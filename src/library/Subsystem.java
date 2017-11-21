@@ -2,6 +2,11 @@ package library;
 
 import org.usfirst.frc.team3309.robot.Systems;
 
+/*
+ * Basic setup for uncontrolled subsystem, implements Runnable to allow 
+ * 			for multithreading in subsystems during teleop
+ * @author Chase Blagden
+ * */
 public abstract class Subsystem implements Runnable {
 
 	private String subsystemID = "default name";
@@ -10,7 +15,9 @@ public abstract class Subsystem implements Runnable {
 		this.subsystemID = name;
 	}
 	
-	@Override
+	/*
+	 * only to be run during teleop 
+	 * */
 	public void run() {
 		updateTeleop();
 		Systems.add(this);
