@@ -11,13 +11,13 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void autonomousInit() {
-		
+
 	}
 
 	@Override
 	public void autonomousPeriodic() {
 	}
-	
+
 	@Override
 	public void teleopInit() {
 		Systems.initTeleop();
@@ -31,4 +31,3 @@ public class Robot extends IterativeRobot {
 	public void testPeriodic() {
 	}
 }
-

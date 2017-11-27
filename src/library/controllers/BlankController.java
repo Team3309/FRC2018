@@ -1,19 +1,19 @@
-package library.controllers.pid;
+package library.controllers;
 
-import library.controllers.Controller;
 import library.controllers.statesandsignals.InputState;
 import library.controllers.statesandsignals.OutputSignal;
 
 public class BlankController extends Controller {
 
 	// power for motor
-	private double power;
+	private double power = 0.0;
 
 	@Override
 	public OutputSignal getOutputSignal(InputState input) {
 		OutputSignal output = new OutputSignal();
 		output.setMotor(power);
-		return null;
+		output.setLeftRightMotor(0, 0);
+		return output;
 	}
 
 	/*

@@ -16,26 +16,27 @@ public abstract class Controller {
 	private String subsystemID = "Default Subsystem";
 
 	/*
-	 * @return boolean indicating whether controller has finished processing
-	 */
-	public abstract boolean isCompletable();
-
-	/*
 	 * @return OuputSignal - power to be returned after processing
 	 */
 	public abstract OutputSignal getOutputSignal(InputState input);
-
-	/*
-	 * @return for reseting controller to default values
-	 */
-	public abstract void reset();
-
+	
 	/*
 	 * @return for sending values to dash board
 	 */
 	public void sendToSmartDash() {
 		
 	}
+
+	/*
+	 * @return for reseting controller to default values
+	 */
+	public abstract void reset();
+	
+	/*
+	 * @return boolean indicating whether controller has finished processing
+	 */
+	public abstract boolean isCompletable();
+
 
 	/*
 	 * @return

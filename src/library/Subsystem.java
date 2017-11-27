@@ -9,7 +9,7 @@ import org.usfirst.frc.team3309.robot.Systems;
  * */
 public abstract class Subsystem implements Runnable {
 
-	private String subsystemID = "default name";
+	protected String subsystemID = "default name";
 	
 	public Subsystem(String name) {
 		this.subsystemID = name;
@@ -31,8 +31,15 @@ public abstract class Subsystem implements Runnable {
 	
 	public abstract void updateAuto();
 	
+	public abstract void initAuto();
+	
+	public abstract void manualControl();
+	
+	public abstract void sendToDashboard();
+	
 	public String getName() {
 		return subsystemID;
 	}
+	
 	
 }

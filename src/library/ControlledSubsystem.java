@@ -1,6 +1,7 @@
 package library;
 
 import library.controllers.Controller;
+import library.controllers.statesandsignals.InputState;
 
 /*
  * outline for subsystem with controller
@@ -12,6 +13,11 @@ public abstract class ControlledSubsystem extends Subsystem {
 	 * Controller for subsystem
 	 */
 	private Controller mController;
+	
+	/*
+	 * input to controller
+	 * */
+	public abstract InputState getInputState();
 
 	/*
 	 * @return
