@@ -7,7 +7,7 @@ import library.controllers.Controller;
 import library.controllers.statesandsignals.InputState;
 import library.controllers.statesandsignals.OutputSignal;
 
-public class DriveVelocityControllerWithWaypoints extends Controller {
+public class DriveVelocityControllerWithSetpoints extends Controller {
 	
 	private List<Waypoint> waypoints = new LinkedList<Waypoint>();
 
