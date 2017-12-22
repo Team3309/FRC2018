@@ -176,6 +176,10 @@ public class Drive extends ControlledSubsystem {
 		this.setController(new BlankController());
 		this.setLeftRight(0, 0);
 	}
+	
+	public double getDistanceTraveled() {
+		return (leftMaster.getPosition() + rightMaster.getPosition()) / 2;
+	}
 
 	public void resetDrive() {
 		leftMaster.setPosition(0);
