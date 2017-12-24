@@ -17,13 +17,13 @@ public class Waypoint {
 		this.enc = enc;
 	}
 	
-	public Waypoint(double leftVel, double rightVel, double enc) {
+	public Waypoint(double enc, double leftVel, double rightVel) {
 		this.leftVel = leftVel;
 		this.rightVel = rightVel;
 		this.enc = enc;
 	}
 	
-	public Waypoint(double leftVel, double rightVel, double enc, double goalAngle) {
+	public Waypoint(double enc, double leftVel, double rightVel, double goalAngle) {
 		this.leftVel = leftVel;
 		this.rightVel = rightVel;
 		this.enc = enc;
@@ -42,7 +42,11 @@ public class Waypoint {
 		return enc;
 	}
 	
-	public double getGoalAngle() {
+	public void setGoalAngle(double goalAngle) {
+		this.goalAngle = goalAngle;
+	}
+	
+	public Double getGoalAngle() {
 		return goalAngle;
 	}
 	

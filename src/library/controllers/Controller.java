@@ -35,7 +35,7 @@ public abstract class Controller {
 	/*
 	 * @return boolean indicating whether controller has finished processing
 	 */
-	public abstract boolean isCompletable();
+	public abstract boolean isCompleted();
 
 
 	/*

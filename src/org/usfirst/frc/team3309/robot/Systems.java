@@ -25,4 +25,16 @@ public class Systems {
 		}
 	}
 	
+	public static void updateAuto() {
+		for (Subsystem s : subsystems) {
+			s.updateAuto();
+		}
+	}
+	
+	public static void sendToDashboard() {
+		for (Subsystem s : subsystems) {
+			s.sendToDashboard();
+		}
+	}
+	
 }

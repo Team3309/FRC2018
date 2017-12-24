@@ -9,6 +9,7 @@ import library.controllers.statesandsignals.OutputSignal;
 
 import org.usfirst.frc.team3309.driverstation.Controls;
 import org.usfirst.frc.team3309.robot.RobotMap;
+import org.usfirst.frc.team3309.robot.Sensors;
 
 import com.ctre.CANTalon.FeedbackDevice;
 import com.ctre.CANTalon.TalonControlMode;
@@ -51,6 +52,7 @@ public class Drive extends ControlledSubsystem {
 	@Override
 	public void initAuto() {
 		this.setLowGear();
+		Sensors.resetDrive();
 		this.setController(new BlankController());
 		this.setVoltageRampRate(0);
 	}
@@ -91,7 +93,8 @@ public class Drive extends ControlledSubsystem {
 	@Override
 	public InputState getInputState() {
 		InputState input = new InputState();
-
+		input.setPos(this.getDistanceTraveled());
+		input.setAngPos(Sensors.getAngle());
 		return input;
 	}
 

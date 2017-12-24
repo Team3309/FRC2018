@@ -20,7 +20,7 @@ public class BlankController extends Controller {
 	 * no goal, so always true
 	 */
 	@Override
-	public boolean isCompletable() {
+	public boolean isCompleted() {
 		return true;
 	}
 

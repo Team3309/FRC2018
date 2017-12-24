@@ -65,7 +65,7 @@ public class InputState extends HashMap<String, Double> {
 	 * 
 	 * @param
 	 */
-	public double getPos(double pos) {
+	public double getPos() {
 		return this.get("pos");
 	}
 

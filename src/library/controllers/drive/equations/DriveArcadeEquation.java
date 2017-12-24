@@ -10,7 +10,7 @@ import library.controllers.statesandsignals.OutputSignal;
 public class DriveArcadeEquation extends Controller {
 
 	@Override
-	public boolean isCompletable() {
+	public boolean isCompleted() {
 		return false;
 	}
 

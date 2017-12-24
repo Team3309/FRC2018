@@ -151,7 +151,7 @@ public class DriveCheezyDriveEquation extends Controller {
 	}
 	
 	@Override
-	public boolean isCompletable() {
+	public boolean isCompleted() {
 		return false;
 	}
 	

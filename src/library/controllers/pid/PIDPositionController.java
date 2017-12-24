@@ -1,5 +1,9 @@
 package library.controllers.pid;
 
+/**
+ * @author Chase.Blagden
+ *
+ */
 public class PIDPositionController extends PIDController {
 
 	public PIDPositionController(double kP, double kI, double kD) {

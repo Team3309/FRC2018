@@ -29,14 +29,14 @@ public abstract class PIDController extends Controller {
 	// threshold of error
 	private double THRESHOLD = 30;
 
-	// time (ms) in which controller must be within threshold
-	private double TIME_TO_BE_COMPLETE_MS = 0.25;
+	// time (s) in which controller must be within threshold
+	private double TIME_TO_BE_COMPLETE_S = .250;
 
 	// set whether controller can be finished
 	private boolean isCompletable;
 
 	// timer for checking time passed
-	private ChaseTimer doneTimer = new ChaseTimer();
+	private ChaseTimer doneTimer;
 
 	public PIDController(double kP, double kI, double kD) {
 		this.kP = kP;
@@ -126,8 +126,11 @@ public abstract class PIDController extends Controller {
 	}
 
 	@Override
-	public boolean isCompletable() {
+	public boolean isCompleted() {
 		if (isCompletable) {
+			if (doneTimer == null) {
+				doneTimer = new ChaseTimer(TIME_TO_BE_COMPLETE_S);
+			}
 			return this.doneTimer
 					.isConditionMaintained(Math.abs(prevError) < THRESHOLD);
 		}
@@ -156,8 +159,8 @@ public abstract class PIDController extends Controller {
 	 * @param TIME_TO_BE_COMPLETE_MS time in which controller must be within
 	 * THRESHOLD to terminate
 	 */
-	public void setTIME_TO_BE_COMPLETE_MS(double TIME_TO_BE_COMPLETE_MS) {
-		this.TIME_TO_BE_COMPLETE_MS = TIME_TO_BE_COMPLETE_MS;
+	public void setTIME_TO_BE_COMPLETE_S(double TIME_TO_BE_COMPLETE_S) {
+		this.TIME_TO_BE_COMPLETE_S = TIME_TO_BE_COMPLETE_S;
 	}
 
 	/*
@@ -167,7 +170,7 @@ public abstract class PIDController extends Controller {
 	 * @param
 	 */
 	public double getTIME_TO_BE_COMPLETE_MS() {
-		return this.TIME_TO_BE_COMPLETE_MS;
+		return this.TIME_TO_BE_COMPLETE_S;
 	}
 
 	@Override
