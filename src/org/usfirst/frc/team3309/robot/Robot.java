@@ -16,7 +16,6 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		Systems.init();
-		Actuators.actuate();
 		AutoModeExecuter.displayAutos();
 	}
 

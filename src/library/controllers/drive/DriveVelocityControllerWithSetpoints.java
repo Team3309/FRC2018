@@ -16,16 +16,17 @@ import org.usfirst.team3309.subsystems.Drive;
  * @author Chase.Blagden
  * 
  */
-public class DriveVelocityControllerWithWaypoints extends Controller {
+public class DriveVelocityControllerWithSetpoints extends Controller {
 
 	private double goal;
 	private double angle;
-	private ChaseTimer doneTimer;
+	private final double TIME_TO_BE_COMPLETE_S = 0.25;
+	private ChaseTimer doneTimer = new ChaseTimer(TIME_TO_BE_COMPLETE_S);
 	private final double DEFAULT_VELOCITY = 1000;
-	private List<Waypoint> waypoints = new LinkedList<Waypoint>();
+	private List<VelocityChangePoint> setpoints = new LinkedList<VelocityChangePoint>();
 	private PIDPositionController turningController;
 
-	public DriveVelocityControllerWithWaypoints(double goal) {
+	public DriveVelocityControllerWithSetpoints(double goal) {
 		Drive.getInstance().changeToVelocityMode();
 		turningController = new PIDPositionController(0.0, 0.0, 0.0);
 		turningController.setName("angle-controller");
@@ -40,11 +41,11 @@ public class DriveVelocityControllerWithWaypoints extends Controller {
 	@Override
 	public OutputSignal getOutputSignal(InputState inputState) {
 		
-		Waypoint curWaypoint = new Waypoint(DEFAULT_VELOCITY, 0);
+		VelocityChangePoint curWaypoint = new VelocityChangePoint(DEFAULT_VELOCITY, 0);
 		double closestPoint = Double.MAX_VALUE;
 		
 		// checks for closest waypoint
-		for (Waypoint waypoint : waypoints) {
+		for (VelocityChangePoint waypoint : setpoints) {
 			if (Math.abs(Sensors.getPos()) > Math.abs(waypoint.getEncValueToChangeAt())) {
 				if (Math.abs(Math.abs(Sensors.getPos()) - Math.abs(waypoint.getEncValueToChangeAt())) < closestPoint) {
 					curWaypoint = waypoint;
@@ -59,9 +60,11 @@ public class DriveVelocityControllerWithWaypoints extends Controller {
 		if (curWaypoint.getGoalAngle() == null) {
 			curWaypoint.setGoalAngle(Sensors.getAngle());
 		}
+		
 		angle = curWaypoint.getGoalAngle();
 		
 		OutputSignal signal = new OutputSignal();
+		
 		if (rightAimVel == leftAimVel) {
 			InputState turningInput = new InputState();
 			turningInput.setError(angle - inputState.getAngPos());
@@ -76,7 +79,8 @@ public class DriveVelocityControllerWithWaypoints extends Controller {
 	
 	@Override
 	public boolean isCompleted() {
-		return this.doneTimer.isConditionMaintained(Math.abs(Drive.getInstance().getDistanceTraveled()) > Math.abs(goal));
+		return this.doneTimer.isConditionMaintained(Math.abs(Drive.getInstance().getDistanceTraveled()) > Math.abs(goal)) &&
+				this.turningController.isCompleted();
 	}
 
 	@Override
@@ -84,8 +88,8 @@ public class DriveVelocityControllerWithWaypoints extends Controller {
 		doneTimer.reset();
 	}
 	
-	public void setWaypoints(List<Waypoint> waypoints) {
-		this.waypoints = waypoints;
+	public void setWaypoints(List<VelocityChangePoint> waypoints) {
+		this.setpoints = waypoints;
 	}
 
 }

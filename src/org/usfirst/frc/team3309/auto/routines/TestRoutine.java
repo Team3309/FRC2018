@@ -4,8 +4,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 import library.controllers.drive.DrivePositionController;
-import library.controllers.drive.DriveVelocityControllerWithWaypoints;
-import library.controllers.drive.Waypoint;
+import library.controllers.drive.DriveVelocityControllerWithSetpoints;
+import library.controllers.drive.VelocityChangePoint;
 
 import org.usfirst.frc.team3309.auto.AutoRoutine;
 import org.usfirst.frc.team3309.auto.DriveAction;
@@ -15,12 +15,12 @@ public class TestRoutine extends AutoRoutine {
 
 	@Override
 	public void redRoutine() {
-		DriveVelocityControllerWithWaypoints c = new DriveVelocityControllerWithWaypoints(50000);
-		List<Waypoint> waypoints = new LinkedList<Waypoint>();
-		waypoints.add(new Waypoint(1000, 0));
-		waypoints.add(new Waypoint(600, 400, 30000));
-		waypoints.add(new Waypoint(500, 500, 45000));
-		c.setWaypoints(waypoints);
+		DriveVelocityControllerWithSetpoints c = new DriveVelocityControllerWithSetpoints(50000);
+		List<VelocityChangePoint> setpoints = new LinkedList<VelocityChangePoint>();
+		setpoints.add(new VelocityChangePoint(0, 1000));
+		setpoints.add(new VelocityChangePoint(30000, 600, 400));
+		setpoints.add(new VelocityChangePoint(45000, 500));
+		c.setWaypoints(setpoints);
 		addDriveAction(new DriveAction(c, 6.0));
 		addAction(new TestAction(0));
 	}

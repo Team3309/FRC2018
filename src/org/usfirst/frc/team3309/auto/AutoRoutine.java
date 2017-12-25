@@ -12,8 +12,8 @@ import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.Timer;
 
 /**
- * @author Chase.Blagden
- * template for defining auto mode, every auto is run in its own thread
+ * @author Chase.Blagden template for defining auto mode, every auto is run in
+ *         its own thread
  */
 @SuppressWarnings("deprecation")
 public abstract class AutoRoutine implements Runnable {
@@ -25,32 +25,39 @@ public abstract class AutoRoutine implements Runnable {
 
 	public AutoRoutine() {
 		t = new Thread(this) {
+
 			@Override
 			public void start() {
 				super.start();
+
 				// checks for alliance color in autonomous
-				if (DriverStation.getInstance().isAutonomous()
-						&& DriverStation.getInstance().getAlliance() == Alliance.Blue) {
-					blueRoutine();
-				} else if (DriverStation.getInstance().isAutonomous()
-						&& DriverStation.getInstance().getAlliance() == Alliance.Red) {
-					redRoutine();
+				if (DriverStation.getInstance().isAutonomous()) {
+					if (DriverStation.getInstance().getAlliance() == Alliance.Blue) {
+						blueRoutine();
+					} else if (DriverStation.getInstance().getAlliance() == Alliance.Red) {
+						redRoutine();
+					} else {
+						this.stop();
+					}
 				} else {
 					this.stop();
 				}
+
 				if (driveAction != null) {
 					driveAction.startDrive();
 				}
+
 				autoTimer.start();
 			}
+
 		};
 	}
 
 	/*
-	 * Main loop running for auto, updating drive and performing actions.
-	 * Running same time as Systems updateAuto.
+	 * Main loop running auto, updating drive and performing actions.
+	 * 
 	 * @see Systems.java
-	 * */
+	 */
 	@Override
 	public void run() {
 
@@ -65,7 +72,7 @@ public abstract class AutoRoutine implements Runnable {
 
 		Action curAction = null;
 		double closeness = Double.MAX_VALUE;
-		
+
 		// checks for current action to run, if any
 		for (Action action : actions) {
 			if (action.getGoal() > Drive.getInstance().getDistanceTraveled()) {
@@ -98,6 +105,14 @@ public abstract class AutoRoutine implements Runnable {
 
 	}
 
+	/*
+	 * Defines actions for auto, addAction and addDriveAction should be called
+	 * here
+	 */
+	public abstract void redRoutine();
+
+	public abstract void blueRoutine();
+
 	public void startAutoThread() {
 		t.start();
 	}
@@ -105,10 +120,6 @@ public abstract class AutoRoutine implements Runnable {
 	public void stopAutoThread() {
 		t.stop();
 	}
-
-	public abstract void redRoutine();
-
-	public abstract void blueRoutine();
 
 	public void addAction(Action a) {
 		actions.add(a);

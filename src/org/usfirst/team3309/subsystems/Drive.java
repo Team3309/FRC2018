@@ -47,7 +47,8 @@ public class Drive extends ControlledSubsystem {
 	}
 
 	@Override
-	public void init() {}
+	public void init() {
+	}
 
 	@Override
 	public void initAuto() {
@@ -100,7 +101,7 @@ public class Drive extends ControlledSubsystem {
 
 	@Override
 	public void sendToDashboard() {
-		
+
 	}
 
 	public void changeToPercentMode() {
@@ -179,9 +180,56 @@ public class Drive extends ControlledSubsystem {
 		this.setController(new BlankController());
 		this.setLeftRight(0, 0);
 	}
-	
+
+	/*
+	 * @return total encoder counts traversed
+	 */
 	public double getDistanceTraveled() {
 		return (leftMaster.getPosition() + rightMaster.getPosition()) / 2;
+	}
+
+	/*
+	 * @return average velocity of left and right encoders (encoder counts per
+	 * ms)
+	 */
+	public double getAverageVelocity() {
+		return (leftMaster.getEncVelocity() + rightMaster.getEncVelocity()) / 2;
+	}
+
+	/*
+	 * @return inches per sec
+	 * 
+	 * @param encoder counts per ms
+	 */
+	public double getInchesPerSec(double encoderRate) {
+		return 1000.0 * encoderRate;
+	}
+
+	/*
+	 * @return encoder counts per ms
+	 * 
+	 * @param inches per sec
+	 */
+	public double getEncoderCountsPerMs(double inchesPerSec) {
+		return inchesPerSec / 1000.0;
+	}
+
+	/*
+	 * @return inches
+	 * 
+	 * @param encoder counts
+	 */
+	public double getInches(double encoderCount) {
+		return 0.0 * encoderCount;
+	}
+
+	/*
+	 * @return encoder counts
+	 * 
+	 * @param inches
+	 */
+	public double getEncoderCounts(double inches) {
+		return 0.0 * inches;
 	}
 
 	public void resetDrive() {
@@ -196,5 +244,7 @@ public class Drive extends ControlledSubsystem {
 	public void setLowGear() {
 		shifter.set(false);
 	}
+
+	
 
 }

@@ -13,15 +13,21 @@ public class Sensors {
 	}
 	
 	public static double getAngle() {
-		return gyro.getAngle();
+		return gyro.getAngle(); // in continuous degrees with wraparound from 360 to 361
 	}
 	
-	public static double getPos() {
+	public static double getPos() { // encoder counts
 		return Drive.getInstance().getDistanceTraveled();
+	}
+	
+	public static double getVel() { // encoder counts per ms
+		return Drive.getInstance().getAverageVelocity();
 	}
 	
 	public static void resetDrive() {
 		Drive.getInstance().resetDrive();
+		gyro.reset();
 	}
+	
 
 }

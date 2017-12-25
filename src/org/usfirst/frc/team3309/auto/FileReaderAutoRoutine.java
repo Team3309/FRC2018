@@ -5,8 +5,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 import library.controllers.drive.DrivePositionController;
-import library.controllers.drive.DriveVelocityControllerWithWaypoints;
-import library.controllers.drive.Waypoint;
+import library.controllers.drive.DriveVelocityControllerWithSetpoints;
+import library.controllers.drive.VelocityChangePoint;
 
 import org.apache.commons.configuration2.HierarchicalConfiguration;
 import org.apache.commons.configuration2.XMLConfiguration;
@@ -24,7 +24,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * Auto routine that reads selected auto and loads actions and driveAction.
  */
 public class FileReaderAutoRoutine extends AutoRoutine {
-
 	
 	private String allianceColor;
 	private static SendableChooser<File> autoOptions = new SendableChooser<>();
@@ -56,6 +55,7 @@ public class FileReaderAutoRoutine extends AutoRoutine {
 	/*
 	 * Using Apache library, parses auto file for key values. Accounts for missing
 	 * 		values.
+	 * TODO: modify for DriveCurvatureFollower controller
 	 * */
 	@SuppressWarnings("unchecked")
 	public void loadAuto() {
@@ -88,15 +88,15 @@ public class FileReaderAutoRoutine extends AutoRoutine {
 							double goal = driveActions.containsKey("goal") ? driveActions.getDouble("goal") : 0;
 							double timeout = driveActions.containsKey("timeout") ? driveActions.getDouble("timeout") : 0;
 							if (!driveActions.configurationAt("waypoints").isEmpty()) {
-								List<Waypoint> waypoints = new LinkedList<>();
+								List<VelocityChangePoint> waypoints = new LinkedList<>();
 								for (HierarchicalConfiguration<ImmutableNode> waypoint : driveActions.childConfigurationsAt("waypoints")) {
 									double enc = waypoint.containsKey("enc") ? waypoint.getDouble("enc") : 0;
 									double leftVel = waypoint.containsKey("leftvel") ? waypoint.getDouble("leftvel") : waypoint.containsKey("vel") ? waypoint.getDouble("vel") : 0;
 									double rightVel = waypoint.containsKey("rightvel") ? waypoint.getDouble("rightvel") : waypoint.containsKey("vel") ? waypoint.getDouble("vel") : 0;
 									double angle = waypoint.containsKey("goalAngle") ? waypoint.getDouble("goalAngle") : null;
-									waypoints.add(new Waypoint(enc, leftVel, rightVel, angle));
+									waypoints.add(new VelocityChangePoint(enc, leftVel, rightVel, angle));
 								}
-								DriveVelocityControllerWithWaypoints x = new DriveVelocityControllerWithWaypoints(goal);
+								DriveVelocityControllerWithSetpoints x = new DriveVelocityControllerWithSetpoints(goal);
 								x.setWaypoints(waypoints); 
 								addDriveAction(new DriveAction(x, timeout));
 							} else  {

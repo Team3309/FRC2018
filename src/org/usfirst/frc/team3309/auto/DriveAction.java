@@ -17,12 +17,20 @@ public class DriveAction {
 	private Timer driveTimer = new Timer();
 
 	public DriveAction(Controller c, double timeout) {
-		this.timeout = timeout;
 		this.driveController = c;
+		this.timeout = timeout;
 	}
 
+	/*
+	 * Sets controller for drive while checking timer
+	 * @thorws AutoTimedOutException
+	 * */
 	public void updateDrive() throws AutoTimedOutException {
-		Drive.getInstance().setController(driveController);
+		if (!driveController.isCompleted()) {
+			Drive.getInstance().setController(driveController);
+		} else {
+			Drive.getInstance().stopDrive();
+		}
 		if (driveTimer.get() > timeout) {
 			throw new AutoTimedOutException();
 		}

@@ -1,54 +1,33 @@
 package library.controllers.drive;
 
-/*
- * Represents series of points during auto for setting drivetrain
- * @author Chase Blagden
- * */
-public class Waypoint {
+import org.usfirst.team3309.subsystems.Drive;
 
-	private double leftVel;
-	private double rightVel;
-	private double enc;
-	private Double goalAngle = null;
+public class Waypoint {
 	
-	public Waypoint(double vel, double enc) {
-		this.leftVel = vel;
-		this.rightVel = vel;
-		this.enc = enc;
+	protected double x;
+	protected double y;
+	
+	public Waypoint() {
+		this.x = 0.0;
+		this.y = 0.0;
 	}
 	
-	public Waypoint(double enc, double leftVel, double rightVel) {
-		this.leftVel = leftVel;
-		this.rightVel = rightVel;
-		this.enc = enc;
+	public Waypoint(double x, double y) {
+		this.x = x;
+		this.y = y;
+	}
+
+	public Waypoint add(Waypoint w) {
+		return new Waypoint(x + w.x, y + w.y);
 	}
 	
-	public Waypoint(double enc, double leftVel, double rightVel, double goalAngle) {
-		this.leftVel = leftVel;
-		this.rightVel = rightVel;
-		this.enc = enc;
-		this.goalAngle = goalAngle;
+	public Waypoint subtract(Waypoint w) {
+		return new Waypoint(x - w.x, y - w.y);
 	}
 	
-	public double getNewLeftVel() {
-		return leftVel;
+	public void convertToEncoderCounts() {
+		this.x = Drive.getInstance().getEncoderCounts(x);
+		this.y = Drive.getInstance().getEncoderCounts(y);
 	}
-	
-	public double getNewRightVel() {
-		return rightVel;
-	}
-	
-	public double getEncValueToChangeAt() {
-		return enc;
-	}
-	
-	public void setGoalAngle(double goalAngle) {
-		this.goalAngle = goalAngle;
-	}
-	
-	public Double getGoalAngle() {
-		return goalAngle;
-	}
-	
 	
 }
