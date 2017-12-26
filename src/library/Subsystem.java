@@ -13,6 +13,7 @@ public abstract class Subsystem implements Runnable {
 	
 	public Subsystem(String name) {
 		this.subsystemID = name;
+		Systems.add(this);
 	}
 	
 	/*
@@ -20,7 +21,6 @@ public abstract class Subsystem implements Runnable {
 	 * */
 	public void run() {
 		updateTeleop();
-		Systems.add(this);
 	}
 	
 	public abstract void initTeleop();

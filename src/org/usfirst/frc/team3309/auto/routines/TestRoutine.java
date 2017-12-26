@@ -15,7 +15,8 @@ public class TestRoutine extends AutoRoutine {
 
 	@Override
 	public void redRoutine() {
-		DriveVelocityControllerWithSetpoints c = new DriveVelocityControllerWithSetpoints(50000);
+		DriveVelocityControllerWithSetpoints c = new DriveVelocityControllerWithSetpoints(
+				50000);
 		List<VelocityChangePoint> setpoints = new LinkedList<VelocityChangePoint>();
 		setpoints.add(new VelocityChangePoint(0, 1000));
 		setpoints.add(new VelocityChangePoint(30000, 600, 400));

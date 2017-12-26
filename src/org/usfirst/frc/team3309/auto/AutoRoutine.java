@@ -48,6 +48,7 @@ public abstract class AutoRoutine implements Runnable {
 				}
 
 				autoTimer.start();
+				this.run();
 			}
 
 		};
@@ -60,49 +61,52 @@ public abstract class AutoRoutine implements Runnable {
 	 */
 	@Override
 	public void run() {
-
-		if (driveAction != null) {
-			try {
-				driveAction.updateDrive();
-			} catch (AutoTimedOutException e) {
-				e.printStackTrace();
-				driveAction = null;
-			}
-		}
-
-		Action curAction = null;
-		double closeness = Double.MAX_VALUE;
-
-		// checks for current action to run, if any
-		for (Action action : actions) {
-			if (action.getGoal() > Drive.getInstance().getDistanceTraveled()) {
-				if (Math.abs(Math.abs(action.getGoal())
-						- Math.abs(Drive.getInstance().getDistanceTraveled())) < Math
-						.abs(closeness)) {
-					closeness = Math.abs(Math.abs(action.getGoal())
-							- Math.abs(Drive.getInstance()
-									.getDistanceTraveled()));
-					curAction = action;
+		while (DriverStation.getInstance().isAutonomous()) {
+			if (driveAction != null) {
+				try {
+					driveAction.updateDrive();
+				} catch (AutoTimedOutException e) {
+					e.printStackTrace();
+					driveAction = null;
 				}
 			}
-		}
 
-		if (curAction != null) {
-			curAction.runAction();
-			actions.remove(curAction);
-		}
+			Action curAction = null;
+			double closeness = Double.MAX_VALUE;
 
-		if (autoTimer.get() > 14.9) {
-			t.stop();
-			try {
-				throw new AutoTimedOutException();
-			} catch (AutoTimedOutException e) {
-				e.printStackTrace();
+			// checks for current action to run, if any
+			for (Action action : actions) {
+				if (action.getGoal() > Drive.getInstance()
+						.getDistanceTraveled()) {
+					if (Math.abs(Math.abs(action.getGoal())
+							- Math.abs(Drive.getInstance()
+									.getDistanceTraveled())) < Math
+							.abs(closeness)) {
+						closeness = Math.abs(Math.abs(action.getGoal())
+								- Math.abs(Drive.getInstance()
+										.getDistanceTraveled()));
+						curAction = action;
+					}
+				}
 			}
+
+			if (curAction != null) {
+				curAction.runAction();
+				actions.remove(curAction);
+			}
+
+			if (autoTimer.get() > 14.9) {
+				try {
+					throw new AutoTimedOutException();
+				} catch (AutoTimedOutException e) {
+					e.printStackTrace();
+					break;
+				}
+			}
+
+			ChaseTimer.delayMs(100);
 		}
-
-		ChaseTimer.delayMs(100);
-
+		t.stop();
 	}
 
 	/*

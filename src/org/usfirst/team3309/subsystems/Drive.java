@@ -96,6 +96,8 @@ public class Drive extends ControlledSubsystem {
 		InputState input = new InputState();
 		input.setPos(this.getDistanceTraveled());
 		input.setAngPos(Sensors.getAngle());
+		input.setVel(Sensors.getVel());
+		;
 		return input;
 	}
 
@@ -244,7 +246,5 @@ public class Drive extends ControlledSubsystem {
 	public void setLowGear() {
 		shifter.set(false);
 	}
-
-	
 
 }
