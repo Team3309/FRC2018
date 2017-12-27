@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import library.ChaseTimer;
+import library.controllers.drive.Waypoint;
 
 import org.usfirst.team3309.subsystems.Drive;
 
@@ -12,16 +13,19 @@ import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.Timer;
 
 /**
- * @author Chase.Blagden template for defining auto mode, every auto is run in
- *         its own thread
+ * @author Chase.Blagden
+ *         <p>
+ *         template for defining auto mode, every auto is run in its own thread
  */
 @SuppressWarnings("deprecation")
 public abstract class AutoRoutine implements Runnable {
 
 	private Thread t;
-	private DriveAction driveAction;
 	private Timer autoTimer = new Timer();
+	private int curDriveActionIndex = 0;
+	private List<DriveAction> driveActions = new LinkedList<>();
 	private List<Action> actions = new LinkedList<>();
+	private final double actionThreshold = 10;
 
 	public AutoRoutine() {
 		t = new Thread(this) {
@@ -43,10 +47,9 @@ public abstract class AutoRoutine implements Runnable {
 					this.stop();
 				}
 
-				if (driveAction != null) {
-					driveAction.startDrive();
+				if (driveActions.get(curDriveActionIndex) != null) {
+					driveActions.get(curDriveActionIndex).startDrive();
 				}
-
 				autoTimer.start();
 				this.run();
 			}
@@ -55,20 +58,22 @@ public abstract class AutoRoutine implements Runnable {
 	}
 
 	/*
-	 * Main loop running auto, updating drive and performing actions.
+	 * <p>Main loop running auto, updating drive and performing actions.
 	 * 
 	 * @see Systems.java
 	 */
 	@Override
 	public void run() {
-		while (DriverStation.getInstance().isAutonomous()) {
-			if (driveAction != null) {
-				try {
-					driveAction.updateDrive();
-				} catch (AutoTimedOutException e) {
-					e.printStackTrace();
-					driveAction = null;
+		boolean running = true;
+		while (DriverStation.getInstance().isAutonomous() && running) {
+
+			try {
+				if (curDriveActionIndex < driveActions.size()) {
+					driveActions.get(curDriveActionIndex).updateDrive();
 				}
+			} catch (AutoTimedOutException e) {
+				e.printStackTrace();
+				curDriveActionIndex++;
 			}
 
 			Action curAction = null;
@@ -76,7 +81,9 @@ public abstract class AutoRoutine implements Runnable {
 
 			// checks for current action to run, if any
 			for (Action action : actions) {
-				if (action.getGoal() > Drive.getInstance()
+				if (action.getPoint() != null) {
+					
+				} else if (action.getGoal() > Drive.getInstance()
 						.getDistanceTraveled()) {
 					if (Math.abs(Math.abs(action.getGoal())
 							- Math.abs(Drive.getInstance()
@@ -100,18 +107,18 @@ public abstract class AutoRoutine implements Runnable {
 					throw new AutoTimedOutException();
 				} catch (AutoTimedOutException e) {
 					e.printStackTrace();
+					running = false;
 					break;
 				}
 			}
 
 			ChaseTimer.delayMs(100);
 		}
-		t.stop();
 	}
 
 	/*
-	 * Defines actions for auto, addAction and addDriveAction should be called
-	 * here
+	 * <p>Defines actions for auto, addAction and addDriveAction should be
+	 * called here
 	 */
 	public abstract void redRoutine();
 
@@ -130,7 +137,7 @@ public abstract class AutoRoutine implements Runnable {
 	}
 
 	public void addDriveAction(DriveAction d) {
-		driveAction = d;
+		driveActions.add(d);
 	}
 
 }

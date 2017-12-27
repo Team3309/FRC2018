@@ -3,7 +3,7 @@ package library.controllers.statesandsignals;
 import java.util.HashMap;
 
 /*
- * Defines input type for controllers
+ * <p>Defines input type for controllers
  * @author Chase Blagden 
  * */
 @SuppressWarnings("serial")

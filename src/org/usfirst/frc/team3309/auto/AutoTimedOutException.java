@@ -9,5 +9,5 @@ public class AutoTimedOutException extends Exception {
 		super.printStackTrace();
 		System.err.println("Auto timer extended past timeout.");
 	}
-	
+
 }

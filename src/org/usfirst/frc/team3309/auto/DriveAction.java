@@ -7,7 +7,9 @@ import org.usfirst.team3309.subsystems.Drive;
 import edu.wpi.first.wpilibj.Timer;
 
 /**
- * @author Chase.Blagden Defines drive actions, can take any drive controller
+ * @author Chase.Blagden
+ *         <p>
+ *         Defines drive actions, can take any drive controller
  */
 public class DriveAction {
 
@@ -21,7 +23,7 @@ public class DriveAction {
 	}
 
 	/*
-	 * Sets controller for drive while checking timer
+	 * <p>Sets controller for drive while checking timer
 	 * 
 	 * @thorws AutoTimedOutException
 	 */

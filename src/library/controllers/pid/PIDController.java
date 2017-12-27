@@ -7,7 +7,7 @@ import library.controllers.statesandsignals.OutputSignal;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
 /*
- * Structure of PID Controller
+ * <p>Structure of PID Controller
  * See http://www.inpharmix.com/jps/PID_Controller_For_Lego_Mindstorms_Robots.html 
  * for understanding of math
  * @author Chase Blagden

@@ -5,6 +5,7 @@ import library.controllers.pid.PIDPositionController;
 import library.controllers.statesandsignals.InputState;
 import library.controllers.statesandsignals.OutputSignal;
 
+import org.usfirst.frc.team3309.robot.Sensors;
 import org.usfirst.team3309.subsystems.Drive;
 
 /**
@@ -15,6 +16,8 @@ public class DriveCurvatureFollowerController extends Controller {
 
 	private Waypoint[] waypoints;
 	private int waypointIndex = 0;
+
+	private Waypoint curWaypoint;
 
 	private PIDPositionController turningController;
 
@@ -28,13 +31,8 @@ public class DriveCurvatureFollowerController extends Controller {
 	private final double maxForwardVelocity = 100;
 	private final double maxAngularVelocity = 100;
 
-	// initialization of initial position of robot
-	double curX = 0.0;
-	double curY = 0.0;
-
-	public DriveCurvatureFollowerController(Waypoint[] waypoints, double finalHeading) {
+	public DriveCurvatureFollowerController(Waypoint[] waypoints) {
 		this.waypoints = waypoints;
-		this.finalHeading = finalHeading;
 		turningController = new PIDPositionController(0.0, 0.0, 0.0);
 		turningController.setName("turningController");
 		turningController.setSubsystemID(getSubsystemID());
@@ -43,28 +41,31 @@ public class DriveCurvatureFollowerController extends Controller {
 		turningController.setTIME_TO_BE_COMPLETE_S(0.25);
 	}
 
+	public DriveCurvatureFollowerController(Waypoint[] waypoints,
+			double finalHeading) {
+		this(waypoints);
+		this.finalHeading = finalHeading;
+	}
+
 	@Override
 	public OutputSignal getOutputSignal(InputState input) {
 
-		// calculate horizontal and vertical coordinates
-		curX += input.getVel() * Math.cos(input.getAngPos());
-		curY += input.getVel() * Math.sin(input.getAngPos());
-
-		Waypoint curWaypoint = new Waypoint(curX, curY);
-		curWaypoint.convertToEncoderCounts();
+		curWaypoint = new Waypoint(Sensors.getXPos(), Sensors.getYPos());
+		curWaypoint = curWaypoint.convertToEncoderCounts();
 
 		OutputSignal signal;
 
 		if (waypoints != null) {
 
 			Waypoint goalWaypoint = waypoints[waypointIndex];
-			goalWaypoint.convertToEncoderCounts();
+			goalWaypoint = goalWaypoint.convertToEncoderCounts();
 
 			// when within certain range from a waypoint, change waypoint
-			if (getDistance(goalWaypoint, curWaypoint) < Drive.getInstance()
-					.getEncoderCounts(radius)) {
+			if (Waypoint.getDistance(goalWaypoint, curWaypoint) < Drive
+					.getInstance().getEncoderCounts(radius)) {
 				waypointIndex++;
 
+				
 				// when on last waypoint, stop moving
 				if (waypointIndex == waypoints.length) {
 					waypointIndex--;
@@ -124,36 +125,13 @@ public class DriveCurvatureFollowerController extends Controller {
 
 	@Override
 	public void reset() {
-
+		waypoints = null;
 	}
 
 	@Override
 	public boolean isCompleted() {
 		// turning controller can only be done when on last waypoint
 		return turningController.isCompleted();
-	}
-
-	/*
-	 * @return distance between two points
-	 */
-	public double getDistance(Waypoint a, Waypoint b) {
-		return Math.hypot(a.x - b.x, a.y - b.y);
-	}
-
-	/*
-	 * Initial position of robot for auto
-	 * 
-	 * @params double x - inches going up from bottom left of field relative to
-	 * robot double y - inches going up from bottom left of field relative to
-	 * robot
-	 */
-	public void setCurPos(double x, double y) {
-		this.curX = Drive.getInstance().getEncoderCounts(x);
-		this.curY = Drive.getInstance().getEncoderCounts(y);
-	}
-
-	public void setFinalHeading(double finalHeading) {
-		this.finalHeading = finalHeading;
 	}
 
 }

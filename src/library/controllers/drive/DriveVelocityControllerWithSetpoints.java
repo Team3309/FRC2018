@@ -36,58 +36,64 @@ public class DriveVelocityControllerWithSetpoints extends Controller {
 		turningController.setTIME_TO_BE_COMPLETE_S(0.25);
 		this.goal = goal;
 	}
-	
 
 	@Override
 	public OutputSignal getOutputSignal(InputState inputState) {
-		
-		VelocityChangePoint curWaypoint = new VelocityChangePoint(DEFAULT_VELOCITY, 0);
+
+		VelocityChangePoint curWaypoint = new VelocityChangePoint(
+				DEFAULT_VELOCITY, 0);
 		double closestPoint = Double.MAX_VALUE;
-		
+
 		// checks for closest waypoint
 		for (VelocityChangePoint waypoint : setpoints) {
-			if (Math.abs(Sensors.getPos()) > Math.abs(waypoint.getEncValueToChangeAt())) {
-				if (Math.abs(Math.abs(Sensors.getPos()) - Math.abs(waypoint.getEncValueToChangeAt())) < closestPoint) {
+			if (Math.abs(Sensors.getPos()) > Math.abs(waypoint
+					.getEncValueToChangeAt())) {
+				if (Math.abs(Math.abs(Sensors.getPos())
+						- Math.abs(waypoint.getEncValueToChangeAt())) < closestPoint) {
 					curWaypoint = waypoint;
-					closestPoint = Math.abs(Math.abs(Sensors.getPos()) - Math.abs(waypoint.getEncValueToChangeAt()));
+					closestPoint = Math.abs(Math.abs(Sensors.getPos())
+							- Math.abs(waypoint.getEncValueToChangeAt()));
 				}
 			}
 		}
-		
+
 		double rightAimVel = curWaypoint.getNewRightVel();
 		double leftAimVel = curWaypoint.getNewLeftVel();
-		
+
 		if (curWaypoint.getGoalAngle() == null) {
 			curWaypoint.setGoalAngle(Sensors.getAngle());
 		}
-		
+
 		angle = curWaypoint.getGoalAngle();
-		
+
 		OutputSignal signal = new OutputSignal();
-		
+
 		if (rightAimVel == leftAimVel) {
 			InputState turningInput = new InputState();
 			turningInput.setError(angle - inputState.getAngPos());
-			double turnPower = turningController.getOutputSignal(turningInput).getMotor();
-			signal.setLeftRightMotor(leftAimVel + turnPower, rightAimVel - turnPower);
+			double turnPower = turningController.getOutputSignal(turningInput)
+					.getMotor();
+			signal.setLeftRightMotor(leftAimVel + turnPower, rightAimVel
+					- turnPower);
 		} else {
 			signal.setLeftRightMotor(leftAimVel, rightAimVel);
 		}
-		
+
 		return signal;
 	}
-	
+
 	@Override
 	public boolean isCompleted() {
-		return this.doneTimer.isConditionMaintained(Math.abs(Drive.getInstance().getDistanceTraveled()) > Math.abs(goal)) &&
-				this.turningController.isCompleted();
+		return this.doneTimer.isConditionMaintained(Math.abs(Drive
+				.getInstance().getDistanceTraveled()) > Math.abs(goal))
+				&& this.turningController.isCompleted();
 	}
 
 	@Override
 	public void reset() {
 		doneTimer.reset();
 	}
-	
+
 	public void setWaypoints(List<VelocityChangePoint> waypoints) {
 		this.setpoints = waypoints;
 	}

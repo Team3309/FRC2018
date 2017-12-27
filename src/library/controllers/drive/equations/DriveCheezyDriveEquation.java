@@ -10,12 +10,25 @@ import org.usfirst.team3309.subsystems.Drive;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+/**
+ * <p>
+ * Drive controller invented by Team 254,
+ * https://github.com/Team254/FRC-2017-Public
+ * /blob/master/src/com/team254/lib/util/CheesyDriveHelper.java
+ * 
+ * <p>
+ * Helper class to implement "Cheesy Drive". "Cheesy Drive" simply means that
+ * the "turning" stick controls the curvature of the robot's path rather than
+ * its rate of heading change. This helps make the robot more controllable at
+ * high speeds. Also handles the robot's quick turn functionality - "quick turn"
+ * overrides constant-curvature turning for turn-in-place maneuvers.
+ */
 public class DriveCheezyDriveEquation extends Controller {
 
 	public DriveCheezyDriveEquation() {
 		Drive.getInstance().changeToPercentMode();
 	}
-	
+
 	private double oldWheel, quickStopAccumulator;
 	private double throttleDeadband = 0.02;
 	private double wheelDeadband = 0.07;
@@ -38,14 +51,19 @@ public class DriveCheezyDriveEquation extends Controller {
 		if (isHighGear) {
 			wheelNonLinearity = 0.6;
 			// Apply a sin function that's scaled to make it feel better.
-			wheel = Math.sin(Math.PI / 2.0 * wheelNonLinearity * wheel) / Math.sin(Math.PI / 2.0 * wheelNonLinearity);
-			wheel = Math.sin(Math.PI / 2.0 * wheelNonLinearity * wheel) / Math.sin(Math.PI / 2.0 * wheelNonLinearity);
+			wheel = Math.sin(Math.PI / 2.0 * wheelNonLinearity * wheel)
+					/ Math.sin(Math.PI / 2.0 * wheelNonLinearity);
+			wheel = Math.sin(Math.PI / 2.0 * wheelNonLinearity * wheel)
+					/ Math.sin(Math.PI / 2.0 * wheelNonLinearity);
 		} else {
 			wheelNonLinearity = 0.5;
 			// Apply a sin function that's scaled to make it feel better.
-			wheel = Math.sin(Math.PI / 2.0 * wheelNonLinearity * wheel) / Math.sin(Math.PI / 2.0 * wheelNonLinearity);
-			wheel = Math.sin(Math.PI / 2.0 * wheelNonLinearity * wheel) / Math.sin(Math.PI / 2.0 * wheelNonLinearity);
-			wheel = Math.sin(Math.PI / 2.0 * wheelNonLinearity * wheel) / Math.sin(Math.PI / 2.0 * wheelNonLinearity);
+			wheel = Math.sin(Math.PI / 2.0 * wheelNonLinearity * wheel)
+					/ Math.sin(Math.PI / 2.0 * wheelNonLinearity);
+			wheel = Math.sin(Math.PI / 2.0 * wheelNonLinearity * wheel)
+					/ Math.sin(Math.PI / 2.0 * wheelNonLinearity);
+			wheel = Math.sin(Math.PI / 2.0 * wheelNonLinearity * wheel)
+					/ Math.sin(Math.PI / 2.0 * wheelNonLinearity);
 		}
 
 		double leftPwm, rightPwm, overPower;
@@ -89,7 +107,8 @@ public class DriveCheezyDriveEquation extends Controller {
 		if (isQuickTurn) {
 			if (Math.abs(linearPower) < 0.2) {
 				double alpha = 0.05;
-				quickStopAccumulator = (1 - alpha) * quickStopAccumulator + alpha * limit(wheel, 1.0) * 5;
+				quickStopAccumulator = (1 - alpha) * quickStopAccumulator
+						+ alpha * limit(wheel, 1.0) * 5;
 			}
 			overPower = 1.0;
 			if (isHighGear) {
@@ -103,7 +122,8 @@ public class DriveCheezyDriveEquation extends Controller {
 			}
 		} else {
 			overPower = 0.0;
-			angularPower = Math.abs(throttle) * wheel * sensitivity - quickStopAccumulator;
+			angularPower = Math.abs(throttle) * wheel * sensitivity
+					- quickStopAccumulator;
 			if (quickStopAccumulator > 1) {
 				quickStopAccumulator -= 1;
 			} else if (quickStopAccumulator < -1) {
@@ -136,7 +156,7 @@ public class DriveCheezyDriveEquation extends Controller {
 		SmartDashboard.putNumber("right", rightPwm);
 		return signal;
 	}
-	
+
 	public double handleDeadband(double val, double deadband) {
 		return (Math.abs(val) > Math.abs(deadband)) ? val : 0.0;
 	}
@@ -147,12 +167,12 @@ public class DriveCheezyDriveEquation extends Controller {
 
 	@Override
 	public void reset() {
-		
+
 	}
-	
+
 	@Override
 	public boolean isCompleted() {
 		return false;
 	}
-	
+
 }

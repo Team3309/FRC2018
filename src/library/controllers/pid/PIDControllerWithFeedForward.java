@@ -5,7 +5,7 @@ import library.controllers.statesandsignals.InputState;
 import library.controllers.statesandsignals.OutputSignal;
 
 /*
- * Controller for PID with feed forward, primarily for flywheels
+ * <p>Controller for PID with feed forward, primarily for flywheels
  * @author Chase Blagden
  * */
 public class PIDControllerWithFeedForward extends PIDController {

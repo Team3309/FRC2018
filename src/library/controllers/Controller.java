@@ -4,8 +4,8 @@ import library.controllers.statesandsignals.InputState;
 import library.controllers.statesandsignals.OutputSignal;
 
 /*
- * generic setup for system controller
  * @author Chase Blagden
+ * <p>generic setup for system controller
  * */
 public abstract class Controller {
 
@@ -19,24 +19,23 @@ public abstract class Controller {
 	 * @return OuputSignal - power to be returned after processing
 	 */
 	public abstract OutputSignal getOutputSignal(InputState input);
-	
+
 	/*
 	 * @return for sending values to dash board
 	 */
 	public void sendToSmartDash() {
-		
+
 	}
 
 	/*
 	 * @return for reseting controller to default values
 	 */
 	public abstract void reset();
-	
+
 	/*
 	 * @return boolean indicating whether controller has finished processing
 	 */
 	public abstract boolean isCompleted();
-
 
 	/*
 	 * @return
@@ -73,6 +72,5 @@ public abstract class Controller {
 	public String getSubsystemID() {
 		return this.subsystemID;
 	}
-	
 
 }

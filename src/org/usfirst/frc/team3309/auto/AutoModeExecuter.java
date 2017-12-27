@@ -6,8 +6,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- * @author Chase.Blagden Class for interfacing between Robot class and selecting
- *         and running auto modes.
+ * @author Chase.Blagden
+ *         <p>
+ *         Class for interfacing between Robot class and selecting and running
+ *         auto modes.
  */
 public class AutoModeExecuter {
 
@@ -15,7 +17,7 @@ public class AutoModeExecuter {
 	private static boolean isUsingFile = false;
 
 	/*
-	 * Loops through and puts autos on dashboard for selection
+	 * <p>Loops through and puts autos on dashboard for selection
 	 */
 	public static void displayAutos() {
 		if (isUsingFile) {

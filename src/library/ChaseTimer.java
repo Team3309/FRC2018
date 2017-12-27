@@ -3,18 +3,18 @@ package library;
 import edu.wpi.first.wpilibj.Timer;
 
 public class ChaseTimer extends Timer {
-	
+
 	private double timeToBeCompleted;
-	
+
 	private boolean isConditionMaintained;
-	
+
 	public ChaseTimer() {
 	}
-	
+
 	public ChaseTimer(double timeToBeCompleted) {
-		this.timeToBeCompleted= timeToBeCompleted;
+		this.timeToBeCompleted = timeToBeCompleted;
 	}
-	
+
 	public boolean isConditionMaintained(boolean isTrue) {
 		if (isTrue) {
 			if (isConditionMaintained && this.get() > this.timeToBeCompleted) {
@@ -30,12 +30,11 @@ public class ChaseTimer extends Timer {
 		}
 		return false;
 	}
-	
-	
+
 	public static void delaySec(double sec) {
 		Timer.delay(sec);
 	}
-	
+
 	public static void delayMs(double ms) {
 		Timer.delay(ms / 1000);
 	}

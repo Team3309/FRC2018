@@ -17,7 +17,7 @@ public class BlankController extends Controller {
 	}
 
 	/*
-	 * no goal, so always true
+	 * <p>no goal, so always true
 	 */
 	@Override
 	public boolean isCompleted() {
@@ -25,7 +25,7 @@ public class BlankController extends Controller {
 	}
 
 	/*
-	 * stops motor
+	 * <p>stops motor
 	 */
 	@Override
 	public void reset() {
@@ -33,7 +33,7 @@ public class BlankController extends Controller {
 	}
 
 	/*
-	 * nothing to send
+	 * <p>nothing to send
 	 */
 	@Override
 	public void sendToSmartDash() {

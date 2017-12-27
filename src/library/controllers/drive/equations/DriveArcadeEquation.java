@@ -7,6 +7,10 @@ import library.controllers.Controller;
 import library.controllers.statesandsignals.InputState;
 import library.controllers.statesandsignals.OutputSignal;
 
+/*
+ * @author Chase Blagden
+ * <p> Basic format of the arcade drive equation
+ * */
 public class DriveArcadeEquation extends Controller {
 
 	@Override
@@ -24,6 +28,7 @@ public class DriveArcadeEquation extends Controller {
 	}
 
 	@Override
-	public void reset() { }
+	public void reset() {
+	}
 
 }

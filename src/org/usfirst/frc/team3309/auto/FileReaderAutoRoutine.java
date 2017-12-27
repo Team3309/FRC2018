@@ -21,8 +21,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- * @author Chase.Blagden Auto routine that reads selected auto and loads actions
- *         and driveAction.
+ * @author Chase.Blagden
+ *         <p>
+ *         Auto routine that reads selected auto and loads actions and
+ *         driveAction.
  */
 public class FileReaderAutoRoutine extends AutoRoutine {
 
@@ -42,7 +44,7 @@ public class FileReaderAutoRoutine extends AutoRoutine {
 	}
 
 	/*
-	 * Loops through auto files and sends them to dashboard
+	 * <p>Loops through auto files and sends them to dashboard
 	 */
 	public static void displayAutos() {
 		File[] autoFiles = new File("autos").listFiles();
@@ -54,7 +56,7 @@ public class FileReaderAutoRoutine extends AutoRoutine {
 	}
 
 	/*
-	 * Using Apache library, parses auto file for key values. Accounts for
+	 * <p>Using Apache library, parses auto file for key values. Accounts for
 	 * missing values. https://www.apache.org/
 	 */
 	@SuppressWarnings("unchecked")
@@ -134,6 +136,12 @@ public class FileReaderAutoRoutine extends AutoRoutine {
 								double finalHeading = driveActions
 										.containsKey("heading") ? driveActions
 										.getDouble("heading") : 0.0;
+								double initX = driveActions
+										.containsKey("initX") ? driveActions
+										.getDouble("initX") : 0.0;
+								double initY = driveActions
+										.containsKey("initY") ? driveActions
+										.getDouble("initY") : 0.0;
 								for (HierarchicalConfiguration<ImmutableNode> waypoint : driveActions
 										.childConfigurationsAt("waypoints")) {
 									double x = waypoint.containsKey("x") ? waypoint

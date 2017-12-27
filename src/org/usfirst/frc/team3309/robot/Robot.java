@@ -1,21 +1,25 @@
 package org.usfirst.frc.team3309.robot;
 
+import library.communications.BlackBox;
+
 import org.usfirst.frc.team3309.auto.AutoModeExecuter;
 import org.usfirst.frc.team3309.auto.AutoRoutine;
+import org.usfirst.team3309.subsystems.Drive;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 
 /**
  * @author Chase.Blagden
- * 
  */
 public class Robot extends IterativeRobot {
 
 	private AutoRoutine autoThread;
-
+	
 	@Override
 	public void robotInit() {
 		Systems.init();
+		BlackBox.initLog("3309" + String.valueOf(DriverStation.getInstance().getAlliance()), "X position", "Y position");
 		AutoModeExecuter.displayAutos();
 	}
 
@@ -29,8 +33,11 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void autonomousPeriodic() {
+		Sensors.updateDrive();
 		Systems.updateAuto();
 		Systems.sendToDashboard();
+		BlackBox.writeLog(String.valueOf(Drive.getInstance().getInches(Sensors.getXPos())), 
+				String.valueOf(Drive.getInstance().getInches(Sensors.getYPos())));
 	}
 
 	@Override
