@@ -42,8 +42,8 @@ public class Sensors {
 	}
 
 	public static void updateDrive() {
-		curX += getVel() * Math.cos(getAngle() + 90);
-		curY += getVel() * Math.sin(getAngle() + 90);
+		curX += getVel() * Math.cos(Math.toRadians(getAngle() + 90));
+		curY += getVel() * Math.sin(Math.toRadians(getAngle() + 90));
 	}
 
 	public static void resetDrive() {

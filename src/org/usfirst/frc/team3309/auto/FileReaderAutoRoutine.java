@@ -1,21 +1,6 @@
 package org.usfirst.frc.team3309.auto;
 
 import java.io.File;
-import java.util.LinkedList;
-import java.util.List;
-
-import library.controllers.drive.DriveCurvatureFollowerController;
-import library.controllers.drive.DrivePositionController;
-import library.controllers.drive.DriveVelocityControllerWithSetpoints;
-import library.controllers.drive.VelocityChangePoint;
-import library.controllers.drive.Waypoint;
-
-import org.apache.commons.configuration2.HierarchicalConfiguration;
-import org.apache.commons.configuration2.XMLConfiguration;
-import org.apache.commons.configuration2.builder.FileBasedConfigurationBuilder;
-import org.apache.commons.configuration2.builder.fluent.Parameters;
-import org.apache.commons.configuration2.ex.ConfigurationException;
-import org.apache.commons.configuration2.tree.ImmutableNode;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -61,7 +46,7 @@ public class FileReaderAutoRoutine extends AutoRoutine {
 	 */
 	@SuppressWarnings("unchecked")
 	public void loadAuto() {
-		Parameters params = new Parameters();
+		/*Parameters params = new Parameters();
 		File propertiesFile = new File(autoOptions.getSelected().getName());
 		FileBasedConfigurationBuilder<XMLConfiguration> builder = new FileBasedConfigurationBuilder<>(
 				XMLConfiguration.class).configure(params.xml().setFile(
@@ -162,7 +147,7 @@ public class FileReaderAutoRoutine extends AutoRoutine {
 		} catch (ConfigurationException e) {
 			e.printStackTrace();
 			super.stopAutoThread();
-		}
+		}*/
 	}
 
 }

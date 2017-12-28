@@ -17,12 +17,14 @@ public class DrivePositionController extends Controller {
 	public DrivePositionController(double goal) {
 		linearController = new PIDPositionController(0.0, 0.0, 0.0);
 		linearController.setTHRESHOLD(200);
+		linearController.setTIME_TO_BE_COMPLETE_S(0.2);
 		linearController.setIsCompletable(true);
 		linearController.setSubsystemID(this.getSubsystemID());
 		linearController.setName("linear");
 
 		angleController = new PIDPositionController(0.0, 0.0, 0.0);
 		angleController.setTHRESHOLD(200);
+		angleController.setTIME_TO_BE_COMPLETE_S(0.2);
 		angleController.setIsCompletable(true);
 		angleController.setSubsystemID(this.getSubsystemID());
 		angleController.setName("angular");
@@ -42,13 +44,10 @@ public class DrivePositionController extends Controller {
 		InputState angularInput = new InputState();
 		linearInput.setError(goal - input.getPos());
 		angularInput.setError(angle - input.getAngPos());
-		OutputSignal linearOutput = linearController
-				.getOutputSignal(linearInput);
-		OutputSignal angularOutput = angleController
-				.getOutputSignal(angularInput);
+		OutputSignal linearOutput = linearController.getOutputSignal(linearInput);
+		OutputSignal angularOutput = angleController.getOutputSignal(angularInput);
 		OutputSignal signal = new OutputSignal();
-		signal.setLeftRightMotor(
-				linearOutput.getMotor() + angularOutput.getMotor(),
+		signal.setLeftRightMotor(linearOutput.getMotor() + angularOutput.getMotor(),
 				linearOutput.getMotor() - angularOutput.getMotor());
 		return signal;
 	}
@@ -66,6 +65,10 @@ public class DrivePositionController extends Controller {
 
 	@Override
 	public void reset() {
+	}
+
+	public void setConstants(double kP, double kI, double kD) {
+		this.linearController.setConstants(kP, kI, kD);
 	}
 
 }

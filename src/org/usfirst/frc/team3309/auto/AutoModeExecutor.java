@@ -1,5 +1,6 @@
 package org.usfirst.frc.team3309.auto;
 
+import org.usfirst.frc.team3309.auto.routines.NoAutoRoutine;
 import org.usfirst.frc.team3309.auto.routines.TestRoutine;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -11,7 +12,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  *         Class for interfacing between Robot class and selecting and running
  *         auto modes.
  */
-public class AutoModeExecuter {
+public class AutoModeExecutor {
 
 	private static SendableChooser<AutoRoutine> autos = new SendableChooser<>();
 	private static boolean isUsingFile = false;
@@ -23,6 +24,7 @@ public class AutoModeExecuter {
 		if (isUsingFile) {
 			FileReaderAutoRoutine.displayAutos();
 		} else {
+			autos.addDefault("NoActionRountine", new NoAutoRoutine());
 			autos.addObject("TestRoutine", new TestRoutine());
 			SmartDashboard.putData("Autos: ", autos);
 		}

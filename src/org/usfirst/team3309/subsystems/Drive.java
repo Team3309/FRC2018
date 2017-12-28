@@ -3,6 +3,7 @@ package org.usfirst.team3309.subsystems;
 import library.ControlledSubsystem;
 import library.actuators.TalonSRXMC;
 import library.controllers.BlankController;
+import library.controllers.drive.DrivePositionController;
 import library.controllers.drive.equations.DriveCheezyDriveEquation;
 import library.controllers.statesandsignals.InputState;
 import library.controllers.statesandsignals.OutputSignal;
@@ -44,17 +45,19 @@ public class Drive extends ControlledSubsystem {
 		super("Drive");
 		rightMaster.setFeedbackDevice(FeedbackDevice.AnalogEncoder);
 		leftMaster.setFeedbackDevice(FeedbackDevice.AnalogEncoder);
+		this.setController(new BlankController());
 	}
 
 	@Override
 	public void init() {
+		this.resetDrive();
+		this.setLowGear();
 	}
 
 	@Override
 	public void initAuto() {
 		this.setLowGear();
-		Sensors.resetDrive();
-		this.setController(new BlankController());
+		this.resetDrive();
 		this.setVoltageRampRate(0);
 	}
 
@@ -97,13 +100,25 @@ public class Drive extends ControlledSubsystem {
 		input.setPos(this.getDistanceTraveled());
 		input.setAngPos(Sensors.getAngle());
 		input.setVel(Sensors.getVel());
-		;
 		return input;
 	}
 
 	@Override
 	public void sendToDashboard() {
-
+		this.getController().sendToSmartDash();
+		table.putNumber("Gyro: ", Sensors.getAngle());
+		table.putNumber("Encoder counts: ", this.getDistanceTraveled());
+		table.putNumber("Encoder left: ", -this.leftMaster.getPosition());
+		table.putNumber("Encoder right: ", this.rightMaster.getPosition());
+		table.putNumber("Velocity: ", this.getAverageVelocity());
+		table.putNumber("Left velocity:", -this.leftMaster.getAnalogInVelocity());
+		table.putNumber("Right velocity ", this.rightMaster.getAnalogInVelocity());
+		if (this.getController() instanceof DrivePositionController) {
+			double kP = table.getNumber("kP", 0.0);
+			double kI = table.getNumber("kI", 0.0);
+			double kD = table.getNumber("kD", 0.0);
+			((DrivePositionController)this.getController()).setConstants(kP, kI, kD);
+		}
 	}
 
 	public void changeToPercentMode() {
@@ -123,14 +138,14 @@ public class Drive extends ControlledSubsystem {
 		rightSlave1.set(rightMaster.getDeviceID());
 		leftMaster.changeControlMode(TalonControlMode.Speed);
 		leftSlave0.changeControlMode(TalonControlMode.Follower);
-		leftSlave1.changeControlMode(TalonControlMode.Follower);
+		leftSlave1.changeControlMode(TalonControlMode.Follower); 
 		leftSlave0.set(leftMaster.getDeviceID());
 		leftSlave1.set(leftMaster.getDeviceID());
 	}
 
 	public void setLeftRight(double left, double right) {
 		setLeft(left);
-		setRight(right);
+		setRight(-right);
 	}
 
 	/*
@@ -187,7 +202,7 @@ public class Drive extends ControlledSubsystem {
 	 * @return total encoder counts traversed
 	 */
 	public double getDistanceTraveled() {
-		return (leftMaster.getPosition() + rightMaster.getPosition()) / 2;
+		return (-leftMaster.getPosition() + rightMaster.getPosition()) / 2;
 	}
 
 	/*
@@ -195,7 +210,7 @@ public class Drive extends ControlledSubsystem {
 	 * ms)
 	 */
 	public double getAverageVelocity() {
-		return (leftMaster.getEncVelocity() + rightMaster.getEncVelocity()) / 2;
+		return (-leftMaster.getAnalogInVelocity() + rightMaster.getAnalogInVelocity()) / 2;
 	}
 
 	/*

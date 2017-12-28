@@ -20,7 +20,9 @@ public abstract class Subsystem implements Runnable {
 	 * <p>only to be run during teleop
 	 */
 	public void run() {
-		updateTeleop();
+		while (true) {
+			updateTeleop();
+		}
 	}
 
 	public abstract void initTeleop();

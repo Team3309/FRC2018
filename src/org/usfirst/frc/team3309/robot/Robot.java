@@ -1,13 +1,12 @@
 package org.usfirst.frc.team3309.robot;
 
-import library.communications.BlackBox;
-
-import org.usfirst.frc.team3309.auto.AutoModeExecuter;
+import org.usfirst.frc.team3309.auto.AutoModeExecutor;
 import org.usfirst.frc.team3309.auto.AutoRoutine;
 import org.usfirst.team3309.subsystems.Drive;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import library.communications.BlackBox;
 
 /**
  * @author Chase.Blagden
@@ -15,20 +14,23 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 public class Robot extends IterativeRobot {
 
 	private AutoRoutine autoThread;
-	
+
 	@Override
 	public void robotInit() {
+		Systems.add(Drive.getInstance());
 		Systems.init();
-		BlackBox.initLog("3309" + String.valueOf(DriverStation.getInstance().getAlliance()), "X position", "Y position");
-		AutoModeExecuter.displayAutos();
+		BlackBox.initLog("3309" + String.valueOf(DriverStation.getInstance().getAlliance()), "X position",
+				"Y position");
+		AutoModeExecutor.displayAutos();
 	}
 
 	@Override
 	public void autonomousInit() {
-		autoThread = AutoModeExecuter.getAutoSelected();
+		autoThread = AutoModeExecutor.getAutoSelected();
 		if (autoThread != null) {
 			autoThread.startAutoThread();
 		}
+		Systems.initAuto();
 	}
 
 	@Override
@@ -36,7 +38,7 @@ public class Robot extends IterativeRobot {
 		Sensors.updateDrive();
 		Systems.updateAuto();
 		Systems.sendToDashboard();
-		BlackBox.writeLog(String.valueOf(Drive.getInstance().getInches(Sensors.getXPos())), 
+		BlackBox.writeLog(String.valueOf(Drive.getInstance().getInches(Sensors.getXPos())),
 				String.valueOf(Drive.getInstance().getInches(Sensors.getYPos())));
 	}
 
@@ -50,9 +52,11 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void teleopPeriodic() {
+		Systems.sendToDashboard();
 	}
 
 	@Override
-	public void testPeriodic() {
+	public void disabledPeriodic() {
+		Systems.sendToDashboard();
 	}
 }

@@ -1,7 +1,5 @@
 package org.usfirst.frc.team3309.auto;
 
-import library.controllers.drive.Waypoint;
-
 import org.usfirst.team3309.subsystems.Drive;
 
 /**
@@ -15,8 +13,6 @@ public abstract class Action {
 	// where action will run (inches)
 	private double goal;
 	
-	private Waypoint goalPoint;
-
 	/*
 	 * @param double goal - where action will run (inches)
 	 */
@@ -24,10 +20,6 @@ public abstract class Action {
 		this.goal = goal;
 	}
 	
-	public Action(Waypoint goalPoint) {
-		this.goalPoint = goalPoint;
-	}
-
 	public abstract void runAction();
 
 	/*
@@ -37,10 +29,6 @@ public abstract class Action {
 	 */
 	public double getGoal() {
 		return Drive.getInstance().getEncoderCounts(goal);
-	}
-	
-	public Waypoint getPoint() {
-		return goalPoint.convertToEncoderCounts();
 	}
 
 }

@@ -11,7 +11,7 @@ import java.util.Date;
 
 public class BlackBox {
 	
-	private static final String logPath = "Log\\";
+	private static final String logPath = "/media/sda1/Logs/";
 	private static PrintWriter pw;
 
 	public static void initLog(String title, String... headers) {
@@ -24,7 +24,7 @@ public class BlackBox {
 		File file = new File(logPath + title + " " + LocalDate.now() + " " + timeString +".csv");
 		try {
 			if (!file.getParentFile().exists()) {
-				file.getParentFile().mkdir();
+				file.getParentFile().mkdirs();
 			}
 			file.createNewFile();
 			pw = new PrintWriter(file);

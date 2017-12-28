@@ -20,6 +20,12 @@ public class Systems {
 			s.init();
 		}
 	}
+	
+	public static void initAuto() {
+		for (Subsystem s : subsystems) {
+			s.initAuto();
+		}
+	}
 
 	public static void initTeleop() {
 		for (Subsystem s : subsystems) {

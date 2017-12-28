@@ -1,16 +1,13 @@
 package org.usfirst.frc.team3309.auto;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
-
-import library.ChaseTimer;
-import library.controllers.drive.Waypoint;
 
 import org.usfirst.team3309.subsystems.Drive;
 
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.Timer;
+import library.ChaseTimer;
 
 /**
  * @author Chase.Blagden
@@ -23,8 +20,8 @@ public abstract class AutoRoutine implements Runnable {
 	private Thread t;
 	private Timer autoTimer = new Timer();
 	private int curDriveActionIndex = 0;
-	private List<DriveAction> driveActions = new LinkedList<>();
-	private List<Action> actions = new LinkedList<>();
+	private List<DriveAction> driveActions = new ArrayList<>();
+	private List<Action> actions = new ArrayList<>();
 	private final double actionThreshold = 10;
 
 	public AutoRoutine() {
@@ -32,23 +29,23 @@ public abstract class AutoRoutine implements Runnable {
 
 			@Override
 			public void start() {
-				super.start();
 
 				// checks for alliance color in autonomous
 				if (DriverStation.getInstance().isAutonomous()) {
-					if (DriverStation.getInstance().getAlliance() == Alliance.Blue) {
+					switch (DriverStation.getInstance().getAlliance()) {
+					case Blue:
 						blueRoutine();
-					} else if (DriverStation.getInstance().getAlliance() == Alliance.Red) {
+					case Red:
 						redRoutine();
-					} else {
+					default:
 						this.stop();
 					}
 				} else {
 					this.stop();
 				}
 
-				if (driveActions.get(curDriveActionIndex) != null) {
-					driveActions.get(curDriveActionIndex).startDrive();
+				if (driveActions.size() > 0) {
+					driveActions.get(0).startDrive();
 				}
 				autoTimer.start();
 				this.run();
@@ -67,31 +64,27 @@ public abstract class AutoRoutine implements Runnable {
 		boolean running = true;
 		while (DriverStation.getInstance().isAutonomous() && running) {
 
-			try {
+		/*	try {
 				if (curDriveActionIndex < driveActions.size()) {
 					driveActions.get(curDriveActionIndex).updateDrive();
 				}
 			} catch (AutoTimedOutException e) {
 				e.printStackTrace();
 				curDriveActionIndex++;
-			}
+			}*/
 
 			Action curAction = null;
 			double closeness = Double.MAX_VALUE;
 
 			// checks for current action to run, if any
 			for (Action action : actions) {
-				if (action.getPoint() != null) {
-					
-				} else if (action.getGoal() > Drive.getInstance()
-						.getDistanceTraveled()) {
-					if (Math.abs(Math.abs(action.getGoal())
-							- Math.abs(Drive.getInstance()
-									.getDistanceTraveled())) < Math
-							.abs(closeness)) {
-						closeness = Math.abs(Math.abs(action.getGoal())
-								- Math.abs(Drive.getInstance()
-										.getDistanceTraveled()));
+
+				if (action.getGoal() > Drive.getInstance().getDistanceTraveled()) {
+					if (Math.abs(
+							Math.abs(action.getGoal()) - Math.abs(Drive.getInstance().getDistanceTraveled())) < Math
+									.abs(closeness)) {
+						closeness = Math
+								.abs(Math.abs(action.getGoal()) - Math.abs(Drive.getInstance().getDistanceTraveled()));
 						curAction = action;
 					}
 				}
