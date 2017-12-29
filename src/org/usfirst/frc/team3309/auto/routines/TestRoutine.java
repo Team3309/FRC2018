@@ -30,7 +30,7 @@ public class TestRoutine extends AutoRoutine {
 	public void blueRoutine() {
 		DrivePositionController c = new DrivePositionController(5000);
 		addDriveAction(new DriveAction(c, 5.0));
-		addAction(new TestAction(0));
+	//	addAction(new TestAction(0));
 	}
 
 }

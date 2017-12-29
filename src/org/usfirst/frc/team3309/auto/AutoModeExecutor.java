@@ -24,7 +24,7 @@ public class AutoModeExecutor {
 		if (isUsingFile) {
 			FileReaderAutoRoutine.displayAutos();
 		} else {
-			autos.addDefault("NoActionRountine", new NoAutoRoutine());
+			autos.addDefault("NoActionRoutine", new NoAutoRoutine());
 			autos.addObject("TestRoutine", new TestRoutine());
 			SmartDashboard.putData("Autos: ", autos);
 		}

@@ -25,16 +25,13 @@ public class DriveAction {
 	/*
 	 * <p>Sets controller for drive while checking timer
 	 * 
-	 * @thorws AutoTimedOutException
+	 * @throws AutoTimedOutException
 	 */
 	public void updateDrive() throws AutoTimedOutException {
 		if (!driveController.isCompleted()) {
 			Drive.getInstance().setController(driveController);
 		} else {
 			Drive.getInstance().stopDrive();
-		}
-		if (driveTimer.get() > timeout) {
-			throw new AutoTimedOutException();
 		}
 	}
 

@@ -14,8 +14,6 @@ public class Systems {
 	}
 
 	public static void init() {
-		RobotMap.runConfigFileReader(RobotMap.class,
-				"configs/robotMapConfig.ini");
 		for (Subsystem s : subsystems) {
 			s.init();
 		}

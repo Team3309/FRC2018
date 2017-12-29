@@ -13,7 +13,7 @@ import library.communications.BlackBox;
  */
 public class Robot extends IterativeRobot {
 
-	private AutoRoutine autoThread;
+	private AutoRoutine auto;
 
 	@Override
 	public void robotInit() {
@@ -22,19 +22,19 @@ public class Robot extends IterativeRobot {
 		BlackBox.initLog("3309" + String.valueOf(DriverStation.getInstance().getAlliance()), "X position",
 				"Y position");
 		AutoModeExecutor.displayAutos();
+		Sensors.resetDrive();
 	}
 
 	@Override
 	public void autonomousInit() {
-		autoThread = AutoModeExecutor.getAutoSelected();
-		if (autoThread != null) {
-			autoThread.startAutoThread();
-		}
 		Systems.initAuto();
+		auto = AutoModeExecutor.getAutoSelected();
+		auto.initialize();
 	}
 
 	@Override
 	public void autonomousPeriodic() {
+		auto.update();
 		Sensors.updateDrive();
 		Systems.updateAuto();
 		Systems.sendToDashboard();
@@ -44,9 +44,6 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void teleopInit() {
-		if (autoThread != null) {
-			autoThread.stopAutoThread();
-		}
 		Systems.initTeleop();
 	}
 

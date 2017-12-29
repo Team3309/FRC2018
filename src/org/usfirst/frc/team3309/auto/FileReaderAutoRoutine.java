@@ -32,11 +32,10 @@ public class FileReaderAutoRoutine extends AutoRoutine {
 	 * <p>Loops through auto files and sends them to dashboard
 	 */
 	public static void displayAutos() {
-		File[] autoFiles = new File("autos").listFiles();
+		File[] autoFiles = new File("/home/lvuser/autos").listFiles();
 		for (File auto : autoFiles) {
 			autoOptions.addObject(auto.getName(), auto);
 		}
-		autoOptions.addDefault("Default", new File("autos/NoAuto.xml"));
 		SmartDashboard.putData("Auto", autoOptions);
 	}
 

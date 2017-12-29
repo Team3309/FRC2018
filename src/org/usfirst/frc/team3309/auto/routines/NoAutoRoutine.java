@@ -6,12 +6,12 @@ public class NoAutoRoutine extends AutoRoutine {
 
 	@Override
 	public void redRoutine() {
-
+		System.out.println("No auto");
 	}
 
 	@Override
 	public void blueRoutine() {
-
+		redRoutine();
 	}
 
 }

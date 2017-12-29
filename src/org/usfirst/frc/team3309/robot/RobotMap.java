@@ -1,13 +1,5 @@
 package org.usfirst.frc.team3309.robot;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.util.Enumeration;
-import java.util.Properties;
-
 public class RobotMap {
 
 	// TALON ID's
@@ -50,29 +42,5 @@ public class RobotMap {
 
 	// Analog OUT
 	public static final int INDICATOR_LIGHT = 0;
-
-	public static void runConfigFileReader(Class<?> toFill, String fileName) {
-		Properties p = new Properties();
-		try (FileInputStream fis = new FileInputStream(new File(fileName))) {
-			p.load(fis);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		Enumeration<?> enumeration = p.propertyNames();
-		while (enumeration.hasMoreElements()) {
-			String name = (String) enumeration.nextElement();
-			String value = p.getProperty(name);
-			Field cur = null;
-			try {
-				cur = toFill.getField(name);
-				cur.set(null, Integer.class.getMethod("parseInt", String.class)
-						.invoke(null, value));
-			} catch (NoSuchFieldException | NoSuchMethodException
-					| InvocationTargetException | IllegalAccessException
-					| SecurityException e) {
-				e.printStackTrace();
-			}
-		}
-	}
 
 }

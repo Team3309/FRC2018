@@ -15,14 +15,14 @@ public class DrivePositionController extends Controller {
 	private PIDPositionController angleController;
 
 	public DrivePositionController(double goal) {
-		linearController = new PIDPositionController(0.0, 0.0, 0.0);
+		linearController = new PIDPositionController(0.1, 0.0, 0.0);
 		linearController.setTHRESHOLD(200);
 		linearController.setTIME_TO_BE_COMPLETE_S(0.2);
 		linearController.setIsCompletable(true);
 		linearController.setSubsystemID(this.getSubsystemID());
 		linearController.setName("linear");
 
-		angleController = new PIDPositionController(0.0, 0.0, 0.0);
+		angleController = new PIDPositionController(0.01, 0.0, 0.0);
 		angleController.setTHRESHOLD(200);
 		angleController.setTIME_TO_BE_COMPLETE_S(0.2);
 		angleController.setIsCompletable(true);
