@@ -19,8 +19,10 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		Systems.add(Drive.getInstance());
 		Systems.init();
-		BlackBox.initLog("3309" + String.valueOf(DriverStation.getInstance().getAlliance()), "X position",
-				"Y position");
+		BlackBox.initLog(
+				"3309"
+						+ String.valueOf(DriverStation.getInstance()
+								.getAlliance()), "X position", "Y position");
 		AutoModeExecutor.displayAutos();
 		Sensors.resetDrive();
 	}
@@ -38,8 +40,9 @@ public class Robot extends IterativeRobot {
 		Sensors.updateDrive();
 		Systems.updateAuto();
 		Systems.sendToDashboard();
-		BlackBox.writeLog(String.valueOf(Drive.getInstance().getInches(Sensors.getXPos())),
-				String.valueOf(Drive.getInstance().getInches(Sensors.getYPos())));
+		BlackBox.writeLog(String.valueOf(Drive.getInstance().getInches(
+				Sensors.getXPos())), String.valueOf(Drive.getInstance()
+				.getInches(Sensors.getYPos())));
 	}
 
 	@Override

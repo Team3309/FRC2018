@@ -108,8 +108,8 @@ public class Drive extends ControlledSubsystem {
 		this.getController().sendToSmartDash();
 		table.putNumber("Gyro: ", Sensors.getAngle());
 		table.putNumber("Encoder counts: ", this.getDistanceTraveled());
-		table.putNumber("Encoder left: ", -this.leftMaster.getPosition());
-		table.putNumber("Encoder right: ", this.rightMaster.getPosition());
+		table.putNumber("Encoder left: ", -this.leftMaster.getAnalogInPosition());
+		table.putNumber("Encoder right: ", this.rightMaster.getAnalogInPosition());
 		table.putNumber("Velocity: ", this.getAverageVelocity());
 		table.putNumber("Left velocity:", -this.leftMaster.getAnalogInVelocity());
 		table.putNumber("Right velocity ", this.rightMaster.getAnalogInVelocity());
