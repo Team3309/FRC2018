@@ -1,6 +1,5 @@
 package library.actuators;
 
-import org.usfirst.frc.team3309.robot.Actuators;
 
 public abstract class Actuator {
 

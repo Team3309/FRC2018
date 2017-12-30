@@ -1,6 +1,5 @@
 package library.controllers.drive;
 
-import org.usfirst.team3309.subsystems.Drive;
 
 public class Waypoint {
 
@@ -26,8 +25,7 @@ public class Waypoint {
 	}
 
 	public Waypoint convertToEncoderCounts() {
-		return new Waypoint(Drive.getInstance().getEncoderCounts(x), Drive
-				.getInstance().getEncoderCounts(y));
+		return new Waypoint(x, y);
 	}
 
 	public static double getDistance(Waypoint a, Waypoint b) {

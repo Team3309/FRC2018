@@ -42,5 +42,7 @@ public class RobotMap {
 
 	// Analog OUT
 	public static final int INDICATOR_LIGHT = 0;
+	
+	public static final int WHEEL_RADIUS_INCHES = 4;
 
 }

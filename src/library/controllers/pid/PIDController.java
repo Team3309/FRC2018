@@ -42,9 +42,6 @@ public abstract class PIDController extends Controller {
 		this.kP = kP;
 		this.kI = kI;
 		this.kD = kD;
-		NetworkTable.getTable(getSubsystemID()).putNumber("kP", kP);
-		NetworkTable.getTable(getSubsystemID()).putNumber("kI", kI);
-		NetworkTable.getTable(getSubsystemID()).putNumber("kD", kD);
 	}
 
 	public PIDController(double kP, double kI, double kD, double kILimit) {
@@ -176,13 +173,13 @@ public abstract class PIDController extends Controller {
 	@Override
 	public void sendToSmartDash() {
 		if (this.isUseSmartDash) {
-			NetworkTable table = NetworkTable.getTable(getSubsystemID());
+		/*	NetworkTable table = NetworkTable.getTable(getSubsystemID());
 			kP = table.getNumber("kP", 0.0);
 			kI = table.getNumber("kI", 0.0);
 			kD = table.getNumber("kD", 0.0);
 			table.putNumber("kP", kP);
 			table.putNumber("kI", kI);
-			table.putNumber("kD", kD);
+			table.putNumber("kD", kD);*/
 		}
 	}
 

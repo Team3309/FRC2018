@@ -7,7 +7,7 @@ import java.util.HashMap;
  * @author Chase Blagden 
  * */
 @SuppressWarnings("serial")
-public class InputState extends HashMap<String, Double> {
+public class InputState extends HashMap<String, Object> {
 
 	public InputState() {
 		super();
@@ -30,7 +30,7 @@ public class InputState extends HashMap<String, Double> {
 	 * @param
 	 */
 	public double getError() {
-		return this.get("error");
+		return (double) this.get("error");
 	}
 
 	/*
@@ -48,7 +48,7 @@ public class InputState extends HashMap<String, Double> {
 	 * @param
 	 */
 	public double getVel() {
-		return this.get("vel");
+		return (double) this.get("vel");
 	}
 
 	/*
@@ -66,7 +66,7 @@ public class InputState extends HashMap<String, Double> {
 	 * @param
 	 */
 	public double getPos() {
-		return this.get("pos");
+		return (double) this.get("pos");
 	}
 
 	/*
@@ -90,7 +90,7 @@ public class InputState extends HashMap<String, Double> {
 	 * @param
 	 */
 	public double getX() {
-		return this.get("x");
+		return (double) this.get("x");
 	}
 
 	/*
@@ -108,7 +108,7 @@ public class InputState extends HashMap<String, Double> {
 	 * @param
 	 */
 	public double getY() {
-		return this.get("y");
+		return (double) this.get("y");
 	}
 
 	/*
@@ -126,7 +126,7 @@ public class InputState extends HashMap<String, Double> {
 	 * @param
 	 */
 	public double getZ() {
-		return this.get("z");
+		return (double) this.get("z");
 	}
 
 	/*
@@ -144,7 +144,7 @@ public class InputState extends HashMap<String, Double> {
 	 * @param
 	 */
 	public double getAngPos() {
-		return this.get("angPos");
+		return (double) this.get("angPos");
 	}
 
 	/*
@@ -162,7 +162,7 @@ public class InputState extends HashMap<String, Double> {
 	 * @param
 	 */
 	public double getAngVel() {
-		return this.get("angVel");
+		return (double) this.get("angVel");
 	}
 
 	/*
@@ -180,7 +180,7 @@ public class InputState extends HashMap<String, Double> {
 	 * @param
 	 */
 	public double getLeftVel() {
-		return this.get("leftVel");
+		return (double) this.get("leftVel");
 	}
 
 	/*
@@ -198,7 +198,7 @@ public class InputState extends HashMap<String, Double> {
 	 * @param
 	 */
 	public double getRightVel() {
-		return this.get("rightVel");
+		return (double) this.get("rightVel");
 	}
 
 	/*
@@ -216,7 +216,7 @@ public class InputState extends HashMap<String, Double> {
 	 * @param
 	 */
 	public double getLeftPos() {
-		return this.get("leftPos");
+		return (double) this.get("leftPos");
 	}
 
 	/*
@@ -234,7 +234,25 @@ public class InputState extends HashMap<String, Double> {
 	 * @param
 	 */
 	public double getRightPos() {
-		return this.get("rightPos");
+		return (double) this.get("rightPos");
+	}
+
+	/*
+	 * @return
+	 * 
+	 * @param boolean isTrue Evaluated boolean condition
+	 */
+	public void setIsTrue(boolean isTrue) {
+		this.put("isTrue", isTrue);
+	}
+
+	/*
+	 * @return Evaluated boolean condition
+	 * 
+	 * @param
+	 */
+	public boolean getIsTrue() {
+		return (boolean) this.get("isTrue");
 	}
 
 }

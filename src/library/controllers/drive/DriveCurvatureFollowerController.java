@@ -6,7 +6,6 @@ import library.controllers.statesandsignals.InputState;
 import library.controllers.statesandsignals.OutputSignal;
 
 import org.usfirst.frc.team3309.robot.Sensors;
-import org.usfirst.team3309.subsystems.Drive;
 
 /**
  * @author Chase.Blagden Controller for following list of real world unit
@@ -35,7 +34,6 @@ public class DriveCurvatureFollowerController extends Controller {
 		this.waypoints = waypoints;
 		turningController = new PIDPositionController(0.0, 0.0, 0.0);
 		turningController.setName("turningController");
-		turningController.setSubsystemID(getSubsystemID());
 		turningController.setIsCompletable(true);
 		turningController.setTHRESHOLD(30);
 		turningController.setTIME_TO_BE_COMPLETE_S(0.25);
@@ -61,8 +59,7 @@ public class DriveCurvatureFollowerController extends Controller {
 			goalWaypoint = goalWaypoint.convertToEncoderCounts();
 
 			// when within certain range from a waypoint, change waypoint
-			if (Waypoint.getDistance(goalWaypoint, curWaypoint) < Drive
-					.getInstance().getEncoderCounts(radius)) {
+			if (Waypoint.getDistance(goalWaypoint, curWaypoint) < radius) {
 				waypointIndex++;
 
 				
@@ -82,12 +79,8 @@ public class DriveCurvatureFollowerController extends Controller {
 			curWaypoint = goalWaypoint.subtract(curWaypoint);
 
 			// set velocities proportional to distance from target
-			double goalVelocity = curWaypoint.y
-					* Drive.getInstance().getEncoderCountsPerMs(
-							maxForwardVelocity);
-			double goalAngularVelocity = curWaypoint.x
-					* Drive.getInstance().getEncoderCountsPerMs(
-							maxAngularVelocity);
+			double goalVelocity = curWaypoint.y * maxForwardVelocity;
+			double goalAngularVelocity = curWaypoint.x* maxAngularVelocity;
 
 			/*
 			 * Truncate velocities if too high

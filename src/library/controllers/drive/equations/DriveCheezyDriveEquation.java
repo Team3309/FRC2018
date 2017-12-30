@@ -3,11 +3,6 @@ package library.controllers.drive.equations;
 import library.controllers.Controller;
 import library.controllers.statesandsignals.InputState;
 import library.controllers.statesandsignals.OutputSignal;
-
-import org.usfirst.frc.team3309.driverstation.Controls;
-import org.usfirst.team3309.subsystems.Drive;
-
-import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -26,7 +21,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class DriveCheezyDriveEquation extends Controller {
 
 	public DriveCheezyDriveEquation() {
-		Drive.getInstance().changeToPercentMode();
 	}
 
 	private double oldWheel, quickStopAccumulator;
@@ -35,9 +29,9 @@ public class DriveCheezyDriveEquation extends Controller {
 
 	@Override
 	public OutputSignal getOutputSignal(InputState input) {
-		double throttle = Controls.driverRemote.getY(Hand.kLeft);
-		double wheel = Controls.driverRemote.getX(Hand.kRight);
-		boolean isQuickTurn = Controls.driverRemote.getBumper(Hand.kRight);
+		double throttle = input.getX(); // x axis of controller
+		double wheel = input.getY(); // y axis of controller
+		boolean isQuickTurn = input.getIsTrue();
 		boolean isHighGear = true;
 		OutputSignal signal = new OutputSignal();
 		double wheelNonLinearity;
@@ -163,11 +157,6 @@ public class DriveCheezyDriveEquation extends Controller {
 
 	public static double limit(double v, double limit) {
 		return (Math.abs(v) < limit) ? v : limit * (v < 0 ? -1 : 1);
-	}
-
-	@Override
-	public void reset() {
-
 	}
 
 	@Override

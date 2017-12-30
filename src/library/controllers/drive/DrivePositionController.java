@@ -19,14 +19,12 @@ public class DrivePositionController extends Controller {
 		linearController.setTHRESHOLD(200);
 		linearController.setTIME_TO_BE_COMPLETE_S(0.2);
 		linearController.setIsCompletable(true);
-		linearController.setSubsystemID(this.getSubsystemID());
 		linearController.setName("linear");
 
 		angleController = new PIDPositionController(0.01, 0.0, 0.0);
 		angleController.setTHRESHOLD(200);
 		angleController.setTIME_TO_BE_COMPLETE_S(0.2);
 		angleController.setIsCompletable(true);
-		angleController.setSubsystemID(this.getSubsystemID());
 		angleController.setName("angular");
 
 		this.goal = goal;

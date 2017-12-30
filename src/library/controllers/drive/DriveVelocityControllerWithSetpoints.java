@@ -10,7 +10,6 @@ import library.controllers.statesandsignals.InputState;
 import library.controllers.statesandsignals.OutputSignal;
 
 import org.usfirst.frc.team3309.robot.Sensors;
-import org.usfirst.team3309.subsystems.Drive;
 
 /**
  * @author Chase.Blagden
@@ -27,11 +26,9 @@ public class DriveVelocityControllerWithSetpoints extends Controller {
 	private PIDPositionController turningController;
 
 	public DriveVelocityControllerWithSetpoints(double goal) {
-		Drive.getInstance().changeToVelocityMode();
 		turningController = new PIDPositionController(0.0, 0.0, 0.0);
 		turningController.setName("angle-controller");
 		turningController.setIsCompletable(true);
-		turningController.setSubsystemID(this.getSubsystemID());
 		turningController.setTHRESHOLD(100);
 		turningController.setTIME_TO_BE_COMPLETE_S(0.25);
 		this.goal = goal;
@@ -46,12 +43,12 @@ public class DriveVelocityControllerWithSetpoints extends Controller {
 
 		// checks for closest waypoint
 		for (VelocityChangePoint waypoint : setpoints) {
-			if (Math.abs(Sensors.getPos()) > Math.abs(waypoint
+			if (Math.abs(inputState.getPos()) > Math.abs(waypoint
 					.getEncValueToChangeAt())) {
-				if (Math.abs(Math.abs(Sensors.getPos())
+				if (Math.abs(Math.abs(inputState.getPos())
 						- Math.abs(waypoint.getEncValueToChangeAt())) < closestPoint) {
 					curWaypoint = waypoint;
-					closestPoint = Math.abs(Math.abs(Sensors.getPos())
+					closestPoint = Math.abs(Math.abs(inputState.getPos())
 							- Math.abs(waypoint.getEncValueToChangeAt()));
 				}
 			}
@@ -84,9 +81,10 @@ public class DriveVelocityControllerWithSetpoints extends Controller {
 
 	@Override
 	public boolean isCompleted() {
-		return this.doneTimer.isConditionMaintained(Math.abs(Drive
+		/*return this.doneTimer.isConditionMaintained(Math.abs(Drive
 				.getInstance().getDistanceTraveled()) > Math.abs(goal))
-				&& this.turningController.isCompleted();
+				&& this.turningController.isCompleted();*/
+		return false;
 	}
 
 	@Override

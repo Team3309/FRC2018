@@ -1,9 +1,7 @@
-package org.usfirst.frc.team3309.robot;
+package library.actuators;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import library.actuators.Actuator;
 
 public class Actuators {
 

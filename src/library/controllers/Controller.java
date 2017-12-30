@@ -12,9 +12,6 @@ public abstract class Controller {
 	// name of Controller
 	private String name = "Default Controller Name";
 
-	// subsystem to which controller is assigned
-	private String subsystemID = "Default Subsystem";
-
 	/*
 	 * @return OuputSignal - power to be returned after processing
 	 */
@@ -30,7 +27,9 @@ public abstract class Controller {
 	/*
 	 * @return for reseting controller to default values
 	 */
-	public abstract void reset();
+	public void reset() {
+		
+	}
 
 	/*
 	 * @return boolean indicating whether controller has finished processing
@@ -53,24 +52,6 @@ public abstract class Controller {
 	 */
 	public String getName() {
 		return name;
-	}
-
-	/*
-	 * @return
-	 * 
-	 * @param subsystemID
-	 */
-	public void setSubsystemID(String id) {
-		this.subsystemID = id;
-	}
-
-	/*
-	 * @return subsystemID
-	 * 
-	 * @param
-	 */
-	public String getSubsystemID() {
-		return this.subsystemID;
 	}
 
 }

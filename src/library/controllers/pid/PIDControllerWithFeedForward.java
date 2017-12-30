@@ -71,9 +71,9 @@ public class PIDControllerWithFeedForward extends PIDController {
 	@Override
 	public void sendToSmartDash() {
 		super.sendToSmartDash();
-		NetworkTable table = NetworkTable.getTable(getSubsystemID());
+	/*	NetworkTable table = NetworkTable.getTable(getSubsystemID());
 		kF = table.getNumber("kF", 0.0);
-		table.putNumber("kF", kF);
+		table.putNumber("kF", kF);*/
 	}
 
 }
