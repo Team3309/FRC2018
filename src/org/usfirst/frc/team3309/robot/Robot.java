@@ -11,8 +11,8 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
  * @author Chase.Blagden
  */
 public class Robot extends IterativeRobot {
-
-	public static final Drive drive = new Drive();
+	
+	public static Drive drive = new Drive();
 	private Command autoCommand;
 	public OI oi;
 
@@ -51,4 +51,5 @@ public class Robot extends IterativeRobot {
 	public void testPeriodic() {
 		LiveWindow.run();
 	}
+	
 }
