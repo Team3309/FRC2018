@@ -1,8 +1,8 @@
 package org.usfirst.frc.team3309.commands.drive;
 
-import library.controllers.drive.equations.DriveCheezyDriveEquation;
-import library.controllers.statesandsignals.InputState;
-import library.controllers.statesandsignals.OutputSignal;
+import lib.controllers.drive.equations.DriveCheezyDriveEquation;
+import lib.controllers.statesandsignals.InputState;
+import lib.controllers.statesandsignals.OutputSignal;
 
 import org.usfirst.frc.team3309.commands.ControlledCommand;
 import org.usfirst.frc.team3309.driverstation.Controls;
@@ -13,16 +13,17 @@ import edu.wpi.first.wpilibj.GenericHID.Hand;
 public class DriveTeleop extends ControlledCommand {
 
 	public DriveTeleop() {
+		super("DriveTeleop");
 		requires(Robot.drive);
 	}
 
 	@Override
-	public void initialize() {
+	protected void initialize() {
 		Robot.drive.changeToPercentMode();
 	}
 
 	@Override
-	public void execute() {
+	protected void execute() {
 		this.setController(new DriveCheezyDriveEquation());
 		OutputSignal signal = this.getController().getOutputSignal(
 				getInputState());
@@ -32,10 +33,11 @@ public class DriveTeleop extends ControlledCommand {
 		} else {
 			Robot.drive.setHighGear();
 		}
+		this.sendToDashboard();
 	}
 
 	@Override
-	public InputState getInputState() {
+	protected InputState getInputState() {
 		InputState state = new InputState();
 		state.setX(Controls.driverRemote.getY(Hand.kLeft));
 		state.setY(Controls.driverRemote.getX(Hand.kRight));
@@ -44,7 +46,7 @@ public class DriveTeleop extends ControlledCommand {
 	}
 
 	@Override
-	public void interrupted() {
+	protected void interrupted() {
 		Robot.drive.stopDrive();
 	}
 

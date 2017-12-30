@@ -1,7 +1,7 @@
 package org.usfirst.frc.team3309.commands;
 
-import library.controllers.Controller;
-import library.controllers.statesandsignals.InputState;
+import lib.controllers.Controller;
+import lib.controllers.statesandsignals.InputState;
 import edu.wpi.first.wpilibj.command.Command;
 
 /*
@@ -11,6 +11,13 @@ import edu.wpi.first.wpilibj.command.Command;
  * 
  * */
 public abstract class ControlledCommand extends Command {
+	
+	public ControlledCommand() {
+	}
+	
+	public ControlledCommand(String commandName) {
+		super(commandName);
+	}
 	
 	/*
 	 * Controller does processing of data for ControlledCommand.
@@ -40,6 +47,12 @@ public abstract class ControlledCommand extends Command {
 			return mController.isCompleted();
 		}
 		return false;
+	}
+	
+	public void sendToDashboard() {
+		if (mController != null) {
+			mController.sendToSmartDash();
+		}
 	}
 	
 }

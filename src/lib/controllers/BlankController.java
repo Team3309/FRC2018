@@ -1,0 +1,61 @@
+package lib.controllers;
+
+import lib.controllers.statesandsignals.InputState;
+import lib.controllers.statesandsignals.OutputSignal;
+
+public class BlankController extends Controller {
+
+	// power for motor
+	private double power = 0.0;
+
+	@Override
+	public OutputSignal getOutputSignal(InputState input) {
+		OutputSignal output = new OutputSignal();
+		output.setMotor(power);
+		output.setLeftRightMotor(0, 0);
+		return output;
+	}
+
+	/*
+	 * <p>no goal, so always true
+	 */
+	@Override
+	public boolean isCompleted() {
+		return true;
+	}
+
+	/*
+	 * <p>stops motor
+	 */
+	@Override
+	public void reset() {
+		power = 0;
+	}
+
+	/*
+	 * <p>nothing to send
+	 */
+	@Override
+	public void sendToSmartDash() {
+
+	}
+
+	/*
+	 * @return
+	 * 
+	 * @param motor power
+	 */
+	public void setPower(double power) {
+		this.power = power;
+	}
+
+	/*
+	 * @return motor power
+	 * 
+	 * @param
+	 */
+	public double getPower() {
+		return power;
+	}
+
+}

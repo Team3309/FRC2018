@@ -1,6 +1,6 @@
 package org.usfirst.frc.team3309.subsystems;
 
-import library.actuators.TalonSRXMC;
+import lib.actuators.TalonSRXMC;
 
 import org.usfirst.frc.team3309.commands.drive.DriveTeleop;
 import org.usfirst.frc.team3309.robot.RobotMap;

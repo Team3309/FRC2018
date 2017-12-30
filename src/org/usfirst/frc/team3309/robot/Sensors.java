@@ -1,6 +1,6 @@
 package org.usfirst.frc.team3309.robot;
 
-import library.controllers.drive.Waypoint;
+import lib.controllers.drive.Waypoint;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 
 public class Sensors {

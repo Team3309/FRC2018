@@ -1,19 +1,17 @@
 package org.usfirst.frc.team3309.robot;
 
-import library.communications.BlackBox;
-
 import org.usfirst.frc.team3309.subsystems.Drive;
 
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 /**
  * @author Chase.Blagden
  */
 public class Robot extends IterativeRobot {
-	
+
 	public static final Drive drive = new Drive();
 	private Command autoCommand;
 	public OI oi;
@@ -21,12 +19,15 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		oi = new OI();
-		BlackBox.initLog("3309" + String.valueOf(DriverStation.getInstance().getAlliance()), "X position",
-				"Y position");
+		AutoModeExecutor.displayAutos();
 	}
 
 	@Override
 	public void autonomousInit() {
+		autoCommand = AutoModeExecutor.getAutoSelected();
+		if (autoCommand != null) {
+			autoCommand.start();
+		}
 	}
 
 	@Override
@@ -36,6 +37,9 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void teleopInit() {
+		if (autoCommand != null) {
+			autoCommand.cancel();
+		}
 	}
 
 	@Override
@@ -44,6 +48,7 @@ public class Robot extends IterativeRobot {
 	}
 
 	@Override
-	public void disabledPeriodic() {
+	public void testPeriodic() {
+		LiveWindow.run();
 	}
 }
