@@ -5,13 +5,14 @@ import lib.controllers.statesandsignals.InputState;
 import lib.controllers.statesandsignals.OutputSignal;
 
 /*
- * @author Chase Blagden
- * <p> Basic format of the arcade drive equation
- * */
-public class DriveArcadeEquation extends Controller {
+ * @author Chase Blagden <p> Basic format of the arcade drive equation
+ */
+public class DriveArcadeEquation extends Controller
+{
 
 	@Override
-	public OutputSignal getOutputSignal(InputState input) {
+	public OutputSignal getOutputSignal(InputState input)
+	{
 		OutputSignal signal = new OutputSignal();
 		double throttle = input.getY();
 		double turn = input.getX();
@@ -20,7 +21,8 @@ public class DriveArcadeEquation extends Controller {
 	}
 
 	@Override
-	public boolean isCompleted() {
+	public boolean isCompleted()
+	{
 		return false;
 	}
 

@@ -6,9 +6,11 @@ import lib.controllers.statesandsignals.OutputSignal;
 
 /*
  * <p>Controller for PID with feed forward, primarily for flywheels
+ * 
  * @author Chase Blagden
- * */
-public class PIDControllerWithFeedForward extends PIDController {
+ */
+public class PIDControllerWithFeedForward extends PIDController
+{
 
 	// feed forward constant
 	private double kF;
@@ -22,7 +24,8 @@ public class PIDControllerWithFeedForward extends PIDController {
 	 * @param kP, kI, kD, kF
 	 */
 	public PIDControllerWithFeedForward(double kP, double kI, double kD,
-			double kF) {
+			double kF)
+	{
 		super(kP, kI, kD);
 		this.kF = kF;
 	}
@@ -32,13 +35,15 @@ public class PIDControllerWithFeedForward extends PIDController {
 	 * 
 	 * @param kP, kI, kD, kF
 	 */
-	public void setConstants(double kP, double kI, double kD, double kF) {
+	public void setConstants(double kP, double kI, double kD, double kF)
+	{
 		super.setConstants(kP, kI, kD);
 		this.kF = kF;
 	}
 
 	@Override
-	public OutputSignal getOutputSignal(InputState input) {
+	public OutputSignal getOutputSignal(InputState input)
+	{
 		OutputSignal signal = new OutputSignal();
 		double power = getOutputSignal(input).getMotor() + kF * aimVel;
 		signal.setMotor(power);
@@ -46,7 +51,8 @@ public class PIDControllerWithFeedForward extends PIDController {
 	}
 
 	@Override
-	public void reset() {
+	public void reset()
+	{
 		super.reset();
 	}
 
@@ -55,7 +61,8 @@ public class PIDControllerWithFeedForward extends PIDController {
 	 * 
 	 * @param aimVel
 	 */
-	public void setAimVel(double aimVel) {
+	public void setAimVel(double aimVel)
+	{
 		this.aimVel = aimVel;
 	}
 
@@ -64,16 +71,19 @@ public class PIDControllerWithFeedForward extends PIDController {
 	 * 
 	 * @param
 	 */
-	public double getAimVel() {
+	public double getAimVel()
+	{
 		return aimVel;
 	}
 
 	@Override
-	public void sendToSmartDash() {
+	public void sendToSmartDash()
+	{
 		super.sendToSmartDash();
-	/*	NetworkTable table = NetworkTable.getTable(getSubsystemID());
-		kF = table.getNumber("kF", 0.0);
-		table.putNumber("kF", kF);*/
+		/*
+		 * NetworkTable table = NetworkTable.getTable(getSubsystemID()); kF =
+		 * table.getNumber("kF", 0.0); table.putNumber("kF", kF);
+		 */
 	}
 
 }

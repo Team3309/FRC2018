@@ -1,5 +1,7 @@
 package org.usfirst.frc.team3309.robot;
 
+import lib.communications.BlackBox;
+
 import org.usfirst.frc.team3309.subsystems.Drive;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -11,7 +13,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
  * @author Chase.Blagden
  */
 public class Robot extends IterativeRobot {
-	
+
 	public static Drive drive = new Drive();
 	private Command autoCommand;
 	public OI oi;
@@ -20,10 +22,13 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		oi = new OI();
 		AutoModeExecutor.displayAutos();
+		BlackBox.initLog("PursuitTest", "X pos", "Y pos");
+		System.out.println("Starting robot");
 	}
 
 	@Override
 	public void autonomousInit() {
+		System.out.println("Starting auto");
 		autoCommand = AutoModeExecutor.getAutoSelected();
 		if (autoCommand != null) {
 			autoCommand.start();
@@ -37,6 +42,7 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void teleopInit() {
+		System.out.println("Starting teleop");
 		if (autoCommand != null) {
 			autoCommand.cancel();
 		}
@@ -51,5 +57,5 @@ public class Robot extends IterativeRobot {
 	public void testPeriodic() {
 		LiveWindow.run();
 	}
-	
+
 }

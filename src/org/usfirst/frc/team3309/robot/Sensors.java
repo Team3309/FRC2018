@@ -1,6 +1,5 @@
 package org.usfirst.frc.team3309.robot;
 
-import lib.controllers.drive.Waypoint;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 
 public class Sensors {
@@ -24,10 +23,6 @@ public class Sensors {
 
 	public static double getYPos() {
 		return curY;
-	}
-	
-	public static Waypoint getPoint() {
-		return new Waypoint(curX, curY);
 	}
 
 }

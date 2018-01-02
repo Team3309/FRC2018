@@ -5,8 +5,6 @@ import lib.controllers.pid.PIDPositionController;
 import lib.controllers.statesandsignals.InputState;
 import lib.controllers.statesandsignals.OutputSignal;
 
-import org.usfirst.frc.team3309.robot.Sensors;
-
 /**
  * @author Chase.Blagden Controller for following list of real world unit
  *         waypoints in curved path
@@ -35,8 +33,8 @@ public class DriveCurvatureFollowerController extends Controller {
 		turningController = new PIDPositionController(0.0, 0.0, 0.0);
 		turningController.setName("turningController");
 		turningController.setIsCompletable(true);
-		turningController.setTHRESHOLD(30);
-		turningController.setTIME_TO_BE_COMPLETE_S(0.25);
+		turningController.setErrorThreshold(30);
+		turningController.setTimeoutS(0.25);
 	}
 
 	public DriveCurvatureFollowerController(Waypoint[] waypoints,
@@ -46,23 +44,20 @@ public class DriveCurvatureFollowerController extends Controller {
 	}
 
 	@Override
-	public OutputSignal getOutputSignal(InputState input) {
+	public OutputSignal getOutputSignal(InputState inputState) {
 
-		curWaypoint = new Waypoint(Sensors.getXPos(), Sensors.getYPos());
-		curWaypoint = curWaypoint.convertToEncoderCounts();
+		curWaypoint = new Waypoint(inputState.getX(), inputState.getY(), inputState.getAngPos());
 
-		OutputSignal signal;
+		OutputSignal signal = new OutputSignal();
 
 		if (waypoints != null) {
 
 			Waypoint goalWaypoint = waypoints[waypointIndex];
-			goalWaypoint = goalWaypoint.convertToEncoderCounts();
 
 			// when within certain range from a waypoint, change waypoint
 			if (Waypoint.getDistance(goalWaypoint, curWaypoint) < radius) {
 				waypointIndex++;
 
-				
 				// when on last waypoint, stop moving
 				if (waypointIndex == waypoints.length) {
 					waypointIndex--;
@@ -76,12 +71,12 @@ public class DriveCurvatureFollowerController extends Controller {
 			}
 
 			// find distance between points
-			curWaypoint = goalWaypoint.subtract(curWaypoint);
+			curWaypoint = new Waypoint(goalWaypoint.y - curWaypoint.y, goalWaypoint.x - curWaypoint.x, goalWaypoint.heading - curWaypoint.heading);
 
 			// set velocities proportional to distance from target
 			double goalVelocity = curWaypoint.y * maxForwardVelocity;
-			double goalAngularVelocity = curWaypoint.x* maxAngularVelocity;
-
+			double goalAngularVelocity = curWaypoint.x * maxAngularVelocity;
+			
 			/*
 			 * Truncate velocities if too high
 			 */
@@ -92,12 +87,11 @@ public class DriveCurvatureFollowerController extends Controller {
 				goalAngularVelocity = maxAngularVelocity;
 			}
 
-			signal = new OutputSignal();
 
 			// if on final waypoint, adjust toward final heading
 			if (waypointIndex == waypoints.length - 1) {
 				InputState turningInput = new InputState();
-				turningInput.setError(finalHeading - input.getAngPos());
+				turningInput.setError(finalHeading - inputState.getAngPos());
 				OutputSignal turningOutput = turningController
 						.getOutputSignal(turningInput);
 				double turningVelocity = turningOutput.getMotor();
@@ -110,7 +104,6 @@ public class DriveCurvatureFollowerController extends Controller {
 				return signal;
 			}
 		} else {
-			signal = new OutputSignal();
 			signal.setLeftRightMotor(0.0, 0.0);
 			return signal;
 		}

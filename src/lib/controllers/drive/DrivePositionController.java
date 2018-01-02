@@ -16,14 +16,14 @@ public class DrivePositionController extends Controller {
 
 	public DrivePositionController(double goal) {
 		linearController = new PIDPositionController(0.1, 0.0, 0.0);
-		linearController.setTHRESHOLD(200);
-		linearController.setTIME_TO_BE_COMPLETE_S(0.2);
+		linearController.setErrorThreshold(200);
+		linearController.setTimeoutS(0.2);
 		linearController.setIsCompletable(true);
 		linearController.setName("linear");
 
 		angleController = new PIDPositionController(0.01, 0.0, 0.0);
-		angleController.setTHRESHOLD(200);
-		angleController.setTIME_TO_BE_COMPLETE_S(0.2);
+		angleController.setErrorThreshold(200);
+		angleController.setTimeoutS(0.2);
 		angleController.setIsCompletable(true);
 		angleController.setName("angular");
 
@@ -62,10 +62,6 @@ public class DrivePositionController extends Controller {
 	public void sendToSmartDash() {
 		linearController.sendToSmartDash();
 		angleController.sendToSmartDash();
-	}
-
-	@Override
-	public void reset() {
 	}
 
 	public void setConstants(double kP, double kI, double kD) {

@@ -5,8 +5,9 @@ import lib.controllers.statesandsignals.OutputSignal;
 
 /*
  * <p>PID Controller with add-ons for velocity and acceleration
+ * 
  * @author Chase Blagden
- * */
+ */
 public class PIDVelocityController extends PIDController {
 
 	// constant for adjusting velocity
@@ -21,10 +22,21 @@ public class PIDVelocityController extends PIDController {
 	// desired acceleration
 	private double aimAcc = 0.0;
 
-	public PIDVelocityController(double kP, double kI, double kD, double kV,
-			double kA) {
+	public PIDVelocityController(double kP, double kI, double kD) {
+		super(kP, kI, kD);
+		this.kV = 0;
+		this.kA = 0;
+	}
+	
+	public PIDVelocityController(double kP, double kI, double kD, double kV) {
 		super(kP, kI, kD);
 		this.kV = kV;
+		this.kA = 0;
+	}
+
+	public PIDVelocityController(double kP, double kI, double kD, double kV,
+			double kA) {
+		this(kP, kI, kD, kV);
 		this.kA = kA;
 	}
 

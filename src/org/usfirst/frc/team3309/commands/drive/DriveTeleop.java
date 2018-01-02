@@ -20,11 +20,12 @@ public class DriveTeleop extends ControlledCommand {
 	@Override
 	protected void initialize() {
 		Robot.drive.changeToPercentMode();
+		Robot.drive.setHighGear();
 	}
 
 	@Override
 	protected void execute() {
-		this.setController(new DriveCheezyDriveEquation());
+		setController(new DriveCheezyDriveEquation());
 		OutputSignal signal = this.getController().getOutputSignal(
 				getInputState());
 		Robot.drive.setLeftRight(signal.getLeftMotor(), signal.getRightMotor());

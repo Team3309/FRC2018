@@ -15,7 +15,7 @@ public abstract class Controller {
 	/*
 	 * @return OuputSignal - power to be returned after processing
 	 */
-	public abstract OutputSignal getOutputSignal(InputState input);
+	public abstract OutputSignal getOutputSignal(InputState inputState);
 
 	/*
 	 * @return for sending values to dash board

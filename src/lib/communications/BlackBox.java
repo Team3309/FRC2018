@@ -9,8 +9,11 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 
+import edu.wpi.first.wpilibj.DriverStation;
+
 public class BlackBox {
 
+	// path writes to USB connected to roboRio
 	private static final String logPath = "/media/sda1/Logs/";
 	private static PrintWriter pw;
 
@@ -21,7 +24,9 @@ public class BlackBox {
 		int min = time.getMinute();
 		int sec = time.getSecond();
 		String timeString = hour + "H " + min + "M " + sec + "S";
-		File file = new File(logPath + title + " " + LocalDate.now() + " " + timeString + ".csv");
+		File file = new File(logPath + "3309_"
+				+ String.valueOf(DriverStation.getInstance().getAlliance()) + "_"
+				+ title + "_" + LocalDate.now() + "_" + timeString + ".csv");
 		try {
 			if (!file.getParentFile().exists()) {
 				file.getParentFile().mkdirs();
@@ -37,7 +42,7 @@ public class BlackBox {
 			pw.println(headersString);
 			pw.flush();
 		} catch (IOException e) {
-		//	e.printStackTrace();
+			// e.printStackTrace();
 		}
 
 	}

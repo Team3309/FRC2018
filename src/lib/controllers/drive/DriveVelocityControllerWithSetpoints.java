@@ -9,7 +9,7 @@ import lib.controllers.pid.PIDPositionController;
 import lib.controllers.statesandsignals.InputState;
 import lib.controllers.statesandsignals.OutputSignal;
 
-import org.usfirst.frc.team3309.robot.Sensors;
+import org.usfirst.frc.team3309.robot.Robot;
 
 /**
  * @author Chase.Blagden
@@ -17,11 +17,10 @@ import org.usfirst.frc.team3309.robot.Sensors;
  */
 public class DriveVelocityControllerWithSetpoints extends Controller {
 
-	private double goal;
-	private double angle;
-	private final double TIME_TO_BE_COMPLETE_S = 0.25;
-	private ChaseTimer doneTimer = new ChaseTimer(TIME_TO_BE_COMPLETE_S);
-	private final double DEFAULT_VELOCITY = 1000;
+	private final double goal;
+	private final double timeoutS = 0.25;
+	private ChaseTimer doneTimer = new ChaseTimer(timeoutS);
+	private final double defaultVelocity = 1000;
 	private List<VelocityChangePoint> setpoints = new LinkedList<VelocityChangePoint>();
 	private PIDPositionController turningController;
 
@@ -29,49 +28,44 @@ public class DriveVelocityControllerWithSetpoints extends Controller {
 		turningController = new PIDPositionController(0.0, 0.0, 0.0);
 		turningController.setName("angle-controller");
 		turningController.setIsCompletable(true);
-		turningController.setTHRESHOLD(100);
-		turningController.setTIME_TO_BE_COMPLETE_S(0.25);
+		turningController.setErrorThreshold(100);
+		turningController.setTimeoutS(0.25);
 		this.goal = goal;
 	}
 
 	@Override
 	public OutputSignal getOutputSignal(InputState inputState) {
-
-		VelocityChangePoint curWaypoint = new VelocityChangePoint(
-				DEFAULT_VELOCITY, 0);
+		
+		VelocityChangePoint curSetpoint = new VelocityChangePoint(defaultVelocity, 0);
+		
 		double closestPoint = Double.MAX_VALUE;
 
 		// checks for closest waypoint
-		for (VelocityChangePoint waypoint : setpoints) {
-			if (Math.abs(inputState.getPos()) > Math.abs(waypoint
-					.getEncValueToChangeAt())) {
-				if (Math.abs(Math.abs(inputState.getPos())
-						- Math.abs(waypoint.getEncValueToChangeAt())) < closestPoint) {
-					curWaypoint = waypoint;
-					closestPoint = Math.abs(Math.abs(inputState.getPos())
-							- Math.abs(waypoint.getEncValueToChangeAt()));
+		for (VelocityChangePoint setpoint : setpoints) {
+			if (Math.abs(inputState.getPos()) > Math.abs(setpoint.getEncValueToChangeAt())) {
+				if (Math.abs(Math.abs(inputState.getPos()) - Math.abs(setpoint.getEncValueToChangeAt())) < closestPoint) {
+					curSetpoint = setpoint;
+					closestPoint = Math.abs(Math.abs(inputState.getPos()) - Math.abs(setpoint.getEncValueToChangeAt()));
 				}
 			}
 		}
 
-		double rightAimVel = curWaypoint.getNewRightVel();
-		double leftAimVel = curWaypoint.getNewLeftVel();
+		double rightAimVel = curSetpoint.getNewRightVel();
+		double leftAimVel = curSetpoint.getNewLeftVel();
 
-		if (curWaypoint.getGoalAngle() == null) {
-			curWaypoint.setGoalAngle(Sensors.getAngle());
+		if (curSetpoint.getGoalAngle() == null) {
+			curSetpoint.setGoalAngle(inputState.getAngPos());
 		}
 
-		angle = curWaypoint.getGoalAngle();
+		double angle = curSetpoint.getGoalAngle();
 
 		OutputSignal signal = new OutputSignal();
 
 		if (rightAimVel == leftAimVel) {
 			InputState turningInput = new InputState();
 			turningInput.setError(angle - inputState.getAngPos());
-			double turnPower = turningController.getOutputSignal(turningInput)
-					.getMotor();
-			signal.setLeftRightMotor(leftAimVel + turnPower, rightAimVel
-					- turnPower);
+			double turnPower = turningController.getOutputSignal(turningInput).getMotor();
+			signal.setLeftRightMotor(leftAimVel + turnPower, rightAimVel - turnPower);
 		} else {
 			signal.setLeftRightMotor(leftAimVel, rightAimVel);
 		}
@@ -81,19 +75,18 @@ public class DriveVelocityControllerWithSetpoints extends Controller {
 
 	@Override
 	public boolean isCompleted() {
-		/*return this.doneTimer.isConditionMaintained(Math.abs(Drive
-				.getInstance().getDistanceTraveled()) > Math.abs(goal))
-				&& this.turningController.isCompleted();*/
-		return false;
+		return this.doneTimer.isConditionMaintained(Math.abs(Robot.drive.getAverageEncoder()) > Math.abs(goal))
+				&& this.turningController.isCompleted();
 	}
 
 	@Override
 	public void reset() {
 		doneTimer.reset();
+		turningController.reset();
 	}
 
-	public void setWaypoints(List<VelocityChangePoint> waypoints) {
-		this.setpoints = waypoints;
+	public void setSetpoints(List<VelocityChangePoint> setpoints) {
+		this.setpoints = setpoints;
 	}
 
 }

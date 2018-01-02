@@ -5,13 +5,16 @@ package lib.controllers.pid;
  *         <p>
  *         Basic postion based PID controller
  */
-public class PIDPositionController extends PIDController {
+public class PIDPositionController extends PIDController
+{
 
-	public PIDPositionController(double kP, double kI, double kD) {
+	public PIDPositionController(double kP, double kI, double kD)
+	{
 		super(kP, kI, kD);
 	}
 
-	public PIDPositionController(double kP, double kI, double kD, double kILimit) {
+	public PIDPositionController(double kP, double kI, double kD, double kILimit)
+	{
 		super(kP, kI, kD, kILimit);
 	}
 

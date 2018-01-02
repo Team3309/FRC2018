@@ -18,17 +18,16 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * high speeds. Also handles the robot's quick turn functionality - "quick turn"
  * overrides constant-curvature turning for turn-in-place maneuvers.
  */
-public class DriveCheezyDriveEquation extends Controller {
-
-	public DriveCheezyDriveEquation() {
-	}
+public class DriveCheezyDriveEquation extends Controller
+{
 
 	private double oldWheel, quickStopAccumulator;
 	private double throttleDeadband = 0.02;
 	private double wheelDeadband = 0.07;
 
 	@Override
-	public OutputSignal getOutputSignal(InputState input) {
+	public OutputSignal getOutputSignal(InputState input)
+	{
 		double throttle = input.getX(); // x axis of controller
 		double wheel = input.getY(); // y axis of controller
 		boolean isQuickTurn = input.getIsTrue();
@@ -42,14 +41,16 @@ public class DriveCheezyDriveEquation extends Controller {
 		double negInertia = wheel - oldWheel;
 		oldWheel = wheel;
 
-		if (isHighGear) {
+		if (isHighGear)
+		{
 			wheelNonLinearity = 0.6;
 			// Apply a sin function that's scaled to make it feel better.
 			wheel = Math.sin(Math.PI / 2.0 * wheelNonLinearity * wheel)
 					/ Math.sin(Math.PI / 2.0 * wheelNonLinearity);
 			wheel = Math.sin(Math.PI / 2.0 * wheelNonLinearity * wheel)
 					/ Math.sin(Math.PI / 2.0 * wheelNonLinearity);
-		} else {
+		} else
+		{
 			wheelNonLinearity = 0.5;
 			// Apply a sin function that's scaled to make it feel better.
 			wheel = Math.sin(Math.PI / 2.0 * wheelNonLinearity * wheel)
@@ -69,10 +70,12 @@ public class DriveCheezyDriveEquation extends Controller {
 		// Negative inertia!
 		double negInertiaAccumulator = 0.0;
 		double negInertiaScalar = 5;
-		if (isHighGear) {
+		if (isHighGear)
+		{
 
 			negInertiaScalar = 5.0;
-		} else {
+		} else
+		{
 			/*
 			 * if (wheel * negInertia > 0) { negInertiaScalar = 1.75; } else {
 			 * if (Math.abs(wheel) > 0.65) { negInertiaScalar = 4.0; } else {
@@ -83,46 +86,60 @@ public class DriveCheezyDriveEquation extends Controller {
 		negInertiaAccumulator += negInertiaPower;
 
 		wheel = wheel + negInertiaAccumulator;
-		if (negInertiaAccumulator > 1) {
+		if (negInertiaAccumulator > 1)
+		{
 			negInertiaAccumulator -= 1;
-		} else if (negInertiaAccumulator < -1) {
+		} else if (negInertiaAccumulator < -1)
+		{
 			negInertiaAccumulator += 1;
-		} else {
+		} else
+		{
 			negInertiaAccumulator = 0;
 		}
 		linearPower = throttle;
 
-		if (throttle > .4) {
+		if (throttle > .4)
+		{
 			sensitivity = .15;
-		} else {
+		} else
+		{
 			sensitivity = .3;
 		}
 		// Quickturn!
-		if (isQuickTurn) {
-			if (Math.abs(linearPower) < 0.2) {
+		if (isQuickTurn)
+		{
+			if (Math.abs(linearPower) < 0.2)
+			{
 				double alpha = 0.05;
 				quickStopAccumulator = (1 - alpha) * quickStopAccumulator
 						+ alpha * limit(wheel, 1.0) * 5;
 			}
 			overPower = 1.0;
-			if (isHighGear) {
+			if (isHighGear)
+			{
 				sensitivity = .455;
-			} else {
+			} else
+			{
 				sensitivity = .455;
 			}
 			angularPower = wheel * sensitivity;
-			if (wheel == 1 && wheel == -1) {
+			if (wheel == 1 && wheel == -1)
+			{
 				angularPower = wheel;
 			}
-		} else {
+		} else
+		{
 			overPower = 0.0;
 			angularPower = Math.abs(throttle) * wheel * sensitivity
 					- quickStopAccumulator;
-			if (quickStopAccumulator > 1) {
+			if (quickStopAccumulator > 1)
+			{
 				quickStopAccumulator -= 1;
-			} else if (quickStopAccumulator < -1) {
+			} else if (quickStopAccumulator < -1)
+			{
 				quickStopAccumulator += 1;
-			} else {
+			} else
+			{
 				quickStopAccumulator = 0.0;
 			}
 		}
@@ -131,16 +148,20 @@ public class DriveCheezyDriveEquation extends Controller {
 		leftPwm -= angularPower;
 		rightPwm += angularPower;
 
-		if (leftPwm > 1.0) {
+		if (leftPwm > 1.0)
+		{
 			rightPwm -= overPower * (leftPwm - 1.0);
 			leftPwm = 1.0;
-		} else if (rightPwm > 1.0) {
+		} else if (rightPwm > 1.0)
+		{
 			leftPwm -= overPower * (rightPwm - 1.0);
 			rightPwm = 1.0;
-		} else if (leftPwm < -1.0) {
+		} else if (leftPwm < -1.0)
+		{
 			rightPwm += overPower * (-1.0 - leftPwm);
 			leftPwm = -1.0;
-		} else if (rightPwm < -1.0) {
+		} else if (rightPwm < -1.0)
+		{
 			leftPwm += overPower * (-1.0 - rightPwm);
 			rightPwm = -1.0;
 		}
@@ -151,16 +172,19 @@ public class DriveCheezyDriveEquation extends Controller {
 		return signal;
 	}
 
-	public double handleDeadband(double val, double deadband) {
+	public double handleDeadband(double val, double deadband)
+	{
 		return (Math.abs(val) > Math.abs(deadband)) ? val : 0.0;
 	}
 
-	public static double limit(double v, double limit) {
+	public static double limit(double v, double limit)
+	{
 		return (Math.abs(v) < limit) ? v : limit * (v < 0 ? -1 : 1);
 	}
 
 	@Override
-	public boolean isCompleted() {
+	public boolean isCompleted()
+	{
 		return false;
 	}
 

@@ -4,13 +4,15 @@ import lib.ChaseTimer;
 import lib.controllers.Controller;
 import lib.controllers.statesandsignals.InputState;
 import lib.controllers.statesandsignals.OutputSignal;
+import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
 /*
- * <p>Structure of PID Controller
- * See http://www.inpharmix.com/jps/PID_Controller_For_Lego_Mindstorms_Robots.html 
+ * <p>Structure of PID Controller See
+ * http://www.inpharmix.com/jps/PID_Controller_For_Lego_Mindstorms_Robots.html
  * for understanding of math
+ * 
  * @author Chase Blagden
- * */
+ */
 public abstract class PIDController extends Controller {
 
 	public double kP;
@@ -23,13 +25,13 @@ public abstract class PIDController extends Controller {
 	private double mIntegral = 0.0;
 	private double prevError;
 
-	private boolean isUseSmartDash = false;
+	private boolean isUseDashboard = false;
 
 	// threshold of error
-	private double THRESHOLD = 30;
+	private double errorThreshold = 30;
 
 	// time (s) in which controller must be within threshold
-	private double TIME_TO_BE_COMPLETE_S = .250;
+	private double timeoutS = .250;
 
 	// set whether controller can be finished
 	private boolean isCompletable;
@@ -68,7 +70,7 @@ public abstract class PIDController extends Controller {
 		mIntegral = kI * (mIntegral + error);
 
 		// dampens oscillation
-		double derivative = kD * (error - prevError);
+		double derivative = kD * (prevError - error);
 
 		output.setMotor(proportional + mIntegral + derivative);
 
@@ -82,8 +84,8 @@ public abstract class PIDController extends Controller {
 	 * 
 	 * @param isUseSmartDash
 	 */
-	public void setIsUseSmartDash(boolean isUseSmartDash) {
-		this.isUseSmartDash = isUseSmartDash;
+	public void setIsUseDashboard(boolean isUseSmartDash) {
+		this.isUseDashboard = isUseSmartDash;
 	}
 
 	/*
@@ -95,6 +97,11 @@ public abstract class PIDController extends Controller {
 		this.kP = kP;
 		this.kI = kI;
 		this.kD = kD;
+	}
+
+	public void setConstants(double kP, double kI, double kD, double kILimit) {
+		setConstants(kP, kI, kD);
+		this.kILimit = kILimit;
 	}
 
 	@Override
@@ -125,10 +132,10 @@ public abstract class PIDController extends Controller {
 	public boolean isCompleted() {
 		if (isCompletable) {
 			if (doneTimer == null) {
-				doneTimer = new ChaseTimer(TIME_TO_BE_COMPLETE_S);
+				doneTimer = new ChaseTimer(timeoutS);
 			}
 			return this.doneTimer
-					.isConditionMaintained(Math.abs(prevError) < THRESHOLD);
+					.isConditionMaintained(Math.abs(prevError) < errorThreshold);
 		}
 		return false;
 	}
@@ -138,15 +145,15 @@ public abstract class PIDController extends Controller {
 	 * 
 	 * @param THRESHOLD of error
 	 */
-	public void setTHRESHOLD(double THRESHOLD) {
-		this.THRESHOLD = THRESHOLD;
+	public void setErrorThreshold(double errorThreshold) {
+		this.errorThreshold = errorThreshold;
 	}
 
 	/*
 	 * @return THRESHOLD of error
 	 */
-	public double getTHRESHOLD() {
-		return this.THRESHOLD;
+	public double getErrorThreshold() {
+		return this.errorThreshold;
 	}
 
 	/*
@@ -155,8 +162,8 @@ public abstract class PIDController extends Controller {
 	 * @param TIME_TO_BE_COMPLETE_MS time in which controller must be within
 	 * THRESHOLD to terminate
 	 */
-	public void setTIME_TO_BE_COMPLETE_S(double TIME_TO_BE_COMPLETE_S) {
-		this.TIME_TO_BE_COMPLETE_S = TIME_TO_BE_COMPLETE_S;
+	public void setTimeoutS(double timeoutS) {
+		this.timeoutS = timeoutS;
 	}
 
 	/*
@@ -165,20 +172,20 @@ public abstract class PIDController extends Controller {
 	 * 
 	 * @param
 	 */
-	public double getTIME_TO_BE_COMPLETE_MS() {
-		return this.TIME_TO_BE_COMPLETE_S;
+	public double getTimeoutS() {
+		return this.timeoutS;
 	}
 
 	@Override
 	public void sendToSmartDash() {
-		if (this.isUseSmartDash) {
-		/*	NetworkTable table = NetworkTable.getTable(getSubsystemID());
+		if (this.isUseDashboard) {
+			NetworkTable table = NetworkTable.getTable("");
 			kP = table.getNumber("kP", 0.0);
 			kI = table.getNumber("kI", 0.0);
 			kD = table.getNumber("kD", 0.0);
 			table.putNumber("kP", kP);
 			table.putNumber("kI", kI);
-			table.putNumber("kD", kD);*/
+			table.putNumber("kD", kD);
 		}
 	}
 

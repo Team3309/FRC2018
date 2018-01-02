@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3309.subsystems;
 
 import lib.actuators.TalonSRXMC;
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 
 import org.usfirst.frc.team3309.commands.drive.DriveTeleop;
 import org.usfirst.frc.team3309.robot.RobotMap;
@@ -18,6 +19,8 @@ public class Drive extends Subsystem {
 	private TalonSRXMC right0 = new TalonSRXMC(RobotMap.DRIVE_RIGHT_0_ID);
 	private TalonSRXMC right1 = new TalonSRXMC(RobotMap.DRIVE_RIGHT_1_ID);
 	private Solenoid shifter = new Solenoid(RobotMap.SHIFTER);
+	
+	private ADXRS450_Gyro gyro = new ADXRS450_Gyro();
 
 	private final double ticksToDist = RobotMap.WHEEL_RADIUS_INCHES * Math.PI;
 
@@ -63,6 +66,14 @@ public class Drive extends Subsystem {
 
 	public double getRightVelocity() {
 		return right0.getAnalogInVelocity();
+	}
+	
+	public double getAngPos() {
+		return gyro.getAngle();
+	}
+	
+	public double getAngVel() {
+		return gyro.getRate();
 	}
 
 	public void changeToPercentMode() {
@@ -119,6 +130,14 @@ public class Drive extends Subsystem {
 		} else {
 			right0.set(power);
 			right1.set(power);
+		}
+	}
+	
+	public void shiftGear(boolean isLowGear) {
+		if (isLowGear) {
+			setLowGear();
+		} else {
+			setHighGear();
 		}
 	}
 
