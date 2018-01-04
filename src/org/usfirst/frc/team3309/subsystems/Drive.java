@@ -24,10 +24,9 @@ public class Drive extends Subsystem {
 
     private ADXRS450_Gyro gyro = new ADXRS450_Gyro();
 
-    private final double ticksToDist = RobotMap.WHEEL_DIAMETER_INCHES * Math.PI;
-
     public Drive() {
         enableBrakeMode(false);
+        left0.reverseSensor(true);
         left0.setFeedbackDevice(FeedbackDevice.AnalogEncoder);
         right0.setFeedbackDevice(FeedbackDevice.AnalogEncoder);
         changeToPercentMode();
@@ -39,13 +38,16 @@ public class Drive extends Subsystem {
     }
 
     public double encoderCountsToInches(double counts) {
-        return counts * ticksToDist;
+        return counts * Math.PI * RobotMap.WHEEL_DIAMETER_INCHES / RobotMap.ENCODER_COUNTER_PER_REVOLUTION;
     }
 
     public void resetDrive() {
+        left0.reverseSensor(true);
         left0.setAnalogPosition(0);
         right0.setAnalogPosition(0);
         gyro.reset();
+        enableBrakeMode(true);
+        setLowGear();
     }
 
     public double getEncoderPos() {
@@ -53,11 +55,11 @@ public class Drive extends Subsystem {
     }
 
     public double getLeftEncoder() {
-        return left0.getAnalogInPosition();
+        return left0.getPosition();
     }
 
     public double getRightEncoder() {
-        return right0.getAnalogInPosition();
+        return right0.getPosition();
     }
 
     public double getEncoderVelocity() {
@@ -136,8 +138,8 @@ public class Drive extends Subsystem {
     }
 
     public void setLeftRight(double left, double right) {
-        setLeft(left);
-        setRight(-right);
+        setLeft(-left);
+        setRight(right);
     }
 
     public void setLeft(double power) {

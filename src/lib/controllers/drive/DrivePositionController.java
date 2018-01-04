@@ -14,14 +14,15 @@ public class DrivePositionController extends Controller {
 	private PIDPositionController angleController;
 
 	public DrivePositionController(double goal) {
-		linearController = new PIDPositionController(0.1, 0.0, 0.0);
-		linearController.setErrorThreshold(200);
+		linearController = new PIDPositionController(0.07, 0.0, 0.017);
+		linearController.setErrorThreshold(0.2);
 		linearController.setTimeoutS(0.2);
 		linearController.setIsCompletable(true);
 		linearController.setName("linear");
+		linearController.setIsUseDashboard(true);
 
-		angleController = new PIDPositionController(0.01, 0.0, 0.0);
-		angleController.setErrorThreshold(200);
+		angleController = new PIDPositionController(0.0, 0.0, 0.0);
+		angleController.setErrorThreshold(0.2);
 		angleController.setTimeoutS(0.2);
 		angleController.setIsCompletable(true);
 		angleController.setName("angular");
@@ -52,9 +53,10 @@ public class DrivePositionController extends Controller {
 		return signal;
 	}
 
+
 	@Override
 	public boolean isCompleted() {
-		return linearController.isCompleted() && angleController.isCompleted();
+		return linearController.isCompleted() && true;
 	}
 
 	@Override

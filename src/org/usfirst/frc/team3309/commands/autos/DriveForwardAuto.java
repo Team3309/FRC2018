@@ -15,7 +15,7 @@ public class DriveForwardAuto extends ControlledCommand{
     @Override
     protected void execute() {
         this.sendToDashboard();
-        this.setController(new DrivePositionController(400));
+        this.setController(new DrivePositionController(-6));
         OutputSignal signal = getController().getOutputSignal(getInputState());
         Robot.drive.setLeftRight(signal.getLeftMotor(), signal.getRightMotor());
     }

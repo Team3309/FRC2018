@@ -25,7 +25,6 @@ public class DrivePathAuto extends ControlledCommand {
         Robot.drive.setLeftRight(signal.getLeftMotor(), signal.getRightMotor());
     }
 
-
     @Override
     protected InputState getInputState() {
         InputState input = new InputState();

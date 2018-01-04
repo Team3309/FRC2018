@@ -52,6 +52,8 @@ public class Robot extends IterativeRobot {
         if (autoCommand != null) {
             autoCommand.cancel();
         }
+        Robot.drive.resetDrive();
+        Robot.drive.enableBrakeMode(false);
     }
 
     @Override

@@ -41,7 +41,7 @@ public class DriveTeleop extends ControlledCommand {
 	protected InputState getInputState() {
 		InputState state = new InputState();
 		state.setX(Controls.driverRemote.getY(Hand.kLeft));
-		state.setY(Controls.driverRemote.getX(Hand.kRight));
+		state.setY(-Controls.driverRemote.getX(Hand.kRight));
 		state.setIsTrue(Controls.driverRemote.getBumper(Hand.kRight));
 		return state;
 	}
