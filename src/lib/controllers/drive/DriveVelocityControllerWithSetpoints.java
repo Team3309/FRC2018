@@ -75,7 +75,7 @@ public class DriveVelocityControllerWithSetpoints extends Controller {
 
 	@Override
 	public boolean isCompleted() {
-		return this.doneTimer.isConditionMaintained(Math.abs(Robot.drive.getAverageEncoder()) > Math.abs(goal))
+		return this.doneTimer.isConditionMaintained(Math.abs(Robot.drive.getEncoderPos()) > Math.abs(goal))
 				&& this.turningController.isCompleted();
 	}
 

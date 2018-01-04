@@ -1,16 +1,17 @@
 package org.usfirst.frc.team3309.robot;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-
+import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import lib.json.JSONObject;
-
+import org.usfirst.frc.team3309.commands.autos.DriveForwardAuto;
+import org.usfirst.frc.team3309.commands.autos.DrivePathAuto;
 import org.usfirst.frc.team3309.commands.autos.NoActionsAuto;
 import org.usfirst.frc.team3309.commands.drive.PathFollowAuto;
 
-import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 
 /*
  * TODO: implement parser for JSON files on roborio
@@ -27,9 +28,11 @@ public class AutoModeExecutor {
 		autos.addDefault("No Action", new NoActionsAuto());
 		if (!isUsingFile) {
 			autos.addObject("PursuitControllerTest", new PathFollowAuto());
+			autos.addObject("DriveForwardAuto", new DriveForwardAuto());
+			autos.addObject("PurePursuirAuto", new DrivePathAuto());
 		} else {
 			for (File autoFile : autoFiles) {
-				Command autoCommand;
+				Command autoCommand= null;
 				try {
 					autoCommand = buildAuto(autoFile);
 				} catch (IOException e) {
@@ -40,6 +43,7 @@ public class AutoModeExecutor {
 				}
 			}
 		}
+		SmartDashboard.putData("Autos: ", autos);
 	}
 
 	public static Command getAutoSelected() {

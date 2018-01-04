@@ -31,7 +31,7 @@ public class PathFollowAuto extends ControlledCommand {
 	protected InputState getInputState() {
 		InputState inputState = new InputState();
 		inputState.setPos(Robot.drive.encoderCountsToInches(Robot.drive
-				.getAverageEncoder()));
+				.getEncoderPos()));
 		inputState.setAngPos(Robot.drive.getAngPos());
 		return inputState;
 	}

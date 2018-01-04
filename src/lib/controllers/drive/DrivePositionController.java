@@ -1,11 +1,10 @@
 package lib.controllers.drive;
 
-import org.usfirst.frc.team3309.robot.Sensors;
-
 import lib.controllers.Controller;
 import lib.controllers.pid.PIDPositionController;
 import lib.controllers.statesandsignals.InputState;
 import lib.controllers.statesandsignals.OutputSignal;
+import org.usfirst.frc.team3309.robot.Robot;
 
 public class DrivePositionController extends Controller {
 
@@ -28,7 +27,7 @@ public class DrivePositionController extends Controller {
 		angleController.setName("angular");
 
 		this.goal = goal;
-		this.angle = Sensors.getAngle();
+		this.angle = Robot.drive.getAngPos();
 	}
 
 	public DrivePositionController(double goal, double angle) {

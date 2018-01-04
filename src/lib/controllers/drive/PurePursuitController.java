@@ -49,6 +49,7 @@ public class PurePursuitController extends Controller {
 			double dx = path[curPathIndex].x - x;
 			double dy = path[curPathIndex].y - y;
 			double l = Math.hypot(dx, dy);
+
 			if (l < radialTolerance) {
 				curPathIndex++;
 			}

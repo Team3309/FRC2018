@@ -22,8 +22,8 @@ public class DriveCheezyDriveEquation extends Controller
 {
 
 	private double oldWheel, quickStopAccumulator;
-	private double throttleDeadband = 0.02;
-	private double wheelDeadband = 0.07;
+	private double throttleDeadband = 0.04;
+	private double wheelDeadband = 0.04;
 
 	@Override
 	public OutputSignal getOutputSignal(InputState input)
