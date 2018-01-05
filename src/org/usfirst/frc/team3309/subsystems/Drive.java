@@ -37,9 +37,13 @@ public class Drive extends Subsystem {
         setDefaultCommand(new DriveTeleop());
     }
 
-    public double encoderCountsToInches(double counts) {
+   /* public double encoderCountsToInches(double counts) {
         return counts * Math.PI * RobotMap.WHEEL_DIAMETER_INCHES / RobotMap.ENCODER_COUNTER_PER_REVOLUTION;
-    }
+    }*/
+
+   public double encoderCountsToInches(double counts) {
+       return counts * (65.0 / 23066);
+   }
 
     public void resetDrive() {
         left0.reverseSensor(true);
@@ -51,7 +55,7 @@ public class Drive extends Subsystem {
     }
 
     public double getEncoderPos() {
-        return (getLeftEncoder() + getRightEncoder()) / 2;
+        return (getLeftEncoder() + getRightEncoder()) / 2.0;
     }
 
     public double getLeftEncoder() {
@@ -63,7 +67,7 @@ public class Drive extends Subsystem {
     }
 
     public double getEncoderVelocity() {
-        return (getLeftVelocity() + getRightVelocity()) / 2;
+        return (getLeftVelocity() + getRightVelocity()) / 2.0;
     }
 
     public double getLeftVelocity() {
@@ -85,6 +89,7 @@ public class Drive extends Subsystem {
     public void sendToDashboard() {
         NetworkTable table = NetworkTable.getTable("Drive");
         table.putNumber("Inches pos: ", encoderCountsToInches(getEncoderPos()));
+        table.putNumber("Inches vel: ", encoderCountsToInches(getEncoderVelocity()));
         table.putNumber("Enc pos: ", getEncoderPos());
         table.putNumber("Enc vel: ", getEncoderVelocity());
         table.putNumber("Left pos: ", getLeftEncoder());

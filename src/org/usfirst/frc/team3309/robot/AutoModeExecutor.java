@@ -8,7 +8,6 @@ import lib.json.JSONObject;
 import org.usfirst.frc.team3309.commands.autos.DriveForwardAuto;
 import org.usfirst.frc.team3309.commands.autos.DrivePathAuto;
 import org.usfirst.frc.team3309.commands.autos.NoActionsAuto;
-import org.usfirst.frc.team3309.commands.drive.PathFollowAuto;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -28,7 +27,6 @@ public class AutoModeExecutor {
     public static void displayAutos() {
         autos.addDefault("No Action", new NoActionsAuto());
         if (!isUsingFile) {
-            autos.addObject("PursuitControllerTest", new PathFollowAuto());
             autos.addObject("DriveForwardAuto", new DriveForwardAuto());
             autos.addObject("PurePursuitAuto", new DrivePathAuto());
         } else {

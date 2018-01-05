@@ -1,5 +1,6 @@
 package org.usfirst.frc.team3309.commands.drive;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import lib.controllers.drive.equations.DriveCheezyDriveEquation;
 import lib.controllers.statesandsignals.InputState;
 import lib.controllers.statesandsignals.OutputSignal;
@@ -36,12 +37,13 @@ public class DriveTeleop extends ControlledCommand {
 		}
 		this.sendToDashboard();
 	}
+	
 
 	@Override
 	protected InputState getInputState() {
 		InputState state = new InputState();
-		state.setX(Controls.driverRemote.getY(Hand.kLeft));
-		state.setY(-Controls.driverRemote.getX(Hand.kRight));
+		state.setX(Controls.driverRemote.getX(Hand.kRight));
+		state.setY(Controls.driverRemote.getY(Hand.kLeft));
 		state.setIsTrue(Controls.driverRemote.getBumper(Hand.kRight));
 		return state;
 	}
