@@ -37,13 +37,9 @@ public class Drive extends Subsystem {
         setDefaultCommand(new DriveTeleop());
     }
 
-   /* public double encoderCountsToInches(double counts) {
-        return counts * Math.PI * RobotMap.WHEEL_DIAMETER_INCHES / RobotMap.ENCODER_COUNTER_PER_REVOLUTION;
-    }*/
-
-   public double encoderCountsToInches(double counts) {
-       return counts * (65.0 / 23066);
-   }
+    public double encoderCountsToInches(double counts) {
+        return counts * (65.0 / 23066);
+    }
 
     public void resetDrive() {
         left0.reverseSensor(true);

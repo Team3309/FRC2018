@@ -6,6 +6,7 @@ import lib.controllers.statesandsignals.InputState;
 import lib.controllers.statesandsignals.OutputSignal;
 import org.usfirst.frc.team3309.commands.ControlledCommand;
 import org.usfirst.frc.team3309.robot.Robot;
+import org.usfirst.frc.team3309.robot.RobotMap;
 
 public class DrivePathAuto extends ControlledCommand {
 
@@ -13,20 +14,20 @@ public class DrivePathAuto extends ControlledCommand {
         requires(Robot.drive);
     }
     private final Waypoint[] path = {
-            new Waypoint(-20, 20, -90)
+        new Waypoint(0, 20, 0)
     };
 
     @Override
     protected void initialize() {
         Robot.drive.setLowGear();
         Robot.drive.setVoltageRampRate(10);
-    //    Robot.drive.changeToVelocityMode();
+        Robot.drive.changeToVelocityMode();
     }
 
     @Override
     protected void execute() {
         this.sendToDashboard();
-        this.setController(new PurePursuitController(path));
+        this.setController(new PurePursuitController(path, RobotMap.WHEELBASE_INCHES, RobotMap.WHEEL_DIAMETER_INCHES));
         OutputSignal signal = getController().getOutputSignal(getInputState());
         Robot.drive.setLeftRight(signal.getLeftMotor(), signal.getRightMotor());
     }

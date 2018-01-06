@@ -28,8 +28,8 @@ public class DriveCheezyDriveEquation extends Controller
 	@Override
 	public OutputSignal getOutputSignal(InputState input)
 	{
-		double throttle = input.getX(); // x axis of controller
-		double wheel = input.getY(); // y axis of controller
+		double throttle = input.getY(); // x axis of controller
+		double wheel = input.getX(); // y axis of controller
 		boolean isQuickTurn = input.getIsTrue();
 		boolean isHighGear = true;
 		OutputSignal signal = new OutputSignal();

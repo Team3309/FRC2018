@@ -14,6 +14,6 @@ public class RobotMap {
     public static final int SHIFTER = 7;
 
     public static final double WHEEL_DIAMETER_INCHES = 4.0625;
-    public static final double ENCODER_COUNTER_PER_REVOLUTION  = 4500;
+    public static final double WHEELBASE_INCHES = 32;
 
 }

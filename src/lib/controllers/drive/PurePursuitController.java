@@ -1,43 +1,30 @@
 package lib.controllers.drive;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import lib.communications.BlackBox;
 import lib.controllers.Controller;
-import lib.controllers.pid.PIDVelocityController;
 import lib.controllers.statesandsignals.InputState;
 import lib.controllers.statesandsignals.OutputSignal;
 
-/*
- * https://github.com/AtsushiSakai/PythonRobotics/blob/master/PathTracking/pure_pursuit/pure_pursuit.py
- * https://github.com/Team254/FRC-2017-Public/blob/master/src/com/team254/lib/util/control/AdaptivePurePursuitController.java
- * */
 public class PurePursuitController extends Controller {
 
-    private PIDVelocityController linearFollower;
-    private PIDVelocityController angleFollower;
     private Waypoint[] path;
     private int curPathIndex = 0;
+
     private final double radialTolerance = 2;
-    private final double maxLinearVelocity = 1;
+    private final double goalVelocity = 15;
+
+    private final double WHEELBASE_INCHES;
+    private final double WHEEL_DIAMETER_INCHES;
+
     private boolean isFinished = false;
 
     private double x = 0;
     private double y = 0;
 
-    public PurePursuitController(Waypoint[] path) {
+    public PurePursuitController(Waypoint[] path, double WHEELBASE_INCHES, double WHEEL_DIAMETER_INCHES) {
         this.path = path;
-
-        linearFollower = new PIDVelocityController(0.09, 0.0, 0.0, 0.017);
-        linearFollower.setIsCompletable(true);
-        linearFollower.setErrorThreshold(0.5);
-        linearFollower.setName("Left Follower");
-        linearFollower.setTimeoutS(0.2);
-
-        angleFollower = new PIDVelocityController(0.006, 0.0, 0.0, 0.0);
-        angleFollower.setIsCompletable(true);
-        angleFollower.setErrorThreshold(10);
-        angleFollower.setName("Right Follower");
-        angleFollower.setTimeoutS(0.2);
+        this.WHEELBASE_INCHES = WHEELBASE_INCHES;
+        this.WHEEL_DIAMETER_INCHES = WHEEL_DIAMETER_INCHES;
     }
 
     @Override
@@ -50,54 +37,38 @@ public class PurePursuitController extends Controller {
         SmartDashboard.putNumber("X: ", x);
         SmartDashboard.putNumber("Y: ", y);
 
-       // BlackBox.writeLog(String.valueOf(x), String.valueOf(y));
 
         double dx = path[curPathIndex].x - x;
         double dy = path[curPathIndex].y - y;
         double l = Math.hypot(dx, dy);
 
-        if (l < radialTolerance) {
+/*        if (l < radialTolerance) {
             curPathIndex++;
             if (curPathIndex == path.length) {
                 isFinished = true;
                 signal.setLeftRightMotor(0, 0);
                 return signal;
             }
-        }
+        }*/
 
-   /*     double robotAngle = inputState.getAngPos();
-        double goalAngle = path[curPathIndex].heading;
-        double diffAngle = goalAngle - robotAngle;
-     //   double yP = Math.sin(Math.toRadians(diffAngle)) / l;*/
-        double robotAngle = inputState.getAngPos();
-        double goalAngle = path[curPathIndex].heading;
-        double diffAngle = goalAngle - robotAngle;
-        double yP = Math.sin(Math.toRadians(diffAngle)) / l;
-        double gamma = (2 * yP) / (l * l);
-        double aimTransVel = l * maxLinearVelocity;
-        double aimAngVel = gamma * aimTransVel;
+        double goalX = path[curPathIndex].x;
+        double goalY = path[curPathIndex].y;
 
-/*
-        double angVelError = aimAngVel - inputState.getAngVel();
-        InputState angVelInput = new InputState();
-        angVelInput.setError(angVelError);
-        aimAngVel = angleFollower.getOutputSignal(angVelInput).getMotor();
+        double curHeading = Math.toRadians(inputState.getAngPos());
+        double curRadius = path[curPathIndex].radius;
 
-        double velError = aimAngVel - inputState.getVel();
-        InputState linearInput = new InputState();
-        linearInput.setError(velError);
-        aimTransVel = linearFollower.getOutputSignal(linearInput).getMotor();*/
+        double xError = goalX - x * curRadius;
+        double yError = goalY - y * curRadius;
 
-        /*if (aimTransVel > maxLinearVelocity) {
-            aimTransVel = maxLinearVelocity;
-        } */
+        double xGoalVelocity = xError * Math.cos(curHeading) + yError * Math.sin(curHeading);
+        double yGoalVelocity = -xError * Math.sin(curHeading) + yError * Math.cos(curHeading);
 
-        SmartDashboard.putNumber("l: ", l);
-        SmartDashboard.putNumber("gamma: ", gamma);
-        SmartDashboard.putNumber("aimTransVel: ", aimTransVel);
+        double goalHeading = Math.atan2(yGoalVelocity, xGoalVelocity);
+        double errorHeading = goalHeading - inputState.getAngPos();
 
-        signal.setLeftRightMotor(aimTransVel + aimAngVel, aimTransVel - aimAngVel);
-      //  signal.setLeftRightMotor(0 ,0);
+        double curvature = WHEEL_DIAMETER_INCHES * errorHeading / WHEELBASE_INCHES;
+
+        signal.setLeftRightMotor(goalVelocity - curvature, goalVelocity + curvature);
         return signal;
     }
 
