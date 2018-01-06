@@ -20,6 +20,7 @@ public class DrivePathAuto extends ControlledCommand {
     protected void initialize() {
         Robot.drive.setLowGear();
         Robot.drive.setVoltageRampRate(10);
+    //    Robot.drive.changeToVelocityMode();
     }
 
     @Override
@@ -35,6 +36,9 @@ public class DrivePathAuto extends ControlledCommand {
         InputState input = new InputState();
         input.setPos(Robot.drive.encoderCountsToInches(Robot.drive.getEncoderPos()));
         input.setAngPos(Robot.drive.getAngPos());
+        input.setAngVel(Robot.drive.getAngVel());
+        input.setVel(Robot.drive.encoderCountsToInches(Robot.drive.getEncoderVelocity()));
         return input;
     }
+
 }

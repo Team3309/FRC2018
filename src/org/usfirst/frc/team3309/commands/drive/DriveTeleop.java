@@ -37,7 +37,7 @@ public class DriveTeleop extends ControlledCommand {
 		}
 		this.sendToDashboard();
 	}
-	
+
 
 	@Override
 	protected InputState getInputState() {

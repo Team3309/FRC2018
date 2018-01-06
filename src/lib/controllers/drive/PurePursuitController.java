@@ -17,14 +17,17 @@ public class PurePursuitController extends Controller {
     private PIDVelocityController angleFollower;
     private Waypoint[] path;
     private int curPathIndex = 0;
-    private final double radialTolerance = 4;
-    private final double maxLinearVelocity = 0.4;
+    private final double radialTolerance = 2;
+    private final double maxLinearVelocity = 1;
     private boolean isFinished = false;
+
+    private double x = 0;
+    private double y = 0;
 
     public PurePursuitController(Waypoint[] path) {
         this.path = path;
 
-        linearFollower = new PIDVelocityController(0.07, 0.0, 0.0, 0.017);
+        linearFollower = new PIDVelocityController(0.09, 0.0, 0.0, 0.017);
         linearFollower.setIsCompletable(true);
         linearFollower.setErrorThreshold(0.5);
         linearFollower.setName("Left Follower");
@@ -41,15 +44,13 @@ public class PurePursuitController extends Controller {
     public OutputSignal getOutputSignal(InputState inputState) {
         OutputSignal signal = new OutputSignal();
 
-        double x = inputState.getPos() * Math.cos(Math.toRadians(inputState.getAngPos() + 90));
-        double y = inputState.getPos() * Math.sin(Math.toRadians(inputState.getAngPos() + 90));
+        x += inputState.getVel() * Math.cos(Math.toRadians(inputState.getAngPos() + 90));
+        y += inputState.getVel() * Math.sin(Math.toRadians(inputState.getAngPos() + 90));
 
         SmartDashboard.putNumber("X: ", x);
         SmartDashboard.putNumber("Y: ", y);
 
-        BlackBox.writeLog(String.valueOf(x), String.valueOf(y));
-        SmartDashboard.putNumber("curPathIndex: ", curPathIndex);
-        SmartDashboard.putNumber("Path length: ", path.length);
+       // BlackBox.writeLog(String.valueOf(x), String.valueOf(y));
 
         double dx = path[curPathIndex].x - x;
         double dy = path[curPathIndex].y - y;
@@ -64,6 +65,10 @@ public class PurePursuitController extends Controller {
             }
         }
 
+   /*     double robotAngle = inputState.getAngPos();
+        double goalAngle = path[curPathIndex].heading;
+        double diffAngle = goalAngle - robotAngle;
+     //   double yP = Math.sin(Math.toRadians(diffAngle)) / l;*/
         double robotAngle = inputState.getAngPos();
         double goalAngle = path[curPathIndex].heading;
         double diffAngle = goalAngle - robotAngle;
@@ -72,15 +77,27 @@ public class PurePursuitController extends Controller {
         double aimTransVel = l * maxLinearVelocity;
         double aimAngVel = gamma * aimTransVel;
 
-        if (aimTransVel > maxLinearVelocity) {
+/*
+        double angVelError = aimAngVel - inputState.getAngVel();
+        InputState angVelInput = new InputState();
+        angVelInput.setError(angVelError);
+        aimAngVel = angleFollower.getOutputSignal(angVelInput).getMotor();
+
+        double velError = aimAngVel - inputState.getVel();
+        InputState linearInput = new InputState();
+        linearInput.setError(velError);
+        aimTransVel = linearFollower.getOutputSignal(linearInput).getMotor();*/
+
+        /*if (aimTransVel > maxLinearVelocity) {
             aimTransVel = maxLinearVelocity;
-        }
+        } */
 
         SmartDashboard.putNumber("l: ", l);
         SmartDashboard.putNumber("gamma: ", gamma);
         SmartDashboard.putNumber("aimTransVel: ", aimTransVel);
 
         signal.setLeftRightMotor(aimTransVel + aimAngVel, aimTransVel - aimAngVel);
+      //  signal.setLeftRightMotor(0 ,0);
         return signal;
     }
 
