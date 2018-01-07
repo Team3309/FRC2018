@@ -16,14 +16,13 @@ public class DrivePathAuto extends ControlledCommand {
 
     private final Waypoint[] path = {
             new Waypoint(0, 0, 0),
-            new Waypoint(20, 0, 0),
-            new Waypoint(60, 40, 0)
+            new Waypoint(40, -40,40)
     };
     private PurePursuitController purePursuitController;
 
     @Override
     protected void initialize() {
-        purePursuitController = new PurePursuitController(path, RobotMap.WHEELBASE_INCHES, RobotMap.WHEEL_DIAMETER_INCHES);
+        purePursuitController = new PurePursuitController(path, RobotMap.WHEELBASE_INCHES);
         this.setController(purePursuitController);
         Robot.drive.setLowGear();
         Robot.drive.setVoltageRampRate(10);
@@ -32,7 +31,6 @@ public class DrivePathAuto extends ControlledCommand {
 
     @Override
     protected void execute() {
-        Robot.drive.changeToVelocityMode();
         this.sendToDashboard();
         OutputSignal signal = getController().getOutputSignal(getInputState());
         Robot.drive.setLeftRight(signal.getLeftMotor(), signal.getRightMotor());
