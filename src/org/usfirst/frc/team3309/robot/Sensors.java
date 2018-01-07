@@ -13,7 +13,10 @@ public class Sensors {
 	}
 
 	public static double getAngle() {
-		return gyro.getAngle(); // in continuous degrees with wraparound from
+		double ang =  gyro.getAngle();
+		if(ang < 0)
+			ang +=360;
+		return ang; // in continuous degrees with wraparound from
 								// 360 to 361
 	}
 

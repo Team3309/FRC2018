@@ -4,22 +4,23 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import lib.controllers.Controller;
 import lib.controllers.statesandsignals.InputState;
 import lib.controllers.statesandsignals.OutputSignal;
+import org.usfirst.frc.team3309.robot.Robot;
 
 public class PurePursuitController extends Controller {
 
     private Waypoint[] path;
-    private int curPathIndex = 0;
+    private int curPathIndex = 1;
 
     private final double radialTolerance = 2;
-    private final double goalVelocity = 15;
+    private final double goalVelocity = 200;
 
     private final double WHEELBASE_INCHES;
     private final double WHEEL_DIAMETER_INCHES;
 
     private boolean isFinished = false;
 
-    private double x = 0;
     private double y = 0;
+    private double x = 0;
 
     public PurePursuitController(Waypoint[] path, double WHEELBASE_INCHES, double WHEEL_DIAMETER_INCHES) {
         this.path = path;
@@ -31,34 +32,31 @@ public class PurePursuitController extends Controller {
     public OutputSignal getOutputSignal(InputState inputState) {
         OutputSignal signal = new OutputSignal();
 
-        x += inputState.getVel() * Math.cos(Math.toRadians(inputState.getAngPos() + 90));
-        y += inputState.getVel() * Math.sin(Math.toRadians(inputState.getAngPos() + 90));
+        SmartDashboard.putNumber("y: ", y);
+        SmartDashboard.putNumber("x: ", x);
 
-        SmartDashboard.putNumber("X: ", x);
-        SmartDashboard.putNumber("Y: ", y);
+        double l = inputState.getPos();
 
 
-        double dx = path[curPathIndex].x - x;
-        double dy = path[curPathIndex].y - y;
-        double l = Math.hypot(dx, dy);
 
-/*        if (l < radialTolerance) {
+        if (l < radialTolerance) {
             curPathIndex++;
             if (curPathIndex == path.length) {
                 isFinished = true;
                 signal.setLeftRightMotor(0, 0);
                 return signal;
             }
-        }*/
+        }
 
+        SmartDashboard.putNumber("L: ", l);
         double goalX = path[curPathIndex].x;
         double goalY = path[curPathIndex].y;
 
         double curHeading = Math.toRadians(inputState.getAngPos());
         double curRadius = path[curPathIndex].radius;
 
-        double xError = goalX - x * curRadius;
-        double yError = goalY - y * curRadius;
+        double yError = goalX - y * curRadius;
+        double xError = goalY - x * curRadius;
 
         double xGoalVelocity = xError * Math.cos(curHeading) + yError * Math.sin(curHeading);
         double yGoalVelocity = -xError * Math.sin(curHeading) + yError * Math.cos(curHeading);
@@ -66,9 +64,14 @@ public class PurePursuitController extends Controller {
         double goalHeading = Math.atan2(yGoalVelocity, xGoalVelocity);
         double errorHeading = goalHeading - inputState.getAngPos();
 
-        double curvature = WHEEL_DIAMETER_INCHES * errorHeading / WHEELBASE_INCHES;
+        double curvature = (WHEEL_DIAMETER_INCHES * errorHeading) / WHEELBASE_INCHES;
+        double nativeCountsCurvature = -Robot.drive.inchesToEncoderCounts(curvature);
 
-        signal.setLeftRightMotor(goalVelocity - curvature, goalVelocity + curvature);
+        SmartDashboard.putNumber("Curvature:", curvature);
+        SmartDashboard.putNumber("xGoalVelocity", xGoalVelocity);
+        SmartDashboard.putNumber("yGoalVelocity", yGoalVelocity);
+
+        signal.setLeftRightMotor(goalVelocity - nativeCountsCurvature, goalVelocity + nativeCountsCurvature);
         return signal;
     }
 

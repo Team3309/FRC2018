@@ -56,7 +56,7 @@ public class DrivePositionController extends Controller {
 
 	@Override
 	public boolean isCompleted() {
-		return linearController.isCompleted() && true;
+		return linearController.isCompleted() && angleController.isCompleted();
 	}
 
 	@Override

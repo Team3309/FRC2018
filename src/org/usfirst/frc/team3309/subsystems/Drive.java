@@ -38,7 +38,11 @@ public class Drive extends Subsystem {
     }
 
     public double encoderCountsToInches(double counts) {
-        return counts * (65.0 / 23066);
+         return counts * ((Math.PI * RobotMap.WHEEL_DIAMETER_INCHES) / 4096.0);
+    }
+
+    public double inchesToEncoderCounts(double inches) {
+        return inches * 4096.0 / (Math.PI * RobotMap.WHEEL_DIAMETER_INCHES);
     }
 
     public void resetDrive() {
@@ -110,10 +114,12 @@ public class Drive extends Subsystem {
         left1.changeControlMode(TalonControlMode.Follower);
         left2.changeControlMode(TalonControlMode.Follower);
         left1.set(left0.getDeviceID());
+        left2.set(left0.getDeviceID());
         right0.changeControlMode(TalonControlMode.Speed);
         right1.changeControlMode(TalonControlMode.Follower);
-        right1.changeControlMode(TalonControlMode.Follower);
+        right2.changeControlMode(TalonControlMode.Follower);
         right1.set(right0.getDeviceID());
+        right2.set(right0.getDeviceID());
     }
 
     public void enableBrakeMode(boolean on) {
