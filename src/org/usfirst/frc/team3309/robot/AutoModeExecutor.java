@@ -8,6 +8,7 @@ import lib.json.JSONObject;
 import org.usfirst.frc.team3309.commands.autos.DriveForwardAuto;
 import org.usfirst.frc.team3309.commands.autos.DrivePathAuto;
 import org.usfirst.frc.team3309.commands.autos.NoActionsAuto;
+import org.usfirst.frc.team3309.commands.autos.StupidAutoTest;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -29,6 +30,7 @@ public class AutoModeExecutor {
         if (!isUsingFile) {
             autos.addObject("DriveForwardAuto", new DriveForwardAuto());
             autos.addObject("PurePursuitAuto", new DrivePathAuto());
+            autos.addObject("StupidCircleAuto", new StupidAutoTest());
         } else {
             for (File autoFile : autoFiles) {
                 Command autoCommand = null;

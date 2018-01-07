@@ -13,9 +13,11 @@ public class DrivePathAuto extends ControlledCommand {
     public DrivePathAuto() {
         requires(Robot.drive);
     }
+
     private final Waypoint[] path = {
-        new Waypoint(0, 0, 0),
-        new Waypoint(20, 0, 0)
+            new Waypoint(0, 0, 0),
+            new Waypoint(20, 0, 0),
+            new Waypoint(60, 40, 0)
     };
     private PurePursuitController purePursuitController;
 
