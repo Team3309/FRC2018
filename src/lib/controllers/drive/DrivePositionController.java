@@ -14,18 +14,19 @@ public class DrivePositionController extends Controller {
 	private PIDPositionController angleController;
 
 	public DrivePositionController(double goal) {
-		linearController = new PIDPositionController(0.07, 0.0, 0.017);
+		linearController = new PIDPositionController(0.04, 0.0, 0.021);
 		linearController.setErrorThreshold(0.2);
-		linearController.setTimeoutS(0.2);
+		linearController.setTimeoutSec(0.2);
 		linearController.setIsCompletable(true);
 		linearController.setName("linear");
 		linearController.setIsUseDashboard(true);
 
 		angleController = new PIDPositionController(0.0, 0.0, 0.0);
 		angleController.setErrorThreshold(0.2);
-		angleController.setTimeoutS(0.2);
+		angleController.setTimeoutSec(0.2);
 		angleController.setIsCompletable(true);
 		angleController.setName("angular");
+		angleController.setIsUseDashboard(true);
 
 		this.goal = goal;
 		this.angle = Robot.drive.getAngPos();
@@ -53,16 +54,15 @@ public class DrivePositionController extends Controller {
 		return signal;
 	}
 
-
 	@Override
 	public boolean isCompleted() {
 		return linearController.isCompleted() && angleController.isCompleted();
 	}
 
 	@Override
-	public void sendToSmartDash() {
-		linearController.sendToSmartDash();
-		angleController.sendToSmartDash();
+	public void sendToDashboard() {
+		linearController.sendToDashboard();
+		angleController.sendToDashboard();
 	}
 
 	public void setConstants(double kP, double kI, double kD) {

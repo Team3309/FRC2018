@@ -2,8 +2,7 @@ package org.usfirst.frc.team3309.commands.autos;
 
 import lib.controllers.drive.DrivePositionController;
 import lib.controllers.statesandsignals.InputState;
-import lib.controllers.statesandsignals.OutputSignal;
-import org.usfirst.frc.team3309.commands.ControlledCommand;
+import lib.controllers.ControlledCommand;
 import org.usfirst.frc.team3309.robot.Robot;
 
 public class DriveForwardAuto extends ControlledCommand{
@@ -13,11 +12,15 @@ public class DriveForwardAuto extends ControlledCommand{
     }
 
     @Override
+    protected void initialize() {
+        this.setController(new DrivePositionController(30));
+    }
+
+    @Override
     protected void execute() {
         this.sendToDashboard();
-        this.setController(new DrivePositionController(-6));
-        OutputSignal signal = getController().getOutputSignal(getInputState());
-        Robot.drive.setLeftRight(signal.getLeftMotor(), signal.getRightMotor());
+        this.setController(new DrivePositionController(50));
+        Robot.drive.setLeftRight(getSignal().getLeftMotor(), getSignal().getRightMotor());
     }
 
     @Override

@@ -14,7 +14,7 @@ public class DriveAngleController extends PIDController {
 		super(0.0, 0.0, 0.0);
 		this.goalAngle = goalAngle;
 		setErrorThreshold(errorThreshold);
-		setTimeoutS(timeoutS);
+		setTimeoutSec(timeoutS);
 		setIsCompletable(true);
 		setName("DriveAngleController");
 	}

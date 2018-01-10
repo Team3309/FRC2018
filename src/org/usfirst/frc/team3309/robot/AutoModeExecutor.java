@@ -3,20 +3,17 @@ package org.usfirst.frc.team3309.robot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import lib.json.JSONArray;
-import lib.json.JSONObject;
+import lib.controllers.drive.Waypoint;
 import org.usfirst.frc.team3309.commands.autos.DriveForwardAuto;
 import org.usfirst.frc.team3309.commands.autos.DrivePathAuto;
 import org.usfirst.frc.team3309.commands.autos.NoActionsAuto;
-import org.usfirst.frc.team3309.commands.autos.StupidAutoTest;
 
+import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
-/*
- * TODO: implement parser for JSON files on roborio
- */
 public class AutoModeExecutor {
 
     private static SendableChooser<Command> autos = new SendableChooser<>();
@@ -25,12 +22,15 @@ public class AutoModeExecutor {
     private static final File[] autoFiles = new File("/home/lvuser/Autos/")
             .listFiles();
 
+    private static ArrayList<Waypoint> semiCircularPath = new ArrayList<>();
+
     public static void displayAutos() {
+        semiCircularPath.add(new Waypoint(89.224, 0.2999));
+        semiCircularPath.add(new Waypoint(34.386, -0.7428));
         autos.addDefault("No Action", new NoActionsAuto());
+        autos.addObject("DriveForwardAuto", new DriveForwardAuto());
         if (!isUsingFile) {
-            autos.addObject("DriveForwardAuto", new DriveForwardAuto());
-            autos.addObject("PurePursuitAuto", new DrivePathAuto());
-            autos.addObject("StupidCircleAuto", new StupidAutoTest());
+            autos.addObject("PurePursuitAuto", new DrivePathAuto(semiCircularPath));
         } else {
             for (File autoFile : autoFiles) {
                 Command autoCommand = null;
@@ -53,15 +53,17 @@ public class AutoModeExecutor {
 
     @SuppressWarnings("resource")
     private static Command buildAuto(File autoFile) throws IOException {
-        FileInputStream fis = new FileInputStream(autoFile);
-        String json = "";
-        int read = 0;
-        while ((read = fis.read()) != -1) {
-            json += (char) read;
+        BufferedReader reader = new BufferedReader(new FileReader(autoFile));
+        String line = reader.readLine();
+        ArrayList<Waypoint> path = new ArrayList<>();
+        while (line != null) {
+            String[] values = line.split(",");
+            double radius = Double.parseDouble(values[0]);
+            double angle = Double.parseDouble(values[1]);
+            path.add(new Waypoint(radius, angle));
         }
-        JSONObject autoData = new JSONObject(json);
-        JSONArray waypoints = autoData.getJSONArray("waypoints");
-        return null;
+        reader.close();
+        return new DrivePathAuto(path);
     }
 
 }

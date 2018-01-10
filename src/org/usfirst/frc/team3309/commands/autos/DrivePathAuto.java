@@ -3,22 +3,22 @@ package org.usfirst.frc.team3309.commands.autos;
 import lib.controllers.drive.PurePursuitController;
 import lib.controllers.drive.Waypoint;
 import lib.controllers.statesandsignals.InputState;
-import lib.controllers.statesandsignals.OutputSignal;
-import org.usfirst.frc.team3309.commands.ControlledCommand;
+import lib.controllers.ControlledCommand;
 import org.usfirst.frc.team3309.robot.Robot;
 import org.usfirst.frc.team3309.robot.RobotMap;
 
+import java.util.ArrayList;
+
 public class DrivePathAuto extends ControlledCommand {
 
-    public DrivePathAuto() {
-        requires(Robot.drive);
-    }
-
-    private final Waypoint[] path = {
-            new Waypoint(0, 0, 0),
-            new Waypoint(40, -40,40)
-    };
     private PurePursuitController purePursuitController;
+
+    private ArrayList<Waypoint> path;
+
+    public DrivePathAuto(ArrayList<Waypoint> path) {
+        requires(Robot.drive);
+        this.path = path;
+    }
 
     @Override
     protected void initialize() {
@@ -32,8 +32,8 @@ public class DrivePathAuto extends ControlledCommand {
     @Override
     protected void execute() {
         this.sendToDashboard();
-        OutputSignal signal = getController().getOutputSignal(getInputState());
-        Robot.drive.setLeftRight(signal.getLeftMotor(), signal.getRightMotor());
+        this.setController(purePursuitController);
+        Robot.drive.setLeftRight(getSignal().getLeftMotor(), getSignal().getRightMotor());
     }
 
     @Override

@@ -1,6 +1,5 @@
 package lib.controllers.pid;
 
-import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import lib.controllers.statesandsignals.InputState;
 import lib.controllers.statesandsignals.OutputSignal;
 
@@ -77,9 +76,9 @@ public class PIDControllerWithFeedForward extends PIDController
 	}
 
 	@Override
-	public void sendToSmartDash()
+	public void sendToDashboard()
 	{
-		super.sendToSmartDash();
+		super.sendToDashboard();
 		/*
 		 * NetworkTable table = NetworkTable.getTable(getSubsystemID()); kF =
 		 * table.getNumber("kF", 0.0); table.putNumber("kF", kF);

@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.GenericHID.Hand;
 import lib.controllers.drive.equations.DriveCheezyDriveEquation;
 import lib.controllers.statesandsignals.InputState;
 import lib.controllers.statesandsignals.OutputSignal;
-import org.usfirst.frc.team3309.commands.ControlledCommand;
+import lib.controllers.ControlledCommand;
 import org.usfirst.frc.team3309.driverstation.Controls;
 import org.usfirst.frc.team3309.robot.Robot;
 

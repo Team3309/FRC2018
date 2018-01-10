@@ -11,7 +11,7 @@
     <varelement var="file://$cscore$" value="cscore" />
     <varelement var="file://$cscore.sources$" kind="src:" value="cscore.sources" />
     <src_description expected_position="0">
-      <src_folder value="file://$MODULE_DIR$//src" expected_position="0" />
+      <src_folder value="file://$MODULE_DIR$/src" expected_position="0" />
     </src_description>
   </component>
   <component name="NewModuleRootManager">
@@ -21,52 +21,8 @@
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module-library">
-      <library name="wpilib">
-        <CLASSES>
-          <root url="file://$wpilib$" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES>
-          <root url="file://$wpilib.sources$" />
-        </SOURCES>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="networktables">
-        <CLASSES>
-          <root url="file://$networktables$" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES>
-          <root url="file://$networktables.sources$" />
-        </SOURCES>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="opencv">
-        <CLASSES>
-          <root url="file://$opencv$" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES>
-          <root url="file://$opencv.sources$" />
-        </SOURCES>
-      </library>
-    </orderEntry>
     <orderEntry type="inheritedJdk" />
-    <orderEntry type="module-library">
-      <library name="cscore">
-        <CLASSES>
-          <root url="file://$cscore$" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES>
-          <root url="file://$cscore.sources$" />
-        </SOURCES>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
+    <orderEntry type="module-library" exported="">
       <library name="CTRLib.jar">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/jars/CTRLib.jar!/" />
@@ -75,6 +31,6 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="cscore-sources" level="application" />
+    <orderEntry type="library" exported="" name="cscore-sources" level="application" />
   </component>
 </module>

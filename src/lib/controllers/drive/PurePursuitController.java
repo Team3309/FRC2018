@@ -1,70 +1,93 @@
 package lib.controllers.drive;
 
-import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import lib.controllers.Controller;
 import lib.controllers.statesandsignals.InputState;
 import lib.controllers.statesandsignals.OutputSignal;
 import org.usfirst.frc.team3309.robot.Robot;
 
+import java.util.ArrayList;
+
 public class PurePursuitController extends Controller {
 
-    private Waypoint[] path;
-    private int curPathIndex = 1;
+    private final ArrayList<Waypoint> path;
 
-    private double totalDistance = 0;
-    private double curRadius = 0;
+    private double goalDistance;
+    private double curRadius;
+    private double goalAngle;
 
-    private final double goalVelocity = 800;
-
-    private final double WHEELBASE_INCHES;
-
+    private int curPathIndex = 0;
     private boolean isFinished = false;
 
-    public PurePursuitController(Waypoint[] path, double WHEELBASE_INCHES) {
+    private final double goalVelocity = 800;
+    private final double ANGLE_ERROR_THRESHOLD = Math.toRadians(5);
+    private final double WHEELBASE_INCHES;
+    private OutputSignal signal = new OutputSignal();
+
+    public PurePursuitController(ArrayList<Waypoint> path, double WHEELBASE_INCHES) {
         this.path = path;
         this.WHEELBASE_INCHES = WHEELBASE_INCHES;
-        totalDistance += Math.hypot(path[1].x, path[1].y);
-        curRadius = path[1].radius;
+        curRadius = this.path.get(0).radius;
+        goalAngle = this.path.get(0).angle;
+        goalDistance += Math.abs(goalAngle) * curRadius;
     }
 
     @Override
     public OutputSignal getOutputSignal(InputState inputState) {
 
-        OutputSignal signal = new OutputSignal();
+        double leftVelocity = 0;
+        double rightVelocity = 0;
 
-        double l = inputState.getPos();
-        double dy = path[curPathIndex].y - path[curPathIndex  - 1].y;
-        double dx = path[curPathIndex].x - path[curPathIndex  - 1].x;
-        curRadius = path[curPathIndex].radius;
-
-        if (l > totalDistance) {
+        if (inputState.getPos() > goalDistance ) {
             curPathIndex++;
-            double curAngle = Math.atan2(dy, dx);
-            totalDistance += curRadius * curAngle;
-            if (curPathIndex >= path.length) {
+            System.out.println("curPathIndex" + curPathIndex);
+            System.out.println("goalDistance" + goalDistance);
+            System.out.println("pos" + inputState.getPos());
+            System.out.println("angPos" + inputState.getAngPos());
+            System.out.println("goalAngle" + goalAngle);
+            if (curPathIndex >= path.size()) {
                 isFinished = true;
                 signal.setLeftRightMotor(0, 0);
                 return signal;
+            } else {
+                goalAngle = path.get(curPathIndex).angle;
+                curRadius = path.get(curPathIndex).radius;
+                goalDistance += Math.abs(goalAngle) * curRadius;
             }
         }
 
-        SmartDashboard.putNumber("l", l);
-        SmartDashboard.putNumber("totalDistance", totalDistance);
-
-        System.out.println("l"+ l);
-        System.out.println("totalDistance" + totalDistance);
-        double leftVelocity = goalVelocity * (WHEELBASE_INCHES / curRadius);
-        double rightVelocity = goalVelocity;
+        SmartDashboard.putNumber("path length", path.size());
+        SmartDashboard.putNumber("curDistance", inputState.getPos());
+        SmartDashboard.putNumber("goalDistance", goalDistance);
+        SmartDashboard.putNumber("curPathIndex", curPathIndex);
+        SmartDashboard.putNumber("curRadius", curRadius);
 
 
-        signal.setLeftRightMotor(leftVelocity, rightVelocity);
+        if (goalAngle > 0) {
+            leftVelocity = goalVelocity * ((curRadius - WHEELBASE_INCHES / 2) / (curRadius + WHEELBASE_INCHES / 2));
+            rightVelocity = goalVelocity;
+        } else if (goalAngle < 0) {
+            leftVelocity = goalVelocity * ((curRadius - WHEELBASE_INCHES / 2) / (curRadius + WHEELBASE_INCHES / 2));
+            rightVelocity = goalVelocity;
+        } else {
+            leftVelocity = goalVelocity;
+            rightVelocity = goalVelocity;
+        }
+
+        SmartDashboard.putNumber("desLeftVel", leftVelocity);
+        SmartDashboard.putNumber("deRightVel", rightVelocity);
+
+        signal.setLeftRightMotor(Robot.drive.inchesToEncoderCounts(leftVelocity), Robot.drive.inchesToEncoderCounts(rightVelocity));
         return signal;
     }
 
     @Override
     public boolean isCompleted() {
         return isFinished;
+    }
+
+    private boolean isAngleComplete(double curAngle) {
+        return Math.abs(goalAngle - curAngle) < ANGLE_ERROR_THRESHOLD;
     }
 
 }

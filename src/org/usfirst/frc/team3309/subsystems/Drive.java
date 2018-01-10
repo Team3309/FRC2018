@@ -38,11 +38,11 @@ public class Drive extends Subsystem {
     }
 
     public double encoderCountsToInches(double counts) {
-         return counts * ((Math.PI * RobotMap.WHEEL_DIAMETER_INCHES) / 4500.0);
+         return counts * ((Math.PI * RobotMap.WHEEL_DIAMETER_INCHES) / 4437.0);
     }
 
     public double inchesToEncoderCounts(double inches) {
-        return inches * 4500.0 / (Math.PI * RobotMap.WHEEL_DIAMETER_INCHES);
+        return inches * 4437.0 / (Math.PI * RobotMap.WHEEL_DIAMETER_INCHES);
     }
 
     public void resetDrive() {

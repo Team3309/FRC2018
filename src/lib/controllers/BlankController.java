@@ -5,7 +5,6 @@ import lib.controllers.statesandsignals.OutputSignal;
 
 public class BlankController extends Controller {
 
-	// power for motor
 	private double power = 0.0;
 
 	@Override
@@ -24,36 +23,15 @@ public class BlankController extends Controller {
 		return true;
 	}
 
-	/*
-	 * <p>stops motor
-	 */
 	@Override
 	public void reset() {
 		power = 0;
 	}
 
-	/*
-	 * <p>nothing to send
-	 */
-	@Override
-	public void sendToSmartDash() {
-
-	}
-
-	/*
-	 * @return
-	 * 
-	 * @param motor power
-	 */
 	public void setPower(double power) {
 		this.power = power;
 	}
 
-	/*
-	 * @return motor power
-	 * 
-	 * @param
-	 */
 	public double getPower() {
 		return power;
 	}

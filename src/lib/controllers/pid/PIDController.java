@@ -162,7 +162,7 @@ public abstract class PIDController extends Controller {
 	 * @param TIME_TO_BE_COMPLETE_MS time in which controller must be within
 	 * THRESHOLD to terminate
 	 */
-	public void setTimeoutS(double timeoutS) {
+	public void setTimeoutSec(double timeoutS) {
 		this.timeoutS = timeoutS;
 	}
 
@@ -177,7 +177,7 @@ public abstract class PIDController extends Controller {
 	}
 
 	@Override
-	public void sendToSmartDash() {
+	public void sendToDashboard() {
 		if (this.isUseDashboard) {
 			NetworkTable table = NetworkTable.getTable("");
 			kP = table.getNumber("kP", 0.0);

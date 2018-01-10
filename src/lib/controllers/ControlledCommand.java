@@ -1,9 +1,8 @@
-package org.usfirst.frc.team3309.commands;
+package lib.controllers;
 
-import lib.controllers.BlankController;
-import lib.controllers.Controller;
-import lib.controllers.statesandsignals.InputState;
 import edu.wpi.first.wpilibj.command.Command;
+import lib.controllers.statesandsignals.InputState;
+import lib.controllers.statesandsignals.OutputSignal;
 
 /*
  * @author Chase Blagden
@@ -41,6 +40,10 @@ public abstract class ControlledCommand extends Command {
 	 */
 	protected abstract InputState getInputState();
 
+	protected OutputSignal getSignal() {
+	    return mController.getOutputSignal(getInputState());
+    }
+
 	/*
 	 * <p>A ControlledCommand will only be complete when the controller is.
 	 */
@@ -50,7 +53,7 @@ public abstract class ControlledCommand extends Command {
 	}
 
 	public void sendToDashboard() {
-		mController.sendToSmartDash();
+		mController.sendToDashboard();
 	}
 
 }

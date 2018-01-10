@@ -9,18 +9,14 @@ import lib.controllers.statesandsignals.OutputSignal;
  * */
 public abstract class Controller {
 
-	// name of Controller
 	private String name = "Default Controller Name";
 
 	/*
-	 * @return OuputSignal - power to be returned after processing
+	 * @return OutputSignal - power to be returned after processing
 	 */
 	public abstract OutputSignal getOutputSignal(InputState inputState);
 
-	/*
-	 * @return for sending values to dash board
-	 */
-	public void sendToSmartDash() {
+	public void sendToDashboard() {
 
 	}
 
@@ -36,22 +32,13 @@ public abstract class Controller {
 	 */
 	public abstract boolean isCompleted();
 
-	/*
-	 * @return
-	 * 
-	 * @param name of controller
-	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
-	/*
-	 * @return name of controller
-	 * 
-	 * @param
-	 */
 	public String getName() {
 		return name;
 	}
+
 
 }

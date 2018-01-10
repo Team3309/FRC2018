@@ -7,29 +7,31 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import org.usfirst.frc.team3309.subsystems.Drive;
 
+import java.util.logging.Logger;
+
 /**
- * @author Chase.Blagden
+ * @author Chase Blagden
  */
 public class Robot extends IterativeRobot {
 
     public static Drive drive = new Drive();
     private Compressor c = new Compressor();
     private Command autoCommand = null;
-    public OI oi = new OI();
+    private Logger logger = Logger.getLogger("Robot");
 
     @Override
     public void robotInit() {
+        logger.info("robot init");
         c.start();
         Robot.drive.sendToDashboard();
         AutoModeExecutor.displayAutos();
-        System.out.println("Starting robot");
         Robot.drive.resetDrive();
     }
 
     @Override
     public void autonomousInit() {
+        logger.info("autonomous init");
         Robot.drive.resetDrive();
-        System.out.println("Starting auto");
         autoCommand = AutoModeExecutor.getAutoSelected();
         if (autoCommand != null) {
             autoCommand.start();
@@ -44,7 +46,7 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void teleopInit() {
-        System.out.println("Starting teleop");
+        logger.info("teleop init");
         if (autoCommand != null) {
             autoCommand.cancel();
         }
