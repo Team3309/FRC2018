@@ -14,54 +14,6 @@ import java.util.logging.Logger;
  */
 public class Robot extends IterativeRobot {
 
-<<<<<<< HEAD
-	private AutoRoutine auto;
-
-	@Override
-	public void robotInit() {
-		Systems.add(Drive.getInstance());
-		Systems.init();
-		BlackBox.initLog(
-				"3309"
-						+ String.valueOf(DriverStation.getInstance()
-								.getAlliance()), "X position", "Y position");
-		AutoModeExecutor.displayAutos();
-		Sensors.resetDrive();
-	}
-
-	@Override
-	public void autonomousInit() {
-		Systems.initAuto();
-		auto = AutoModeExecutor.getAutoSelected();
-		auto.initialize();
-	}
-
-	@Override
-	public void autonomousPeriodic() {
-		auto.update();
-		Sensors.updateDrive();
-		Systems.updateAuto();
-		Systems.sendToDashboard();
-		BlackBox.writeLog(String.valueOf(Drive.getInstance().getInches(
-				Sensors.getXPos())), String.valueOf(Drive.getInstance()
-				.getInches(Sensors.getYPos())));
-	}
-
-	@Override
-	public void teleopInit() {
-		Systems.initTeleop();
-	}
-
-	@Override
-	public void teleopPeriodic() {
-		Systems.sendToDashboard();
-	}
-
-	@Override
-	public void disabledPeriodic() {
-		Systems.sendToDashboard();
-	}
-=======
     public static Drive drive = new Drive();
 
     private Compressor c = new Compressor();
@@ -115,5 +67,4 @@ public class Robot extends IterativeRobot {
         LiveWindow.run();
     }
 
->>>>>>> command-based
 }
