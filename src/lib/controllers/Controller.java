@@ -17,14 +17,12 @@ public abstract class Controller {
 	public abstract OutputSignal getOutputSignal(InputState inputState);
 
 	public void sendToDashboard() {
-
 	}
 
 	/*
-	 * @return for reseting controller to default values
+	 * @return for resetting controller to default values
 	 */
 	public void reset() {
-		
 	}
 
 	/*

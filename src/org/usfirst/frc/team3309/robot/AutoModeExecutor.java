@@ -25,8 +25,8 @@ public class AutoModeExecutor {
     private static ArrayList<Waypoint> semiCircularPath = new ArrayList<>();
 
     public static void displayAutos() {
-        semiCircularPath.add(new Waypoint(89.224, 0.2999));
-        semiCircularPath.add(new Waypoint(34.386, -0.7428));
+        semiCircularPath.add(new Waypoint(50, 0.785398));
+        semiCircularPath.add(new Waypoint(50, -0.785398));
         autos.addDefault("No Action", new NoActionsAuto());
         autos.addObject("DriveForwardAuto", new DriveForwardAuto());
         if (!isUsingFile) {

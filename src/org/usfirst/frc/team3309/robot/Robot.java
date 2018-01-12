@@ -15,7 +15,9 @@ import java.util.logging.Logger;
 public class Robot extends IterativeRobot {
 
     public static Drive drive = new Drive();
+
     private Compressor c = new Compressor();
+
     private Command autoCommand = null;
     private Logger logger = Logger.getLogger("Robot");
 
