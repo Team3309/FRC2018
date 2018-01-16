@@ -7,11 +7,11 @@ import lib.controllers.statesandsignals.OutputSignal;
 public class DriveAngleController extends PIDController {
 
 	private final double goalAngle;
-	private final double errorThreshold = 10;
+	private final double errorThreshold = 7;
 	private final double timeoutS = 0.2;
 
 	public DriveAngleController(double goalAngle) {
-		super(0.0, 0.0, 0.0);
+		super(0.04, 0.0, 0.0);
 		this.goalAngle = goalAngle;
 		setErrorThreshold(errorThreshold);
 		setTimeoutSec(timeoutS);

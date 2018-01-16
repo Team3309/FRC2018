@@ -22,15 +22,12 @@ public class AutoModeExecutor {
     private static final File[] autoFiles = new File("/home/lvuser/Autos/")
             .listFiles();
 
-    private static ArrayList<Waypoint> semiCircularPath = new ArrayList<>();
 
     public static void displayAutos() {
-        semiCircularPath.add(new Waypoint(50, 0.785398));
-        semiCircularPath.add(new Waypoint(50, -0.785398));
         autos.addDefault("No Action", new NoActionsAuto());
         autos.addObject("DriveForwardAuto", new DriveForwardAuto());
         if (!isUsingFile) {
-            autos.addObject("PurePursuitAuto", new DrivePathAuto(semiCircularPath));
+            autos.addObject("PurePursuitAuto", new DrivePathAuto(RobotMap.semiCircularPath));
         } else {
             for (File autoFile : autoFiles) {
                 Command autoCommand = null;
@@ -58,9 +55,15 @@ public class AutoModeExecutor {
         ArrayList<Waypoint> path = new ArrayList<>();
         while (line != null) {
             String[] values = line.split(",");
-            double radius = Double.parseDouble(values[0]);
-            double angle = Double.parseDouble(values[1]);
-            path.add(new Waypoint(radius, angle));
+            if (values[0] == "linear") {
+                double goal = Double.parseDouble(values[1]);
+            } else if (values[0] == "arc") {
+                double radius = Double.parseDouble(values[1]);
+                double angle = Double.parseDouble(values[2]);
+                path.add(new Waypoint(radius, angle));
+            } else if (values[0] == "wait") {
+                double timeout = Double.parseDouble(values[1]);
+            }
         }
         reader.close();
         return new DrivePathAuto(path);
