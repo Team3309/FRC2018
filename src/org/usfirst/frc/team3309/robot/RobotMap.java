@@ -1,7 +1,6 @@
 package org.usfirst.frc.team3309.robot;
 
 import lib.controllers.drive.Waypoint;
-import org.jcp.xml.dsig.internal.dom.DOMUtils;
 
 import java.util.ArrayList;
 

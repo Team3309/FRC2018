@@ -1,9 +1,7 @@
 package lib.controllers.drive.equations;
 
-import lib.controllers.Controller;
-import lib.controllers.Finishable;
+import lib.controllers.interfaces.Finishable;
 import lib.controllers.drive.DriveController;
-import lib.controllers.drive.DriveSignal;
 
 public abstract class DriveTeleopController extends DriveController implements Finishable {
 

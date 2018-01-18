@@ -4,9 +4,9 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import lib.controllers.drive.Waypoint;
-import org.usfirst.frc.team3309.commands.autos.DriveForwardAuto;
-import org.usfirst.frc.team3309.commands.autos.DrivePathAuto;
 import org.usfirst.frc.team3309.commands.autos.NoActionsAuto;
+import org.usfirst.frc.team3309.commands.subsystems.drive.DriveForward;
+import org.usfirst.frc.team3309.commands.subsystems.drive.DrivePath;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -25,9 +25,9 @@ public class AutoModeExecutor {
 
     public static void displayAutos() {
         autos.addDefault("No Action", new NoActionsAuto());
-        autos.addObject("DriveForwardAuto", new DriveForwardAuto());
+        autos.addObject("DriveForwardAuto", new DriveForward(30));
         if (!isUsingFile) {
-            autos.addObject("PurePursuitAuto", new DrivePathAuto(RobotMap.semiCircularPath));
+            autos.addObject("PurePursuitAuto", new DrivePath(RobotMap.semiCircularPath));
         } else {
             for (File autoFile : autoFiles) {
                 Command autoCommand = null;
@@ -66,7 +66,7 @@ public class AutoModeExecutor {
             }
         }
         reader.close();
-        return new DrivePathAuto(path);
+        return new DrivePath(path);
     }
 
 }

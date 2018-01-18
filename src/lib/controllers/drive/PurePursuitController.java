@@ -1,7 +1,7 @@
 package lib.controllers.drive;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import lib.controllers.Finishable;
+import lib.controllers.interfaces.Finishable;
 import org.usfirst.frc.team3309.robot.Robot;
 
 import java.util.ArrayList;

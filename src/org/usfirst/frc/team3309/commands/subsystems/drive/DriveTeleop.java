@@ -1,4 +1,4 @@
-package org.usfirst.frc.team3309.commands.drive;
+package org.usfirst.frc.team3309.commands.subsystems.drive;
 
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
@@ -12,8 +12,8 @@ public class DriveTeleop extends Command {
     private DriveCheezyDriveEquation cheezyDriveEquation;
 
     public DriveTeleop() {
-        cheezyDriveEquation = new DriveCheezyDriveEquation();
         requires(Robot.drive);
+        cheezyDriveEquation = new DriveCheezyDriveEquation();
     }
 
     @Override

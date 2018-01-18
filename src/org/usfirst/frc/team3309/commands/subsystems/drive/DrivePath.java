@@ -1,30 +1,25 @@
-package org.usfirst.frc.team3309.commands.autos;
+package org.usfirst.frc.team3309.commands.subsystems.drive;
 
 import edu.wpi.first.wpilibj.command.Command;
 import lib.controllers.drive.DriveSignal;
 import lib.controllers.drive.PurePursuitController;
 import lib.controllers.drive.Waypoint;
-import org.usfirst.frc.team3309.commands.ControlledCommand;
 import org.usfirst.frc.team3309.robot.Robot;
 import org.usfirst.frc.team3309.robot.RobotMap;
 
 import java.util.ArrayList;
 
-public class DrivePathAuto extends Command {
+public class DrivePath extends Command {
 
     private PurePursuitController purePursuitController;
 
-    private ArrayList<Waypoint> path;
-
-    public DrivePathAuto(ArrayList<Waypoint> path) {
-        purePursuitController = new PurePursuitController(path, RobotMap.WHEELBASE_INCHES);
+    public DrivePath(ArrayList<Waypoint> path) {
         requires(Robot.drive);
-        this.path = path;
+        purePursuitController = new PurePursuitController(path, RobotMap.WHEELBASE_INCHES);
     }
 
     @Override
     protected void initialize() {
-        purePursuitController = new PurePursuitController(path, RobotMap.WHEELBASE_INCHES);
         Robot.drive.setLowGear();
         Robot.drive.setVoltageRampRate(10);
         Robot.drive.changeToVelocityMode();

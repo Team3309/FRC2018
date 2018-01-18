@@ -1,6 +1,6 @@
 package lib.controllers.drive;
 
-import lib.controllers.Finishable;
+import lib.controllers.interfaces.Finishable;
 import lib.controllers.pid.PIDConstants;
 import lib.controllers.pid.PIDPositionController;
 
@@ -16,7 +16,6 @@ public class DrivePositionController extends DriveController implements Finishab
     private PIDPositionController leftSideController;
     private PIDPositionController rightSideController;
     private PIDPositionController angleController;
-
 
     public DrivePositionController(PIDConstants pidConstantsLeft,
                                    PIDConstants pidConstantsRight, PIDConstants pidConstantsTurn) {

@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import lib.actuators.TalonSRXMC;
-import org.usfirst.frc.team3309.commands.drive.DriveTeleop;
+import org.usfirst.frc.team3309.commands.subsystems.drive.DriveTeleop;
 import org.usfirst.frc.team3309.robot.RobotMap;
 
 public class Drive extends Subsystem {
@@ -102,24 +102,20 @@ public class Drive extends Subsystem {
 
     public void changeToPercentMode() {
         left0.changeControlMode(TalonControlMode.PercentVbus);
-        left1.changeControlMode(TalonControlMode.PercentVbus);
-        left2.changeControlMode(TalonControlMode.PercentVbus);
-        right0.changeControlMode(TalonControlMode.PercentVbus);
-        right1.changeControlMode(TalonControlMode.PercentVbus);
-        right2.changeControlMode(TalonControlMode.PercentVbus);
-    }
-
-    public void changeToVelocityMode() {
-        left0.changeControlMode(TalonControlMode.Speed);
         left1.changeControlMode(TalonControlMode.Follower);
         left2.changeControlMode(TalonControlMode.Follower);
-        left1.set(left0.getDeviceID());
+        left0.set(left0.getDeviceID());
         left2.set(left0.getDeviceID());
-        right0.changeControlMode(TalonControlMode.Speed);
+        right0.changeControlMode(TalonControlMode.PercentVbus);
         right1.changeControlMode(TalonControlMode.Follower);
         right2.changeControlMode(TalonControlMode.Follower);
         right1.set(right0.getDeviceID());
         right2.set(right0.getDeviceID());
+    }
+
+    public void changeToVelocityMode() {
+        left0.changeControlMode(TalonControlMode.Speed);
+        right0.changeControlMode(TalonControlMode.Speed);
     }
 
     public void enableBrakeMode(boolean on) {
@@ -166,14 +162,6 @@ public class Drive extends Subsystem {
             right0.set(power);
             right1.set(power);
             right2.set(power);
-        }
-    }
-
-    public void shiftGear(boolean isLowGear) {
-        if (isLowGear) {
-            setLowGear();
-        } else {
-            setHighGear();
         }
     }
 

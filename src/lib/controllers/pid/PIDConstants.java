@@ -7,7 +7,8 @@ public class PIDConstants {
     private double dScale;
     private double integralLimit;
 
-    public PIDConstants() {}
+    public PIDConstants() {
+    }
 
     public PIDConstants(double p, double i, double d) {
         this.pScale = p;
@@ -35,4 +36,16 @@ public class PIDConstants {
     public double getIntegralLimit() {
         return integralLimit;
     }
+
+    public void setConstants(double p, double i, double d) {
+        this.pScale = p;
+        this.iScale = i;
+        this.dScale = d;
+    }
+
+    public void setConstants(double p, double i, double d, double integralLimit) {
+        setConstants(p, i, d);
+        this.integralLimit = integralLimit;
+    }
+
 }

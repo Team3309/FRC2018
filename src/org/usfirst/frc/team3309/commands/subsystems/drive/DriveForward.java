@@ -1,30 +1,32 @@
-package org.usfirst.frc.team3309.commands.autos;
+package org.usfirst.frc.team3309.commands.subsystems.drive;
 
 import edu.wpi.first.wpilibj.command.Command;
 import lib.controllers.drive.DrivePositionController;
 import lib.controllers.drive.DriveSignal;
 import lib.controllers.pid.PIDConstants;
-import org.usfirst.frc.team3309.commands.ControlledCommand;
 import org.usfirst.frc.team3309.robot.Robot;
 import org.usfirst.frc.team3309.robot.RobotMap;
 
-public class DriveForwardAuto extends Command {
+public class DriveForward extends Command {
 
-    private PIDConstants pidConstants;
     private DrivePositionController  drivePositionController;
 
-    private double goalPos;
-    private double goalAngle;
+    // inches
+    private final double goalPos;
 
-    public DriveForwardAuto(double goalPos, double goalAngle) {
-        pidConstants = new PIDConstants(RobotMap.DRIVE_POSITION_CONTROLLER_P_SCALE,
+    private final double goalAngle;
+
+    public DriveForward(double goalPos, double goalAngle) {
+        this.goalPos = goalPos;
+        this.goalAngle = goalAngle;
+        PIDConstants pidConstantsLinear = new PIDConstants(RobotMap.DRIVE_POSITION_CONTROLLER_P_SCALE,
                 RobotMap.DRIVE_POSITION_CONTROLLER_I_SCALE,
                 RobotMap.DRIVE_POSITION_CONTROLLER_D_SCALE);
-        drivePositionController = new DrivePositionController(pidConstants, pidConstants, new PIDConstants());
+        drivePositionController = new DrivePositionController(pidConstantsLinear, pidConstantsLinear, new PIDConstants());
         requires(Robot.drive);
     }
 
-    public DriveForwardAuto(double goalPos) {
+    public DriveForward(double goalPos) {
         this(goalPos, 0);
     }
 
@@ -36,7 +38,7 @@ public class DriveForwardAuto extends Command {
     @Override
     protected void execute() {
         DriveSignal driveSignal = drivePositionController.update(Robot.drive.getEncoderPos(),
-                Robot.drive.encoderCountsToInches(goalPos), Robot.drive.getAngPos(), 0);
+                Robot.drive.encoderCountsToInches(goalPos), Robot.drive.getAngPos(), goalAngle);
         Robot.drive.setLeftRight(driveSignal.getLeftMotor(), driveSignal.getRightMotor());
     }
 

@@ -1,4 +1,4 @@
-package lib.controllers;
+package lib.controllers.interfaces;
 
 public interface Finishable {
 

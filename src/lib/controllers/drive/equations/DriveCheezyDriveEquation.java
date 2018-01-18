@@ -7,7 +7,7 @@ import lib.controllers.drive.DriveSignal;
  * Drive controller invented by Team 254,
  * https://github.com/Team254/FRC-2017-Public
  * /blob/master/src/com/team254/lib/util/CheesyDriveHelper.java
- * <p>
+ *
  * <p>
  * Helper class to implement "Cheesy Drive". "Cheesy Drive" simply means that
  * the "turning" stick controls the curvature of the robot's path rather than
