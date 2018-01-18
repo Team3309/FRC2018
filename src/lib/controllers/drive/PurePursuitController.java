@@ -1,14 +1,12 @@
 package lib.controllers.drive;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import lib.controllers.Controller;
-import lib.controllers.statesandsignals.InputState;
-import lib.controllers.statesandsignals.OutputSignal;
+import lib.controllers.Finishable;
 import org.usfirst.frc.team3309.robot.Robot;
 
 import java.util.ArrayList;
 
-public class PurePursuitController extends Controller {
+public class PurePursuitController extends DriveController implements Finishable {
 
     private final ArrayList<Waypoint> path;
 
@@ -17,11 +15,12 @@ public class PurePursuitController extends Controller {
     private double goalAngle;
 
     private int curPathIndex = 0;
-    private boolean isFinished = false;
+
+    private double curPos;
+    private double curAngle;
 
     private final double goalVelocity = 800;
     private final double WHEELBASE_INCHES;
-    private OutputSignal signal = new OutputSignal();
 
     public PurePursuitController(ArrayList<Waypoint> path, double WHEELBASE_INCHES) {
         this.path = path;
@@ -32,23 +31,19 @@ public class PurePursuitController extends Controller {
     }
 
     @Override
-    public OutputSignal getOutputSignal(InputState inputState) {
-
+    public void update() {
         double leftVelocity;
         double rightVelocity;
 
-        if (inputState.getPos() > goalDistance) {
+        if (curPos > goalDistance) {
             curPathIndex++;
             System.out.println("curPathIndex" + curPathIndex);
             System.out.println("goalDistance" + goalDistance);
-            System.out.println("pos" + inputState.getPos());
-            System.out.println("angPos" + inputState.getAngPos());
+            System.out.println("pos" + curPos);
+            System.out.println("angPos" + curAngle);
             System.out.println("goalAngle" + goalAngle);
-            if (curPathIndex >= path.size()) {
-                isFinished = true;
-                signal.setLeftRightMotor(0, 0);
-                System.out.println("Stopped");
-                return signal;
+            if (isFinished()) {
+                driveSignal = new DriveSignal(0, 0);
             } else {
                 goalAngle = path.get(curPathIndex).angle;
                 curRadius = path.get(curPathIndex).radius;
@@ -70,22 +65,26 @@ public class PurePursuitController extends Controller {
         SmartDashboard.putNumber("desLeftVel", leftVelocity);
         SmartDashboard.putNumber("deRightVel", rightVelocity);
         SmartDashboard.putNumber("path length", path.size());
-        SmartDashboard.putNumber("curDistance", inputState.getPos());
+        SmartDashboard.putNumber("curDistance", curPos);
         SmartDashboard.putNumber("goalDistance", goalDistance);
         SmartDashboard.putNumber("curPathIndex", curPathIndex);
         SmartDashboard.putNumber("curRadius", curRadius);
-
-        signal.setLeftRightMotor(leftVelocity, rightVelocity);
-        return signal;
     }
 
-    @Override
-    public boolean isCompleted() {
-        return isFinished;
+    public DriveSignal update(double curPos, double curAngle) {
+        this.curPos = curPos;
+        this.curAngle = curAngle;
+        update();
+        return driveSignal;
     }
 
     private double getTurningValue() {
         return goalVelocity * Robot.drive.inchesToEncoderCounts(((curRadius - (WHEELBASE_INCHES / 2)) / (curRadius + (WHEELBASE_INCHES / 2))));
+    }
+
+    @Override
+    public boolean isFinished() {
+        return curPathIndex >= path.size();
     }
 
 }

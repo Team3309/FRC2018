@@ -1,10 +1,10 @@
 package lib.controllers.pid;
 
+import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import lib.ChaseTimer;
 import lib.controllers.Controller;
-import lib.controllers.statesandsignals.InputState;
-import lib.controllers.statesandsignals.OutputSignal;
-import edu.wpi.first.wpilibj.networktables.NetworkTable;
+import lib.controllers.Finishable;
+import lib.controllers.Resettable;
 
 /*
  * <p>Structure of PID Controller See
@@ -13,16 +13,16 @@ import edu.wpi.first.wpilibj.networktables.NetworkTable;
  * 
  * @author Chase Blagden
  */
-public abstract class PIDController extends Controller {
+public abstract class PIDController extends Controller implements Resettable, Finishable {
 
-	public double kP;
-	public double kI;
-	public double kD;
+	public double pScalar;
+	public double iScalar;
+	public double dScalar;
 
 	// limit for integral value
-	public double kILimit;
+	public double integralLimit;
 
-	private double mIntegral = 0.0;
+	private double totalIntegral = 0.0;
 	private double prevError;
 
 	private boolean isUseDashboard = false;
@@ -39,45 +39,49 @@ public abstract class PIDController extends Controller {
 	// timer for checking time passed
 	private ChaseTimer doneTimer;
 
-	public PIDController(double kP, double kI, double kD) {
-		this.kP = kP;
-		this.kI = kI;
-		this.kD = kD;
-	}
+	protected double setpoint;
+	protected double current;
+	protected double output;
 
-	public PIDController(double kP, double kI, double kD, double kILimit) {
-		this(kP, kI, kD);
-		this.kILimit = kILimit;
+	public PIDController(PIDConstants pidConstants) {
+		this.pScalar = pidConstants.getP();
+		this.iScalar = pidConstants.getI();
+		this.dScalar = pidConstants.getD();
+		this.integralLimit = pidConstants.getIntegralLimit();
 	}
 
 	@Override
-	public OutputSignal getOutputSignal(InputState input) {
-		OutputSignal output = new OutputSignal();
+	public void update() {
 
-		double error = input.getError();
+		double error = setpoint - current;
 
 		// checking for integral being over limit
-		if (mIntegral * kI > kILimit) {
-			mIntegral = kILimit / kI;
-		} else if (mIntegral * kI < kILimit) {
-			mIntegral = -kILimit / kI;
+		if (totalIntegral * iScalar > integralLimit) {
+			totalIntegral = integralLimit / iScalar;
+		} else if (totalIntegral * iScalar < integralLimit) {
+			totalIntegral = -integralLimit / iScalar;
 		}
 
 		// controls ramp up
-		double proportional = kP * error;
+		double proportional = pScalar * error;
 
 		// makes up for steady state error
-		mIntegral = kI * (mIntegral + error);
+		totalIntegral = iScalar * (totalIntegral + error);
 
 		// dampens oscillation
-		double derivative = kD * (prevError - error);
+		double derivative = dScalar * (prevError - error);
 
-		output.setMotor(proportional + mIntegral + derivative);
+		output = proportional + totalIntegral + derivative;
 
 		prevError = error;
-
-		return output;
 	}
+
+	public double update(double current, double setpoint) {
+	    setCurrentAndSetpoint(current, setpoint);
+	    update();
+	    return output;
+    }
+
 
 	/*
 	 * @return
@@ -91,23 +95,23 @@ public abstract class PIDController extends Controller {
 	/*
 	 * @return
 	 * 
-	 * @param kP, kI, kD
+	 * @param pScalar, iScalar, dScalar
 	 */
 	public void setConstants(double kP, double kI, double kD) {
-		this.kP = kP;
-		this.kI = kI;
-		this.kD = kD;
+		this.pScalar = kP;
+		this.iScalar = kI;
+		this.dScalar = kD;
 	}
 
 	public void setConstants(double kP, double kI, double kD, double kILimit) {
 		setConstants(kP, kI, kD);
-		this.kILimit = kILimit;
+		this.integralLimit = kILimit;
 	}
 
 	@Override
 	public void reset() {
 		this.prevError = 0.0;
-		this.mIntegral = 0.0;
+		this.totalIntegral = 0.0;
 	}
 
 	/*
@@ -129,7 +133,7 @@ public abstract class PIDController extends Controller {
 	}
 
 	@Override
-	public boolean isCompleted() {
+	public boolean isFinished() {
 		if (isCompletable) {
 			if (doneTimer == null) {
 				doneTimer = new ChaseTimer(timeoutS);
@@ -180,13 +184,18 @@ public abstract class PIDController extends Controller {
 	public void sendToDashboard() {
 		if (this.isUseDashboard) {
 			NetworkTable table = NetworkTable.getTable("");
-			kP = table.getNumber("kP", 0.0);
-			kI = table.getNumber("kI", 0.0);
-			kD = table.getNumber("kD", 0.0);
-			table.putNumber("kP", kP);
-			table.putNumber("kI", kI);
-			table.putNumber("kD", kD);
+			pScalar = table.getNumber("pScalar", 0.0);
+			iScalar = table.getNumber("iScalar", 0.0);
+			dScalar = table.getNumber("dScalar", 0.0);
+			table.putNumber("pScalar", pScalar);
+			table.putNumber("iScalar", iScalar);
+			table.putNumber("dScalar", dScalar);
 		}
 	}
+
+	public void setCurrentAndSetpoint(double current, double setpoint) {
+	    this.current = current;
+	    this.setpoint = setpoint;
+    }
 
 }

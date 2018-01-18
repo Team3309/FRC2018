@@ -1,8 +1,5 @@
 package lib.controllers.pid;
 
-import lib.controllers.statesandsignals.InputState;
-import lib.controllers.statesandsignals.OutputSignal;
-
 /*
  * <p>PID Controller with add-ons for velocity and acceleration
  * 
@@ -11,54 +8,42 @@ import lib.controllers.statesandsignals.OutputSignal;
 public class PIDVelocityController extends PIDController {
 
 	// constant for adjusting velocity
-	private double kV;
+	private double vScalar;
 
 	// constant for adjusting acceleration
-	private double kA;
+	private double aScalar;
 
 	// desired velocity
 	private double aimVel = 0.0;
 
 	// desired acceleration
 	private double aimAcc = 0.0;
-
-	public PIDVelocityController(double kP, double kI, double kD) {
-		super(kP, kI, kD);
-		this.kV = 0;
-		this.kA = 0;
-	}
 	
-	public PIDVelocityController(double kP, double kI, double kD, double kV) {
-		super(kP, kI, kD);
-		this.kV = kV;
-		this.kA = 0;
+	public PIDVelocityController(PIDConstants pidConstants, double v) {
+		super(pidConstants);
+		this.vScalar = vScalar;
 	}
 
-	public PIDVelocityController(double kP, double kI, double kD, double kV,
-			double kA) {
-		this(kP, kI, kD, kV);
-		this.kA = kA;
+	public PIDVelocityController(PIDConstants pidConstants, double v, double a) {
+		this(pidConstants, v);
+		this.aScalar = a;
 	}
 
-	/*
-	 * @return
-	 * 
-	 * @param kP, kI, kD, kV, kA
-	 */
 	public void setConstants(double kP, double kI, double kD, double kV,
 			double kA) {
 		super.setConstants(kP, kI, kD);
-		this.kV = kV;
-		this.kA = kA;
+		this.vScalar = kV;
+		this.aScalar = kA;
 	}
 
 	@Override
-	public OutputSignal getOutputSignal(InputState input) {
-		OutputSignal signal = new OutputSignal();
-		double power = super.getOutputSignal(input).getMotor() + kV * aimVel
-				+ kA * aimAcc;
-		signal.setMotor(power);
-		return signal;
+	public void update() {
+		output = super.update(current, output) + vScalar * aimVel + aScalar * aimAcc;
 	}
 
+	public double update(double current, double setpoint) {
+		setCurrentAndSetpoint(current, setpoint);
+		update();
+		return output;
+	}
 }

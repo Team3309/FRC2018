@@ -31,6 +31,6 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" exported="" name="cscore-sources" level="application" />
+    <orderEntry type="library" name="cscore-sources" level="application" />
   </component>
 </module>

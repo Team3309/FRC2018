@@ -1,9 +1,6 @@
 package lib.controllers.drive.equations;
 
-import lib.controllers.Controller;
-import lib.controllers.statesandsignals.InputState;
-import lib.controllers.statesandsignals.OutputSignal;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import lib.controllers.drive.DriveSignal;
 
 /**
  * <p>
@@ -18,21 +15,19 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * high speeds. Also handles the robot's quick turn functionality - "quick turn"
  * overrides constant-curvature turning for turn-in-place maneuvers.
  */
-public class DriveCheezyDriveEquation extends Controller {
+public class DriveCheezyDriveEquation extends DriveTeleopController {
 
     private double oldWheel, quickStopAccumulator;
     private double throttleDeadband = 0.04;
     private double wheelDeadband = 0.04;
+    private boolean isQuickTurn;
 
     @Override
-    public OutputSignal getOutputSignal(InputState input) {
-        double throttle = input.getY(); // x axis of controller
-        double wheel = input.getX(); // y axis of controller
-        boolean isQuickTurn = input.getIsTrue();
+    public void update() {
         boolean isHighGear = true;
-        OutputSignal signal = new OutputSignal();
         double wheelNonLinearity;
 
+        double wheel = turn;
         wheel = handleDeadband(wheel, wheelDeadband);
         throttle = handleDeadband(throttle, throttleDeadband);
 
@@ -141,24 +136,23 @@ public class DriveCheezyDriveEquation extends Controller {
             leftPwm += overPower * (-1.0 - rightPwm);
             rightPwm = -1.0;
         }
-        signal.setLeftMotor(leftPwm);
-        signal.setRightMotor(rightPwm);
-        SmartDashboard.putNumber("left", leftPwm);
-        SmartDashboard.putNumber("right", rightPwm);
-        return signal;
+        driveSignal = new DriveSignal(leftPwm, rightPwm);
     }
 
-    public double handleDeadband(double val, double deadband) {
-        return (Math.abs(val) > Math.abs(deadband)) ? val : 0.0;
+    public DriveSignal update(double throttle, double turn, boolean isQuickTurn) {
+        setThrottleTurnAndIsQuickTurn(throttle, turn, isQuickTurn);
+        update();
+        return driveSignal;
     }
 
-    public static double limit(double v, double limit) {
+    private static double limit(double v, double limit) {
         return (Math.abs(v) < limit) ? v : limit * (v < 0 ? -1 : 1);
     }
 
-    @Override
-    public boolean isCompleted() {
-        return false;
+    public void setThrottleTurnAndIsQuickTurn(double throttle, double turn, boolean isQuickTurn) {
+        setThrottleAndTurn(throttle, turn);
+        this.isQuickTurn = isQuickTurn;
     }
+
 
 }

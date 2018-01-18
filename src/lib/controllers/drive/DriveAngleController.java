@@ -1,33 +1,44 @@
 package lib.controllers.drive;
 
-import lib.controllers.pid.PIDController;
-import lib.controllers.statesandsignals.InputState;
-import lib.controllers.statesandsignals.OutputSignal;
+import lib.controllers.Finishable;
+import lib.controllers.pid.PIDConstants;
+import lib.controllers.pid.PIDPositionController;
 
-public class DriveAngleController extends PIDController {
+public class DriveAngleController extends DriveController implements Finishable {
 
-	private final double goalAngle;
-	private final double errorThreshold = 7;
-	private final double timeoutS = 0.2;
+    private double goalAngle;
+    private double curAngPos;
+    private boolean isClockwiseTurn = false;
 
-	public DriveAngleController(double goalAngle) {
-		super(0.04, 0.0, 0.0);
-		this.goalAngle = goalAngle;
-		setErrorThreshold(errorThreshold);
-		setTimeoutSec(timeoutS);
-		setIsCompletable(true);
-		setName("DriveAngleController");
-	}
+    private PIDPositionController angleController;
 
-	@Override
-	public OutputSignal getOutputSignal(InputState inputState) {
-		double error = goalAngle - inputState.getAngPos();
-		InputState input = new InputState();
-		input.setError(error);
-		OutputSignal x = new OutputSignal();
-		x.setLeftMotor(-getOutputSignal(input).getMotor());
-		x.setRightMotor(getOutputSignal(input).getMotor());
-		return x;
-	}
+    public DriveAngleController(PIDConstants pidConstants) {
+        angleController = new PIDPositionController(pidConstants);
+    }
 
+    @Override
+    public void update() {
+        double output = angleController.update(curAngPos, goalAngle);
+        if (!isClockwiseTurn) {
+            driveSignal = new DriveSignal(output, -output);
+        } else {
+            driveSignal = new DriveSignal(-output, output);
+        }
+    }
+
+    public DriveSignal update(double angPos, double goalAngle) {
+        this.curAngPos = angPos;
+        this.goalAngle = goalAngle;
+        update();
+        return driveSignal;
+    }
+
+    public void setIsClockwiseTurn(boolean isClockwiseTurn) {
+        this.isClockwiseTurn = isClockwiseTurn;
+    }
+
+    @Override
+    public boolean isFinished() {
+        return angleController.isFinished();
+    }
 }

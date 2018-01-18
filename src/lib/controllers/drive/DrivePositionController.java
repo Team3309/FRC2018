@@ -1,72 +1,59 @@
 package lib.controllers.drive;
 
-import lib.controllers.Controller;
+import lib.controllers.Finishable;
+import lib.controllers.pid.PIDConstants;
 import lib.controllers.pid.PIDPositionController;
-import lib.controllers.statesandsignals.InputState;
-import lib.controllers.statesandsignals.OutputSignal;
-import org.usfirst.frc.team3309.robot.Robot;
 
-public class DrivePositionController extends Controller {
+public class DrivePositionController extends DriveController implements Finishable {
 
-	private double goal;
-	private double angle;
-	private PIDPositionController linearController;
-	private PIDPositionController angleController;
+    private double goalPos;
+    private double goalAngle;
 
-	public DrivePositionController(double goal) {
-		linearController = new PIDPositionController(0.04, 0.0, 0.021);
-		linearController.setErrorThreshold(0.2);
-		linearController.setTimeoutSec(0.2);
-		linearController.setIsCompletable(true);
-		linearController.setName("linear");
-		linearController.setIsUseDashboard(true);
+    private double leftPos;
+    private double rightPos;
+    private double curAngle;
 
-		angleController = new PIDPositionController(0.0, 0.0, 0.0);
-		angleController.setErrorThreshold(0.2);
-		angleController.setTimeoutSec(0.2);
-		angleController.setIsCompletable(true);
-		angleController.setName("angular");
-		angleController.setIsUseDashboard(true);
+    private PIDPositionController leftSideController;
+    private PIDPositionController rightSideController;
+    private PIDPositionController angleController;
 
-		this.goal = goal;
-		this.angle = Robot.drive.getAngPos();
-	}
 
-	public DrivePositionController(double goal, double angle) {
-		this(goal);
-		this.angle = angle;
-	}
+    public DrivePositionController(PIDConstants pidConstantsLeft,
+                                   PIDConstants pidConstantsRight, PIDConstants pidConstantsTurn) {
+        leftSideController = new PIDPositionController(pidConstantsLeft);
+        rightSideController = new PIDPositionController(pidConstantsRight);
+        angleController = new PIDPositionController(pidConstantsTurn);
+    }
 
-	@Override
-	public OutputSignal getOutputSignal(InputState input) {
-		InputState linearInput = new InputState();
-		InputState angularInput = new InputState();
-		linearInput.setError(goal - input.getPos());
-		angularInput.setError(angle - input.getAngPos());
-		OutputSignal linearOutput = linearController
-				.getOutputSignal(linearInput);
-		OutputSignal angularOutput = angleController
-				.getOutputSignal(angularInput);
-		OutputSignal signal = new OutputSignal();
-		signal.setLeftRightMotor(
-				linearOutput.getMotor() + angularOutput.getMotor(),
-				linearOutput.getMotor() - angularOutput.getMotor());
-		return signal;
-	}
+    public DrivePositionController(PIDConstants pidConstantsLinear, PIDConstants pidConstantsTurn) {
+        this(pidConstantsLinear, pidConstantsLinear, pidConstantsTurn);
+    }
 
-	@Override
-	public boolean isCompleted() {
-		return linearController.isCompleted() && angleController.isCompleted();
-	}
+    @Override
+    public void update() {
+        double leftOutput = leftSideController.update(leftPos, goalPos);
+        double rightOutput = rightSideController.update(rightPos, goalPos);
+        double turningOutput = angleController.update(curAngle, goalAngle);
+        driveSignal = new DriveSignal(leftOutput + turningOutput, rightOutput - turningOutput);
+    }
 
-	@Override
-	public void sendToDashboard() {
-		linearController.sendToDashboard();
-		angleController.sendToDashboard();
-	}
+    public DriveSignal update(double leftPos, double rightPos, double goalPos, double curAngle, double goalAngle) {
+        this.leftPos = leftPos;
+        this.rightPos = rightPos;
+        this.curAngle = curAngle;
+        this.goalPos = goalPos;
+        this.goalAngle = goalAngle;
+        update();
+        return driveSignal;
+    }
 
-	public void setConstants(double kP, double kI, double kD) {
-		this.linearController.setConstants(kP, kI, kD);
-	}
+    public DriveSignal update(double curPos, double goalPos, double curAngle, double goalAngle) {
+        update(curPos, curPos, goalPos, curAngle, goalAngle);
+        return driveSignal;
+    }
 
+    @Override
+    public boolean isFinished() {
+        return leftSideController.isFinished() && rightSideController.isFinished() && angleController.isFinished();
+    }
 }

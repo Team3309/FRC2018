@@ -1,17 +1,18 @@
 package org.usfirst.frc.team3309.commands.drive;
 
 import edu.wpi.first.wpilibj.GenericHID.Hand;
+import edu.wpi.first.wpilibj.command.Command;
+import lib.controllers.drive.DriveSignal;
 import lib.controllers.drive.equations.DriveCheezyDriveEquation;
-import lib.controllers.statesandsignals.InputState;
-import lib.controllers.statesandsignals.OutputSignal;
-import lib.controllers.ControlledCommand;
 import org.usfirst.frc.team3309.driverstation.Controls;
 import org.usfirst.frc.team3309.robot.Robot;
 
-public class DriveTeleop extends ControlledCommand {
+public class DriveTeleop extends Command {
+
+    private DriveCheezyDriveEquation cheezyDriveEquation;
 
     public DriveTeleop() {
-        super("DriveTeleop");
+        cheezyDriveEquation = new DriveCheezyDriveEquation();
         requires(Robot.drive);
     }
 
@@ -23,30 +24,21 @@ public class DriveTeleop extends ControlledCommand {
 
     @Override
     protected void execute() {
-        setController(new DriveCheezyDriveEquation());
-        OutputSignal signal = this.getController().getOutputSignal(
-                getInputState());
-        Robot.drive.setLeftRight(signal.getLeftMotor(), signal.getRightMotor());
+        double throttle = Controls.driverRemote.getY(Hand.kLeft);
+        double turn = Controls.driverRemote.getX(Hand.kRight);
+        boolean isQuickTurn = Controls.driverRemote.getBumper(Hand.kLeft);
+        DriveSignal driveSignal = cheezyDriveEquation.update(throttle, turn, isQuickTurn);
+        Robot.drive.setLeftRight(driveSignal.getLeftMotor(), driveSignal.getRightMotor());
         if (Controls.driverRemote.getBumper(Hand.kLeft)) {
             Robot.drive.setLowGear();
         } else {
             Robot.drive.setHighGear();
         }
-        this.sendToDashboard();
     }
 
     @Override
-    protected InputState getInputState() {
-        InputState state = new InputState();
-        state.setX(-Controls.driverRemote.getX(Hand.kRight));
-        state.setY(-Controls.driverRemote.getY(Hand.kLeft));
-        state.setIsTrue(Controls.driverRemote.getBumper(Hand.kRight));
-        return state;
-    }
-
-    @Override
-    protected void interrupted() {
-        Robot.drive.stopDrive();
+    protected boolean isFinished() {
+        return false;
     }
 
 }

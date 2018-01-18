@@ -1,33 +1,23 @@
 package lib.controllers.drive.equations;
 
-import lib.controllers.Controller;
-import lib.controllers.statesandsignals.InputState;
-import lib.controllers.statesandsignals.OutputSignal;
+import lib.controllers.drive.DriveSignal;
 
 /*
  * @author Chase Blagden <p> Basic format of the arcade drive equation
  */
-public class DriveArcadeEquation extends Controller {
-
-    private final double throttleDeadband = 0.04;
-    private final double turnDeadband = 0.04;
+public class DriveArcadeEquation extends DriveTeleopController {
 
     @Override
-    public OutputSignal getOutputSignal(InputState input) {
-        OutputSignal signal = new OutputSignal();
-        double throttle = handleDeadband(input.getY(), throttleDeadband);
-        double turn = handleDeadband(input.getX(), turnDeadband);
-        signal.setLeftRightMotor(throttle + turn, throttle - turn);
-        return signal;
+    public void update() {
+        double linearPower = handleDeadband(throttle, throttleDeadband);
+        double angPower = handleDeadband(turn, turnDeadband);
+        driveSignal = new DriveSignal(linearPower + angPower, linearPower - angPower);
     }
 
-    @Override
-    public boolean isCompleted() {
-        return false;
-    }
-
-    public double handleDeadband(double val, double lim) {
-        return Math.abs(val) < Math.abs(lim) ? 0.0 : val;
+    public DriveSignal update(double throttle, double turn) {
+        setThrottleAndTurn(throttle, turn);
+        update();
+        return driveSignal;
     }
 
 }

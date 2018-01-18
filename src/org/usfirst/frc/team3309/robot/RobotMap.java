@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3309.robot;
 
 import lib.controllers.drive.Waypoint;
+import org.jcp.xml.dsig.internal.dom.DOMUtils;
 
 import java.util.ArrayList;
 
@@ -26,5 +27,10 @@ public class RobotMap {
         semiCircularPath.add(new Waypoint(51.158, 1.4858));
         semiCircularPath.add(new Waypoint(48.660, 1.5458));
     }
+
+    public static final double DRIVE_POSITION_CONTROLLER_P_SCALE = 0.04;
+    public static final double DRIVE_POSITION_CONTROLLER_I_SCALE = 0.0;
+    public static final double DRIVE_POSITION_CONTROLLER_D_SCALE = 0.021;
+
 
 }

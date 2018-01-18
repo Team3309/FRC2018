@@ -1,33 +1,48 @@
 package org.usfirst.frc.team3309.commands.autos;
 
+import edu.wpi.first.wpilibj.command.Command;
 import lib.controllers.drive.DrivePositionController;
-import lib.controllers.statesandsignals.InputState;
-import lib.controllers.ControlledCommand;
+import lib.controllers.drive.DriveSignal;
+import lib.controllers.pid.PIDConstants;
+import org.usfirst.frc.team3309.commands.ControlledCommand;
 import org.usfirst.frc.team3309.robot.Robot;
+import org.usfirst.frc.team3309.robot.RobotMap;
 
-public class DriveForwardAuto extends ControlledCommand{
+public class DriveForwardAuto extends Command {
 
-    public DriveForwardAuto() {
+    private PIDConstants pidConstants;
+    private DrivePositionController  drivePositionController;
+
+    private double goalPos;
+    private double goalAngle;
+
+    public DriveForwardAuto(double goalPos, double goalAngle) {
+        pidConstants = new PIDConstants(RobotMap.DRIVE_POSITION_CONTROLLER_P_SCALE,
+                RobotMap.DRIVE_POSITION_CONTROLLER_I_SCALE,
+                RobotMap.DRIVE_POSITION_CONTROLLER_D_SCALE);
+        drivePositionController = new DrivePositionController(pidConstants, pidConstants, new PIDConstants());
         requires(Robot.drive);
+    }
+
+    public DriveForwardAuto(double goalPos) {
+        this(goalPos, 0);
     }
 
     @Override
     protected void initialize() {
-        this.setController(new DrivePositionController(30));
+        Robot.drive.changeToPercentMode();
     }
 
     @Override
     protected void execute() {
-        this.sendToDashboard();
-        this.setController(new DrivePositionController(50));
-        Robot.drive.setLeftRight(getSignal().getLeftMotor(), getSignal().getRightMotor());
+        DriveSignal driveSignal = drivePositionController.update(Robot.drive.getEncoderPos(),
+                Robot.drive.encoderCountsToInches(goalPos), Robot.drive.getAngPos(), 0);
+        Robot.drive.setLeftRight(driveSignal.getLeftMotor(), driveSignal.getRightMotor());
     }
 
     @Override
-    protected InputState getInputState() {
-        InputState input = new InputState();
-        input.setAngPos(Robot.drive.getAngPos());
-        input.setPos(Robot.drive.encoderCountsToInches(Robot.drive.getEncoderPos()));
-        return input;
+    protected boolean isFinished() {
+        return drivePositionController.isFinished();
     }
+
 }
