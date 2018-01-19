@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import org.usfirst.frc.team3309.subsystems.BeltBar;
 import org.usfirst.frc.team3309.subsystems.Drive;
 import org.usfirst.frc.team3309.subsystems.Intake;
 import org.usfirst.frc.team3309.subsystems.Lift;
@@ -19,6 +20,7 @@ public class Robot extends IterativeRobot {
     public static Drive drive = new Drive();
     public static Intake intake = new Intake();
     public static Lift lift = new Lift();
+    public static BeltBar beltBar = new BeltBar();
 
     private Compressor c = new Compressor();
 

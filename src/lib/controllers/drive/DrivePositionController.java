@@ -1,17 +1,11 @@
 package lib.controllers.drive;
 
+import lib.controllers.Controller3;
 import lib.controllers.interfaces.Finishable;
 import lib.controllers.pid.PIDConstants;
 import lib.controllers.pid.PIDPositionController;
 
-public class DrivePositionController extends DriveController implements Finishable {
-
-    private double goalPos;
-    private double goalAngle;
-
-    private double leftPos;
-    private double rightPos;
-    private double curAngle;
+public class DrivePositionController extends Controller3<DriveSignal, DriveState, Double, Double> implements Finishable {
 
     private PIDPositionController leftSideController;
     private PIDPositionController rightSideController;
@@ -29,26 +23,17 @@ public class DrivePositionController extends DriveController implements Finishab
     }
 
     @Override
-    public void update() {
-        double leftOutput = leftSideController.update(leftPos, goalPos);
-        double rightOutput = rightSideController.update(rightPos, goalPos);
-        double turningOutput = angleController.update(curAngle, goalAngle);
+    public DriveSignal update(DriveState driveState, Double goalPos, Double goalAngle) {
+        DriveSignal driveSignal;
+        double leftOutput = leftSideController.update(driveState.getLeftPos(), goalPos);
+        double rightOutput = rightSideController.update(driveState.getRightPos(), goalPos);
+        double turningOutput = angleController.update(driveState.getAngPos(), goalAngle);
         driveSignal = new DriveSignal(leftOutput + turningOutput, rightOutput - turningOutput);
-    }
-
-    public DriveSignal update(double leftPos, double rightPos, double goalPos, double curAngle, double goalAngle) {
-        this.leftPos = leftPos;
-        this.rightPos = rightPos;
-        this.curAngle = curAngle;
-        this.goalPos = goalPos;
-        this.goalAngle = goalAngle;
-        update();
         return driveSignal;
     }
 
-    public DriveSignal update(double curPos, double goalPos, double curAngle, double goalAngle) {
-        update(curPos, curPos, goalPos, curAngle, goalAngle);
-        return driveSignal;
+    public DriveSignal update(DriveState driveState, Double goalPos) {
+        return update(driveState, goalPos, 0.0);
     }
 
     @Override

@@ -2,6 +2,7 @@ package org.usfirst.frc.team3309.commands.subsystems.drive;
 
 import edu.wpi.first.wpilibj.command.Command;
 import lib.controllers.drive.DriveSignal;
+import lib.controllers.drive.DriveState;
 import lib.controllers.drive.PurePursuitController;
 import lib.controllers.drive.Waypoint;
 import org.usfirst.frc.team3309.robot.Robot;
@@ -27,8 +28,9 @@ public class DrivePath extends Command {
 
     @Override
     protected void execute() {
-        DriveSignal driveSignal = purePursuitController.update(Robot.drive.encoderCountsToInches(Robot.drive.getEncoderPos()),
+        DriveState driveState = new DriveState(Robot.drive.encoderCountsToInches(Robot.drive.getEncoderPos()),
                 Robot.drive.getAngPos());
+        DriveSignal driveSignal = purePursuitController.update(driveState);
         Robot.drive.setLeftRight(driveSignal.getLeftMotor(), driveSignal.getRightMotor());
     }
 

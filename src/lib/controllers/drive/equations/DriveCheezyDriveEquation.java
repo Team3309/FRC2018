@@ -1,5 +1,7 @@
 package lib.controllers.drive.equations;
 
+import lib.LibMath;
+import lib.controllers.Controller3;
 import lib.controllers.drive.DriveSignal;
 
 /**
@@ -7,7 +9,7 @@ import lib.controllers.drive.DriveSignal;
  * Drive controller invented by Team 254,
  * https://github.com/Team254/FRC-2017-Public
  * /blob/master/src/com/team254/lib/util/CheesyDriveHelper.java
- *
+ * <p>
  * <p>
  * Helper class to implement "Cheesy Drive". "Cheesy Drive" simply means that
  * the "turning" stick controls the curvature of the robot's path rather than
@@ -15,21 +17,30 @@ import lib.controllers.drive.DriveSignal;
  * high speeds. Also handles the robot's quick turn functionality - "quick turn"
  * overrides constant-curvature turning for turn-in-place maneuvers.
  */
-public class DriveCheezyDriveEquation extends DriveTeleopController {
+public class DriveCheezyDriveEquation extends Controller3<DriveSignal, Double, Double, Boolean> {
 
     private double oldWheel, quickStopAccumulator;
+
     private double throttleDeadband = 0.04;
     private double wheelDeadband = 0.04;
-    private boolean isQuickTurn;
+
+    public DriveCheezyDriveEquation(double throttleDeadband, double turnDeadband) {
+        this.throttleDeadband = throttleDeadband;
+        this.wheelDeadband = turnDeadband;
+    }
+
+    public DriveCheezyDriveEquation() {
+    }
 
     @Override
-    public void update() {
+    public DriveSignal update(Double throttle, Double turn, Boolean isQuickTurn) {
+        DriveSignal driveSignal;
         boolean isHighGear = true;
         double wheelNonLinearity;
 
         double wheel = turn;
-        wheel = handleDeadband(wheel, wheelDeadband);
-        throttle = handleDeadband(throttle, throttleDeadband);
+        wheel = LibMath.handleDeadband(wheel, wheelDeadband);
+        throttle = LibMath.handleDeadband(throttle, throttleDeadband);
 
         double negInertia = wheel - oldWheel;
         oldWheel = wheel;
@@ -137,22 +148,11 @@ public class DriveCheezyDriveEquation extends DriveTeleopController {
             rightPwm = -1.0;
         }
         driveSignal = new DriveSignal(leftPwm, rightPwm);
-    }
-
-    public DriveSignal update(double throttle, double turn, boolean isQuickTurn) {
-        setThrottleTurnAndIsQuickTurn(throttle, turn, isQuickTurn);
-        update();
         return driveSignal;
     }
 
     private static double limit(double v, double limit) {
         return (Math.abs(v) < limit) ? v : limit * (v < 0 ? -1 : 1);
     }
-
-    public void setThrottleTurnAndIsQuickTurn(double throttle, double turn, boolean isQuickTurn) {
-        setThrottleAndTurn(throttle, turn);
-        this.isQuickTurn = isQuickTurn;
-    }
-
 
 }

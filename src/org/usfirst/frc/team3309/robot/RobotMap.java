@@ -34,6 +34,10 @@ public class RobotMap {
     public static final int LIFT_3 = 0;
     public static final int LIFT_4 = 0;
 
+    // beltbar
+    public static final int BELTBAR_0 = 0;
+    public static final int BELTBAR_1 = 0;
+
 
     // robot constants
 

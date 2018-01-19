@@ -1,12 +1,16 @@
 package lib.controllers.drive;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import lib.controllers.Controller1;
 import lib.controllers.interfaces.Finishable;
 import org.usfirst.frc.team3309.robot.Robot;
 
 import java.util.ArrayList;
 
-public class PurePursuitController extends DriveController implements Finishable {
+/*
+* TODO: Make goalVelocity a member of the ArrayList<Waypoint> path, instead of a constant value for the whole path.
+* */
+public class PurePursuitController extends Controller1<DriveSignal, DriveState> implements Finishable {
 
     private final ArrayList<Waypoint> path;
 
@@ -15,9 +19,6 @@ public class PurePursuitController extends DriveController implements Finishable
     private double goalAngle;
 
     private int curPathIndex = 0;
-
-    private double curPos;
-    private double curAngle;
 
     private final double goalVelocity = 800;
     private final double WHEELBASE_INCHES;
@@ -31,9 +32,13 @@ public class PurePursuitController extends DriveController implements Finishable
     }
 
     @Override
-    public void update() {
+    public DriveSignal update(DriveState driveState) {
+        DriveSignal driveSignal;
         double leftVelocity;
         double rightVelocity;
+
+        double curPos = driveState.getAveragePos();
+        double curAngle = driveState.getAngPos();
 
         if (curPos > goalDistance) {
             curPathIndex++;
@@ -44,6 +49,7 @@ public class PurePursuitController extends DriveController implements Finishable
             System.out.println("goalAngle" + goalAngle);
             if (isFinished()) {
                 driveSignal = new DriveSignal(0, 0);
+                return driveSignal;
             } else {
                 goalAngle = path.get(curPathIndex).angle;
                 curRadius = path.get(curPathIndex).radius;
@@ -69,12 +75,8 @@ public class PurePursuitController extends DriveController implements Finishable
         SmartDashboard.putNumber("goalDistance", goalDistance);
         SmartDashboard.putNumber("curPathIndex", curPathIndex);
         SmartDashboard.putNumber("curRadius", curRadius);
-    }
 
-    public DriveSignal update(double curPos, double curAngle) {
-        this.curPos = curPos;
-        this.curAngle = curAngle;
-        update();
+        driveSignal = new DriveSignal(leftVelocity, rightVelocity);
         return driveSignal;
     }
 

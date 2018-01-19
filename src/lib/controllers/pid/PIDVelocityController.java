@@ -1,50 +1,46 @@
 package lib.controllers.pid;
 
+import lib.controllers.Controller3;
+
 /*
  * <p>PID Controller with add-ons for velocity and acceleration
- * 
+ *
  * @author Chase Blagden
  */
-public class PIDVelocityController extends PIDController {
+public class PIDVelocityController extends Controller3<Double, Double, Double, Double> {
 
-	// constant for adjusting velocity
-	private double vScalar;
+    private PIDPositionController pidPositionController;
 
-	// constant for adjusting acceleration
-	private double aScalar;
+    // constant for adjusting velocity
+    private double vScalar;
 
-	// desired velocity
-	private double aimVel = 0.0;
+    // constant for adjusting acceleration
+    private double aScalar;
 
-	// desired acceleration
-	private double aimAcc = 0.0;
-	
-	public PIDVelocityController(PIDConstants pidConstants, double v) {
-		super(pidConstants);
-		this.vScalar = vScalar;
-	}
+    public PIDVelocityController(PIDConstants pidConstants, double v) {
+        pidPositionController = new PIDPositionController(pidConstants);
+        this.vScalar = v;
+    }
 
-	public PIDVelocityController(PIDConstants pidConstants, double v, double a) {
-		this(pidConstants, v);
-		this.aScalar = a;
-	}
+    public PIDVelocityController(PIDConstants pidConstants, double v, double a) {
+        this(pidConstants, v);
+        this.aScalar = a;
+    }
 
-	public void setConstants(double kP, double kI, double kD, double kV,
-			double kA) {
-		super.setConstants(kP, kI, kD);
-		this.vScalar = kV;
-		this.aScalar = kA;
-	}
+    public void setConstants(PIDConstants pidConstants, double v,
+                             double a) {
+        pidPositionController.setConstants(pidConstants);
+        this.vScalar = v;
+        this.aScalar = a;
+    }
 
-	@Override
-	public void update() {
-		output = super.update(current, output) + vScalar * aimVel + aScalar * aimAcc;
-	}
+    @Override
+    public Double update(Double current, Double aimVel, Double aimAcc) {
+        return pidPositionController.update(current, aimVel) + vScalar * aimVel + aScalar * aimAcc;
+    }
 
-	public double update(double current, double setpoint) {
-		setCurrentAndSetpoint(current, setpoint);
-		update();
-		return output;
-	}
+    public PIDPositionController getController() {
+        return pidPositionController;
+    }
 
 }

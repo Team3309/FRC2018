@@ -1,8 +1,8 @@
 package lib.controllers.pid;
 
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
-import lib.ChaseTimer;
-import lib.controllers.Controller;
+import lib.LibTimer;
+import lib.controllers.Controller2;
 import lib.controllers.interfaces.Finishable;
 import lib.controllers.interfaces.Resettable;
 
@@ -13,7 +13,7 @@ import lib.controllers.interfaces.Resettable;
  *
  * @author Chase Blagden
  */
-public abstract class PIDController extends Controller implements Resettable, Finishable {
+public abstract class PIDController extends Controller2<Double, Double, Double> implements Resettable, Finishable {
 
     private PIDConstants pidConstants;
 
@@ -32,18 +32,13 @@ public abstract class PIDController extends Controller implements Resettable, Fi
     private boolean isCompletable;
 
     // timer for checking time passed
-    private ChaseTimer doneTimer;
-
-    protected double setpoint;
-    protected double current;
-    protected double output;
+    private LibTimer doneTimer;
 
     public PIDController(PIDConstants pidConstants) {
         this.pidConstants = pidConstants;
     }
 
-    public void update() {
-
+    public Double update(Double current, Double setpoint) {
         double error = setpoint - current;
 
         // checking for integral being over limit
@@ -63,15 +58,37 @@ public abstract class PIDController extends Controller implements Resettable, Fi
         // dampens oscillation
         double derivative = pidConstants.getD() * (prevError - error);
 
-        output = proportional + totalIntegral + derivative;
+        double output = proportional + totalIntegral + derivative;
 
         prevError = error;
+        return output;
     }
 
-    public double update(double current, double setpoint) {
-        setCurrentAndSetpoint(current, setpoint);
-        update();
-        return output;
+    @Override
+    public void reset() {
+        this.prevError = 0.0;
+        this.totalIntegral = 0.0;
+    }
+
+    @Override
+    public boolean isFinished() {
+        if (isCompletable) {
+            if (doneTimer == null) {
+                doneTimer = new LibTimer(timeoutSec);
+            }
+            return this.doneTimer
+                    .isConditionMaintained(Math.abs(prevError) < errorThreshold);
+        }
+        return false;
+    }
+
+    public void sendToDashboard() {
+        if (this.isUseDashboard) {
+            NetworkTable table = NetworkTable.getTable("");
+            table.putNumber("pScalar", pidConstants.getP());
+            table.putNumber("iScalar", pidConstants.getI());
+            table.putNumber("dScalar", pidConstants.getD());
+        }
     }
 
     public void setIsUseDashboard(boolean isUseSmartDash) {
@@ -87,39 +104,13 @@ public abstract class PIDController extends Controller implements Resettable, Fi
         pidConstants.setIntegralLimit(integralLimit);
     }
 
-    @Override
-    public void reset() {
-        this.prevError = 0.0;
-        this.totalIntegral = 0.0;
-    }
-
-    /*
-     * @param isCompletable for setting controller to terminate
-     */
-    public void setIsCompletable(boolean isCompletable) {
-        this.isCompletable = isCompletable;
-    }
-
-    public boolean getIsCompletable() {
-        return this.isCompletable;
-    }
-
-    @Override
-    public boolean isFinished() {
-        if (isCompletable) {
-            if (doneTimer == null) {
-                doneTimer = new ChaseTimer(timeoutSec);
-            }
-            return this.doneTimer
-                    .isConditionMaintained(Math.abs(prevError) < errorThreshold);
-        }
-        return false;
+    public void setConstants(PIDConstants pidConstants) {
+        this.pidConstants = pidConstants;
     }
 
     public void setErrorThreshold(double errorThreshold) {
         this.errorThreshold = errorThreshold;
     }
-
 
     public double getErrorThreshold() {
         return this.errorThreshold;
@@ -133,18 +124,15 @@ public abstract class PIDController extends Controller implements Resettable, Fi
         return this.timeoutSec;
     }
 
-    public void sendToDashboard() {
-        if (this.isUseDashboard) {
-            NetworkTable table = NetworkTable.getTable("");
-            table.putNumber("pScalar", pidConstants.getP());
-            table.putNumber("iScalar", pidConstants.getI());
-            table.putNumber("dScalar", pidConstants.getD());
-        }
+    /*
+     * @param isCompletable for setting controller to terminate
+     */
+    public void setIsCompletable(boolean isCompletable) {
+        this.isCompletable = isCompletable;
     }
 
-    public void setCurrentAndSetpoint(double current, double setpoint) {
-        this.current = current;
-        this.setpoint = setpoint;
+    public boolean getIsCompletable() {
+        return this.isCompletable;
     }
 
 }

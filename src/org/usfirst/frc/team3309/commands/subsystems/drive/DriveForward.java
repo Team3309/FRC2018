@@ -3,6 +3,7 @@ package org.usfirst.frc.team3309.commands.subsystems.drive;
 import edu.wpi.first.wpilibj.command.Command;
 import lib.controllers.drive.DrivePositionController;
 import lib.controllers.drive.DriveSignal;
+import lib.controllers.drive.DriveState;
 import lib.controllers.pid.PIDConstants;
 import org.usfirst.frc.team3309.robot.Robot;
 import org.usfirst.frc.team3309.robot.RobotMap;
@@ -37,8 +38,9 @@ public class DriveForward extends Command {
 
     @Override
     protected void execute() {
-        DriveSignal driveSignal = drivePositionController.update(Robot.drive.getEncoderPos(),
-                Robot.drive.encoderCountsToInches(goalPos), Robot.drive.getAngPos(), goalAngle);
+        DriveState driveState = new DriveState(Robot.drive.getEncoderPos(), Robot.drive.getAngPos());
+        DriveSignal driveSignal = drivePositionController.update(driveState,
+                Robot.drive.encoderCountsToInches(goalPos),  goalAngle);
         Robot.drive.setLeftRight(driveSignal.getLeftMotor(), driveSignal.getRightMotor());
     }
 

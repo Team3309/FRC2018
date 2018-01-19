@@ -2,16 +2,16 @@ package lib;
 
 import edu.wpi.first.wpilibj.Timer;
 
-public class ChaseTimer extends Timer {
+public class LibTimer extends Timer {
 
 	private double timeToBeCompleted;
 
 	private boolean isConditionMaintained;
 
-	public ChaseTimer() {
+	public LibTimer() {
 	}
 
-	public ChaseTimer(double timeToBeCompleted) {
+	public LibTimer(double timeToBeCompleted) {
 		this.timeToBeCompleted = timeToBeCompleted;
 	}
 
