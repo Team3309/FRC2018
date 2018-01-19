@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class RobotMap {
 
-    // TALON ID's
+    // drive
     public static final int DRIVE_RIGHT_0_ID = 2;
     public static final int DRIVE_RIGHT_1_ID = 3;
     public static final int DRIVE_RIGHT_2_ID = 4;
@@ -16,6 +16,26 @@ public class RobotMap {
     public static final int DRIVE_LEFT_2_ID = 16;
 
     public static final int SHIFTER = 7;
+
+    // intake
+    public static final int INTAKE_LEFT_ROLLER = 0;
+    public static final int INTAKE_RIGHT_ROLLER = 0;
+
+    public static final int INTAKE_HARDSTOP_ACTUATOR_A = 0;
+    public static final int INTAKE_HARDSTOP_ACTUATOR_B = 0;
+
+    public static final int INTAKE_INNER_ACTUATOR_A = 0;
+    public static final int INTAKE_INNER_ACTUATOR_B = 0;
+
+    // lift
+    public static final int LIFT_0 = 0;
+    public static final int LIFT_1 = 0;
+    public static final int LIFT_2 = 0;
+    public static final int LIFT_3 = 0;
+    public static final int LIFT_4 = 0;
+
+
+    // robot constants
 
     public static final double WHEEL_DIAMETER_INCHES = 4.0625;
     public static final double WHEELBASE_INCHES = 28.0;

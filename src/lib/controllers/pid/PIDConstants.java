@@ -48,4 +48,8 @@ public class PIDConstants {
         this.integralLimit = integralLimit;
     }
 
+    public void setIntegralLimit(double integralLimit) {
+        this.integralLimit = integralLimit;
+    }
+
 }

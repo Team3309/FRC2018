@@ -6,6 +6,8 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import org.usfirst.frc.team3309.subsystems.Drive;
+import org.usfirst.frc.team3309.subsystems.Intake;
+import org.usfirst.frc.team3309.subsystems.Lift;
 
 import java.util.logging.Logger;
 
@@ -15,6 +17,8 @@ import java.util.logging.Logger;
 public class Robot extends IterativeRobot {
 
     public static Drive drive = new Drive();
+    public static Intake intake = new Intake();
+    public static Lift lift = new Lift();
 
     private Compressor c = new Compressor();
 

@@ -7,18 +7,19 @@ import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import lib.actuators.TalonSRXMC;
+import lib.actuators.VictorSPXMC;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveTeleop;
 import org.usfirst.frc.team3309.robot.RobotMap;
 
 public class Drive extends Subsystem {
 
     private TalonSRXMC left0 = new TalonSRXMC(RobotMap.DRIVE_LEFT_0_ID);
-    private TalonSRXMC left1 = new TalonSRXMC(RobotMap.DRIVE_LEFT_1_ID);
-    private TalonSRXMC left2 = new TalonSRXMC(RobotMap.DRIVE_LEFT_2_ID);
+    private VictorSPXMC left1 = new VictorSPXMC(RobotMap.DRIVE_LEFT_1_ID);
+    private VictorSPXMC left2 = new VictorSPXMC(RobotMap.DRIVE_LEFT_2_ID);
 
     private TalonSRXMC right0 = new TalonSRXMC(RobotMap.DRIVE_RIGHT_0_ID);
-    private TalonSRXMC right1 = new TalonSRXMC(RobotMap.DRIVE_RIGHT_1_ID);
-    private TalonSRXMC right2 = new TalonSRXMC(RobotMap.DRIVE_RIGHT_2_ID);
+    private VictorSPXMC right1 = new VictorSPXMC(RobotMap.DRIVE_RIGHT_1_ID);
+    private VictorSPXMC right2 = new VictorSPXMC(RobotMap.DRIVE_RIGHT_2_ID);
 
     private Solenoid shifter = new Solenoid(RobotMap.SHIFTER);
 

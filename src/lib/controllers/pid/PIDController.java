@@ -15,14 +15,7 @@ import lib.controllers.interfaces.Resettable;
  */
 public abstract class PIDController extends Controller implements Resettable, Finishable {
 
-    protected double pScalar;
-    protected double iScalar;
-    protected double dScalar;
-
     private PIDConstants pidConstants;
-
-    // limit for integral value
-    public double integralLimit;
 
     private double totalIntegral = 0.0;
     private double prevError;
@@ -33,7 +26,7 @@ public abstract class PIDController extends Controller implements Resettable, Fi
     private double errorThreshold = 30;
 
     // time (s) in which controller must be within threshold
-    private double timeoutSec = .250;
+    private double timeoutSec = 0.25;
 
     // set whether controller can be finished
     private boolean isCompletable;
@@ -46,24 +39,19 @@ public abstract class PIDController extends Controller implements Resettable, Fi
     protected double output;
 
     public PIDController(PIDConstants pidConstants) {
-        this.pScalar = pidConstants.getP();
-        this.iScalar = pidConstants.getI();
-        this.dScalar = pidConstants.getD();
-        this.integralLimit = pidConstants.getIntegralLimit();
         this.pidConstants = pidConstants;
     }
 
-    @Override
     public void update() {
 
         double error = setpoint - current;
 
         // checking for integral being over limit
         double integralLimit = pidConstants.getIntegralLimit();
-        if (totalIntegral * iScalar > integralLimit) {
-            totalIntegral = integralLimit / iScalar;
-        } else if (totalIntegral * iScalar < integralLimit) {
-            totalIntegral = -integralLimit / iScalar;
+        if (totalIntegral * pidConstants.getI() > integralLimit) {
+            totalIntegral = integralLimit / pidConstants.getI();
+        } else if (totalIntegral * pidConstants.getI() < integralLimit) {
+            totalIntegral = -integralLimit / pidConstants.getI();
         }
 
         // controls ramp up
@@ -96,7 +84,7 @@ public abstract class PIDController extends Controller implements Resettable, Fi
 
     public void setConstants(double p, double i, double d, double integralLimit) {
         setConstants(p, i, d);
-        this.integralLimit = integralLimit;
+        pidConstants.setIntegralLimit(integralLimit);
     }
 
     @Override
@@ -145,16 +133,12 @@ public abstract class PIDController extends Controller implements Resettable, Fi
         return this.timeoutSec;
     }
 
-    @Override
     public void sendToDashboard() {
         if (this.isUseDashboard) {
             NetworkTable table = NetworkTable.getTable("");
-            pScalar = table.getNumber("pScalar", 0.0);
-            iScalar = table.getNumber("iScalar", 0.0);
-            dScalar = table.getNumber("dScalar", 0.0);
-            table.putNumber("pScalar", pScalar);
-            table.putNumber("iScalar", iScalar);
-            table.putNumber("dScalar", dScalar);
+            table.putNumber("pScalar", pidConstants.getP());
+            table.putNumber("iScalar", pidConstants.getI());
+            table.putNumber("dScalar", pidConstants.getD());
         }
     }
 
