@@ -2,29 +2,34 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0fe28238-9a8a-4ac8-a47e-10926d5882f6" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/lib/LibMath.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/lib/controllers/Controller2.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/lib/controllers/Controller3.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/lib/controllers/drive/DriveState.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/org/usfirst/frc/team3309/subsystems/BeltBar.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/lib/controllers/Controller.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/org/usfirst/frc/team3309/commands/subsystems/AssemblyPosition.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/org/usfirst/frc/team3309/commands/subsystems/MoveAssembly.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/org/usfirst/frc/team3309/commands/subsystems/beltbar/BeltBarMoveToPos.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/org/usfirst/frc/team3309/commands/subsystems/drive/DriveSetHighGear.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/org/usfirst/frc/team3309/commands/subsystems/drive/DriveSetLowGear.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/org/usfirst/frc/team3309/commands/subsystems/intake/IntakeClamp.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/org/usfirst/frc/team3309/commands/subsystems/intake/IntakeCube.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/org/usfirst/frc/team3309/commands/subsystems/intake/IntakeOpen.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/org/usfirst/frc/team3309/commands/subsystems/intake/IntakeTeleop.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/org/usfirst/frc/team3309/commands/subsystems/lift/LiftElevate.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/org/usfirst/frc/team3309/commands/subsystems/lift/LiftSetClimbMode.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/org/usfirst/frc/team3309/commands/subsystems/lift/LiftSetElevatorMode.java" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/CBlagden.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/CBlagden.xml" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/lib/ChaseTimer.java" afterPath="$PROJECT_DIR$/src/lib/LibTimer.java" />
-      <change beforePath="$PROJECT_DIR$/src/lib/controllers/Controller.java" afterPath="" />
       <change beforePath="$PROJECT_DIR$/src/lib/controllers/Controller1.java" afterPath="$PROJECT_DIR$/src/lib/controllers/Controller1.java" />
-      <change beforePath="$PROJECT_DIR$/src/lib/controllers/drive/DriveAngleController.java" afterPath="$PROJECT_DIR$/src/lib/controllers/drive/DriveAngleController.java" />
-      <change beforePath="$PROJECT_DIR$/src/lib/controllers/drive/DriveController.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/lib/controllers/drive/DrivePositionController.java" afterPath="$PROJECT_DIR$/src/lib/controllers/drive/DrivePositionController.java" />
+      <change beforePath="$PROJECT_DIR$/src/lib/controllers/Controller2.java" afterPath="$PROJECT_DIR$/src/lib/controllers/Controller2.java" />
+      <change beforePath="$PROJECT_DIR$/src/lib/controllers/Controller3.java" afterPath="$PROJECT_DIR$/src/lib/controllers/Controller3.java" />
       <change beforePath="$PROJECT_DIR$/src/lib/controllers/drive/PurePursuitController.java" afterPath="$PROJECT_DIR$/src/lib/controllers/drive/PurePursuitController.java" />
-      <change beforePath="$PROJECT_DIR$/src/lib/controllers/drive/equations/DriveArcadeEquation.java" afterPath="$PROJECT_DIR$/src/lib/controllers/drive/equations/DriveArcadeEquation.java" />
       <change beforePath="$PROJECT_DIR$/src/lib/controllers/drive/equations/DriveCheezyDriveEquation.java" afterPath="$PROJECT_DIR$/src/lib/controllers/drive/equations/DriveCheezyDriveEquation.java" />
-      <change beforePath="$PROJECT_DIR$/src/lib/controllers/drive/equations/DriveTeleopController.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/lib/controllers/pid/PIDController.java" afterPath="$PROJECT_DIR$/src/lib/controllers/pid/PIDController.java" />
-      <change beforePath="$PROJECT_DIR$/src/lib/controllers/pid/PIDVelocityController.java" afterPath="$PROJECT_DIR$/src/lib/controllers/pid/PIDVelocityController.java" />
-      <change beforePath="$PROJECT_DIR$/src/org/usfirst/frc/team3309/commands/subsystems/drive/DriveForward.java" afterPath="$PROJECT_DIR$/src/org/usfirst/frc/team3309/commands/subsystems/drive/DriveForward.java" />
-      <change beforePath="$PROJECT_DIR$/src/org/usfirst/frc/team3309/commands/subsystems/drive/DrivePath.java" afterPath="$PROJECT_DIR$/src/org/usfirst/frc/team3309/commands/subsystems/drive/DrivePath.java" />
+      <change beforePath="$PROJECT_DIR$/src/org/usfirst/frc/team3309/commands/subsystems/drive/DriveTeleop.java" afterPath="$PROJECT_DIR$/src/org/usfirst/frc/team3309/commands/subsystems/drive/DriveTeleop.java" />
+      <change beforePath="$PROJECT_DIR$/src/org/usfirst/frc/team3309/driverstation/XboxController.java" afterPath="$PROJECT_DIR$/src/org/usfirst/frc/team3309/driverstation/XboxController.java" />
       <change beforePath="$PROJECT_DIR$/src/org/usfirst/frc/team3309/robot/OI.java" afterPath="$PROJECT_DIR$/src/org/usfirst/frc/team3309/robot/OI.java" />
       <change beforePath="$PROJECT_DIR$/src/org/usfirst/frc/team3309/robot/Robot.java" afterPath="$PROJECT_DIR$/src/org/usfirst/frc/team3309/robot/Robot.java" />
       <change beforePath="$PROJECT_DIR$/src/org/usfirst/frc/team3309/robot/RobotMap.java" afterPath="$PROJECT_DIR$/src/org/usfirst/frc/team3309/robot/RobotMap.java" />
+      <change beforePath="$PROJECT_DIR$/src/org/usfirst/frc/team3309/subsystems/BeltBar.java" afterPath="$PROJECT_DIR$/src/org/usfirst/frc/team3309/subsystems/BeltBar.java" />
+      <change beforePath="$PROJECT_DIR$/src/org/usfirst/frc/team3309/subsystems/Intake.java" afterPath="$PROJECT_DIR$/src/org/usfirst/frc/team3309/subsystems/Intake.java" />
+      <change beforePath="$PROJECT_DIR$/src/org/usfirst/frc/team3309/subsystems/Lift.java" afterPath="$PROJECT_DIR$/src/org/usfirst/frc/team3309/subsystems/Lift.java" />
     </list>
     <ignored path="$PROJECT_DIR$/bin/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -39,45 +44,99 @@
       <file leaf-file-name="Robot.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team3309/robot/Robot.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="273">
-              <caret line="23" column="0" lean-forward="true" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+            <state relative-caret-position="483">
+              <caret line="33" column="22" lean-forward="false" selection-start-line="33" selection-start-column="22" selection-end-line="33" selection-end-column="22" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DrivePositionController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/lib/controllers/drive/DrivePositionController.java">
+      <file leaf-file-name="DriveTeleop.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team3309/commands/subsystems/drive/DriveTeleop.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="399">
-              <caret line="22" column="5" lean-forward="false" selection-start-line="22" selection-start-column="5" selection-end-line="22" selection-end-column="5" />
+            <state relative-caret-position="609">
+              <caret line="34" column="14" lean-forward="true" selection-start-line="34" selection-start-column="14" selection-end-line="34" selection-end-column="14" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MoveAssembly.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team3309/commands/subsystems/MoveAssembly.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="231">
+              <caret line="11" column="5" lean-forward="true" selection-start-line="11" selection-start-column="5" selection-end-line="11" selection-end-column="5" />
               <folding>
-                <element signature="e#1671#1672#0" expanded="true" />
-                <element signature="e#1726#1727#0" expanded="true" />
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DriveForward.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team3309/commands/subsystems/drive/DriveForward.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="462">
-              <caret line="28" column="0" lean-forward="true" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
-              <folding>
-                <element signature="e#1207#1208#0" expanded="true" />
-                <element signature="e#1256#1257#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="OI.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="OI.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team3309/robot/OI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
-              <caret line="6" column="5" lean-forward="true" selection-start-line="6" selection-start-column="5" selection-end-line="6" selection-end-column="5" />
+            <state relative-caret-position="315">
+              <caret line="15" column="0" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Controls.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team3309/driverstation/Controls.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="378">
+              <caret line="18" column="0" lean-forward="true" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RobotMap.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team3309/robot/RobotMap.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="742">
+              <caret line="65" column="44" lean-forward="true" selection-start-line="65" selection-start-column="44" selection-end-line="65" selection-end-column="44" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BeltBar.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team3309/subsystems/BeltBar.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="420">
+              <caret line="24" column="0" lean-forward="true" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+              <folding>
+                <element signature="e#843#844#0" expanded="true" />
+                <element signature="e#897#898#0" expanded="true" />
+                <element signature="e#1064#1065#0" expanded="true" />
+                <element signature="e#1100#1101#0" expanded="true" />
+                <element signature="e#1136#1137#0" expanded="true" />
+                <element signature="e#1168#1169#0" expanded="true" />
+                <element signature="e#1218#1219#0" expanded="true" />
+                <element signature="e#1260#1261#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Lift.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team3309/subsystems/Lift.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="630">
+              <caret line="53" column="29" lean-forward="false" selection-start-line="53" selection-start-column="29" selection-end-line="53" selection-end-column="29" />
+              <folding>
+                <element signature="e#1851#1852#0" expanded="true" />
+                <element signature="e#1889#1890#0" expanded="true" />
+                <element signature="e#1923#1924#0" expanded="true" />
+                <element signature="e#1953#1954#0" expanded="true" />
+                <element signature="e#1999#2000#0" expanded="true" />
+                <element signature="e#2037#2038#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -108,20 +167,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/org/usfirst/team3309/subsystems/ChainBar.java" />
-        <option value="$PROJECT_DIR$/src/lib/controllers/pid/PIDControllerWithFeedForward.java" />
-        <option value="$PROJECT_DIR$/src/lib/controllers/Resettable.java" />
-        <option value="$PROJECT_DIR$/src/lib/controllers/Finishable.java" />
-        <option value="$PROJECT_DIR$/src/lib/controllers/BlankController.java" />
-        <option value="$PROJECT_DIR$/src/lib/controllers/drive/DriveSignal.java" />
-        <option value="$PROJECT_DIR$/src/lib/actuators/VictorSPX.java" />
-        <option value="$PROJECT_DIR$/src/lib/controllers/drive/DriveController.java" />
-        <option value="$PROJECT_DIR$/src/lib/controllers/pid/PIDContstants.java" />
-        <option value="$PROJECT_DIR$/src/org/usfirst/frc/team3309/commands/drive/DriveTeleop.java" />
-        <option value="$PROJECT_DIR$/src/org/usfirst/frc/team3309/commands/ControlledCommand.java" />
-        <option value="$PROJECT_DIR$/src/lib/actuators/VictorSPXMC.java" />
-        <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/src/org/usfirst/frc/team3309/commands/autos/DriveForwardAuto.java" />
         <option value="$PROJECT_DIR$/src/org/usfirst/frc/team3309/commands/autos/DrivePathAuto.java" />
         <option value="$PROJECT_DIR$/src/org/usfirst/frc/team3309/commands/autos/DrivePath.java" />
         <option value="$PROJECT_DIR$/src/lib/controllers/interfaces/Finishable.java" />
@@ -130,12 +175,8 @@
         <option value="$PROJECT_DIR$/src/lib/actuators/TalonSRXMC.java" />
         <option value="$PROJECT_DIR$/src/lib/controllers/pid/PIDPositionController.java" />
         <option value="$PROJECT_DIR$/src/lib/controllers/pid/PIDConstants.java" />
-        <option value="$PROJECT_DIR$/src/org/usfirst/frc/team3309/commands/subsystems/drive/DriveTeleop.java" />
-        <option value="$PROJECT_DIR$/src/org/usfirst/frc/team3309/driverstation/XboxController.java" />
         <option value="$PROJECT_DIR$/src/org/usfirst/frc/team3309/subsystems/Drive.java" />
         <option value="$PROJECT_DIR$/src/org/usfirst/frc/team3309/driverstation/Controls.java" />
-        <option value="$PROJECT_DIR$/src/org/usfirst/frc/team3309/subsystems/Intake.java" />
-        <option value="$PROJECT_DIR$/src/org/usfirst/frc/team3309/subsystems/Lift.java" />
         <option value="$PROJECT_DIR$/src/lib/controllers/drive/DriveState.java" />
         <option value="$PROJECT_DIR$/src/lib/controllers/drive/equations/DriveTeleopController.java" />
         <option value="$PROJECT_DIR$/src/lib/controllers/drive/equations/DriveArcadeEquation.java" />
@@ -144,29 +185,46 @@
         <option value="$PROJECT_DIR$/src/lib/LibMath.java" />
         <option value="$PROJECT_DIR$/src/lib/ChaseTimer.java" />
         <option value="$PROJECT_DIR$/src/lib/LibTimer.java" />
-        <option value="$PROJECT_DIR$/src/lib/controllers/Controller.java" />
-        <option value="$PROJECT_DIR$/src/org/usfirst/frc/team3309/robot/RobotMap.java" />
-        <option value="$PROJECT_DIR$/src/org/usfirst/frc/team3309/subsystems/BeltBar.java" />
-        <option value="$PROJECT_DIR$/src/org/usfirst/frc/team3309/robot/Robot.java" />
         <option value="$PROJECT_DIR$/src/lib/controllers/pid/PIDController.java" />
         <option value="$PROJECT_DIR$/src/lib/controllers/pid/PIDVelocityController.java" />
-        <option value="$PROJECT_DIR$/src/org/usfirst/frc/team3309/commands/subsystems/drive/DriveForward.java" />
         <option value="$PROJECT_DIR$/src/lib/controllers/drive/PurePursuitController.java" />
         <option value="$PROJECT_DIR$/src/lib/controllers/drive/DriveAngleController.java" />
-        <option value="$PROJECT_DIR$/src/org/usfirst/frc/team3309/commands/subsystems/drive/DrivePath.java" />
-        <option value="$PROJECT_DIR$/src/lib/controllers/Controller3.java" />
-        <option value="$PROJECT_DIR$/src/lib/controllers/Controller2.java" />
-        <option value="$PROJECT_DIR$/src/lib/controllers/Controller1.java" />
         <option value="$PROJECT_DIR$/src/lib/controllers/drive/DrivePositionController.java" />
+        <option value="$PROJECT_DIR$/src/lib/controllers/Controller1.java" />
+        <option value="$PROJECT_DIR$/src/lib/controllers/Controller2.java" />
+        <option value="$PROJECT_DIR$/src/lib/controllers/Controller3.java" />
+        <option value="$PROJECT_DIR$/src/lib/controllers/Controller.java" />
+        <option value="$PROJECT_DIR$/src/org/usfirst/frc/team3309/commands/subsystems/drive/DriveForward.java" />
+        <option value="$PROJECT_DIR$/src/org/usfirst/frc/team3309/commands/subsystems/drive/DrivePath.java" />
+        <option value="$PROJECT_DIR$/src/org/usfirst/frc/team3309/driverstation/XboxController.java" />
+        <option value="$PROJECT_DIR$/src/org/usfirst/frc/team3309/commands/subsystems/intake/IntakeClamp.java" />
+        <option value="$PROJECT_DIR$/src/org/usfirst/frc/team3309/commands/subsystems/intake/IntakeOpen.java" />
+        <option value="$PROJECT_DIR$/src/org/usfirst/frc/team3309/commands/subsystems/intake/IntakeCube.java" />
+        <option value="$PROJECT_DIR$/src/org/usfirst/frc/team3309/commands/subsystems/intake/IntakeTeleop.java" />
+        <option value="$PROJECT_DIR$/src/org/usfirst/frc/team3309/subsystems/Intake.java" />
+        <option value="$PROJECT_DIR$/src/org/usfirst/frc/team3309/subsystems/BeltBar.java" />
+        <option value="$PROJECT_DIR$/src/org/usfirst/frc/team3309/commands/subsystems/lift/LiftElevator.java" />
+        <option value="$PROJECT_DIR$/src/org/usfirst/frc/team3309/commands/subsystems/lift/LiftSetClimbMOde.java" />
+        <option value="$PROJECT_DIR$/src/org/usfirst/frc/team3309/subsystems/Lift.java" />
+        <option value="$PROJECT_DIR$/src/org/usfirst/frc/team3309/commands/subsystems/lift/LiftSetClimbMode.java" />
+        <option value="$PROJECT_DIR$/src/org/usfirst/frc/team3309/commands/subsystems/lift/LiftSetElevatorMode.java" />
+        <option value="$PROJECT_DIR$/src/org/usfirst/frc/team3309/commands/subsystems/beltbar/BeltBarMoveToPos.java" />
+        <option value="$PROJECT_DIR$/src/org/usfirst/frc/team3309/robot/Robot.java" />
+        <option value="$PROJECT_DIR$/src/org/usfirst/frc/team3309/commands/subsystems/lift/LiftElevate.java" />
+        <option value="$PROJECT_DIR$/src/org/usfirst/frc/team3309/commands/subsystems/AssemblyPosition.java" />
+        <option value="$PROJECT_DIR$/src/org/usfirst/frc/team3309/robot/RobotMap.java" />
+        <option value="$PROJECT_DIR$/src/org/usfirst/frc/team3309/commands/subsystems/MoveAssembly.java" />
+        <option value="$PROJECT_DIR$/src/org/usfirst/frc/team3309/commands/subsystems/drive/DriveTeleop.java" />
+        <option value="$PROJECT_DIR$/src/org/usfirst/frc/team3309/commands/subsystems/drive/DriveSetLowGear.java" />
+        <option value="$PROJECT_DIR$/src/org/usfirst/frc/team3309/commands/subsystems/drive/DriveSetHighGear.java" />
         <option value="$PROJECT_DIR$/src/org/usfirst/frc/team3309/robot/OI.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="-9" />
-    <option name="y" value="-9" />
-    <option name="width" value="1924" />
-    <option name="height" value="1048" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-8" />
+    <option name="width" value="976" />
+    <option name="height" value="1038" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -183,7 +241,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -253,7 +310,50 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="team3309" type="462c0819:PsiDirectoryNode" />
               <item name="commands" type="462c0819:PsiDirectoryNode" />
+              <item name="subsystems" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="FRC2018" type="b2602c69:ProjectViewProjectNode" />
+              <item name="FRC2018" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="team3309" type="462c0819:PsiDirectoryNode" />
+              <item name="commands" type="462c0819:PsiDirectoryNode" />
+              <item name="subsystems" type="462c0819:PsiDirectoryNode" />
+              <item name="beltbar" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="FRC2018" type="b2602c69:ProjectViewProjectNode" />
+              <item name="FRC2018" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="team3309" type="462c0819:PsiDirectoryNode" />
+              <item name="commands" type="462c0819:PsiDirectoryNode" />
+              <item name="subsystems" type="462c0819:PsiDirectoryNode" />
               <item name="drive" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="FRC2018" type="b2602c69:ProjectViewProjectNode" />
+              <item name="FRC2018" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="team3309" type="462c0819:PsiDirectoryNode" />
+              <item name="commands" type="462c0819:PsiDirectoryNode" />
+              <item name="subsystems" type="462c0819:PsiDirectoryNode" />
+              <item name="intake" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="FRC2018" type="b2602c69:ProjectViewProjectNode" />
+              <item name="FRC2018" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="team3309" type="462c0819:PsiDirectoryNode" />
+              <item name="commands" type="462c0819:PsiDirectoryNode" />
+              <item name="subsystems" type="462c0819:PsiDirectoryNode" />
+              <item name="lift" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="FRC2018" type="b2602c69:ProjectViewProjectNode" />
+              <item name="FRC2018" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="team3309" type="462c0819:PsiDirectoryNode" />
+              <item name="driverstation" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="FRC2018" type="b2602c69:ProjectViewProjectNode" />
@@ -273,9 +373,10 @@
           <select />
         </subPane>
       </pane>
-      <pane id="AndroidView" />
       <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="Scratches" />
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -416,18 +517,17 @@
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32992035" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17679559" sideWeight="0.49785176" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17064847" sideWeight="0.5021482" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32839224" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32992035" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.284375" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2859375" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32928178" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.07572503" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -449,6 +549,7 @@
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32992035" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17679559" sideWeight="0.49785176" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -475,7 +576,7 @@
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32992035" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17747441" sideWeight="0.49785176" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17679559" sideWeight="0.49785176" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -493,7 +594,9 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <option name="time" value="1" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="antWorkspaceConfiguration">
@@ -516,42 +619,6 @@
     </buildFile>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/lib/controllers/statesandsignals/OutputSignal.java" />
-    <entry file="file://$PROJECT_DIR$/src/org/usfirst/team3309/subsystems/Drive.java" />
-    <entry file="file://$PROJECT_DIR$/src/lib/controllers/statesandsignals/TestInputState.java" />
-    <entry file="file://$PROJECT_DIR$/src/org/usfirst/team3309/subsystems/ChainBar.java" />
-    <entry file="file://$PROJECT_DIR$/src/org/usfirst/team3309/subsystems/Lift.java" />
-    <entry file="file://$PROJECT_DIR$/FRC2018.iml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="15" column="14" lean-forward="true" selection-start-line="15" selection-start-column="14" selection-end-line="15" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="498">
-          <caret line="860" column="14" lean-forward="true" selection-start-line="860" selection-start-column="14" selection-end-line="860" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/lib/controllers/BlankController.java" />
-    <entry file="file://$PROJECT_DIR$/src/lib/controllers/pid/PIDControllerWithFeedForward.java" />
-    <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team3309/robot/Sensors.java" />
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="4" column="4" lean-forward="false" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/lib/controllers/interfaces/Finishable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="42">
-          <caret line="2" column="17" lean-forward="false" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/lib/controllers/interfaces/Resettable.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="147">
@@ -605,91 +672,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team3309/driverstation/XboxController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="5" column="0" lean-forward="true" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#5162#5163#0" expanded="false" />
-            <element signature="e#5185#5186#0" expanded="false" />
-            <element signature="e#6257#6258#0" expanded="false" />
-            <element signature="e#6284#6285#0" expanded="false" />
-            <element signature="e#6392#6393#0" expanded="false" />
-            <element signature="e#6425#6426#0" expanded="false" />
-            <element signature="e#8218#8219#0" expanded="false" />
-            <element signature="e#8260#8261#0" expanded="false" />
-            <element signature="e#12373#12374#0" expanded="false" />
-            <element signature="e#12434#12435#0" expanded="false" />
-            <element signature="e#12645#12646#0" expanded="false" />
-            <element signature="e#12680#12681#0" expanded="false" />
-            <element signature="e#12811#12812#0" expanded="false" />
-            <element signature="e#12848#12849#0" expanded="false" />
-            <element signature="e#12979#12980#0" expanded="false" />
-            <element signature="e#13016#13017#0" expanded="false" />
-            <element signature="e#14676#14677#0" expanded="false" />
-            <element signature="e#14718#14719#0" expanded="false" />
-            <element signature="e#14891#14892#0" expanded="false" />
-            <element signature="e#14933#14934#0" expanded="false" />
-            <element signature="e#16012#16013#0" expanded="false" />
-            <element signature="e#16063#16064#0" expanded="false" />
-            <element signature="e#16294#16295#0" expanded="false" />
-            <element signature="e#16329#16330#0" expanded="false" />
-            <element signature="e#16890#16891#0" expanded="false" />
-            <element signature="e#16992#16993#0" expanded="false" />
-            <element signature="e#17190#17191#0" expanded="false" />
-            <element signature="e#17236#17237#0" expanded="false" />
-            <element signature="e#17441#17442#0" expanded="false" />
-            <element signature="e#17490#17491#0" expanded="false" />
-            <element signature="e#18735#18736#0" expanded="false" />
-            <element signature="e#18781#18782#0" expanded="false" />
-            <element signature="e#18870#18871#0" expanded="false" />
-            <element signature="e#18914#18915#0" expanded="false" />
-            <element signature="e#19277#19278#0" expanded="false" />
-            <element signature="e#19315#19316#0" expanded="false" />
-            <element signature="e#19536#19537#0" expanded="false" />
-            <element signature="e#19588#19589#0" expanded="false" />
-            <element signature="e#20375#20376#0" expanded="false" />
-            <element signature="e#20450#20451#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/lib/actuators/VictorSPXMC.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
           <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team3309/driverstation/Controls.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="18" column="0" lean-forward="true" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team3309/commands/subsystems/drive/DriveTeleop.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="17" column="0" lean-forward="true" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team3309/subsystems/Intake.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="483">
-          <caret line="23" column="34" lean-forward="true" selection-start-line="23" selection-start-column="34" selection-end-line="23" selection-end-column="34" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#1699#1700#0" expanded="false" />
-            <element signature="e#1733#1734#0" expanded="false" />
-            <element signature="e#1781#1782#0" expanded="false" />
-            <element signature="e#1816#1817#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -708,22 +695,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/lib/controllers/drive/DriveController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="4" column="22" lean-forward="false" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/lib/controllers/drive/equations/DriveTeleopController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="462">
-          <caret line="29" column="5" lean-forward="true" selection-start-line="29" selection-start-column="5" selection-end-line="29" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/lib/controllers/drive/DriveController.java" />
+    <entry file="file://$PROJECT_DIR$/src/lib/controllers/drive/equations/DriveTeleopController.java" />
     <entry file="file://$PROJECT_DIR$/src/lib/LibMath.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="42">
@@ -739,22 +712,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="245">
           <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team3309/robot/RobotMap.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="567">
-          <caret line="38" column="42" lean-forward="false" selection-start-line="38" selection-start-column="42" selection-end-line="38" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team3309/subsystems/Lift.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="546">
-          <caret line="30" column="30" lean-forward="false" selection-start-line="30" selection-start-column="30" selection-end-line="30" selection-end-column="30" />
           <folding />
         </state>
       </provider>
@@ -780,7 +737,7 @@
         <state relative-caret-position="169">
           <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -790,8 +747,8 @@
         <state relative-caret-position="483">
           <caret line="23" column="0" lean-forward="true" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
           <folding>
-            <element signature="e#1245#1246#0" expanded="true" />
-            <element signature="e#1289#1290#0" expanded="true" />
+            <element signature="e#1245#1246#0" expanded="false" />
+            <element signature="e#1289#1290#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -802,65 +759,9 @@
           <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#5470#5471#0" expanded="true" />
-            <element signature="e#5545#5546#0" expanded="true" />
+            <element signature="e#5482#5483#0" expanded="false" />
+            <element signature="e#5557#5558#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team3309/commands/subsystems/drive/DrivePath.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="483">
-          <caret line="34" column="5" lean-forward="true" selection-start-line="34" selection-start-column="5" selection-end-line="34" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/lib/controllers/Controller.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="6" column="24" lean-forward="true" selection-start-line="6" selection-start-column="24" selection-end-line="6" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/lib/controllers/Controller2.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="42">
-          <caret line="2" column="44" lean-forward="false" selection-start-line="2" selection-start-column="44" selection-end-line="2" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/lib/controllers/Controller1.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="42">
-          <caret line="2" column="33" lean-forward="true" selection-start-line="2" selection-start-column="33" selection-end-line="2" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team3309/subsystems/BeltBar.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#821#822#0" expanded="true" />
-            <element signature="e#903#904#0" expanded="true" />
-            <element signature="e#945#946#0" expanded="true" />
-            <element signature="e#1021#1022#0" expanded="true" />
-            <element signature="e#1061#1062#0" expanded="true" />
-            <element signature="e#1097#1098#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team3309/robot/OI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="6" column="5" lean-forward="true" selection-start-line="6" selection-start-column="5" selection-end-line="6" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -869,8 +770,8 @@
         <state relative-caret-position="1863">
           <caret line="107" column="41" lean-forward="false" selection-start-line="107" selection-start-column="41" selection-end-line="107" selection-end-column="41" />
           <folding>
-            <element signature="e#3281#3282#0" expanded="true" />
-            <element signature="e#3329#3330#0" expanded="true" />
+            <element signature="e#3281#3282#0" expanded="false" />
+            <element signature="e#3329#3330#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -891,22 +792,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team3309/robot/Robot.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="23" column="0" lean-forward="true" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/lib/controllers/Controller3.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="42">
-          <caret line="2" column="48" lean-forward="false" selection-start-line="2" selection-start-column="48" selection-end-line="2" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/lib/controllers/drive/DriveAngleController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="273">
@@ -915,24 +800,322 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/lib/controllers/Controller1.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="7" column="0" lean-forward="true" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/lib/controllers/Controller2.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/lib/controllers/Controller3.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="7" column="0" lean-forward="true" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/lib/controllers/Controller.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="42">
+          <caret line="2" column="16" lean-forward="true" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team3309/commands/subsystems/drive/DrivePath.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="84">
+          <caret line="12" column="13" lean-forward="false" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/lib/controllers/drive/DrivePositionController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="22" column="5" lean-forward="false" selection-start-line="22" selection-start-column="5" selection-end-line="22" selection-end-column="5" />
+        <state relative-caret-position="651">
+          <caret line="34" column="41" lean-forward="true" selection-start-line="34" selection-start-column="41" selection-end-line="34" selection-end-column="41" />
           <folding>
-            <element signature="e#1671#1672#0" expanded="true" />
-            <element signature="e#1726#1727#0" expanded="true" />
+            <element signature="e#1671#1672#0" expanded="false" />
+            <element signature="e#1726#1727#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team3309/commands/subsystems/drive/DriveForward.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="462">
-          <caret line="28" column="0" lean-forward="true" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+        <state relative-caret-position="231">
+          <caret line="17" column="35" lean-forward="true" selection-start-line="17" selection-start-column="35" selection-end-line="17" selection-end-column="35" />
           <folding>
             <element signature="e#1207#1208#0" expanded="true" />
             <element signature="e#1256#1257#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team3309/commands/subsystems/intake/IntakeCube.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#280#281#0" expanded="true" />
+            <element signature="e#318#319#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team3309/commands/subsystems/intake/IntakeClamp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#282#283#0" expanded="true" />
+            <element signature="e#320#321#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team3309/commands/subsystems/intake/IntakeOpen.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#280#281#0" expanded="true" />
+            <element signature="e#318#319#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team3309/driverstation/XboxController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="805">
+          <caret line="615" column="8" lean-forward="true" selection-start-line="615" selection-start-column="8" selection-end-line="615" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team3309/subsystems/Intake.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="441">
+          <caret line="26" column="0" lean-forward="true" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+          <folding>
+            <element signature="e#1135#1136#0" expanded="true" />
+            <element signature="e#1188#1189#0" expanded="true" />
+            <element signature="e#1252#1253#0" expanded="true" />
+            <element signature="e#1292#1293#0" expanded="true" />
+            <element signature="e#1359#1360#0" expanded="true" />
+            <element signature="e#1402#1403#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team3309/commands/subsystems/intake/IntakeTeleop.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="504">
+          <caret line="24" column="0" lean-forward="true" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#325#326#0" expanded="true" />
+            <element signature="e#363#364#0" expanded="true" />
+            <element signature="e#837#838#0" expanded="true" />
+            <element signature="e#865#866#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team3309/subsystems/Lift.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="630">
+          <caret line="53" column="29" lean-forward="false" selection-start-line="53" selection-start-column="29" selection-end-line="53" selection-end-column="29" />
+          <folding>
+            <element signature="e#1851#1852#0" expanded="true" />
+            <element signature="e#1889#1890#0" expanded="true" />
+            <element signature="e#1923#1924#0" expanded="true" />
+            <element signature="e#1953#1954#0" expanded="true" />
+            <element signature="e#1999#2000#0" expanded="true" />
+            <element signature="e#2037#2038#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team3309/commands/subsystems/lift/LiftSetElevatorMode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="231">
+          <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#296#297#0" expanded="true" />
+            <element signature="e#332#333#0" expanded="true" />
+            <element signature="e#378#379#0" expanded="true" />
+            <element signature="e#450#451#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team3309/subsystems/BeltBar.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="24" column="0" lean-forward="true" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+          <folding>
+            <element signature="e#843#844#0" expanded="true" />
+            <element signature="e#897#898#0" expanded="true" />
+            <element signature="e#1064#1065#0" expanded="true" />
+            <element signature="e#1100#1101#0" expanded="true" />
+            <element signature="e#1136#1137#0" expanded="true" />
+            <element signature="e#1168#1169#0" expanded="true" />
+            <element signature="e#1218#1219#0" expanded="true" />
+            <element signature="e#1260#1261#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team3309/commands/subsystems/lift/LiftSetClimbMode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="15" column="5" lean-forward="true" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#290#291#0" expanded="true" />
+            <element signature="e#326#327#0" expanded="true" />
+            <element signature="e#372#373#0" expanded="true" />
+            <element signature="e#444#445#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team3309/commands/subsystems/lift/LiftElevate.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="16" column="37" lean-forward="false" selection-start-line="16" selection-start-column="37" selection-end-line="16" selection-end-column="37" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#381#382#0" expanded="true" />
+            <element signature="e#427#428#0" expanded="true" />
+            <element signature="e#473#474#0" expanded="true" />
+            <element signature="e#532#533#0" expanded="true" />
+            <element signature="e#584#585#0" expanded="true" />
+            <element signature="e#612#613#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team3309/commands/subsystems/beltbar/BeltBarMoveToPos.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="483">
+          <caret line="23" column="0" lean-forward="true" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#403#404#0" expanded="true" />
+            <element signature="e#449#450#0" expanded="true" />
+            <element signature="e#495#496#0" expanded="true" />
+            <element signature="e#561#562#0" expanded="true" />
+            <element signature="e#613#614#0" expanded="true" />
+            <element signature="e#641#642#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team3309/commands/subsystems/AssemblyPosition.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="441">
+          <caret line="21" column="0" lean-forward="true" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+          <folding>
+            <element signature="e#353#354#0" expanded="true" />
+            <element signature="e#387#388#0" expanded="true" />
+            <element signature="e#424#425#0" expanded="true" />
+            <element signature="e#457#458#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team3309/commands/subsystems/MoveAssembly.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="231">
+          <caret line="11" column="5" lean-forward="true" selection-start-line="11" selection-start-column="5" selection-end-line="11" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team3309/driverstation/Controls.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="18" column="0" lean-forward="true" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team3309/robot/RobotMap.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="742">
+          <caret line="65" column="44" lean-forward="true" selection-start-line="65" selection-start-column="44" selection-end-line="65" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team3309/robot/Robot.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="483">
+          <caret line="33" column="22" lean-forward="false" selection-start-line="33" selection-start-column="22" selection-end-line="33" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team3309/commands/subsystems/drive/DriveSetHighGear.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="17" column="0" lean-forward="true" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#246#247#0" expanded="true" />
+            <element signature="e#283#284#0" expanded="true" />
+            <element signature="e#329#330#0" expanded="true" />
+            <element signature="e#370#371#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team3309/commands/subsystems/drive/DriveSetLowGear.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#244#245#0" expanded="true" />
+            <element signature="e#281#282#0" expanded="true" />
+            <element signature="e#327#328#0" expanded="true" />
+            <element signature="e#367#368#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team3309/commands/subsystems/drive/DriveTeleop.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="609">
+          <caret line="34" column="14" lean-forward="true" selection-start-line="34" selection-start-column="14" selection-end-line="34" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team3309/robot/OI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="15" column="0" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

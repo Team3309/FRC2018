@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3309.robot;
 
 import lib.controllers.drive.Waypoint;
+import org.usfirst.frc.team3309.commands.subsystems.AssemblyPosition;
 
 import java.util.ArrayList;
 
@@ -34,10 +35,12 @@ public class RobotMap {
     public static final int LIFT_3 = 0;
     public static final int LIFT_4 = 0;
 
+    public static final int LIFT_SHIFTER_A = 0;
+    public static final int LIFT_SHIFTER_B = 0;
+
     // beltbar
     public static final int BELTBAR_0 = 0;
     public static final int BELTBAR_1 = 0;
-
 
     // robot constants
 
@@ -55,5 +58,11 @@ public class RobotMap {
     public static final double DRIVE_POSITION_CONTROLLER_I_SCALE = 0.0;
     public static final double DRIVE_POSITION_CONTROLLER_D_SCALE = 0.021;
 
+    public static final AssemblyPosition scaleDown = new AssemblyPosition(0, 0);
+    public static final AssemblyPosition scaleUp = new AssemblyPosition(0, 0);
+    public static final AssemblyPosition switchDown = new AssemblyPosition(0, 0);
+    public static final AssemblyPosition switchUp = new AssemblyPosition(0, 0);
+    public static final AssemblyPosition tuckInCube = new AssemblyPosition(0, 0);
+    public static final AssemblyPosition holdCube = new AssemblyPosition(0, 0);
 
 }

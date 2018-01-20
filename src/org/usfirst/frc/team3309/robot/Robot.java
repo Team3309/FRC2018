@@ -17,6 +17,8 @@ import java.util.logging.Logger;
  */
 public class Robot extends IterativeRobot {
 
+    private OI oi;
+
     public static Drive drive = new Drive();
     public static Intake intake = new Intake();
     public static Lift lift = new Lift();
@@ -29,6 +31,7 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void robotInit() {
+        oi = new OI();
         logger.info("robot init");
         c.start();
         Robot.drive.sendToDashboard();

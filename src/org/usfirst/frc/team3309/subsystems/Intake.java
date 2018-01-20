@@ -4,6 +4,7 @@ import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import lib.actuators.VictorSPXMC;
+import org.usfirst.frc.team3309.commands.subsystems.intake.IntakeTeleop;
 import org.usfirst.frc.team3309.robot.RobotMap;
 
 public class Intake extends Subsystem {
@@ -26,22 +27,15 @@ public class Intake extends Subsystem {
 
     @Override
     protected void initDefaultCommand() {
-
+        setDefaultCommand(new IntakeTeleop());
     }
 
-    public void open() {
-        hardStopActuator.set(DoubleSolenoid.Value.kReverse);
-        innerActuator.set(DoubleSolenoid.Value.kReverse);
+    public void setInnerActuator(DoubleSolenoid.Value value) {
+        innerActuator.set(value);
     }
 
-    public void intake() {
-        hardStopActuator.set(DoubleSolenoid.Value.kForward);
-        innerActuator.set(DoubleSolenoid.Value.kOff);
-    }
-
-    public void clamp() {
-        hardStopActuator.set(DoubleSolenoid.Value.kReverse);
-        innerActuator.set(DoubleSolenoid.Value.kForward);
+    public void setHardStopActuator(DoubleSolenoid.Value value) {
+        hardStopActuator.set(value);
     }
 
     public void setLeftRightRoller(double left, double right) {

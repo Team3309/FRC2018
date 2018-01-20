@@ -29,11 +29,12 @@ public class DriveTeleop extends Command {
         boolean isQuickTurn = Controls.driverRemote.getBumper(Hand.kLeft);
         DriveSignal driveSignal = cheezyDriveEquation.update(throttle, turn, isQuickTurn);
         Robot.drive.setLeftRight(driveSignal.getLeftMotor(), driveSignal.getRightMotor());
-        if (Controls.driverRemote.getBumper(Hand.kLeft)) {
+        Robot.drive.setLowGear();
+        /*if (Controls.driverRemote.getBumper(Hand.kLeft)) {
             Robot.drive.setLowGear();
         } else {
             Robot.drive.setHighGear();
-        }
+        }*/
     }
 
     @Override

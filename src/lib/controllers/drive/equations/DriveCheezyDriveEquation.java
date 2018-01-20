@@ -47,14 +47,14 @@ public class DriveCheezyDriveEquation extends Controller3<DriveSignal, Double, D
 
         if (isHighGear) {
             wheelNonLinearity = 0.6;
-            // Apply a sin function that's scaled to make it feel better.
+            // Apply buttonA sin function that's scaled to make it feel better.
             wheel = Math.sin(Math.PI / 2.0 * wheelNonLinearity * wheel)
                     / Math.sin(Math.PI / 2.0 * wheelNonLinearity);
             wheel = Math.sin(Math.PI / 2.0 * wheelNonLinearity * wheel)
                     / Math.sin(Math.PI / 2.0 * wheelNonLinearity);
         } else {
             wheelNonLinearity = 0.5;
-            // Apply a sin function that's scaled to make it feel better.
+            // Apply buttonA sin function that's scaled to make it feel better.
             wheel = Math.sin(Math.PI / 2.0 * wheelNonLinearity * wheel)
                     / Math.sin(Math.PI / 2.0 * wheelNonLinearity);
             wheel = Math.sin(Math.PI / 2.0 * wheelNonLinearity * wheel)

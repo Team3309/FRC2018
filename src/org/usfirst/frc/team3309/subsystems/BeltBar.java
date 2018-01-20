@@ -11,8 +11,10 @@ public class BeltBar extends Subsystem {
     private TalonSRXMC masterBar = new TalonSRXMC(RobotMap.BELTBAR_0);
     private VictorSPXMC slaveBar = new VictorSPXMC(RobotMap.BELTBAR_1);
 
+    private double goalAngle;
+
     public BeltBar() {
-        masterBar.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
+        masterBar.changeControlMode(CANTalon.TalonControlMode.Position);
         slaveBar.changeControlMode(CANTalon.TalonControlMode.Follower);
         slaveBar.set(masterBar.getDeviceID());
         masterBar.setFeedbackDevice(CANTalon.FeedbackDevice.AnalogPot);
@@ -23,16 +25,23 @@ public class BeltBar extends Subsystem {
 
     }
 
+    public double getBarAngle() {
+        return masterBar.getAnalogInPosition();
+    }
+
     public void changeToPercentMode() {
         masterBar.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
     }
-
-    public void changeToVelocityMode() {
-        masterBar.changeControlMode(CANTalon.TalonControlMode.Speed);
-    }
-
+    
     public void setBar(double power) {
         masterBar.set(power);
     }
 
+    public double getGoalAngle() {
+        return goalAngle;
+    }
+
+    public void setGoalAngle(double goalAngle) {
+        this.goalAngle = goalAngle;
+    }
 }

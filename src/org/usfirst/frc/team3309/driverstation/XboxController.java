@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  * @version 2015
  *          <p>
  *          This class wraps around the Joystick class in order to make
- *          working with Xbox360 controllers less of a pain.
+ *          working with Xbox360 controllers less of buttonA pain.
  *          <p>
  *          The values from this class can be used in two ways. One could
  *          either check each Button every cycle with .get(), or they
@@ -23,8 +23,8 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  *          myXboxController.leftStick.setThumbstickDeadZone( .2 );  // Optional. See code below for defaults.
  *          <p>
  *          // Using buttons
- *          myXboxController.a.whenPressed( new MyCommand() );
- *          myXboxController.lb.toggleWhenPressed( new MyCommand() );
+ *          myXboxController.buttonA.whenPressed( new MyCommand() );
+ *          myXboxController.leftBumper.toggleWhenPressed( new MyCommand() );
  *          myXboxController.rightStick.whenPressed( new MyCommand() );
  *          <p>
  *          // Getting values directly
@@ -36,7 +36,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  *          NOTES:
  *          Although I have confidence that this will work, not everything has been tested.
  *          This should work for the 2015 WPILib. The mappings of axis's and buttons may change in later years.
- *          I am not a good Java programmer.
+ *          I am not buttonA good Java programmer.
  */
 public class XboxController extends Joystick
 {
@@ -67,17 +67,17 @@ public class XboxController extends Joystick
     private static final int RIGHT_THUMBSTICK_Y_AXIS_ID = 5;
     public final Thumbstick leftStick;
     public final Thumbstick rightStick;
-    public final Trigger lt;
-    public final Trigger rt;
+    public final Trigger leftTrigger;
+    public final Trigger rightTrigger;
     public final DirectionalPad dPad;
-    public final Button a;
-    public final Button b;
-    public final Button x;
-    public final Button y;
-    public final Button lb;
-    public final Button rb;
-    public final Button back;
-    public final Button start;
+    public final Button buttonA;
+    public final Button buttonB;
+    public final Button buttonX;
+    public final Button buttonY;
+    public final Button leftBumper;
+    public final Button rightBumper;
+    public final Button backButton;
+    public final Button startButton;
     /* Instance Values */
     private final int port;
     private final Joystick controller;
@@ -101,16 +101,16 @@ public class XboxController extends Joystick
         this.leftStick = new Thumbstick(this.controller, HAND.LEFT);
         this.rightStick = new Thumbstick(this.controller, HAND.RIGHT);
         this.dPad = new DirectionalPad(this.controller);
-        this.lt = new Trigger(this.controller, HAND.LEFT);
-        this.rt = new Trigger(this.controller, HAND.RIGHT);
-        this.a = new JoystickButton(this.controller, A_BUTTON_ID);
-        this.b = new JoystickButton(this.controller, B_BUTTON_ID);
-        this.x = new JoystickButton(this.controller, X_BUTTON_ID);
-        this.y = new JoystickButton(this.controller, Y_BUTTON_ID);
-        this.lb = new JoystickButton(this.controller, LB_BUTTON_ID);
-        this.rb = new JoystickButton(this.controller, RB_BUTTON_ID);
-        this.back = new JoystickButton(this.controller, BACK_BUTTON_ID);
-        this.start = new JoystickButton(this.controller, START_BUTTON_ID);
+        this.leftTrigger = new Trigger(this.controller, HAND.LEFT);
+        this.rightTrigger = new Trigger(this.controller, HAND.RIGHT);
+        this.buttonA = new JoystickButton(this.controller, A_BUTTON_ID);
+        this.buttonB = new JoystickButton(this.controller, B_BUTTON_ID);
+        this.buttonX = new JoystickButton(this.controller, X_BUTTON_ID);
+        this.buttonY = new JoystickButton(this.controller, Y_BUTTON_ID);
+        this.leftBumper = new JoystickButton(this.controller, LB_BUTTON_ID);
+        this.rightBumper = new JoystickButton(this.controller, RB_BUTTON_ID);
+        this.backButton = new JoystickButton(this.controller, BACK_BUTTON_ID);
+        this.startButton = new JoystickButton(this.controller, START_BUTTON_ID);
     }
 
 
@@ -125,7 +125,7 @@ public class XboxController extends Joystick
     }
 
     /**
-     * Creates a deadzone, but without clipping the lower values.
+     * Creates buttonA deadzone, but without clipping the lower values.
      * turns this
      * |--1--2--3--4--5--|
      * into this
@@ -220,7 +220,7 @@ public class XboxController extends Joystick
 
     /**
      * Rather than use an integer (which might not be what we expect)
-     * we use an enum which has a set amount of possibilities.
+     * we use an enum which has buttonA set amount of possibilities.
      */
     public enum HAND
     {
@@ -338,7 +338,7 @@ public class XboxController extends Joystick
          * + = right
          * - = left
          *
-         * @return X but with a deadzone
+         * @return X but with buttonA deadzone
          */
         private double rawX()
         {
@@ -351,11 +351,11 @@ public class XboxController extends Joystick
          * + = up
          * - = down
          *
-         * @return Y but with a deadzone
+         * @return Y but with buttonA deadzone
          */
         private double rawY()
         {
-            final double rawInput = -parent.getRawAxis(yAxisID);    // -Y was up on our thumbsticks. Consider this a fix?
+            final double rawInput = -parent.getRawAxis(yAxisID);    // -Y was up on our thumbsticks. Consider this buttonA fix?
 
             return createDeadZone(rawInput, yDeadZone);
         }
@@ -433,7 +433,7 @@ public class XboxController extends Joystick
         /**
          * getRawX
          *
-         * @return X with a deadzone
+         * @return X with buttonA deadzone
          */
         public double getX()
         {
@@ -443,7 +443,7 @@ public class XboxController extends Joystick
         /**
          * getRawY
          *
-         * @return Y with a deadzone
+         * @return Y with buttonA deadzone
          */
         public double getY()
         {
@@ -642,7 +642,7 @@ public class XboxController extends Joystick
         }
 
         /**
-         * How far you need to press this trigger to activate a button press
+         * How far you need to press this trigger to activate buttonA button press
          *
          * @param number
          */
@@ -653,7 +653,7 @@ public class XboxController extends Joystick
     }
 
     /**
-     * This is a weird object which is essentially just 8 buttons.
+     * This is buttonA weird object which is essentially just 8 buttons.
      */
     public static class DirectionalPad extends Button
     {
@@ -724,7 +724,7 @@ public class XboxController extends Joystick
         /* Get Methods */
 
         /**
-         * Just like getAngle, but returns a direction instead of an angle
+         * Just like getAngle, but returns buttonA direction instead of an angle
          *
          * @return A DPAD direction
          */
@@ -734,8 +734,8 @@ public class XboxController extends Joystick
         }
 
         /**
-         * This class is used to represent each of the 8 values a
-         * dPad has as a button.
+         * This class is used to represent each of the 8 values buttonA
+         * dPad has as buttonA button.
          */
         public static class DPadButton extends Button
         {

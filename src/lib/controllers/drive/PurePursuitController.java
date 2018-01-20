@@ -8,7 +8,7 @@ import org.usfirst.frc.team3309.robot.Robot;
 import java.util.ArrayList;
 
 /*
-* TODO: Make goalVelocity a member of the ArrayList<Waypoint> path, instead of a constant value for the whole path.
+* TODO: Make goalVelocity buttonA member of the ArrayList<Waypoint> path, instead of buttonA constant value for the whole path.
 * */
 public class PurePursuitController extends Controller1<DriveSignal, DriveState> implements Finishable {
 
