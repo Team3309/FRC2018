@@ -1,10 +1,10 @@
 package org.usfirst.frc.team3309.commands.subsystems.drive;
 
 import edu.wpi.first.wpilibj.command.Command;
-import lib.controllers.drive.DriveSignal;
-import lib.controllers.drive.DriveState;
-import lib.controllers.drive.PurePursuitController;
-import lib.controllers.drive.Waypoint;
+import org.usfirst.frc.team3309.lib.controllers.drive.DriveSignal;
+import org.usfirst.frc.team3309.lib.controllers.drive.DriveState;
+import org.usfirst.frc.team3309.lib.controllers.drive.PurePursuitController;
+import org.usfirst.frc.team3309.lib.controllers.drive.Waypoint;
 import org.usfirst.frc.team3309.robot.Robot;
 import org.usfirst.frc.team3309.robot.RobotMap;
 
@@ -16,14 +16,13 @@ public class DrivePath extends Command {
 
     public DrivePath(ArrayList<Waypoint> path) {
         requires(Robot.drive);
-        purePursuitController = new PurePursuitController(path, RobotMap.WHEELBASE_INCHES);
+        purePursuitController = new PurePursuitController(path, Robot.drive.inchesToEncoderCounts(RobotMap.WHEELBASE_INCHES));
     }
 
     @Override
     protected void initialize() {
         Robot.drive.setLowGear();
-        Robot.drive.setVoltageRampRate(10);
-        Robot.drive.changeToVelocityMode();
+        Robot.drive.changeToPercentMode();
     }
 
     @Override

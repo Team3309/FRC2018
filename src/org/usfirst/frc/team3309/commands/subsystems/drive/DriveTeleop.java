@@ -1,10 +1,10 @@
 package org.usfirst.frc.team3309.commands.subsystems.drive;
 
-import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
-import lib.controllers.drive.DriveSignal;
-import lib.controllers.drive.equations.DriveCheezyDriveEquation;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team3309.driverstation.Controls;
+import org.usfirst.frc.team3309.lib.controllers.drive.DriveSignal;
+import org.usfirst.frc.team3309.lib.controllers.drive.equations.DriveCheezyDriveEquation;
 import org.usfirst.frc.team3309.robot.Robot;
 
 public class DriveTeleop extends Command {
@@ -24,17 +24,12 @@ public class DriveTeleop extends Command {
 
     @Override
     protected void execute() {
-        double throttle = Controls.driverRemote.getY(Hand.kLeft);
-        double turn = Controls.driverRemote.getX(Hand.kRight);
-        boolean isQuickTurn = Controls.driverRemote.getBumper(Hand.kLeft);
+        double throttle = Controls.driverRemote.leftStick.getY();
+        double turn = -Controls.driverRemote.rightStick.getX();
+        SmartDashboard.putNumber("Turn: ",turn);
+        boolean isQuickTurn = Controls.driverRemote.rightBumper.get();
         DriveSignal driveSignal = cheezyDriveEquation.update(throttle, turn, isQuickTurn);
         Robot.drive.setLeftRight(driveSignal.getLeftMotor(), driveSignal.getRightMotor());
-        Robot.drive.setLowGear();
-        /*if (Controls.driverRemote.getBumper(Hand.kLeft)) {
-            Robot.drive.setLowGear();
-        } else {
-            Robot.drive.setHighGear();
-        }*/
     }
 
     @Override

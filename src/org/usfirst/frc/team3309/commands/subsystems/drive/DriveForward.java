@@ -1,52 +1,41 @@
 package org.usfirst.frc.team3309.commands.subsystems.drive;
 
 import edu.wpi.first.wpilibj.command.Command;
-import lib.controllers.drive.DrivePositionController;
-import lib.controllers.drive.DriveSignal;
-import lib.controllers.drive.DriveState;
-import lib.controllers.pid.PIDConstants;
+import org.usfirst.frc.team3309.lib.controllers.drive.DrivePositionController;
+import org.usfirst.frc.team3309.lib.controllers.drive.DriveSignal;
+import org.usfirst.frc.team3309.lib.controllers.drive.DriveState;
+import org.usfirst.frc.team3309.lib.controllers.pid.PIDConstants;
 import org.usfirst.frc.team3309.robot.Robot;
 import org.usfirst.frc.team3309.robot.RobotMap;
 
 public class DriveForward extends Command {
 
-    private DrivePositionController  drivePositionController;
 
     // inches
     private final double goalPos;
-
-    private final double goalAngle;
-
-    public DriveForward(double goalPos, double goalAngle) {
-        this.goalPos = goalPos;
-        this.goalAngle = goalAngle;
-        PIDConstants pidConstantsLinear = new PIDConstants(RobotMap.DRIVE_POSITION_CONTROLLER_P_SCALE,
-                RobotMap.DRIVE_POSITION_CONTROLLER_I_SCALE,
-                RobotMap.DRIVE_POSITION_CONTROLLER_D_SCALE);
-        drivePositionController = new DrivePositionController(pidConstantsLinear, pidConstantsLinear, new PIDConstants());
-        requires(Robot.drive);
-    }
+    private final double errorThreshold = 0.5;
+    private double error;
 
     public DriveForward(double goalPos) {
-        this(goalPos, 0);
+        this.goalPos = goalPos;
+        requires(Robot.drive);
     }
 
     @Override
     protected void initialize() {
-        Robot.drive.changeToPercentMode();
+        Robot.drive.setGoalPos(goalPos);
+        Robot.drive.changeToPositionMode();
     }
 
     @Override
     protected void execute() {
-        DriveState driveState = new DriveState(Robot.drive.getEncoderPos(), Robot.drive.getAngPos());
-        DriveSignal driveSignal = drivePositionController.update(driveState,
-                Robot.drive.encoderCountsToInches(goalPos),  goalAngle);
-        Robot.drive.setLeftRight(driveSignal.getLeftMotor(), driveSignal.getRightMotor());
+        error = Robot.drive.inchesToEncoderCounts(goalPos) - Robot.drive.getEncoderPos();
+        Robot.drive.setLeftRight(Robot.drive.getGoalPos(), Robot.drive.getGoalPos());
     }
 
     @Override
     protected boolean isFinished() {
-        return drivePositionController.isFinished();
+        return Math.abs(error) < Robot.drive.inchesToEncoderCounts(errorThreshold);
     }
 
 }

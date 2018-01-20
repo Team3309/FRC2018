@@ -1,7 +1,7 @@
 package org.usfirst.frc.team3309.robot;
 
-import lib.controllers.drive.Waypoint;
 import org.usfirst.frc.team3309.commands.subsystems.AssemblyPosition;
+import org.usfirst.frc.team3309.lib.controllers.drive.Waypoint;
 
 import java.util.ArrayList;
 
@@ -23,10 +23,10 @@ public class RobotMap {
     public static final int INTAKE_RIGHT_ROLLER = 0;
 
     public static final int INTAKE_HARDSTOP_ACTUATOR_A = 0;
-    public static final int INTAKE_HARDSTOP_ACTUATOR_B = 0;
+    public static final int INTAKE_HARDSTOP_ACTUATOR_B = 1;
 
-    public static final int INTAKE_INNER_ACTUATOR_A = 0;
-    public static final int INTAKE_INNER_ACTUATOR_B = 0;
+    public static final int INTAKE_INNER_ACTUATOR_A = 2;
+    public static final int INTAKE_INNER_ACTUATOR_B = 3;
 
     // lift
     public static final int LIFT_0 = 0;
@@ -35,8 +35,8 @@ public class RobotMap {
     public static final int LIFT_3 = 0;
     public static final int LIFT_4 = 0;
 
-    public static final int LIFT_SHIFTER_A = 0;
-    public static final int LIFT_SHIFTER_B = 0;
+    public static final int LIFT_SHIFTER_A = 4;
+    public static final int LIFT_SHIFTER_B = 5;
 
     // beltbar
     public static final int BELTBAR_0 = 0;
@@ -50,13 +50,12 @@ public class RobotMap {
     public static final ArrayList<Waypoint> semiCircularPath = new ArrayList<>();
 
     static {
-        semiCircularPath.add(new Waypoint(51.158, 1.4858));
-        semiCircularPath.add(new Waypoint(48.660, 1.5458));
+        semiCircularPath.add(new Waypoint(34.773, 1.6191));
+        semiCircularPath.add(new Waypoint(35.669, 1.5937));
+        for (Waypoint waypoint : semiCircularPath) {
+            waypoint.setRadius(Robot.drive.inchesToEncoderCounts(waypoint.getRadius()));
+        }
     }
-
-    public static final double DRIVE_POSITION_CONTROLLER_P_SCALE = 0.04;
-    public static final double DRIVE_POSITION_CONTROLLER_I_SCALE = 0.0;
-    public static final double DRIVE_POSITION_CONTROLLER_D_SCALE = 0.021;
 
     public static final AssemblyPosition scaleDown = new AssemblyPosition(0, 0);
     public static final AssemblyPosition scaleUp = new AssemblyPosition(0, 0);

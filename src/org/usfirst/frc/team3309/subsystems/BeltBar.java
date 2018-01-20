@@ -2,8 +2,8 @@ package org.usfirst.frc.team3309.subsystems;
 
 import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import lib.actuators.TalonSRXMC;
-import lib.actuators.VictorSPXMC;
+import org.usfirst.frc.team3309.lib.actuators.TalonSRXMC;
+import org.usfirst.frc.team3309.lib.actuators.VictorSPXMC;
 import org.usfirst.frc.team3309.robot.RobotMap;
 
 public class BeltBar extends Subsystem {

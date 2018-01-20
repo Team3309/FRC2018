@@ -3,10 +3,10 @@ package org.usfirst.frc.team3309.robot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import lib.controllers.drive.Waypoint;
 import org.usfirst.frc.team3309.commands.autos.NoActionsAuto;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveForward;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DrivePath;
+import org.usfirst.frc.team3309.lib.controllers.drive.Waypoint;
 
 import java.io.BufferedReader;
 import java.io.File;

@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3309.driverstation;
 
 import edu.wpi.first.wpilibj.Joystick;
+import org.usfirst.frc.team3309.lib.XboxController;
 
 /*
  * <p>Class for defining controllers

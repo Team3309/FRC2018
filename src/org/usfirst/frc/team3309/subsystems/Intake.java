@@ -3,8 +3,8 @@ package org.usfirst.frc.team3309.subsystems;
 import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import lib.actuators.VictorSPXMC;
 import org.usfirst.frc.team3309.commands.subsystems.intake.IntakeTeleop;
+import org.usfirst.frc.team3309.lib.actuators.VictorSPXMC;
 import org.usfirst.frc.team3309.robot.RobotMap;
 
 public class Intake extends Subsystem {

@@ -19,10 +19,10 @@ public class Robot extends IterativeRobot {
 
     private OI oi;
 
-    public static Drive drive = new Drive();
-    public static Intake intake = new Intake();
-    public static Lift lift = new Lift();
-    public static BeltBar beltBar = new BeltBar();
+    public static Drive drive;
+    public static Intake intake;
+    public static Lift lift;
+    public static BeltBar beltBar;
 
     private Compressor c = new Compressor();
 
@@ -31,18 +31,22 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void robotInit() {
-        oi = new OI();
         logger.info("robot init");
+        oi = new OI();
+        drive = new Drive();
+        intake = new Intake();
+        lift = new Lift();
+        beltBar = new BeltBar();
         c.start();
-        Robot.drive.sendToDashboard();
+        drive.sendToDashboard();
         AutoModeExecutor.displayAutos();
-        Robot.drive.resetDrive();
+        drive.resetDrive();
     }
 
     @Override
     public void autonomousInit() {
         logger.info("autonomous init");
-        Robot.drive.resetDrive();
+        drive.resetDrive();
         autoCommand = AutoModeExecutor.getAutoSelected();
         if (autoCommand != null) {
             autoCommand.start();
@@ -61,14 +65,14 @@ public class Robot extends IterativeRobot {
         if (autoCommand != null) {
             autoCommand.cancel();
         }
-        Robot.drive.resetDrive();
-        Robot.drive.enableBrakeMode(false);
+        drive.resetDrive();
+        drive.enableBrakeMode(false);
     }
 
     @Override
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
-        Robot.drive.sendToDashboard();
+        drive.sendToDashboard();
     }
 
     @Override

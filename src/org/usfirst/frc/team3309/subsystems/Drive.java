@@ -6,9 +6,9 @@ import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
-import lib.actuators.TalonSRXMC;
-import lib.actuators.VictorSPXMC;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveTeleop;
+import org.usfirst.frc.team3309.lib.actuators.TalonSRXMC;
+import org.usfirst.frc.team3309.lib.actuators.VictorSPXMC;
 import org.usfirst.frc.team3309.robot.RobotMap;
 
 public class Drive extends Subsystem {
@@ -25,12 +25,24 @@ public class Drive extends Subsystem {
 
     private ADXRS450_Gyro gyro = new ADXRS450_Gyro();
 
+    private double goalPos;
+
     public Drive() {
+        left0.changeControlMode(TalonControlMode.PercentVbus);
+        left1.changeControlMode(TalonControlMode.Follower);
+        left2.changeControlMode(TalonControlMode.Follower);
+        left1.set(left0.getDeviceID());
+        left2.set(left0.getDeviceID());
+        right0.changeControlMode(TalonControlMode.PercentVbus);
+        right1.changeControlMode(TalonControlMode.Follower);
+        right2.changeControlMode(TalonControlMode.Follower);
+        right1.set(right0.getDeviceID());
+        right2.set(right0.getDeviceID());
+        setHighGear();
         enableBrakeMode(false);
         left0.reverseSensor(true);
         left0.setFeedbackDevice(FeedbackDevice.AnalogEncoder);
         right0.setFeedbackDevice(FeedbackDevice.AnalogEncoder);
-        changeToPercentMode();
     }
 
     @Override
@@ -39,11 +51,11 @@ public class Drive extends Subsystem {
     }
 
     public double encoderCountsToInches(double counts) {
-         return counts * ((Math.PI * RobotMap.WHEEL_DIAMETER_INCHES) / 4437.0);
+         return counts * ((Math.PI * RobotMap.WHEEL_DIAMETER_INCHES) / 4500.0);
     }
 
     public double inchesToEncoderCounts(double inches) {
-        return inches * 4437.0 / (Math.PI * RobotMap.WHEEL_DIAMETER_INCHES);
+        return inches * 4500.0 / (Math.PI * RobotMap.WHEEL_DIAMETER_INCHES);
     }
 
     public void resetDrive() {
@@ -101,17 +113,14 @@ public class Drive extends Subsystem {
         table.putNumber("Ang vel: ", getAngVel());
     }
 
+    public void changeToPositionMode() {
+        left0.changeControlMode(TalonControlMode.Position);
+        right0.changeControlMode(TalonControlMode.Position);
+    }
+
     public void changeToPercentMode() {
         left0.changeControlMode(TalonControlMode.PercentVbus);
-        left1.changeControlMode(TalonControlMode.Follower);
-        left2.changeControlMode(TalonControlMode.Follower);
-        left0.set(left0.getDeviceID());
-        left2.set(left0.getDeviceID());
         right0.changeControlMode(TalonControlMode.PercentVbus);
-        right1.changeControlMode(TalonControlMode.Follower);
-        right2.changeControlMode(TalonControlMode.Follower);
-        right1.set(right0.getDeviceID());
-        right2.set(right0.getDeviceID());
     }
 
     public void changeToVelocityMode() {
@@ -121,24 +130,12 @@ public class Drive extends Subsystem {
 
     public void enableBrakeMode(boolean on) {
         left0.enableBrakeMode(on);
-        left1.enableBrakeMode(on);
-        left2.enableBrakeMode(on);
         right0.enableBrakeMode(on);
-        right1.enableBrakeMode(on);
-        right2.enableBrakeMode(on);
     }
 
     public void setVoltageRampRate(double rampRate) {
         left0.setVoltageRampRate(rampRate);
-        left1.setVoltageRampRate(rampRate);
-        left2.setVoltageRampRate(rampRate);
         right0.setVoltageRampRate(rampRate);
-        right1.setVoltageRampRate(rampRate);
-        right2.setVoltageRampRate(rampRate);
-    }
-
-    public void stopDrive() {
-        setLeftRight(0, 0);
     }
 
     public void setLeftRight(double left, double right) {
@@ -147,23 +144,11 @@ public class Drive extends Subsystem {
     }
 
     public void setLeft(double power) {
-        if (left0.getControlMode() == TalonControlMode.Speed) {
-            left0.set(power);
-        } else {
-            left0.set(power);
-            left1.set(power);
-            left2.set(power);
-        }
+        left0.set(power);
     }
 
     public void setRight(double power) {
-        if (right0.getControlMode() == TalonControlMode.Speed) {
-            right0.set(power);
-        } else {
-            right0.set(power);
-            right1.set(power);
-            right2.set(power);
-        }
+      right0.set(power);
     }
 
     public void setHighGear() {
@@ -174,4 +159,11 @@ public class Drive extends Subsystem {
         shifter.set(false);
     }
 
+    public double getGoalPos() {
+        return goalPos;
+    }
+
+    public void setGoalPos(double goalPos) {
+        this.goalPos = goalPos;
+    }
 }
