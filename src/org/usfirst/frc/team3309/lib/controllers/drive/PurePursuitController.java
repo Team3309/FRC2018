@@ -23,6 +23,8 @@ public class PurePursuitController extends Controller1<DriveSignal, DriveState> 
     private final double goalVelocity = 0.5;
     private final double WHEELBASE;
 
+    private double totalAngle;
+
     public PurePursuitController(ArrayList<Waypoint> path, double WHEELBASE) {
         this.path = path;
         this.WHEELBASE = WHEELBASE;
@@ -39,9 +41,10 @@ public class PurePursuitController extends Controller1<DriveSignal, DriveState> 
 
         double curPos = driveState.getAveragePos();
         double curAngle = driveState.getAngPos();
-
+// && Math.toRadians(curAngle) >= Math.abs(curAngle)
         if (curPos > goalDistance) {
             curPathIndex++;
+        //    Robot.drive.resetGyro();
             System.out.println("curPathIndex" + curPathIndex);
             System.out.println("goalDistance" + goalDistance);
             System.out.println("pos" + curPos);
@@ -57,10 +60,10 @@ public class PurePursuitController extends Controller1<DriveSignal, DriveState> 
             }
         }
 
-        if (goalAngle < 0) {
+        if (goalAngle > 0) {
             leftVelocity = getTurningValue();
             rightVelocity = goalVelocity;
-        } else if (goalAngle > 0) {
+        } else if (goalAngle < 0) {
             rightVelocity = getTurningValue();
             leftVelocity = goalVelocity;
         } else {

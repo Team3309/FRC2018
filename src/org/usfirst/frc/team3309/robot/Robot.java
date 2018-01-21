@@ -32,11 +32,11 @@ public class Robot extends IterativeRobot {
     @Override
     public void robotInit() {
         logger.info("robot init");
-        oi = new OI();
         drive = new Drive();
         intake = new Intake();
         lift = new Lift();
         beltBar = new BeltBar();
+        oi = new OI();
         c.start();
         drive.sendToDashboard();
         AutoModeExecutor.displayAutos();

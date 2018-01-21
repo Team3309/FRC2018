@@ -67,6 +67,10 @@ public class Drive extends Subsystem {
         setLowGear();
     }
 
+    public void resetGyro() {
+        gyro.reset();
+    }
+
     public double getEncoderPos() {
         return (getLeftEncoder() + getRightEncoder()) / 2.0;
     }

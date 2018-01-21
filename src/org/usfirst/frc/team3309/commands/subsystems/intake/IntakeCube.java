@@ -7,7 +7,6 @@ import org.usfirst.frc.team3309.robot.Robot;
 public class IntakeCube extends InstantCommand {
 
     public IntakeCube() {
-        requires(Robot.intake);
     }
 
     @Override

@@ -6,7 +6,6 @@ import org.usfirst.frc.team3309.robot.Robot;
 public class DriveSetLowGear extends InstantCommand {
 
     public DriveSetLowGear() {
-//        requires(Robot.drive);
     }
 
     @Override

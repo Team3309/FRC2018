@@ -27,7 +27,8 @@ public class AutoModeExecutor {
         autos.addDefault("No Action", new NoActionsAuto());
         autos.addObject("DriveForwardAuto", new DriveForward(30));
         if (!isUsingFile) {
-            autos.addObject("PurePursuitAuto", new DrivePath(RobotMap.semiCircularPath));
+            autos.addObject("Figure Eight Path", new DrivePath(RobotMap.figureEightPath));
+            autos.addObject("Sigmoid Path", new DrivePath(RobotMap.sigmoidPath));
         } else {
             for (File autoFile : autoFiles) {
                 Command autoCommand = null;

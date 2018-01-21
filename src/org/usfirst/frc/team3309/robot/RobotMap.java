@@ -47,12 +47,23 @@ public class RobotMap {
     public static final double WHEEL_DIAMETER_INCHES = 4.0625;
     public static final double WHEELBASE_INCHES = 28.0;
 
-    public static final ArrayList<Waypoint> semiCircularPath = new ArrayList<>();
+    public static final ArrayList<Waypoint> figureEightPath = new ArrayList<>();
+    public static final ArrayList<Waypoint> sigmoidPath = new ArrayList<>();
 
     static {
-        semiCircularPath.add(new Waypoint(34.773, 1.6191));
-        semiCircularPath.add(new Waypoint(35.669, 1.5937));
-        for (Waypoint waypoint : semiCircularPath) {
+        figureEightPath.add(new Waypoint(32.470, 1.1821));
+        figureEightPath.add(new Waypoint(32.470, -1.1821));
+        figureEightPath.add(new Waypoint(22.140, -1.1571));
+        figureEightPath.add(new Waypoint(22.140, -1.1571));
+        figureEightPath.add(new Waypoint(28.367, -1.3498));
+        figureEightPath.add(new Waypoint(28.367, 1.3498));
+        for (Waypoint waypoint : figureEightPath) {
+            waypoint.setRadius(Robot.drive.inchesToEncoderCounts(waypoint.getRadius()));
+        }
+
+        sigmoidPath.add(new Waypoint(39.497, 1.1467));
+        sigmoidPath.add(new Waypoint(37.191, -1.202));
+        for (Waypoint waypoint : sigmoidPath) {
             waypoint.setRadius(Robot.drive.inchesToEncoderCounts(waypoint.getRadius()));
         }
     }

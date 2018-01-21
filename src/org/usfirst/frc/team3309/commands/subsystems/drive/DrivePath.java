@@ -27,7 +27,7 @@ public class DrivePath extends Command {
 
     @Override
     protected void execute() {
-        DriveState driveState = new DriveState(Robot.drive.encoderCountsToInches(Robot.drive.getEncoderPos()),
+        DriveState driveState = new DriveState(Robot.drive.getEncoderPos(),
                 Robot.drive.getAngPos());
         DriveSignal driveSignal = purePursuitController.update(driveState);
         Robot.drive.setLeftRight(driveSignal.getLeftMotor(), driveSignal.getRightMotor());

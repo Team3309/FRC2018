@@ -7,7 +7,6 @@ import org.usfirst.frc.team3309.robot.Robot;
 public class IntakeClamp extends InstantCommand {
 
     public IntakeClamp() {
-        requires(Robot.intake);
     }
 
     protected void execute() {

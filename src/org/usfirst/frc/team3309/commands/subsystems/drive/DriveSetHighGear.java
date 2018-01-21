@@ -6,7 +6,6 @@ import org.usfirst.frc.team3309.robot.Robot;
 public class DriveSetHighGear extends InstantCommand {
 
     public DriveSetHighGear() {
-//        requires(Robot.drive);
     }
 
     @Override

@@ -11,6 +11,7 @@ public class OI {
         Controls.driverRemote.leftBumper.whenReleased(new DriveSetHighGear());
        // Controls.operatorRemote.buttonA.whileHeld(new MoveAssembly(RobotMap.holdCube));
        // Controls.operatorRemote.buttonB.whileHeld(new MoveAssembly(RobotMap.tuckInCube));
+       // Controls.operatorRemote.buttonA.whenPressed(new DrivePath(RobotMap.semiCircularPath));
     }
 
 }
