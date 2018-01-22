@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /**
- * [class] XboxController
+ * [class] InputXbox
  *
  * @author AJ Granowski & 4624 Owatonna Robotics
  * @version 2015
@@ -19,7 +19,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  *          <p>
  *          USAGE:
  *          // Initialization
- *          myXboxController = new XboxController( <port the controller is on (starts at 0)> );
+ *          myXboxController = new InputXbox( <port the controller is on (starts at 0)> );
  *          myXboxController.leftStick.setThumbstickDeadZone( .2 );  // Optional. See code below for defaults.
  *          <p>
  *          // Using buttons
@@ -38,7 +38,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  *          This should work for the 2015 WPILib. The mappings of axis's and buttons may change in later years.
  *          I am not buttonA good Java programmer.
  */
-public class XboxController extends Joystick
+public class InputXbox extends Joystick
 {
 
     /* Default Values */
@@ -85,12 +85,12 @@ public class XboxController extends Joystick
 
     /**
      * (Constructor #1)
-     * There are two ways to make an XboxController. With this constructor,
+     * There are two ways to make an InputXbox. With this constructor,
      * you can specify which port you expect the controller to be on.
      *
      * @param port
      */
-    public XboxController(final int port)
+    public InputXbox(final int port)
     {
         super(port);  // Extends Joystick...
 
@@ -116,10 +116,10 @@ public class XboxController extends Joystick
 
     /**
      * (Constructor #2) This is the other constructor. I would recommend using this one instead
-     * as it is unlikely that anything else but the XboxController will be
+     * as it is unlikely that anything else but the InputXbox will be
      * connected.
      */
-    public XboxController()
+    public InputXbox()
     {
         this(0);
     }
@@ -156,7 +156,7 @@ public class XboxController extends Joystick
     }
 
     /**
-     * @return The port of this XboxController
+     * @return The port of this InputXbox
      */
     public int getPort()
     {
@@ -164,7 +164,7 @@ public class XboxController extends Joystick
     }
 
     /**
-     * @return The Joystick of this XboxController
+     * @return The Joystick of this InputXbox
      */
     public Joystick getJoystick()
     {

@@ -5,18 +5,18 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.usfirst.frc.team3309.commands.subsystems.intake.IntakeTeleop;
 import org.usfirst.frc.team3309.lib.actuators.VictorSPXMC;
-import org.usfirst.frc.team3309.robot.RobotMap;
+import org.usfirst.frc.team3309.robot.Constants;
 
 public class Intake extends Subsystem {
 
-    private VictorSPXMC leftArm = new VictorSPXMC(RobotMap.INTAKE_LEFT_ROLLER);
-    private VictorSPXMC rightArm = new VictorSPXMC(RobotMap.INTAKE_RIGHT_ROLLER);
+    private VictorSPXMC leftArm = new VictorSPXMC(Constants.INTAKE_LEFT_ROLLER);
+    private VictorSPXMC rightArm = new VictorSPXMC(Constants.INTAKE_RIGHT_ROLLER);
 
-    private DoubleSolenoid hardStopActuator = new DoubleSolenoid(RobotMap.INTAKE_HARDSTOP_ACTUATOR_A,
-            RobotMap.INTAKE_HARDSTOP_ACTUATOR_B);
+    private DoubleSolenoid hardStopActuator = new DoubleSolenoid(Constants.INTAKE_HARDSTOP_ACTUATOR_A,
+            Constants.INTAKE_HARDSTOP_ACTUATOR_B);
 
-    private DoubleSolenoid innerActuator = new DoubleSolenoid(RobotMap.INTAKE_INNER_ACTUATOR_A,
-            RobotMap.INTAKE_INNER_ACTUATOR_B);
+    private DoubleSolenoid innerActuator = new DoubleSolenoid(Constants.INTAKE_INNER_ACTUATOR_A,
+            Constants.INTAKE_INNER_ACTUATOR_B);
 
     public Intake() {
         leftArm.changeControlMode(CANTalon.TalonControlMode.PercentVbus);

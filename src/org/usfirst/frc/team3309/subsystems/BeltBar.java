@@ -4,12 +4,12 @@ import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.usfirst.frc.team3309.lib.actuators.TalonSRXMC;
 import org.usfirst.frc.team3309.lib.actuators.VictorSPXMC;
-import org.usfirst.frc.team3309.robot.RobotMap;
+import org.usfirst.frc.team3309.robot.Constants;
 
 public class BeltBar extends Subsystem {
 
-    private TalonSRXMC masterBar = new TalonSRXMC(RobotMap.BELTBAR_0);
-    private VictorSPXMC slaveBar = new VictorSPXMC(RobotMap.BELTBAR_1);
+    private TalonSRXMC masterBar = new TalonSRXMC(Constants.BELTBAR_0);
+    private VictorSPXMC slaveBar = new VictorSPXMC(Constants.BELTBAR_1);
 
     private double goalAngle;
 

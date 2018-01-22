@@ -1,4 +1,4 @@
-package org.usfirst.frc.team3309.lib.controllers.drive;
+package org.usfirst.frc.team3309.lib.controllers.helpers;
 
 public class DriveSignal {
 

@@ -1,8 +1,8 @@
-package org.usfirst.frc.team3309.lib.controllers.drive.equations;
+package org.usfirst.frc.team3309.lib.controllers.drive;
 
 import org.usfirst.frc.team3309.lib.LibMath;
 import org.usfirst.frc.team3309.lib.controllers.Controller3;
-import org.usfirst.frc.team3309.lib.controllers.drive.DriveSignal;
+import org.usfirst.frc.team3309.lib.controllers.helpers.DriveSignal;
 
 /**
  * <p>
@@ -17,19 +17,19 @@ import org.usfirst.frc.team3309.lib.controllers.drive.DriveSignal;
  * high speeds. Also handles the robot's quick turn functionality - "quick turn"
  * overrides constant-curvature turning for turn-in-place maneuvers.
  */
-public class DriveCheezyDriveEquation extends Controller3<DriveSignal, Double, Double, Boolean> {
+public class DriveCheezyController extends Controller3<DriveSignal, Double, Double, Boolean> {
 
     private double oldWheel, quickStopAccumulator;
 
     private double throttleDeadband = 0.04;
     private double wheelDeadband = 0.04;
 
-    public DriveCheezyDriveEquation(double throttleDeadband, double turnDeadband) {
+    public DriveCheezyController(double throttleDeadband, double turnDeadband) {
         this.throttleDeadband = throttleDeadband;
         this.wheelDeadband = turnDeadband;
     }
 
-    public DriveCheezyDriveEquation() {
+    public DriveCheezyController() {
     }
 
     @Override

@@ -1,11 +1,11 @@
 package org.usfirst.frc.team3309.robot;
 
-import org.usfirst.frc.team3309.commands.subsystems.AssemblyPosition;
-import org.usfirst.frc.team3309.lib.controllers.drive.Waypoint;
+import org.usfirst.frc.team3309.lib.Length;
+import org.usfirst.frc.team3309.lib.controllers.helpers.Waypoint;
 
 import java.util.ArrayList;
 
-public class RobotMap {
+public class Constants {
 
     // drive
     public static final int DRIVE_RIGHT_0_ID = 2;
@@ -44,6 +44,8 @@ public class RobotMap {
 
     // robot constants
 
+    public static final double DRIVE_ENCODER_COUNTS_PER_REV = 4500;
+
     public static final double WHEEL_DIAMETER_INCHES = 4.0625;
     public static final double WHEELBASE_INCHES = 28.0;
 
@@ -51,28 +53,21 @@ public class RobotMap {
     public static final ArrayList<Waypoint> sigmoidPath = new ArrayList<>();
 
     static {
-        figureEightPath.add(new Waypoint(32.470, 1.1821));
-        figureEightPath.add(new Waypoint(32.470, -1.1821));
-        figureEightPath.add(new Waypoint(22.140, -1.1571));
-        figureEightPath.add(new Waypoint(22.140, -1.1571));
-        figureEightPath.add(new Waypoint(28.367, -1.3498));
-        figureEightPath.add(new Waypoint(28.367, 1.3498));
+        figureEightPath.add(new Waypoint(Length.fromInches(32.470), 1.1821));
+        figureEightPath.add(new Waypoint(Length.fromInches(32.470), -1.1821));
+        figureEightPath.add(new Waypoint(Length.fromInches(22.140), -1.1571));
+        figureEightPath.add(new Waypoint(Length.fromInches(22.140), -1.1571));
+        figureEightPath.add(new Waypoint(Length.fromInches(28.367), -1.3498));
+        figureEightPath.add(new Waypoint(Length.fromInches(28.367), 1.3498));
         for (Waypoint waypoint : figureEightPath) {
-            waypoint.setRadius(Robot.drive.inchesToEncoderCounts(waypoint.getRadius()));
+           // waypoint.setRadius(Robot.drive.inchesToEncoderCounts(waypoint.getRadius()));
         }
 
-        sigmoidPath.add(new Waypoint(39.497, 1.1467));
-        sigmoidPath.add(new Waypoint(37.191, -1.202));
+        sigmoidPath.add(new Waypoint(Length.fromInches(39.497), 1.1467));
+        sigmoidPath.add(new Waypoint(Length.fromInches(37.191), -1.202));
         for (Waypoint waypoint : sigmoidPath) {
-            waypoint.setRadius(Robot.drive.inchesToEncoderCounts(waypoint.getRadius()));
+         //   waypoint.setRadius(Robot.drive.inchesToEncoderCounts(waypoint.getRadius()));
         }
     }
-
-    public static final AssemblyPosition scaleDown = new AssemblyPosition(0, 0);
-    public static final AssemblyPosition scaleUp = new AssemblyPosition(0, 0);
-    public static final AssemblyPosition switchDown = new AssemblyPosition(0, 0);
-    public static final AssemblyPosition switchUp = new AssemblyPosition(0, 0);
-    public static final AssemblyPosition tuckInCube = new AssemblyPosition(0, 0);
-    public static final AssemblyPosition holdCube = new AssemblyPosition(0, 0);
 
 }

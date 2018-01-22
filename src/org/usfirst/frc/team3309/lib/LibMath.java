@@ -6,4 +6,11 @@ public class LibMath {
         return Math.abs(val) < Math.abs(lim) ? 0.0 : val;
     }
 
+    public static boolean isInThreshold(double val, double threshold) {
+        if (handleDeadband(val, threshold) == 0) {
+            return true;
+        }
+        return false;
+    }
+
 }

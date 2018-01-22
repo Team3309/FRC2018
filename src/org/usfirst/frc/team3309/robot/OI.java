@@ -1,17 +1,26 @@
 package org.usfirst.frc.team3309.robot;
 
+import edu.wpi.first.wpilibj.Joystick;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveSetHighGear;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveSetLowGear;
-import org.usfirst.frc.team3309.driverstation.Controls;
+import org.usfirst.frc.team3309.lib.InputXbox;
 
+/*
+ * <p>Class for defining controllers
+ *
+ * @author Chase Blagden
+ */
 public class OI {
 
+    public static InputXbox driverRemote = new InputXbox();
+    public static InputXbox operatorRemote = new InputXbox(1);
+
     public OI() {
-        Controls.driverRemote.leftBumper.whenPressed(new DriveSetLowGear());
-        Controls.driverRemote.leftBumper.whenReleased(new DriveSetHighGear());
-       // Controls.operatorRemote.buttonA.whileHeld(new MoveAssembly(RobotMap.holdCube));
-       // Controls.operatorRemote.buttonB.whileHeld(new MoveAssembly(RobotMap.tuckInCube));
-       // Controls.operatorRemote.buttonA.whenPressed(new DrivePath(RobotMap.semiCircularPath));
+        driverRemote.leftBumper.whenPressed(new DriveSetLowGear());
+        driverRemote.leftBumper.whenReleased(new DriveSetHighGear());
+        // OI.operatorRemote.buttonA.whileHeld(new MoveAssembly(Constants.holdCube));
+        // OI.operatorRemote.buttonB.whileHeld(new MoveAssembly(Constants.tuckInCube));
+        // OI.operatorRemote.buttonA.whenPressed(new DrivePath(Constants.semiCircularPath));
     }
 
 }

@@ -3,12 +3,19 @@ package org.usfirst.frc.team3309.commands.subsystems;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import org.usfirst.frc.team3309.commands.subsystems.beltbar.BeltBarMoveToPos;
 import org.usfirst.frc.team3309.commands.subsystems.lift.LiftElevate;
+import org.usfirst.frc.team3309.lib.Length;
 
 public class MoveAssembly extends CommandGroup {
 
-    public MoveAssembly(AssemblyPosition assemblyPosition) {
-        addParallel(new BeltBarMoveToPos(assemblyPosition.getBeltBarPos()));
-        addSequential(new LiftElevate(assemblyPosition.getElevatorPos()));
+    @Override
+    public void start() {
+        super.start();
+
+    }
+
+    public MoveAssembly(AssemblyLocation assemblyLocation) {
+        addParallel(new BeltBarMoveToPos(assemblyLocation.getBeltBarPosition()));
+        addSequential(new LiftElevate(Length.fromInches(assemblyLocation.getElevatorPosition())));
     }
 
 }

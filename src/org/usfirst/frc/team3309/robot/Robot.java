@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import org.usfirst.frc.team3309.commands.subsystems.AssemblyLocation;
 import org.usfirst.frc.team3309.subsystems.BeltBar;
 import org.usfirst.frc.team3309.subsystems.Drive;
 import org.usfirst.frc.team3309.subsystems.Intake;
@@ -17,7 +18,6 @@ import java.util.logging.Logger;
  */
 public class Robot extends IterativeRobot {
 
-    private OI oi;
 
     public static Drive drive;
     public static Intake intake;
@@ -36,7 +36,6 @@ public class Robot extends IterativeRobot {
         intake = new Intake();
         lift = new Lift();
         beltBar = new BeltBar();
-        oi = new OI();
         c.start();
         drive.sendToDashboard();
         AutoModeExecutor.displayAutos();

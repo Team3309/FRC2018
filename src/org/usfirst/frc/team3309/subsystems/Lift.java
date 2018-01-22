@@ -5,18 +5,18 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.usfirst.frc.team3309.lib.actuators.TalonSRXMC;
 import org.usfirst.frc.team3309.lib.actuators.VictorSPXMC;
-import org.usfirst.frc.team3309.robot.RobotMap;
+import org.usfirst.frc.team3309.robot.Constants;
 
 public class Lift extends Subsystem {
 
-    private TalonSRXMC lift0 = new TalonSRXMC(RobotMap.LIFT_0);
-    private VictorSPXMC lift1 = new VictorSPXMC(RobotMap.LIFT_1);
-    private VictorSPXMC lift2 = new VictorSPXMC(RobotMap.LIFT_2);
-    private VictorSPXMC lift3 = new VictorSPXMC(RobotMap.LIFT_3);
-    private VictorSPXMC lift4 = new VictorSPXMC(RobotMap.LIFT_4);
+    private TalonSRXMC lift0 = new TalonSRXMC(Constants.LIFT_0);
+    private VictorSPXMC lift1 = new VictorSPXMC(Constants.LIFT_1);
+    private VictorSPXMC lift2 = new VictorSPXMC(Constants.LIFT_2);
+    private VictorSPXMC lift3 = new VictorSPXMC(Constants.LIFT_3);
+    private VictorSPXMC lift4 = new VictorSPXMC(Constants.LIFT_4);
 
-    private DoubleSolenoid liftShifter = new DoubleSolenoid(RobotMap.LIFT_SHIFTER_A,
-            RobotMap.LIFT_SHIFTER_B);
+    private DoubleSolenoid liftShifter = new DoubleSolenoid(Constants.LIFT_SHIFTER_A,
+            Constants.LIFT_SHIFTER_B);
 
     private double goalPos;
 
@@ -36,6 +36,13 @@ public class Lift extends Subsystem {
     @Override
     protected void initDefaultCommand() {
 
+    }
+
+    /*
+    * TODO: implement conversion to inches HEIGHT
+    * */
+    public double inchesToEncoderCounts(double encoderCounts) {
+        return encoderCounts * 0.0;
     }
 
     public void setLift(double power) {

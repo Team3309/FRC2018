@@ -1,22 +1,22 @@
 package org.usfirst.frc.team3309.commands.subsystems.drive;
 
 import edu.wpi.first.wpilibj.command.Command;
-import org.usfirst.frc.team3309.lib.controllers.drive.DriveSignal;
-import org.usfirst.frc.team3309.lib.controllers.drive.DriveState;
-import org.usfirst.frc.team3309.lib.controllers.drive.PurePursuitController;
-import org.usfirst.frc.team3309.lib.controllers.drive.Waypoint;
+import org.usfirst.frc.team3309.lib.controllers.drive.BiArcController;
+import org.usfirst.frc.team3309.lib.controllers.helpers.DriveSignal;
+import org.usfirst.frc.team3309.lib.controllers.helpers.DriveState;
+import org.usfirst.frc.team3309.lib.controllers.helpers.Waypoint;
+import org.usfirst.frc.team3309.robot.Constants;
 import org.usfirst.frc.team3309.robot.Robot;
-import org.usfirst.frc.team3309.robot.RobotMap;
 
 import java.util.ArrayList;
 
 public class DrivePath extends Command {
 
-    private PurePursuitController purePursuitController;
+    private BiArcController biArcController;
 
     public DrivePath(ArrayList<Waypoint> path) {
         requires(Robot.drive);
-        purePursuitController = new PurePursuitController(path, Robot.drive.inchesToEncoderCounts(RobotMap.WHEELBASE_INCHES));
+        biArcController = new BiArcController(path, Constants.WHEELBASE_INCHES);
     }
 
     @Override
@@ -27,15 +27,16 @@ public class DrivePath extends Command {
 
     @Override
     protected void execute() {
-        DriveState driveState = new DriveState(Robot.drive.getEncoderPos(),
+        DriveState driveState = new DriveState(Robot.drive.inchesToEncoderCounts(Robot.drive.getEncoderPos()),
                 Robot.drive.getAngPos());
-        DriveSignal driveSignal = purePursuitController.update(driveState);
-        Robot.drive.setLeftRight(driveSignal.getLeftMotor(), driveSignal.getRightMotor());
+        DriveSignal driveSignal = biArcController.update(driveState);
+        Robot.drive.setLeftRight(Robot.drive.inchesToEncoderCounts(driveSignal.getLeftMotor()),
+                Robot.drive.inchesToEncoderCounts(driveSignal.getRightMotor()));
     }
 
     @Override
     protected boolean isFinished() {
-        return purePursuitController.isFinished();
+        return biArcController.isFinished();
     }
 
 }

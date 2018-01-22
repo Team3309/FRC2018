@@ -5,16 +5,16 @@ import org.usfirst.frc.team3309.robot.Robot;
 
 public class BeltBarMoveToPos extends Command {
 
-    private final double goalPos;
+    private final double goalAngle;
 
-    public BeltBarMoveToPos(double goalPos) {
-        this.goalPos = goalPos;
+    public BeltBarMoveToPos(double goalAngle) {
+        this.goalAngle = goalAngle;
         requires(Robot.beltBar);
     }
 
     @Override
     protected void initialize() {
-        Robot.lift.setGoalPos(goalPos);
+        Robot.beltBar.setGoalAngle(goalAngle);
     }
 
     @Override

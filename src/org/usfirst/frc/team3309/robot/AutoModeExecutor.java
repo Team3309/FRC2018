@@ -6,7 +6,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team3309.commands.autos.NoActionsAuto;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveForward;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DrivePath;
-import org.usfirst.frc.team3309.lib.controllers.drive.Waypoint;
+import org.usfirst.frc.team3309.lib.Length;
+import org.usfirst.frc.team3309.lib.controllers.helpers.Waypoint;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -25,10 +26,10 @@ public class AutoModeExecutor {
 
     public static void displayAutos() {
         autos.addDefault("No Action", new NoActionsAuto());
-        autos.addObject("DriveForwardAuto", new DriveForward(30));
+        autos.addObject("DriveForwardAuto", new DriveForward(Length.fromInches(30)));
         if (!isUsingFile) {
-            autos.addObject("Figure Eight Path", new DrivePath(RobotMap.figureEightPath));
-            autos.addObject("Sigmoid Path", new DrivePath(RobotMap.sigmoidPath));
+            autos.addObject("Figure Eight Path", new DrivePath(Constants.figureEightPath));
+            autos.addObject("Sigmoid Path", new DrivePath(Constants.sigmoidPath));
         } else {
             for (File autoFile : autoFiles) {
                 Command autoCommand = null;
@@ -59,7 +60,7 @@ public class AutoModeExecutor {
             if (values[0] == "linear") {
                 double goal = Double.parseDouble(values[1]);
             } else if (values[0] == "arc") {
-                double radius = Double.parseDouble(values[1]);
+                Length radius = Length.fromInches(Double.parseDouble(values[1]));
                 double angle = Double.parseDouble(values[2]);
                 path.add(new Waypoint(radius, angle));
             } else if (values[0] == "wait") {

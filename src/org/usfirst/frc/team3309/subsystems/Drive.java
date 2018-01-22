@@ -9,19 +9,19 @@ import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveTeleop;
 import org.usfirst.frc.team3309.lib.actuators.TalonSRXMC;
 import org.usfirst.frc.team3309.lib.actuators.VictorSPXMC;
-import org.usfirst.frc.team3309.robot.RobotMap;
+import org.usfirst.frc.team3309.robot.Constants;
 
 public class Drive extends Subsystem {
 
-    private TalonSRXMC left0 = new TalonSRXMC(RobotMap.DRIVE_LEFT_0_ID);
-    private VictorSPXMC left1 = new VictorSPXMC(RobotMap.DRIVE_LEFT_1_ID);
-    private VictorSPXMC left2 = new VictorSPXMC(RobotMap.DRIVE_LEFT_2_ID);
+    private TalonSRXMC left0 = new TalonSRXMC(Constants.DRIVE_LEFT_0_ID);
+    private VictorSPXMC left1 = new VictorSPXMC(Constants.DRIVE_LEFT_1_ID);
+    private VictorSPXMC left2 = new VictorSPXMC(Constants.DRIVE_LEFT_2_ID);
 
-    private TalonSRXMC right0 = new TalonSRXMC(RobotMap.DRIVE_RIGHT_0_ID);
-    private VictorSPXMC right1 = new VictorSPXMC(RobotMap.DRIVE_RIGHT_1_ID);
-    private VictorSPXMC right2 = new VictorSPXMC(RobotMap.DRIVE_RIGHT_2_ID);
+    private TalonSRXMC right0 = new TalonSRXMC(Constants.DRIVE_RIGHT_0_ID);
+    private VictorSPXMC right1 = new VictorSPXMC(Constants.DRIVE_RIGHT_1_ID);
+    private VictorSPXMC right2 = new VictorSPXMC(Constants.DRIVE_RIGHT_2_ID);
 
-    private Solenoid shifter = new Solenoid(RobotMap.SHIFTER);
+    private Solenoid shifter = new Solenoid(Constants.SHIFTER);
 
     private ADXRS450_Gyro gyro = new ADXRS450_Gyro();
 
@@ -51,11 +51,11 @@ public class Drive extends Subsystem {
     }
 
     public double encoderCountsToInches(double counts) {
-         return counts * ((Math.PI * RobotMap.WHEEL_DIAMETER_INCHES) / 4500.0);
+         return counts * ((Math.PI * Constants.WHEEL_DIAMETER_INCHES) / Constants.DRIVE_ENCODER_COUNTS_PER_REV);
     }
 
     public double inchesToEncoderCounts(double inches) {
-        return inches * 4500.0 / (Math.PI * RobotMap.WHEEL_DIAMETER_INCHES);
+        return inches * Constants.DRIVE_ENCODER_COUNTS_PER_REV / (Math.PI * Constants.WHEEL_DIAMETER_INCHES);
     }
 
     public void resetDrive() {

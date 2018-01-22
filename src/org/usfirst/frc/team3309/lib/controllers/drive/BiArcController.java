@@ -1,16 +1,20 @@
 package org.usfirst.frc.team3309.lib.controllers.drive;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.usfirst.frc.team3309.lib.Length;
+import org.usfirst.frc.team3309.lib.LibMath;
 import org.usfirst.frc.team3309.lib.controllers.Controller1;
+import org.usfirst.frc.team3309.lib.controllers.helpers.DriveSignal;
+import org.usfirst.frc.team3309.lib.controllers.helpers.DriveState;
+import org.usfirst.frc.team3309.lib.controllers.helpers.Waypoint;
 import org.usfirst.frc.team3309.lib.controllers.interfaces.Finishable;
-import org.usfirst.frc.team3309.robot.Robot;
 
 import java.util.ArrayList;
 
 /*
 * TODO: Make goalVelocity member of the ArrayList<Waypoint> path, instead of constant value for the whole path.
 * */
-public class PurePursuitController extends Controller1<DriveSignal, DriveState> implements Finishable {
+public class BiArcController extends Controller1<DriveSignal, DriveState> implements Finishable {
 
     private final ArrayList<Waypoint> path;
 
@@ -18,18 +22,20 @@ public class PurePursuitController extends Controller1<DriveSignal, DriveState> 
     private double curRadius;
     private double goalAngle;
 
+    private double angleErrorThreshold = Math.toDegrees(5);
+    private double distanceErrorThreshold = 1;
+
+    private double prevAngle;
     private int curPathIndex = 0;
 
     private final double goalVelocity = 0.5;
     private final double WHEELBASE;
 
-    private double totalAngle;
-
-    public PurePursuitController(ArrayList<Waypoint> path, double WHEELBASE) {
+    public BiArcController(ArrayList<Waypoint> path, double WHEELBASE) {
         this.path = path;
         this.WHEELBASE = WHEELBASE;
-        curRadius = this.path.get(0).radius;
-        goalAngle = this.path.get(0).angle;
+        curRadius = this.path.get(0).getRadius();
+        goalAngle = this.path.get(0).getAngle();
         goalDistance += Math.abs(goalAngle) * curRadius;
     }
 
@@ -41,10 +47,16 @@ public class PurePursuitController extends Controller1<DriveSignal, DriveState> 
 
         double curPos = driveState.getAveragePos();
         double curAngle = driveState.getAngPos();
-// && Math.toRadians(curAngle) >= Math.abs(curAngle)
-        if (curPos > goalDistance) {
+
+        double curAngleDiff = goalAngle - Math.toRadians(Math.abs(Math.abs(curAngle) - Math.abs(prevAngle)));
+        double curPosDiff = curPos - goalDistance;
+
+        boolean distInThreshold = LibMath.isInThreshold(curPosDiff, distanceErrorThreshold);
+        boolean angleInThreshold = LibMath.isInThreshold(curAngleDiff, angleErrorThreshold);
+
+        if (distInThreshold && angleInThreshold) {
             curPathIndex++;
-        //    Robot.drive.resetGyro();
+            prevAngle = curAngle;
             System.out.println("curPathIndex" + curPathIndex);
             System.out.println("goalDistance" + goalDistance);
             System.out.println("pos" + curPos);
@@ -54,8 +66,8 @@ public class PurePursuitController extends Controller1<DriveSignal, DriveState> 
                 driveSignal = new DriveSignal(0, 0);
                 return driveSignal;
             } else {
-                goalAngle = path.get(curPathIndex).angle;
-                curRadius = path.get(curPathIndex).radius;
+                goalAngle = path.get(curPathIndex).getAngle();
+                curRadius = path.get(curPathIndex).getRadius();
                 goalDistance += Math.abs(goalAngle) * curRadius;
             }
         }
@@ -92,4 +104,11 @@ public class PurePursuitController extends Controller1<DriveSignal, DriveState> 
         return curPathIndex >= path.size();
     }
 
+    public void setDistanceErrorThreshold(double distanceErrorThreshold) {
+        this.distanceErrorThreshold = distanceErrorThreshold;
+    }
+
+    public void setAngleErrorThreshold(double angleErrorThreshold) {
+        this.angleErrorThreshold = angleErrorThreshold;
+    }
 }

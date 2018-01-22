@@ -1,12 +1,8 @@
 package org.usfirst.frc.team3309.commands.subsystems.drive;
 
 import edu.wpi.first.wpilibj.command.Command;
-import org.usfirst.frc.team3309.lib.controllers.drive.DrivePositionController;
-import org.usfirst.frc.team3309.lib.controllers.drive.DriveSignal;
-import org.usfirst.frc.team3309.lib.controllers.drive.DriveState;
-import org.usfirst.frc.team3309.lib.controllers.pid.PIDConstants;
+import org.usfirst.frc.team3309.lib.Length;
 import org.usfirst.frc.team3309.robot.Robot;
-import org.usfirst.frc.team3309.robot.RobotMap;
 
 public class DriveForward extends Command {
 
@@ -16,8 +12,8 @@ public class DriveForward extends Command {
     private final double errorThreshold = 0.5;
     private double error;
 
-    public DriveForward(double goalPos) {
-        this.goalPos = goalPos;
+    public DriveForward(Length goalPos) {
+        this.goalPos = goalPos.toInches();
         requires(Robot.drive);
     }
 
