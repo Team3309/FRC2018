@@ -27,7 +27,7 @@ public class Robot extends IterativeRobot {
     private Compressor c = new Compressor();
 
     private Command autoCommand = null;
-    private Logger logger = Logger.getLogger("Robot");
+    public static Logger logger = Logger.getLogger("Robot");
 
     @Override
     public void robotInit() {

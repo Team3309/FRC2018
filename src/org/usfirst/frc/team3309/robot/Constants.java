@@ -1,6 +1,5 @@
 package org.usfirst.frc.team3309.robot;
 
-import org.usfirst.frc.team3309.lib.Length;
 import org.usfirst.frc.team3309.lib.controllers.helpers.Waypoint;
 
 import java.util.ArrayList;
@@ -51,23 +50,21 @@ public class Constants {
 
     public static final ArrayList<Waypoint> figureEightPath = new ArrayList<>();
     public static final ArrayList<Waypoint> sigmoidPath = new ArrayList<>();
+    public static final ArrayList<Waypoint> aroundSwitchPath = new ArrayList<>();
 
     static {
-        figureEightPath.add(new Waypoint(Length.fromInches(32.470), 1.1821));
-        figureEightPath.add(new Waypoint(Length.fromInches(32.470), -1.1821));
-        figureEightPath.add(new Waypoint(Length.fromInches(22.140), -1.1571));
-        figureEightPath.add(new Waypoint(Length.fromInches(22.140), -1.1571));
-        figureEightPath.add(new Waypoint(Length.fromInches(28.367), -1.3498));
-        figureEightPath.add(new Waypoint(Length.fromInches(28.367), 1.3498));
-        for (Waypoint waypoint : figureEightPath) {
-           // waypoint.setRadius(Robot.drive.inchesToEncoderCounts(waypoint.getRadius()));
-        }
+        figureEightPath.add(new Waypoint(32.470, 1.1821));
+        figureEightPath.add(new Waypoint(32.470, -1.1821));
+        figureEightPath.add(new Waypoint(22.140, -1.1571));
+        figureEightPath.add(new Waypoint(22.140, -1.1571));
+        figureEightPath.add(new Waypoint(28.367, -1.3498));
+        figureEightPath.add(new Waypoint(28.367, 1.3498));
 
-        sigmoidPath.add(new Waypoint(Length.fromInches(39.497), 1.1467));
-        sigmoidPath.add(new Waypoint(Length.fromInches(37.191), -1.202));
-        for (Waypoint waypoint : sigmoidPath) {
-         //   waypoint.setRadius(Robot.drive.inchesToEncoderCounts(waypoint.getRadius()));
-        }
+        sigmoidPath.add(new Waypoint(39.497, 1.1467));
+        sigmoidPath.add(new Waypoint(37.191, -1.202));
+
+        aroundSwitchPath.add(new Waypoint(1614.3783, 0.077429));
+        aroundSwitchPath.add(new Waypoint(155.7727, 0.76347));
     }
 
 }

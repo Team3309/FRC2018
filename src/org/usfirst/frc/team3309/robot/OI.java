@@ -1,6 +1,5 @@
 package org.usfirst.frc.team3309.robot;
 
-import edu.wpi.first.wpilibj.Joystick;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveSetHighGear;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveSetLowGear;
 import org.usfirst.frc.team3309.lib.InputXbox;
@@ -12,7 +11,7 @@ import org.usfirst.frc.team3309.lib.InputXbox;
  */
 public class OI {
 
-    public static InputXbox driverRemote = new InputXbox();
+    public static InputXbox driverRemote = new InputXbox(0);
     public static InputXbox operatorRemote = new InputXbox(1);
 
     public OI() {

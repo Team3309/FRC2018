@@ -7,7 +7,7 @@ public class LibMath {
     }
 
     public static boolean isInThreshold(double val, double threshold) {
-        if (handleDeadband(val, threshold) == 0) {
+        if (Math.abs(val) < Math.abs(threshold)) {
             return true;
         }
         return false;

@@ -23,7 +23,7 @@ public class BiArcController extends Controller1<DriveSignal, DriveState> implem
     private double goalAngle;
 
     private double angleErrorThreshold = Math.toDegrees(5);
-    private double distanceErrorThreshold = 1;
+    private double distanceErrorThreshold = 100;
 
     private double prevAngle;
     private int curPathIndex = 0;
@@ -42,6 +42,7 @@ public class BiArcController extends Controller1<DriveSignal, DriveState> implem
     @Override
     public DriveSignal update(DriveState driveState) {
         DriveSignal driveSignal;
+
         double leftVelocity;
         double rightVelocity;
 
@@ -49,12 +50,13 @@ public class BiArcController extends Controller1<DriveSignal, DriveState> implem
         double curAngle = driveState.getAngPos();
 
         double curAngleDiff = goalAngle - Math.toRadians(Math.abs(Math.abs(curAngle) - Math.abs(prevAngle)));
-        double curPosDiff = curPos - goalDistance;
+        double curPosDiff = goalDistance - curPos;
 
         boolean distInThreshold = LibMath.isInThreshold(curPosDiff, distanceErrorThreshold);
         boolean angleInThreshold = LibMath.isInThreshold(curAngleDiff, angleErrorThreshold);
 
-        if (distInThreshold && angleInThreshold) {
+       // if (distInThreshold && angleInThreshold) {
+        if (distInThreshold) {
             curPathIndex++;
             prevAngle = curAngle;
             System.out.println("curPathIndex" + curPathIndex);

@@ -16,22 +16,26 @@ public class DrivePath extends Command {
 
     public DrivePath(ArrayList<Waypoint> path) {
         requires(Robot.drive);
-        biArcController = new BiArcController(path, Constants.WHEELBASE_INCHES);
+        for (Waypoint waypoint : path) {
+            waypoint.setRadius(Robot.drive.inchesToEncoderCounts(waypoint.getRadius()));
+        }
+        biArcController = new BiArcController(path, Robot.drive.inchesToEncoderCounts(Constants.WHEELBASE_INCHES));
     }
 
     @Override
     protected void initialize() {
         Robot.drive.setLowGear();
+        Robot.drive.enableBrakeMode(false);
         Robot.drive.changeToPercentMode();
     }
 
     @Override
     protected void execute() {
-        DriveState driveState = new DriveState(Robot.drive.inchesToEncoderCounts(Robot.drive.getEncoderPos()),
+        DriveState driveState = new DriveState(Robot.drive.getEncoderPos(),
                 Robot.drive.getAngPos());
         DriveSignal driveSignal = biArcController.update(driveState);
-        Robot.drive.setLeftRight(Robot.drive.inchesToEncoderCounts(driveSignal.getLeftMotor()),
-                Robot.drive.inchesToEncoderCounts(driveSignal.getRightMotor()));
+        Robot.drive.setLeftRight(driveSignal.getLeftMotor(),
+                driveSignal.getRightMotor());
     }
 
     @Override

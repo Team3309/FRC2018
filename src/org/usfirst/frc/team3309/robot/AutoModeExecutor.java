@@ -23,13 +23,13 @@ public class AutoModeExecutor {
     private static final File[] autoFiles = new File("/home/lvuser/Autos/")
             .listFiles();
 
-
     public static void displayAutos() {
         autos.addDefault("No Action", new NoActionsAuto());
         autos.addObject("DriveForwardAuto", new DriveForward(Length.fromInches(30)));
+        autos.addObject("Figure Eight Path", new DrivePath(Constants.figureEightPath));
+        autos.addObject("Sigmoid Path", new DrivePath(Constants.sigmoidPath));
+        autos.addObject("Around Switch Path", new DrivePath(Constants.aroundSwitchPath));
         if (!isUsingFile) {
-            autos.addObject("Figure Eight Path", new DrivePath(Constants.figureEightPath));
-            autos.addObject("Sigmoid Path", new DrivePath(Constants.sigmoidPath));
         } else {
             for (File autoFile : autoFiles) {
                 Command autoCommand = null;
@@ -57,15 +57,7 @@ public class AutoModeExecutor {
         ArrayList<Waypoint> path = new ArrayList<>();
         while (line != null) {
             String[] values = line.split(",");
-            if (values[0] == "linear") {
-                double goal = Double.parseDouble(values[1]);
-            } else if (values[0] == "arc") {
-                Length radius = Length.fromInches(Double.parseDouble(values[1]));
-                double angle = Double.parseDouble(values[2]);
-                path.add(new Waypoint(radius, angle));
-            } else if (values[0] == "wait") {
-                double timeout = Double.parseDouble(values[1]);
-            }
+            path.add(new Waypoint(Double.parseDouble(values[0]), Double.parseDouble(values[1])));
         }
         reader.close();
         return new DrivePath(path);
