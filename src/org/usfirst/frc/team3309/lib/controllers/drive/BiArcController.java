@@ -1,19 +1,19 @@
 package org.usfirst.frc.team3309.lib.controllers.drive;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.usfirst.frc.team3309.lib.Length;
 import org.usfirst.frc.team3309.lib.LibMath;
 import org.usfirst.frc.team3309.lib.controllers.Controller1;
 import org.usfirst.frc.team3309.lib.controllers.helpers.DriveSignal;
 import org.usfirst.frc.team3309.lib.controllers.helpers.DriveState;
 import org.usfirst.frc.team3309.lib.controllers.helpers.Waypoint;
 import org.usfirst.frc.team3309.lib.controllers.interfaces.Finishable;
+import org.usfirst.frc.team3309.robot.Robot;
 
 import java.util.ArrayList;
 
 /*
-* TODO: Make goalVelocity member of the ArrayList<Waypoint> path, instead of constant value for the whole path.
-* */
+ * TODO: Make goalVelocity member of the ArrayList<Waypoint> path, instead of constant value for the whole path.
+ * */
 public class BiArcController extends Controller1<DriveSignal, DriveState> implements Finishable {
 
     private final ArrayList<Waypoint> path;
@@ -22,8 +22,8 @@ public class BiArcController extends Controller1<DriveSignal, DriveState> implem
     private double curRadius;
     private double goalAngle;
 
-    private double angleErrorThreshold = Math.toDegrees(5);
-    private double distanceErrorThreshold = 100;
+    private double angleErrorThreshold = Math.toRadians(5);
+    private double distanceErrorThreshold = Robot.drive.inchesToEncoderCounts(1.5);
 
     private double prevAngle;
     private int curPathIndex = 0;
@@ -49,14 +49,19 @@ public class BiArcController extends Controller1<DriveSignal, DriveState> implem
         double curPos = driveState.getAveragePos();
         double curAngle = driveState.getAngPos();
 
-        double curAngleDiff = goalAngle - Math.toRadians(Math.abs(Math.abs(curAngle) - Math.abs(prevAngle)));
+        double curAngleDiff = Math.abs(Math.abs(goalAngle) -
+                Math.toRadians(Math.abs(Math.abs(curAngle) - Math.abs(prevAngle))));
         double curPosDiff = goalDistance - curPos;
 
-        boolean distInThreshold = LibMath.isInThreshold(curPosDiff, distanceErrorThreshold);
-        boolean angleInThreshold = LibMath.isInThreshold(curAngleDiff, angleErrorThreshold);
+        boolean isDistInThreshold = LibMath.isInThreshold(curPosDiff, distanceErrorThreshold);
+        boolean isAngleInThreshold = LibMath.isInThreshold(curAngleDiff, angleErrorThreshold);
 
-       // if (distInThreshold && angleInThreshold) {
-        if (distInThreshold) {
+        SmartDashboard.putBoolean("isInAngleThresh", isAngleInThreshold);
+        SmartDashboard.putBoolean("isInDistThresh", isDistInThreshold);
+        SmartDashboard.putNumber("curPosDiff ", curPosDiff);
+        SmartDashboard.putNumber("curAngleDiff ", curAngleDiff);
+
+        if (isDistInThreshold) {
             curPathIndex++;
             prevAngle = curAngle;
             System.out.println("curPathIndex" + curPathIndex);

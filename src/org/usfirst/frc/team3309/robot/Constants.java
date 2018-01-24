@@ -1,5 +1,6 @@
 package org.usfirst.frc.team3309.robot;
 
+import org.usfirst.frc.team3309.lib.Length;
 import org.usfirst.frc.team3309.lib.controllers.helpers.Waypoint;
 
 import java.util.ArrayList;
@@ -37,6 +38,9 @@ public class Constants {
     public static final int LIFT_SHIFTER_A = 4;
     public static final int LIFT_SHIFTER_B = 5;
 
+    public static final int LIFT_TOP_LIMIT_SWITCH = 0;
+    public static final int LIFT_BOTTOM_LIMIT_SWITCH = 1;
+
     // beltbar
     public static final int BELTBAR_0 = 0;
     public static final int BELTBAR_1 = 0;
@@ -45,12 +49,15 @@ public class Constants {
 
     public static final double DRIVE_ENCODER_COUNTS_PER_REV = 4500;
 
-    public static final double WHEEL_DIAMETER_INCHES = 4.0625;
-    public static final double WHEELBASE_INCHES = 28.0;
+    public static final Length WHEEL_DIAMETER_INCHES = Length.fromInches(4.0625);
+    public static final Length WHEELBASE_INCHES = Length.fromInches(28.0);
+    public static final Length BELTBAR_ARM_LENGTH = Length.fromInches(9);
 
     public static final ArrayList<Waypoint> figureEightPath = new ArrayList<>();
     public static final ArrayList<Waypoint> sigmoidPath = new ArrayList<>();
     public static final ArrayList<Waypoint> aroundSwitchPath = new ArrayList<>();
+    public static final ArrayList<Waypoint> circularPath = new ArrayList<>();
+    public static final ArrayList<Waypoint> semiCircular = new ArrayList<>();
 
     static {
         figureEightPath.add(new Waypoint(32.470, 1.1821));
@@ -65,6 +72,16 @@ public class Constants {
 
         aroundSwitchPath.add(new Waypoint(1614.3783, 0.077429));
         aroundSwitchPath.add(new Waypoint(155.7727, 0.76347));
+
+        circularPath.add(new Waypoint(27.48, 1.622));
+        circularPath.add(new Waypoint(29.5, 1.552));
+        circularPath.add(new Waypoint(29.2969, 0.8153));
+        circularPath.add(new Waypoint(28.6254, 0.8323));
+        circularPath.add(new Waypoint(27.3257, 0.79898));
+        circularPath.add(new Waypoint(30.2656, 0.72836));
+
+        semiCircular.add(new Waypoint(25.169, 1.6019));
+        semiCircular.add(new Waypoint(25.478, 1.5897));
     }
 
 }

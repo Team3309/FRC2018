@@ -51,11 +51,11 @@ public class Drive extends Subsystem {
     }
 
     public double encoderCountsToInches(double counts) {
-         return counts * ((Math.PI * Constants.WHEEL_DIAMETER_INCHES) / Constants.DRIVE_ENCODER_COUNTS_PER_REV);
+         return counts * ((Math.PI * Constants.WHEEL_DIAMETER_INCHES.toInches()) / Constants.DRIVE_ENCODER_COUNTS_PER_REV);
     }
 
     public double inchesToEncoderCounts(double inches) {
-        return inches * Constants.DRIVE_ENCODER_COUNTS_PER_REV / (Math.PI * Constants.WHEEL_DIAMETER_INCHES);
+        return inches * Constants.DRIVE_ENCODER_COUNTS_PER_REV / (Math.PI * Constants.WHEEL_DIAMETER_INCHES.toInches());
     }
 
     public void resetDrive() {

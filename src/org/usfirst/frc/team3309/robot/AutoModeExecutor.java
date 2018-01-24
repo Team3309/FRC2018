@@ -29,6 +29,8 @@ public class AutoModeExecutor {
         autos.addObject("Figure Eight Path", new DrivePath(Constants.figureEightPath));
         autos.addObject("Sigmoid Path", new DrivePath(Constants.sigmoidPath));
         autos.addObject("Around Switch Path", new DrivePath(Constants.aroundSwitchPath));
+        autos.addObject("Circular Path", new DrivePath(Constants.circularPath));
+        autos.addObject("SemiCircular", new DrivePath(Constants.semiCircular));
         if (!isUsingFile) {
         } else {
             for (File autoFile : autoFiles) {

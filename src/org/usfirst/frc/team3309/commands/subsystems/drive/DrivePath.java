@@ -19,7 +19,8 @@ public class DrivePath extends Command {
         for (Waypoint waypoint : path) {
             waypoint.setRadius(Robot.drive.inchesToEncoderCounts(waypoint.getRadius()));
         }
-        biArcController = new BiArcController(path, Robot.drive.inchesToEncoderCounts(Constants.WHEELBASE_INCHES));
+        biArcController = new BiArcController(path,
+                Robot.drive.inchesToEncoderCounts(Constants.WHEELBASE_INCHES.toInches()));
     }
 
     @Override

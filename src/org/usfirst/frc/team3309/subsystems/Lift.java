@@ -3,6 +3,7 @@ package org.usfirst.frc.team3309.subsystems;
 import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import org.usfirst.frc.team3309.lib.sensors.LimitSwitch;
 import org.usfirst.frc.team3309.lib.actuators.TalonSRXMC;
 import org.usfirst.frc.team3309.lib.actuators.VictorSPXMC;
 import org.usfirst.frc.team3309.robot.Constants;
@@ -15,12 +16,17 @@ public class Lift extends Subsystem {
     private VictorSPXMC lift3 = new VictorSPXMC(Constants.LIFT_3);
     private VictorSPXMC lift4 = new VictorSPXMC(Constants.LIFT_4);
 
+    private LimitSwitch topLimitSwitch = new LimitSwitch(Constants.LIFT_TOP_LIMIT_SWITCH);
+    private LimitSwitch bottomLimitSwitch = new LimitSwitch(Constants.LIFT_BOTTOM_LIMIT_SWITCH);
+
     private DoubleSolenoid liftShifter = new DoubleSolenoid(Constants.LIFT_SHIFTER_A,
             Constants.LIFT_SHIFTER_B);
 
     private double goalPos;
 
     public Lift() {
+        topLimitSwitch.reset();
+        bottomLimitSwitch.reset();
         lift0.setFeedbackDevice(CANTalon.FeedbackDevice.CtreMagEncoder_Absolute);
         lift0.changeControlMode(CANTalon.TalonControlMode.Position);
         lift1.changeControlMode(CANTalon.TalonControlMode.Follower);
@@ -68,4 +74,13 @@ public class Lift extends Subsystem {
     public void setGoalPos(double goalPos) {
         this.goalPos = goalPos;
     }
+
+    public boolean isTopLimitSwitch() {
+        return topLimitSwitch.isSwitchSet();
+    }
+
+    public boolean isBottomLimitSwitch() {
+        return bottomLimitSwitch.isSwitchSet();
+    }
+
 }
