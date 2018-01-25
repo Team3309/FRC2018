@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3309.robot;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team3309.commands.autos.NoActionsAuto;
@@ -53,16 +54,23 @@ public class AutoModeExecutor {
     }
 
     @SuppressWarnings("resource")
-    private static Command buildAuto(File autoFile) throws IOException {
+    private static CommandGroup buildAuto(File autoFile) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(autoFile));
         String line = reader.readLine();
         ArrayList<Waypoint> path = new ArrayList<>();
+        CommandGroup autoGroup = new CommandGroup();
         while (line != null) {
             String[] values = line.split(",");
-            path.add(new Waypoint(Double.parseDouble(values[0]), Double.parseDouble(values[1])));
+            String commandType = values[0];
+            if (commandType == "ARC" ) {
+                double radius = Double.parseDouble(values[1]);
+                double angle = Double.parseDouble(values[2]);
+                path.add(new Waypoint(radius, angle));
+            }
         }
+        autoGroup.addSequential(new DrivePath(path));
         reader.close();
-        return new DrivePath(path);
+        return autoGroup;
     }
 
 }
