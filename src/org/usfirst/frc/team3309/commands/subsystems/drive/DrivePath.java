@@ -26,8 +26,9 @@ public class DrivePath extends Command {
     @Override
     protected void initialize() {
         Robot.drive.setLowGear();
-        Robot.drive.enableBrakeMode(false);
-        Robot.drive.changeToPercentMode();
+        Robot.drive.enableBrakeMode(false);                                       
+      //  Robot.drive.changeToPercentMode();
+        Robot.drive.changeToVelocityMode();
     }
 
     @Override

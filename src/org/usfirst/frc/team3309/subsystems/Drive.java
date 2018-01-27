@@ -40,8 +40,8 @@ public class Drive extends Subsystem {
         right2.set(right0.getDeviceID());
         setHighGear();
         enableBrakeMode(false);
-        left0.reverseSensor(true);
         left0.setFeedbackDevice(FeedbackDevice.AnalogEncoder);
+        left0.reverseSensor(true);
         right0.setFeedbackDevice(FeedbackDevice.AnalogEncoder);
     }
 
@@ -59,16 +59,13 @@ public class Drive extends Subsystem {
     }
 
     public void resetDrive() {
-        left0.reverseSensor(true);
         left0.setAnalogPosition(0);
         right0.setAnalogPosition(0);
+        left0.setPosition(0);
+        right0.setPosition(0);
         gyro.reset();
         enableBrakeMode(true);
         setLowGear();
-    }
-
-    public void resetGyro() {
-        gyro.reset();
     }
 
     public double getEncoderPos() {
@@ -76,11 +73,11 @@ public class Drive extends Subsystem {
     }
 
     public double getLeftEncoder() {
-        return left0.getPosition();
+        return left0.getAnalogInPosition();
     }
 
     public double getRightEncoder() {
-        return right0.getPosition();
+        return right0.getAnalogInPosition();
     }
 
     public double getEncoderVelocity() {
@@ -107,6 +104,8 @@ public class Drive extends Subsystem {
         NetworkTable table = NetworkTable.getTable("Drive");
         table.putNumber("Inches pos: ", encoderCountsToInches(getEncoderPos()));
         table.putNumber("Inches vel: ", encoderCountsToInches(getEncoderVelocity()));
+        table.putNumber("Inches pos left: ", encoderCountsToInches(getLeftEncoder()));
+        table.putNumber("Inches pos right: ", encoderCountsToInches(getRightEncoder()));
         table.putNumber("Enc pos: ", getEncoderPos());
         table.putNumber("Enc vel: ", getEncoderVelocity());
         table.putNumber("Left pos: ", getLeftEncoder());

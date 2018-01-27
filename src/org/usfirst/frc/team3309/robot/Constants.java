@@ -51,6 +51,7 @@ public class Constants {
 
     public static final Length WHEEL_DIAMETER_INCHES = Length.fromInches(4.0625);
     public static final Length WHEELBASE_INCHES = Length.fromInches(28.0);
+
     public static final Length BELTBAR_ARM_LENGTH = Length.fromInches(9);
 
     public static final ArrayList<Waypoint> figureEightPath = new ArrayList<>();

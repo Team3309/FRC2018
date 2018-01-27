@@ -47,6 +47,7 @@ public class Robot extends IterativeRobot {
         logger.info("autonomous init");
         drive.resetDrive();
         autoCommand = AutoModeExecutor.getAutoSelected();
+        logger.info("Running " + autoCommand.getName());
         if (autoCommand != null) {
             autoCommand.start();
         }

@@ -28,7 +28,7 @@ public class BiArcController extends Controller1<DriveSignal, DriveState> implem
     private double prevAngle;
     private int curPathIndex = 0;
 
-    private final double goalVelocity = 0.5;
+    private final double goalVelocity = 100;
     private final double WHEELBASE;
 
     public BiArcController(ArrayList<Waypoint> path, double WHEELBASE) {
@@ -119,3 +119,6 @@ public class BiArcController extends Controller1<DriveSignal, DriveState> implem
         this.angleErrorThreshold = angleErrorThreshold;
     }
 }
+
+
+
