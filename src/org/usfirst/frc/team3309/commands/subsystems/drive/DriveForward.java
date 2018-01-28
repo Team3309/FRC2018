@@ -10,7 +10,7 @@ public class DriveForward extends Command {
 
     // inches
     private final double goalPos;
-    private final double errorThreshold = 1.5;
+    private final double errorThreshold = 1;
     private double error;
 
     public DriveForward(Length goalPos) {
@@ -36,7 +36,7 @@ public class DriveForward extends Command {
 
     @Override
     protected boolean isFinished() {
-        return false;
+        return Math.abs(Robot.drive.encoderCountsToInches(error)) < errorThreshold;
     }
 
 }

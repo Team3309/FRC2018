@@ -20,6 +20,7 @@ public class DriveTeleop extends Command {
     protected void initialize() {
         Robot.drive.changeToPercentMode();
         Robot.drive.setHighGear();
+        Robot.drive.enableBrakeMode(false);
     }
 
     @Override

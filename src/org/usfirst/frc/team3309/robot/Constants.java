@@ -8,8 +8,8 @@ import java.util.ArrayList;
 public class Constants {
 
     // drive
-    public static final int DRIVE_RIGHT_0_ID = 2;
-    public static final int DRIVE_RIGHT_1_ID = 3;
+    public static final int DRIVE_RIGHT_0_ID = 3;
+    public static final int DRIVE_RIGHT_1_ID = 2;
     public static final int DRIVE_RIGHT_2_ID = 4;
 
     public static final int DRIVE_LEFT_0_ID = 14;
@@ -45,9 +45,12 @@ public class Constants {
     public static final int BELTBAR_0 = 0;
     public static final int BELTBAR_1 = 0;
 
+    // shooter
+    public static final int SHOOTER_0 = 0;
+
     // robot constants
 
-    public static final double DRIVE_ENCODER_COUNTS_PER_REV = 4500;
+    public static final double DRIVE_ENCODER_COUNTS_PER_REV = 1.5*4096.0*(150.0/34.0);
 
     public static final Length WHEEL_DIAMETER_INCHES = Length.fromInches(4.0625);
     public static final Length WHEELBASE_INCHES = Length.fromInches(28.0);
@@ -56,9 +59,10 @@ public class Constants {
 
     public static final ArrayList<Waypoint> figureEightPath = new ArrayList<>();
     public static final ArrayList<Waypoint> sigmoidPath = new ArrayList<>();
-    public static final ArrayList<Waypoint> aroundSwitchPath = new ArrayList<>();
     public static final ArrayList<Waypoint> circularPath = new ArrayList<>();
     public static final ArrayList<Waypoint> semiCircular = new ArrayList<>();
+    public static final ArrayList<Waypoint> toSwitchPath = new ArrayList<>();
+
 
     static {
         figureEightPath.add(new Waypoint(32.470, 1.1821));
@@ -71,9 +75,6 @@ public class Constants {
         sigmoidPath.add(new Waypoint(39.497, 1.1467));
         sigmoidPath.add(new Waypoint(37.191, -1.202));
 
-        aroundSwitchPath.add(new Waypoint(1614.3783, 0.077429));
-        aroundSwitchPath.add(new Waypoint(155.7727, 0.76347));
-
         circularPath.add(new Waypoint(27.48, 1.622));
         circularPath.add(new Waypoint(29.5, 1.552));
         circularPath.add(new Waypoint(29.2969, 0.8153));
@@ -83,6 +84,11 @@ public class Constants {
 
         semiCircular.add(new Waypoint(25.169, 1.6019));
         semiCircular.add(new Waypoint(25.478, 1.5897));
+
+        toSwitchPath.add(new Waypoint(-87.135, 0.9282));
+        toSwitchPath.add(new Waypoint(-43.654, 1.5699));
+        toSwitchPath.add(new Waypoint(44.6938, -1.3548));
+        toSwitchPath.add(new Waypoint(55.8847, -1.1433));
     }
 
 }

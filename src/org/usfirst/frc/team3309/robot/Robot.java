@@ -6,10 +6,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import org.usfirst.frc.team3309.commands.subsystems.AssemblyLocation;
-import org.usfirst.frc.team3309.subsystems.BeltBar;
-import org.usfirst.frc.team3309.subsystems.Drive;
-import org.usfirst.frc.team3309.subsystems.Intake;
-import org.usfirst.frc.team3309.subsystems.Lift;
+import org.usfirst.frc.team3309.subsystems.*;
 
 import java.util.logging.Logger;
 
@@ -23,10 +20,12 @@ public class Robot extends IterativeRobot {
     public static Intake intake;
     public static Lift lift;
     public static BeltBar beltBar;
+    public static Shooter shooter;
 
     private Compressor c = new Compressor();
 
     private Command autoCommand = null;
+    private OI oi;
     public static Logger logger = Logger.getLogger("Robot");
 
     @Override
@@ -36,6 +35,8 @@ public class Robot extends IterativeRobot {
         intake = new Intake();
         lift = new Lift();
         beltBar = new BeltBar();
+        shooter = new Shooter();
+        oi = new OI();
         c.start();
         drive.sendToDashboard();
         AutoModeExecutor.displayAutos();
@@ -66,6 +67,7 @@ public class Robot extends IterativeRobot {
             autoCommand.cancel();
         }
         drive.resetDrive();
+        drive.setHighGear();
         drive.enableBrakeMode(false);
     }
 
@@ -78,6 +80,11 @@ public class Robot extends IterativeRobot {
     @Override
     public void testPeriodic() {
         LiveWindow.run();
+    }
+
+    @Override
+    public void disabledPeriodic() {
+        drive.resetDrive();
     }
 
 }

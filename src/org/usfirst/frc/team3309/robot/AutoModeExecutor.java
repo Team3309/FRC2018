@@ -29,11 +29,10 @@ public class AutoModeExecutor {
         autos.addObject("DriveForwardAuto", new DriveForward(Length.fromInches(30)));
         autos.addObject("Figure Eight Path", new DrivePath(Constants.figureEightPath));
         autos.addObject("Sigmoid Path", new DrivePath(Constants.sigmoidPath));
-        autos.addObject("Around Switch Path", new DrivePath(Constants.aroundSwitchPath));
+        autos.addObject("Switch Path", new DrivePath(Constants.toSwitchPath));
         autos.addObject("Circular Path", new DrivePath(Constants.circularPath));
         autos.addObject("SemiCircular", new DrivePath(Constants.semiCircular));
-        if (!isUsingFile) {
-        } else {
+        if (isUsingFile) {
             for (File autoFile : autoFiles) {
                 Command autoCommand = null;
                 try {

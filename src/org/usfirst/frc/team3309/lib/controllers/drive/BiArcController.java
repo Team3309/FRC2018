@@ -28,7 +28,7 @@ public class BiArcController extends Controller1<DriveSignal, DriveState> implem
     private double prevAngle;
     private int curPathIndex = 0;
 
-    private final double goalVelocity = 100;
+    private final double goalVelocity = 600;
     private final double WHEELBASE;
 
     public BiArcController(ArrayList<Waypoint> path, double WHEELBASE) {
@@ -36,7 +36,7 @@ public class BiArcController extends Controller1<DriveSignal, DriveState> implem
         this.WHEELBASE = WHEELBASE;
         curRadius = this.path.get(0).getRadius();
         goalAngle = this.path.get(0).getAngle();
-        goalDistance += Math.abs(goalAngle) * curRadius;
+        goalDistance += Math.abs(goalAngle) * Math.abs(curRadius);
     }
 
     @Override
@@ -75,14 +75,14 @@ public class BiArcController extends Controller1<DriveSignal, DriveState> implem
             } else {
                 goalAngle = path.get(curPathIndex).getAngle();
                 curRadius = path.get(curPathIndex).getRadius();
-                goalDistance += Math.abs(goalAngle) * curRadius;
+                goalDistance += Math.abs(goalAngle) * Math.abs(curRadius);
             }
         }
 
-        if (goalAngle > 0) {
+        if (curRadius < 0) {
             leftVelocity = getTurningValue();
             rightVelocity = goalVelocity;
-        } else if (goalAngle < 0) {
+        } else if (curRadius > 0) {
             rightVelocity = getTurningValue();
             leftVelocity = goalVelocity;
         } else {
@@ -90,8 +90,9 @@ public class BiArcController extends Controller1<DriveSignal, DriveState> implem
             rightVelocity = goalVelocity;
         }
 
+        SmartDashboard.putNumber("turing value", getTurningValue());
         SmartDashboard.putNumber("desLeftVel", leftVelocity);
-        SmartDashboard.putNumber("deRightVel", rightVelocity);
+        SmartDashboard.putNumber("desRightVel", rightVelocity);
         SmartDashboard.putNumber("path length", path.size());
         SmartDashboard.putNumber("curDistance", curPos);
         SmartDashboard.putNumber("goalDistance", goalDistance);
@@ -103,7 +104,7 @@ public class BiArcController extends Controller1<DriveSignal, DriveState> implem
     }
 
     private double getTurningValue() {
-        return goalVelocity * ((curRadius - (WHEELBASE / 2.0)) / (curRadius + (WHEELBASE / 2.0)));
+        return goalVelocity * ((Math.abs(curRadius) - (WHEELBASE / 2.0)) / (Math.abs(curRadius) + (WHEELBASE / 2.0)));
     }
 
     @Override
@@ -118,6 +119,7 @@ public class BiArcController extends Controller1<DriveSignal, DriveState> implem
     public void setAngleErrorThreshold(double angleErrorThreshold) {
         this.angleErrorThreshold = angleErrorThreshold;
     }
+
 }
 
 

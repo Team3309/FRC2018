@@ -41,6 +41,7 @@ public class Drive extends Subsystem {
         setHighGear();
         enableBrakeMode(false);
         left0.setFeedbackDevice(FeedbackDevice.AnalogEncoder);
+        right0.reverseSensor(false);
         left0.reverseSensor(true);
         right0.setFeedbackDevice(FeedbackDevice.AnalogEncoder);
     }
@@ -51,7 +52,7 @@ public class Drive extends Subsystem {
     }
 
     public double encoderCountsToInches(double counts) {
-         return counts * ((Math.PI * Constants.WHEEL_DIAMETER_INCHES.toInches()) / Constants.DRIVE_ENCODER_COUNTS_PER_REV);
+        return counts * ((Math.PI * Constants.WHEEL_DIAMETER_INCHES.toInches()) / Constants.DRIVE_ENCODER_COUNTS_PER_REV);
     }
 
     public double inchesToEncoderCounts(double inches) {
@@ -73,11 +74,11 @@ public class Drive extends Subsystem {
     }
 
     public double getLeftEncoder() {
-        return left0.getAnalogInPosition();
+        return left0.getPosition();
     }
 
     public double getRightEncoder() {
-        return right0.getAnalogInPosition();
+        return right0.getPosition();
     }
 
     public double getEncoderVelocity() {
@@ -85,11 +86,11 @@ public class Drive extends Subsystem {
     }
 
     public double getLeftVelocity() {
-        return left0.getAnalogInVelocity();
+        return left0.getSpeed();
     }
 
     public double getRightVelocity() {
-        return right0.getAnalogInVelocity();
+        return right0.getSpeed();
     }
 
     public double getAngPos() {
@@ -151,7 +152,7 @@ public class Drive extends Subsystem {
     }
 
     public void setRight(double power) {
-      right0.set(power);
+        right0.set(power);
     }
 
     public void setHighGear() {
