@@ -26,17 +26,15 @@ public class DrivePath extends Command {
     @Override
     protected void initialize() {
         Robot.drive.setLowGear();
-        Robot.drive.enableBrakeMode(false);                                       
+        Robot.drive.enableBrakeMode(false);
         Robot.drive.changeToVelocityMode();
     }
 
     @Override
     protected void execute() {
-        DriveState driveState = new DriveState(Robot.drive.getEncoderPos(),
-                Robot.drive.getAngPos());
+        DriveState driveState = new DriveState(Robot.drive.getEncoderPos(), Robot.drive.getAngPos());
         DriveSignal driveSignal = biArcController.update(driveState);
-        Robot.drive.setLeftRight(driveSignal.getLeftMotor(),
-                driveSignal.getRightMotor());
+        Robot.drive.setLeftRight(driveSignal.getLeftMotor(), driveSignal.getRightMotor());
     }
 
     @Override

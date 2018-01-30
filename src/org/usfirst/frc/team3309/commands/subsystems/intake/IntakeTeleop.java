@@ -14,8 +14,8 @@ public class IntakeTeleop extends Command {
 
     @Override
     protected void execute() {
-        double leftTrigger = OI.operatorRemote.leftTrigger.getX();
-        double rightTrigger = OI.operatorRemote.rightTrigger.getX();
+        double leftTrigger = OI.driverRemote.leftTrigger.getX();
+        double rightTrigger = OI.driverRemote.rightTrigger.getX();
         if (Math.abs(leftTrigger) > MIN_POWER) {
             Robot.intake.setLeftRightRoller(leftTrigger, leftTrigger);
         } else {

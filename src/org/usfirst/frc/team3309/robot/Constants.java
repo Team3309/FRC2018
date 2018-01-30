@@ -20,7 +20,7 @@ public class Constants {
 
     // intake
     public static final int INTAKE_LEFT_ROLLER = 0;
-    public static final int INTAKE_RIGHT_ROLLER = 0;
+    public static final int INTAKE_RIGHT_ROLLER = 1;
 
     public static final int INTAKE_HARDSTOP_ACTUATOR_A = 0;
     public static final int INTAKE_HARDSTOP_ACTUATOR_B = 1;

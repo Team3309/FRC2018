@@ -26,7 +26,7 @@ public class AutoModeExecutor {
 
     public static void displayAutos() {
         autos.addDefault("No Action", new NoActionsAuto());
-        autos.addObject("DriveForwardAuto", new DriveForward(Length.fromInches(30)));
+        autos.addObject("DriveForwardAuto", new DriveForward(Length.fromInches(30), 0));
         autos.addObject("Figure Eight Path", new DrivePath(Constants.figureEightPath));
         autos.addObject("Sigmoid Path", new DrivePath(Constants.sigmoidPath));
         autos.addObject("Switch Path", new DrivePath(Constants.toSwitchPath));
