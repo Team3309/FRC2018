@@ -13,7 +13,8 @@ public class BeltBarMoveToPos extends Command {
     }
 
     @Override
-    protected void initialize() {
+        protected void initialize() {
+        Robot.beltBar.changeToPositionMode();
         Robot.beltBar.setGoalAngle(goalAngle);
     }
 

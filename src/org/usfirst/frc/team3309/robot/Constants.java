@@ -57,6 +57,8 @@ public class Constants {
 
     public static final Length BELTBAR_ARM_LENGTH = Length.fromInches(9);
 
+    public static final double LIFT_MAX_ENC_POSITION = 0;
+
     public static final ArrayList<Waypoint> figureEightPath = new ArrayList<>();
     public static final ArrayList<Waypoint> sigmoidPath = new ArrayList<>();
     public static final ArrayList<Waypoint> circularPath = new ArrayList<>();

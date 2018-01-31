@@ -28,7 +28,6 @@ public class DriveAngleController extends Controller2<DriveSignal, Double, Doubl
         return driveSignal;
     }
 
-
     public void setIsClockwiseTurn(boolean isClockwiseTurn) {
         this.isClockwiseTurn = isClockwiseTurn;
     }

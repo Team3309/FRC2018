@@ -16,6 +16,10 @@ public class DriveForward extends Command {
     private double error;
     private PIDController turnController;
 
+    public DriveForward(Length goalPos) {
+        this(goalPos, 0);
+    }
+
     public DriveForward(Length goalPos, double goalAngle) {
         this.goalPos = goalPos.toInches();
         this.goalAngle = goalAngle;

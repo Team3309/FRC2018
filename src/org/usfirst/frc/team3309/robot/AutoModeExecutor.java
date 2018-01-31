@@ -2,11 +2,13 @@ package org.usfirst.frc.team3309.robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.command.WaitCommand;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team3309.commands.autos.NoActionsAuto;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveForward;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DrivePath;
+import org.usfirst.frc.team3309.commands.subsystems.drive.DriveTurn;
 import org.usfirst.frc.team3309.lib.Length;
 import org.usfirst.frc.team3309.lib.controllers.helpers.Waypoint;
 
@@ -56,18 +58,39 @@ public class AutoModeExecutor {
     private static CommandGroup buildAuto(File autoFile) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(autoFile));
         String line = reader.readLine();
-        ArrayList<Waypoint> path = new ArrayList<>();
         CommandGroup autoGroup = new CommandGroup();
         while (line != null) {
             String[] values = line.split(",");
             String commandType = values[0];
-            if (commandType == "ARC" ) {
-                double radius = Double.parseDouble(values[1]);
-                double angle = Double.parseDouble(values[2]);
-                path.add(new Waypoint(radius, angle));
+            switch (commandType) {
+                case "ARC":
+                    double radius = Double.parseDouble(values[1]);
+                    double theta = Double.parseDouble(values[2]);
+                    ArrayList<Waypoint> arcPath = new ArrayList<>();
+                    arcPath.add(new Waypoint(radius, theta));
+                    autoGroup.addSequential(new DrivePath(arcPath));
+                case "LINE":
+                    double dist = Double.parseDouble(values[1]);
+                    autoGroup.addSequential(new DriveForward(Length.fromInches(dist)));
+                case "WAIT":
+                    double sec = Double.parseDouble(values[1]);
+                    autoGroup.addSequential(new WaitCommand(sec));
+                case "TURN":
+                    double angle = Double.parseDouble(values[1]);
+                    autoGroup.addSequential(new DriveTurn(angle));
+                case "RUN":
+                    try {
+                        // TODO("Implement parsing for condition to run command and args to be passed into command")
+                        String commandName = values[1];
+                        String term = values[2];
+                        String  args = values[3];
+                        Command command = (Command) Class.forName(commandName).cast(Command.class);
+                        autoGroup.addSequential(command);
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    }
             }
         }
-        autoGroup.addSequential(new DrivePath(path));
         reader.close();
         return autoGroup;
     }

@@ -7,12 +7,6 @@ import org.usfirst.frc.team3309.lib.Length;
 
 public class MoveAssembly extends CommandGroup {
 
-    @Override
-    public void start() {
-        super.start();
-
-    }
-
     public MoveAssembly(AssemblyLocation assemblyLocation) {
         addParallel(new BeltBarMoveToPos(assemblyLocation.getBeltBarPosition()));
         addSequential(new LiftElevate(Length.fromInches(assemblyLocation.getElevatorPosition())));

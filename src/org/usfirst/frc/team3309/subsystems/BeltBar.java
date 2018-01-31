@@ -29,6 +29,10 @@ public class BeltBar extends Subsystem {
         return masterBar.getAnalogInPosition();
     }
 
+    public void changeToPositionMode() {
+        masterBar.changeControlMode(CANTalon.TalonControlMode.Position);
+    }
+
     public void changeToPercentMode() {
         masterBar.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
     }
