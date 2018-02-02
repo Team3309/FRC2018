@@ -1,4 +1,4 @@
-package org.usfirst.frc.team3309.lib;
+package org.usfirst.frc.team3309.lib.input;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;

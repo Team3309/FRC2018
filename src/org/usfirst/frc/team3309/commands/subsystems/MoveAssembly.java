@@ -3,7 +3,7 @@ package org.usfirst.frc.team3309.commands.subsystems;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import org.usfirst.frc.team3309.commands.subsystems.beltbar.BeltBarMoveToPos;
 import org.usfirst.frc.team3309.commands.subsystems.lift.LiftElevate;
-import org.usfirst.frc.team3309.lib.Length;
+import org.usfirst.frc.team3309.lib.math.Length;
 
 public class MoveAssembly extends CommandGroup {
 

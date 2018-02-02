@@ -9,7 +9,7 @@ import org.usfirst.frc.team3309.commands.autos.NoActionsAuto;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveForward;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DrivePath;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveTurn;
-import org.usfirst.frc.team3309.lib.Length;
+import org.usfirst.frc.team3309.lib.math.Length;
 import org.usfirst.frc.team3309.lib.controllers.helpers.Waypoint;
 
 import java.io.BufferedReader;

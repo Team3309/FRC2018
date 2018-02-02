@@ -1,4 +1,4 @@
-package org.usfirst.frc.team3309.lib;
+package org.usfirst.frc.team3309.lib.math;
 
 public class Length {
 

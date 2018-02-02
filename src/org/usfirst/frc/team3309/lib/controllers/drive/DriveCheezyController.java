@@ -1,6 +1,6 @@
 package org.usfirst.frc.team3309.lib.controllers.drive;
 
-import org.usfirst.frc.team3309.lib.LibMath;
+import org.usfirst.frc.team3309.lib.math.LibMath;
 import org.usfirst.frc.team3309.lib.controllers.Controller3;
 import org.usfirst.frc.team3309.lib.controllers.helpers.DriveSignal;
 

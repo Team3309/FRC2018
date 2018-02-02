@@ -1,6 +1,6 @@
 package org.usfirst.frc.team3309.robot;
 
-import org.usfirst.frc.team3309.lib.Length;
+import org.usfirst.frc.team3309.lib.math.Length;
 import org.usfirst.frc.team3309.lib.controllers.helpers.Waypoint;
 
 import java.util.ArrayList;
@@ -47,6 +47,10 @@ public class Constants {
 
     // shooter
     public static final int SHOOTER_0 = 0;
+
+    // falcon doors
+    public static final int FALCONDOORS_LEFT_SOLENOID = 0;
+    public static final int FALCONDOORS_RIGHT_SOLENOID = 0;
 
     // robot constants
 

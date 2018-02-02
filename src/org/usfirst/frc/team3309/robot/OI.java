@@ -2,7 +2,7 @@ package org.usfirst.frc.team3309.robot;
 
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveSetHighGear;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveSetLowGear;
-import org.usfirst.frc.team3309.lib.InputXbox;
+import org.usfirst.frc.team3309.lib.input.InputXbox;
 
 /*
  * <p>Class for defining controllers
@@ -17,8 +17,6 @@ public class OI {
     public OI() {
         driverRemote.leftBumper.whenPressed(new DriveSetLowGear());
         driverRemote.leftBumper.whenReleased(new DriveSetHighGear());
-
-
     }
 
 }
