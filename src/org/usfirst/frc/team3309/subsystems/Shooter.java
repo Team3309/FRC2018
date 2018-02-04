@@ -1,9 +1,12 @@
 package org.usfirst.frc.team3309.subsystems;
 
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import org.usfirst.frc.team3309.robot.Constants;
 
 public class Shooter extends Subsystem {
 
+    private Solenoid actuator = new Solenoid(Constants.SHOOTER_0);
 
     public Shooter() {
     }
@@ -13,8 +16,12 @@ public class Shooter extends Subsystem {
 
     }
 
-    public void set(double power) {
+    public void actuateForward() {
+        actuator.set(true);
+    }
 
+    public void actuateBack() {
+        actuator.set(false);
     }
 
 }

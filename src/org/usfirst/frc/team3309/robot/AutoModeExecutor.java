@@ -9,8 +9,8 @@ import org.usfirst.frc.team3309.commands.autos.NoActionsAuto;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveForward;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DrivePath;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveTurn;
-import org.usfirst.frc.team3309.lib.math.Length;
 import org.usfirst.frc.team3309.lib.controllers.helpers.Waypoint;
+import org.usfirst.frc.team3309.lib.math.Length;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -83,7 +83,7 @@ public class AutoModeExecutor {
                         // TODO("Implement parsing for condition to run command and args to be passed into command")
                         String commandName = values[1];
                         String term = values[2];
-                        String  args = values[3];
+                        String args = values[3];
                         Command command = (Command) Class.forName(commandName).cast(Command.class);
                         autoGroup.addSequential(command);
                     } catch (ClassNotFoundException e) {

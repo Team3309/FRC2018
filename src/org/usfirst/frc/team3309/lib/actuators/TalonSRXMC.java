@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3309.lib.actuators;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 public class TalonSRXMC extends TalonSRX {
@@ -21,7 +22,6 @@ public class TalonSRXMC extends TalonSRX {
     }
 
     public void changeToVelocityMode() {
-        controlMode = ControlMode.Velocity;
         controlMode = ControlMode.Velocity;
     }
 

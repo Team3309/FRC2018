@@ -1,6 +1,6 @@
 package org.usfirst.frc.team3309.lib.controllers.pid;
 
-import edu.wpi.first.wpilibj.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTable;
 import org.usfirst.frc.team3309.lib.LibTimer;
 import org.usfirst.frc.team3309.lib.controllers.Controller2;
 import org.usfirst.frc.team3309.lib.controllers.interfaces.Finishable;
@@ -84,10 +84,7 @@ public class PIDController extends Controller2<Double, Double, Double> implement
 
     public void sendToDashboard() {
         if (this.isUseDashboard) {
-            NetworkTable table = NetworkTable.getTable("");
-            table.putNumber("pScalar", pidConstants.getP());
-            table.putNumber("iScalar", pidConstants.getI());
-            table.putNumber("dScalar", pidConstants.getD());
+
         }
     }
 
