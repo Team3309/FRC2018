@@ -1,11 +1,8 @@
 package org.usfirst.frc.team3309.subsystems;
 
-import com.ctre.CANTalon;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.usfirst.frc.team3309.lib.actuators.TalonSRXMC;
@@ -33,7 +30,7 @@ public class Lift extends Subsystem {
         topLimitSwitch.reset();
         bottomLimitSwitch.reset();
         lift0.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0,
-                10);
+                0);
         lift0.set(ControlMode.Position, 0.0);
         lift1.set(ControlMode.Follower, lift0.getDeviceID());
         lift2.set(ControlMode.Follower, lift0.getDeviceID());
@@ -44,7 +41,6 @@ public class Lift extends Subsystem {
 
     @Override
     protected void initDefaultCommand() {
-
     }
 
     /*
@@ -70,20 +66,24 @@ public class Lift extends Subsystem {
         lift0.setNeutralMode(NeutralMode.Coast);
     }
 
-    public void changeToPositionMode() {
-        lift0.changeToPercentMode();
-    }
-
-    public void setPercent(double power) {
-        lift0.set(ControlMode.PercentOutput, power);
+    public void set(double value) {
+        lift0.set(value);
     }
 
     public void setVelocity(double velocity) {
         lift0.set(ControlMode.Velocity, velocity);
     }
 
-    public void setPosition(double position) {
-        lift0.set(ControlMode.Position, position);
+    public void changeToPositionMode() {
+        lift0.changeToPercentMode();
+    }
+
+    public void changeToPercentMode() {
+        lift0.changeToPercentMode();
+    }
+
+    public void changeToVeloctiyMode() {
+        lift0.changeToVelocityMode();
     }
 
     public void setLiftShifter(DoubleSolenoid.Value value) {

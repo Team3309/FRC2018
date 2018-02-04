@@ -17,11 +17,12 @@ public class LiftElevate extends Command {
     protected void initialize() {
         Robot.lift.changeToBrakeMode();
         Robot.lift.setGoalPos(Robot.lift.inchesToEncoderCounts(goalPos));
+        Robot.lift.changeToPositionMode();
     }
 
     @Override
     protected void execute() {
-        Robot.lift.setPosition(Robot.lift.getGoalPos());
+        Robot.lift.set(Robot.lift.getGoalPos());
     }
 
     @Override
