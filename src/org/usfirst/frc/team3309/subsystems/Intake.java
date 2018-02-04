@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3309.subsystems;
 
-import com.ctre.CANTalon;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.usfirst.frc.team3309.commands.subsystems.intake.IntakeTeleop;
@@ -9,8 +10,8 @@ import org.usfirst.frc.team3309.robot.Constants;
 
 public class Intake extends Subsystem {
 
-    private VictorSPXMC leftArm = new VictorSPXMC(Constants.INTAKE_LEFT_ROLLER);
-    private VictorSPXMC rightArm = new VictorSPXMC(Constants.INTAKE_RIGHT_ROLLER);
+    private VictorSPXMC leftMotor = new VictorSPXMC(Constants.INTAKE_LEFT_ROLLER);
+    private VictorSPXMC rightMotor = new VictorSPXMC(Constants.INTAKE_RIGHT_ROLLER);
 
     private DoubleSolenoid hardStopActuator = new DoubleSolenoid(Constants.INTAKE_HARDSTOP_ACTUATOR_A,
             Constants.INTAKE_HARDSTOP_ACTUATOR_B);
@@ -19,10 +20,8 @@ public class Intake extends Subsystem {
             Constants.INTAKE_INNER_ACTUATOR_B);
 
     public Intake() {
-        leftArm.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
-        rightArm.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
-        leftArm.enableBrakeMode(false);
-        rightArm.enableBrakeMode(false);
+        leftMotor.set(0);
+        rightMotor.set(0);
     }
 
     @Override
@@ -38,18 +37,22 @@ public class Intake extends Subsystem {
         hardStopActuator.set(value);
     }
 
-    public void setLeftRightRoller(double left, double right) {
-        setLeftRoller(left);
-        setRightRoller(right);
+    public void setLeftRight(double left, double right) {
+        setLeft(left);
+        setRight(right);
     }
 
-    public void setLeftRoller(double power) {
-        leftArm.set(power);
+    public void setLeft(double power) {
+        leftMotor.set(ControlMode.PercentOutput, power);
     }
 
-    public void setRightRoller(double power) {
-        rightArm.set(power);
+    public void setRight(double power) {
+        rightMotor.set(ControlMode.PercentOutput, power);
     }
 
+    public void changeToPercentMode() {
+        leftMotor.changeToPercentMode();
+        rightMotor.changeToPercentMode();
+    }
 
 }

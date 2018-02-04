@@ -1,6 +1,10 @@
 package org.usfirst.frc.team3309.subsystems;
 
-import com.ctre.CANTalon;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.usfirst.frc.team3309.lib.actuators.TalonSRXMC;
 import org.usfirst.frc.team3309.lib.actuators.VictorSPXMC;
@@ -14,10 +18,9 @@ public class BeltBar extends Subsystem {
     private double goalAngle;
 
     public BeltBar() {
-        masterBar.changeControlMode(CANTalon.TalonControlMode.Position);
-        slaveBar.changeControlMode(CANTalon.TalonControlMode.Follower);
-        slaveBar.set(masterBar.getDeviceID());
-        masterBar.setFeedbackDevice(CANTalon.FeedbackDevice.AnalogPot);
+        masterBar.set(0);
+        slaveBar.set(ControlMode.Follower, masterBar.getDeviceID());
+        masterBar.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0 ,0);
     }
 
     @Override
@@ -26,19 +29,23 @@ public class BeltBar extends Subsystem {
     }
 
     public double getBarAngle() {
-        return masterBar.getAnalogInPosition();
+        return masterBar.getSensorCollection().getAnalogIn();
+    }
+
+    public void set(double value) {
+        masterBar.set(value);
+    }
+
+    public void changeToBrakeMode() {
+        masterBar.setNeutralMode(NeutralMode.Brake);
+    }
+
+    public void changeToCoastMode() {
+        masterBar.setNeutralMode(NeutralMode.Coast);
     }
 
     public void changeToPositionMode() {
-        masterBar.changeControlMode(CANTalon.TalonControlMode.Position);
-    }
-
-    public void changeToPercentMode() {
-        masterBar.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
-    }
-    
-    public void setBar(double power) {
-        masterBar.set(power);
+        masterBar.changeToPositionMode();
     }
 
     public double getGoalAngle() {

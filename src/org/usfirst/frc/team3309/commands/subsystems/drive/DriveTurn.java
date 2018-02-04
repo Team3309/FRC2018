@@ -18,6 +18,11 @@ public class DriveTurn extends Command {
     }
 
     @Override
+    protected void initialize() {
+        Robot.drive.changeToPercentMode();
+    }
+
+    @Override
     protected void execute() {
         DriveSignal driveSignal = angleController.update(Robot.drive.getAngPos(), goalAngle);
         Robot.drive.setLeftRight(driveSignal.getLeftMotor(), driveSignal.getRightMotor());

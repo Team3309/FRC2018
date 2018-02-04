@@ -1,24 +1,32 @@
 package org.usfirst.frc.team3309.lib.actuators;
 
-import com.ctre.CANTalon;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
-/*
-* TODO: Update the class to wrap the new CTRE Phoenix framework.
-* */
-public class TalonSRXMC extends CANTalon {
+public class TalonSRXMC extends TalonSRX {
 
-	private TalonControlMode currentControlMode = TalonControlMode.PercentVbus;
+    private ControlMode controlMode;
 
-	public TalonSRXMC(int port) {
-		super(port);
-	}
+    public TalonSRXMC(int deviceNumber) {
+        super(deviceNumber);
+        controlMode = ControlMode.PercentOutput;
+    }
 
-	@Override
-	public void changeControlMode(TalonControlMode controlMode) {
-		if (!controlMode.equals(currentControlMode)) {
-			currentControlMode = controlMode;
-			super.changeControlMode(controlMode);
-		}
-	}
+    public void changeToPercentMode() {
+        controlMode = ControlMode.PercentOutput;
+    }
+
+    public void changeToPositionMode() {
+       controlMode = ControlMode.Position;
+    }
+
+    public void changeToVelocityMode() {
+        controlMode = ControlMode.Velocity;
+        controlMode = ControlMode.Velocity;
+    }
+
+    public void set(double value) {
+        set(controlMode, value);
+    }
 
 }

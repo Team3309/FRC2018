@@ -30,7 +30,7 @@ public class DriveForward extends Command {
     @Override
     protected void initialize() {
         Robot.drive.setLowGear();
-        Robot.drive.enableBrakeMode(false);
+        Robot.drive.changeToBrakeMode();
         Robot.drive.setGoalPos(goalPos);
         Robot.drive.changeToPositionMode();
     }
@@ -41,6 +41,7 @@ public class DriveForward extends Command {
         double turn = turnController.update(Robot.drive.getAngPos(), goalAngle);
         Robot.drive.setLeftRight(Robot.drive.inchesToEncoderCounts(Robot.drive.getGoalPos()) + turn,
                 Robot.drive.inchesToEncoderCounts(Robot.drive.getGoalPos()) - turn);
+
         SmartDashboard.putNumber("drive error", error);
     }
 

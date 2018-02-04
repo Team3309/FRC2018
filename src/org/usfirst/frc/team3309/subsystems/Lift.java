@@ -1,13 +1,16 @@
 package org.usfirst.frc.team3309.subsystems;
 
 import com.ctre.CANTalon;
-import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import org.usfirst.frc.team3309.commands.subsystems.lift.LiftCheckLimits;
-import org.usfirst.frc.team3309.lib.sensors.LimitSwitch;
 import org.usfirst.frc.team3309.lib.actuators.TalonSRXMC;
 import org.usfirst.frc.team3309.lib.actuators.VictorSPXMC;
+import org.usfirst.frc.team3309.lib.sensors.LimitSwitch;
 import org.usfirst.frc.team3309.robot.Constants;
 
 public class Lift extends Subsystem {
@@ -29,21 +32,19 @@ public class Lift extends Subsystem {
     public Lift() {
         topLimitSwitch.reset();
         bottomLimitSwitch.reset();
-        lift0.setFeedbackDevice(CANTalon.FeedbackDevice.CtreMagEncoder_Absolute);
-        lift0.changeControlMode(CANTalon.TalonControlMode.Position);
-        lift1.changeControlMode(CANTalon.TalonControlMode.Follower);
-        lift2.changeControlMode(CANTalon.TalonControlMode.Follower);
-        lift3.changeControlMode(CANTalon.TalonControlMode.Follower);
-        lift4.changeControlMode(CANTalon.TalonControlMode.Follower);
-        lift1.set(lift0.getDeviceID());
-        lift2.set(lift0.getDeviceID());
-        lift3.set(lift0.getDeviceID());
-        lift4.set(lift0.getDeviceID());
+        lift0.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0,
+                10);
+        lift0.set(ControlMode.Position, 0.0);
+        lift1.set(ControlMode.Follower, lift0.getDeviceID());
+        lift2.set(ControlMode.Follower, lift0.getDeviceID());
+        lift3.set(ControlMode.Follower, lift0.getDeviceID());
+        lift3.set(ControlMode.Follower, lift0.getDeviceID());
+        lift4.set(ControlMode.Follower, lift0.getDeviceID());
     }
 
     @Override
     protected void initDefaultCommand() {
-        setDefaultCommand(new LiftCheckLimits());
+
     }
 
     /*
@@ -53,34 +54,36 @@ public class Lift extends Subsystem {
         return encoderCounts * 0.0;
     }
 
-    public void setLift(double power) {
-        lift0.set(power);
-    }
-
     public void resetToBottom() {
-        lift0.setPosition(0);
-        lift0.setAnalogPosition(0);
+        lift0.getSensorCollection().setAnalogPosition(0, 0);
     }
 
     public void resetToTop() {
-        lift0.setPosition(Constants.LIFT_MAX_ENC_POSITION);
-        lift0.setAnalogPosition((int)Constants.LIFT_MAX_ENC_POSITION);
+        lift0.getSensorCollection().setAnalogPosition((int)Constants.LIFT_MAX_ENC_POSITION, 0);
     }
 
-    public void enableBrakeMode(boolean on){
-        lift0.enableBrakeMode(on);
-        lift1.enableBrakeMode(on);
-        lift2.enableBrakeMode(on);
-        lift3.enableBrakeMode(on);
-        lift4.enableBrakeMode(on);
+    public void changeToBrakeMode(){
+        lift0.setNeutralMode(NeutralMode.Brake);
     }
 
-    public void changeToPercentMode() {
-        lift0.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
+    public void changeToCoastMode() {
+        lift0.setNeutralMode(NeutralMode.Coast);
     }
 
-    public void changeToVelocityMode() {
-        lift0.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
+    public void changeToPositionMode() {
+        lift0.changeToPercentMode();
+    }
+
+    public void setPercent(double power) {
+        lift0.set(ControlMode.PercentOutput, power);
+    }
+
+    public void setVelocity(double velocity) {
+        lift0.set(ControlMode.Velocity, velocity);
+    }
+
+    public void setPosition(double position) {
+        lift0.set(ControlMode.Position, position);
     }
 
     public void setLiftShifter(DoubleSolenoid.Value value) {

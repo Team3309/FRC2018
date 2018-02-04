@@ -22,16 +22,8 @@
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="inheritedJdk" />
-    <orderEntry type="module-library" exported="">
-      <library name="CTRLib.jar">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/jars/CTRLib.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
     <orderEntry type="library" name="cscore-sources" level="application" />
     <orderEntry type="library" name="KotlinJavaRuntime" level="project" />
+    <orderEntry type="library" name="CTRE_Phoenix-sources" level="project" />
   </component>
 </module>

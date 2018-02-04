@@ -14,7 +14,7 @@ public class IntakeAccept extends Command {
 
     @Override
     protected void execute() {
-        Robot.intake.setLeftRightRoller(intakeRollerPower, intakeRollerPower);
+        Robot.intake.setLeftRight(intakeRollerPower, intakeRollerPower);
     }
 
     @Override

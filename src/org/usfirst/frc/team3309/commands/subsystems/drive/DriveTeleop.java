@@ -18,9 +18,9 @@ public class DriveTeleop extends Command {
 
     @Override
     protected void initialize() {
-        Robot.drive.changeToPercentMode();
         Robot.drive.setHighGear();
-        Robot.drive.enableBrakeMode(false);
+        Robot.drive.changeToCoastMode();
+        Robot.drive.changeToPercentMode();
     }
 
     @Override

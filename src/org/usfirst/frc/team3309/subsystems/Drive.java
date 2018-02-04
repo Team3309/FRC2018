@@ -1,7 +1,10 @@
 package org.usfirst.frc.team3309.subsystems;
 
-import com.ctre.CANTalon.FeedbackDevice;
-import com.ctre.CANTalon.TalonControlMode;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -28,22 +31,22 @@ public class Drive extends Subsystem {
     private double goalPos;
 
     public Drive() {
-        left0.changeControlMode(TalonControlMode.PercentVbus);
-        left1.changeControlMode(TalonControlMode.Follower);
-        left2.changeControlMode(TalonControlMode.Follower);
-        left1.set(left0.getDeviceID());
-        left2.set(left0.getDeviceID());
-        right0.changeControlMode(TalonControlMode.PercentVbus);
-        right1.changeControlMode(TalonControlMode.Follower);
-        right2.changeControlMode(TalonControlMode.Follower);
-        right1.set(right0.getDeviceID());
-        right2.set(right0.getDeviceID());
+        left0.set(ControlMode.PercentOutput, 0);
+        left1.set(ControlMode.Follower, left0.getDeviceID());
+        left2.set(ControlMode.Follower, left0.getDeviceID());
+
+        right0.set(ControlMode.PercentOutput, 0);
+        right1.set(ControlMode.Follower, right0.getDeviceID());
+        right2.set(ControlMode.Follower, right0.getDeviceID());
+
         setHighGear();
-        enableBrakeMode(false);
-        left0.setFeedbackDevice(FeedbackDevice.AnalogEncoder);
-        right0.reverseSensor(false);
-        left0.reverseSensor(true);
-        right0.setFeedbackDevice(FeedbackDevice.AnalogEncoder);
+        changeToBrakeMode();
+
+        left0.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 0);
+        right0.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 0);
+
+        left0.setSensorPhase(false);
+        right0.setSensorPhase(true);
     }
 
     @Override
@@ -60,12 +63,10 @@ public class Drive extends Subsystem {
     }
 
     public void resetDrive() {
-        left0.setAnalogPosition(0);
-        right0.setAnalogPosition(0);
-        left0.setPosition(0);
-        right0.setPosition(0);
+        left0.getSensorCollection().setAnalogPosition(0, 0);
+        right0.getSensorCollection().setAnalogPosition(0, 0);
         gyro.reset();
-        enableBrakeMode(true);
+        changeToBrakeMode();
         setLowGear();
     }
 
@@ -74,11 +75,11 @@ public class Drive extends Subsystem {
     }
 
     public double getLeftEncoder() {
-        return left0.getPosition();
+        return left0.getSensorCollection().getAnalogIn();
     }
 
     public double getRightEncoder() {
-        return right0.getPosition();
+        return right0.getSensorCollection().getAnalogIn();
     }
 
     public double getEncoderVelocity() {
@@ -86,11 +87,11 @@ public class Drive extends Subsystem {
     }
 
     public double getLeftVelocity() {
-        return left0.getSpeed();
+        return left0.getSensorCollection().getAnalogInVel();
     }
 
     public double getRightVelocity() {
-        return right0.getSpeed();
+        return right0.getSensorCollection().getAnalogInVel();
     }
 
     public double getAngPos() {
@@ -117,42 +118,14 @@ public class Drive extends Subsystem {
         table.putNumber("Ang vel: ", getAngVel());
     }
 
-    public void changeToPositionMode() {
-        left0.changeControlMode(TalonControlMode.Position);
-        right0.changeControlMode(TalonControlMode.Position);
+    public void changeToBrakeMode() {
+        left0.setNeutralMode(NeutralMode.Brake);
+        right0.setNeutralMode(NeutralMode.Brake);
     }
 
-    public void changeToPercentMode() {
-        left0.changeControlMode(TalonControlMode.PercentVbus);
-        right0.changeControlMode(TalonControlMode.PercentVbus);
-    }
-
-    public void changeToVelocityMode() {
-        left0.changeControlMode(TalonControlMode.Speed);
-        right0.changeControlMode(TalonControlMode.Speed);
-    }
-
-    public void enableBrakeMode(boolean on) {
-        left0.enableBrakeMode(on);
-        right0.enableBrakeMode(on);
-    }
-
-    public void setVoltageRampRate(double rampRate) {
-        left0.setVoltageRampRate(rampRate);
-        right0.setVoltageRampRate(rampRate);
-    }
-
-    public void setLeftRight(double left, double right) {
-        setLeft(-left);
-        setRight(right);
-    }
-
-    public void setLeft(double power) {
-        left0.set(power);
-    }
-
-    public void setRight(double power) {
-        right0.set(power);
+    public void changeToCoastMode() {
+        left0.setNeutralMode(NeutralMode.Coast);
+        right0.setNeutralMode(NeutralMode.Coast);
     }
 
     public void setHighGear() {
@@ -161,6 +134,34 @@ public class Drive extends Subsystem {
 
     public void setLowGear() {
         shifter.set(false);
+    }
+
+    public void setLeftRight(double left, double right) {
+        setLeft(left);
+        setRight(right);
+    }
+
+    public void setLeft(double value) {
+        left0.set(value);
+    }
+
+    public void setRight(double value) {
+        right0.set(value);
+    }
+
+    public void changeToPercentMode() {
+        left0.changeToPercentMode();
+        right0.changeToPercentMode();
+    }
+
+    public void changeToPositionMode() {
+        left0.changeToPositionMode();
+        right0.changeToPositionMode();
+    }
+
+    public void changeToVelocityMode() {
+        left0.changeToVelocityMode();
+        right0.changeToVelocityMode();
     }
 
     public double getGoalPos() {
