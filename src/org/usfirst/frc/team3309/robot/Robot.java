@@ -3,10 +3,9 @@ package org.usfirst.frc.team3309.robot;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
-import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import org.usfirst.frc.team3309.commands.subsystems.lift.LiftCheckLimits;
 import org.usfirst.frc.team3309.subsystems.*;
 
@@ -15,7 +14,7 @@ import java.util.logging.Logger;
 /**
  * @author Chase Blagden
  */
-public class Robot extends IterativeRobot {
+public class Robot extends TimedRobot {
 
     public static Drive drive;
     public static Intake intake;
