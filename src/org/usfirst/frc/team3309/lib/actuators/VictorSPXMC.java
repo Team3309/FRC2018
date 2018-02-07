@@ -5,7 +5,7 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 public class VictorSPXMC extends VictorSPX {
 
-    private ControlMode controlMode;
+    private ControlMode controlMode = ControlMode.PercentOutput;
 
     public VictorSPXMC(int deviceNumber) {
         super(deviceNumber);

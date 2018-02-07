@@ -6,19 +6,14 @@ import org.usfirst.frc.team3309.robot.Constants;
 
 public class FalconDoors extends Subsystem {
 
-    private Solenoid leftSolenoid = new Solenoid(Constants.FALCONDOORS_LEFT_SOLENOID);
-    private Solenoid rightSolenoid = new Solenoid(Constants.FALCONDOORS_RIGHT_SOLENOID);
+    private Solenoid shifter = new Solenoid(Constants.FALCONDOORS_SOLENOID);
 
     @Override
     protected void initDefaultCommand() {
     }
 
-    public void setLeftSolenoidForward() {
-        leftSolenoid.set(true);
-    }
-
-    public void setRightSolenoidForward() {
-        rightSolenoid.set(true);
+    public void setOut() {
+        shifter.set(true);
     }
 
 }

@@ -3,7 +3,7 @@ package org.usfirst.frc.team3309.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.usfirst.frc.team3309.lib.actuators.TalonSRXMC;
 import org.usfirst.frc.team3309.lib.actuators.VictorSPXMC;
@@ -21,8 +21,7 @@ public class Lift extends Subsystem {
     private LimitSwitch topLimitSwitch = new LimitSwitch(Constants.LIFT_TOP_LIMIT_SWITCH);
     private LimitSwitch bottomLimitSwitch = new LimitSwitch(Constants.LIFT_BOTTOM_LIMIT_SWITCH);
 
-    private DoubleSolenoid liftShifter = new DoubleSolenoid(Constants.LIFT_SHIFTER_A,
-            Constants.LIFT_SHIFTER_B);
+    private Solenoid liftShifter = new Solenoid(Constants.LIFT_SHIFTER);
 
     private double goalPos;
 
@@ -85,7 +84,7 @@ public class Lift extends Subsystem {
         lift0.changeToVelocityMode();
     }
 
-    public void setLiftShifter(DoubleSolenoid.Value value) {
+    public void setLiftShifter(boolean value) {
         liftShifter.set(value);
     }
 

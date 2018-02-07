@@ -1,7 +1,7 @@
 package org.usfirst.frc.team3309.robot;
 
-import org.usfirst.frc.team3309.lib.math.Length;
 import org.usfirst.frc.team3309.lib.controllers.helpers.Waypoint;
+import org.usfirst.frc.team3309.lib.math.Length;
 
 import java.util.ArrayList;
 
@@ -23,11 +23,11 @@ public class Constants {
     public static final int ROLLER_RIGHT = 41;
 
     // arms
-    public static final int ARMS_LEFT_ACTUATOR_A = 0;
-    public static final int ARMS_LEFT_ACTUATOR_B = 1;
+    public static final int ARMS_LEFT_ACTUATOR_A = 1;
+    public static final int ARMS_LEFT_ACTUATOR_B = 2;
 
-    public static final int ARMS_RIGHT_ACTUATOR_A = 2;
-    public static final int ARMS_RIGHT_ACTUATOR_B = 3;
+    public static final int ARMS_RIGHT_ACTUATOR_A = 3;
+    public static final int ARMS_RIGHT_ACTUATOR_B = 4;
 
     // lift
     public static final int LIFT_0 = 20;
@@ -36,8 +36,7 @@ public class Constants {
     public static final int LIFT_3 = 23;
     public static final int LIFT_4 = 24;
 
-    public static final int LIFT_SHIFTER_A = 4;
-    public static final int LIFT_SHIFTER_B = 5;
+    public static final int LIFT_SHIFTER = 5;
 
     public static final int LIFT_TOP_LIMIT_SWITCH = 0;
     public static final int LIFT_BOTTOM_LIMIT_SWITCH = 1;
@@ -46,15 +45,14 @@ public class Constants {
     public static final int BELTBAR_0 = 30;
 
     // shooter
-    public static final int SHOOTER_SHIFTER = 0;
+    public static final int SHOOTER_SHIFTER = 6;
 
     // falcon doors
-    public static final int FALCONDOORS_LEFT_SOLENOID = 0;
-    public static final int FALCONDOORS_RIGHT_SOLENOID = 0;
+    public static final int FALCONDOORS_SOLENOID = 7;
 
     // robot constants
 
-    public static final double DRIVE_ENCODER_COUNTS_PER_REV = 1.5*4096.0*(150.0/34.0);
+    public static final double DRIVE_ENCODER_COUNTS_PER_REV = 1.5 * 4096.0 * (150.0 / 34.0);
 
     public static final Length WHEEL_DIAMETER_INCHES = Length.fromInches(4.0625);
     public static final Length WHEELBASE_INCHES = Length.fromInches(28.0);

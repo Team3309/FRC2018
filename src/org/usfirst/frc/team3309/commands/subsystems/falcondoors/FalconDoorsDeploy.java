@@ -11,8 +11,7 @@ public class FalconDoorsDeploy extends InstantCommand {
 
     @Override
     protected void execute() {
-        Robot.falconDoors.setLeftSolenoidForward();
-        Robot.falconDoors.setRightSolenoidForward();
+        Robot.falconDoors.setOut();
     }
 
 }

@@ -13,7 +13,7 @@ public class LiftSetClimbMode extends InstantCommand {
     @Override
     protected void execute() {
         Robot.lift.changeToPercentMode();
-        Robot.lift.setLiftShifter(DoubleSolenoid.Value.kForward);
+        Robot.lift.setLiftShifter(true);
     }
 
 }
