@@ -2,6 +2,8 @@ package org.usfirst.frc.team3309.subsystems;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import org.usfirst.frc.team3309.commands.subsystems.arms.ArmsIntake;
+import org.usfirst.frc.team3309.commands.subsystems.arms.ArmsOpen;
 import org.usfirst.frc.team3309.robot.Constants;
 
 public class Arms extends Subsystem {
@@ -14,6 +16,7 @@ public class Arms extends Subsystem {
 
     @Override
     protected void initDefaultCommand() {
+        setDefaultCommand(new ArmsIntake());
     }
 
     public void setRightActuator(DoubleSolenoid.Value value) {
