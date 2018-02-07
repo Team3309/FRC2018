@@ -88,7 +88,7 @@ public class InputXbox extends Joystick
      * There are two ways to make an InputXbox. With this constructor,
      * you can specify which port you expect the controller to be on.
      *
-     * @param port
+     * @param port Joystick port on Driver Station
      */
     public InputXbox(final int port)
     {
@@ -125,14 +125,14 @@ public class InputXbox extends Joystick
     }
 
     /**
-     * Creates buttonA deadzone, but without clipping the lower values.
+     * Creates a deadzone, but without clipping the lower values.
      * turns this
      * |--1--2--3--4--5--|
      * into this
      * ______|-1-2-3-4-5-|
      *
-     * @param input
-     * @param deadZoneSize
+     * @param input input value to clamp
+     * @param deadZoneSize size of deadzone
      * @return adjusted_input
      */
     private static double createDeadZone(double input, double deadZoneSize)
@@ -179,7 +179,7 @@ public class InputXbox extends Joystick
      */
     public void setRumble(HAND hand, double intensity)
     {
-        final float amount = new Float(intensity);
+        final float amount = (float)intensity;
 
         if(hand == HAND.LEFT)
         {
@@ -198,7 +198,7 @@ public class InputXbox extends Joystick
      */
     public void setRumble(double intensity)
     {
-        final float amount = new Float(intensity);
+        final float amount = (float)intensity;
 
         controller.setRumble(RumbleType.kLeftRumble, amount);
         controller.setRumble(RumbleType.kRightRumble, amount);
@@ -250,7 +250,7 @@ public class InputXbox extends Joystick
         /**
          * Constructor
          *
-         * @param value
+         * @param value angle value
          */
         DPAD(final int value)
         {
@@ -260,7 +260,7 @@ public class InputXbox extends Joystick
         /**
          * Convert integers to DPAD values
          *
-         * @param angle
+         * @param angle angle to convert to enum instance
          * @return DPAD with matching angle
          */
         public static DPAD getEnum(int angle)
@@ -271,11 +271,11 @@ public class InputXbox extends Joystick
 
             DPAD[] all = DPAD.values();
 
-            for(int i = 0; i < all.length; i++)
+            for (DPAD dpad : all)
             {
-                if(all[i].value == angle)
+                if (dpad.value == angle)
                 {
-                    return all[i];
+                    return dpad;
                 }
             }
             // I don't know what to do here
@@ -307,8 +307,8 @@ public class InputXbox extends Joystick
         /**
          * Constructor
          *
-         * @param parent
-         * @param hand
+         * @param parent Controller thumbstick resides on
+         * @param hand Side of the joystick the thumbstick resides on
          */
         Thumbstick(final Joystick parent, final HAND hand)
         {
@@ -363,8 +363,8 @@ public class InputXbox extends Joystick
         /**
          * magnitude
          *
-         * @param x
-         * @param y
+         * @param x x coordinate
+         * @param y y coordinate
          * @return Magnitude of thing
          */
         private double magnitude(double x, double y)
@@ -378,7 +378,7 @@ public class InputXbox extends Joystick
         /**
          * angleToSquareSpace
          *
-         * @param angle
+         * @param angle angle to convert
          * @return Number between 0 and PI/4
          */
         private double angleToSquareSpace(double angle)
@@ -394,9 +394,9 @@ public class InputXbox extends Joystick
         /**
          * scaleMagnitude
          *
-         * @param x
-         * @param y
-         * @return
+         * @param x x coordinate
+         * @param y y coordinate
+         * @return scaled magnitude
          */
         private double scaleMagnitude(double x, double y)
         {
@@ -516,7 +516,7 @@ public class InputXbox extends Joystick
         /**
          * Set the X axis deadzone of this thumbstick
          *
-         * @param number
+         * @param number New deadzone value
          */
         public void setXDeadZone(double number)
         {
@@ -526,7 +526,7 @@ public class InputXbox extends Joystick
         /**
          * Set the Y axis deadzone of this thumbstick
          *
-         * @param number
+         * @param number New deadzone value
          */
         public void setYDeadZone(double number)
         {
@@ -536,7 +536,7 @@ public class InputXbox extends Joystick
         /**
          * Set both axis deadzones of this thumbstick
          *
-         * @param number
+         * @param number New deadzone value
          */
         public void setDeadZone(double number)
         {
@@ -563,8 +563,8 @@ public class InputXbox extends Joystick
         /**
          * Constructor
          *
-         * @param joystick
-         * @param hand
+         * @param joystick Joystick the trigger resides on
+         * @param hand Side of the joystick the trigger resides on
          */
         Trigger(final Joystick joystick, final HAND hand)
         {
@@ -634,7 +634,7 @@ public class InputXbox extends Joystick
         /**
          * Set the deadzone of this trigger
          *
-         * @param number
+         * @param number New deadzone value
          */
         public void setTriggerDeadZone(double number)
         {
@@ -644,7 +644,7 @@ public class InputXbox extends Joystick
         /**
          * How far you need to press this trigger to activate buttonA button press
          *
-         * @param number
+         * @param number New deadzone value
          */
         public void setTriggerSensitivity(double number)
         {
@@ -673,7 +673,7 @@ public class InputXbox extends Joystick
         /**
          * Constructor
          *
-         * @param parent
+         * @param parent Joystick the DirectionalPad resides on
          */
         DirectionalPad(final Joystick parent)
         {
@@ -748,8 +748,8 @@ public class InputXbox extends Joystick
             /**
              * Constructor
              *
-             * @param parent
-             * @param dPadDirection
+             * @param parent Joystick the DirectionalPad resides on
+             * @param dPadDirection inital direction of the pad
              */
             DPadButton(final DirectionalPad parent, final DPAD dPadDirection)
             {

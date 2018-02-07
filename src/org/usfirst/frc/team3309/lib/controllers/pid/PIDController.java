@@ -1,6 +1,5 @@
 package org.usfirst.frc.team3309.lib.controllers.pid;
 
-import edu.wpi.first.networktables.NetworkTable;
 import org.usfirst.frc.team3309.lib.LibTimer;
 import org.usfirst.frc.team3309.lib.controllers.Controller2;
 import org.usfirst.frc.team3309.lib.controllers.interfaces.Finishable;

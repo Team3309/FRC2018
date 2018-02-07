@@ -8,7 +8,7 @@ public class Length {
     * @param length inches
     * */
     private Length(double length) {
-        this.length = length;
+        Length.length = length;
     }
 
     public static Length fromInches(double inches) {

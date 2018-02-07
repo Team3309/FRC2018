@@ -33,10 +33,11 @@ public class BlackBox {
 			}
 			file.createNewFile();
 			pw = new PrintWriter(file);
-			String headersString = "Time,";
-			for (int i = 0; i < headers.length; i++) {
-				headersString += headers[i] + ",";
-			}
+			StringBuilder headersString = new StringBuilder("Time,");
+            for (String header : headers)
+            {
+                headersString.append(header).append(",");
+            }
 			pw.println("Team 3309");
 			pw.println(simpleFormat.format(new Date()));
 			pw.println(headersString);
@@ -49,10 +50,11 @@ public class BlackBox {
 
 	public static void writeLog(String... data) {
 		if (pw != null) {
-			String input = "";
-			for (int i = 0; i < data.length; i++) {
-				input += data[i] + ",";
-			}
+			StringBuilder input = new StringBuilder();
+            for (String val : data)
+            {
+                input.append(val).append(",");
+            }
 			DateFormat simpleFormat = new SimpleDateFormat("HH:MM:ss");
 			pw.println(simpleFormat.format(new Date()) + "," + input);
 			pw.flush();

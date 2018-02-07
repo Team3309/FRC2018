@@ -3,14 +3,12 @@ package org.usfirst.frc.team3309.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.kauailabs.navx.frc.AHRS;
-import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveTeleop;
 import org.usfirst.frc.team3309.lib.actuators.TalonSRXMC;
 import org.usfirst.frc.team3309.lib.actuators.VictorSPXMC;
@@ -105,19 +103,18 @@ public class Drive extends Subsystem {
     }
 
     public void sendToDashboard() {
-        NetworkTable table = NetworkTable.getTable("Drive");
-        table.putNumber("Inches pos: ", encoderCountsToInches(getEncoderPos()));
-        table.putNumber("Inches vel: ", encoderCountsToInches(getEncoderVelocity()));
-        table.putNumber("Inches pos left: ", encoderCountsToInches(getLeftEncoder()));
-        table.putNumber("Inches pos right: ", encoderCountsToInches(getRightEncoder()));
-        table.putNumber("Enc pos: ", getEncoderPos());
-        table.putNumber("Enc vel: ", getEncoderVelocity());
-        table.putNumber("Left pos: ", getLeftEncoder());
-        table.putNumber("Right pos: ", getRightEncoder());
-        table.putNumber("Left vel: ", getLeftVelocity());
-        table.putNumber("Right vel: ", getRightVelocity());
-        table.putNumber("Ang pos: ", getAngPos());
-        table.putNumber("Ang vel: ", getAngVel());
+        NetworkTable table = NetworkTableInstance.getDefault().getTable("Drive");
+        table.getEntry("Position (Inches): ").setNumber(encoderCountsToInches(getEncoderPos()));
+        table.getEntry("Velocity (Inches): ").setNumber(encoderCountsToInches(getEncoderVelocity()));
+        table.getEntry("Left Position (Inches): ").setNumber(encoderCountsToInches(getLeftEncoder()));
+        table.getEntry("Right Position (Inches): ").setNumber(encoderCountsToInches(getRightEncoder()));
+        table.getEntry("Position (Raw): ").setNumber(getEncoderPos());
+        table.getEntry("Velocity (Raw): ").setNumber(getEncoderVelocity());
+        table.getEntry("Left Position (Raw): ").setNumber(encoderCountsToInches(getLeftEncoder()));
+        table.getEntry("Right Position (Raw): ").setNumber(encoderCountsToInches(getRightEncoder()));
+        table.getEntry("Left Velocity (Raw): ").setNumber(getLeftVelocity());
+        table.getEntry("Angular Position: ").setNumber(getAngPos());
+        table.getEntry("Angular Velocity: ").setNumber(getAngVel());
     }
 
     public void changeToBrakeMode() {

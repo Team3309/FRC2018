@@ -4,7 +4,6 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.usfirst.frc.team3309.lib.actuators.TalonSRXMC;
-import org.usfirst.frc.team3309.lib.actuators.VictorSPXMC;
 import org.usfirst.frc.team3309.robot.Constants;
 
 public class BeltBar extends Subsystem {
