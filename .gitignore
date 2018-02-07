@@ -1,5 +1,8 @@
 .classpath
 .settings
+.gradle
+.idea/workspace.xml
+out
 bin
 build
 dist
