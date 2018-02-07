@@ -1,15 +1,15 @@
-package org.usfirst.frc.team3309.commands.subsystems.intake;
+package org.usfirst.frc.team3309.commands.subsystems.rollers;
 
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team3309.robot.OI;
 import org.usfirst.frc.team3309.robot.Robot;
 
-public class IntakeTeleop extends Command {
+public class RollersTeleop extends Command {
 
     private final double MIN_POWER = 0.52;
 
-    public IntakeTeleop() {
-        requires(Robot.intake);
+    public RollersTeleop() {
+        requires(Robot.rollers);
     }
 
     @Override
@@ -17,9 +17,9 @@ public class IntakeTeleop extends Command {
         double leftTrigger = OI.driverRemote.leftTrigger.getX();
         double rightTrigger = OI.driverRemote.rightTrigger.getX();
         if (Math.abs(leftTrigger) > MIN_POWER) {
-            Robot.intake.setLeftRight(leftTrigger, leftTrigger);
+            Robot.rollers.setLeftRight(leftTrigger, leftTrigger);
         } else {
-            Robot.intake.setLeftRight(-rightTrigger, -rightTrigger);
+            Robot.rollers.setLeftRight(-rightTrigger, -rightTrigger);
         }
     }
 

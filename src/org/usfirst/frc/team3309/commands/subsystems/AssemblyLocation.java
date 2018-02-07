@@ -17,12 +17,8 @@ public enum AssemblyLocation {
         this.elevatorPosition = elevatorPosition;
     }
 
-    public double getBeltBarPosition() {
-        return beltBarPosition;
-    }
+    public double getBeltBarPosition() { return beltBarPosition; }
 
-    public double getElevatorPosition() {
-        return elevatorPosition;
-    }
+    public double getElevatorPosition() { return elevatorPosition; }
 
 }

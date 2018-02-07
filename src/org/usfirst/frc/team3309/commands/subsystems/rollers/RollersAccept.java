@@ -1,20 +1,20 @@
-package org.usfirst.frc.team3309.commands.subsystems.intake;
+package org.usfirst.frc.team3309.commands.subsystems.rollers;
 
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team3309.robot.Robot;
 
-public class IntakeAccept extends Command {
+public class RollersAccept extends Command {
 
     private final double intakeRollerPower;
 
-    public IntakeAccept(double intakeRollerPower) {
+    public RollersAccept(double intakeRollerPower) {
         this.intakeRollerPower = intakeRollerPower;
-        requires(Robot.intake);
+        requires(Robot.rollers);
     }
 
     @Override
     protected void execute() {
-        Robot.intake.setLeftRight(intakeRollerPower, intakeRollerPower);
+        Robot.rollers.setLeftRight(intakeRollerPower, intakeRollerPower);
     }
 
     @Override

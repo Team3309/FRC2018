@@ -32,11 +32,10 @@ public class Lift extends Subsystem {
         lift0.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0,
                 0);
         lift0.set(ControlMode.Position, 0.0);
-        lift1.set(ControlMode.Follower, lift0.getDeviceID());
-        lift2.set(ControlMode.Follower, lift0.getDeviceID());
-        lift3.set(ControlMode.Follower, lift0.getDeviceID());
-        lift3.set(ControlMode.Follower, lift0.getDeviceID());
-        lift4.set(ControlMode.Follower, lift0.getDeviceID());
+        lift1.follow(lift0);
+        lift2.follow(lift0);
+        lift3.follow(lift0);
+        lift4.follow(lift0);
     }
 
     @Override

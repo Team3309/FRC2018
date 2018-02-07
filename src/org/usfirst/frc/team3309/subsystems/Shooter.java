@@ -6,7 +6,7 @@ import org.usfirst.frc.team3309.robot.Constants;
 
 public class Shooter extends Subsystem {
 
-    private Solenoid actuator = new Solenoid(Constants.SHOOTER_0);
+    private Solenoid actuator = new Solenoid(Constants.SHOOTER_SHIFTER);
 
     public Shooter() {
     }

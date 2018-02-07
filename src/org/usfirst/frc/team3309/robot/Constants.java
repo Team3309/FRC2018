@@ -8,32 +8,33 @@ import java.util.ArrayList;
 public class Constants {
 
     // drive
-    public static final int DRIVE_RIGHT_0_ID = 3;
-    public static final int DRIVE_RIGHT_1_ID = 2;
-    public static final int DRIVE_RIGHT_2_ID = 4;
+    public static final int DRIVE_RIGHT_0_ID = 11;
+    public static final int DRIVE_RIGHT_1_ID = 13;
+    public static final int DRIVE_RIGHT_2_ID = 15;
 
-    public static final int DRIVE_LEFT_0_ID = 14;
-    public static final int DRIVE_LEFT_1_ID = 15;
-    public static final int DRIVE_LEFT_2_ID = 16;
+    public static final int DRIVE_LEFT_0_ID = 10;
+    public static final int DRIVE_LEFT_1_ID = 12;
+    public static final int DRIVE_LEFT_2_ID = 14;
 
-    public static final int SHIFTER = 7;
+    public static final int SHIFTER = 0;
 
-    // intake
-    public static final int INTAKE_LEFT_ROLLER = 0;
-    public static final int INTAKE_RIGHT_ROLLER = 1;
+    // roller
+    public static final int ROLLER_LEFT = 40;
+    public static final int ROLLER_RIGHT = 41;
 
-    public static final int INTAKE_HARDSTOP_ACTUATOR_A = 0;
-    public static final int INTAKE_HARDSTOP_ACTUATOR_B = 1;
+    // arms
+    public static final int ARMS_LEFT_ACTUATOR_A = 0;
+    public static final int ARMS_LEFT_ACTUATOR_B = 1;
 
-    public static final int INTAKE_INNER_ACTUATOR_A = 2;
-    public static final int INTAKE_INNER_ACTUATOR_B = 3;
+    public static final int ARMS_RIGHT_ACTUATOR_A = 2;
+    public static final int ARMS_RIGHT_ACTUATOR_B = 3;
 
     // lift
-    public static final int LIFT_0 = 0;
-    public static final int LIFT_1 = 0;
-    public static final int LIFT_2 = 0;
-    public static final int LIFT_3 = 0;
-    public static final int LIFT_4 = 0;
+    public static final int LIFT_0 = 20;
+    public static final int LIFT_1 = 21;
+    public static final int LIFT_2 = 22;
+    public static final int LIFT_3 = 23;
+    public static final int LIFT_4 = 24;
 
     public static final int LIFT_SHIFTER_A = 4;
     public static final int LIFT_SHIFTER_B = 5;
@@ -42,11 +43,10 @@ public class Constants {
     public static final int LIFT_BOTTOM_LIMIT_SWITCH = 1;
 
     // beltbar
-    public static final int BELTBAR_0 = 0;
-    public static final int BELTBAR_1 = 0;
+    public static final int BELTBAR_0 = 30;
 
     // shooter
-    public static final int SHOOTER_0 = 0;
+    public static final int SHOOTER_SHIFTER = 0;
 
     // falcon doors
     public static final int FALCONDOORS_LEFT_SOLENOID = 0;

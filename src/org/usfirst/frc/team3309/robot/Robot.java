@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team3309.commands.subsystems.lift.LiftCheckLimits;
 import org.usfirst.frc.team3309.subsystems.*;
 
@@ -17,11 +18,12 @@ import java.util.logging.Logger;
 public class Robot extends TimedRobot {
 
     public static Drive drive;
-    public static Intake intake;
     public static Lift lift;
     public static BeltBar beltBar;
     public static Shooter shooter;
     public static FalconDoors falconDoors;
+    public static Arms arms;
+    public static Rollers rollers;
 
     private UsbCamera cam;
     private Compressor c;
@@ -36,23 +38,24 @@ public class Robot extends TimedRobot {
         cam = CameraServer.getInstance().startAutomaticCapture();
         cam.setFPS(15);
         drive = new Drive();
-        intake = new Intake();
         lift = new Lift();
         beltBar = new BeltBar();
         shooter = new Shooter();
         falconDoors = new FalconDoors();
+        arms = new Arms();
+        rollers = new Rollers();
         oi = new OI();
         c = new Compressor();
         c.start();
         drive.sendToDashboard();
-        reset();
+        drive.resetDrive();
         AutoModeExecutor.displayAutos();
     }
 
     @Override
     public void autonomousInit() {
         logger.info("autonomous init");
-        reset();
+        drive.resetDrive();
         autoCommand = AutoModeExecutor.getAutoSelected();
         logger.info("Running " + autoCommand.getName());
         if (autoCommand != null) {
@@ -72,7 +75,7 @@ public class Robot extends TimedRobot {
         if (autoCommand != null) {
             autoCommand.cancel();
         }
-        reset();
+        drive.resetDrive();
         drive.setHighGear();
         drive.changeToBrakeMode();
         new LiftCheckLimits().start();
@@ -82,6 +85,13 @@ public class Robot extends TimedRobot {
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
         drive.sendToDashboard();
+        SmartDashboard.putData(drive);
+        SmartDashboard.putData(lift);
+        SmartDashboard.putData(beltBar);
+        SmartDashboard.putData(shooter);
+        SmartDashboard.putData(falconDoors);
+        SmartDashboard.putData(arms);
+        SmartDashboard.putData(rollers);
     }
 
     @Override
@@ -93,8 +103,5 @@ public class Robot extends TimedRobot {
         drive.resetDrive();
     }
 
-    public void reset() {
-        drive.resetDrive();
-    }
 
 }

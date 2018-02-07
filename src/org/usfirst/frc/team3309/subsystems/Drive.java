@@ -5,7 +5,9 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
@@ -26,18 +28,18 @@ public class Drive extends Subsystem {
 
     private Solenoid shifter = new Solenoid(Constants.SHIFTER);
 
-    private ADXRS450_Gyro gyro = new ADXRS450_Gyro();
+    private AHRS navX = new AHRS(SerialPort.Port.kMXP);
 
     private double goalPos;
 
     public Drive() {
         left0.set(ControlMode.PercentOutput, 0);
-        left1.set(ControlMode.Follower, left0.getDeviceID());
-        left2.set(ControlMode.Follower, left0.getDeviceID());
+        left1.follow(left0);
+        left2.follow(left0);
 
         right0.set(ControlMode.PercentOutput, 0);
-        right1.set(ControlMode.Follower, right0.getDeviceID());
-        right2.set(ControlMode.Follower, right0.getDeviceID());
+        right1.follow(right0);
+        right2.follow(right0);
 
         setHighGear();
         changeToBrakeMode();
@@ -65,7 +67,7 @@ public class Drive extends Subsystem {
     public void resetDrive() {
         left0.getSensorCollection().setAnalogPosition(0, 0);
         right0.getSensorCollection().setAnalogPosition(0, 0);
-        gyro.reset();
+        navX.reset();
         changeToBrakeMode();
         setLowGear();
     }
@@ -95,11 +97,11 @@ public class Drive extends Subsystem {
     }
 
     public double getAngPos() {
-        return gyro.getAngle();
+        return navX.getAngle();
     }
 
     public double getAngVel() {
-        return gyro.getRate();
+        return navX.getRate();
     }
 
     public void sendToDashboard() {
@@ -164,9 +166,7 @@ public class Drive extends Subsystem {
         right0.changeToVelocityMode();
     }
 
-    public double getGoalPos() {
-        return goalPos;
-    }
+    public double getGoalPos() { return goalPos; }
 
     public void setGoalPos(double goalPos) {
         this.goalPos = goalPos;
