@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.usfirst.frc.team3309.commands.autos.NoActionsAuto;
+import org.usfirst.frc.team3309.commands.autos.NoActionAuto;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveForward;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DrivePath;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveTurn;
@@ -27,7 +27,7 @@ public class AutoModeExecutor {
             .listFiles();
 
     public static void displayAutos() {
-        autos.addDefault("No Action", new NoActionsAuto());
+        autos.addDefault("No Action", new NoActionAuto());
         autos.addObject("DriveForwardAuto", new DriveForward(Length.fromInches(30), 0));
         autos.addObject("Figure Eight Path", new DrivePath(Constants.figureEightPath));
         autos.addObject("Sigmoid Path", new DrivePath(Constants.sigmoidPath));

@@ -7,7 +7,8 @@ public enum AssemblyLocation {
     SWITCH_UP(0, 0),
     SWITCH_DOWN(0, 0),
     HOLD_CUBE(0, 0),
-    TUCK_IN_CUBE(0, 0);
+    TUCK_IN_CUBE(0, 0),
+    CLIMB_MODE(0, 0);
 
     private double beltBarPosition;
     private double elevatorPosition;

@@ -68,7 +68,7 @@ public class Constants {
     public static final ArrayList<Waypoint> toSwitchPath = new ArrayList<>();
 
 
-    static {
+    static  {
         figureEightPath.add(new Waypoint(32.470, 1.1821));
         figureEightPath.add(new Waypoint(32.470, -1.1821));
         figureEightPath.add(new Waypoint(22.140, -1.1571));
