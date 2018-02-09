@@ -5,10 +5,14 @@ public class Length {
     private static double length;
 
     /*
-    * @param length inches
-    * */
+     * @param length inches
+     * */
     private Length(double length) {
         Length.length = length;
+    }
+
+    public static Length fromLiz(double lizzes) {
+        return fromInches(lizzes / 62);
     }
 
     public static Length fromInches(double inches) {
@@ -33,6 +37,10 @@ public class Length {
 
     public double toMeters() {
         return length * 39.3701;
+    }
+
+    public double toLizes() {
+        return length * 62;
     }
 
 }
