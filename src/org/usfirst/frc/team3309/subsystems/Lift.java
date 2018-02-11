@@ -106,5 +106,4 @@ public class Lift extends Subsystem {
         return bottomLimitSwitch.isSwitchSet();
     }
 
-
 }

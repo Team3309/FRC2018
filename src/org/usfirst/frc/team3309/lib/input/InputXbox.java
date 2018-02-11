@@ -9,37 +9,36 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  *
  * @author AJ Granowski & 4624 Owatonna Robotics
  * @version 2015
- *          <p>
- *          This class wraps around the Joystick class in order to make
- *          working with Xbox360 controllers less of buttonA pain.
- *          <p>
- *          The values from this class can be used in two ways. One could
- *          either check each Button every cycle with .get(), or they
- *          could call commands directly from the Buttons with .whenPressed()
- *          <p>
- *          USAGE:
- *          // Initialization
- *          myXboxController = new InputXbox( <port the controller is on (starts at 0)> );
- *          myXboxController.leftStick.setThumbstickDeadZone( .2 );  // Optional. See code below for defaults.
- *          <p>
- *          // Using buttons
- *          myXboxController.buttonA.whenPressed( new MyCommand() );
- *          myXboxController.leftBumper.toggleWhenPressed( new MyCommand() );
- *          myXboxController.rightStick.whenPressed( new MyCommand() );
- *          <p>
- *          // Getting values directly
- *          if( myXboxController.leftStick.getY() > .4 ) ...
- *          <p>
- *          // Support of legacy methods (NOTE: These values are straight from the Joystick class. No deadzone stuff or anything)
- *          if( xboxController.getX() > .4 ) ...
- *          <p>
- *          NOTES:
- *          Although I have confidence that this will work, not everything has been tested.
- *          This should work for the 2015 WPILib. The mappings of axis's and buttons may change in later years.
- *          I am not buttonA good Java programmer.
+ * <p>
+ * This class wraps around the Joystick class in order to make
+ * working with Xbox360 controllers less of buttonA pain.
+ * <p>
+ * The values from this class can be used in two ways. One could
+ * either check each Button every cycle with .get(), or they
+ * could call commands directly from the Buttons with .whenPressed()
+ * <p>
+ * USAGE:
+ * // Initialization
+ * myXboxController = new InputXbox( <port the controller is on (starts at 0)> );
+ * myXboxController.leftStick.setThumbstickDeadZone( .2 );  // Optional. See code below for defaults.
+ * <p>
+ * // Using buttons
+ * myXboxController.buttonA.whenPressed( new MyCommand() );
+ * myXboxController.leftBumper.toggleWhenPressed( new MyCommand() );
+ * myXboxController.rightStick.whenPressed( new MyCommand() );
+ * <p>
+ * // Getting values directly
+ * if( myXboxController.leftStick.getY() > .4 ) ...
+ * <p>
+ * // Support of legacy methods (NOTE: These values are straight from the Joystick class. No deadzone stuff or anything)
+ * if( xboxController.getX() > .4 ) ...
+ * <p>
+ * NOTES:
+ * Although I have confidence that this will work, not everything has been tested.
+ * This should work for the 2015 WPILib. The mappings of axis's and buttons may change in later years.
+ * I am not buttonA good Java programmer.
  */
-public class InputXbox extends Joystick
-{
+public class InputXbox extends Joystick {
 
     /* Default Values */
     private static final double DEFAULT_THUMBSTICK_DEADZONE = 0.1;  // Jiggle room for the thumbsticks
@@ -90,8 +89,7 @@ public class InputXbox extends Joystick
      *
      * @param port Joystick port on Driver Station
      */
-    public InputXbox(final int port)
-    {
+    public InputXbox(final int port) {
         super(port);  // Extends Joystick...
 
         /* Initialize */
@@ -119,8 +117,7 @@ public class InputXbox extends Joystick
      * as it is unlikely that anything else but the InputXbox will be
      * connected.
      */
-    public InputXbox()
-    {
+    public InputXbox() {
         this(0);
     }
 
@@ -131,18 +128,16 @@ public class InputXbox extends Joystick
      * into this
      * ______|-1-2-3-4-5-|
      *
-     * @param input input value to clamp
+     * @param input        input value to clamp
      * @param deadZoneSize size of deadzone
      * @return adjusted_input
      */
-    private static double createDeadZone(double input, double deadZoneSize)
-    {
+    private static double createDeadZone(double input, double deadZoneSize) {
         final double negative;
         double deadZoneSizeClamp = deadZoneSize;
         double adjusted;
 
-        if(deadZoneSizeClamp < 0 || deadZoneSizeClamp >= 1)
-        {
+        if (deadZoneSizeClamp < 0 || deadZoneSizeClamp >= 1) {
             deadZoneSizeClamp = 0;  // Prevent any weird errors
         }
 
@@ -158,16 +153,14 @@ public class InputXbox extends Joystick
     /**
      * @return The port of this InputXbox
      */
-    public int getPort()
-    {
+    public int getPort() {
         return port;
     }
 
     /**
      * @return The Joystick of this InputXbox
      */
-    public Joystick getJoystick()
-    {
+    public Joystick getJoystick() {
         return controller;
     }
 
@@ -177,16 +170,12 @@ public class InputXbox extends Joystick
      * @param hand      The side of the controller to rumble
      * @param intensity How strong the rumble is
      */
-    public void setRumble(HAND hand, double intensity)
-    {
-        final float amount = (float)intensity;
+    public void setRumble(HAND hand, double intensity) {
+        final float amount = (float) intensity;
 
-        if(hand == HAND.LEFT)
-        {
+        if (hand == HAND.LEFT) {
             controller.setRumble(RumbleType.kLeftRumble, amount);
-        }
-        else
-        {
+        } else {
             controller.setRumble(RumbleType.kRightRumble, amount);
         }
     }
@@ -196,9 +185,8 @@ public class InputXbox extends Joystick
      *
      * @param intensity How strong the rumble is
      */
-    public void setRumble(double intensity)
-    {
-        final float amount = (float)intensity;
+    public void setRumble(double intensity) {
+        final float amount = (float) intensity;
 
         controller.setRumble(RumbleType.kLeftRumble, amount);
         controller.setRumble(RumbleType.kRightRumble, amount);
@@ -208,8 +196,7 @@ public class InputXbox extends Joystick
      * Set both axis deadzones of both thumbsticks
      * @param number
      */
-    public void setDeadZone(double number)
-    {
+    public void setDeadZone(double number) {
         leftStick.setDeadZone(number);
         rightStick.setDeadZone(number);
     }
@@ -222,8 +209,7 @@ public class InputXbox extends Joystick
      * Rather than use an integer (which might not be what we expect)
      * we use an enum which has buttonA set amount of possibilities.
      */
-    public enum HAND
-    {
+    public enum HAND {
         LEFT, RIGHT
     }
 
@@ -231,8 +217,7 @@ public class InputXbox extends Joystick
      * This is the relation of direction and number for .getPOV() used
      * in the DirectionalPad class.
      */
-    public enum DPAD
-    {
+    public enum DPAD {
         UP(0),
         UP_RIGHT(45),
         RIGHT(90),
@@ -252,8 +237,7 @@ public class InputXbox extends Joystick
          *
          * @param value angle value
          */
-        DPAD(final int value)
-        {
+        DPAD(final int value) {
             this.value = value;
         }
 
@@ -263,18 +247,15 @@ public class InputXbox extends Joystick
          * @param angle angle to convert to enum instance
          * @return DPAD with matching angle
          */
-        public static DPAD getEnum(int angle)
-        {
+        public static DPAD getEnum(int angle) {
             angle = Math.abs(angle);
             angle %= 360;
             angle = Math.round(angle / 45) * 45;    // May have rounding errors. Due to rounding errors.
 
             DPAD[] all = DPAD.values();
 
-            for (DPAD dpad : all)
-            {
-                if (dpad.value == angle)
-                {
+            for (DPAD dpad : all) {
+                if (dpad.value == angle) {
                     return dpad;
                 }
             }
@@ -291,8 +272,7 @@ public class InputXbox extends Joystick
      * This class is used to represent the thumbsticks on the
      * Xbox360 controller.
      */
-    public static class Thumbstick extends Button
-    {
+    public static class Thumbstick extends Button {
 
         /* Instance Values */
         private final Joystick parent;
@@ -308,10 +288,9 @@ public class InputXbox extends Joystick
          * Constructor
          *
          * @param parent Controller thumbstick resides on
-         * @param hand Side of the joystick the thumbstick resides on
+         * @param hand   Side of the joystick the thumbstick resides on
          */
-        Thumbstick(final Joystick parent, final HAND hand)
-        {
+        Thumbstick(final Joystick parent, final HAND hand) {
 
             /* Initialize */
             this.parent = parent;
@@ -319,14 +298,11 @@ public class InputXbox extends Joystick
             this.xDeadZone = DEFAULT_THUMBSTICK_DEADZONE;
             this.yDeadZone = DEFAULT_THUMBSTICK_DEADZONE;
 
-            if(hand == HAND.LEFT)
-            {
+            if (hand == HAND.LEFT) {
                 this.xAxisID = LEFT_THUMBSTICK_X_AXIS_ID;
                 this.yAxisID = LEFT_THUMBSTICK_Y_AXIS_ID;
                 this.pressedID = LEFT_THUMBSTIKC_BUTTON_ID;
-            }
-            else
-            {                                            // If right hand
+            } else {                                            // If right hand
                 this.xAxisID = RIGHT_THUMBSTICK_X_AXIS_ID;
                 this.yAxisID = RIGHT_THUMBSTICK_Y_AXIS_ID;
                 this.pressedID = RIGHT_THUMBSTICK_BUTTON_ID;
@@ -340,8 +316,7 @@ public class InputXbox extends Joystick
          *
          * @return X but with buttonA deadzone
          */
-        private double rawX()
-        {
+        private double rawX() {
             final double rawInput = parent.getRawAxis(xAxisID);
 
             return createDeadZone(rawInput, xDeadZone);
@@ -353,8 +328,7 @@ public class InputXbox extends Joystick
          *
          * @return Y but with buttonA deadzone
          */
-        private double rawY()
-        {
+        private double rawY() {
             final double rawInput = -parent.getRawAxis(yAxisID);    // -Y was up on our thumbsticks. Consider this buttonA fix?
 
             return createDeadZone(rawInput, yDeadZone);
@@ -367,8 +341,7 @@ public class InputXbox extends Joystick
          * @param y y coordinate
          * @return Magnitude of thing
          */
-        private double magnitude(double x, double y)
-        {
+        private double magnitude(double x, double y) {
             final double xSquared = Math.pow(x, 2);
             final double ySquared = Math.pow(y, 2);
 
@@ -381,8 +354,7 @@ public class InputXbox extends Joystick
          * @param angle angle to convert
          * @return Number between 0 and PI/4
          */
-        private double angleToSquareSpace(double angle)
-        {
+        private double angleToSquareSpace(double angle) {
             final double absAngle = Math.abs(angle);
             final double halfPi = Math.PI / 2;
             final double quarterPi = Math.PI / 4;
@@ -398,8 +370,7 @@ public class InputXbox extends Joystick
          * @param y y coordinate
          * @return scaled magnitude
          */
-        private double scaleMagnitude(double x, double y)
-        {
+        private double scaleMagnitude(double x, double y) {
             final double magnitude = magnitude(x, y);
             final double angle = Math.atan2(x, y);
             final double newAngle = angleToSquareSpace(angle);
@@ -411,8 +382,7 @@ public class InputXbox extends Joystick
 
         /* Extended Methods */
         @Override
-        public boolean get()
-        {
+        public boolean get() {
             return parent.getRawButton(pressedID);
         }
 
@@ -425,8 +395,7 @@ public class InputXbox extends Joystick
          *
          * @return Thumbstick hand
          */
-        public HAND getHand()
-        {
+        public HAND getHand() {
             return hand;
         }
 
@@ -435,8 +404,7 @@ public class InputXbox extends Joystick
          *
          * @return X with buttonA deadzone
          */
-        public double getX()
-        {
+        public double getX() {
             return rawX();
         }
 
@@ -445,8 +413,7 @@ public class InputXbox extends Joystick
          *
          * @return Y with buttonA deadzone
          */
-        public double getY()
-        {
+        public double getY() {
             return rawY();
         }
 
@@ -457,8 +424,7 @@ public class InputXbox extends Joystick
          *
          * @return Angle the thumbstick is pointing
          */
-        public double getAngle()
-        {
+        public double getAngle() {
             final double angle = Math.atan2(rawX(), rawY());
 
             return Math.toDegrees(angle);
@@ -469,12 +435,10 @@ public class InputXbox extends Joystick
          *
          * @return A number between 0 and 1
          */
-        public double getMagnitude()
-        {
+        public double getMagnitude() {
             double magnitude = scaleMagnitude(rawX(), rawY());
 
-            if(magnitude > 1)
-            {
+            if (magnitude > 1) {
                 magnitude = 1;  // Prevent any errors that might arise
             }
 
@@ -486,8 +450,7 @@ public class InputXbox extends Joystick
          *
          * @return True thumbstick position
          */
-        public double getTrueX()
-        {
+        public double getTrueX() {
             final double x = rawX();
             final double y = rawY();
             final double angle = Math.atan2(x, y);
@@ -500,8 +463,7 @@ public class InputXbox extends Joystick
          *
          * @return True thumbstick position
          */
-        public double getTrueY()
-        {
+        public double getTrueY() {
             final double x = rawX();
             final double y = rawY();
             final double angle = Math.atan2(x, y);
@@ -518,8 +480,7 @@ public class InputXbox extends Joystick
          *
          * @param number New deadzone value
          */
-        public void setXDeadZone(double number)
-        {
+        public void setXDeadZone(double number) {
             xDeadZone = number;
         }
 
@@ -528,8 +489,7 @@ public class InputXbox extends Joystick
          *
          * @param number New deadzone value
          */
-        public void setYDeadZone(double number)
-        {
+        public void setYDeadZone(double number) {
             yDeadZone = number;
         }
 
@@ -538,8 +498,7 @@ public class InputXbox extends Joystick
          *
          * @param number New deadzone value
          */
-        public void setDeadZone(double number)
-        {
+        public void setDeadZone(double number) {
             xDeadZone = number;
             yDeadZone = number;
         }
@@ -549,8 +508,7 @@ public class InputXbox extends Joystick
      * This class is used to represent one of the two
      * Triggers on an Xbox360 controller.
      */
-    public static class Trigger extends Button
-    {
+    public static class Trigger extends Button {
 
         /* Instance Values */
         private final Joystick parent;
@@ -564,10 +522,9 @@ public class InputXbox extends Joystick
          * Constructor
          *
          * @param joystick Joystick the trigger resides on
-         * @param hand Side of the joystick the trigger resides on
+         * @param hand     Side of the joystick the trigger resides on
          */
-        Trigger(final Joystick joystick, final HAND hand)
-        {
+        Trigger(final Joystick joystick, final HAND hand) {
 
             /* Initialize */
             this.parent = joystick;
@@ -579,8 +536,7 @@ public class InputXbox extends Joystick
 
         /* Extended Methods */
         @Override
-        public boolean get()
-        {
+        public boolean get() {
             return getX() > sensitivity;
         }
 
@@ -595,8 +551,7 @@ public class InputXbox extends Joystick
          * <p>
          * See which side of the controller this trigger is
          */
-        public HAND getHand()
-        {
+        public HAND getHand() {
             return hand;
         }
 
@@ -606,24 +561,19 @@ public class InputXbox extends Joystick
          *
          * @return How far its pressed
          */
-        public double getX()
-        {
+        public double getX() {
             final double rawInput;
 
-            if(hand == HAND.LEFT)
-            {
+            if (hand == HAND.LEFT) {
                 rawInput = parent.getRawAxis(LEFT_TRIGGER_AXIS_ID);
-            }
-            else
-            {
+            } else {
                 rawInput = parent.getRawAxis(RIGHT_TRIGGER_AXIS_ID);
             }
 
             return createDeadZone(rawInput, deadZone);
         }
 
-        public double getY()
-        {
+        public double getY() {
             return getX();    // Triggers have one dimensional movement. Use getX() instead
         }
 
@@ -636,8 +586,7 @@ public class InputXbox extends Joystick
          *
          * @param number New deadzone value
          */
-        public void setTriggerDeadZone(double number)
-        {
+        public void setTriggerDeadZone(double number) {
             this.deadZone = number;
         }
 
@@ -646,8 +595,7 @@ public class InputXbox extends Joystick
          *
          * @param number New deadzone value
          */
-        public void setTriggerSensitivity(double number)
-        {
+        public void setTriggerSensitivity(double number) {
             this.sensitivity = number;
         }
     }
@@ -655,8 +603,7 @@ public class InputXbox extends Joystick
     /**
      * This is buttonA weird object which is essentially just 8 buttons.
      */
-    public static class DirectionalPad extends Button
-    {
+    public static class DirectionalPad extends Button {
 
         public final Button up;
         public final Button upRight;
@@ -675,8 +622,7 @@ public class InputXbox extends Joystick
          *
          * @param parent Joystick the DirectionalPad resides on
          */
-        DirectionalPad(final Joystick parent)
-        {
+        DirectionalPad(final Joystick parent) {
 
             /* Initialize */
             this.parent = parent;
@@ -690,15 +636,13 @@ public class InputXbox extends Joystick
             this.upLeft = new DPadButton(this, DPAD.UP_LEFT);
         }
 
-        private int angle()
-        {
+        private int angle() {
             return parent.getPOV();
         }
 
         /* Extended Methods */
         @Override
-        public boolean get()
-        {
+        public boolean get() {
             return angle() != -1;
         }
 
@@ -714,8 +658,7 @@ public class InputXbox extends Joystick
          *
          * @return A number between 0 and 315 indicating direction
          */
-        public int getAngle()
-        {
+        public int getAngle() {
             return angle();
         }
 
@@ -728,8 +671,7 @@ public class InputXbox extends Joystick
          *
          * @return A DPAD direction
          */
-        public DPAD getDirection()
-        {
+        public DPAD getDirection() {
             return DPAD.getEnum(angle());
         }
 
@@ -737,8 +679,7 @@ public class InputXbox extends Joystick
          * This class is used to represent each of the 8 values buttonA
          * dPad has as buttonA button.
          */
-        public static class DPadButton extends Button
-        {
+        public static class DPadButton extends Button {
 
             /* Instance Values */
             private final DPAD direction;
@@ -748,11 +689,10 @@ public class InputXbox extends Joystick
             /**
              * Constructor
              *
-             * @param parent Joystick the DirectionalPad resides on
+             * @param parent        Joystick the DirectionalPad resides on
              * @param dPadDirection inital direction of the pad
              */
-            DPadButton(final DirectionalPad parent, final DPAD dPadDirection)
-            {
+            DPadButton(final DirectionalPad parent, final DPAD dPadDirection) {
 
                 /* Initialize */
                 this.direction = dPadDirection;
@@ -762,8 +702,7 @@ public class InputXbox extends Joystick
 
             /* Extended Methods */
             @Override
-            public boolean get()
-            {
+            public boolean get() {
                 return parent.getAngle() == direction.value;
             }
         }

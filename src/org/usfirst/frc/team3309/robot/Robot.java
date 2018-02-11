@@ -6,7 +6,9 @@ import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.hal.PDPJNI;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.usfirst.frc.team3309.commands.subsystems.arms.ArmsCheckForCube;
 import org.usfirst.frc.team3309.commands.subsystems.lift.LiftCheckLimits;
 import org.usfirst.frc.team3309.subsystems.*;
 
@@ -79,6 +81,7 @@ public class Robot extends TimedRobot {
         drive.setHighGear();
         drive.changeToBrakeMode();
         new LiftCheckLimits().start();
+        new ArmsCheckForCube().start();
     }
 
     @Override
@@ -92,10 +95,6 @@ public class Robot extends TimedRobot {
         SmartDashboard.putData(falconDoors);
         SmartDashboard.putData(arms);
         SmartDashboard.putData(rollers);
-    }
-
-    @Override
-    public void testPeriodic() {
     }
 
     @Override

@@ -1,9 +1,9 @@
 package org.usfirst.frc.team3309.subsystems;
 
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.usfirst.frc.team3309.commands.subsystems.arms.ArmsIntake;
-import org.usfirst.frc.team3309.commands.subsystems.arms.ArmsOpen;
 import org.usfirst.frc.team3309.robot.Constants;
 
 public class Arms extends Subsystem {
@@ -14,9 +14,10 @@ public class Arms extends Subsystem {
     private DoubleSolenoid rightActuator = new DoubleSolenoid(Constants.ARMS_RIGHT_ACTUATOR_A,
             Constants.ARMS_RIGHT_ACTUATOR_B);
 
+    private AnalogInput hasCubeSensor = new AnalogInput(Constants.ARMS_SHARP_SENSOR);
+
     @Override
     protected void initDefaultCommand() {
-        setDefaultCommand(new ArmsIntake());
     }
 
     public void setRightActuator(DoubleSolenoid.Value value) {
@@ -25,6 +26,10 @@ public class Arms extends Subsystem {
 
     public void setLeftActuator(DoubleSolenoid.Value value) {
         leftActuator.set(value);
+    }
+
+    public boolean isCubeIn() {
+        return hasCubeSensor.getAverageVoltage() > 0.7;
     }
 
 }

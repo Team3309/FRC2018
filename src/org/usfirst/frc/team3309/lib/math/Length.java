@@ -11,10 +11,6 @@ public class Length {
         Length.length = length;
     }
 
-    public static Length fromLiz(double lizzes) {
-        return fromInches(lizzes / 62);
-    }
-
     public static Length fromInches(double inches) {
         return new Length(inches);
     }
@@ -37,10 +33,6 @@ public class Length {
 
     public double toMeters() {
         return length * 39.3701;
-    }
-
-    public double toLizes() {
-        return length * 62;
     }
 
 }
