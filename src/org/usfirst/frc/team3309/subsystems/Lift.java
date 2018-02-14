@@ -5,7 +5,7 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import org.usfirst.frc.team3309.commands.subsystems.lift.LiftSet;
+import org.usfirst.frc.team3309.commands.subsystems.lift.LiftManualTest;
 import org.usfirst.frc.team3309.lib.actuators.TalonSRXMC;
 import org.usfirst.frc.team3309.lib.actuators.VictorSPXMC;
 import org.usfirst.frc.team3309.lib.sensors.LimitSwitch;
@@ -40,7 +40,8 @@ public class Lift extends Subsystem {
 
     @Override
     protected void initDefaultCommand() {
-        setDefaultCommand(new LiftSet(0));
+        setDefaultCommand(new LiftManualTest());
+     //   setDefaultCommand(new LiftSet(0));
     }
 
     /*
