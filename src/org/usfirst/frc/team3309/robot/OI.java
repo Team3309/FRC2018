@@ -26,7 +26,7 @@ public class OI {
 
     public OI() {
         driverRemote.leftBumper.whenPressed(new DriveSetLowGear());
-        driverRemote.leftBumper.whenReleased(new DriveSetHighGear());o
+        driverRemote.leftBumper.whenReleased(new DriveSetHighGear());
 
         driverRemote.backButton.whenPressed(new InterruptAll());
         operatorRemote.backButton.whenPressed(new InterruptAll());
