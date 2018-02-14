@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  * @version 2015
  * <p>
  * This class wraps around the Joystick class in order to make
- * working with Xbox360 controllers less of buttonA pain.
+ * working with Xbox360 controllers less of a pain.
  * <p>
  * The values from this class can be used in two ways. One could
  * either check each Button every cycle with .get(), or they
@@ -36,7 +36,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  * NOTES:
  * Although I have confidence that this will work, not everything has been tested.
  * This should work for the 2015 WPILib. The mappings of axis's and buttons may change in later years.
- * I am not buttonA good Java programmer.
+ * I am not a good Java programmer.
  */
 public class InputXbox extends Joystick {
 
@@ -207,7 +207,7 @@ public class InputXbox extends Joystick {
 
     /**
      * Rather than use an integer (which might not be what we expect)
-     * we use an enum which has buttonA set amount of possibilities.
+     * we use an enum which has a set amount of possibilities.
      */
     public enum HAND {
         LEFT, RIGHT
@@ -314,7 +314,7 @@ public class InputXbox extends Joystick {
          * + = right
          * - = left
          *
-         * @return X but with buttonA deadzone
+         * @return X but with a deadzone
          */
         private double rawX() {
             final double rawInput = parent.getRawAxis(xAxisID);
@@ -326,10 +326,10 @@ public class InputXbox extends Joystick {
          * + = up
          * - = down
          *
-         * @return Y but with buttonA deadzone
+         * @return Y but with a deadzone
          */
         private double rawY() {
-            final double rawInput = -parent.getRawAxis(yAxisID);    // -Y was up on our thumbsticks. Consider this buttonA fix?
+            final double rawInput = -parent.getRawAxis(yAxisID);    // -Y was up on our thumbsticks. Consider this a fix?
 
             return createDeadZone(rawInput, yDeadZone);
         }
@@ -402,7 +402,7 @@ public class InputXbox extends Joystick {
         /**
          * getRawX
          *
-         * @return X with buttonA deadzone
+         * @return X with a deadzone
          */
         public double getX() {
             return rawX();
@@ -411,7 +411,7 @@ public class InputXbox extends Joystick {
         /**
          * getRawY
          *
-         * @return Y with buttonA deadzone
+         * @return Y with a deadzone
          */
         public double getY() {
             return rawY();
@@ -591,7 +591,7 @@ public class InputXbox extends Joystick {
         }
 
         /**
-         * How far you need to press this trigger to activate buttonA button press
+         * How far you need to press this trigger to activate a button press
          *
          * @param number New deadzone value
          */
@@ -601,7 +601,7 @@ public class InputXbox extends Joystick {
     }
 
     /**
-     * This is buttonA weird object which is essentially just 8 buttons.
+     * This is a weird object which is essentially just 8 buttons.
      */
     public static class DirectionalPad extends Button {
 
@@ -667,7 +667,7 @@ public class InputXbox extends Joystick {
         /* Get Methods */
 
         /**
-         * Just like getAngle, but returns buttonA direction instead of an angle
+         * Just like getAngle, but returns a direction instead of an angle
          *
          * @return A DPAD direction
          */
@@ -676,8 +676,8 @@ public class InputXbox extends Joystick {
         }
 
         /**
-         * This class is used to represent each of the 8 values buttonA
-         * dPad has as buttonA button.
+         * This class is used to represent each of the 8 values a
+         * dPad has as a button.
          */
         public static class DPadButton extends Button {
 
