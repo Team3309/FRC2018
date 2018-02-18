@@ -16,7 +16,7 @@ public class Constants {
     public static final int DRIVE_LEFT_1_ID = 12;
     public static final int DRIVE_LEFT_2_ID = 14;
 
-    public static final int SHIFTER = 0;
+    public static final int SHIFTER = 7;
 
     // roller
     public static final int ROLLER_LEFT = 40;
@@ -38,7 +38,7 @@ public class Constants {
     public static final int LIFT_3 = 23;
     public static final int LIFT_4 = 24;
 
-    public static final int LIFT_SHIFTER = 5;
+    public static final int LIFT_SHIFTER = 6;
 
     public static final int LIFT_TOP_LIMIT_SWITCH = 0;
     public static final int LIFT_BOTTOM_LIMIT_SWITCH = 1;
@@ -47,10 +47,10 @@ public class Constants {
     public static final int BELTBAR_0 = 30;
 
     // shooter
-    public static final int SHOOTER_SHIFTER = 6;
+    public static final int SHOOTER_SHIFTER = 5;
 
     // falcon doors
-    public static final int FALCONDOORS_SOLENOID = 7;
+    public static final int FALCONDOORS_SOLENOID = 0;
 
     // robot constants
 

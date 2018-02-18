@@ -79,9 +79,8 @@ public class Robot extends TimedRobot {
         }
         drive.resetDrive();
         drive.setHighGear();
-        drive.changeToBrakeMode();
+        drive.changeToCoastMode();
         Scheduler.getInstance().add(new LiftCheckLimits());
-        new ArmsCheckForCube().start();
     }
 
     @Override

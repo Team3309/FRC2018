@@ -34,14 +34,15 @@ public class Drive extends Subsystem {
         left0.set(ControlMode.PercentOutput, 0);
         left1.follow(left0);
         left2.follow(left0);
+        left0.configOpenloopRamp(0.25, 0);
 
         right0.set(ControlMode.PercentOutput, 0);
         right1.follow(right0);
         right2.follow(right0);
+        right0.configOpenloopRamp(0.25, 0);
 
         setHighGear();
-  //      changeToBrakeMode();
-        changeToCoastMode();
+        changeToBrakeMode();
 
         left0.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 0);
         right0.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 0);
@@ -146,7 +147,7 @@ public class Drive extends Subsystem {
     }
 
     public void setRight(double value) {
-        right0.set(value);
+        right0.set(-value);
     }
 
     public void changeToPercentMode() {
