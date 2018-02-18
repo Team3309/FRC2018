@@ -40,7 +40,8 @@ public class Drive extends Subsystem {
         right2.follow(right0);
 
         setHighGear();
-        changeToBrakeMode();
+  //      changeToBrakeMode();
+        changeToCoastMode();
 
         left0.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 0);
         right0.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 0);

@@ -56,7 +56,7 @@ public class Constants {
 
     public static final double DRIVE_ENCODER_COUNTS_PER_REV = 1.5 * 4096.0 * (150.0 / 34.0);
 
-    public static final Length WHEEL_DIAMETER_INCHES = Length.fromInches(4.0625);
+    public static final Length WHEEL_DIAMETER_INCHES = Length.fromInches(6.0);
     public static final Length WHEELBASE_INCHES = Length.fromInches(28.0);
 
     public static final Length BELTBAR_ARM_LENGTH = Length.fromInches(9);

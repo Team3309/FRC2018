@@ -3,8 +3,10 @@ package org.usfirst.frc.team3309.subsystems;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import org.usfirst.frc.team3309.commands.subsystems.arms.ArmsCheckForCube;
 import org.usfirst.frc.team3309.commands.subsystems.arms.ArmsIntake;
 import org.usfirst.frc.team3309.robot.Constants;
+import org.usfirst.frc.team3309.robot.Robot;
 
 public class Arms extends Subsystem {
 
@@ -18,18 +20,34 @@ public class Arms extends Subsystem {
 
     @Override
     protected void initDefaultCommand() {
+        setDefaultCommand(new ArmsCheckForCube());
     }
 
-    public void setRightActuator(DoubleSolenoid.Value value) {
+    private void setRightActuator(DoubleSolenoid.Value value) {
         rightActuator.set(value);
     }
 
-    public void setLeftActuator(DoubleSolenoid.Value value) {
+    private void setLeftActuator(DoubleSolenoid.Value value) {
         leftActuator.set(value);
     }
 
     public boolean isCubeIn() {
         return hasCubeSensor.getAverageVoltage() > 0.7;
+    }
+
+    public void clampArms() {
+        setLeftActuator(DoubleSolenoid.Value.kForward);
+        setRightActuator(DoubleSolenoid.Value.kForward);
+    }
+
+    public void intakeArms() {
+        setLeftActuator(DoubleSolenoid.Value.kForward);
+        setRightActuator(DoubleSolenoid.Value.kReverse);
+    }
+
+    public void openArms() {
+        setLeftActuator(DoubleSolenoid.Value.kReverse);
+        setRightActuator(DoubleSolenoid.Value.kReverse);
     }
 
 }

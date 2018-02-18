@@ -3,6 +3,7 @@ package org.usfirst.frc.team3309.robot;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -79,7 +80,7 @@ public class Robot extends TimedRobot {
         drive.resetDrive();
         drive.setHighGear();
         drive.changeToBrakeMode();
-        new LiftCheckLimits().start();
+        Scheduler.getInstance().add(new LiftCheckLimits());
         new ArmsCheckForCube().start();
     }
 
@@ -99,6 +100,14 @@ public class Robot extends TimedRobot {
     @Override
     public void disabledPeriodic() {
         drive.resetDrive();
+    }
+
+    public static boolean isLeftSwitch() {
+        return DriverStation.getInstance().getGameSpecificMessage().charAt(0) == 'L';
+    }
+
+    public static boolean isLeftScale() {
+        return DriverStation.getInstance().getGameSpecificMessage().charAt(1) == 'L';
     }
 
 }
