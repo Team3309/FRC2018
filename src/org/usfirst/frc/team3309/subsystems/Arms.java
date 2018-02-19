@@ -4,9 +4,7 @@ import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.usfirst.frc.team3309.commands.subsystems.arms.ArmsCheckForCube;
-import org.usfirst.frc.team3309.commands.subsystems.arms.ArmsIntake;
 import org.usfirst.frc.team3309.robot.Constants;
-import org.usfirst.frc.team3309.robot.Robot;
 
 public class Arms extends Subsystem {
 

@@ -9,6 +9,7 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveTeleop;
 import org.usfirst.frc.team3309.lib.actuators.TalonSRXMC;
 import org.usfirst.frc.team3309.lib.actuators.VictorSPXMC;
@@ -44,8 +45,8 @@ public class Drive extends Subsystem {
         setHighGear();
         changeToBrakeMode();
 
-        left0.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 0);
-        right0.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 0);
+        left0.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
+        right0.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
 
         left0.setSensorPhase(false);
         right0.setSensorPhase(true);
@@ -64,9 +65,9 @@ public class Drive extends Subsystem {
         return inches * Constants.DRIVE_ENCODER_COUNTS_PER_REV / (Math.PI * Constants.WHEEL_DIAMETER_INCHES.toInches());
     }
 
-    public void resetDrive() {
-        left0.getSensorCollection().setAnalogPosition(0, 0);
-        right0.getSensorCollection().setAnalogPosition(0, 0);
+    public void reset() {
+        left0.getSensorCollection().setQuadraturePosition(0, 0);
+        right0.getSensorCollection().setQuadraturePosition(0, 0);
         navX.reset();
         changeToBrakeMode();
         setLowGear();
@@ -77,11 +78,11 @@ public class Drive extends Subsystem {
     }
 
     public double getLeftEncoder() {
-        return left0.getSensorCollection().getAnalogIn();
+        return left0.getSensorCollection().getQuadraturePosition();
     }
 
     public double getRightEncoder() {
-        return right0.getSensorCollection().getAnalogIn();
+        return right0.getSensorCollection().getQuadraturePosition();
     }
 
     public double getEncoderVelocity() {
@@ -89,11 +90,11 @@ public class Drive extends Subsystem {
     }
 
     public double getLeftVelocity() {
-        return left0.getSensorCollection().getAnalogInVel();
+        return left0.getSensorCollection().getQuadratureVelocity();
     }
 
     public double getRightVelocity() {
-        return right0.getSensorCollection().getAnalogInVel();
+        return right0.getSensorCollection().getQuadratureVelocity();
     }
 
     public double getAngPos() {
@@ -105,6 +106,7 @@ public class Drive extends Subsystem {
     }
 
     public void sendToDashboard() {
+        SmartDashboard.putData(this);
         NetworkTable table = NetworkTableInstance.getDefault().getTable("Drive");
         table.getEntry("Position (Inches): ").setNumber(encoderCountsToInches(getEncoderPos()));
         table.getEntry("Velocity (Inches): ").setNumber(encoderCountsToInches(getEncoderVelocity()));

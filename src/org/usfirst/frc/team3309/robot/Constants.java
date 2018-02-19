@@ -40,8 +40,7 @@ public class Constants {
 
     public static final int LIFT_SHIFTER = 6;
 
-    public static final int LIFT_TOP_LIMIT_SWITCH = 0;
-    public static final int LIFT_BOTTOM_LIMIT_SWITCH = 1;
+    public static final int LIFT_BOTTOM_LIMIT_SWITCH = 0;
 
     // beltbar
     public static final int BELTBAR_0 = 30;
@@ -54,7 +53,7 @@ public class Constants {
 
     // robot constants
 
-    public static final double DRIVE_ENCODER_COUNTS_PER_REV = 1.5 * 4096.0 * (150.0 / 34.0);
+    public static final double DRIVE_ENCODER_COUNTS_PER_REV = 4096.0 * 5;
 
     public static final Length WHEEL_DIAMETER_INCHES = Length.fromInches(6.0);
     public static final Length WHEELBASE_INCHES = Length.fromInches(28.0);
