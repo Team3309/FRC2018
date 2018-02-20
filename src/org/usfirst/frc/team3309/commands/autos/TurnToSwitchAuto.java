@@ -11,14 +11,17 @@ import org.usfirst.frc.team3309.robot.Robot;
 public class TurnToSwitchAuto extends CommandGroup {
 
     public TurnToSwitchAuto() {
-        addSequential(new DriveForward(Length.fromInches(10)));
+        System.out.println("Starting " + this.getName());
+        addSequential(new DriveForward(Length.fromInches(-32)));
         if (DriverStation.getInstance().getGameSpecificMessage().length() > 0) {
             if (Robot.isLeftSwitch()) {
-                addSequential(new DriveTurn(15));
+                addSequential(new DriveTurn(90));
+                addSequential(new DriveForward(Length.fromInches(-65)));
+                addSequential(new DriveTurn(-90));
+                addSequential(new DriveForward(Length.fromInches(-62)));
             } else {
-                addSequential(new DriveTurn(-15));
+                addSequential(new DriveTurn(-90));
             }
-            addSequential(new DriveForward(Length.fromInches(60)));
             addSequential(new ShooterShoot());
         }
     }

@@ -3,6 +3,7 @@ package org.usfirst.frc.team3309.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.sensors.PigeonIMU;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.Solenoid;
@@ -22,6 +23,8 @@ public class Lift extends Subsystem {
     private VictorSPXMC lift3 = new VictorSPXMC(Constants.LIFT_3);
     private VictorSPXMC lift4 = new VictorSPXMC(Constants.LIFT_4);
 
+    private PigeonIMU pigeonIMU = new PigeonIMU(lift1);
+
     private LimitSwitch bottomLimitSwitch = new LimitSwitch(Constants.LIFT_BOTTOM_LIMIT_SWITCH);
 
     private Solenoid liftShifter = new Solenoid(Constants.LIFT_SHIFTER);
@@ -36,10 +39,6 @@ public class Lift extends Subsystem {
         lift0.configPeakOutputReverse(-0.2, 0);
         lift0.changeToPositionMode();
         lift0.setSensorPhase(false);
-        lift0.set(ControlMode.Position, 0);
-/*        lift0.set(ControlMode.MotionMagic, 0);
-        lift0.configMotionCruiseVelocity(10, 0);
-        lift0.configMotionAcceleration(10, 0);*/
         lift1.follow(lift0);
         lift2.follow(lift0);
         lift3.follow(lift0);
@@ -69,7 +68,7 @@ public class Lift extends Subsystem {
     }
 
     public double getPosition() {
-        return -lift0.getSensorCollection().getQuadraturePosition();
+        return lift0.getSensorCollection().getQuadraturePosition();
     }
 
     public void changeToBrakeMode() {
@@ -89,7 +88,7 @@ public class Lift extends Subsystem {
     }
 
     public void changeToPositionMode() {
-        lift0.changeToPercentMode();
+        lift0.changeToPositionMode();
     }
 
     public void changeToPercentMode() {

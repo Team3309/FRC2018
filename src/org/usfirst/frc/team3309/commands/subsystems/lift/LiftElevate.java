@@ -13,14 +13,14 @@ public class LiftElevate extends Command {
     public LiftElevate(double goalPos) {
         pidController = new PIDController(new PIDConstants(0.00009 ,0.0001,0));
         this.goalPos = goalPos;
-        requires(Robot.lift);    }
-
+        requires(Robot.lift);
+    }
 
     @Override
     protected void initialize() {
         Robot.lift.changeToBrakeMode();
         Robot.lift.setGoalPos(goalPos);
-    //    Robot.lift.changeToPositionMode();
+        //Robot.lift.changeToPositionMode();
         Robot.lift.changeToPercentMode();
     }
 

@@ -17,8 +17,8 @@ public class BeltBar extends Subsystem {
 
     public BeltBar() {
         masterBar.set(0);
-        masterBar.configPeakOutputForward(0.5, 0);
-        masterBar.configPeakOutputReverse(0.5, 0);
+        masterBar.configPeakOutputForward(0.1, 0);
+        masterBar.configPeakOutputReverse(0.1, 0);
         masterBar.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 0);
     }
 

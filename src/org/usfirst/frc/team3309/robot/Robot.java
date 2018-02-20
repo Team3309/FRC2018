@@ -26,18 +26,19 @@ public class Robot extends TimedRobot {
     public static Arms arms;
     public static Rollers rollers;
 
-    private UsbCamera cam;
+  //  private UsbCamera cam;
     private Compressor c;
     private OI oi;
 
     private Command autoCommand = null;
-    public static Logger logger = Logger.getLogger("Robot");
+    public static Logger logger;
 
     @Override
     public void robotInit() {
+        logger = Logger.getLogger("Robot");
         logger.info("robot init");
-        cam = CameraServer.getInstance().startAutomaticCapture();
-        cam.setFPS(30);
+     //   cam = CameraServer.getInstance().startAutomaticCapture();
+      //  cam.setFPS(30);
         drive = new Drive();
         lift = new Lift();
         beltBar = new BeltBar();
@@ -63,6 +64,7 @@ public class Robot extends TimedRobot {
         autoCommand = AutoModeExecutor.getAutoSelected();
         logger.info("Running " + autoCommand.getName());
         if (autoCommand != null) {
+            System.out.println("Starting");
             autoCommand.start();
         }
     }

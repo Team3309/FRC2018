@@ -1,5 +1,6 @@
 package org.usfirst.frc.team3309.commands.subsystems.shooter;
 
+import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.InstantCommand;
 import org.usfirst.frc.team3309.robot.Robot;
 

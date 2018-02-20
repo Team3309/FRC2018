@@ -7,7 +7,7 @@ import org.usfirst.frc.team3309.lib.math.Length;
 public class AutoLineAuto extends CommandGroup {
 
     public AutoLineAuto() {
-        addSequential(new DriveForward(Length.fromInches(90)));
+        addSequential(new DriveForward(Length.fromFeet(11)));
     }
 
 }

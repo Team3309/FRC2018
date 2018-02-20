@@ -1,35 +1,46 @@
 package org.usfirst.frc.team3309.commands.subsystems.drive;
 
 import edu.wpi.first.wpilibj.command.Command;
-import org.usfirst.frc.team3309.lib.controllers.drive.DriveAngleController;
-import org.usfirst.frc.team3309.lib.controllers.helpers.DriveSignal;
 import org.usfirst.frc.team3309.lib.controllers.pid.PIDConstants;
+import org.usfirst.frc.team3309.lib.controllers.pid.PIDController;
 import org.usfirst.frc.team3309.robot.Robot;
 
 public class DriveTurn extends Command {
 
     private double goalAngle;
-    private DriveAngleController angleController;
+    private double error;
+    private PIDController angleController;
 
     public DriveTurn(double goalAngle) {
         this.goalAngle = goalAngle;
-        angleController = new DriveAngleController(new PIDConstants(0, 0, 0));
+        angleController = new PIDController(new PIDConstants(0.006, 0, 0.004));
         requires(Robot.drive);
     }
 
     @Override
-    protected void initialize() {
+    public void start() {
+        super.start();
+        Robot.drive.reset();
+        Robot.drive.changeToBrakeMode();
         Robot.drive.changeToPercentMode();
     }
 
     @Override
     protected void execute() {
-        DriveSignal driveSignal = angleController.update(Robot.drive.getAngPos(), goalAngle);
-        Robot.drive.setLeftRight(driveSignal.getLeftMotor(), driveSignal.getRightMotor());
+        System.out.println("Drive angle " + Robot.drive.getAngPos());
+        error = goalAngle - Robot.drive.getAngPos();
+        System.out.println("Error: " + error);
+        double power = angleController.update(Robot.drive.getAngPos(), goalAngle);
+        if (goalAngle > 0 ) {
+            Robot.drive.setLeftRight(power, -power);
+        } else {
+            Robot.drive.setLeftRight(power, -power);
+        }
     }
 
     @Override
     protected boolean isFinished() {
-        return angleController.isFinished();
+        return false;
     }
+
 }
