@@ -29,6 +29,13 @@ public class DriveTurn extends Command {
     protected void execute() {
         System.out.println("Drive angle " + Robot.drive.getAngPos());
         error = goalAngle - Robot.drive.getAngPos();
+        if (Math.abs(error) > 180) {
+            if (error > 0) {
+                error -= 360;
+            } else {
+                error += 360;
+            }
+        }
         System.out.println("Error: " + error);
         double power = angleController.update(Robot.drive.getAngPos(), goalAngle);
         if (goalAngle > 0 ) {
