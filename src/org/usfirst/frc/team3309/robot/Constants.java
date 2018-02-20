@@ -16,7 +16,7 @@ public class Constants {
     public static final int DRIVE_LEFT_1_ID = 12;
     public static final int DRIVE_LEFT_2_ID = 14;
 
-    public static final int SHIFTER = 0;
+    public static final int SHIFTER = 7;
 
     // roller
     public static final int ROLLER_LEFT = 40;
@@ -38,25 +38,24 @@ public class Constants {
     public static final int LIFT_3 = 23;
     public static final int LIFT_4 = 24;
 
-    public static final int LIFT_SHIFTER = 5;
+    public static final int LIFT_SHIFTER = 6;
 
-    public static final int LIFT_TOP_LIMIT_SWITCH = 0;
-    public static final int LIFT_BOTTOM_LIMIT_SWITCH = 1;
+    public static final int LIFT_BOTTOM_LIMIT_SWITCH = 0;
 
     // beltbar
     public static final int BELTBAR_0 = 30;
 
     // shooter
-    public static final int SHOOTER_SHIFTER = 6;
+    public static final int SHOOTER_SHIFTER = 5;
 
     // falcon doors
-    public static final int FALCONDOORS_SOLENOID = 7;
+    public static final int FALCONDOORS_SOLENOID = 0;
 
     // robot constants
 
-    public static final double DRIVE_ENCODER_COUNTS_PER_REV = 1.5 * 4096.0 * (150.0 / 34.0);
+    public static final double DRIVE_ENCODER_COUNTS_PER_REV = 4096.0 * 5.0 * 2 * 10; // 4096 * 5
 
-    public static final Length WHEEL_DIAMETER_INCHES = Length.fromInches(4.0625);
+    public static final Length WHEEL_DIAMETER_INCHES = Length.fromInches(6.0);
     public static final Length WHEELBASE_INCHES = Length.fromInches(28.0);
 
     public static final Length BELTBAR_ARM_LENGTH = Length.fromInches(9);

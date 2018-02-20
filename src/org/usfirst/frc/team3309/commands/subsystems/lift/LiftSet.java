@@ -18,7 +18,7 @@ public class LiftSet extends Command {
     }
 
     @Override
-    protected void execute() {
+    public void start() {
         Robot.lift.set(power);
     }
 

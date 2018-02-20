@@ -14,6 +14,9 @@ public class DriveAngleController extends Controller2<DriveSignal, Double, Doubl
 
     public DriveAngleController(PIDConstants pidConstants) {
         angleController = new PIDController(pidConstants);
+        angleController.setErrorThreshold(10);
+        angleController.setIsCompletable(true);
+        angleController.setTimeoutSec(0.75);
     }
 
     @Override

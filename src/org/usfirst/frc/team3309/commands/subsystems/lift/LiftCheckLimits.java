@@ -7,15 +7,13 @@ public class LiftCheckLimits extends Command {
 
     @Override
     protected void execute() {
-        if (Robot.lift.isTopLimitSwitch()) {
-            Robot.lift.resetToTop();
-        } else if (Robot.lift.isBottomLimitSwitch()) {
+        if (Robot.lift.isBottomLimitSwitch()) {
             Robot.lift.resetToBottom();
         }
     }
 
     @Override
-    protected boolean isFinished(){
+    protected boolean isFinished() {
         return false;
     }
 

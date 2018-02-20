@@ -3,8 +3,12 @@ package org.usfirst.frc.team3309.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.sensors.PigeonIMU;
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team3309.commands.subsystems.lift.LiftManualTest;
 import org.usfirst.frc.team3309.lib.actuators.TalonSRXMC;
 import org.usfirst.frc.team3309.lib.actuators.VictorSPXMC;
@@ -19,7 +23,8 @@ public class Lift extends Subsystem {
     private VictorSPXMC lift3 = new VictorSPXMC(Constants.LIFT_3);
     private VictorSPXMC lift4 = new VictorSPXMC(Constants.LIFT_4);
 
-    private LimitSwitch topLimitSwitch = new LimitSwitch(Constants.LIFT_TOP_LIMIT_SWITCH);
+    private PigeonIMU pigeonIMU = new PigeonIMU(lift1);
+
     private LimitSwitch bottomLimitSwitch = new LimitSwitch(Constants.LIFT_BOTTOM_LIMIT_SWITCH);
 
     private Solenoid liftShifter = new Solenoid(Constants.LIFT_SHIFTER);
@@ -27,39 +32,46 @@ public class Lift extends Subsystem {
     private double goalPos;
 
     public Lift() {
-        topLimitSwitch.reset();
         bottomLimitSwitch.reset();
-        lift0.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0,
+        lift0.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0,
                 0);
-        lift0.set(ControlMode.Position, 0.0);
+        lift0.configPeakOutputForward(0.2, 0);
+        lift0.configPeakOutputReverse(-0.2, 0);
+        lift0.changeToPositionMode();
+        lift0.setSensorPhase(false);
         lift1.follow(lift0);
         lift2.follow(lift0);
         lift3.follow(lift0);
         lift4.follow(lift0);
+        changeToBrakeMode();
     }
 
     @Override
     protected void initDefaultCommand() {
         setDefaultCommand(new LiftManualTest());
-     //   setDefaultCommand(new LiftSet(0));
     }
 
-    /*
-     * TODO: implement conversion to inches HEIGHT
-     * */
-    public double inchesToEncoderCounts(double encoderCounts) {
-        return encoderCounts * 0.0;
+    public void sendToDashboard() {
+        SmartDashboard.putData(this);
+        NetworkTable table = NetworkTableInstance.getDefault().getTable("Lift");
+        table.getEntry("lift pos: ").setNumber(getPosition());
+        table.getEntry("lift goal pos: ").setNumber(getGoalPos());
+        table.getEntry("lift limit switch: ").setBoolean(isBottomLimitSwitch());
+    }
+
+    public void reset() {
+        resetToBottom();
     }
 
     public void resetToBottom() {
-        lift0.getSensorCollection().setAnalogPosition(0, 0);
+        lift0.getSensorCollection().setQuadraturePosition(0, 0);
     }
 
-    public void resetToTop() {
-        lift0.getSensorCollection().setAnalogPosition((int)Constants.LIFT_MAX_ENC_POSITION, 0);
+    public double getPosition() {
+        return lift0.getSensorCollection().getQuadraturePosition();
     }
 
-    public void changeToBrakeMode(){
+    public void changeToBrakeMode() {
         lift0.setNeutralMode(NeutralMode.Brake);
     }
 
@@ -71,12 +83,12 @@ public class Lift extends Subsystem {
         lift0.set(value);
     }
 
-    public void setVelocity(double velocity) {
-        lift0.set(ControlMode.Velocity, velocity);
+    public void set(ControlMode controlMode, double value) {
+        lift0.set(controlMode, value);
     }
 
     public void changeToPositionMode() {
-        lift0.changeToPercentMode();
+        lift0.changeToPositionMode();
     }
 
     public void changeToPercentMode() {
@@ -97,10 +109,6 @@ public class Lift extends Subsystem {
 
     public void setGoalPos(double goalPos) {
         this.goalPos = goalPos;
-    }
-
-    public boolean isTopLimitSwitch() {
-        return topLimitSwitch.isSwitchSet();
     }
 
     public boolean isBottomLimitSwitch() {

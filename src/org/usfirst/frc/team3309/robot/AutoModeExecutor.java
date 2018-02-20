@@ -5,10 +5,16 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.usfirst.frc.team3309.commands.autos.AutoLineAuto;
 import org.usfirst.frc.team3309.commands.autos.NoActionAuto;
+import org.usfirst.frc.team3309.commands.autos.SwitchForwardAuto;
+import org.usfirst.frc.team3309.commands.autos.TurnToSwitchAuto;
+import org.usfirst.frc.team3309.commands.subsystems.beltbar.BeltBarMoveToPos;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveForward;
+import org.usfirst.frc.team3309.commands.subsystems.drive.DriveForwardVelocity;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DrivePath;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveTurn;
+import org.usfirst.frc.team3309.commands.subsystems.lift.LiftElevate;
 import org.usfirst.frc.team3309.lib.controllers.helpers.Waypoint;
 import org.usfirst.frc.team3309.lib.math.Length;
 
@@ -28,12 +34,16 @@ public class AutoModeExecutor {
 
     public static void displayAutos() {
         autos.addDefault("No Action", new NoActionAuto());
-        autos.addObject("DriveForwardAuto", new DriveForward(Length.fromInches(30), 0));
-        autos.addObject("Figure Eight Path", new DrivePath(Constants.figureEightPath));
-        autos.addObject("Sigmoid Path", new DrivePath(Constants.sigmoidPath));
-        autos.addObject("Switch Path", new DrivePath(Constants.toSwitchPath));
-        autos.addObject("Circular Path", new DrivePath(Constants.circularPath));
-        autos.addObject("SemiCircular", new DrivePath(Constants.semiCircular));
+        autos.addObject("DriveForwardAuto", new DriveForward(Length.fromInches(130)));
+     //   autos.addObject("DriveBack", new DriveForward(Length.fromInches(-130)));
+        autos.addObject("TurnCWToAngleAuto", new DriveTurn(90));
+        autos.addObject("TurnCCWToAngleAuto", new DriveTurn(90));
+        autos.addObject("AutoLineAuto", new AutoLineAuto());
+        autos.addObject("SwitchForwardAuto", new SwitchForwardAuto());
+        autos.addObject("TurnToSwitchAuto", new TurnToSwitchAuto());
+        autos.addObject("LiftElevate", new LiftElevate(5000));
+        autos.addObject("BeltbarMoveToPos", new BeltBarMoveToPos(0));
+        autos.addObject("DriveForwardVelocity", new DriveForwardVelocity(25000));
         if (isUsingFile) {
             for (File autoFile : autoFiles) {
                 Command autoCommand = null;

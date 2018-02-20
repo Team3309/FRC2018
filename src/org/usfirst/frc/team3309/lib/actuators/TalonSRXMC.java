@@ -24,6 +24,8 @@ public class TalonSRXMC extends TalonSRX {
         controlMode = ControlMode.Velocity;
     }
 
+    public void changeToMotionMagic() { controlMode = ControlMode.MotionMagic; }
+
     public void set(double value) {
         set(controlMode, value);
     }

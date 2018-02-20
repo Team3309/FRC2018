@@ -1,53 +1,56 @@
 package org.usfirst.frc.team3309.commands.subsystems.drive;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team3309.lib.math.Length;
 import org.usfirst.frc.team3309.lib.controllers.pid.PIDConstants;
 import org.usfirst.frc.team3309.lib.controllers.pid.PIDController;
 import org.usfirst.frc.team3309.robot.Robot;
 
+import javax.xml.bind.SchemaOutputResolver;
+
 public class DriveForward extends Command {
 
     // inches
     private final double goalPos;
-    private final double goalAngle;
-    private final double errorThreshold = 1;
+    private final double errorThreshold = 3;
     private double error;
-    private PIDController turnController;
+    private final double CRUISE_VELOCITY = 15000; // 20000
+    private PIDController turningController;
 
     public DriveForward(Length goalPos) {
-        this(goalPos, 0);
-    }
-
-    public DriveForward(Length goalPos, double goalAngle) {
         this.goalPos = goalPos.toInches();
-        this.goalAngle = goalAngle;
         requires(Robot.drive);
-        turnController = new PIDController(new PIDConstants(0.1, 0, 0));
+        turningController = new PIDController(new PIDConstants(0.0, 0, 0));
     }
 
     @Override
-    protected void initialize() {
-        Robot.drive.setLowGear();
+    public void start() {
+        super.start();
+        Robot.drive.reset();
+        Robot.drive.setHighGear();
         Robot.drive.changeToBrakeMode();
         Robot.drive.setGoalPos(goalPos);
-        Robot.drive.changeToPositionMode();
+        Robot.drive.changeToMotionMagicMode();
+       /* Robot.drive.configLeftRightCruiseVelocity(CRUISE_VELOCITY, CRUISE_VELOCITY);
+        Robot.drive.setLeftRight(Robot.drive.inchesToEncoderCounts(Robot.drive.getGoalPos()),
+                Robot.drive.inchesToEncoderCounts(Robot.drive.getGoalPos()));*/
     }
-
+    
     @Override
     protected void execute() {
-        error = Robot.drive.inchesToEncoderCounts(goalPos) - Robot.drive.getEncoderPos();
-        double turn = turnController.update(Robot.drive.getAngPos(), goalAngle);
-        Robot.drive.setLeftRight(Robot.drive.inchesToEncoderCounts(Robot.drive.getGoalPos()) + turn,
-                Robot.drive.inchesToEncoderCounts(Robot.drive.getGoalPos()) - turn);
-
-        SmartDashboard.putNumber("drive error", error);
+        double adjustmentVelocity = turningController.update(Robot.drive.getAngPos(), 0.0);
+        error = Robot.drive.getGoalPos() - Robot.drive.encoderCountsToInches(Robot.drive.getEncoderPos());
+        Robot.drive.setLeftRight(-Robot.drive.inchesToEncoderCounts(Robot.drive.getGoalPos()),
+                -Robot.drive.inchesToEncoderCounts(Robot.drive.getGoalPos()));
+        Robot.drive.configLeftRightCruiseVelocity(CRUISE_VELOCITY, CRUISE_VELOCITY);
+        System.out.println("drive error " + error);
     }
 
     @Override
     protected boolean isFinished() {
-        return Math.abs(Robot.drive.encoderCountsToInches(error)) < errorThreshold;
+        return Math.abs(error) < errorThreshold;
     }
 
 }

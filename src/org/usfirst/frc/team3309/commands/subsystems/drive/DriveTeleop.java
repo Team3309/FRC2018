@@ -26,7 +26,7 @@ public class DriveTeleop extends Command {
     @Override
     protected void execute() {
         double throttle = OI.driverRemote.leftStick.getY();
-        double turn = -OI.driverRemote.rightStick.getX();
+        double turn = OI.driverRemote.rightStick.getX();
         SmartDashboard.putNumber("Turn: ",turn);
         boolean isQuickTurn = OI.driverRemote.rightBumper.get();
         DriveSignal driveSignal = cheezyDriveEquation.update(throttle, turn, isQuickTurn);

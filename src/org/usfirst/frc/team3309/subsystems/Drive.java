@@ -1,14 +1,14 @@
 package org.usfirst.frc.team3309.subsystems;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.kauailabs.navx.frc.AHRS;
-import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveTeleop;
 import org.usfirst.frc.team3309.lib.actuators.TalonSRXMC;
 import org.usfirst.frc.team3309.lib.actuators.VictorSPXMC;
@@ -31,22 +31,30 @@ public class Drive extends Subsystem {
     private double goalPos;
 
     public Drive() {
-        left0.set(ControlMode.PercentOutput, 0);
+        left0.changeToPercentMode();
+        left0.configPeakOutputForward(1.0,0);
+        left0.configPeakOutputReverse(-1.0,0);
+        left0.configNominalOutputForward(0.12, 0);
+        left0.configNominalOutputReverse(-0.12, 0);
+        left0.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
         left1.follow(left0);
         left2.follow(left0);
+        left0.configOpenloopRamp(0.25, 0);
+        left0.configMotionAcceleration(10000, 0);
 
-        right0.set(ControlMode.PercentOutput, 0);
+        right0.changeToPercentMode();
+        right0.configPeakOutputForward(1.0,0);
+        right0.configPeakOutputReverse(-1.0,0);
+        right0.configNominalOutputForward(0.12, 0);
+        right0.configNominalOutputReverse(-0.12, 0);
+        right0.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
         right1.follow(right0);
         right2.follow(right0);
+        right0.configOpenloopRamp(0.25, 0);
+        right0.configMotionAcceleration(10000, 0);
 
-        setHighGear();
+     //   setHighGear();
         changeToBrakeMode();
-
-        left0.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 0);
-        right0.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 0);
-
-        left0.setSensorPhase(false);
-        right0.setSensorPhase(true);
     }
 
     @Override
@@ -62,12 +70,12 @@ public class Drive extends Subsystem {
         return inches * Constants.DRIVE_ENCODER_COUNTS_PER_REV / (Math.PI * Constants.WHEEL_DIAMETER_INCHES.toInches());
     }
 
-    public void resetDrive() {
-        left0.getSensorCollection().setAnalogPosition(0, 0);
-        right0.getSensorCollection().setAnalogPosition(0, 0);
+    public void reset() {
+        left0.clearMotionProfileTrajectories();
+        right0.clearMotionProfileTrajectories();
+        left0.getSensorCollection().setQuadraturePosition(0, 0);
+        right0.getSensorCollection().setQuadraturePosition(0, 0);
         navX.reset();
-        changeToBrakeMode();
-        setLowGear();
     }
 
     public double getEncoderPos() {
@@ -75,27 +83,27 @@ public class Drive extends Subsystem {
     }
 
     public double getLeftEncoder() {
-        return left0.getSensorCollection().getAnalogIn();
+        return -left0.getSensorCollection().getQuadraturePosition();
     }
 
     public double getRightEncoder() {
-        return right0.getSensorCollection().getAnalogIn();
+        return right0.getSensorCollection().getQuadraturePosition();
     }
 
     public double getEncoderVelocity() {
         return (getLeftVelocity() + getRightVelocity()) / 2.0;
     }
 
-    public double getLeftVelocity() {
-        return left0.getSensorCollection().getAnalogInVel();
+    public int getLeftVelocity() {
+        return left0.getSensorCollection().getQuadratureVelocity();
     }
 
     public double getRightVelocity() {
-        return right0.getSensorCollection().getAnalogInVel();
+        return -right0.getSensorCollection().getQuadratureVelocity();
     }
 
     public double getAngPos() {
-        return navX.getAngle();
+        return -navX.getAngle();
     }
 
     public double getAngVel() {
@@ -103,6 +111,7 @@ public class Drive extends Subsystem {
     }
 
     public void sendToDashboard() {
+        SmartDashboard.putData(this);
         NetworkTable table = NetworkTableInstance.getDefault().getTable("Drive");
         table.getEntry("Position (Inches): ").setNumber(encoderCountsToInches(getEncoderPos()));
         table.getEntry("Velocity (Inches): ").setNumber(encoderCountsToInches(getEncoderVelocity()));
@@ -110,11 +119,14 @@ public class Drive extends Subsystem {
         table.getEntry("Right Position (Inches): ").setNumber(encoderCountsToInches(getRightEncoder()));
         table.getEntry("Position (Raw): ").setNumber(getEncoderPos());
         table.getEntry("Velocity (Raw): ").setNumber(getEncoderVelocity());
-        table.getEntry("Left Position (Raw): ").setNumber(encoderCountsToInches(getLeftEncoder()));
-        table.getEntry("Right Position (Raw): ").setNumber(encoderCountsToInches(getRightEncoder()));
+        table.getEntry("Left Position (Raw): ").setNumber(getLeftEncoder());
+        table.getEntry("Right Position (Raw): ").setNumber(getRightEncoder());
         table.getEntry("Left Velocity (Raw): ").setNumber(getLeftVelocity());
+        table.getEntry("Right Velocity (Raw): ").setNumber(getRightVelocity());
         table.getEntry("Angular Position: ").setNumber(getAngPos());
         table.getEntry("Angular Velocity: ").setNumber(getAngVel());
+        table.getEntry("Left output: ").setNumber(left0.getMotorOutputPercent());
+        table.getEntry("Right output: ").setNumber(right0.getMotorOutputPercent());
     }
 
     public void changeToBrakeMode() {
@@ -128,11 +140,11 @@ public class Drive extends Subsystem {
     }
 
     public void setHighGear() {
-        shifter.set(true);
+        shifter.set(false);
     }
 
     public void setLowGear() {
-        shifter.set(false);
+        shifter.set(true);
     }
 
     public void setLeftRight(double left, double right) {
@@ -145,7 +157,7 @@ public class Drive extends Subsystem {
     }
 
     public void setRight(double value) {
-        right0.set(value);
+        right0.set(-value);
     }
 
     public void changeToPercentMode() {
@@ -161,6 +173,24 @@ public class Drive extends Subsystem {
     public void changeToVelocityMode() {
         left0.changeToVelocityMode();
         right0.changeToVelocityMode();
+    }
+
+    public void changeToMotionMagicMode() {
+        left0.changeToMotionMagic();
+        right0.changeToMotionMagic();
+    }
+
+    public void configLeftRightCruiseVelocity(double leftSpeed, double rightSpeed){
+        configLeftCruiseVelocity(leftSpeed);
+        configRightCruiseVelocity(rightSpeed);
+    }
+
+    public void configRightCruiseVelocity(double sensorUnitsPer100ms) {
+        right0.configMotionCruiseVelocity((int) sensorUnitsPer100ms, 0);
+    }
+
+    public void configLeftCruiseVelocity(double sensorUnitsPer100ms) {
+        left0.configMotionCruiseVelocity((int) sensorUnitsPer100ms, 0);
     }
 
     public double getGoalPos() { return goalPos; }

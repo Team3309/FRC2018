@@ -16,11 +16,11 @@ public class Length {
     }
 
     public static Length fromFeet(double feet) {
-        return new Length(feet / 12);
+        return new Length(feet * 12);
     }
 
     public static Length fromMeters(double meters) {
-        return new Length(meters / 39.3701);
+        return new Length(meters * 39.3701);
     }
 
     public double toInches() {
@@ -28,11 +28,7 @@ public class Length {
     }
 
     public double toFeet() {
-        return length * 12;
-    }
-
-    public double toMeters() {
-        return length * 39.3701;
+        return length / 12;
     }
 
 }
