@@ -17,6 +17,8 @@ public class DriveForward extends Command {
     private PIDController turningController;
     private LibTimer timer = new LibTimer(.5);
 
+    private boolean isInitialized = false;
+
     public DriveForward(Length goalPos) {
         this.goalPos = goalPos.toInches();
         requires(Robot.drive);
@@ -37,6 +39,10 @@ public class DriveForward extends Command {
     
     @Override
     protected void execute() {
+        if (!isInitialized) {
+            this.initialize();
+            isInitialized = true;
+        }
         double adjustmentVelocity = turningController.update(Robot.drive.getAngPos(), 0.0);
 
         error = Robot.drive.getGoalPos() - Robot.drive.encoderCountsToInches(Robot.drive.getEncoderPos());
