@@ -1,5 +1,7 @@
 package org.usfirst.frc.team3309.robot;
 
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -24,7 +26,7 @@ public class Robot extends TimedRobot {
     public static Arms arms;
     public static Rollers rollers;
 
-  //  private UsbCamera cam;
+    private UsbCamera cam;
     private Compressor c;
     private OI oi;
 
@@ -35,8 +37,8 @@ public class Robot extends TimedRobot {
     public void robotInit() {
         logger = Logger.getLogger("Robot");
         logger.info("robot init");
-     //   cam = CameraServer.getInstance().startAutomaticCapture();
-      //  cam.setFPS(30);
+        cam = CameraServer.getInstance().startAutomaticCapture();
+        cam.setFPS(30);
         drive = new Drive();
         lift = new Lift();
         beltBar = new BeltBar();

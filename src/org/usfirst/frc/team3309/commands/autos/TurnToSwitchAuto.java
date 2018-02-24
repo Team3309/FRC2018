@@ -26,10 +26,4 @@ public class TurnToSwitchAuto extends CommandGroup {
         }
     }
 
-    @Override
-    public void start() {
-        super.start();
-        System.out.println("I am starting" + this.getName());
-    }
-
 }
