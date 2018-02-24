@@ -2,7 +2,77 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0fe28238-9a8a-4ac8-a47e-10926d5882f6" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/org/usfirst/frc/team3309/commands/subsystems/drive/DriveTurn.java" afterPath="$PROJECT_DIR$/src/org/usfirst/frc/team3309/commands/subsystems/drive/DriveTurn.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/src/org/usfirst/frc/team3309/commands/InterruptAll.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/src/org/usfirst/frc/team3309/commands/autos/AutoLineAuto.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/src/org/usfirst/frc/team3309/commands/autos/NoActionAuto.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/src/org/usfirst/frc/team3309/commands/autos/SwitchForwardAuto.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/src/org/usfirst/frc/team3309/commands/autos/TurnToSwitchAuto.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/src/org/usfirst/frc/team3309/commands/subsystems/AssemblyLocation.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/src/org/usfirst/frc/team3309/commands/subsystems/MoveAssembly.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/src/org/usfirst/frc/team3309/commands/subsystems/SetClimbMode.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/src/org/usfirst/frc/team3309/commands/subsystems/arms/ArmsCheckForCube.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/src/org/usfirst/frc/team3309/commands/subsystems/arms/ArmsClamp.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/src/org/usfirst/frc/team3309/commands/subsystems/arms/ArmsOpen.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/src/org/usfirst/frc/team3309/commands/subsystems/beltbar/BeltBarManualTest.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/src/org/usfirst/frc/team3309/commands/subsystems/beltbar/BeltBarMoveToPos.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/src/org/usfirst/frc/team3309/commands/subsystems/drive/DriveForward.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/src/org/usfirst/frc/team3309/commands/subsystems/drive/DriveForwardVelocity.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/src/org/usfirst/frc/team3309/commands/subsystems/drive/DrivePath.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/src/org/usfirst/frc/team3309/commands/subsystems/drive/DriveSetHighGear.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/src/org/usfirst/frc/team3309/commands/subsystems/drive/DriveSetLowGear.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/src/org/usfirst/frc/team3309/commands/subsystems/drive/DriveTeleop.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/src/org/usfirst/frc/team3309/commands/subsystems/drive/DriveTurn.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/src/org/usfirst/frc/team3309/commands/subsystems/falcondoors/FalconDoorsDeploy.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/src/org/usfirst/frc/team3309/commands/subsystems/lift/LiftCheckLimits.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/src/org/usfirst/frc/team3309/commands/subsystems/lift/LiftElevate.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/src/org/usfirst/frc/team3309/commands/subsystems/lift/LiftManualTest.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/src/org/usfirst/frc/team3309/commands/subsystems/lift/LiftSet.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/src/org/usfirst/frc/team3309/commands/subsystems/lift/LiftSetElevatorMode.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/src/org/usfirst/frc/team3309/commands/subsystems/lift/LiftShiftToClimbMode.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/src/org/usfirst/frc/team3309/commands/subsystems/rollers/RollersActuate.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/src/org/usfirst/frc/team3309/commands/subsystems/rollers/RollersTeleop.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/src/org/usfirst/frc/team3309/commands/subsystems/shooter/ShooterBack.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/src/org/usfirst/frc/team3309/commands/subsystems/shooter/ShooterForward.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/src/org/usfirst/frc/team3309/commands/subsystems/shooter/ShooterShoot.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/src/org/usfirst/frc/team3309/lib/LibTimer.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/src/org/usfirst/frc/team3309/lib/actuators/TalonSRXMC.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/src/org/usfirst/frc/team3309/lib/actuators/VictorSPXMC.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/src/org/usfirst/frc/team3309/lib/communications/BlackBox.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/src/org/usfirst/frc/team3309/lib/controllers/Controller.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/src/org/usfirst/frc/team3309/lib/controllers/Controller1.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/src/org/usfirst/frc/team3309/lib/controllers/Controller2.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/src/org/usfirst/frc/team3309/lib/controllers/Controller3.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/src/org/usfirst/frc/team3309/lib/controllers/drive/BiArcController.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/src/org/usfirst/frc/team3309/lib/controllers/drive/DriveAngleController.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/src/org/usfirst/frc/team3309/lib/controllers/drive/DriveArcadeController.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/src/org/usfirst/frc/team3309/lib/controllers/drive/DriveCheezyController.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/src/org/usfirst/frc/team3309/lib/controllers/drive/DrivePositionController.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/src/org/usfirst/frc/team3309/lib/controllers/helpers/DriveSignal.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/src/org/usfirst/frc/team3309/lib/controllers/helpers/DriveState.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/src/org/usfirst/frc/team3309/lib/controllers/helpers/Waypoint.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/src/org/usfirst/frc/team3309/lib/controllers/interfaces/Finishable.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/src/org/usfirst/frc/team3309/lib/controllers/interfaces/Resettable.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/src/org/usfirst/frc/team3309/lib/controllers/pid/PIDConstants.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/src/org/usfirst/frc/team3309/lib/controllers/pid/PIDController.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/src/org/usfirst/frc/team3309/lib/controllers/pid/PIDVelocityController.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/src/org/usfirst/frc/team3309/lib/input/InputXbox.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/src/org/usfirst/frc/team3309/lib/math/Length.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/src/org/usfirst/frc/team3309/lib/math/LibMath.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/src/org/usfirst/frc/team3309/lib/sensors/LimitSwitch.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/src/org/usfirst/frc/team3309/robot/AutoModeExecutor.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/src/org/usfirst/frc/team3309/robot/Constants.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/src/org/usfirst/frc/team3309/robot/OI.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/src/org/usfirst/frc/team3309/robot/Robot.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/src/org/usfirst/frc/team3309/subsystems/Arms.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/src/org/usfirst/frc/team3309/subsystems/BeltBar.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/src/org/usfirst/frc/team3309/subsystems/Drive.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/src/org/usfirst/frc/team3309/subsystems/FalconDoors.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/src/org/usfirst/frc/team3309/subsystems/Lift.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/src/org/usfirst/frc/team3309/subsystems/Rollers.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/src/org/usfirst/frc/team3309/subsystems/Shooter.java" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.bin" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.lock" afterPath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.lock" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/bin/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -44,12 +114,12 @@
     <favorites_list name="FRC2018" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="Robot.java" pinned="false" current-in-tab="false">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
+      <file leaf-file-name="Robot.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team3309/robot/Robot.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="399">
-              <caret line="69" column="5" lean-forward="true" selection-start-line="69" selection-start-column="5" selection-end-line="69" selection-end-column="5" />
+            <state relative-caret-position="588">
+              <caret line="51" column="32" lean-forward="true" selection-start-line="51" selection-start-column="32" selection-end-line="51" selection-end-column="32" />
               <folding />
             </state>
           </provider>
@@ -58,8 +128,8 @@
       <file leaf-file-name="OI.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team3309/robot/OI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="148">
-              <caret line="25" column="0" lean-forward="true" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+            <state relative-caret-position="273">
+              <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -68,8 +138,8 @@
       <file leaf-file-name="DriveForward.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team3309/commands/subsystems/drive/DriveForward.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-398">
-              <caret line="12" column="43" lean-forward="true" selection-start-line="12" selection-start-column="43" selection-end-line="12" selection-end-column="43" />
+            <state relative-caret-position="84">
+              <caret line="12" column="43" lean-forward="false" selection-start-line="12" selection-start-column="43" selection-end-line="12" selection-end-column="43" />
               <folding>
                 <element signature="e#2095#2096#0" expanded="true" />
                 <element signature="e#2150#2151#0" expanded="true" />
@@ -81,8 +151,8 @@
       <file leaf-file-name="DriveTeleop.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team3309/commands/subsystems/drive/DriveTeleop.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1">
-              <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+            <state relative-caret-position="147">
+              <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -91,8 +161,8 @@
       <file leaf-file-name="AutoModeExecutor.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team3309/robot/AutoModeExecutor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="378">
-              <caret line="49" column="21" lean-forward="true" selection-start-line="49" selection-start-column="21" selection-end-line="49" selection-end-column="21" />
+            <state relative-caret-position="567">
+              <caret line="49" column="21" lean-forward="false" selection-start-line="49" selection-start-column="21" selection-end-line="49" selection-end-column="21" />
               <folding>
                 <element signature="e#2890#2891#0" expanded="true" />
                 <element signature="e#2932#2933#0" expanded="true" />
@@ -104,8 +174,8 @@
       <file leaf-file-name="Drive.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team3309/subsystems/Drive.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1701">
-              <caret line="77" column="21" lean-forward="true" selection-start-line="77" selection-start-column="21" selection-end-line="77" selection-end-column="21" />
+            <state relative-caret-position="1323">
+              <caret line="77" column="21" lean-forward="false" selection-start-line="77" selection-start-column="21" selection-end-line="77" selection-end-column="21" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#3212#3213#0" expanded="true" />
@@ -133,21 +203,31 @@
         <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team3309/commands/autos/TurnToSwitchAuto.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="483">
-              <caret line="29" column="0" lean-forward="true" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+              <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DriveTurn.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="DriveTurn.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team3309/commands/subsystems/drive/DriveTurn.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="295">
-              <caret line="35" column="29" lean-forward="false" selection-start-line="35" selection-start-column="29" selection-end-line="35" selection-end-column="29" />
+            <state relative-caret-position="714">
+              <caret line="37" column="9" lean-forward="false" selection-start-line="37" selection-start-column="9" selection-end-line="37" selection-end-column="9" />
               <folding>
                 <element signature="e#1494#1495#0" expanded="true" />
                 <element signature="e#1522#1523#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Length.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/src/org/usfirst/frc/team3309/lib/math/Length.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="84">
+              <caret line="4" column="20" lean-forward="false" selection-start-line="4" selection-start-column="20" selection-end-line="4" selection-end-column="20" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -479,7 +559,7 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="$PROJECT_DIR$" value="3037966880047" />
+        <entry key="$PROJECT_DIR$" value="3038870473508" />
         <entry key="$PROJECT_DIR$/build.gradle" value="1862045711" />
         <entry key="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" value="2083459160" />
       </map>
@@ -713,7 +793,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/org/usfirst/frc/team3309/subsystems/FalconDoors.java" />
         <option value="$PROJECT_DIR$/src/org/usfirst/frc/team3309/subsystems/Shooter.java" />
         <option value="$PROJECT_DIR$/src/org/usfirst/frc/team3309/commands/subsystems/rollers/RollersTeleop.java" />
         <option value="$PROJECT_DIR$/src/org/usfirst/frc/team3309/commands/autos/NoActionsAuto.java" />
@@ -764,6 +843,7 @@
         <option value="$PROJECT_DIR$/src/org/usfirst/frc/team3309/robot/Robot.java" />
         <option value="$PROJECT_DIR$/src/org/usfirst/frc/team3309/robot/AutoModeExecutor.java" />
         <option value="$PROJECT_DIR$/src/org/usfirst/frc/team3309/commands/subsystems/drive/DriveTurn.java" />
+        <option value="$PROJECT_DIR$/src/src/org/usfirst/frc/team3309/lib/math/Length.java" />
       </list>
     </option>
   </component>
@@ -801,9 +881,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="Scope" />
-      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -919,11 +997,34 @@
               <item name="team3309" type="462c0819:PsiDirectoryNode" />
               <item name="subsystems" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="FRC2018" type="b2602c69:ProjectViewProjectNode" />
+              <item name="FRC2018" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="team3309" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="FRC2018" type="b2602c69:ProjectViewProjectNode" />
+              <item name="FRC2018" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="team3309" type="462c0819:PsiDirectoryNode" />
+              <item name="lib" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="FRC2018" type="b2602c69:ProjectViewProjectNode" />
+              <item name="FRC2018" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="team3309" type="462c0819:PsiDirectoryNode" />
+              <item name="lib" type="462c0819:PsiDirectoryNode" />
+              <item name="math" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
+      <pane id="AndroidView" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -948,6 +1049,9 @@
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="org.usfirst.frc.team3309.commands.subsystems.rollers" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\CBlagden\Documents\Github\robot\FRC2018\src" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -1105,7 +1209,7 @@
     </list>
   </component>
   <component name="SbtLocalSettings">
-    <option name="lastUpdateTimestamp" value="1517852772863" />
+    <option name="lastUpdateTimestamp" value="1519435294394" />
     <option name="externalProjectsViewState">
       <projects_view />
     </option>
@@ -1169,21 +1273,20 @@
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295325" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Cargo" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17217788" sideWeight="0.5042965" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" x="100" y="122" width="1240" height="673" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32975295" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1904219" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1904219" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.327252" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295325" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22771214" sideWeight="0.4881356" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23093449" sideWeight="0.4881356" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Statistic" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.327252" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Build" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32839224" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295325" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32975295" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.08754028" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
@@ -1192,14 +1295,15 @@
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3990878" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22126746" sideWeight="0.5118644" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Cargo" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24964234" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32948717" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17103763" sideWeight="0.49570355" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" x="100" y="122" width="1240" height="673" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295325" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1287,14 +1391,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team3309/subsystems/Shooter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="25" column="5" lean-forward="true" selection-start-line="25" selection-start-column="5" selection-end-line="25" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team3309/subsystems/FalconDoors.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
@@ -1550,7 +1646,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="189">
           <caret line="9" column="5" lean-forward="true" selection-start-line="9" selection-start-column="5" selection-end-line="9" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1566,10 +1661,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="189">
           <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-          <folding>
-            <element signature="e#238#239#0" expanded="false" />
-            <element signature="e#277#278#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1577,7 +1668,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
           <caret line="309" column="92" lean-forward="false" selection-start-line="309" selection-start-column="87" selection-end-line="309" selection-end-column="92" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1585,10 +1675,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="189">
           <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-          <folding>
-            <element signature="e#290#291#0" expanded="false" />
-            <element signature="e#329#330#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1596,7 +1682,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="247">
           <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1604,7 +1689,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="511">
           <caret line="185" column="0" lean-forward="true" selection-start-line="185" selection-start-column="0" selection-end-line="185" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1612,7 +1696,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
           <caret line="42" column="54" lean-forward="false" selection-start-line="42" selection-start-column="54" selection-end-line="42" selection-end-column="54" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1620,7 +1703,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="273">
           <caret line="20" column="41" lean-forward="true" selection-start-line="20" selection-start-column="41" selection-end-line="20" selection-end-column="41" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1647,8 +1729,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team3309/robot/OI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="148">
-          <caret line="25" column="0" lean-forward="true" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+        <state relative-caret-position="273">
+          <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1661,18 +1743,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team3309/robot/Robot.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="69" column="5" lean-forward="true" selection-start-line="69" selection-start-column="5" selection-end-line="69" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team3309/commands/subsystems/drive/DriveForward.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-398">
-          <caret line="12" column="43" lean-forward="true" selection-start-line="12" selection-start-column="43" selection-end-line="12" selection-end-column="43" />
+        <state relative-caret-position="84">
+          <caret line="12" column="43" lean-forward="false" selection-start-line="12" selection-start-column="43" selection-end-line="12" selection-end-column="43" />
           <folding>
             <element signature="e#2095#2096#0" expanded="true" />
             <element signature="e#2150#2151#0" expanded="true" />
@@ -1682,8 +1756,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team3309/subsystems/Drive.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1701">
-          <caret line="77" column="21" lean-forward="true" selection-start-line="77" selection-start-column="21" selection-end-line="77" selection-end-column="21" />
+        <state relative-caret-position="1323">
+          <caret line="77" column="21" lean-forward="false" selection-start-line="77" selection-start-column="21" selection-end-line="77" selection-end-column="21" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#3212#3213#0" expanded="true" />
@@ -1708,8 +1782,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team3309/commands/subsystems/drive/DriveTeleop.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1">
-          <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+        <state relative-caret-position="147">
+          <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1717,15 +1791,15 @@
     <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team3309/commands/autos/TurnToSwitchAuto.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="483">
-          <caret line="29" column="0" lean-forward="true" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+          <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team3309/robot/AutoModeExecutor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="49" column="21" lean-forward="true" selection-start-line="49" selection-start-column="21" selection-end-line="49" selection-end-column="21" />
+        <state relative-caret-position="567">
+          <caret line="49" column="21" lean-forward="false" selection-start-line="49" selection-start-column="21" selection-end-line="49" selection-end-column="21" />
           <folding>
             <element signature="e#2890#2891#0" expanded="true" />
             <element signature="e#2932#2933#0" expanded="true" />
@@ -1735,12 +1809,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team3309/commands/subsystems/drive/DriveTurn.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="295">
-          <caret line="35" column="29" lean-forward="false" selection-start-line="35" selection-start-column="29" selection-end-line="35" selection-end-column="29" />
+        <state relative-caret-position="714">
+          <caret line="37" column="9" lean-forward="false" selection-start-line="37" selection-start-column="9" selection-end-line="37" selection-end-column="9" />
           <folding>
             <element signature="e#1494#1495#0" expanded="true" />
             <element signature="e#1522#1523#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/src/org/usfirst/frc/team3309/lib/math/Length.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="84">
+          <caret line="4" column="20" lean-forward="false" selection-start-line="4" selection-start-column="20" selection-end-line="4" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team3309/robot/Robot.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="588">
+          <caret line="51" column="32" lean-forward="true" selection-start-line="51" selection-start-column="32" selection-end-line="51" selection-end-column="32" />
+          <folding />
         </state>
       </provider>
     </entry>
