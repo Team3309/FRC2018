@@ -35,8 +35,8 @@ public class Lift extends Subsystem {
         bottomLimitSwitch.reset();
         lift0.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0,
                 0);
-        lift0.configPeakOutputForward(0.2, 0);
-        lift0.configPeakOutputReverse(-0.2, 0);
+        lift0.configPeakOutputForward(0.8, 0);
+        lift0.configPeakOutputReverse(-0.8, 0);
         lift0.changeToPositionMode();
         lift0.setSensorPhase(false);
         lift1.follow(lift0);

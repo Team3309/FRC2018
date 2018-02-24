@@ -1,8 +1,8 @@
 package org.usfirst.frc.team3309.lib.controllers.drive;
 
-import org.usfirst.frc.team3309.lib.math.LibMath;
 import org.usfirst.frc.team3309.lib.controllers.Controller3;
 import org.usfirst.frc.team3309.lib.controllers.helpers.DriveSignal;
+import org.usfirst.frc.team3309.lib.math.LibMath;
 
 /**
  * <p>
@@ -95,9 +95,9 @@ public class DriveCheezyController extends Controller3<DriveSignal, Double, Doub
         linearPower = throttle;
 
         if (throttle > .4) {
-            sensitivity = .15;
+            sensitivity = .5; // 0.15
         } else {
-            sensitivity = .3;
+            sensitivity = .8; // 0.3
         }
         // Quickturn!
         if (isQuickTurn) {
@@ -108,9 +108,9 @@ public class DriveCheezyController extends Controller3<DriveSignal, Double, Doub
             }
             overPower = 1.0;
             if (isHighGear) {
-                sensitivity = .455;
+                sensitivity = .85; // 0.455
             } else {
-                sensitivity = .455;
+                sensitivity = .85; // 0.455
             }
             angularPower = turn * sensitivity;
             if (turn == 1 || turn == -1) {

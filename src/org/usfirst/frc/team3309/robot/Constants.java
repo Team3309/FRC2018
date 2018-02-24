@@ -27,7 +27,7 @@ public class Constants {
     public static final int ARMS_LEFT_ACTUATOR_B = 2;
 
     public static final int ARMS_RIGHT_ACTUATOR_A = 3;
-    public static final int ARMS_RIGHT_ACTUATOR_B = 4;
+    public static final int ARMS_RIGHT_ACTUATOR_B = 0;
 
     public static final int ARMS_SHARP_SENSOR = 0;
 
@@ -49,11 +49,11 @@ public class Constants {
     public static final int SHOOTER_SHIFTER = 5;
 
     // falcon doors
-    public static final int FALCONDOORS_SOLENOID = 0;
+    public static final int FALCONDOORS_SOLENOID = 4;
 
     // robot constants
 
-    public static final double DRIVE_ENCODER_COUNTS_PER_REV = 4096.0 * 5.0 * 2 * 10; // 4096 * 5
+    public static final double DRIVE_ENCODER_COUNTS_PER_REV = 4096.0 * 5  * 2 * 10; // 4096.0 * 5.0 * 2 * 10
 
     public static final Length WHEEL_DIAMETER_INCHES = Length.fromInches(6.0);
     public static final Length WHEELBASE_INCHES = Length.fromInches(28.0);
@@ -67,7 +67,6 @@ public class Constants {
     public static final ArrayList<Waypoint> circularPath = new ArrayList<>();
     public static final ArrayList<Waypoint> semiCircular = new ArrayList<>();
     public static final ArrayList<Waypoint> toSwitchPath = new ArrayList<>();
-
 
     static  {
         figureEightPath.add(new Waypoint(32.470, 1.1821));

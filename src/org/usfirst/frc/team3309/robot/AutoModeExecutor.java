@@ -35,15 +35,15 @@ public class AutoModeExecutor {
     public static void displayAutos() {
         autos.addDefault("No Action", new NoActionAuto());
         autos.addObject("DriveForwardAuto", new DriveForward(Length.fromInches(130)));
-     //   autos.addObject("DriveBack", new DriveForward(Length.fromInches(-130)));
-        autos.addObject("TurnCWToAngleAuto", new DriveTurn(90));
+        autos.addObject("DriveBack", new DriveForward(Length.fromInches(-130)));
+        autos.addObject("TurnCWToAngleAuto", new DriveTurn(-90));
         autos.addObject("TurnCCWToAngleAuto", new DriveTurn(90));
         autos.addObject("AutoLineAuto", new AutoLineAuto());
         autos.addObject("SwitchForwardAuto", new SwitchForwardAuto());
         autos.addObject("TurnToSwitchAuto", new TurnToSwitchAuto());
         autos.addObject("LiftElevate", new LiftElevate(5000));
         autos.addObject("BeltbarMoveToPos", new BeltBarMoveToPos(0));
-        autos.addObject("DriveForwardVelocity", new DriveForwardVelocity(25000));
+        autos.addObject("DriveForwardVelocity", new DriveForwardVelocity(28000));
         if (isUsingFile) {
             for (File autoFile : autoFiles) {
                 Command autoCommand = null;

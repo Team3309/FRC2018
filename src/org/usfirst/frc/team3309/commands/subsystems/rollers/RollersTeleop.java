@@ -14,12 +14,14 @@ public class RollersTeleop extends Command {
 
     @Override
     protected void execute() {
-        double leftTrigger = OI.operatorRemote.leftTrigger.getX();
-        double rightTrigger = OI.operatorRemote.rightTrigger.getX();
+        double leftTrigger = OI.operatorRemote.leftTrigger.getY();
+        double rightTrigger = OI.operatorRemote.rightTrigger.getY();
         if (Math.abs(leftTrigger) > MIN_POWER) {
-            Robot.rollers.setLeftRight(leftTrigger, leftTrigger);
+            Robot.rollers.setLeftRight(-leftTrigger, leftTrigger);
+        } else if (Math.abs(rightTrigger) > MIN_POWER) {
+            Robot.rollers.setLeftRight(rightTrigger, -rightTrigger);
         } else {
-            Robot.rollers.setLeftRight(-rightTrigger, -rightTrigger);
+            Robot.rollers.setLeftRight(0 ,0);
         }
     }
 

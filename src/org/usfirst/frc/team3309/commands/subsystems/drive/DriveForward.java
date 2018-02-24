@@ -1,14 +1,11 @@
 package org.usfirst.frc.team3309.commands.subsystems.drive;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.usfirst.frc.team3309.lib.math.Length;
+import org.usfirst.frc.team3309.lib.LibTimer;
 import org.usfirst.frc.team3309.lib.controllers.pid.PIDConstants;
 import org.usfirst.frc.team3309.lib.controllers.pid.PIDController;
+import org.usfirst.frc.team3309.lib.math.Length;
 import org.usfirst.frc.team3309.robot.Robot;
-
-import javax.xml.bind.SchemaOutputResolver;
 
 public class DriveForward extends Command {
 
@@ -18,6 +15,7 @@ public class DriveForward extends Command {
     private double error;
     private final double CRUISE_VELOCITY = 15000; // 20000
     private PIDController turningController;
+    private LibTimer timer = new LibTimer(.5);
 
     public DriveForward(Length goalPos) {
         this.goalPos = goalPos.toInches();
@@ -26,8 +24,7 @@ public class DriveForward extends Command {
     }
 
     @Override
-    public void start() {
-        super.start();
+    public void initialize() {
         Robot.drive.reset();
         Robot.drive.setHighGear();
         Robot.drive.changeToBrakeMode();
@@ -41,16 +38,23 @@ public class DriveForward extends Command {
     @Override
     protected void execute() {
         double adjustmentVelocity = turningController.update(Robot.drive.getAngPos(), 0.0);
+
         error = Robot.drive.getGoalPos() - Robot.drive.encoderCountsToInches(Robot.drive.getEncoderPos());
-        Robot.drive.setLeftRight(-Robot.drive.inchesToEncoderCounts(Robot.drive.getGoalPos()),
-                -Robot.drive.inchesToEncoderCounts(Robot.drive.getGoalPos()));
-        Robot.drive.configLeftRightCruiseVelocity(CRUISE_VELOCITY, CRUISE_VELOCITY);
+
+        Robot.drive.setLeftRight(Robot.drive.inchesToEncoderCounts(Robot.drive.getGoalPos()),
+                Robot.drive.inchesToEncoderCounts(Robot.drive.getGoalPos()));
+        double cv = CRUISE_VELOCITY;
+        if (error < 0 ) {
+            cv = -CRUISE_VELOCITY;
+        }
+        Robot.drive.configLeftRightCruiseVelocity(cv, cv);
         System.out.println("drive error " + error);
     }
 
     @Override
     protected boolean isFinished() {
-        return Math.abs(error) < errorThreshold;
+        System.out.println("drive error " + error);
+        return timer.isConditionMaintained(Math.abs(error) < errorThreshold);
     }
 
 }

@@ -11,7 +11,7 @@ public class LiftShiftToClimbMode extends InstantCommand {
 
     @Override
     protected void execute() {
-        Robot.lift.setLiftShifter(false);
+        Robot.lift.setLiftShifter(true);
     }
 
 }

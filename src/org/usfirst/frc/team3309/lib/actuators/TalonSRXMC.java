@@ -27,6 +27,12 @@ public class TalonSRXMC extends TalonSRX {
     public void changeToMotionMagic() { controlMode = ControlMode.MotionMagic; }
 
     public void set(double value) {
+        /*
+        * Apparent talon bug where goal velocity is exacly half
+        * */
+        if (controlMode == ControlMode.Velocity) {
+            value *= 2;
+        }
         set(controlMode, value);
     }
 
