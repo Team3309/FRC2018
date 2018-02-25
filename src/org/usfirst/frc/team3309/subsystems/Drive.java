@@ -5,7 +5,7 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
-import edu.wpi.first.wpilibj.SerialPort;
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -26,14 +26,14 @@ public class Drive extends Subsystem {
 
     private Solenoid shifter = new Solenoid(Constants.SHIFTER);
 
-    private AHRS navX = new AHRS(SerialPort.Port.kMXP);
+    private AHRS navX = new AHRS(SPI.Port.kMXP);
 
     private double goalPos;
 
     public Drive() {
         left0.changeToPercentMode();
-        left0.configPeakOutputForward(1.0,0);
-        left0.configPeakOutputReverse(-1.0,0);
+        left0.configPeakOutputForward(1.0, 0);
+        left0.configPeakOutputReverse(-1.0, 0);
         left0.configNominalOutputForward(0.0, 0);
         left0.configNominalOutputReverse(-0.0, 0);
         left0.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
@@ -44,9 +44,10 @@ public class Drive extends Subsystem {
         left0.config_kP(0, 0.019, 0);
         left0.config_kD(0, 0.0006, 0);
 
+
         right0.changeToPercentMode();
-        right0.configPeakOutputForward(1.0,0);
-        right0.configPeakOutputReverse(-1.0,0);
+        right0.configPeakOutputForward(1.0, 0);
+        right0.configPeakOutputReverse(-1.0, 0);
         right0.configNominalOutputForward(0.0, 0);
         right0.configNominalOutputReverse(-0.0, 0);
         right0.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
@@ -77,6 +78,8 @@ public class Drive extends Subsystem {
     public void reset() {
         left0.clearMotionProfileTrajectories();
         right0.clearMotionProfileTrajectories();
+        left0.changeToDisabledMode();
+        right0.changeToDisabledMode();
         left0.getSensorCollection().setQuadraturePosition(0, 0);
         right0.getSensorCollection().setQuadraturePosition(0, 0);
         navX.reset();
@@ -191,7 +194,7 @@ public class Drive extends Subsystem {
         right0.changeToMotionMagic();
     }
 
-    public void configLeftRightCruiseVelocity(double leftSpeed, double rightSpeed){
+    public void configLeftRightCruiseVelocity(double leftSpeed, double rightSpeed) {
         configLeftCruiseVelocity(leftSpeed);
         configRightCruiseVelocity(rightSpeed);
     }
@@ -204,7 +207,9 @@ public class Drive extends Subsystem {
         left0.configMotionCruiseVelocity((int) sensorUnitsPer100ms, 0);
     }
 
-    public double getGoalPos() { return goalPos; }
+    public double getGoalPos() {
+        return goalPos;
+    }
 
     public void setGoalPos(double goalPos) {
         this.goalPos = goalPos;

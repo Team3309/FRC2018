@@ -3,11 +3,13 @@ package org.usfirst.frc.team3309.robot;
 import org.usfirst.frc.team3309.commands.InterruptAll;
 import org.usfirst.frc.team3309.commands.subsystems.arms.ArmsClamp;
 import org.usfirst.frc.team3309.commands.subsystems.arms.ArmsOpen;
+import org.usfirst.frc.team3309.commands.subsystems.drive.DriveForward;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveSetHighGear;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveSetLowGear;
 import org.usfirst.frc.team3309.commands.subsystems.lift.LiftShiftToClimbMode;
 import org.usfirst.frc.team3309.commands.subsystems.shooter.ShooterForward;
 import org.usfirst.frc.team3309.lib.input.InputXbox;
+import org.usfirst.frc.team3309.lib.math.Length;
 
 /*
  * <p>Class for defining controllers
@@ -38,6 +40,9 @@ public class OI {
     //    operatorRemote.leftBumper.whenReleased(new LiftSet(0));
 
         operatorRemote.leftBumper.whenPressed(new ShooterForward());
+
+        driverRemote.buttonY.whenPressed(new DriveForward(Length.fromInches(156)));
+        driverRemote.buttonA.whenPressed(new DriveForward(Length.fromInches(-156)));
 
     }
 

@@ -10,10 +10,7 @@ import org.usfirst.frc.team3309.commands.autos.NoActionAuto;
 import org.usfirst.frc.team3309.commands.autos.SwitchForwardAuto;
 import org.usfirst.frc.team3309.commands.autos.TurnToSwitchAuto;
 import org.usfirst.frc.team3309.commands.subsystems.beltbar.BeltBarMoveToPos;
-import org.usfirst.frc.team3309.commands.subsystems.drive.DriveForward;
-import org.usfirst.frc.team3309.commands.subsystems.drive.DriveForwardVelocity;
-import org.usfirst.frc.team3309.commands.subsystems.drive.DrivePath;
-import org.usfirst.frc.team3309.commands.subsystems.drive.DriveTurn;
+import org.usfirst.frc.team3309.commands.subsystems.drive.*;
 import org.usfirst.frc.team3309.commands.subsystems.lift.LiftElevate;
 import org.usfirst.frc.team3309.lib.controllers.helpers.Waypoint;
 import org.usfirst.frc.team3309.lib.math.Length;
@@ -33,9 +30,10 @@ public class AutoModeExecutor {
             .listFiles();
 
     public static void displayAutos() {
+        autos.addObject("Drivepower auto", new DrivePower());
         autos.addDefault("No Action", new NoActionAuto());
-        autos.addObject("DriveForwardAuto", new DriveForward(Length.fromInches(130)));
-        autos.addObject("DriveBack", new DriveForward(Length.fromInches(-130)));
+        autos.addObject("DriveForwardAuto", new DriveForward(Length.fromInches(50)));
+        autos.addObject("DriveBack", new DriveForward(Length.fromInches(-50)));
         autos.addObject("TurnCWToAngleAuto", new DriveTurn(-90));
         autos.addObject("TurnCCWToAngleAuto", new DriveTurn(90));
         autos.addObject("AutoLineAuto", new AutoLineAuto());

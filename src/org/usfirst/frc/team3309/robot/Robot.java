@@ -87,6 +87,7 @@ public class Robot extends TimedRobot {
         drive.setHighGear();
         drive.changeToCoastMode();
         lift.setLiftShifter(false);
+        Scheduler.getInstance().removeAll();
         Scheduler.getInstance().add(new LiftCheckLimits());
     }
 

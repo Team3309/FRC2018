@@ -14,7 +14,6 @@ public class DriveForward extends Command {
     private final double errorThreshold = 2;
     private double error;
     private double CRUISE_VELOCITY = 15000;
-    private PIDController turningController;
     private LibTimer timer = new LibTimer(.5);
 
     private boolean isInitialized = false;
@@ -22,32 +21,31 @@ public class DriveForward extends Command {
     public DriveForward(Length goalPos) {
         this.goalPos = goalPos.toInches();
         requires(Robot.drive);
-        turningController = new PIDController(new PIDConstants(0.0, 0, 0));
     }
 
     @Override
     public void initialize() {
+        // TODO create a CommandBase object to handle initialization
         isInitialized = true;
         Robot.drive.reset();
         Robot.drive.setHighGear();
         Robot.drive.changeToBrakeMode();
         Robot.drive.setGoalPos(goalPos);
         Robot.drive.changeToMotionMagicMode();
-        if (goalPos < 0) {
-            CRUISE_VELOCITY *= -1;
-        }
     }
 
     @Override
     protected void execute() {
         if (!isInitialized) {
-            this.initialize();
+            initialize();
             isInitialized = true;
         }
         error = Robot.drive.getGoalPos() - Robot.drive.encoderCountsToInches(Robot.drive.getEncoderPos());
-        Robot.drive.setLeftRight(Robot.drive.inchesToEncoderCounts(Robot.drive.getGoalPos()),
-                Robot.drive.inchesToEncoderCounts(Robot.drive.getGoalPos()));
+
+        Robot.drive.setLeftRight(-Robot.drive.inchesToEncoderCounts(Robot.drive.getGoalPos()),
+                -Robot.drive.inchesToEncoderCounts(Robot.drive.getGoalPos()));
         Robot.drive.configLeftRightCruiseVelocity(CRUISE_VELOCITY, CRUISE_VELOCITY);
+
     }
 
     @Override
