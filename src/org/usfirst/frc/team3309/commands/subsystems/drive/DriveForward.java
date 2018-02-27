@@ -13,8 +13,9 @@ public class DriveForward extends Command {
     private final double goalPos;
     private final double errorThreshold = 2;
     private double error;
-    private double CRUISE_VELOCITY = 15000;
+    private double CRUISE_VELOCITY = 25000;
     private LibTimer timer = new LibTimer(.5);
+    private double timeoutSec = Double.POSITIVE_INFINITY;
 
     private boolean isInitialized = false;
 
@@ -23,15 +24,20 @@ public class DriveForward extends Command {
         requires(Robot.drive);
     }
 
+    public DriveForward(Length goalPos, double timeoutSec) {
+        this(goalPos);
+        this.timeoutSec = timeoutSec;
+    }
+
     @Override
     public void initialize() {
         // TODO create a CommandBase object to handle initialization
-        isInitialized = true;
         Robot.drive.reset();
         Robot.drive.setHighGear();
         Robot.drive.changeToBrakeMode();
         Robot.drive.setGoalPos(goalPos);
         Robot.drive.changeToMotionMagicMode();
+        timer.reset();
     }
 
     @Override
@@ -50,12 +56,14 @@ public class DriveForward extends Command {
 
     @Override
     protected boolean isFinished() {
-        return timer.isConditionMaintained(Math.abs(error) < errorThreshold);
+        return timer.isConditionMaintained(Math.abs(error) < errorThreshold)
+                || timer.get() > timeoutSec;
     }
 
     @Override
     public void end() {
         isInitialized = false;
+        timeoutSec = Double.POSITIVE_INFINITY;
     }
 
 }

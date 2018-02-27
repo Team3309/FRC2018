@@ -20,6 +20,15 @@ public class BeltBar extends Subsystem {
         masterBar.configPeakOutputForward(1.0, 0);
         masterBar.configPeakOutputReverse(-1.0, 0);
         masterBar.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 0);
+        masterBar.setInverted(true);
+        masterBar.setSelectedSensorPosition(masterBar.getSensorCollection().getPulseWidthPosition()%4096,0,0);
+        masterBar.config_kP(0, 0.1, 0);
+        masterBar.config_kF(0, 0.05, 0);
+        // TODO fix soft limits
+/*        masterBar.configForwardSoftLimitThreshold(140, 0);
+        masterBar.configForwardSoftLimitEnable(true, 0);
+        masterBar.configReverseSoftLimitThreshold(-1500,0);
+        masterBar.configReverseSoftLimitEnable(true, 0);*/
     }
 
     @Override
@@ -30,17 +39,10 @@ public class BeltBar extends Subsystem {
     public void sendToDashboard() {
         NetworkTable table = NetworkTableInstance.getDefault().getTable("Beltbar");
         table.getEntry("Beltbar pos: ").setNumber(getPosition());
+        table.getEntry("Beltbar percent output: ").setNumber(masterBar.getMotorOutputPercent());
     }
 
     public double getPosition() {
-        return masterBar.getSensorCollection().getQuadraturePosition();
-    }
-
-    public void reset() {
-        masterBar.getSensorCollection().setQuadraturePosition(0, 0);
-    }
-
-    public double getBarAngle() {
         return masterBar.getSensorCollection().getQuadraturePosition();
     }
 

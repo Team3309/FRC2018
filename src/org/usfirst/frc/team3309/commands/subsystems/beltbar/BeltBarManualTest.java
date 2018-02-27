@@ -18,7 +18,7 @@ public class BeltBarManualTest extends Command {
 
     @Override
     protected void execute() {
-        double power = -OI.operatorRemote.rightStick.getY();
+        double power = OI.operatorRemote.rightStick.getY();
         Robot.beltBar.set(power);
     }
 

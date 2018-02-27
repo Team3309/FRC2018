@@ -35,10 +35,16 @@ public class Lift extends Subsystem {
         bottomLimitSwitch.reset();
         lift0.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0,
                 0);
-        lift0.configPeakOutputForward(0.8, 0);
-        lift0.configPeakOutputReverse(-0.8, 0);
+        lift0.configForwardSoftLimitThreshold(47000, 0);
+        lift0.configForwardSoftLimitEnable(true, 0);
+        lift0.config_kP(0, 0.18, 0);
+        lift0.config_kD(0, 10, 0);
+        lift0.config_kF(0, 0.023, 0);
+        lift0.configClosedloopRamp(0.22,0);
+        lift0.configPeakOutputForward(1.0, 0);
+        lift0.configPeakOutputReverse(-0.5, 0);
         lift0.changeToPositionMode();
-        lift0.setSensorPhase(false);
+        lift0.setInverted(true);
         lift1.follow(lift0);
         lift2.follow(lift0);
         lift3.follow(lift0);
@@ -57,6 +63,8 @@ public class Lift extends Subsystem {
         table.getEntry("lift pos: ").setNumber(getPosition());
         table.getEntry("lift goal pos: ").setNumber(getGoalPos());
         table.getEntry("lift limit switch: ").setBoolean(isBottomLimitSwitch());
+        table.getEntry("lift control mode: ").setString(lift0.getControlMode().toString());
+        table.getEntry("lift percent mode: ").setNumber(lift0.getMotorOutputPercent());
     }
 
     public void reset() {

@@ -11,16 +11,22 @@ public class DriveTurn extends Command {
 
     private double goalAngle;
     private PIDController angleController;
-    private final double ANGLE_LENIENCY = 15; // 1.5
+    private final double ANGLE_LENIENCY = 12; // 1.5
     private boolean isInitialized = false;
-    private LibTimer timer = new LibTimer(0.5);
+    private LibTimer timer = new LibTimer(0.35);
+    private double timeoutSec = Double.POSITIVE_INFINITY;
 
     public DriveTurn(double goalAngle) {
         this.goalAngle = goalAngle;
 
         // compbot constants 0.0077, 0, 0.00001
-        angleController = new PIDController(new PIDConstants(0.0094, 0.000042, 0.0));
+        angleController = new PIDController(new PIDConstants(0.0074, 0.0000, 0.00001));
         requires(Robot.drive);
+    }
+
+    public DriveTurn(double goalAngle, double timeoutSec) {
+        this(goalAngle);
+        this.timeoutSec = timeoutSec;
     }
 
     @Override
@@ -30,6 +36,7 @@ public class DriveTurn extends Command {
         Robot.drive.setHighGear();
         Robot.drive.changeToBrakeMode();
         Robot.drive.changeToPercentMode();
+        timer.reset();
     }
 
     @Override
@@ -45,12 +52,15 @@ public class DriveTurn extends Command {
     protected boolean isFinished() {
         return timer.isConditionMaintained(
                 LibMath.isWithin(Robot.drive.getAngPos(),
-                        goalAngle - ANGLE_LENIENCY, goalAngle + ANGLE_LENIENCY));
+                        goalAngle - ANGLE_LENIENCY, goalAngle + ANGLE_LENIENCY))
+                || timer.get() > timeoutSec;
     }
 
     @Override
     public void end() {
         isInitialized = false;
+        timeoutSec = Double.POSITIVE_INFINITY;
     }
 
 }
+

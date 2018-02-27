@@ -57,7 +57,6 @@ public class Robot extends TimedRobot {
     @Override
     public void autonomousInit() {
         logger.info("autonomous init");
-        beltBar.reset();
         drive.reset();
         lift.setLiftShifter(false);
         lift.reset();
@@ -115,8 +114,16 @@ public class Robot extends TimedRobot {
         return DriverStation.getInstance().getGameSpecificMessage().charAt(0) == 'L';
     }
 
+    public static boolean isRightSwitch() {
+        return DriverStation.getInstance().getGameSpecificMessage().charAt(0) == 'R';
+    }
+
     public static boolean isLeftScale() {
         return DriverStation.getInstance().getGameSpecificMessage().charAt(1) == 'L';
+    }
+
+    public static boolean isRightScale() {
+        return DriverStation.getInstance().getGameSpecificMessage().charAt(1) == 'R';
     }
 
 }
