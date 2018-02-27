@@ -26,7 +26,7 @@ public class Robot extends TimedRobot {
     public static Arms arms;
     public static Rollers rollers;
 
-  //  private UsbCamera cam;
+    private UsbCamera cam;
     private Compressor c;
     private OI oi;
 
@@ -37,8 +37,8 @@ public class Robot extends TimedRobot {
     public void robotInit() {
         logger = Logger.getLogger("Robot");
         logger.info("robot init");
-     //   cam = CameraServer.getInstance().startAutomaticCapture();
-      //  cam.setFPS(30);
+        cam = CameraServer.getInstance().startAutomaticCapture();
+        cam.setFPS(30);
         drive = new Drive();
         lift = new Lift();
         beltBar = new BeltBar();
@@ -57,7 +57,6 @@ public class Robot extends TimedRobot {
     @Override
     public void autonomousInit() {
         logger.info("autonomous init");
-        beltBar.reset();
         drive.reset();
         lift.setLiftShifter(false);
         lift.reset();
@@ -67,6 +66,7 @@ public class Robot extends TimedRobot {
             System.out.println("Starting");
             autoCommand.start();
         }
+        Scheduler.getInstance().run();
     }
 
     @Override
@@ -86,6 +86,7 @@ public class Robot extends TimedRobot {
         drive.setHighGear();
         drive.changeToCoastMode();
         lift.setLiftShifter(false);
+        Scheduler.getInstance().removeAll();
         Scheduler.getInstance().add(new LiftCheckLimits());
     }
 
@@ -113,8 +114,16 @@ public class Robot extends TimedRobot {
         return DriverStation.getInstance().getGameSpecificMessage().charAt(0) == 'L';
     }
 
+    public static boolean isRightSwitch() {
+        return DriverStation.getInstance().getGameSpecificMessage().charAt(0) == 'R';
+    }
+
     public static boolean isLeftScale() {
         return DriverStation.getInstance().getGameSpecificMessage().charAt(1) == 'L';
+    }
+
+    public static boolean isRightScale() {
+        return DriverStation.getInstance().getGameSpecificMessage().charAt(1) == 'R';
     }
 
 }

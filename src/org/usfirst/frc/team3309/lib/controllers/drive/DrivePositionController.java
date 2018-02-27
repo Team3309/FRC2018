@@ -1,11 +1,11 @@
 package org.usfirst.frc.team3309.lib.controllers.drive;
 
 import org.usfirst.frc.team3309.lib.controllers.Controller3;
+import org.usfirst.frc.team3309.lib.controllers.helpers.DriveSignal;
+import org.usfirst.frc.team3309.lib.controllers.helpers.DriveState;
 import org.usfirst.frc.team3309.lib.controllers.interfaces.Finishable;
 import org.usfirst.frc.team3309.lib.controllers.pid.PIDConstants;
 import org.usfirst.frc.team3309.lib.controllers.pid.PIDController;
-import org.usfirst.frc.team3309.lib.controllers.helpers.DriveSignal;
-import org.usfirst.frc.team3309.lib.controllers.helpers.DriveState;
 
 public class DrivePositionController extends Controller3<DriveSignal, DriveState, Double, Double> implements Finishable {
 

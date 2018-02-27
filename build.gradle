@@ -9,6 +9,11 @@ plugins {
 def TEAM = 3309
 def ROBOT_CLASS = "org.usfirst.frc.team3309.robot.Robot"
 
+wpi {
+    wpilibVersion = "2018.3.3"
+    ctreVersion = "5.2.2.0"
+}
+
 deploy {
     targets {
         target("roborio", jaci.openrio.gradle.frc.RoboRIO) {

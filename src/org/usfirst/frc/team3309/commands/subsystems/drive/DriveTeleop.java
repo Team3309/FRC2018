@@ -2,9 +2,10 @@ package org.usfirst.frc.team3309.commands.subsystems.drive;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.usfirst.frc.team3309.robot.OI;
-import org.usfirst.frc.team3309.lib.controllers.helpers.DriveSignal;
 import org.usfirst.frc.team3309.lib.controllers.drive.DriveCheezyController;
+import org.usfirst.frc.team3309.lib.controllers.helpers.DriveSignal;
+import org.usfirst.frc.team3309.lib.math.LibMath;
+import org.usfirst.frc.team3309.robot.OI;
 import org.usfirst.frc.team3309.robot.Robot;
 
 public class DriveTeleop extends Command {
@@ -25,8 +26,8 @@ public class DriveTeleop extends Command {
 
     @Override
     protected void execute() {
-        double throttle = OI.driverRemote.leftStick.getY();
-        double turn = OI.driverRemote.rightStick.getX();
+        double throttle = LibMath.handleDeadband(OI.driverRemote.leftStick.getY(), 0.04);
+        double turn = LibMath.handleDeadband(OI.driverRemote.rightStick.getX(), 0.02);
         SmartDashboard.putNumber("Turn: ",turn);
         boolean isQuickTurn = OI.driverRemote.rightBumper.get();
         DriveSignal driveSignal = cheezyDriveEquation.update(throttle, turn, isQuickTurn);

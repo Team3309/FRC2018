@@ -38,11 +38,6 @@ public class Arms extends Subsystem {
         setRightActuator(DoubleSolenoid.Value.kForward);
     }
 
-    public void intakeArms() {
-        setLeftActuator(DoubleSolenoid.Value.kForward);
-        setRightActuator(DoubleSolenoid.Value.kReverse);
-    }
-
     public void openArms() {
         setLeftActuator(DoubleSolenoid.Value.kReverse);
         setRightActuator(DoubleSolenoid.Value.kReverse);

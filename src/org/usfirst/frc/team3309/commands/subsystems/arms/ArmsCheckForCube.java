@@ -1,9 +1,7 @@
 package org.usfirst.frc.team3309.commands.subsystems.arms;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.command.Scheduler;
 import org.usfirst.frc.team3309.robot.Robot;
-import org.usfirst.frc.team3309.subsystems.Arms;
 
 public class ArmsCheckForCube extends Command {
 

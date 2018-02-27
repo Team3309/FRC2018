@@ -10,4 +10,12 @@ public class LibMath {
         return Math.abs(val) < Math.abs(threshold);
     }
 
+    public static boolean isWithin(double val, double a, double b) {
+        if (a < b) {
+            return val > a && val < b;
+        }
+        return val < a && val > b;
+    }
+
+
 }

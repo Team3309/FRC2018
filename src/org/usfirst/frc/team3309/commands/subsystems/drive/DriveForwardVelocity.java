@@ -3,6 +3,7 @@ package org.usfirst.frc.team3309.commands.subsystems.drive;
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team3309.robot.Robot;
 
+@Deprecated
 public class DriveForwardVelocity extends Command {
 
     private double goalVelocity;

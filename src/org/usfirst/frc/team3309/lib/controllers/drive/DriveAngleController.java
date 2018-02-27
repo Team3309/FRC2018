@@ -1,10 +1,10 @@
 package org.usfirst.frc.team3309.lib.controllers.drive;
 
 import org.usfirst.frc.team3309.lib.controllers.Controller2;
+import org.usfirst.frc.team3309.lib.controllers.helpers.DriveSignal;
 import org.usfirst.frc.team3309.lib.controllers.interfaces.Finishable;
 import org.usfirst.frc.team3309.lib.controllers.pid.PIDConstants;
 import org.usfirst.frc.team3309.lib.controllers.pid.PIDController;
-import org.usfirst.frc.team3309.lib.controllers.helpers.DriveSignal;
 
 public class DriveAngleController extends Controller2<DriveSignal, Double, Double> implements Finishable {
 

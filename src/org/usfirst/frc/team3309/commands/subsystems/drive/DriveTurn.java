@@ -1,53 +1,66 @@
 package org.usfirst.frc.team3309.commands.subsystems.drive;
 
 import edu.wpi.first.wpilibj.command.Command;
+import org.usfirst.frc.team3309.lib.LibTimer;
 import org.usfirst.frc.team3309.lib.controllers.pid.PIDConstants;
 import org.usfirst.frc.team3309.lib.controllers.pid.PIDController;
+import org.usfirst.frc.team3309.lib.math.LibMath;
 import org.usfirst.frc.team3309.robot.Robot;
 
 public class DriveTurn extends Command {
 
     private double goalAngle;
-    private double error;
     private PIDController angleController;
+    private final double ANGLE_LENIENCY = 12; // 1.5
+    private boolean isInitialized = false;
+    private LibTimer timer = new LibTimer(0.35);
+    private double timeoutSec = Double.POSITIVE_INFINITY;
 
     public DriveTurn(double goalAngle) {
         this.goalAngle = goalAngle;
-        angleController = new PIDController(new PIDConstants(0.006, 0, 0.004));
+
+        // compbot constants 0.0077, 0, 0.00001
+        angleController = new PIDController(new PIDConstants(0.0074, 0.0000, 0.00001));
         requires(Robot.drive);
     }
 
+    public DriveTurn(double goalAngle, double timeoutSec) {
+        this(goalAngle);
+        this.timeoutSec = timeoutSec;
+    }
+
     @Override
-    public void start() {
-        super.start();
+    public void initialize() {
+        isInitialized = true;
         Robot.drive.reset();
+        Robot.drive.setHighGear();
         Robot.drive.changeToBrakeMode();
         Robot.drive.changeToPercentMode();
+        timer.reset();
     }
 
     @Override
     protected void execute() {
-        System.out.println("Drive angle " + Robot.drive.getAngPos());
-        error = goalAngle - Robot.drive.getAngPos();
-        if (Math.abs(error) > 180) {
-            if (error > 0) {
-                error -= 360;
-            } else {
-                error += 360;
-            }
+        if (!isInitialized) {
+            initialize();
         }
-        System.out.println("Error: " + error);
         double power = angleController.update(Robot.drive.getAngPos(), goalAngle);
-        if (goalAngle > 0 ) {
-            Robot.drive.setLeftRight(power, -power);
-        } else {
-            Robot.drive.setLeftRight(power, -power);
-        }
+        Robot.drive.setLeftRight(power, -power);
     }
 
     @Override
     protected boolean isFinished() {
-        return false;
+        return timer.isConditionMaintained(
+                LibMath.isWithin(Robot.drive.getAngPos(),
+                        goalAngle - ANGLE_LENIENCY, goalAngle + ANGLE_LENIENCY))
+                || timer.get() > timeoutSec;
+    }
+
+    @Override
+    public void end() {
+        isInitialized = false;
+        timeoutSec = Double.POSITIVE_INFINITY;
     }
 
 }
+

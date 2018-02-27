@@ -9,7 +9,7 @@ import org.usfirst.frc.team3309.lib.controllers.Controller3;
  */
 public class PIDVelocityController extends Controller3<Double, Double, Double, Double> {
 
-    private PIDController pidPositionController;
+    private org.usfirst.frc.team3309.lib.controllers.pid.PIDController pidPositionController;
 
     // constant for adjusting velocity
     private double vScalar;
@@ -18,7 +18,7 @@ public class PIDVelocityController extends Controller3<Double, Double, Double, D
     private double aScalar;
 
     public PIDVelocityController(PIDConstants pidConstants, double v) {
-        pidPositionController = new PIDController(pidConstants);
+        pidPositionController = new org.usfirst.frc.team3309.lib.controllers.pid.PIDController(pidConstants);
         this.vScalar = v;
     }
 
