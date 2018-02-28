@@ -40,7 +40,7 @@ public class Constants {
 
     public static final int LIFT_SHIFTER = 6;
 
-    public static final int LIFT_BOTTOM_LIMIT_SWITCH = 0;
+    public static final int LIFT_BANNER_SENSOR = 0;
 
     // beltbar
     public static final int BELTBAR_0 = 30;

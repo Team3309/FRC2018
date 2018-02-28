@@ -2,31 +2,42 @@ package org.usfirst.frc.team3309.commands.subsystems.drive;
 
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team3309.lib.LibTimer;
-import org.usfirst.frc.team3309.lib.controllers.pid.PIDConstants;
-import org.usfirst.frc.team3309.lib.controllers.pid.PIDController;
 import org.usfirst.frc.team3309.lib.math.Length;
 import org.usfirst.frc.team3309.robot.Robot;
 
-public class DriveForward extends Command {
+public class DriveTo extends Command {
 
     // inches
     private final double goalPos;
-    private final double errorThreshold = 2;
     private double error;
-    private double CRUISE_VELOCITY = 25000;
-    private LibTimer timer = new LibTimer(.5);
     private double timeoutSec = Double.POSITIVE_INFINITY;
+    private boolean isMotionProfile = false;
+
+    private final double errorThreshold = 2;
+    private double CRUISE_VELOCITY = 25000;
+
+    private LibTimer timer = new LibTimer(.5);
 
     private boolean isInitialized = false;
 
-    public DriveForward(Length goalPos) {
+    public DriveTo(Length goalPos) {
         this.goalPos = goalPos.toInches();
         requires(Robot.drive);
     }
 
-    public DriveForward(Length goalPos, double timeoutSec) {
+    public DriveTo(Length goalPos, boolean isMotionProfile) {
+        this(goalPos);
+        this.isMotionProfile = isMotionProfile;
+    }
+
+    public DriveTo(Length goalPos, double timeoutSec) {
         this(goalPos);
         this.timeoutSec = timeoutSec;
+    }
+
+    public DriveTo(Length goalPos, double timeoutSec, boolean isMotionProfile) {
+        this(goalPos, timeoutSec);
+        this.isMotionProfile = isMotionProfile;
     }
 
     @Override
@@ -36,15 +47,19 @@ public class DriveForward extends Command {
         Robot.drive.setHighGear();
         Robot.drive.changeToBrakeMode();
         Robot.drive.setGoalPos(goalPos);
-        Robot.drive.changeToMotionMagicMode();
+        if (isMotionProfile) {
+            Robot.drive.changeToMotionMagicMode();
+        } else {
+            Robot.drive.changeToPositionMode();
+        }
         timer.reset();
+        isInitialized = true;
     }
 
     @Override
     protected void execute() {
         if (!isInitialized) {
             initialize();
-            isInitialized = true;
         }
         error = Robot.drive.getGoalPos() - Robot.drive.encoderCountsToInches(Robot.drive.getEncoderPos());
 
@@ -64,6 +79,7 @@ public class DriveForward extends Command {
     public void end() {
         isInitialized = false;
         timeoutSec = Double.POSITIVE_INFINITY;
+        isMotionProfile = false;
     }
 
 }

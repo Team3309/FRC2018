@@ -5,14 +5,12 @@ import org.usfirst.frc.team3309.commands.subsystems.AssemblyLocation;
 import org.usfirst.frc.team3309.commands.subsystems.arms.ArmsClamp;
 import org.usfirst.frc.team3309.commands.subsystems.arms.ArmsOpen;
 import org.usfirst.frc.team3309.commands.subsystems.beltbar.BeltBarMoveToPos;
-import org.usfirst.frc.team3309.commands.subsystems.drive.DriveForward;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveSetHighGear;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveSetLowGear;
 import org.usfirst.frc.team3309.commands.subsystems.lift.LiftElevate;
 import org.usfirst.frc.team3309.commands.subsystems.lift.LiftShiftToClimbMode;
 import org.usfirst.frc.team3309.commands.subsystems.shooter.ShooterForward;
 import org.usfirst.frc.team3309.lib.input.InputXbox;
-import org.usfirst.frc.team3309.lib.math.Length;
 
 /*
  * <p>Class for defining controllers
@@ -43,7 +41,8 @@ public class OI {
         operatorRemote.dPad.left.whenPressed(new LiftElevate(AssemblyLocation.SCALE_DOWN.getElevatorPosition()));
         operatorRemote.dPad.right.whenPressed(new LiftElevate(AssemblyLocation.SCALE_UP.getElevatorPosition()));
 
-        operatorRemote.dPad.down.whenPressed(new BeltBarMoveToPos(AssemblyLocation.SWITCH.getBeltBarPosition()));
+        operatorRemote.dPad.down.whenPressed(new BeltBarMoveToPos(AssemblyLocation.SWITCH.getBeltBarPosition())); // 2500
+        operatorRemote.startButton.whenPressed(new BeltBarMoveToPos(AssemblyLocation.SCALE_DOWN.getBeltBarPosition())); // 3500
     }
 
 

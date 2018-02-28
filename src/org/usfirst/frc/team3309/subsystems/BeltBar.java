@@ -19,11 +19,13 @@ public class BeltBar extends Subsystem {
         masterBar.set(0);
         masterBar.configPeakOutputForward(1.0, 0);
         masterBar.configPeakOutputReverse(-1.0, 0);
-        masterBar.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 0);
         masterBar.setInverted(true);
-        masterBar.setSelectedSensorPosition(masterBar.getSensorCollection().getPulseWidthPosition()%4096,0,0);
-        masterBar.config_kP(0, 0.1, 0);
-        masterBar.config_kF(0, 0.05, 0);
+        masterBar.setSensorPhase(false);
+        masterBar.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 0);
+        masterBar.changeToPositionMode();
+
+/*        masterBar.config_kP(0, 0.1, 0);
+        masterBar.config_kF(0, 0.05, 0);*/
         // TODO fix soft limits
 /*        masterBar.configForwardSoftLimitThreshold(140, 0);
         masterBar.configForwardSoftLimitEnable(true, 0);
@@ -40,10 +42,11 @@ public class BeltBar extends Subsystem {
         NetworkTable table = NetworkTableInstance.getDefault().getTable("Beltbar");
         table.getEntry("Beltbar pos: ").setNumber(getPosition());
         table.getEntry("Beltbar percent output: ").setNumber(masterBar.getMotorOutputPercent());
+        table.getEntry("Beltbar control mode: ").setString(masterBar.getControlMode().toString());
     }
 
     public double getPosition() {
-        return masterBar.getSensorCollection().getQuadraturePosition();
+        return masterBar.getSensorCollection().getPulseWidthPosition();
     }
 
     public void set(double value) {

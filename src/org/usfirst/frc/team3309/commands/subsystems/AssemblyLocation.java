@@ -3,9 +3,9 @@ package org.usfirst.frc.team3309.commands.subsystems;
 public enum AssemblyLocation {
 
     GROUND(0, 0),
-    SCALE_DOWN(0, 20000),
-    SCALE_UP(0, 42000),
-    SWITCH(-400, 10000),
+    SCALE_DOWN(3500, 20000),
+    SCALE_UP(0, 43000),
+    SWITCH(2500, 10000),
     HOLD_CUBE(0, 0),
     CLIMB_MODE(0, 0);
 

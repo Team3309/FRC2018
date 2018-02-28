@@ -6,13 +6,14 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.sensors.PigeonIMU;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.Counter;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team3309.commands.subsystems.lift.LiftManualTest;
 import org.usfirst.frc.team3309.lib.actuators.TalonSRXMC;
 import org.usfirst.frc.team3309.lib.actuators.VictorSPXMC;
-import org.usfirst.frc.team3309.lib.sensors.LimitSwitch;
 import org.usfirst.frc.team3309.robot.Constants;
 
 public class Lift extends Subsystem {
@@ -25,14 +26,13 @@ public class Lift extends Subsystem {
 
     private PigeonIMU pigeonIMU = new PigeonIMU(lift1);
 
-    private LimitSwitch bottomLimitSwitch = new LimitSwitch(Constants.LIFT_BOTTOM_LIMIT_SWITCH);
+    private DigitalInput bannerSensor = new DigitalInput(Constants.LIFT_BANNER_SENSOR);
 
     private Solenoid liftShifter = new Solenoid(Constants.LIFT_SHIFTER);
 
     private double goalPos;
 
     public Lift() {
-        bottomLimitSwitch.reset();
         lift0.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0,
                 0);
         lift0.configForwardSoftLimitThreshold(47000, 0);
@@ -42,7 +42,7 @@ public class Lift extends Subsystem {
         lift0.config_kF(0, 0.023, 0);
         lift0.configClosedloopRamp(0.22,0);
         lift0.configPeakOutputForward(1.0, 0);
-        lift0.configPeakOutputReverse(-0.5, 0);
+        lift0.configPeakOutputReverse(-0.4, 0);
         lift0.changeToPositionMode();
         lift0.setInverted(true);
         lift1.follow(lift0);
@@ -62,16 +62,20 @@ public class Lift extends Subsystem {
         NetworkTable table = NetworkTableInstance.getDefault().getTable("Lift");
         table.getEntry("lift pos: ").setNumber(getPosition());
         table.getEntry("lift goal pos: ").setNumber(getGoalPos());
-        table.getEntry("lift limit switch: ").setBoolean(isBottomLimitSwitch());
         table.getEntry("lift control mode: ").setString(lift0.getControlMode().toString());
         table.getEntry("lift percent mode: ").setNumber(lift0.getMotorOutputPercent());
+  /*      table.getEntry("lift banner sensor period: ").setNumber(bannerSensor.getPeriod());
+        table.getEntry("lift banner sensor inverse period: ").setNumber(1.0/bannerSensor.getPeriod());
+        table.getEntry("lift banner sensor: ").setNumber(bannerSensor.getDistance());*/
+        table.getEntry("lift banner sensor: ").setBoolean(bannerSensor.get());
+        table.getEntry("banner sensor trigger: ").setBoolean(bannerSensor.isAnalogTrigger());
     }
 
-    public void reset() {
-        resetToBottom();
-    }
+        public void reset() {
+            resetToBottom();
+        }
 
-    public void resetToBottom() {
+        public void resetToBottom() {
         lift0.getSensorCollection().setQuadraturePosition(0, 0);
     }
 
@@ -119,8 +123,8 @@ public class Lift extends Subsystem {
         this.goalPos = goalPos;
     }
 
-    public boolean isBottomLimitSwitch() {
-        return bottomLimitSwitch.isSwitchSet();
+    public boolean isAtBottom() {
+        return bannerSensor.get();
     }
 
 }
