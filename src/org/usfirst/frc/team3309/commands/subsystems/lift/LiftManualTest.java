@@ -8,7 +8,7 @@ import org.usfirst.frc.team3309.robot.Robot;
 @Deprecated
 public class LiftManualTest extends Command {
 
-    private final double MAX_POWER = 0.8;
+    private final double MAX_POWER = 0.5;
 
     public LiftManualTest() {
         requires(Robot.lift);
@@ -24,6 +24,9 @@ public class LiftManualTest extends Command {
         double power = OI.operatorRemote.leftStick.getY();
         if (Math.abs(power) > MAX_POWER) {
             power = MAX_POWER * Math.signum(power);
+        }
+        if (Robot.lift.isAtBottom() && power < 0.1) {
+            power = 0;
         }
         Robot.lift.set(power);
         SmartDashboard.putNumber("Lift power: ", power);

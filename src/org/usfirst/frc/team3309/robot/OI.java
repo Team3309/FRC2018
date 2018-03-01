@@ -2,6 +2,7 @@ package org.usfirst.frc.team3309.robot;
 
 import org.usfirst.frc.team3309.commands.InterruptAll;
 import org.usfirst.frc.team3309.commands.subsystems.AssemblyLocation;
+import org.usfirst.frc.team3309.commands.subsystems.MoveAssembly;
 import org.usfirst.frc.team3309.commands.subsystems.arms.ArmsClamp;
 import org.usfirst.frc.team3309.commands.subsystems.arms.ArmsOpen;
 import org.usfirst.frc.team3309.commands.subsystems.beltbar.BeltBarMoveToPos;
@@ -36,14 +37,19 @@ public class OI {
         operatorRemote.leftBumper.whenPressed(new ShooterForward());
         operatorRemote.rightBumper.whenPressed(new LiftShiftToClimbMode());
 
-        operatorRemote.buttonX.whenPressed(new LiftElevate(AssemblyLocation.GROUND.getElevatorPosition()));
+  /*
         operatorRemote.buttonY.whenPressed(new LiftElevate(AssemblyLocation.SWITCH.getElevatorPosition()));
         operatorRemote.dPad.left.whenPressed(new LiftElevate(AssemblyLocation.SCALE_DOWN.getElevatorPosition()));
         operatorRemote.dPad.right.whenPressed(new LiftElevate(AssemblyLocation.SCALE_UP.getElevatorPosition()));
 
-        operatorRemote.dPad.down.whenPressed(new BeltBarMoveToPos(AssemblyLocation.SWITCH.getBeltBarPosition())); // 2500
-        operatorRemote.startButton.whenPressed(new BeltBarMoveToPos(AssemblyLocation.SCALE_DOWN.getBeltBarPosition())); // 3500
+        operatorRemote.dPad.down.whenPressed(new BeltBarMoveToPos(AssemblyLocation.SWITCH.getBeltBarPosition()));
+        operatorRemote.startButton.whenPressed(new BeltBarMoveToPos(AssemblyLocation.SCALE_DOWN.getBeltBarPosition()));*/
+
+
+        operatorRemote.buttonX.whenPressed(new LiftElevate(AssemblyLocation.GROUND.getElevatorPosition()));
+        operatorRemote.rightStick.whenPressed(new MoveAssembly(AssemblyLocation.GROUND));
     }
+
 
 
 }

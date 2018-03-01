@@ -96,6 +96,7 @@ public class Robot extends TimedRobot {
         drive.sendToDashboard();
         lift.sendToDashboard();
         beltBar.sendToDashboard();
+        arms.sendToDashboard();
         SmartDashboard.putData(beltBar);
         SmartDashboard.putData(shooter);
         SmartDashboard.putData(falconDoors);

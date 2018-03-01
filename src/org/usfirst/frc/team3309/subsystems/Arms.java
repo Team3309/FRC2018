@@ -1,5 +1,7 @@
 package org.usfirst.frc.team3309.subsystems;
 
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -21,6 +23,12 @@ public class Arms extends Subsystem {
         setDefaultCommand(new ArmsCheckForCube());
     }
 
+    public void sendToDashboard() {
+        NetworkTable table = NetworkTableInstance.getDefault().getTable("Arms");
+        table.getEntry("sees cube").setBoolean(isCubeIn());
+        table.getEntry("sharp sensor").setNumber(hasCubeSensor.getValue());
+    }
+
     private void setRightActuator(DoubleSolenoid.Value value) {
         rightActuator.set(value);
     }
@@ -30,7 +38,7 @@ public class Arms extends Subsystem {
     }
 
     public boolean isCubeIn() {
-        return hasCubeSensor.getAverageVoltage() > 0.7;
+        return hasCubeSensor.getValue() > 0.7;
     }
 
     public void clampArms() {
