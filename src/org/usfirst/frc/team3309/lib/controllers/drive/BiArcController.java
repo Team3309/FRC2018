@@ -11,9 +11,6 @@ import org.usfirst.frc.team3309.robot.Robot;
 
 import java.util.ArrayList;
 
-/*
- * TODO: Make goalVelocity member of the ArrayList<Waypoint> path, instead of constant value for the whole path.
- * */
 public class BiArcController extends Controller1<DriveSignal, DriveState> implements Finishable {
 
     private final ArrayList<Waypoint> path;
@@ -28,15 +25,16 @@ public class BiArcController extends Controller1<DriveSignal, DriveState> implem
     private double prevAngle;
     private int curPathIndex = 0;
 
-    private final double goalVelocity = 600;
+    private final double goalVelocity;
     private final double WHEELBASE;
 
-    public BiArcController(ArrayList<Waypoint> path, double WHEELBASE) {
+    public BiArcController(ArrayList<Waypoint> path, double WHEELBASE, double goalVelocity) {
         this.path = path;
         this.WHEELBASE = WHEELBASE;
         curRadius = this.path.get(0).getRadius();
         goalAngle = this.path.get(0).getAngle();
         goalDistance += Math.abs(goalAngle) * Math.abs(curRadius);
+        this.goalVelocity = goalVelocity;
     }
 
     @Override

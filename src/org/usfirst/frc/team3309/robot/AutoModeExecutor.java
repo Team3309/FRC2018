@@ -5,10 +5,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.usfirst.frc.team3309.commands.autos.AutoLineAuto;
-import org.usfirst.frc.team3309.commands.autos.NoActionAuto;
-import org.usfirst.frc.team3309.commands.autos.SwitchForwardAuto;
-import org.usfirst.frc.team3309.commands.autos.TurnToSwitchAuto;
+import org.usfirst.frc.team3309.commands.autos.*;
 import org.usfirst.frc.team3309.commands.subsystems.beltbar.BeltBarMoveToPos;
 import org.usfirst.frc.team3309.commands.subsystems.drive.*;
 import org.usfirst.frc.team3309.commands.subsystems.lift.LiftElevate;
@@ -30,8 +27,9 @@ public class AutoModeExecutor {
             .listFiles();
 
     public static void displayAutos() {
-        autos.addObject("Drivepower auto", new DrivePower());
         autos.addDefault("No Action", new NoActionAuto());
+        autos.addObject("TurnRight90Curvy", new DrivePath(Constants.turnRightAngleLeft));
+        autos.addObject("CurvyToSwitch", new CurvyToSwitch());
         autos.addObject("DriveForwardAuto", new DriveTo(Length.fromInches(50)));
         autos.addObject("DriveBack", new DriveTo(Length.fromInches(-50)));
         autos.addObject("TurnCWToAngleAuto", new DriveTurn(-90));
@@ -41,7 +39,6 @@ public class AutoModeExecutor {
         autos.addObject("TurnToSwitchAuto", new TurnToSwitchAuto());
         autos.addObject("LiftElevate", new LiftElevate(5000));
         autos.addObject("BeltbarMoveToPos", new BeltBarMoveToPos(0));
-        autos.addObject("DriveForwardVelocity", new DriveForwardVelocity(28000));
         if (isUsingFile) {
             for (File autoFile : autoFiles) {
                 Command autoCommand = null;

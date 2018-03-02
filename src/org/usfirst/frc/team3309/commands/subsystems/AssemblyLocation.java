@@ -2,13 +2,12 @@ package org.usfirst.frc.team3309.commands.subsystems;
 
 public enum AssemblyLocation {
 
-    GROUND(2115, 0),
-    SCALE_DOWN(3100, 20000),
-    SCALE_UP(3100, 42000),
-
-    SWITCH(3100, 10000),
-    HOLD_CUBE(0, 0),
-    CLIMB_MODE(0, 0);
+    BOTTOM(3300, 0),
+    BOTTOM_FOR_CUBE(1950, 1200),
+    SCALE_DOWN(3300, 34000),
+    SCALE_MIDDLE(3300, 38000),
+    SCALE_UP(3300, 42000),
+    SWITCH(3300, 10000);
 
     private double beltBarPosition;
     private double elevatorPosition;

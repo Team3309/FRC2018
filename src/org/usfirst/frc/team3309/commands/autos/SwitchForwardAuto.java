@@ -8,7 +8,7 @@ import org.usfirst.frc.team3309.lib.math.Length;
 public class SwitchForwardAuto extends CommandGroup {
 
     public SwitchForwardAuto() {
-        addSequential(new DriveTo(Length.fromInches(50)));
+        addSequential(new DriveTo(Length.fromInches(-50)));
         addSequential(new ShooterShoot());
     }
 

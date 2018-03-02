@@ -11,7 +11,7 @@ public class DriveTurn extends Command {
 
     private double goalAngle;
     private PIDController angleController;
-    private final double ANGLE_LENIENCY = 12; // 1.5
+    private final double ANGLE_LENIENCY = 5; // 1.5
     private boolean isInitialized = false;
     private LibTimer timer = new LibTimer(0.35);
     private double timeoutSec = Double.POSITIVE_INFINITY;
@@ -20,7 +20,7 @@ public class DriveTurn extends Command {
         this.goalAngle = goalAngle;
 
         // compbot constants 0.0077, 0, 0.00001
-        angleController = new PIDController(new PIDConstants(0.0074, 0.0000, 0.00001));
+        angleController = new PIDController(new PIDConstants(0.0076, 0.0000, 0.00001));
         requires(Robot.drive);
     }
 

@@ -2,13 +2,12 @@ package org.usfirst.frc.team3309.robot;
 
 import org.usfirst.frc.team3309.commands.InterruptAll;
 import org.usfirst.frc.team3309.commands.subsystems.AssemblyLocation;
+import org.usfirst.frc.team3309.commands.subsystems.IntakeCube;
 import org.usfirst.frc.team3309.commands.subsystems.MoveAssembly;
 import org.usfirst.frc.team3309.commands.subsystems.arms.ArmsClamp;
 import org.usfirst.frc.team3309.commands.subsystems.arms.ArmsOpen;
-import org.usfirst.frc.team3309.commands.subsystems.beltbar.BeltBarMoveToPos;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveSetHighGear;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveSetLowGear;
-import org.usfirst.frc.team3309.commands.subsystems.lift.LiftElevate;
 import org.usfirst.frc.team3309.commands.subsystems.lift.LiftShiftToClimbMode;
 import org.usfirst.frc.team3309.commands.subsystems.shooter.ShooterForward;
 import org.usfirst.frc.team3309.lib.input.InputXbox;
@@ -31,26 +30,20 @@ public class OI {
         driverRemote.backButton.whenPressed(new InterruptAll());
         operatorRemote.backButton.whenPressed(new InterruptAll());
 
-        operatorRemote.buttonA.whenPressed(new ArmsClamp());
+        operatorRemote.buttonA
+                .whenPressed(new ArmsClamp());
         operatorRemote.buttonB.whenPressed(new ArmsOpen());
 
         operatorRemote.leftBumper.whenPressed(new ShooterForward());
         operatorRemote.rightBumper.whenPressed(new LiftShiftToClimbMode());
 
-  /*
-        operatorRemote.buttonY.whenPressed(new LiftElevate(AssemblyLocation.SWITCH.getElevatorPosition()));
-        operatorRemote.dPad.left.whenPressed(new LiftElevate(AssemblyLocation.SCALE_DOWN.getElevatorPosition()));
-        operatorRemote.dPad.right.whenPressed(new LiftElevate(AssemblyLocation.SCALE_UP.getElevatorPosition()));
-
-        operatorRemote.dPad.down.whenPressed(new BeltBarMoveToPos(AssemblyLocation.SWITCH.getBeltBarPosition()));
-        operatorRemote.startButton.whenPressed(new BeltBarMoveToPos(AssemblyLocation.SCALE_DOWN.getBeltBarPosition()));*/
-
-
-        operatorRemote.buttonX.whenPressed(new LiftElevate(AssemblyLocation.GROUND.getElevatorPosition()));
-        operatorRemote.rightStick.whenPressed(new MoveAssembly(AssemblyLocation.GROUND));
+        operatorRemote.buttonX.whenPressed(new IntakeCube());
+        operatorRemote.buttonY.whenPressed(new MoveAssembly(AssemblyLocation.BOTTOM));
+        operatorRemote.dPad.down.whenPressed(new MoveAssembly(AssemblyLocation.SWITCH));
+        operatorRemote.dPad.right.whenPressed(new MoveAssembly(AssemblyLocation.SCALE_DOWN));
+        operatorRemote.dPad.up.whenPressed(new MoveAssembly(AssemblyLocation.SCALE_MIDDLE));
+        operatorRemote.dPad.left.whenPressed(new MoveAssembly(AssemblyLocation.SCALE_UP));
     }
-
-
 
 }
 

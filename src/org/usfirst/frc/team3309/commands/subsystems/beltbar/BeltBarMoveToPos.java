@@ -6,6 +6,7 @@ import org.usfirst.frc.team3309.robot.Robot;
 public class BeltBarMoveToPos extends Command {
 
     private final double goalAngle;
+    private final double ERROR_THRESHOLD = 230;
 
     public BeltBarMoveToPos(double goalAngle) {
         this.goalAngle = goalAngle;
@@ -25,7 +26,7 @@ public class BeltBarMoveToPos extends Command {
 
     @Override
     protected boolean isFinished() {
-        return false;
+        return Math.abs(Robot.beltBar.getError()) < ERROR_THRESHOLD;
     }
 
 }

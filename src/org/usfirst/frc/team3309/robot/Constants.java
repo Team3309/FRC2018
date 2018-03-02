@@ -29,7 +29,6 @@ public class Constants {
     public static final int ARMS_RIGHT_ACTUATOR_A = 3;
     public static final int ARMS_RIGHT_ACTUATOR_B = 0;
 
-    public static final int ARMS_SHARP_SENSOR = 0;
 
     // lift
     public static final int LIFT_0 = 20;
@@ -45,6 +44,8 @@ public class Constants {
     // beltbar
     public static final int BELTBAR_0 = 30;
 
+    public static final int BELTBAR_SHARP_SENSOR = 0;
+
     // shooter
     public static final int SHOOTER_SHIFTER = 5;
 
@@ -53,46 +54,29 @@ public class Constants {
 
     // robot constants
 
-    public static final double DRIVE_ENCODER_COUNTS_PER_REV = 4096.0 * 5  * 2 * 10; // 4096.0 * 5.0 * 2 * 10
-
+    public static final double DRIVE_ENCODER_COUNTS_PER_REV = 4096.0 * 5  * 2 * 10;
     public static final Length WHEEL_DIAMETER_INCHES = Length.fromInches(6.0);
-    public static final Length WHEELBASE_INCHES = Length.fromInches(28.0);
+    public static final Length WHEELBASE_INCHES = Length.fromInches(26.0);
 
-    public static final Length BELTBAR_ARM_LENGTH = Length.fromInches(9);
-
-    public static final double LIFT_MAX_ENC_POSITION = 0;
-
-    public static final ArrayList<Waypoint> figureEightPath = new ArrayList<>();
-    public static final ArrayList<Waypoint> sigmoidPath = new ArrayList<>();
-    public static final ArrayList<Waypoint> circularPath = new ArrayList<>();
-    public static final ArrayList<Waypoint> semiCircular = new ArrayList<>();
-    public static final ArrayList<Waypoint> toSwitchPath = new ArrayList<>();
+    public static final ArrayList<Waypoint> curvyToSwitchLeft = new ArrayList<>();
+    public static final ArrayList<Waypoint> curvyToSwitchRight = new ArrayList<>();
+    public static final ArrayList<Waypoint> turnRightAngleLeft = new ArrayList<>();
 
     static  {
-        figureEightPath.add(new Waypoint(32.470, 1.1821));
-        figureEightPath.add(new Waypoint(32.470, -1.1821));
-        figureEightPath.add(new Waypoint(22.140, -1.1571));
-        figureEightPath.add(new Waypoint(22.140, -1.1571));
-        figureEightPath.add(new Waypoint(28.367, -1.3498));
-        figureEightPath.add(new Waypoint(28.367, 1.3498));
+        curvyToSwitchRight.add(new Waypoint(52.854731086091235,-0.8675442323770085));
+        curvyToSwitchRight.add(new Waypoint(-284.1884696605429,0.17186991901218243));
+        curvyToSwitchRight.add(new Waypoint(-106.49401217174581,0.35621490596844907));
+        curvyToSwitchRight.add(new Waypoint(-127.06675597446096,0.2994807202730872));
+        curvyToSwitchRight.add(new Waypoint(-11.533333333333331,4.407090323594159));
+        curvyToSwitchRight.add(new Waypoint(11.533333333333331,-4.407090323594159));
 
-        sigmoidPath.add(new Waypoint(39.497, 1.1467));
-        sigmoidPath.add(new Waypoint(37.191, -1.202));
+        curvyToSwitchLeft.add(new Waypoint(-103.91292904800127,0.818334867744188));
+        curvyToSwitchLeft.add(new Waypoint(98.47224413937104,-0.8583135548674871));
+        curvyToSwitchLeft.add(new Waypoint(121.30000000000015,-6.079807603653432));
+        curvyToSwitchLeft.add(new Waypoint(-121.30000000000015,6.0798076036534345));
 
-        circularPath.add(new Waypoint(27.48, 1.622));
-        circularPath.add(new Waypoint(29.5, 1.552));
-        circularPath.add(new Waypoint(29.2969, 0.8153));
-        circularPath.add(new Waypoint(28.6254, 0.8323));
-        circularPath.add(new Waypoint(27.3257, 0.79898));
-        circularPath.add(new Waypoint(30.2656, 0.72836));
-
-        semiCircular.add(new Waypoint(25.169, 1.6019));
-        semiCircular.add(new Waypoint(25.478, 1.5897));
-
-        toSwitchPath.add(new Waypoint(-87.135, 0.9282));
-        toSwitchPath.add(new Waypoint(-43.654, 1.5699));
-        toSwitchPath.add(new Waypoint(44.6938, -1.3548));
-        toSwitchPath.add(new Waypoint(55.8847, -1.1433));
+        turnRightAngleLeft.add(new Waypoint(-133.26484176551588,0.6127649414338202));
+        turnRightAngleLeft.add(new Waypoint(80.19104427606113,0.9680110939597296));
     }
 
 }

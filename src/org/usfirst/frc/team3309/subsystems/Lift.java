@@ -40,7 +40,7 @@ public class Lift extends Subsystem {
         lift0.config_kP(0, 0.18, 0);
         lift0.config_kD(0, 10, 0);
         lift0.config_kF(0, 0.023, 0);
-        lift0.configClosedloopRamp(0.22,0);
+        lift0.configClosedloopRamp(0.22, 0);
         lift0.configPeakOutputForward(1.0, 0);
         lift0.configPeakOutputReverse(-0.35, 0);
         lift0.changeToPositionMode();
@@ -54,7 +54,6 @@ public class Lift extends Subsystem {
 
     @Override
     protected void initDefaultCommand() {
-        setDefaultCommand(new LiftManualTest());
     }
 
     public void sendToDashboard() {
@@ -64,18 +63,15 @@ public class Lift extends Subsystem {
         table.getEntry("lift goal pos: ").setNumber(getGoalPos());
         table.getEntry("lift control mode: ").setString(lift0.getControlMode().toString());
         table.getEntry("lift percent mode: ").setNumber(lift0.getMotorOutputPercent());
-  /*      table.getEntry("lift banner sensor period: ").setNumber(bannerSensor.getPeriod());
-        table.getEntry("lift banner sensor inverse period: ").setNumber(1.0/bannerSensor.getPeriod());
-        table.getEntry("lift banner sensor: ").setNumber(bannerSensor.getDistance());*/
         table.getEntry("lift banner sensor: ").setBoolean(bannerSensor.get());
         table.getEntry("banner sensor trigger: ").setBoolean(bannerSensor.isAnalogTrigger());
     }
 
-        public void reset() {
-            resetToBottom();
-        }
+    public void reset() {
+        resetToBottom();
+    }
 
-        public void resetToBottom() {
+    public void resetToBottom() {
         lift0.getSensorCollection().setQuadraturePosition(0, 0);
     }
 
@@ -125,6 +121,10 @@ public class Lift extends Subsystem {
 
     public boolean isAtBottom() {
         return bannerSensor.get();
+    }
+
+    public double getError() {
+        return lift0.getClosedLoopError(0);
     }
 
 }

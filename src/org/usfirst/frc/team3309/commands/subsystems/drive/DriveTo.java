@@ -10,10 +10,11 @@ public class DriveTo extends Command {
     // inches
     private final double goalPos;
     private double error;
-    private double timeoutSec = Double.POSITIVE_INFINITY;
     private boolean isMotionProfile = false;
 
-    private final double errorThreshold = 2;
+    private double timeoutSec = Double.POSITIVE_INFINITY;
+
+    private final double errorThreshold = 6;
     private double CRUISE_VELOCITY = 25000;
 
     private LibTimer timer = new LibTimer(.5);
@@ -35,7 +36,7 @@ public class DriveTo extends Command {
         this.timeoutSec = timeoutSec;
     }
 
-    public DriveTo(Length goalPos, double timeoutSec, boolean isMotionProfile) {
+    public DriveTo(Length goalPos, boolean isMotionProfile, double timeoutSec) {
         this(goalPos, timeoutSec);
         this.isMotionProfile = isMotionProfile;
     }
@@ -62,11 +63,9 @@ public class DriveTo extends Command {
             initialize();
         }
         error = Robot.drive.getGoalPos() - Robot.drive.encoderCountsToInches(Robot.drive.getEncoderPos());
-
         Robot.drive.setLeftRight(-Robot.drive.inchesToEncoderCounts(Robot.drive.getGoalPos()),
                 -Robot.drive.inchesToEncoderCounts(Robot.drive.getGoalPos()));
         Robot.drive.configLeftRightCruiseVelocity(CRUISE_VELOCITY, CRUISE_VELOCITY);
-
     }
 
     @Override

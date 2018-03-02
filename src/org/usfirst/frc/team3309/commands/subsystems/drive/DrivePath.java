@@ -7,6 +7,7 @@ import org.usfirst.frc.team3309.lib.controllers.helpers.DriveState;
 import org.usfirst.frc.team3309.lib.controllers.helpers.Waypoint;
 import org.usfirst.frc.team3309.robot.Constants;
 import org.usfirst.frc.team3309.robot.Robot;
+import org.usfirst.frc.team3309.subsystems.Drive;
 
 import java.util.ArrayList;
 
@@ -16,19 +17,25 @@ public class DrivePath extends Command {
     private double start;
     private boolean isInitialized = false;
     private final double TIMEOUT_SEC;
+    private boolean backwards = false;
 
-    public DrivePath(ArrayList<Waypoint> path, double timeoutSec) {
+    public DrivePath(ArrayList<Waypoint> path, boolean backwards, double timeoutSec) {
         requires(Robot.drive);
         for (Waypoint waypoint : path) {
-            waypoint.setRadius(Robot.drive.inchesToEncoderCounts(waypoint.getRadius()));
+            waypoint.setRadius(Robot.drive.inchesToEncoderCounts(0.796 * waypoint.getRadius()));
         }
+        this.backwards = backwards;
         biArcController = new BiArcController(path,
-                Robot.drive.inchesToEncoderCounts(Constants.WHEELBASE_INCHES.toInches()));
+                Robot.drive.inchesToEncoderCounts(Constants.WHEELBASE_INCHES.toInches()), 30000);
         this.TIMEOUT_SEC = timeoutSec;
     }
 
+    public DrivePath(ArrayList<Waypoint> path, boolean backwards) {
+        this(path, backwards, Double.POSITIVE_INFINITY);
+    }
+
     public DrivePath(ArrayList<Waypoint> path){
-        this(path, Double.POSITIVE_INFINITY);
+        this(path,false, Double.POSITIVE_INFINITY);
     }
 
     @Override
@@ -46,7 +53,13 @@ public class DrivePath extends Command {
         }
         DriveState driveState = new DriveState(Robot.drive.getEncoderPos(), Robot.drive.getAngPos());
         DriveSignal driveSignal = biArcController.update(driveState);
-        Robot.drive.setLeftRight(driveSignal.getLeftMotor(), driveSignal.getRightMotor());
+        Robot.logger.info("left motor "  + driveSignal.getLeftMotor());
+        Robot.logger.info("right motor " + driveSignal.getRightMotor());
+        if (backwards) {
+            Robot.drive.setLeftRight(-driveSignal.getLeftMotor(), -driveSignal.getRightMotor());
+        } else {
+            Robot.drive.setLeftRight(driveSignal.getLeftMotor(), driveSignal.getRightMotor());
+        }
     }
 
     @Override

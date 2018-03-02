@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.usfirst.frc.team3309.commands.CheckForCube;
 import org.usfirst.frc.team3309.commands.subsystems.lift.LiftCheckLimits;
 import org.usfirst.frc.team3309.subsystems.*;
 
@@ -49,7 +50,7 @@ public class Robot extends TimedRobot {
         oi = new OI();
         c = new Compressor();
         c.start();
-        drive.sendToDashboard();
+        sendToDashboard();
         drive.reset();
         AutoModeExecutor.displayAutos();
     }
@@ -63,7 +64,6 @@ public class Robot extends TimedRobot {
         autoCommand = AutoModeExecutor.getAutoSelected();
         logger.info("Running " + autoCommand.getName());
         if (autoCommand != null) {
-            System.out.println("Starting");
             autoCommand.start();
         }
         Scheduler.getInstance().run();
@@ -72,8 +72,7 @@ public class Robot extends TimedRobot {
     @Override
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
-        drive.sendToDashboard();
-        lift.sendToDashboard();
+        sendToDashboard();
     }
 
     @Override
@@ -88,15 +87,13 @@ public class Robot extends TimedRobot {
         lift.setLiftShifter(false);
         Scheduler.getInstance().removeAll();
         Scheduler.getInstance().add(new LiftCheckLimits());
+        Scheduler.getInstance().add(new CheckForCube());
     }
 
     @Override
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
-        drive.sendToDashboard();
-        lift.sendToDashboard();
-        beltBar.sendToDashboard();
-        arms.sendToDashboard();
+        sendToDashboard();
         SmartDashboard.putData(beltBar);
         SmartDashboard.putData(shooter);
         SmartDashboard.putData(falconDoors);
@@ -109,6 +106,13 @@ public class Robot extends TimedRobot {
         drive.reset();
         lift.reset();
         lift.setLiftShifter(false);
+    }
+
+    public void sendToDashboard() {
+        drive.sendToDashboard();
+        lift.sendToDashboard();
+        beltBar.sendToDashboard();
+        arms.sendToDashboard();
     }
 
     public static boolean isLeftSwitch() {

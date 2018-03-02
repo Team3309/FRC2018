@@ -6,6 +6,7 @@ import org.usfirst.frc.team3309.robot.Robot;
 public class LiftElevate extends Command {
 
     private double goalPos;
+    private final double ERROR_THRESHOLD = 400;
 
     public LiftElevate(double goalPos) {
         this.goalPos = goalPos;
@@ -26,7 +27,7 @@ public class LiftElevate extends Command {
 
     @Override
     protected boolean isFinished() {
-        return false;
+        return Math.abs(Robot.lift.getError()) < ERROR_THRESHOLD;
     }
 
 }
