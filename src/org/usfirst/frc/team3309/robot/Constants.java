@@ -45,6 +45,7 @@ public class Constants {
     public static final int BELTBAR_0 = 30;
 
     public static final int BELTBAR_SHARP_SENSOR = 0;
+    public static final int BELTBAR_HALL_EFFECT = 1;
 
     // shooter
     public static final int SHOOTER_SHIFTER = 5;
@@ -58,25 +59,15 @@ public class Constants {
     public static final Length WHEEL_DIAMETER_INCHES = Length.fromInches(6.0);
     public static final Length WHEELBASE_INCHES = Length.fromInches(26.0);
 
-    public static final ArrayList<Waypoint> curvyToSwitchLeft = new ArrayList<>();
     public static final ArrayList<Waypoint> curvyToSwitchRight = new ArrayList<>();
-    public static final ArrayList<Waypoint> turnRightAngleLeft = new ArrayList<>();
+    public static final ArrayList<Waypoint> curvyToSwitchLeft = new ArrayList<>();
 
     static  {
-        curvyToSwitchRight.add(new Waypoint(52.854731086091235,-0.8675442323770085));
-        curvyToSwitchRight.add(new Waypoint(-284.1884696605429,0.17186991901218243));
-        curvyToSwitchRight.add(new Waypoint(-106.49401217174581,0.35621490596844907));
-        curvyToSwitchRight.add(new Waypoint(-127.06675597446096,0.2994807202730872));
-        curvyToSwitchRight.add(new Waypoint(-11.533333333333331,4.407090323594159));
-        curvyToSwitchRight.add(new Waypoint(11.533333333333331,-4.407090323594159));
+        curvyToSwitchRight.add(new Waypoint(82.34987618525085, 0.39093873144451713));
+        curvyToSwitchRight.add(new Waypoint(-29.777276396478868,     0.740486358108046));
 
-        curvyToSwitchLeft.add(new Waypoint(-103.91292904800127,0.818334867744188));
-        curvyToSwitchLeft.add(new Waypoint(98.47224413937104,-0.8583135548674871));
-        curvyToSwitchLeft.add(new Waypoint(121.30000000000015,-6.079807603653432));
-        curvyToSwitchLeft.add(new Waypoint(-121.30000000000015,6.0798076036534345));
-
-        turnRightAngleLeft.add(new Waypoint(-133.26484176551588,0.6127649414338202));
-        turnRightAngleLeft.add(new Waypoint(80.19104427606113,0.9680110939597296));
+        curvyToSwitchLeft.add(new Waypoint(-82.34987618525085, -0.39093873144451713));
+        curvyToSwitchLeft.add(new Waypoint(34.777276396478868,     -0.740486358108046));
     }
 
 }

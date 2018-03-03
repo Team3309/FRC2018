@@ -47,8 +47,7 @@ public class BiArcController extends Controller1<DriveSignal, DriveState> implem
         double curPos = driveState.getAveragePos();
         double curAngle = driveState.getAngPos();
 
-        double curAngleDiff = Math.abs(Math.abs(goalAngle) -
-                Math.toRadians(Math.abs(Math.abs(curAngle) - Math.abs(prevAngle))));
+        double curAngleDiff = goalAngle - curAngle;
         double curPosDiff = goalDistance - curPos;
 
         boolean isDistInThreshold = LibMath.isInThreshold(curPosDiff, distanceErrorThreshold);

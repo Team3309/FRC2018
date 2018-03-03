@@ -28,10 +28,9 @@ public class AutoModeExecutor {
 
     public static void displayAutos() {
         autos.addDefault("No Action", new NoActionAuto());
-        autos.addObject("TurnRight90Curvy", new DrivePath(Constants.turnRightAngleLeft));
         autos.addObject("CurvyToSwitch", new CurvyToSwitch());
-        autos.addObject("DriveForwardAuto", new DriveTo(Length.fromInches(50)));
-        autos.addObject("DriveBack", new DriveTo(Length.fromInches(-50)));
+        autos.addObject("DriveForwardAuto", new DriveTo(Length.fromInches(50), false));
+        autos.addObject("DriveBack", new DriveTo(Length.fromInches(-50), false));
         autos.addObject("TurnCWToAngleAuto", new DriveTurn(-90));
         autos.addObject("TurnCCWToAngleAuto", new DriveTurn(90));
         autos.addObject("AutoLineAuto", new AutoLineAuto());

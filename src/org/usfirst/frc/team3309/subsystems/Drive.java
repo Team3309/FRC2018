@@ -1,5 +1,6 @@
 package org.usfirst.frc.team3309.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.kauailabs.navx.frc.AHRS;
@@ -122,10 +123,16 @@ public class Drive extends Subsystem {
     public void sendToDashboard() {
         SmartDashboard.putData(this);
         NetworkTable table = NetworkTableInstance.getDefault().getTable("Drive");
-        table.getEntry("Target velocity left: ").setNumber(left0.getClosedLoopTarget(0));
-        table.getEntry("Target velocity right: ").setNumber(right0.getClosedLoopTarget(0));
-        table.getEntry("Velocity left error: ").setNumber(left0.getClosedLoopError(0));
-        table.getEntry("Velocity right error: ").setNumber(right0.getClosedLoopError(0));
+        if (left0.getControlMode() == ControlMode.Velocity || left0.getControlMode() == ControlMode.MotionMagic
+                || left0.getControlMode() == ControlMode.Position) {
+            table.getEntry("Target velocity left: ").setNumber(left0.getClosedLoopTarget(0));
+            table.getEntry("Velocity left error: ").setNumber(left0.getClosedLoopError(0));
+        }
+        if (right0.getControlMode() == ControlMode.Velocity || right0.getControlMode() == ControlMode.MotionMagic
+                || right0.getControlMode() == ControlMode.Position) {
+            table.getEntry("Target velocity right: ").setNumber(right0.getClosedLoopTarget(0));
+            table.getEntry("Velocity right error: ").setNumber(right0.getClosedLoopError(0));
+        }
         table.getEntry("Position (Inches): ").setNumber(encoderCountsToInches(getEncoderPos()));
         table.getEntry("Velocity (Inches): ").setNumber(encoderCountsToInches(getEncoderVelocity()));
         table.getEntry("Left Position (Inches): ").setNumber(encoderCountsToInches(getLeftEncoder()));

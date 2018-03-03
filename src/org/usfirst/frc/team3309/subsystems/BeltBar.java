@@ -5,7 +5,9 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import org.usfirst.frc.team3309.commands.subsystems.beltbar.BeltBarManualTest;
 import org.usfirst.frc.team3309.lib.actuators.TalonSRXMC;
 import org.usfirst.frc.team3309.robot.Constants;
 
@@ -14,26 +16,38 @@ public class BeltBar extends Subsystem {
     private TalonSRXMC masterBar = new TalonSRXMC(Constants.BELTBAR_0);
 
     private AnalogInput hasCubeSensor = new AnalogInput(Constants.BELTBAR_SHARP_SENSOR);
+    private DigitalInput hallEffectSensor = new DigitalInput(Constants.BELTBAR_HALL_EFFECT);
 
     private double goalAngle;
 
+    // TODO determine top value
+    private final int TOP_VALUE = 0;
+    private final int MAX_CURRENT = 0;
+    private final int MAX_CURRENT_DURATION = 0;
+
     public BeltBar() {
-        masterBar.set(0);
         masterBar.setInverted(false);
         masterBar.setSensorPhase(false);
-        masterBar.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 0);
+        masterBar.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
         masterBar.changeToPositionMode();
-        masterBar.setSelectedSensorPosition(masterBar.getSensorCollection().getPulseWidthPosition() % 4096, 0, 0);
-        masterBar.config_kP(0, 0.93, 0);
+        masterBar.config_kP(0, 0, 0); // 0.93
+
         masterBar.configForwardSoftLimitThreshold(3400, 0);
-        masterBar.configForwardSoftLimitEnable(true, 0);
+        masterBar.configForwardSoftLimitEnable(false, 0);
         masterBar.configReverseSoftLimitThreshold(1900,0);
-        masterBar.configReverseSoftLimitEnable(true, 0);
+        masterBar.configReverseSoftLimitEnable(false, 0);
+/*
+        masterBar.configPeakCurrentLimit(MAX_CURRENT, 0);
+        masterBar.configPeakCurrentDuration(MAX_CURRENT_DURATION, 0);
+        masterBar.configContinuousCurrentLimit(0, 0);
+        masterBar.enableCurrentLimit(true);*/
+
         changeToBrakeMode();
     }
 
     @Override
     protected void initDefaultCommand() {
+        setDefaultCommand(new BeltBarManualTest());
     }
 
     public void sendToDashboard() {
@@ -48,7 +62,7 @@ public class BeltBar extends Subsystem {
     }
 
     public double getPosition() {
-        return masterBar.getSensorCollection().getPulseWidthPosition();
+        return masterBar.getSensorCollection().getQuadraturePosition();
     }
 
     public void set(double value) {
@@ -84,5 +98,11 @@ public class BeltBar extends Subsystem {
     }
 
     public double getError() { return masterBar.getClosedLoopError(0); }
+
+    public boolean isAtTop(){ return hallEffectSensor.get(); }
+
+    public void resetToTop() {
+        masterBar.getSensorCollection().setQuadraturePosition(TOP_VALUE, 0);
+    }
 
 }

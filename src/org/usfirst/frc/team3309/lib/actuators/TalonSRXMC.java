@@ -30,7 +30,7 @@ public class TalonSRXMC extends TalonSRX {
 
     public void set(double value) {
         /*
-        * Apparent talon bug where goal velocity is exacly half
+        * Apparent talon bug where goal velocity is exactly half
         * */
         if (controlMode == ControlMode.Velocity) {
             value *= 2;

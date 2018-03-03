@@ -1,9 +1,6 @@
 package org.usfirst.frc.team3309.robot;
 
-import org.usfirst.frc.team3309.commands.InterruptAll;
-import org.usfirst.frc.team3309.commands.subsystems.AssemblyLocation;
-import org.usfirst.frc.team3309.commands.subsystems.IntakeCube;
-import org.usfirst.frc.team3309.commands.subsystems.MoveAssembly;
+import org.usfirst.frc.team3309.commands.subsystems.InterruptAll;
 import org.usfirst.frc.team3309.commands.subsystems.arms.ArmsClamp;
 import org.usfirst.frc.team3309.commands.subsystems.arms.ArmsOpen;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveSetHighGear;
@@ -37,12 +34,13 @@ public class OI {
         operatorRemote.leftBumper.whenPressed(new ShooterForward());
         operatorRemote.rightBumper.whenPressed(new LiftShiftToClimbMode());
 
-        operatorRemote.buttonX.whenPressed(new IntakeCube());
+        /*operatorRemote.buttonX.whenPressed(new IntakeCube());
         operatorRemote.buttonY.whenPressed(new MoveAssembly(AssemblyLocation.BOTTOM));
         operatorRemote.dPad.down.whenPressed(new MoveAssembly(AssemblyLocation.SWITCH));
         operatorRemote.dPad.right.whenPressed(new MoveAssembly(AssemblyLocation.SCALE_DOWN));
         operatorRemote.dPad.up.whenPressed(new MoveAssembly(AssemblyLocation.SCALE_MIDDLE));
         operatorRemote.dPad.left.whenPressed(new MoveAssembly(AssemblyLocation.SCALE_UP));
+    */
     }
 
 }

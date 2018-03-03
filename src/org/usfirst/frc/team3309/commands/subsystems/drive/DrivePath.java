@@ -26,7 +26,7 @@ public class DrivePath extends Command {
         }
         this.backwards = backwards;
         biArcController = new BiArcController(path,
-                Robot.drive.inchesToEncoderCounts(Constants.WHEELBASE_INCHES.toInches()), 30000);
+                Robot.drive.inchesToEncoderCounts(Constants.WHEELBASE_INCHES.toInches()), 26000);
         this.TIMEOUT_SEC = timeoutSec;
     }
 
@@ -51,10 +51,8 @@ public class DrivePath extends Command {
         if  (!isInitialized) {
             initialize();
         }
-        DriveState driveState = new DriveState(Robot.drive.getEncoderPos(), Robot.drive.getAngPos());
+        DriveState driveState = new DriveState(Robot.drive.getEncoderPos(), Math.toRadians(Robot.drive.getAngPos()));
         DriveSignal driveSignal = biArcController.update(driveState);
-        Robot.logger.info("left motor "  + driveSignal.getLeftMotor());
-        Robot.logger.info("right motor " + driveSignal.getRightMotor());
         if (backwards) {
             Robot.drive.setLeftRight(-driveSignal.getLeftMotor(), -driveSignal.getRightMotor());
         } else {

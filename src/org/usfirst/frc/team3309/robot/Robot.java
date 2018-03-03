@@ -8,7 +8,8 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.usfirst.frc.team3309.commands.CheckForCube;
+import org.usfirst.frc.team3309.commands.subsystems.CheckForCube;
+import org.usfirst.frc.team3309.commands.subsystems.beltbar.BeltBarCheckLimits;
 import org.usfirst.frc.team3309.commands.subsystems.lift.LiftCheckLimits;
 import org.usfirst.frc.team3309.subsystems.*;
 
@@ -39,7 +40,7 @@ public class Robot extends TimedRobot {
         logger = Logger.getLogger("Robot");
         logger.info("robot init");
         cam = CameraServer.getInstance().startAutomaticCapture();
-        cam.setFPS(30);
+        cam.setFPS(15);
         drive = new Drive();
         lift = new Lift();
         beltBar = new BeltBar();
@@ -87,7 +88,7 @@ public class Robot extends TimedRobot {
         lift.setLiftShifter(false);
         Scheduler.getInstance().removeAll();
         Scheduler.getInstance().add(new LiftCheckLimits());
-        Scheduler.getInstance().add(new CheckForCube());
+        Scheduler.getInstance().add(new BeltBarCheckLimits());
     }
 
     @Override

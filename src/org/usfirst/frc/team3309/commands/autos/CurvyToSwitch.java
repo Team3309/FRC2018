@@ -18,7 +18,6 @@ public class CurvyToSwitch extends CommandGroup {
             }
             addSequential(new ShooterShoot());
         }
-
     }
 
 }
