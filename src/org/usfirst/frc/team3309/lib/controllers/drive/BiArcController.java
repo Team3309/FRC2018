@@ -11,6 +11,7 @@ import org.usfirst.frc.team3309.robot.Robot;
 
 import java.util.ArrayList;
 
+@Deprecated
 public class BiArcController extends Controller1<DriveSignal, DriveState> implements Finishable {
 
     private final ArrayList<Waypoint> path;

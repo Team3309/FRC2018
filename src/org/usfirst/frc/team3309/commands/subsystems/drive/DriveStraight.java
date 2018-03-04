@@ -1,11 +1,11 @@
 package org.usfirst.frc.team3309.commands.subsystems.drive;
 
-import edu.wpi.first.wpilibj.command.Command;
+import org.usfirst.frc.team3309.lib.CommandEx;
 import org.usfirst.frc.team3309.lib.LibTimer;
 import org.usfirst.frc.team3309.lib.math.Length;
 import org.usfirst.frc.team3309.robot.Robot;
 
-public class DriveTo extends Command {
+public class DriveStraight extends CommandEx {
 
     // inches
     private final double goalPos;
@@ -21,29 +21,28 @@ public class DriveTo extends Command {
 
     private boolean isInitialized = false;
 
-    public DriveTo(Length goalPos) {
+    public DriveStraight(Length goalPos) {
         this.goalPos = goalPos.toInches();
         requires(Robot.drive);
     }
 
-    public DriveTo(Length goalPos, boolean isMotionProfile) {
+    public DriveStraight(Length goalPos, boolean isMotionProfile) {
         this(goalPos);
         this.isMotionProfile = isMotionProfile;
     }
 
-    public DriveTo(Length goalPos, double timeoutSec) {
+    public DriveStraight(Length goalPos, double timeoutSec) {
         this(goalPos);
         this.timeoutSec = timeoutSec;
     }
 
-    public DriveTo(Length goalPos, boolean isMotionProfile, double timeoutSec) {
+    public DriveStraight(Length goalPos, boolean isMotionProfile, double timeoutSec) {
         this(goalPos, timeoutSec);
         this.isMotionProfile = isMotionProfile;
     }
 
     @Override
     public void initialize() {
-        // TODO create a CommandBase object to handle initialization
         Robot.drive.reset();
         Robot.drive.setHighGear();
         Robot.drive.changeToBrakeMode();

@@ -11,6 +11,7 @@ import org.usfirst.frc.team3309.subsystems.Drive;
 
 import java.util.ArrayList;
 
+@Deprecated
 public class DrivePath extends Command {
 
     private BiArcController biArcController;

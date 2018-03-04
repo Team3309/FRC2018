@@ -1,14 +1,12 @@
 package org.usfirst.frc.team3309.commands.subsystems.drive;
 
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team3309.lib.CommandEx;
 import org.usfirst.frc.team3309.lib.LibTimer;
-import org.usfirst.frc.team3309.lib.math.Length;
 import org.usfirst.frc.team3309.robot.Robot;
 
-public class DriveToVel extends CommandEx {
+public class DriveStraightVel extends CommandEx {
 
     private boolean isInit;
     private double vel;
@@ -19,7 +17,7 @@ public class DriveToVel extends CommandEx {
     private double timeoutSec;
     private double start = Double.POSITIVE_INFINITY;
 
-    public DriveToVel(double pos, double vel, double timeoutSec) {
+    public DriveStraightVel(double pos, double vel, double timeoutSec) {
         requires(Robot.drive);
         this.vel = Math.abs(vel);
         this.timeoutSec = timeoutSec;
@@ -53,7 +51,7 @@ public class DriveToVel extends CommandEx {
         error = Math.abs(Robot.drive.getGoalPos()) - Math.abs(Robot.drive.encoderCountsToInches(Robot.drive.getEncoderPos()));
         System.out.println("Goal pos " + Robot.drive.getGoalPos());
         System.out.println("Pos " + Robot.drive.encoderCountsToInches(Robot.drive.getEncoderPos()));
-        SmartDashboard.putNumber("DriveToVel error", error);
+        SmartDashboard.putNumber("DriveStraightVel error", error);
         Robot.drive.setLeftRight(vel, vel);
     }
 

@@ -37,6 +37,7 @@ public class Robot extends TimedRobot {
 
     @Override
     public void robotInit() {
+        setPeriod(0.01);
         logger = Logger.getLogger("Robot");
         logger.info("robot init");
         cam = CameraServer.getInstance().startAutomaticCapture();

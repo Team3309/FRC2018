@@ -29,8 +29,8 @@ public class AutoModeExecutor {
     public static void displayAutos() {
         autos.addDefault("No Action", new NoActionAuto());
         autos.addObject("CurvyToSwitchAuto", new CurvyToSwitchAuto());
-        autos.addObject("DriveForwardAuto", new DriveTo(Length.fromInches(50), false));
-        autos.addObject("DriveBack", new DriveTo(Length.fromInches(-50), false));
+        autos.addObject("DriveForwardAuto", new DriveStraight(Length.fromInches(50), false));
+        autos.addObject("DriveBack", new DriveStraight(Length.fromInches(-50), false));
         autos.addObject("TurnCWToAngleAuto", new DriveTurn(-90));
         autos.addObject("TurnCCWToAngleAuto", new DriveTurn(90));
         autos.addObject("AutoLineAuto", new AutoLineAuto());
@@ -75,7 +75,7 @@ public class AutoModeExecutor {
                     autoGroup.addSequential(new DrivePath(arcPath));
                 case "LINE":
                     double dist = Double.parseDouble(values[1]);
-                    autoGroup.addSequential(new DriveTo(Length.fromInches(dist)));
+                    autoGroup.addSequential(new DriveStraight(Length.fromInches(dist)));
                 case "WAIT":
                     double sec = Double.parseDouble(values[1]);
                     autoGroup.addSequential(new WaitCommand(sec));
