@@ -1,15 +1,10 @@
 package org.usfirst.frc.team3309.robot;
 
 import edu.wpi.cscore.UsbCamera;
-import edu.wpi.first.wpilibj.CameraServer;
-import edu.wpi.first.wpilibj.Compressor;
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.usfirst.frc.team3309.commands.subsystems.CheckForCube;
-import org.usfirst.frc.team3309.commands.subsystems.beltbar.BeltBarCheckLimits;
 import org.usfirst.frc.team3309.commands.subsystems.lift.LiftCheckLimits;
 import org.usfirst.frc.team3309.subsystems.*;
 
@@ -91,7 +86,6 @@ public class Robot extends TimedRobot {
         lift.setLiftShifter(false);
         Scheduler.getInstance().removeAll();
         Scheduler.getInstance().add(new LiftCheckLimits());
-        Scheduler.getInstance().add(new BeltBarCheckLimits());
     }
 
     @Override

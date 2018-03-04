@@ -23,12 +23,8 @@ public class Constants {
     public static final int ROLLER_RIGHT = 41;
 
     // arms
-    public static final int ARMS_LEFT_ACTUATOR_A = 1;
-    public static final int ARMS_LEFT_ACTUATOR_B = 2;
-
-    public static final int ARMS_RIGHT_ACTUATOR_A = 3;
-    public static final int ARMS_RIGHT_ACTUATOR_B = 0;
-
+    public static final int ARMS_ACTUATOR_A = 1;
+    public static final int ARMS_ACTUATOR_B = 2;
 
     // lift
     public static final int LIFT_0 = 20;
@@ -40,6 +36,9 @@ public class Constants {
     public static final int LIFT_SHIFTER = 6;
 
     public static final int LIFT_BANNER_SENSOR = 0;
+
+    public static final int LIFT_HOLDER_A = 3;
+    public static final int LIFT_HOLDER_B = 0;
 
     // beltbar
     public static final int BELTBAR_0 = 30;
@@ -56,6 +55,8 @@ public class Constants {
     public static final int FALCONDOORS_SOLENOID = 4;
 
     // robot constants
+
+    public static final double MAX_LIFT_POS = 47000;
 
     public static final double DRIVE_ENCODER_COUNTS_PER_REV = 4096.0 * 5  * 2 * 10;
     public static final Length WHEEL_DIAMETER_INCHES = Length.fromInches(6.0);

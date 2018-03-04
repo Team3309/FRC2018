@@ -24,32 +24,33 @@ public class BeltBar extends Subsystem {
 
     // TODO determine top value
     private final int TOP_VALUE = 0;
-    private final int MAX_CURRENT = 0;
-    private final int MAX_CURRENT_DURATION = 0;
+
+    private final int MAX_CURRENT = 30;
+    private final int MAX_CURRENT_DURATION = 1000;
 
     public BeltBar() {
         masterBar.setInverted(false);
-        masterBar.setSensorPhase(false);
-        masterBar.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
+        masterBar.setSensorPhase(true);
+        masterBar.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 0);
         masterBar.changeToPositionMode();
-        masterBar.config_kP(0, 0, 0); // 0.93
+        masterBar.config_kP(0, 0.98, 0);
+        masterBar.config_kF(0, 0.04, 0);
 
-        masterBar.configForwardSoftLimitThreshold(3400, 0);
-        masterBar.configForwardSoftLimitEnable(false, 0);
-        masterBar.configReverseSoftLimitThreshold(1900,0);
-        masterBar.configReverseSoftLimitEnable(false, 0);
-/*
+        masterBar.configForwardSoftLimitThreshold(-1650, 0);
+        masterBar.configForwardSoftLimitEnable(true, 0);
+        masterBar.configReverseSoftLimitThreshold(-3100,0);
+        masterBar.configReverseSoftLimitEnable(true, 0);
+
         masterBar.configPeakCurrentLimit(MAX_CURRENT, 0);
         masterBar.configPeakCurrentDuration(MAX_CURRENT_DURATION, 0);
-        masterBar.configContinuousCurrentLimit(0, 0);
-        masterBar.enableCurrentLimit(true);*/
+        masterBar.configContinuousCurrentLimit(1, 0);
+        masterBar.enableCurrentLimit(true);
 
         changeToBrakeMode();
     }
 
     @Override
     protected void initDefaultCommand() {
-        setDefaultCommand(new BeltBarManualTest());
     }
 
     public void sendToDashboard() {
@@ -59,7 +60,9 @@ public class BeltBar extends Subsystem {
         table.getEntry("Beltbar control mode: ").setString(masterBar.getControlMode().toString());
         table.getEntry("Beltbar goal: ").setNumber(goalAngle);
         table.getEntry("sees cube").setBoolean(isCubePresent());
-        table.getEntry("sharp sensor").setNumber(hasCubeSensorLeft.getAverageVoltage());
+        table.getEntry("sharp sensor left").setNumber(hasCubeSensorLeft.getAverageVoltage());
+        table.getEntry("sharp sensor right").setNumber(hasCubeSensorRight.getAverageVoltage());
+        table.getEntry("sharp sensor average").setNumber(getSharpSensorValue());
         table.getEntry("current: ").setNumber(masterBar.getOutputCurrent());
     }
 
@@ -96,11 +99,12 @@ public class BeltBar extends Subsystem {
     }
 
     public boolean isCubePresent() {
-        return hasCubeSensorLeft.getAverageVoltage() > 1.2 &&
-                hasCubeSensorRight.getAverageVoltage() > 1.2;
+        return getSharpSensorValue() > 1250;
     }
 
-    public double getError() { return masterBar.getClosedLoopError(0); }
+    public double getSharpSensorValue() {
+        return (hasCubeSensorLeft.getAverageValue() + hasCubeSensorRight.getAverageValue()) / 2.0;
+    }
 
     public boolean isAtTop(){ return hallEffectSensor.get(); }
 

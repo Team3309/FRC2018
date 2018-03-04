@@ -8,11 +8,8 @@ import org.usfirst.frc.team3309.robot.Constants;
 
 public class Arms extends Subsystem {
 
-    private DoubleSolenoid leftActuator = new DoubleSolenoid(Constants.ARMS_LEFT_ACTUATOR_A,
-            Constants.ARMS_LEFT_ACTUATOR_B);
-
-    private DoubleSolenoid rightActuator = new DoubleSolenoid(Constants.ARMS_RIGHT_ACTUATOR_A,
-            Constants.ARMS_RIGHT_ACTUATOR_B);
+    private DoubleSolenoid actuator = new DoubleSolenoid(Constants.ARMS_ACTUATOR_A,
+            Constants.ARMS_ACTUATOR_B);
 
     @Override
     protected void initDefaultCommand() {
@@ -23,27 +20,20 @@ public class Arms extends Subsystem {
         table.getEntry("arms closed: ").setBoolean(isArmsClosed());
     }
 
-    private void setRightActuator(DoubleSolenoid.Value value) {
-        rightActuator.set(value);
-    }
-
-    private void setLeftActuator(DoubleSolenoid.Value value) {
-        leftActuator.set(value);
+    private void setActuator(DoubleSolenoid.Value value) {
+        actuator.set(value);
     }
 
     public void openArms() {
-        setLeftActuator(DoubleSolenoid.Value.kForward);
-        setRightActuator(DoubleSolenoid.Value.kForward);
+        setActuator(DoubleSolenoid.Value.kForward);
     }
 
     public void clampArms() {
-        setLeftActuator(DoubleSolenoid.Value.kReverse);
-        setRightActuator(DoubleSolenoid.Value.kReverse);
+        setActuator(DoubleSolenoid.Value.kReverse);
     }
 
     public boolean isArmsClosed() {
-        return leftActuator.get() == DoubleSolenoid.Value.kReverse
-                && rightActuator.get() == DoubleSolenoid.Value.kReverse;
+        return actuator.get() == DoubleSolenoid.Value.kReverse;
     }
 
 }

@@ -95,7 +95,7 @@ public class DriveCheezyController extends Controller3<DriveSignal, Double, Doub
         linearPower = throttle;
 
         if (throttle > .4) {
-            sensitivity = .5; // 0.15
+            sensitivity = .9; // 0.15
         } else {
             sensitivity = .8; // 0.3
         }

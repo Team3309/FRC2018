@@ -7,7 +7,7 @@ import org.usfirst.frc.team3309.robot.Robot;
 public class RollersTeleop extends Command {
 
     private final double MIN_POWER = 0.1;
-    private final double MAX_POWER= 0.5;
+    private final double MAX_POWER= 1.0;
 
     private final double DEFAULT_POWER = 0.1;
 
@@ -32,7 +32,11 @@ public class RollersTeleop extends Command {
                 Robot.rollers.setLeftRight(rightTrigger, -rightTrigger);
             }
         } else {
-            Robot.rollers.setLeftRight(DEFAULT_POWER,-DEFAULT_POWER);
+            if (Robot.beltBar.isCubePresent() && Robot.arms.isArmsClosed()) {
+                Robot.rollers.setLeftRight(-DEFAULT_POWER, DEFAULT_POWER);
+            } else {
+                Robot.rollers.setLeftRight(0, 0);
+            }
         }
     }
 

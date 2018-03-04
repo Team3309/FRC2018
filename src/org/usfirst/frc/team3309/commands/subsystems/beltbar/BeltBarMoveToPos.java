@@ -1,12 +1,16 @@
 package org.usfirst.frc.team3309.commands.subsystems.beltbar;
 
 import edu.wpi.first.wpilibj.command.Command;
+import org.usfirst.frc.team3309.lib.LibTimer;
 import org.usfirst.frc.team3309.robot.Robot;
 
 public class BeltBarMoveToPos extends Command {
 
     private final double goalAngle;
-    private final double ERROR_THRESHOLD = 230;
+    private double error;
+    private final double ERROR_THRESHOLD = 120;
+
+    private LibTimer timer = new LibTimer();
 
     public BeltBarMoveToPos(double goalAngle) {
         this.goalAngle = goalAngle;
@@ -17,16 +21,18 @@ public class BeltBarMoveToPos extends Command {
     protected void initialize() {
         Robot.beltBar.setGoalAngle(goalAngle);
         Robot.beltBar.changeToPositionMode();
+        timer.start();
     }
 
     @Override
     protected void execute() {
-        Robot.beltBar.set(Robot.beltBar.getGoalAngle());
+        Robot.beltBar.set(goalAngle);
+        error = goalAngle - Robot.beltBar.getPosition();
     }
 
     @Override
     protected boolean isFinished() {
-        return Math.abs(Robot.beltBar.getError()) < ERROR_THRESHOLD;
+        return Math.abs(error) < ERROR_THRESHOLD;
     }
 
 }

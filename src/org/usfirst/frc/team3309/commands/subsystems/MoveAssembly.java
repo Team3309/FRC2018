@@ -7,6 +7,11 @@ import org.usfirst.frc.team3309.lib.WaitCommand;
 
 public class MoveAssembly extends CommandGroup {
 
+    public MoveAssembly(double elevatorPos, double beltbarPos) {
+        addSequential(new LiftElevate(elevatorPos));
+        addSequential(new BeltBarMoveToPos(beltbarPos));
+    }
+
     public MoveAssembly(AssemblyLocation assemblyLocation) {
         addSequential(new LiftElevate(assemblyLocation.getElevatorPosition()));
         addSequential(new BeltBarMoveToPos(assemblyLocation.getBeltBarPosition()));

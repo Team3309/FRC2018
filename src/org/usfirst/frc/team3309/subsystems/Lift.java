@@ -8,9 +8,12 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.Counter;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.usfirst.frc.team3309.commands.subsystems.AssemblyLocation;
+import org.usfirst.frc.team3309.commands.subsystems.MoveAssembly;
 import org.usfirst.frc.team3309.commands.subsystems.lift.LiftManualTest;
 import org.usfirst.frc.team3309.lib.actuators.TalonSRXMC;
 import org.usfirst.frc.team3309.lib.actuators.VictorSPXMC;
@@ -24,11 +27,14 @@ public class Lift extends Subsystem {
     private VictorSPXMC lift3 = new VictorSPXMC(Constants.LIFT_3);
     private VictorSPXMC lift4 = new VictorSPXMC(Constants.LIFT_4);
 
-    private PigeonIMU pigeonIMU = new PigeonIMU(lift1);
+    private DoubleSolenoid secondStageHolder = new DoubleSolenoid(Constants.LIFT_HOLDER_A, Constants.LIFT_HOLDER_B);
 
     private DigitalInput bannerSensor = new DigitalInput(Constants.LIFT_BANNER_SENSOR);
 
     private Solenoid liftShifter = new Solenoid(Constants.LIFT_SHIFTER);
+
+    private double liftPos = AssemblyLocation.BOTTOM.getElevatorPosition();
+    private double beltbarPos = AssemblyLocation.BOTTOM.getBeltBarPosition();
 
     private double goalPos;
 
@@ -42,19 +48,19 @@ public class Lift extends Subsystem {
         lift0.config_kF(0, 0.023, 0);
         lift0.configClosedloopRamp(0.22, 0);
         lift0.configPeakOutputForward(1.0, 0);
-        lift0.configPeakOutputReverse(-0.35, 0);
+        lift0.configPeakOutputReverse(-0.29, 0);
         lift0.changeToPositionMode();
         lift0.setInverted(true);
         lift1.follow(lift0);
         lift2.follow(lift0);
         lift3.follow(lift0);
         lift4.follow(lift0);
+        setHolderIn();
         changeToBrakeMode();
     }
 
     @Override
     protected void initDefaultCommand() {
-        setDefaultCommand(new LiftManualTest());
     }
 
     public void sendToDashboard() {
@@ -126,6 +132,30 @@ public class Lift extends Subsystem {
 
     public double getError() {
         return lift0.getClosedLoopError(0);
+    }
+
+    public void setHolderIn() {
+        secondStageHolder.set(DoubleSolenoid.Value.kReverse);
+    }
+
+    public void setHolderOut() {
+        secondStageHolder.set(DoubleSolenoid.Value.kForward);
+    }
+
+    public void setLiftPos(double liftPos) {
+        this.liftPos = liftPos;
+    }
+
+    public double getLiftPos() {
+         return liftPos;
+    }
+
+    public void setBeltbarPos(double beltbarPos) {
+        this.beltbarPos = beltbarPos;
+    }
+
+    public double getBeltbarPos() {
+        return beltbarPos;
     }
 
 }
