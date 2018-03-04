@@ -28,7 +28,7 @@ public class AutoModeExecutor {
 
     public static void displayAutos() {
         autos.addDefault("No Action", new NoActionAuto());
-        autos.addObject("CurvyToSwitch", new CurvyToSwitch());
+        autos.addObject("CurvyToSwitchAuto", new CurvyToSwitchAuto());
         autos.addObject("DriveForwardAuto", new DriveTo(Length.fromInches(50), false));
         autos.addObject("DriveBack", new DriveTo(Length.fromInches(-50), false));
         autos.addObject("TurnCWToAngleAuto", new DriveTurn(-90));

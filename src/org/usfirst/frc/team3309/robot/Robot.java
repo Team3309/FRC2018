@@ -58,6 +58,7 @@ public class Robot extends TimedRobot {
 
     @Override
     public void autonomousInit() {
+        c.stop();
         logger.info("autonomous init");
         drive.reset();
         lift.setLiftShifter(false);
@@ -78,6 +79,7 @@ public class Robot extends TimedRobot {
 
     @Override
     public void teleopInit() {
+        c.start();
         logger.info("teleop init");
         if (autoCommand != null) {
             autoCommand.cancel();

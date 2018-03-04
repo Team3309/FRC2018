@@ -27,8 +27,7 @@ public class OI {
         driverRemote.backButton.whenPressed(new InterruptAll());
         operatorRemote.backButton.whenPressed(new InterruptAll());
 
-        operatorRemote.buttonA
-                .whenPressed(new ArmsClamp());
+        operatorRemote.buttonA.whenPressed(new ArmsClamp());
         operatorRemote.buttonB.whenPressed(new ArmsOpen());
 
         operatorRemote.leftBumper.whenPressed(new ShooterForward());

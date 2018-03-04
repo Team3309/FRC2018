@@ -82,9 +82,9 @@ public class Drive extends Subsystem {
         right0.clearMotionProfileTrajectories();
         left0.changeToDisabledMode();
         right0.changeToDisabledMode();
-        left0.getSensorCollection().setQuadraturePosition(0, 0);
-        right0.getSensorCollection().setQuadraturePosition(0, 0);
-        navX.reset();
+        left0.setSelectedSensorPosition(0, 0,0);
+        right0.setSelectedSensorPosition(0, 0,0);
+        navX.zeroYaw();
     }
 
     public double getEncoderPos() {
@@ -92,11 +92,11 @@ public class Drive extends Subsystem {
     }
 
     public double getLeftEncoder() {
-        return -left0.getSensorCollection().getQuadraturePosition();
+        return -left0.getSelectedSensorPosition(0);
     }
 
     public double getRightEncoder() {
-        return right0.getSensorCollection().getQuadraturePosition();
+        return right0.getSelectedSensorPosition(0);
     }
 
     public double getEncoderVelocity() {
@@ -104,15 +104,14 @@ public class Drive extends Subsystem {
     }
 
     public int getLeftVelocity() {
-        return left0.getSensorCollection().getQuadratureVelocity();
+        return left0.getSelectedSensorVelocity(0);
     }
 
     public double getRightVelocity() {
-        return -right0.getSensorCollection().getQuadratureVelocity();
+        return -right0.getSelectedSensorVelocity(0);
     }
 
-    public double
-    getAngPos() {
+    public double getAngPos() {
         return -navX.getAngle();
     }
 

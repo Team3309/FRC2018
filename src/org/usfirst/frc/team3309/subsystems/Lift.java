@@ -73,11 +73,11 @@ public class Lift extends Subsystem {
     }
 
     public void resetToBottom() {
-        lift0.getSensorCollection().setQuadraturePosition(0, 0);
+        lift0.setSelectedSensorPosition(0,0, 0);
     }
 
     public double getPosition() {
-        return lift0.getSensorCollection().getQuadraturePosition();
+        return lift0.getSelectedSensorPosition(0);
     }
 
     public void changeToBrakeMode() {

@@ -44,8 +44,10 @@ public class Constants {
     // beltbar
     public static final int BELTBAR_0 = 30;
 
-    public static final int BELTBAR_SHARP_SENSOR = 0;
-    public static final int BELTBAR_HALL_EFFECT = 1;
+    public static final int BELTBAR_SHARP_SENSOR_LEFT = 0;
+    public static final int BELTBAR_SHARP_SENSOR_RIGHT = 1;
+
+    public static final int BELTBAR_HALL_EFFECT = 2;
 
     // shooter
     public static final int SHOOTER_SHIFTER = 5;
@@ -63,11 +65,11 @@ public class Constants {
     public static final ArrayList<Waypoint> curvyToSwitchLeft = new ArrayList<>();
 
     static  {
-        curvyToSwitchRight.add(new Waypoint(82.34987618525085, 0.39093873144451713));
-        curvyToSwitchRight.add(new Waypoint(-29.777276396478868,     0.740486358108046));
+        curvyToSwitchRight.add(new Waypoint(0.796 * 82.34987618525085, 0.39093873144451713));
+        curvyToSwitchRight.add(new Waypoint(-0.796 * 29.777276396478868,     0.740486358108046));
 
-        curvyToSwitchLeft.add(new Waypoint(-82.34987618525085, -0.39093873144451713));
-        curvyToSwitchLeft.add(new Waypoint(34.777276396478868,     -0.740486358108046));
+        curvyToSwitchLeft.add(new Waypoint(-0.796 * 82.34987618525085, -0.39093873144451713));
+     //   curvyToSwitchLeft.add(new Waypoint(0.796 * 34.777276396478868,     -0.740486358108046));
     }
 
 }

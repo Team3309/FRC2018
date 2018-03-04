@@ -22,7 +22,7 @@ public class DrivePath extends Command {
     public DrivePath(ArrayList<Waypoint> path, boolean backwards, double timeoutSec) {
         requires(Robot.drive);
         for (Waypoint waypoint : path) {
-            waypoint.setRadius(Robot.drive.inchesToEncoderCounts(0.796 * waypoint.getRadius()));
+            waypoint.setRadius(Robot.drive.inchesToEncoderCounts(waypoint.getRadius()));
         }
         this.backwards = backwards;
         biArcController = new BiArcController(path,

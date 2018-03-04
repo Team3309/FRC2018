@@ -65,7 +65,9 @@ public class DriveTo extends Command {
         error = Robot.drive.getGoalPos() - Robot.drive.encoderCountsToInches(Robot.drive.getEncoderPos());
         Robot.drive.setLeftRight(-Robot.drive.inchesToEncoderCounts(Robot.drive.getGoalPos()),
                 -Robot.drive.inchesToEncoderCounts(Robot.drive.getGoalPos()));
-        Robot.drive.configLeftRightCruiseVelocity(CRUISE_VELOCITY, CRUISE_VELOCITY);
+        if (isMotionProfile) {
+            Robot.drive.configLeftRightCruiseVelocity(CRUISE_VELOCITY, CRUISE_VELOCITY);
+        }
     }
 
     @Override

@@ -15,7 +15,9 @@ public class BeltBar extends Subsystem {
 
     private TalonSRXMC masterBar = new TalonSRXMC(Constants.BELTBAR_0);
 
-    private AnalogInput hasCubeSensor = new AnalogInput(Constants.BELTBAR_SHARP_SENSOR);
+    private AnalogInput hasCubeSensorLeft = new AnalogInput(Constants.BELTBAR_SHARP_SENSOR_LEFT);
+    private AnalogInput hasCubeSensorRight = new AnalogInput(Constants.BELTBAR_SHARP_SENSOR_RIGHT);
+
     private DigitalInput hallEffectSensor = new DigitalInput(Constants.BELTBAR_HALL_EFFECT);
 
     private double goalAngle;
@@ -57,12 +59,12 @@ public class BeltBar extends Subsystem {
         table.getEntry("Beltbar control mode: ").setString(masterBar.getControlMode().toString());
         table.getEntry("Beltbar goal: ").setNumber(goalAngle);
         table.getEntry("sees cube").setBoolean(isCubePresent());
-        table.getEntry("sharp sensor").setNumber(hasCubeSensor.getAverageVoltage());
+        table.getEntry("sharp sensor").setNumber(hasCubeSensorLeft.getAverageVoltage());
         table.getEntry("current: ").setNumber(masterBar.getOutputCurrent());
     }
 
     public double getPosition() {
-        return masterBar.getSensorCollection().getQuadraturePosition();
+        return masterBar.getSelectedSensorPosition(0);
     }
 
     public void set(double value) {
@@ -94,7 +96,8 @@ public class BeltBar extends Subsystem {
     }
 
     public boolean isCubePresent() {
-        return hasCubeSensor.getAverageVoltage() > 1.2;
+        return hasCubeSensorLeft.getAverageVoltage() > 1.2 &&
+                hasCubeSensorRight.getAverageVoltage() > 1.2;
     }
 
     public double getError() { return masterBar.getClosedLoopError(0); }
@@ -102,7 +105,7 @@ public class BeltBar extends Subsystem {
     public boolean isAtTop(){ return hallEffectSensor.get(); }
 
     public void resetToTop() {
-        masterBar.getSensorCollection().setQuadraturePosition(TOP_VALUE, 0);
+        masterBar.setSelectedSensorPosition(TOP_VALUE, 0,0);
     }
 
 }
