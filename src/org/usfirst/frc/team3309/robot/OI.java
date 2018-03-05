@@ -40,7 +40,7 @@ public class OI {
         operatorRemote.buttonB.whenPressed(new ArmsOpen());
 
         operatorRemote.leftBumper.whenPressed(new ShooterForward());
-        operatorRemote.rightBumper.whenPressed(new LiftShiftToClimbMode());
+        operatorRemote.startButton.whenPressed(new LiftShiftToClimbMode());
 
         operatorRemote.buttonX.whenPressed(new IntakeCube());
         operatorRemote.buttonY.whenPressed(new MoveAssembly(AssemblyLocation.BOTTOM));
@@ -48,6 +48,7 @@ public class OI {
         operatorRemote.dPad.right.whenPressed(new MoveAssembly(AssemblyLocation.SCALE_DOWN));
         operatorRemote.dPad.up.whenPressed(new MoveAssembly(AssemblyLocation.SCALE_MIDDLE));
         operatorRemote.dPad.left.whenPressed(new MoveAssembly(AssemblyLocation.SCALE_UP));
+        operatorRemote.rightBumper.whenReleased(new MoveAssembly(AssemblyLocation.EXCHANGE_ZONE));
 
         driverRemote.buttonA.whenPressed(new LiftSetHolderOut());
         driverRemote.buttonA.whenReleased(new LiftSetHolderIn());

@@ -27,7 +27,7 @@ public class DriveTeleop extends Command {
     @Override
     protected void execute() {
         double throttle = LibMath.handleDeadband(OI.driverRemote.leftStick.getY(), 0.04);
-        double turn = LibMath.handleDeadband(OI.driverRemote.rightStick.getX(), 0.02);
+        double turn = -LibMath.handleDeadband(OI.driverRemote.rightStick.getX(), 0.02);
         SmartDashboard.putNumber("Turn: ", turn);
         SmartDashboard.putNumber("throttle: ", throttle);
         SmartDashboard.putNumber("turn: ", turn);

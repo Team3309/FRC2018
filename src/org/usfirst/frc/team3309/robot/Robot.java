@@ -50,6 +50,7 @@ public class Robot extends TimedRobot {
         sendToDashboard();
         drive.reset();
         AutoModeExecutor.displayAutos();
+        lift.setLiftShifter(false);
     }
 
     @Override
@@ -75,6 +76,7 @@ public class Robot extends TimedRobot {
 
     @Override
     public void teleopInit() {
+        lift.setLiftShifter(false);
         c.start();
         logger.info("teleop init");
         if (autoCommand != null) {
@@ -102,8 +104,6 @@ public class Robot extends TimedRobot {
     @Override
     public void disabledPeriodic() {
         drive.reset();
-        lift.reset();
-        lift.setLiftShifter(false);
     }
 
     public void sendToDashboard() {

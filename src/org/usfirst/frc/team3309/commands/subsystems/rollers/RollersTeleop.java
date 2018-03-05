@@ -20,16 +20,16 @@ public class RollersTeleop extends Command {
         double leftTrigger = OI.operatorRemote.leftTrigger.getY();
         double rightTrigger = OI.operatorRemote.rightTrigger.getY();
         if (Math.abs(leftTrigger) > MIN_POWER) {
-            if (Math.abs(leftTrigger) > MAX_POWER) {
-                Robot.rollers.setLeftRight(-MAX_POWER, MAX_POWER);
+            if (Math.abs(leftTrigger) > 0.4) {
+                Robot.rollers.setLeftRight(0.4, -0.4);
             } else {
-                Robot.rollers.setLeftRight(-leftTrigger, leftTrigger);
+                Robot.rollers.setLeftRight(leftTrigger, -leftTrigger);
             }
         } else if (Math.abs(rightTrigger) > MIN_POWER) {
             if (Math.abs(rightTrigger) > MAX_POWER) {
-                Robot.rollers.setLeftRight(MAX_POWER, -MAX_POWER);
+                Robot.rollers.setLeftRight(-MAX_POWER, MAX_POWER);
             } else {
-                Robot.rollers.setLeftRight(rightTrigger, -rightTrigger);
+                Robot.rollers.setLeftRight(-rightTrigger, rightTrigger);
             }
         } else {
             if (Robot.beltBar.isCubePresent() && Robot.arms.isArmsClosed()) {
