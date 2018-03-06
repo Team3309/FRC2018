@@ -10,7 +10,7 @@ def TEAM = 3309
 def ROBOT_CLASS = "org.usfirst.frc.team3309.robot.Robot"
 
 wpi {
-    wpilibVersion = "2018.3.3"
+    wpilibVersion = "2018.4.1"
     ctreVersion = "5.2.2.0"
 }
 

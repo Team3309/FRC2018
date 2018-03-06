@@ -26,7 +26,6 @@ public class Robot extends TimedRobot {
     public static Arms arms;
     public static Rollers rollers;
 
-    private UsbCamera cam;
     private Compressor c;
     private OI oi;
 
@@ -39,8 +38,10 @@ public class Robot extends TimedRobot {
         setPeriod(0.01);
         logger = Logger.getLogger("Robot");
         logger.info("robot init");
-        cam = CameraServer.getInstance().startAutomaticCapture();
+
+        UsbCamera cam = CameraServer.getInstance().startAutomaticCapture();
         cam.setFPS(15);
+
         drive = new Drive();
         lift = new Lift();
         beltBar = new BeltBar();
@@ -50,11 +51,14 @@ public class Robot extends TimedRobot {
         rollers = new Rollers();
         oi = new OI();
         c = new Compressor();
+
         c.start();
-        sendToDashboard();
         drive.reset();
-        AutoModeExecutor.displayAutos();
         lift.setLiftShifter(false);
+
+        sendToDashboard();
+
+        AutoModeExecutor.displayAutos();
     }
 
     @Override
