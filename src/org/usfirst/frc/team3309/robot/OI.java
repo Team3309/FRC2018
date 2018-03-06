@@ -2,10 +2,7 @@ package org.usfirst.frc.team3309.robot;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Command;
-import org.usfirst.frc.team3309.commands.subsystems.AssemblyLocation;
-import org.usfirst.frc.team3309.commands.subsystems.IntakeCube;
-import org.usfirst.frc.team3309.commands.subsystems.InterruptAll;
-import org.usfirst.frc.team3309.commands.subsystems.MoveAssembly;
+import org.usfirst.frc.team3309.commands.subsystems.*;
 import org.usfirst.frc.team3309.commands.subsystems.arms.ArmsClamp;
 import org.usfirst.frc.team3309.commands.subsystems.arms.ArmsOpen;
 import org.usfirst.frc.team3309.commands.subsystems.beltbar.BeltBarMoveToPos;
@@ -40,7 +37,9 @@ public class OI {
         operatorRemote.buttonB.whenPressed(new ArmsOpen());
 
         operatorRemote.leftBumper.whenPressed(new ShooterForward());
-        operatorRemote.startButton.whenPressed(new LiftShiftToClimbMode());
+
+        operatorRemote.startButton.whenPressed(new PrepareForClimb());
+        operatorRemote.backButton.whenReleased(new SetClimbMode());
 
         operatorRemote.buttonX.whenPressed(new IntakeCube());
         operatorRemote.buttonY.whenPressed(new MoveAssembly(AssemblyLocation.BOTTOM));
@@ -49,10 +48,6 @@ public class OI {
         operatorRemote.dPad.up.whenPressed(new MoveAssembly(AssemblyLocation.SCALE_MIDDLE));
         operatorRemote.dPad.left.whenPressed(new MoveAssembly(AssemblyLocation.SCALE_UP));
         operatorRemote.rightBumper.whenReleased(new MoveAssembly(AssemblyLocation.EXCHANGE_ZONE));
-
-        driverRemote.buttonA.whenPressed(new LiftSetHolderOut());
-        driverRemote.buttonA.whenReleased(new LiftSetHolderIn());
-
     }
 
 }

@@ -43,12 +43,12 @@ public class Lift extends Subsystem {
                 0);
         lift0.configForwardSoftLimitThreshold(47000, 0);
         lift0.configForwardSoftLimitEnable(true, 0);
-        lift0.config_kP(0, 0.18, 0);
-        lift0.config_kD(0, 10, 0);
+        lift0.config_kP(0, 0.24, 0);
+        lift0.config_kD(0, 28, 0);
         lift0.config_kF(0, 0.023, 0);
         lift0.configClosedloopRamp(0.22, 0);
         lift0.configPeakOutputForward(1.0, 0);
-        lift0.configPeakOutputReverse(-0.29, 0);
+        lift0.configPeakOutputReverse(-0.3309, 0);
         lift0.changeToPositionMode();
         lift0.setInverted(true);
         lift1.follow(lift0);

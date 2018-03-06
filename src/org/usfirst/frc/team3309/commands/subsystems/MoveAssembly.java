@@ -14,7 +14,7 @@ public class MoveAssembly extends CommandGroup {
 
     public MoveAssembly(AssemblyLocation assemblyLocation) {
         addSequential(new LiftElevate(assemblyLocation.getElevatorPosition()));
-        addSequential(new BeltBarMoveToPos(assemblyLocation.getBeltBarPosition()));
+        addParallel(new BeltBarMoveToPos(assemblyLocation.getBeltBarPosition()));
     }
 
 }

@@ -40,7 +40,7 @@ public class Drive extends Subsystem {
         left0.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
         left1.follow(left0);
         left2.follow(left0);
-        left0.configOpenloopRamp(0.25, 0);
+        left0.configOpenloopRamp(0, 0);
         left0.configMotionAcceleration(30000, 0);
         left0.config_kP(0, 0.019, 0);
         left0.config_kD(0, 0.0006, 0);
@@ -54,7 +54,7 @@ public class Drive extends Subsystem {
         right0.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
         right1.follow(right0);
         right2.follow(right0);
-        right0.configOpenloopRamp(0.25, 0);
+        right0.configOpenloopRamp(0, 0);
         right0.configMotionAcceleration(30000, 0);
         right0.config_kP(0, 0.019, 0);
         right0.config_kD(0, 0.0006, 0);

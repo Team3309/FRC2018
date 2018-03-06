@@ -4,10 +4,13 @@ import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.hal.PDPJNI;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team3309.commands.subsystems.lift.LiftCheckLimits;
+import org.usfirst.frc.team3309.lib.communications.BlackBox;
 import org.usfirst.frc.team3309.subsystems.*;
 
+import java.sql.Time;
 import java.util.logging.Logger;
 
 /**
@@ -32,6 +35,7 @@ public class Robot extends TimedRobot {
 
     @Override
     public void robotInit() {
+        BlackBox.initLog("Current log", "Time", "15", "13", "14", "0", "1", "3");
         setPeriod(0.01);
         logger = Logger.getLogger("Robot");
         logger.info("robot init");
@@ -74,6 +78,8 @@ public class Robot extends TimedRobot {
         sendToDashboard();
     }
 
+    double start;
+
     @Override
     public void teleopInit() {
         lift.setLiftShifter(false);
@@ -84,10 +90,11 @@ public class Robot extends TimedRobot {
         }
         drive.reset();
         drive.setHighGear();
-        drive.changeToCoastMode();
+        drive.changeToBrakeMode();
         lift.setLiftShifter(false);
         Scheduler.getInstance().removeAll();
         Scheduler.getInstance().add(new LiftCheckLimits());
+        start = Timer.getFPGATimestamp();
     }
 
     @Override
@@ -99,6 +106,31 @@ public class Robot extends TimedRobot {
         SmartDashboard.putData(falconDoors);
         SmartDashboard.putData(arms);
         SmartDashboard.putData(rollers);
+
+        if (beltBar.isCubePresent() &&
+                arms.isArmsClosed()) {
+            OI.operatorRemote.setRumble(1);
+            OI.driverRemote.setRumble(1);
+        } else {
+            OI.operatorRemote.setRumble(0);
+            OI.driverRemote.setRumble(0);
+        }
+
+        double now = Timer.getFPGATimestamp();
+
+        if (now - start > 0.5) {
+            // 15 13 14 0 1 3
+            BlackBox.writeLog(
+                    String.valueOf(Timer.getFPGATimestamp()),
+                    String.valueOf(PDPJNI.getPDPTotalCurrent(15)),
+                    String.valueOf(PDPJNI.getPDPTotalCurrent(13)),
+                    String.valueOf(PDPJNI.getPDPTotalCurrent(14)),
+                    String.valueOf(PDPJNI.getPDPTotalCurrent(0)),
+                    String.valueOf(PDPJNI.getPDPTotalCurrent(1)),
+                    String.valueOf(PDPJNI.getPDPTotalCurrent(3)));
+            start = Timer.getFPGATimestamp();
+        }
+
     }
 
     @Override
