@@ -15,8 +15,8 @@ public class BlackBox {
 
     // path writes to USB connected to roboRio
 
-    // /media/sda1/Logs
-    private static final String logPath = "/home/lvuser/Logs/";
+    // /home/lvuser/Logs/
+    private static final String logPath = "/media/sda1/Logs";
     private static PrintWriter pw;
 
     public static void initLog(String title, String... headers) {

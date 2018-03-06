@@ -35,7 +35,7 @@ public class Robot extends TimedRobot {
 
     @Override
     public void robotInit() {
-        BlackBox.initLog("Current log", "Time", "15", "13", "14", "0", "1", "3");
+    //    BlackBox.initLog("Current log", "Time", "15", "13", "14", "0", "1", "3");
         setPeriod(0.01);
         logger = Logger.getLogger("Robot");
         logger.info("robot init");
@@ -118,7 +118,7 @@ public class Robot extends TimedRobot {
 
         double now = Timer.getFPGATimestamp();
 
-        if (now - start > 0.5) {
+ /*       if (now - start > 0.5) {
             // 15 13 14 0 1 3
             BlackBox.writeLog(
                     String.valueOf(Timer.getFPGATimestamp()),
@@ -129,7 +129,7 @@ public class Robot extends TimedRobot {
                     String.valueOf(PDPJNI.getPDPTotalCurrent(1)),
                     String.valueOf(PDPJNI.getPDPTotalCurrent(3)));
             start = Timer.getFPGATimestamp();
-        }
+        }*/
 
     }
 

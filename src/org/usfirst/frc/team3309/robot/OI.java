@@ -42,6 +42,7 @@ public class OI {
         operatorRemote.backButton.whenReleased(new SetClimbMode());
 
         operatorRemote.buttonX.whenPressed(new IntakeCube());
+
         operatorRemote.buttonY.whenPressed(new MoveAssembly(AssemblyLocation.BOTTOM));
         operatorRemote.dPad.down.whenPressed(new MoveAssembly(AssemblyLocation.SWITCH));
         operatorRemote.dPad.right.whenPressed(new MoveAssembly(AssemblyLocation.SCALE_DOWN));
