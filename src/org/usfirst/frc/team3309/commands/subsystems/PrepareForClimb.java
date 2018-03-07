@@ -11,8 +11,8 @@ public class PrepareForClimb extends CommandGroup {
         addSequential(new MoveAssembly(AssemblyLocation.BOTTOM));
         addSequential(new LiftSetHolderIn());
         addSequential(new WaitCommand(0.2));
-        addSequential(new MoveAssembly(AssemblyLocation.CLIMB));
         addSequential(new LiftManualForClimbing());
     }
 
 }
+
