@@ -10,6 +10,7 @@ import java.util.ArrayList;
 /*
 * not working
 * */
+@Deprecated
 public class DriveFollowVelocity extends Command {
 
     private ArrayList<VelocityChangePoint> velocityChangePoints;

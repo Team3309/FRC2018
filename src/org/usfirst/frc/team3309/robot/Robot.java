@@ -4,13 +4,10 @@ import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.hal.PDPJNI;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team3309.commands.subsystems.lift.LiftCheckLimits;
-import org.usfirst.frc.team3309.lib.communications.BlackBox;
 import org.usfirst.frc.team3309.subsystems.*;
 
-import java.sql.Time;
 import java.util.logging.Logger;
 
 /**
@@ -54,8 +51,8 @@ public class Robot extends TimedRobot {
 
         c.start();
         drive.reset();
-        lift.setLiftShifter(false);
-
+        lift.setLiftShifter(true);
+        falconDoors.setUp();
         sendToDashboard();
 
         AutoModeExecutor.displayAutos();
@@ -63,10 +60,11 @@ public class Robot extends TimedRobot {
 
     @Override
     public void autonomousInit() {
+        falconDoors.setUp();
         c.stop();
         logger.info("autonomous init");
         drive.reset();
-        lift.setLiftShifter(false);
+        lift.setLiftShifter(true);
         lift.reset();
         autoCommand = AutoModeExecutor.getAutoSelected();
         logger.info("Running " + autoCommand.getName());
@@ -86,7 +84,7 @@ public class Robot extends TimedRobot {
 
     @Override
     public void teleopInit() {
-        lift.setLiftShifter(false);
+        lift.setLiftShifter(true);
         c.start();
         logger.info("teleop init");
         if (autoCommand != null) {
@@ -95,7 +93,8 @@ public class Robot extends TimedRobot {
         drive.reset();
         drive.setHighGear();
         drive.changeToBrakeMode();
-        lift.setLiftShifter(false);
+        falconDoors.setUp();
+        lift.setHolderOut();
         Scheduler.getInstance().removeAll();
         Scheduler.getInstance().add(new LiftCheckLimits());
         start = Timer.getFPGATimestamp();
@@ -138,7 +137,12 @@ public class Robot extends TimedRobot {
     }
 
     @Override
+    public void disabledInit() {
+    }
+
+    @Override
     public void disabledPeriodic() {
+        falconDoors.setUp();
         drive.reset();
     }
 

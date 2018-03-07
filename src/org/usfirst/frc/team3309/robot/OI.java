@@ -8,6 +8,8 @@ import org.usfirst.frc.team3309.commands.subsystems.arms.ArmsOpen;
 import org.usfirst.frc.team3309.commands.subsystems.beltbar.BeltBarMoveToPos;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveSetHighGear;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveSetLowGear;
+import org.usfirst.frc.team3309.commands.subsystems.falcondoors.FalconDoorsDeploy;
+import org.usfirst.frc.team3309.commands.subsystems.falcondoors.FalconDoorsRetract;
 import org.usfirst.frc.team3309.commands.subsystems.lift.LiftSetHolderIn;
 import org.usfirst.frc.team3309.commands.subsystems.lift.LiftSetHolderOut;
 import org.usfirst.frc.team3309.commands.subsystems.lift.LiftShiftToClimbMode;
@@ -39,10 +41,12 @@ public class OI {
         operatorRemote.leftBumper.whenPressed(new ShooterForward());
 
         operatorRemote.startButton.whenPressed(new PrepareForClimb());
-        operatorRemote.backButton.whenReleased(new SetClimbMode());
+        operatorRemote.rightStick.whenPressed(new SetClimbMode());
+
+      //  driverRemote.buttonA.whenReleased(new FalconDoorsDeploy());
+      // driverRemote.buttonA.whenReleased(new FalconDoorsRetract());
 
         operatorRemote.buttonX.whenPressed(new IntakeCube());
-
         operatorRemote.buttonY.whenPressed(new MoveAssembly(AssemblyLocation.BOTTOM));
         operatorRemote.dPad.down.whenPressed(new MoveAssembly(AssemblyLocation.SWITCH));
         operatorRemote.dPad.right.whenPressed(new MoveAssembly(AssemblyLocation.SCALE_DOWN));

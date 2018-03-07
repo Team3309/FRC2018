@@ -6,12 +6,11 @@ import org.usfirst.frc.team3309.robot.Robot;
 public class LiftShiftToClimbMode extends InstantCommand {
 
     public LiftShiftToClimbMode() {
-        requires(Robot.lift);
     }
 
     @Override
     protected void execute() {
-        Robot.lift.setLiftShifter(true);
+        Robot.lift.setLiftShifter(false);
     }
 
 }

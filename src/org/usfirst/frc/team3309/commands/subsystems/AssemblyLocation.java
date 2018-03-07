@@ -9,7 +9,7 @@ public enum AssemblyLocation {
     SCALE_MIDDLE(-2500, 38000),
     SCALE_UP(-2500, 42000),
     SWITCH(-2500, 14000),
-    CLIMB(-3000, 43000);
+    CLIMB(-3000, 15000);
 
     private double beltBarPosition;
     private double elevatorPosition;

@@ -3,18 +3,14 @@ package org.usfirst.frc.team3309.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.sensors.PigeonIMU;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
-import edu.wpi.first.wpilibj.Counter;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team3309.commands.subsystems.AssemblyLocation;
-import org.usfirst.frc.team3309.commands.subsystems.MoveAssembly;
-import org.usfirst.frc.team3309.commands.subsystems.lift.LiftManualTest;
 import org.usfirst.frc.team3309.lib.actuators.TalonSRXMC;
 import org.usfirst.frc.team3309.lib.actuators.VictorSPXMC;
 import org.usfirst.frc.team3309.robot.Constants;
@@ -48,7 +44,7 @@ public class Lift extends Subsystem {
         lift0.config_kF(0, 0.023, 0);
         lift0.configClosedloopRamp(0.22, 0);
         lift0.configPeakOutputForward(1.0, 0);
-        lift0.configPeakOutputReverse(-0.3309, 0);
+        lift0.configPeakOutputReverse(-0.36, 0);
         lift0.changeToPositionMode();
         lift0.setInverted(true);
         lift1.follow(lift0);
@@ -135,11 +131,11 @@ public class Lift extends Subsystem {
     }
 
     public void setHolderIn() {
-        secondStageHolder.set(DoubleSolenoid.Value.kReverse);
+        secondStageHolder.set(DoubleSolenoid.Value.kForward);
     }
 
     public void setHolderOut() {
-        secondStageHolder.set(DoubleSolenoid.Value.kForward);
+        secondStageHolder.set(DoubleSolenoid.Value.kReverse);
     }
 
     public void setLiftPos(double liftPos) {

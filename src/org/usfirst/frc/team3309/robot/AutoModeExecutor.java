@@ -27,17 +27,11 @@ public class AutoModeExecutor {
             .listFiles();
 
     public static void displayAutos() {
+
         autos.addDefault("No Action", new NoActionAuto());
         autos.addObject("CurvyToSwitchAuto", new CurvyToSwitchAuto());
-        autos.addObject("DriveForwardAuto", new DriveStraight(Length.fromInches(50), false));
-        autos.addObject("DriveBack", new DriveStraight(Length.fromInches(-50), false));
-        autos.addObject("TurnCWToAngleAuto", new DriveTurn(-90));
-        autos.addObject("TurnCCWToAngleAuto", new DriveTurn(90));
         autos.addObject("AutoLineAuto", new AutoLineAuto());
-        autos.addObject("SwitchForwardAuto", new SwitchForwardAuto());
-        autos.addObject("TurnToSwitchAuto", new TurnToSwitchAuto());
-        autos.addObject("LiftElevate", new LiftElevate(5000));
-        autos.addObject("BeltbarMoveToPos", new BeltBarMoveToPos(0));
+
         if (isUsingFile) {
             for (File autoFile : autoFiles) {
                 Command autoCommand = null;
