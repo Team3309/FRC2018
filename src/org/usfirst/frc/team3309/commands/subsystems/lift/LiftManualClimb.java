@@ -7,7 +7,7 @@ import org.usfirst.frc.team3309.robot.Robot;
 
 public class LiftManualClimb extends Command {
 
-    private final double MAX_POWER = 0.75;
+    private final double MAX_POWER = 0.85;
 
     public LiftManualClimb() {
         requires(Robot.lift);
