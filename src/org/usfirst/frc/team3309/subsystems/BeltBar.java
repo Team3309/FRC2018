@@ -26,8 +26,8 @@ public class BeltBar extends Subsystem {
     // TODO determine top value
     private final int TOP_VALUE = 0;
 
-    private final int MAX_CURRENT = 30;
-    private final int MAX_CURRENT_DURATION = 1000;
+    private final int MAX_CURRENT = 18;
+    private final int MAX_CURRENT_DURATION = 125;
 
     public BeltBar() {
         masterBar.setInverted(false);
@@ -37,9 +37,15 @@ public class BeltBar extends Subsystem {
         masterBar.config_kP(0, 0.98, 0);
         masterBar.config_kF(0, 0.04, 0);
 
+        /* practice bot
         masterBar.configForwardSoftLimitThreshold(-1650, 0);
-        masterBar.configForwardSoftLimitEnable(true, 0);
+        masterBar.configForwardSoftLimitEnable(false, 0);
         masterBar.configReverseSoftLimitThreshold(-3100,0);
+        masterBar.configReverseSoftLimitEnable(false, 0);*/
+
+        masterBar.configForwardSoftLimitThreshold(-650, 0);
+        masterBar.configForwardSoftLimitEnable(true,0);
+        masterBar.configReverseSoftLimitThreshold(-2050,0);
         masterBar.configReverseSoftLimitEnable(true, 0);
 
         masterBar.configPeakCurrentLimit(MAX_CURRENT, 0);
@@ -52,6 +58,7 @@ public class BeltBar extends Subsystem {
 
     @Override
     protected void initDefaultCommand() {
+      //  setDefaultCommand(new BeltBarManualTest());
     }
 
     public void sendToDashboard() {
@@ -65,6 +72,7 @@ public class BeltBar extends Subsystem {
         table.getEntry("sharp sensor right").setNumber(hasCubeSensorRight.getAverageVoltage());
         table.getEntry("sharp sensor average").setNumber(getSharpSensorValue());
         table.getEntry("current: ").setNumber(masterBar.getOutputCurrent());
+     //   System.out.println(masterBar.);
     }
 
     public double getPosition() {
@@ -111,6 +119,10 @@ public class BeltBar extends Subsystem {
 
     public void resetToTop() {
         masterBar.setSelectedSensorPosition(TOP_VALUE, 0,0);
+    }
+
+    public double getCurrent() {
+        return masterBar.getOutputCurrent();
     }
 
 }

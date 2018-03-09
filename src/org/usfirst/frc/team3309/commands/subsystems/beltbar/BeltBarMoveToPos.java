@@ -21,6 +21,7 @@ public class BeltBarMoveToPos extends Command {
     protected void initialize() {
         Robot.beltBar.setGoalAngle(goalAngle);
         Robot.beltBar.changeToPositionMode();
+        Robot.beltBar.changeToBrakeMode();
         timer.start();
     }
 

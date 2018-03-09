@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team3309.commands.subsystems.lift.LiftCheckLimits;
+import org.usfirst.frc.team3309.lib.communications.BlackBox;
 import org.usfirst.frc.team3309.subsystems.*;
 
 import java.util.logging.Logger;
@@ -29,13 +30,18 @@ public class Robot extends TimedRobot {
     private Command autoCommand = null;
     public static Logger logger;
 
+    private static boolean isLeftSwitch;
+    private static boolean isRightSwitch;
+
+    private static boolean isLeftScale;
+    private static boolean isRightScale;
+
     @Override
     public void robotInit() {
-    //    BlackBox.initLog("Current log", "Time", "15", "13", "14", "0", "1", "3");
         setPeriod(0.01);
         logger = Logger.getLogger("Robot");
         logger.info("robot init");
-
+     //   BlackBox.initLog("beltbar current ", "amps");
         UsbCamera cam = CameraServer.getInstance().startAutomaticCapture();
         cam.setFPS(15);
 
@@ -60,6 +66,12 @@ public class Robot extends TimedRobot {
 
     @Override
     public void autonomousInit() {
+        if (DriverStation.getInstance().getGameSpecificMessage() != null) {
+            isLeftSwitch = DriverStation.getInstance().getGameSpecificMessage().charAt(0) == 'L';
+            isRightSwitch = DriverStation.getInstance().getGameSpecificMessage().charAt(0) == 'R';
+            isLeftScale = DriverStation.getInstance().getGameSpecificMessage().charAt(1) == 'L';
+            isRightScale = DriverStation.getInstance().getGameSpecificMessage().charAt(1) == 'R';
+        }
         falconDoors.setUp();
         c.stop();
         logger.info("autonomous init");
@@ -80,10 +92,11 @@ public class Robot extends TimedRobot {
         sendToDashboard();
     }
 
-    double start;
+    private double start;
 
     @Override
     public void teleopInit() {
+        start = Timer.getFPGATimestamp();
         lift.setLiftShifter(true);
         c.start();
         logger.info("teleop init");
@@ -97,8 +110,8 @@ public class Robot extends TimedRobot {
         lift.setHolderOut();
         Scheduler.getInstance().removeAll();
         Scheduler.getInstance().add(new LiftCheckLimits());
-        start = Timer.getFPGATimestamp();
     }
+
 
     @Override
     public void teleopPeriodic() {
@@ -110,29 +123,10 @@ public class Robot extends TimedRobot {
         SmartDashboard.putData(arms);
         SmartDashboard.putData(rollers);
 
-        if (beltBar.isCubePresent() &&
-                arms.isArmsClosed()) {
-            OI.operatorRemote.setRumble(1);
-            OI.driverRemote.setRumble(1);
-        } else {
-            OI.operatorRemote.setRumble(0);
-            OI.driverRemote.setRumble(0);
-        }
-
-        double now = Timer.getFPGATimestamp();
-
- /*       if (now - start > 0.5) {
-            // 15 13 14 0 1 3
-            BlackBox.writeLog(
-                    String.valueOf(Timer.getFPGATimestamp()),
-                    String.valueOf(PDPJNI.getPDPTotalCurrent(15)),
-                    String.valueOf(PDPJNI.getPDPTotalCurrent(13)),
-                    String.valueOf(PDPJNI.getPDPTotalCurrent(14)),
-                    String.valueOf(PDPJNI.getPDPTotalCurrent(0)),
-                    String.valueOf(PDPJNI.getPDPTotalCurrent(1)),
-                    String.valueOf(PDPJNI.getPDPTotalCurrent(3)));
+        if (Timer.getFPGATimestamp() - start >= 1) {
+          //  BlackBox.writeLog(String.valueOf(Timer.getFPGATimestamp()), String.valueOf(beltBar.getCurrent()));
             start = Timer.getFPGATimestamp();
-        }*/
+        }
 
     }
 
@@ -154,19 +148,19 @@ public class Robot extends TimedRobot {
     }
 
     public static boolean isLeftSwitch() {
-        return DriverStation.getInstance().getGameSpecificMessage().charAt(0) == 'L';
+        return isLeftSwitch;
     }
 
     public static boolean isRightSwitch() {
-        return DriverStation.getInstance().getGameSpecificMessage().charAt(0) == 'R';
+        return isRightSwitch;
     }
 
     public static boolean isLeftScale() {
-        return DriverStation.getInstance().getGameSpecificMessage().charAt(1) == 'L';
+        return isLeftScale;
     }
 
     public static boolean isRightScale() {
-        return DriverStation.getInstance().getGameSpecificMessage().charAt(1) == 'R';
+        return isRightScale;
     }
 
 }
