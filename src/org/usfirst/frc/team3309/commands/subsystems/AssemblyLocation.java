@@ -8,7 +8,7 @@ public enum AssemblyLocation {
     SCALE_DOWN(-1690, 34000),
     SCALE_MIDDLE(-1690, 38000),
     SCALE_UP(-1690, 42000),
-    SWITCH(-1690, 14000);
+    SWITCH(-1090, 14000);
 
 /*    practice bot
     BOTTOM(-3000, 0),

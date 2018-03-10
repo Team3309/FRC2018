@@ -11,6 +11,10 @@ public class TalonSRXMC extends TalonSRX {
     public TalonSRXMC(int deviceNumber) {
         super(deviceNumber);
         controlMode = ControlMode.PercentOutput;
+        reset();
+    }
+
+    public void reset(){
         configOpenloopRamp(0, 0);
         configClosedloopRamp(0, 0);
         configPeakOutputForward(1, 0);

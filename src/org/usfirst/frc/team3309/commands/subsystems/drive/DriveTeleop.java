@@ -52,12 +52,9 @@ public class DriveTeleop extends Command {
             SmartDashboard.putNumber("turn: ", turn);
         }
 
-        if (OI.driverRemote.rightBumper.get()) {
-            Robot.drive.setLeftRight(0.0, 0);
-        } else {
-            driveSignal = cheezyDriveEquation.update(throttle, turn, isQuickTurn);
-            Robot.drive.setLeftRight(driveSignal.getLeftMotor(), driveSignal.getRightMotor());
-        }
+        driveSignal = cheezyDriveEquation.update(throttle, turn, isQuickTurn);
+        Robot.drive.setLeftRight(driveSignal.getLeftMotor(), driveSignal.getRightMotor());
+
 
     }
 

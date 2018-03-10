@@ -1,14 +1,13 @@
 package org.usfirst.frc.team3309.robot;
 
 import edu.wpi.cscore.UsbCamera;
+import edu.wpi.cscore.VideoSource;
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.hal.PDPJNI;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team3309.commands.subsystems.lift.LiftCheckLimits;
-import org.usfirst.frc.team3309.lib.communications.BlackBox;
 import org.usfirst.frc.team3309.subsystems.*;
 
 import java.util.logging.Logger;
@@ -48,9 +47,8 @@ public class Robot extends TimedRobot {
         logger = Logger.getLogger("Robot");
         logger.info("robot init");
      //   BlackBox.initLog("beltbar current ", "amps");
-        UsbCamera cam = CameraServer.getInstance().startAutomaticCapture();
-        cam.setFPS(15);
-
+        CameraServer.getInstance().startAutomaticCapture(0).setFPS(18);
+        CameraServer.getInstance().startAutomaticCapture(1).setFPS(18);
         drive = new Drive();
         lift = new Lift();
         beltBar = new BeltBar();
@@ -66,12 +64,12 @@ public class Robot extends TimedRobot {
         lift.setLiftShifter(true);
         falconDoors.setUp();
         sendToDashboard();
-
         AutoModeExecutor.displayAutos();
     }
 
     @Override
     public void autonomousInit() {
+        Scheduler.getInstance().removeAll();
         if (DriverStation.getInstance().getGameSpecificMessage() != null) {
             isLeftSwitch = DriverStation.getInstance().getGameSpecificMessage().charAt(0) == 'L';
             isRightSwitch = DriverStation.getInstance().getGameSpecificMessage().charAt(0) == 'R';

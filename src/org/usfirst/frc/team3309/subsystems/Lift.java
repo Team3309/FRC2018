@@ -45,19 +45,19 @@ public class Lift extends Subsystem {
         lift0.configForwardSoftLimitThreshold(FORWARD_LIM, 0);
         lift0.configForwardSoftLimitEnable(true, 0);
 
-/*
+        /* practice bot
         lift0.config_kP(0, 0.24, 0);
         lift0.config_kD(0, 28, 0);
         lift0.config_kF(0, 0.023, 0);
-*/
+        */
 
         lift0.config_kP(0, 0.2, 0);
         lift0.config_kD(0, 28, 0);
         lift0.config_kF(0, 0.023, 0);
 
         lift0.configClosedloopRamp(0.22, 0);
-        lift0.configPeakOutputForward(1.0, 0); // 1.0
-        lift0.configPeakOutputReverse(-0.36, 0); // -// 0.36
+        lift0.configPeakOutputForward(1.0, 0);
+        lift0.configPeakOutputReverse(-0.45, 0);
 
         lift0.changeToPositionMode();
 
@@ -79,7 +79,7 @@ public class Lift extends Subsystem {
 
     @Override
     protected void initDefaultCommand() {
-       // setDefaultCommand(new LiftManualTest());
+        // setDefaultCommand(new LiftManualTest());
     }
 
     public void sendToDashboard() {
@@ -92,13 +92,6 @@ public class Lift extends Subsystem {
         table.getEntry("lift percent output: ").setNumber(lift0.getMotorOutputPercent());
         table.getEntry("lift banner sensor: ").setBoolean(bannerSensor.get());
         table.getEntry("banner sensor trigger: ").setBoolean(bannerSensor.isAnalogTrigger());
-
-        table.getEntry("lift0 current").setNumber(lift0.getOutputCurrent());
-        table.getEntry("lift1 current").setNumber(lift1.getOutputCurrent());
-        table.getEntry("lift2 current").setNumber(lift2.getOutputCurrent());
-        table.getEntry("lift3 current").setNumber(lift3.getOutputCurrent());
-        table.getEntry("lift4 current").setNumber(lift4.getOutputCurrent());
-
     }
 
     public void reset() {
