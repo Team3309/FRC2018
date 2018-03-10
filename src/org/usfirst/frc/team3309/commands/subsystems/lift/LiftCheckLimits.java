@@ -10,9 +10,11 @@ public class LiftCheckLimits extends Command {
     private final double DESIRED_TIME_ELUDED = 0.3;
     private boolean hasStarted = false;
 
+    private boolean isZeroed = false;
+
     @Override
     protected void execute() {
-        if (Robot.lift.isAtBottom()) {
+        if (Robot.lift.isAtBottom() && !isZeroed) {
             if (!hasStarted) {
                 start = Timer.getFPGATimestamp();
                 hasStarted = true;
@@ -21,6 +23,7 @@ public class LiftCheckLimits extends Command {
                 if (timeEluded > DESIRED_TIME_ELUDED) {
                     Robot.lift.resetToBottom();
                     hasStarted = false;
+                    isZeroed = true;
                     start = Double.POSITIVE_INFINITY;
                 }
             }

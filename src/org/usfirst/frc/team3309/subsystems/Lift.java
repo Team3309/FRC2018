@@ -45,7 +45,13 @@ public class Lift extends Subsystem {
         lift0.configForwardSoftLimitThreshold(FORWARD_LIM, 0);
         lift0.configForwardSoftLimitEnable(true, 0);
 
+/*
         lift0.config_kP(0, 0.24, 0);
+        lift0.config_kD(0, 28, 0);
+        lift0.config_kF(0, 0.023, 0);
+*/
+
+        lift0.config_kP(0, 0.2, 0);
         lift0.config_kD(0, 28, 0);
         lift0.config_kF(0, 0.023, 0);
 
@@ -54,7 +60,14 @@ public class Lift extends Subsystem {
         lift0.configPeakOutputReverse(-0.36, 0); // -// 0.36
 
         lift0.changeToPositionMode();
-        lift0.setInverted(true);
+
+        // practice bot
+      /*lift0.setInverted(true);
+        lift0.setSensorPhase(false);*/
+
+        lift0.setInverted(false);
+        lift0.setSensorPhase(true);
+
         lift1.follow(lift0);
         lift2.follow(lift0);
         lift3.follow(lift0);
@@ -93,7 +106,7 @@ public class Lift extends Subsystem {
     }
 
     public void resetToBottom() {
-        lift0.setSelectedSensorPosition(0,0, 0);
+        lift0.setSelectedSensorPosition(0, 0, 0);
     }
 
     public double getPosition() {
@@ -161,7 +174,7 @@ public class Lift extends Subsystem {
     }
 
     public double getLiftPos() {
-         return liftPos;
+        return liftPos;
     }
 
     public void setBeltbarPos(double beltbarPos) {

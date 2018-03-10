@@ -43,9 +43,9 @@ public class BeltBar extends Subsystem {
         masterBar.configReverseSoftLimitThreshold(-3100,0);
         masterBar.configReverseSoftLimitEnable(false, 0);*/
 
-        masterBar.configForwardSoftLimitThreshold(-650, 0);
+        masterBar.configForwardSoftLimitThreshold(-730, 0); // -400
         masterBar.configForwardSoftLimitEnable(true,0);
-        masterBar.configReverseSoftLimitThreshold(-2050,0);
+        masterBar.configReverseSoftLimitThreshold(-1990,0); // -2050
         masterBar.configReverseSoftLimitEnable(true, 0);
 
         masterBar.configPeakCurrentLimit(MAX_CURRENT, 0);
@@ -58,7 +58,7 @@ public class BeltBar extends Subsystem {
 
     @Override
     protected void initDefaultCommand() {
-      //  setDefaultCommand(new BeltBarManualTest());
+        setDefaultCommand(new BeltBarManualTest());
     }
 
     public void sendToDashboard() {

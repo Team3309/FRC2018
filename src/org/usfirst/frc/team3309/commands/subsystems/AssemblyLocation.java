@@ -3,13 +3,12 @@ package org.usfirst.frc.team3309.commands.subsystems;
 public enum AssemblyLocation {
 
     BOTTOM(-1950, 0),
-    BOTTOM_FOR_CUBE(-700, 900),
-    EXCHANGE_ZONE(-980, 900),
+    BOTTOM_FOR_CUBE(-640, 940),
+    EXCHANGE_ZONE(-900, 700),
     SCALE_DOWN(-1690, 34000),
     SCALE_MIDDLE(-1690, 38000),
     SCALE_UP(-1690, 42000),
     SWITCH(-1690, 14000);
-
 
 /*    practice bot
     BOTTOM(-3000, 0),

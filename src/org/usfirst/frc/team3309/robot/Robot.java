@@ -4,6 +4,8 @@ import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.hal.PDPJNI;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team3309.commands.subsystems.lift.LiftCheckLimits;
 import org.usfirst.frc.team3309.lib.communications.BlackBox;
@@ -36,9 +38,13 @@ public class Robot extends TimedRobot {
     private static boolean isLeftScale;
     private static boolean isRightScale;
 
+    private PowerDistributionPanel pdp;
+
     @Override
     public void robotInit() {
         setPeriod(0.01);
+        pdp = new PowerDistributionPanel(0);
+
         logger = Logger.getLogger("Robot");
         logger.info("robot init");
      //   BlackBox.initLog("beltbar current ", "amps");
@@ -54,7 +60,7 @@ public class Robot extends TimedRobot {
         rollers = new Rollers();
         oi = new OI();
         c = new Compressor();
-
+        LiveWindow.disableTelemetry(pdp);
         c.start();
         drive.reset();
         lift.setLiftShifter(true);
@@ -122,12 +128,10 @@ public class Robot extends TimedRobot {
         SmartDashboard.putData(falconDoors);
         SmartDashboard.putData(arms);
         SmartDashboard.putData(rollers);
-
         if (Timer.getFPGATimestamp() - start >= 1) {
           //  BlackBox.writeLog(String.valueOf(Timer.getFPGATimestamp()), String.valueOf(beltBar.getCurrent()));
             start = Timer.getFPGATimestamp();
         }
-
     }
 
     @Override

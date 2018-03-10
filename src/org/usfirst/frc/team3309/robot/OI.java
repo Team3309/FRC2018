@@ -38,13 +38,23 @@ public class OI {
         operatorRemote.startButton.whenPressed(new PrepareForClimb());
         operatorRemote.rightStick.whenPressed(new SetClimbMode());
 
-        operatorRemote.buttonX.whenPressed(new IntakeCube());
+/*        operatorRemote.buttonX.whenPressed(new IntakeCube());
         operatorRemote.buttonY.whenPressed(new MoveAssembly(AssemblyLocation.BOTTOM));
         operatorRemote.dPad.down.whenPressed(new MoveAssembly(AssemblyLocation.SWITCH));
         operatorRemote.dPad.right.whenPressed(new MoveAssembly(AssemblyLocation.SCALE_DOWN));
         operatorRemote.dPad.up.whenPressed(new MoveAssembly(AssemblyLocation.SCALE_MIDDLE));
         operatorRemote.dPad.left.whenPressed(new MoveAssembly(AssemblyLocation.SCALE_UP));
-        operatorRemote.rightBumper.whenPressed(new MoveAssembly(AssemblyLocation.EXCHANGE_ZONE));
+        operatorRemote.rightBumper.whenPressed(new MoveAssembly(AssemblyLocation.EXCHANGE_ZONE));*/
+
+
+        operatorRemote.buttonX.whenPressed(new LiftElevate(AssemblyLocation.BOTTOM_FOR_CUBE.getElevatorPosition()));
+        operatorRemote.buttonY.whenPressed(new LiftElevate((AssemblyLocation.BOTTOM.getElevatorPosition())));
+        operatorRemote.dPad.down.whenPressed(new LiftElevate((AssemblyLocation.SWITCH.getElevatorPosition())));
+        operatorRemote.dPad.right.whenPressed(new LiftElevate((AssemblyLocation.SCALE_DOWN.getElevatorPosition())));
+        operatorRemote.dPad.up.whenPressed(new LiftElevate((AssemblyLocation.SCALE_MIDDLE.getElevatorPosition())));
+        operatorRemote.dPad.left.whenPressed(new LiftElevate((AssemblyLocation.SCALE_UP.getElevatorPosition())));
+        operatorRemote.rightBumper.whenPressed(new LiftElevate((AssemblyLocation.EXCHANGE_ZONE.getElevatorPosition())));
+
 
     }
 

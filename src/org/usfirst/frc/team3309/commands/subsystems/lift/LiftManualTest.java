@@ -8,7 +8,7 @@ import org.usfirst.frc.team3309.robot.Robot;
 @Deprecated
 public class LiftManualTest extends Command {
 
-    private final double MAX_POWER = 0.4;
+    private final double MAX_POWER = 1.0;
 
     public LiftManualTest() {
         requires(Robot.lift);

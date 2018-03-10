@@ -32,7 +32,6 @@ public class DriveStraightVel extends CommandEx {
         Robot.drive.changeToVelocityMode();
         Robot.drive.changeToBrakeMode();
         Robot.drive.setGoalPos(pos);
-        System.out.println("-----------" +  pos);
         if (pos < 0 ) {
             vel *= -1;
         }
