@@ -31,6 +31,8 @@ public class AutoModeExecutor {
         autos.addObject("No Action", new NoActionAuto());
         autos.addDefault("CurvyToSwitchAuto", new CurvyToSwitchAuto());
         autos.addObject("AutoLineAuto", new AutoLineAuto());
+        autos.addObject("LeftSideSwitch", new GreedyCrossAuto(true));
+        autos.addObject("RightSideSwitch", new GreedyCrossAuto(false));
 
         if (isUsingFile) {
             for (File autoFile : autoFiles) {

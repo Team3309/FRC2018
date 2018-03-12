@@ -47,6 +47,7 @@ public class BeltBar extends Subsystem {
         masterBar.config_kP(0, 0.98, 0);
         masterBar.config_kF(0, 0.04, 0);
         masterBar.clearStickyFaults(0);
+
         /* practice bot
         masterBar.configForwardSoftLimitThreshold(-1650, 0);
         masterBar.configForwardSoftLimitEnable(false, 0);
