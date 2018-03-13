@@ -1,5 +1,6 @@
 package org.usfirst.frc.team3309.robot;
 
+import edu.wpi.first.wpilibj.Joystick;
 import org.usfirst.frc.team3309.commands.subsystems.*;
 import org.usfirst.frc.team3309.commands.subsystems.arms.ArmsClamp;
 import org.usfirst.frc.team3309.commands.subsystems.arms.ArmsOpen;
@@ -21,7 +22,7 @@ public class OI {
 
     public static InputXbox driverRemote = new InputXbox(0);
     public static InputXbox operatorRemote = new InputXbox(1);
-
+    
     OI() {
 
         driverRemote.leftBumper.whenPressed(new DriveSetLowGear());
