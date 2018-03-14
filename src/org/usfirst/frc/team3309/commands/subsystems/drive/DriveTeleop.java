@@ -2,6 +2,7 @@ package org.usfirst.frc.team3309.commands.subsystems.drive;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.usfirst.frc.team3309.commands.subsystems.shooter.ShooterForward;
 import org.usfirst.frc.team3309.lib.controllers.drive.DriveCheezyController;
 import org.usfirst.frc.team3309.lib.controllers.helpers.DriveSignal;
 import org.usfirst.frc.team3309.lib.math.LibMath;
@@ -30,32 +31,33 @@ public class DriveTeleop extends Command {
     protected void execute() {
 
         DriveSignal driveSignal;
-        boolean isQuickTurn = false;
+        boolean isQuickTurn;
 
-        double leftTrigger = OI.driverRemote.leftTrigger.getY();
-        double rightTrigger = OI.driverRemote.rightTrigger.getY();
+        double throttle = -LibMath.handleDeadband(OI.driverRemoteLeft.getY(), 0.04);
+        double turn = -LibMath.handleDeadband(OI.driverRemoteRight.getX(), 0.02);
 
-        double throttle = 0;
-        double turn;
+        if (OI.driverRemoteLeft.getTrigger()) {
+            Robot.drive.setLowGear();
+        } else {
+            Robot.drive.setHighGear();
+        }
 
-        if (Math.abs(leftTrigger) > MIN_TRIGGER_POWER) {
-            turn = leftTrigger;
-            isQuickTurn = true;
-        } else if (Math.abs(rightTrigger) > MIN_TRIGGER_POWER) {
-            turn = -rightTrigger;
+        if (OI.driverRemoteLeft.getRawButton(2) || OI.driverRemoteRight.getRawButton(2)) {
+            Robot.falconDoors.setDown();
+        }
+
+        if (OI.driverRemoteRight.getTrigger()) {
             isQuickTurn = true;
         } else {
-            throttle = LibMath.handleDeadband(OI.driverRemote.leftStick.getY(), 0.04);
-            turn = -LibMath.handleDeadband(OI.driverRemote.rightStick.getX(), 0.02);
-            SmartDashboard.putNumber("Turn: ", turn);
-            SmartDashboard.putNumber("throttle: ", throttle);
-            SmartDashboard.putNumber("turn: ", turn);
+            isQuickTurn = false;
+        }
+
+        if (OI.driverRemoteRight.getRawButton(3) || OI.driverRemoteLeft.getRawButton(3)) {
+            new ShooterForward().start();
         }
 
         driveSignal = cheezyDriveEquation.update(throttle, turn, isQuickTurn);
         Robot.drive.setLeftRight(driveSignal.getLeftMotor(), driveSignal.getRightMotor());
-
-
     }
 
     @Override

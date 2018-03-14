@@ -27,7 +27,7 @@ public class DriveCheezyController extends Controller3<DriveSignal, Double, Doub
 
     private static final double kHighNegInertiaScalar = 4.0;
 
-    private static final double kHighSensitivity = 1.3;
+    private static final double kHighSensitivity = .9;//1.3
     private static final double kLowSensitiity = 1.3;
 
     private static final double kLowNegInertiaThreshold = 0.65;

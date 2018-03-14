@@ -69,7 +69,7 @@ public class BeltBar extends Subsystem {
 
     @Override
     public void periodic() {
-        if (getPosition() > FORWARD_SOFT_LIM ) {
+       /* if (getPosition() > FORWARD_SOFT_LIM ) {
             masterBar.configForwardSoftLimitEnable(false,0);
             masterBar.set(ControlMode.Position, AssemblyLocation.BOTTOM_FOR_CUBE.getBeltBarPosition());
             DriverStation.reportWarning("Beltbar exceeded forward limit! Correcting...",false);
@@ -84,7 +84,7 @@ public class BeltBar extends Subsystem {
         {
             masterBar.configForwardSoftLimitEnable(true,0);
             masterBar.configReverseSoftLimitEnable(true,0);
-        }
+        }*/
     }
 
     @Override
