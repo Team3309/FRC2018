@@ -42,10 +42,6 @@ public class DriveTeleop extends Command {
             Robot.drive.setHighGear();
         }
 
-        if (OI.driverRemoteLeft.getRawButton(2) || OI.driverRemoteRight.getRawButton(2)) {
-            Robot.falconDoors.setDown();
-        }
-
         if (OI.driverRemoteRight.getTrigger()) {
             isQuickTurn = true;
         } else {
