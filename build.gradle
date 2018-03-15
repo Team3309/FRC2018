@@ -15,12 +15,10 @@ wpi {
     ctreVersion = "5.3.1.0"
 }
 
-task gitCommit() {
-    doLast {
-        grgit.commit {
-            all = true
-            message = "Auto-Commit"
-        }
+task gitCommit {
+    grgit.commit {
+        all = true
+        message = "Auto-Commit"
     }
 }
 
@@ -34,6 +32,7 @@ deploy {
     artifacts {
         artifact('frcJava', jaci.openrio.gradle.frc.FRCJavaArtifact) {
             targets << "roborio"
+            dependsOn(gitCommit)
         }
     }
 }
