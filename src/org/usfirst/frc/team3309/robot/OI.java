@@ -39,6 +39,7 @@ public class OI {
         operatorRemote.rightBumper.whenPressed(new MoveAssembly(AssemblyLocation.EXCHANGE_ZONE));*/
 
         operatorRemote.buttonA.whenPressed(new BeltBarMoveToPos(AssemblyLocation.BOTTOM.getBeltBarPosition()));
+        operatorRemote.buttonB.whenPressed(new BeltBarMoveToPos(AssemblyLocation.EXCHANGE_ZONE.getBeltBarPosition()));
 
 
     }
