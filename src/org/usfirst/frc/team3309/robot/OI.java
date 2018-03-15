@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import org.usfirst.frc.team3309.commands.subsystems.*;
 import org.usfirst.frc.team3309.commands.subsystems.arms.ArmsClamp;
 import org.usfirst.frc.team3309.commands.subsystems.arms.ArmsOpen;
+import org.usfirst.frc.team3309.commands.subsystems.beltbar.BeltBarMoveToPos;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveSetHighGear;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveSetLowGear;
 import org.usfirst.frc.team3309.commands.subsystems.shooter.ShooterForward;
@@ -38,6 +39,7 @@ public class OI {
         operatorRemote.dPad.up.whenPressed(new MoveAssembly(AssemblyLocation.SCALE_MIDDLE));
         operatorRemote.dPad.left.whenPressed(new MoveAssembly(AssemblyLocation.SCALE_UP));
         operatorRemote.rightBumper.whenPressed(new MoveAssembly(AssemblyLocation.EXCHANGE_ZONE));*/
+
 
     }
 
