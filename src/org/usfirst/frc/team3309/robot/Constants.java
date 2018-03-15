@@ -2,6 +2,7 @@ package org.usfirst.frc.team3309.robot;
 
 import org.usfirst.frc.team3309.lib.controllers.helpers.Waypoint;
 import org.usfirst.frc.team3309.lib.math.Length;
+
 import java.net.NetworkInterface;
 
 import java.net.SocketException;
@@ -10,45 +11,38 @@ import java.util.Arrays;
 
 public class Constants {
 
-    private static final byte[] PRACTICEBOT_MAC_ADDR = {0x00,(byte)0x80,0x2F,0x17,(byte)0x85,(byte)0xD3};
-    private static final byte[] COMPBOT_MAC_ADDR = {0x00,0x00,0x00,0x00,0x00,0x00}; // find this at comp
+    private static final byte[] PRACTICEBOT_MAC_ADDR = {0x00, (byte) 0x80, 0x2F, 0x17, (byte) 0x85, (byte) 0xD3};
+    private static final byte[] COMPBOT_MAC_ADDR = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00}; // find this at comp
 
-    public enum Robot
-    {
+    public enum Robot {
         PRACTICE,
         COMPETITION
     }
 
     public static Robot currentRobot;
-    static{
-        try
-        {
+
+    static {
+        try {
             byte[] rioMac = NetworkInterface.getByName("eth0").getHardwareAddress();
-            if(Arrays.equals(rioMac,PRACTICEBOT_MAC_ADDR))
-            {
+            if (Arrays.equals(rioMac, PRACTICEBOT_MAC_ADDR)) {
                 currentRobot = Robot.PRACTICE;
-            }
-            else if(Arrays.equals(rioMac,COMPBOT_MAC_ADDR))
-            {
+            } else if (Arrays.equals(rioMac, COMPBOT_MAC_ADDR)) {
                 currentRobot = Robot.COMPETITION;
-            }
-            else
-            {
+            } else {
                 currentRobot = null;
                 System.err.println("Oh no! Unknown robot! Did somebody install a new rio?");
             }
-        }
-        catch (SocketException ex)
-        {
+        } catch (SocketException ex) {
             ex.printStackTrace();
         }
     }
 
     public static double BELTBAR_BOTTOM_POS = Constants.currentRobot == Robot.PRACTICE ? -2820 : -1950;
-    public static double BELTBAR_BOTTOM_FOR_CUBE_POS = Constants.currentRobot == Robot.PRACTICE ? PB : -640;
-    public static double BELTBAR_EXCHANGE_POS = Constants.currentRobot == Robot.PRACTICE ? PB : -900;
-    public static double BELTBAR_EJECT_POS = Constants.currentRobot == Robot.PRACTICE ? PB : -1690;
-    public static double BELTBAR_SWITCH_POS = Constants.currentRobot == Robot.PRACTICE ? PB : -1090;
+    public static double BELTBAR_BOTTOM_FOR_CUBE_POS = Constants.currentRobot == Robot.PRACTICE ? -2820 : -640;
+    public static double BELTBAR_EXCHANGE_POS = Constants.currentRobot == Robot.PRACTICE ? -2820 : -900;
+    public static double BELTBAR_EJECT_POS = Constants.currentRobot == Robot.PRACTICE ? -2820 : -1690;
+    public static double BELTBAR_SWITCH_POS = Constants.currentRobot == Robot.PRACTICE ? -2820 : -1090;
+
     public static double ELEVATOR_BOTTOM_POS = 0;
     public static double ELEVATOR_BOTTOM_FOR_CUBE_POS = 940;
     public static double ELEVATOR_EXCHANGE_POS = 700;
@@ -115,12 +109,12 @@ public class Constants {
     public static final ArrayList<Waypoint> curvyToSwitchRight = new ArrayList<>();
     public static final ArrayList<Waypoint> curvyToSwitchLeft = new ArrayList<>();
 
-    static  {
+    static {
         curvyToSwitchRight.add(new Waypoint(0.796 * 82.34987618525085, 0.39093873144451713));
-        curvyToSwitchRight.add(new Waypoint(-0.796 * 29.777276396478868,     0.740486358108046));
+        curvyToSwitchRight.add(new Waypoint(-0.796 * 29.777276396478868, 0.740486358108046));
 
         curvyToSwitchLeft.add(new Waypoint(-0.796 * 82.34987618525085, -0.39093873144451713));
-     //   curvyToSwitchLeft.add(new Waypoint(0.796 * 34.777276396478868,     -0.740486358108046));
+        //   curvyToSwitchLeft.add(new Waypoint(0.796 * 34.777276396478868,     -0.740486358108046));
     }
 
 }
