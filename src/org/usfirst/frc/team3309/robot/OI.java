@@ -5,6 +5,7 @@ import org.usfirst.frc.team3309.commands.subsystems.*;
 import org.usfirst.frc.team3309.commands.subsystems.arms.ArmsClamp;
 import org.usfirst.frc.team3309.commands.subsystems.arms.ArmsOpen;
 import org.usfirst.frc.team3309.commands.subsystems.beltbar.BeltBarMoveToPos;
+import org.usfirst.frc.team3309.commands.subsystems.lift.LiftElevate;
 import org.usfirst.frc.team3309.commands.subsystems.shooter.ShooterForward;
 import org.usfirst.frc.team3309.lib.input.InputXbox;
 
@@ -40,6 +41,9 @@ public class OI {
 
         operatorRemote.buttonA.whenPressed(new BeltBarMoveToPos(AssemblyLocation.BOTTOM.getBeltBarPosition()));
         operatorRemote.buttonB.whenPressed(new BeltBarMoveToPos(AssemblyLocation.EXCHANGE_ZONE.getBeltBarPosition()));
+
+        operatorRemote.buttonX.whenPressed(new LiftElevate(AssemblyLocation.SWITCH.getElevatorPosition()));
+        operatorRemote.buttonY.whenPressed(new LiftElevate(AssemblyLocation.BOTTOM.getElevatorPosition()));
 
 
     }
