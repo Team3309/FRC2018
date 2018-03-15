@@ -3,6 +3,7 @@ package org.usfirst.frc.team3309.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.sun.org.apache.regexp.internal.RE;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.AnalogInput;
@@ -32,8 +33,8 @@ public class BeltBar extends Subsystem {
     private final int MAX_CURRENT = 18;
     private final int MAX_CURRENT_DURATION = 125;
 
-    private final int FORWARD_SOFT_LIM = -400;  //  -730
-    private final int REVERSE_SOFT_LIM = -2050; //  -1990
+    private int FORWARD_SOFT_LIM = -400;  //  -730
+    private int REVERSE_SOFT_LIM = -2050; //  -1990
 
     public BeltBar() {
         init();
@@ -49,18 +50,19 @@ public class BeltBar extends Subsystem {
         masterBar.clearStickyFaults(0);
 
         if(Constants.currentRobot == Constants.Robot.PRACTICE) {
-            masterBar.configForwardSoftLimitThreshold(-1650, 0);
-            masterBar.configForwardSoftLimitEnable(false, 0);
-            masterBar.configReverseSoftLimitThreshold(-3100, 0);
-            masterBar.configReverseSoftLimitEnable(false, 0);
+            REVERSE_SOFT_LIM = -2840;
+            FORWARD_SOFT_LIM = -1538; //Moo
         }
 
         if(Constants.currentRobot == Constants.Robot.COMPETITION) {
-            masterBar.configForwardSoftLimitThreshold(FORWARD_SOFT_LIM, 0);
-            masterBar.configForwardSoftLimitEnable(true, 0);
-            masterBar.configReverseSoftLimitThreshold(REVERSE_SOFT_LIM, 0);
-            masterBar.configReverseSoftLimitEnable(true, 0);
+            REVERSE_SOFT_LIM = -2050;
+            FORWARD_SOFT_LIM = -400;
         }
+
+        masterBar.configForwardSoftLimitThreshold(FORWARD_SOFT_LIM, 0);
+        masterBar.configForwardSoftLimitEnable(true, 0);
+        masterBar.configReverseSoftLimitThreshold(REVERSE_SOFT_LIM, 0);
+        masterBar.configReverseSoftLimitEnable(true, 0);
 
         masterBar.configPeakCurrentLimit(MAX_CURRENT, 0);
         masterBar.configPeakCurrentDuration(MAX_CURRENT_DURATION, 0);

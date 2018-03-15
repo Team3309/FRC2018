@@ -1,5 +1,7 @@
 package org.usfirst.frc.team3309.commands.subsystems;
 
+import org.usfirst.frc.team3309.robot.Constants;
+
 public enum AssemblyLocation {
 
     // comp bot
@@ -12,14 +14,13 @@ public enum AssemblyLocation {
     SWITCH(-1090, 14000);*/
 
    //  practice bot
-    BOTTOM(-3000, 0),
-    BOTTOM_FOR_CUBE(-1700, 900),
-    EXCHANGE_ZONE(-2000, 1300),
-    SCALE_DOWN(-2500, 34000),
-    SCALE_MIDDLE(-2500, 38000),
-    SCALE_UP(-2500, 42000),
-    SWITCH(-2500, 14000),
-    CLIMB(-3000, 15000);
+    BOTTOM(Constants.BELTBAR_BOTTOM_POS, 0),
+    BOTTOM_FOR_CUBE(Constants.BELTBAR_BOTTOM_FOR_CUBE_POS, 900),
+    EXCHANGE_ZONE(Constants.BELTBAR_EXCHANGE_POS, 1300),
+    SCALE_DOWN(Constants.BELTBAR_EJECT_POS, 34000),
+    SCALE_MIDDLE(Constants.BELTBAR_EJECT_POS, 38000),
+    SCALE_UP(Constants.BELTBAR_EJECT_POS, 42000),
+    SWITCH(Constants.BELTBAR_EJECT_POS, 14000);
 
     private double beltBarPosition;
     private double elevatorPosition;
