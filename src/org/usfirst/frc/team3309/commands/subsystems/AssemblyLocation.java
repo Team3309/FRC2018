@@ -10,7 +10,8 @@ public enum AssemblyLocation {
     SCALE_DOWN(Constants.BELTBAR_EJECT_POS, Constants.ELEVATOR_SCALE_DOWN_POS),
     SCALE_MIDDLE(Constants.BELTBAR_EJECT_POS, Constants.ELEVATOR_SCALE_MIDDLE_POS),
     SCALE_UP(Constants.BELTBAR_EJECT_POS, Constants.ELEVATOR_SCALE_TOP_POS),
-    SWITCH(Constants.BELTBAR_SWITCH_POS, Constants.ELEVATOR_SWITCH_POS);
+    SWITCH(Constants.BELTBAR_SWITCH_POS, Constants.ELEVATOR_SWITCH_POS),
+    CLIMB(Constants.BELTBAR_CLIMB, Constants.ELEVATOR_BOTTOM_POS);
 
     private double beltBarPosition;
     private double elevatorPosition;
