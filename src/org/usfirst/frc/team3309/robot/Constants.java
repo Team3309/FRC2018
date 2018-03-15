@@ -45,7 +45,7 @@ public class Constants {
 
     public static double ELEVATOR_BOTTOM_POS = 0;
     public static double ELEVATOR_INTAKE_POS = 940;
-    public static double ELEVATOR_EXCHANGE_POS = 700;
+    public static double ELEVATOR_EXCHANGE_POS = 500;
     public static double ELEVATOR_SWITCH_POS = 17000;
     public static double ELEVATOR_SCALE_DOWN_POS = 34000;
     public static double ELEVATOR_SCALE_MIDDLE_POS = 38000;
