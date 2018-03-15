@@ -2,10 +2,47 @@ package org.usfirst.frc.team3309.robot;
 
 import org.usfirst.frc.team3309.lib.controllers.helpers.Waypoint;
 import org.usfirst.frc.team3309.lib.math.Length;
+import java.net.NetworkInterface;
 
+import java.net.SocketException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Constants {
+
+    private static final byte[] PRACTICEBOT_MAC_ADDR = {0x00,(byte)0x80,0x2F,0x17,(byte)0x85,(byte)0xD3};
+    private static final byte[] COMPBOT_MAC_ADDR = {0x00,0x00,0x00,0x00,0x00,0x00}; // find this at comp
+
+    public enum Robot
+    {
+        PRACTICE,
+        COMPETITION
+    }
+
+    public static Robot currentRobot;
+    static{
+        try
+        {
+            byte[] rioMac = NetworkInterface.getByName("en0").getHardwareAddress();
+            if(Arrays.equals(rioMac,PRACTICEBOT_MAC_ADDR))
+            {
+                currentRobot = Robot.PRACTICE;
+            }
+            else if(Arrays.equals(rioMac,COMPBOT_MAC_ADDR))
+            {
+                currentRobot = Robot.COMPETITION;
+            }
+            else
+            {
+                currentRobot = null;
+                System.err.println("Oh no! Unknown robot! Did somebody install a new rio?");
+            }
+        }
+        catch (SocketException ex)
+        {
+            ex.printStackTrace();
+        }
+    }
 
     // drive
     public static final int DRIVE_RIGHT_0_ID = 11;

@@ -61,12 +61,15 @@ public class Lift extends Subsystem {
 
         lift0.changeToPositionMode();
 
-        // practice bot
-      /*lift0.setInverted(true);
-        lift0.setSensorPhase(false);*/
+        if(Constants.currentRobot == Constants.Robot.PRACTICE) {
+            lift0.setSensorPhase(false);
+            lift0.setInverted(true);
+        }
 
-        lift0.setInverted(false);
-        lift0.setSensorPhase(true);
+        if(Constants.currentRobot == Constants.Robot.COMPETITION) {
+            lift0.setInverted(false);
+            lift0.setSensorPhase(true);
+        }
 
         lift1.follow(lift0);
         lift2.follow(lift0);

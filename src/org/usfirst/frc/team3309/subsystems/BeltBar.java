@@ -48,16 +48,19 @@ public class BeltBar extends Subsystem {
         masterBar.config_kF(0, 0.04, 0);
         masterBar.clearStickyFaults(0);
 
-        /* practice bot
-        masterBar.configForwardSoftLimitThreshold(-1650, 0);
-        masterBar.configForwardSoftLimitEnable(false, 0);
-        masterBar.configReverseSoftLimitThreshold(-3100,0);
-        masterBar.configReverseSoftLimitEnable(false, 0);*/
+        if(Constants.currentRobot == Constants.Robot.PRACTICE) {
+            masterBar.configForwardSoftLimitThreshold(-1650, 0);
+            masterBar.configForwardSoftLimitEnable(false, 0);
+            masterBar.configReverseSoftLimitThreshold(-3100, 0);
+            masterBar.configReverseSoftLimitEnable(false, 0);
+        }
 
-        masterBar.configForwardSoftLimitThreshold(FORWARD_SOFT_LIM, 0);
-        masterBar.configForwardSoftLimitEnable(true,0);
-        masterBar.configReverseSoftLimitThreshold(REVERSE_SOFT_LIM,0);
-        masterBar.configReverseSoftLimitEnable(true, 0);
+        if(Constants.currentRobot == Constants.Robot.COMPETITION) {
+            masterBar.configForwardSoftLimitThreshold(FORWARD_SOFT_LIM, 0);
+            masterBar.configForwardSoftLimitEnable(true, 0);
+            masterBar.configReverseSoftLimitThreshold(REVERSE_SOFT_LIM, 0);
+            masterBar.configReverseSoftLimitEnable(true, 0);
+        }
 
         masterBar.configPeakCurrentLimit(MAX_CURRENT, 0);
         masterBar.configPeakCurrentDuration(MAX_CURRENT_DURATION, 0);
