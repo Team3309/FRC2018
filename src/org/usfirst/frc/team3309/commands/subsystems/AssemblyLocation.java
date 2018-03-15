@@ -4,18 +4,8 @@ import org.usfirst.frc.team3309.robot.Constants;
 
 public enum AssemblyLocation {
 
-    // comp bot
-    /*BOTTOM(-1950, 0),
-    BOTTOM_FOR_CUBE(-640, 940),
-    EXCHANGE_ZONE(-900, 700),
-    SCALE_DOWN(-1690, 34000),
-    SCALE_MIDDLE(-1690, 38000),
-    SCALE_UP(-1690, 42000),
-    SWITCH(-1090, 14000);*/
-
-   //  practice bot
     BOTTOM(Constants.BELTBAR_BOTTOM_POS, Constants.ELEVATOR_BOTTOM_POS),
-    BOTTOM_FOR_CUBE(Constants.BELTBAR_BOTTOM_FOR_CUBE_POS, Constants.ELEVATOR_BOTTOM_FOR_CUBE_POS),
+    BOTTOM_FOR_CUBE(Constants.BELTBAR_INTAKE_POS, Constants.ELEVATOR_INTAKE_POS),
     EXCHANGE_ZONE(Constants.BELTBAR_EXCHANGE_POS, Constants.ELEVATOR_EXCHANGE_POS),
     SCALE_DOWN(Constants.BELTBAR_EJECT_POS, Constants.ELEVATOR_SCALE_DOWN_POS),
     SCALE_MIDDLE(Constants.BELTBAR_EJECT_POS, Constants.ELEVATOR_SCALE_MIDDLE_POS),
