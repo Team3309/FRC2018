@@ -31,19 +31,13 @@ public class OI {
         operatorRemote.startButton.whenPressed(new PrepareForClimb());
         operatorRemote.rightStick.whenPressed(new SetClimbMode());
 
-/*        operatorRemote.buttonX.whenPressed(new IntakeCube());
+        operatorRemote.buttonX.whenPressed(new IntakeCube());
         operatorRemote.buttonY.whenPressed(new MoveAssembly(AssemblyLocation.BOTTOM));
         operatorRemote.dPad.down.whenPressed(new MoveAssembly(AssemblyLocation.SWITCH));
         operatorRemote.dPad.right.whenPressed(new MoveAssembly(AssemblyLocation.SCALE_DOWN));
         operatorRemote.dPad.up.whenPressed(new MoveAssembly(AssemblyLocation.SCALE_MIDDLE));
         operatorRemote.dPad.left.whenPressed(new MoveAssembly(AssemblyLocation.SCALE_UP));
-        operatorRemote.rightBumper.whenPressed(new MoveAssembly(AssemblyLocation.EXCHANGE_ZONE));*/
-
-        operatorRemote.buttonA.whenPressed(new BeltBarMoveToPos(AssemblyLocation.BOTTOM.getBeltBarPosition()));
-        operatorRemote.buttonB.whenPressed(new BeltBarMoveToPos(AssemblyLocation.EXCHANGE_ZONE.getBeltBarPosition()));
-
-        operatorRemote.buttonX.whenPressed(new LiftElevate(AssemblyLocation.SWITCH.getElevatorPosition()));
-        operatorRemote.buttonY.whenPressed(new LiftElevate(AssemblyLocation.BOTTOM.getElevatorPosition()));
+        operatorRemote.rightBumper.whenPressed(new MoveAssembly(AssemblyLocation.EXCHANGE_ZONE));
 
 
     }
