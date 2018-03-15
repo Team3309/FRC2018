@@ -44,14 +44,18 @@ public class Constants {
         }
     }
 
-    public static double BELTBAR_BOTTOM_POS = Constants.currentRobot == Robot.PRACTICE ? 2820 : 0000;
-    public static double BELTBAR_BOTTOM_FOR_CUBE_POS = Constants.currentRobot == Robot.PRACTICE ? 2820 : 0000;
-    public static double BELTBAR_EXCHANGE_POS = Constants.currentRobot == Robot.PRACTICE ? 2820 : 0000;
-    public static double BELTBAR_EJECT_POS = 3309;
+    public static double BELTBAR_BOTTOM_POS = Constants.currentRobot == Robot.PRACTICE ? -2820 : -1950;
+    public static double BELTBAR_BOTTOM_FOR_CUBE_POS = Constants.currentRobot == Robot.PRACTICE ? PB : -640;
+    public static double BELTBAR_EXCHANGE_POS = Constants.currentRobot == Robot.PRACTICE ? PB : -900;
+    public static double BELTBAR_EJECT_POS = Constants.currentRobot == Robot.PRACTICE ? PB : -1690;
+    public static double BELTBAR_SWITCH_POS = Constants.currentRobot == Robot.PRACTICE ? PB : -1090;
     public static double ELEVATOR_BOTTOM_POS = 0;
-    public static double ELEVATOR_BOTTOM_FOR_CUBE_POS = 0;
-    public static double ELEVATOR_BOTTOM_CUBE_POS = 0;
-    public static double ELEVATOR_BOTTOM_FOR_CUBE_POS = 0;
+    public static double ELEVATOR_BOTTOM_FOR_CUBE_POS = 940;
+    public static double ELEVATOR_EXCHANGE_POS = 700;
+    public static double ELEVATOR_SWITCH_POS = 17000;
+    public static double ELEVATOR_SCALE_DOWN_POS = 34000;
+    public static double ELEVATOR_SCALE_MIDDLE_POS = 38000;
+    public static double ELEVATOR_SCALE_TOP_POS = 42000;
 
     // drive
     public static final int DRIVE_RIGHT_0_ID = 11;
