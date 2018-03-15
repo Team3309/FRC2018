@@ -23,7 +23,7 @@ public class Constants {
     static{
         try
         {
-            byte[] rioMac = NetworkInterface.getByName("en0").getHardwareAddress();
+            byte[] rioMac = NetworkInterface.getByName("eth0").getHardwareAddress();
             if(Arrays.equals(rioMac,PRACTICEBOT_MAC_ADDR))
             {
                 currentRobot = Robot.PRACTICE;
