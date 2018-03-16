@@ -31,14 +31,16 @@ public class Lift extends Subsystem {
 
     private Solenoid liftShifter = new Solenoid(Constants.LIFT_SHIFTER);
 
-    private double liftPos = AssemblyLocation.BOTTOM.getElevatorPosition();
-    private double beltbarPos = AssemblyLocation.BOTTOM.getBeltBarPosition();
+    private double liftPos;
+    private double beltbarPos;
 
     private double goalPos;
 
     private final int FORWARD_LIM = 47000; // 47000
 
     public Lift() {
+        liftPos = AssemblyLocation.BOTTOM.getElevatorPosition();
+        beltbarPos = AssemblyLocation.BOTTOM.getBeltBarPosition();
         lift0.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0,
                 10);
 
