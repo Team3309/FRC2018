@@ -76,7 +76,21 @@ public class Lift extends Subsystem {
 
     @Override
     protected void initDefaultCommand() {
-    //    setDefaultCommand(new LiftManualTest());
+        setDefaultCommand(new LiftManualTest());
+    }
+
+    @Override
+    public void periodic() {
+       /* if (getPosition() > FORWARD_LIM) {
+            lift0.configForwardSoftLimitEnable(false, 10);
+            lift0.set(ControlMode.Position, AssemblyLocation.SCALE_UP.getElevatorPosition());
+        } else if (getPosition() < 0) {
+            lift0.configReverseSoftLimitEnable(false, 10);
+            lift0.set(ControlMode.Position, AssemblyLocation.BOTTOM.getElevatorPosition());
+        } else {
+            lift0.configForwardSoftLimitEnable(true, 10);
+            lift0.configReverseSoftLimitEnable(true, 10);
+        }*/
     }
 
     public void sendToDashboard() {
