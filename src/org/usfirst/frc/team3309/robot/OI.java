@@ -40,6 +40,8 @@ public class OI {
         operatorRemote.rightBumper.whenPressed(new MoveAssembly(AssemblyLocation.EXCHANGE_ZONE));*/
 
         operatorRemote.buttonX.whenPressed(new LiftElevate(AssemblyLocation.SWITCH.getElevatorPosition()));
+        operatorRemote.buttonY.whenPressed(new LiftElevate(AssemblyLocation.BOTTOM.getElevatorPosition()));
+        operatorRemote.dPad.down.whenPressed(new LiftElevate(AssemblyLocation.SCALE_DOWN.getElevatorPosition()));
 
     }
 
