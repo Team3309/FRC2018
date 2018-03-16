@@ -50,9 +50,9 @@ public class BeltBar extends Subsystem {
         masterBar.config_kD(0,0.5,0);
         masterBar.config_kF(0, 0.04, 10);
         masterBar.clearStickyFaults(10);
-        SmartDashboard.putNumber("Beltbar P: ", 0.98);
+        SmartDashboard.putNumber("Beltbar P: ", 3);
         SmartDashboard.putNumber("Beltbar I: ", 0);
-        SmartDashboard.putNumber("Beltbar D: ", 0);
+        SmartDashboard.putNumber("Beltbar D: ", 0.5);
         SmartDashboard.putNumber("Beltbar F: ", 0.04);
         SmartDashboard.putNumber("Beltbar Iz: ", 0);
 
