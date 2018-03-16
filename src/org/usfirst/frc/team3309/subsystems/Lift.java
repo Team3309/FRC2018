@@ -11,6 +11,8 @@ import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team3309.commands.subsystems.AssemblyLocation;
+import org.usfirst.frc.team3309.commands.subsystems.lift.LiftManualClimb;
+import org.usfirst.frc.team3309.commands.subsystems.lift.LiftManualTest;
 import org.usfirst.frc.team3309.lib.actuators.TalonSRXMC;
 import org.usfirst.frc.team3309.lib.actuators.VictorSPXMC;
 import org.usfirst.frc.team3309.robot.Constants;
@@ -34,29 +36,53 @@ public class Lift extends Subsystem {
 
     private double goalPos;
 
+    private final int FORWARD_LIM = 47000;
+
     public Lift() {
         lift0.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0,
                 0);
-        lift0.configForwardSoftLimitThreshold(47000, 0);
+
+        lift0.configForwardSoftLimitThreshold(FORWARD_LIM, 0);
         lift0.configForwardSoftLimitEnable(true, 0);
+
+        /* practice bot
         lift0.config_kP(0, 0.24, 0);
         lift0.config_kD(0, 28, 0);
         lift0.config_kF(0, 0.023, 0);
+        */
+
+        lift0.config_kP(0, 0.2, 0);
+        lift0.config_kD(0, 28, 0);
+        lift0.config_kF(0, 0.023, 0);
+
         lift0.configClosedloopRamp(0.22, 0);
-        lift0.configPeakOutputForward(1.0, 0);
-        lift0.configPeakOutputReverse(-0.36, 0);
+        lift0.configPeakOutputForward(0.2, 0); //1.0
+        lift0.configPeakOutputReverse(-0.2, 0); // -0.45
+
         lift0.changeToPositionMode();
-        lift0.setInverted(true);
+
+        if(Constants.currentRobot == Constants.Robot.PRACTICE) {
+            lift0.setSensorPhase(false);
+            lift0.setInverted(true);
+        }
+
+        if(Constants.currentRobot == Constants.Robot.COMPETITION) {
+            lift0.setInverted(false);
+            lift0.setSensorPhase(true);
+        }
+
         lift1.follow(lift0);
         lift2.follow(lift0);
         lift3.follow(lift0);
         lift4.follow(lift0);
+
         setHolderIn();
         changeToBrakeMode();
     }
 
     @Override
     protected void initDefaultCommand() {
+    //    setDefaultCommand(new LiftManualTest());
     }
 
     public void sendToDashboard() {
@@ -66,6 +92,7 @@ public class Lift extends Subsystem {
         table.getEntry("lift goal pos: ").setNumber(getGoalPos());
         table.getEntry("lift control mode: ").setString(lift0.getControlMode().toString());
         table.getEntry("lift percent mode: ").setNumber(lift0.getMotorOutputPercent());
+        table.getEntry("lift percent output: ").setNumber(lift0.getMotorOutputPercent());
         table.getEntry("lift banner sensor: ").setBoolean(bannerSensor.get());
         table.getEntry("banner sensor trigger: ").setBoolean(bannerSensor.isAnalogTrigger());
     }
@@ -75,7 +102,7 @@ public class Lift extends Subsystem {
     }
 
     public void resetToBottom() {
-        lift0.setSelectedSensorPosition(0,0, 0);
+        lift0.setSelectedSensorPosition(0, 0, 0);
     }
 
     public double getPosition() {
@@ -143,7 +170,7 @@ public class Lift extends Subsystem {
     }
 
     public double getLiftPos() {
-         return liftPos;
+        return liftPos;
     }
 
     public void setBeltbarPos(double beltbarPos) {
@@ -154,4 +181,7 @@ public class Lift extends Subsystem {
         return beltbarPos;
     }
 
+    public double getFORWARD_LIM() {
+        return FORWARD_LIM;
+    }
 }

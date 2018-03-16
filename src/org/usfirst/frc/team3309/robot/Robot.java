@@ -1,9 +1,11 @@
 package org.usfirst.frc.team3309.robot;
 
 import edu.wpi.cscore.UsbCamera;
+import edu.wpi.cscore.VideoSource;
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team3309.commands.subsystems.lift.LiftCheckLimits;
 import org.usfirst.frc.team3309.subsystems.*;
@@ -29,16 +31,24 @@ public class Robot extends TimedRobot {
     private Command autoCommand = null;
     public static Logger logger;
 
+    private static boolean isLeftSwitch;
+    private static boolean isRightSwitch;
+
+    private static boolean isLeftScale;
+    private static boolean isRightScale;
+
+    private PowerDistributionPanel pdp;
+
     @Override
     public void robotInit() {
-    //    BlackBox.initLog("Current log", "Time", "15", "13", "14", "0", "1", "3");
         setPeriod(0.01);
+        pdp = new PowerDistributionPanel(0);
+
         logger = Logger.getLogger("Robot");
         logger.info("robot init");
-
-        UsbCamera cam = CameraServer.getInstance().startAutomaticCapture();
-        cam.setFPS(15);
-
+     //   BlackBox.initLog("beltbar current ", "amps");
+        CameraServer.getInstance().startAutomaticCapture(0).setFPS(18);
+        CameraServer.getInstance().startAutomaticCapture(1).setFPS(18);
         drive = new Drive();
         lift = new Lift();
         beltBar = new BeltBar();
@@ -48,18 +58,24 @@ public class Robot extends TimedRobot {
         rollers = new Rollers();
         oi = new OI();
         c = new Compressor();
-
+        LiveWindow.disableTelemetry(pdp);
         c.start();
         drive.reset();
         lift.setLiftShifter(true);
         falconDoors.setUp();
         sendToDashboard();
-
         AutoModeExecutor.displayAutos();
     }
 
     @Override
     public void autonomousInit() {
+        Scheduler.getInstance().removeAll();
+        if (DriverStation.getInstance().getGameSpecificMessage() != null) {
+            isLeftSwitch = DriverStation.getInstance().getGameSpecificMessage().charAt(0) == 'L';
+            isRightSwitch = DriverStation.getInstance().getGameSpecificMessage().charAt(0) == 'R';
+            isLeftScale = DriverStation.getInstance().getGameSpecificMessage().charAt(1) == 'L';
+            isRightScale = DriverStation.getInstance().getGameSpecificMessage().charAt(1) == 'R';
+        }
         falconDoors.setUp();
         c.stop();
         logger.info("autonomous init");
@@ -80,10 +96,11 @@ public class Robot extends TimedRobot {
         sendToDashboard();
     }
 
-    double start;
+    private double start;
 
     @Override
     public void teleopInit() {
+        start = Timer.getFPGATimestamp();
         lift.setLiftShifter(true);
         c.start();
         logger.info("teleop init");
@@ -96,9 +113,10 @@ public class Robot extends TimedRobot {
         falconDoors.setUp();
         lift.setHolderOut();
         Scheduler.getInstance().removeAll();
-        Scheduler.getInstance().add(new LiftCheckLimits());
-        start = Timer.getFPGATimestamp();
+        //Scheduler.getInstance().add(new LiftCheckLimits());
+        lift.reset();
     }
+
 
     @Override
     public void teleopPeriodic() {
@@ -109,31 +127,10 @@ public class Robot extends TimedRobot {
         SmartDashboard.putData(falconDoors);
         SmartDashboard.putData(arms);
         SmartDashboard.putData(rollers);
-
-        if (beltBar.isCubePresent() &&
-                arms.isArmsClosed()) {
-            OI.operatorRemote.setRumble(1);
-            OI.driverRemote.setRumble(1);
-        } else {
-            OI.operatorRemote.setRumble(0);
-            OI.driverRemote.setRumble(0);
-        }
-
-        double now = Timer.getFPGATimestamp();
-
- /*       if (now - start > 0.5) {
-            // 15 13 14 0 1 3
-            BlackBox.writeLog(
-                    String.valueOf(Timer.getFPGATimestamp()),
-                    String.valueOf(PDPJNI.getPDPTotalCurrent(15)),
-                    String.valueOf(PDPJNI.getPDPTotalCurrent(13)),
-                    String.valueOf(PDPJNI.getPDPTotalCurrent(14)),
-                    String.valueOf(PDPJNI.getPDPTotalCurrent(0)),
-                    String.valueOf(PDPJNI.getPDPTotalCurrent(1)),
-                    String.valueOf(PDPJNI.getPDPTotalCurrent(3)));
+        if (Timer.getFPGATimestamp() - start >= 1) {
+          //  BlackBox.writeLog(String.valueOf(Timer.getFPGATimestamp()), String.valueOf(beltBar.getCurrent()));
             start = Timer.getFPGATimestamp();
-        }*/
-
+        }
     }
 
     @Override
@@ -154,19 +151,19 @@ public class Robot extends TimedRobot {
     }
 
     public static boolean isLeftSwitch() {
-        return DriverStation.getInstance().getGameSpecificMessage().charAt(0) == 'L';
+        return isLeftSwitch;
     }
 
     public static boolean isRightSwitch() {
-        return DriverStation.getInstance().getGameSpecificMessage().charAt(0) == 'R';
+        return isRightSwitch;
     }
 
     public static boolean isLeftScale() {
-        return DriverStation.getInstance().getGameSpecificMessage().charAt(1) == 'L';
+        return isLeftScale;
     }
 
     public static boolean isRightScale() {
-        return DriverStation.getInstance().getGameSpecificMessage().charAt(1) == 'R';
+        return isRightScale;
     }
 
 }

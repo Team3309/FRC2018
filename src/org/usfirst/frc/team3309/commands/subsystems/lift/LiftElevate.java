@@ -6,7 +6,7 @@ import org.usfirst.frc.team3309.robot.Robot;
 public class LiftElevate extends Command {
 
     private double goalPos;
-    private final double ERROR_THRESHOLD = 200;
+    private final double ERROR_THRESHOLD = 300;
 
     public LiftElevate(double goalPos) {
         this.goalPos = goalPos;
@@ -22,6 +22,9 @@ public class LiftElevate extends Command {
 
     @Override
     protected void execute() {
+        if (goalPos > Robot.lift.getFORWARD_LIM()) {
+            goalPos = 0;
+        }
         Robot.lift.set(goalPos);
     }
 

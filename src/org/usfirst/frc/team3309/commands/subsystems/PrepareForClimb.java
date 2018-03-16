@@ -8,11 +8,11 @@ import org.usfirst.frc.team3309.lib.WaitCommand;
 public class PrepareForClimb extends CommandGroup {
 
     public PrepareForClimb() {
-        addSequential(new MoveAssembly(AssemblyLocation.BOTTOM));
+        addSequential(new MoveAssembly(AssemblyLocation.CLIMB));
         addSequential(new LiftSetHolderIn());
         addSequential(new WaitCommand(0.2));
-        addSequential(new MoveAssembly(AssemblyLocation.CLIMB));
         addSequential(new LiftManualForClimbing());
     }
 
 }
+

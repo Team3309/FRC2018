@@ -22,8 +22,8 @@ public class Rollers extends Subsystem {
     }
 
     public void setLeftRight(double left, double right) {
-        setLeft(left);
-        setRight(right);
+        setLeft(-left);
+        setRight(-right);
     }
 
     public void setLeft(double power) {

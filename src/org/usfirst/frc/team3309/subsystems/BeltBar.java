@@ -8,7 +8,6 @@ import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.usfirst.frc.team3309.commands.subsystems.beltbar.BeltBarManualTest;
-import org.usfirst.frc.team3309.commands.subsystems.beltbar.BeltBarMoveToPos;
 import org.usfirst.frc.team3309.lib.actuators.TalonSRXMC;
 import org.usfirst.frc.team3309.robot.Constants;
 
@@ -26,20 +25,40 @@ public class BeltBar extends Subsystem {
     // TODO determine top value
     private final int TOP_VALUE = 0;
 
-    private final int MAX_CURRENT = 30;
-    private final int MAX_CURRENT_DURATION = 1000;
+    private final int MAX_CURRENT = 18;
+    private final int MAX_CURRENT_DURATION = 125;
+
+    private int FORWARD_SOFT_LIM = -400;  //  -730
+    private int REVERSE_SOFT_LIM = -2050; //  -1990
 
     public BeltBar() {
+        init();
+    }
+
+    public void init() {
         masterBar.setInverted(false);
         masterBar.setSensorPhase(true);
+
         masterBar.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 0);
         masterBar.changeToPositionMode();
+
         masterBar.config_kP(0, 0.98, 0);
         masterBar.config_kF(0, 0.04, 0);
+        masterBar.clearStickyFaults(0);
 
-        masterBar.configForwardSoftLimitThreshold(-1650, 0);
+        if(Constants.currentRobot == Constants.Robot.PRACTICE) {
+            REVERSE_SOFT_LIM = -2840;
+            FORWARD_SOFT_LIM = -1538;
+        }
+
+        if(Constants.currentRobot == Constants.Robot.COMPETITION) {
+            REVERSE_SOFT_LIM = -2050;
+            FORWARD_SOFT_LIM = -400;
+        }
+
+        masterBar.configForwardSoftLimitThreshold(FORWARD_SOFT_LIM, 0);
         masterBar.configForwardSoftLimitEnable(true, 0);
-        masterBar.configReverseSoftLimitThreshold(-3100,0);
+        masterBar.configReverseSoftLimitThreshold(REVERSE_SOFT_LIM, 0);
         masterBar.configReverseSoftLimitEnable(true, 0);
 
         masterBar.configPeakCurrentLimit(MAX_CURRENT, 0);
@@ -51,7 +70,28 @@ public class BeltBar extends Subsystem {
     }
 
     @Override
+    public void periodic() {
+       /* if (getPosition() > FORWARD_SOFT_LIM ) {
+            masterBar.configForwardSoftLimitEnable(false,0);
+            masterBar.set(ControlMode.Position, AssemblyLocation.BOTTOM_FOR_CUBE.getBeltBarPosition());
+            DriverStation.reportWarning("Beltbar exceeded forward limit! Correcting...",false);
+        }
+        else if(getPosition() < REVERSE_SOFT_LIM)
+        {
+            masterBar.configReverseSoftLimitEnable(false,0);
+            masterBar.set(ControlMode.Position, AssemblyLocation.BOTTOM.getBeltBarPosition());
+            DriverStation.reportWarning("Beltbar exceeded reverse limit! Correcting...",false);
+        }
+        else
+        {
+            masterBar.configForwardSoftLimitEnable(true,0);
+            masterBar.configReverseSoftLimitEnable(true,0);
+        }*/
+    }
+
+    @Override
     protected void initDefaultCommand() {
+     //   setDefaultCommand(new BeltBarManualTest());
     }
 
     public void sendToDashboard() {
@@ -111,6 +151,10 @@ public class BeltBar extends Subsystem {
 
     public void resetToTop() {
         masterBar.setSelectedSensorPosition(TOP_VALUE, 0,0);
+    }
+
+    public double getCurrent() {
+        return masterBar.getOutputCurrent();
     }
 
 }

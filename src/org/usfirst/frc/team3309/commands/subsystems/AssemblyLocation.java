@@ -1,15 +1,17 @@
 package org.usfirst.frc.team3309.commands.subsystems;
 
+import org.usfirst.frc.team3309.robot.Constants;
+
 public enum AssemblyLocation {
 
-    BOTTOM(-3000, 0),
-    BOTTOM_FOR_CUBE(-1700, 900),
-    EXCHANGE_ZONE(-2000, 1300),
-    SCALE_DOWN(-2500, 34000),
-    SCALE_MIDDLE(-2500, 38000),
-    SCALE_UP(-2500, 42000),
-    SWITCH(-2500, 14000),
-    CLIMB(-3000, 15000);
+    BOTTOM(Constants.BELTBAR_BOTTOM_POS, Constants.ELEVATOR_BOTTOM_POS),
+    BOTTOM_FOR_CUBE(Constants.BELTBAR_INTAKE_POS, Constants.ELEVATOR_INTAKE_POS),
+    EXCHANGE_ZONE(Constants.BELTBAR_EXCHANGE_POS, Constants.ELEVATOR_EXCHANGE_POS),
+    SCALE_DOWN(Constants.BELTBAR_EJECT_POS, Constants.ELEVATOR_SCALE_DOWN_POS),
+    SCALE_MIDDLE(Constants.BELTBAR_EJECT_POS, Constants.ELEVATOR_SCALE_MIDDLE_POS),
+    SCALE_UP(Constants.BELTBAR_EJECT_POS, Constants.ELEVATOR_SCALE_TOP_POS),
+    SWITCH(Constants.BELTBAR_SWITCH_POS, Constants.ELEVATOR_SWITCH_POS),
+    CLIMB(Constants.BELTBAR_CLIMB, Constants.ELEVATOR_BOTTOM_POS);
 
     private double beltBarPosition;
     private double elevatorPosition;
@@ -19,8 +21,12 @@ public enum AssemblyLocation {
         this.elevatorPosition = elevatorPosition;
     }
 
-    public double getBeltBarPosition() { return beltBarPosition; }
+    public double getBeltBarPosition() {
+        return beltBarPosition;
+    }
 
-    public double getElevatorPosition() { return elevatorPosition; }
+    public double getElevatorPosition() {
+        return elevatorPosition;
+    }
 
 }

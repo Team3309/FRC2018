@@ -5,11 +5,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team3309.robot.OI;
 import org.usfirst.frc.team3309.robot.Robot;
 
-public class LiftManualClimb extends Command {
+@Deprecated
+public class LiftManualTest extends Command {
 
     private final double MAX_POWER = 1.0;
 
-    public LiftManualClimb() {
+    public LiftManualTest() {
         requires(Robot.lift);
     }
 
@@ -20,12 +21,9 @@ public class LiftManualClimb extends Command {
 
     @Override
     protected void execute() {
-        double power = -OI.operatorRemote.leftStick.getY();
+        double power = OI.operatorRemote.leftStick.getY();
         if (Math.abs(power) > MAX_POWER) {
             power = MAX_POWER * Math.signum(power);
-        }
-        if (Robot.lift.isAtBottom() && power > 0.1) {
-            power = 0;
         }
         Robot.lift.set(power);
         SmartDashboard.putNumber("Lift power: ", power);

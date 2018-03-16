@@ -3,7 +3,8 @@ plugins {
     id "eclipse"
     id "org.jetbrains.kotlin.jvm" version "1.2.21"
     id "idea"
-    id "jaci.openrio.gradle.GradleRIO" version "2018.01.22"
+    id "jaci.openrio.gradle.GradleRIO" version "2018.03.06"
+    id "org.ajoberstar.grgit" version '2.1.1'
 }
 
 def TEAM = 3309
@@ -11,10 +12,18 @@ def ROBOT_CLASS = "org.usfirst.frc.team3309.robot.Robot"
 
 wpi {
     wpilibVersion = "2018.4.1"
-    ctreVersion = "5.2.2.0"
+    ctreVersion = "5.3.1.0"
+}
+
+task gitCommit() {
+    grgit.commit {
+        all = true
+        message = "Auto-Commit"
+    }
 }
 
 deploy {
+
     targets {
         target("roborio", jaci.openrio.gradle.frc.RoboRIO) {
             team = TEAM
@@ -23,6 +32,7 @@ deploy {
     artifacts {
         artifact('frcJava', jaci.openrio.gradle.frc.FRCJavaArtifact) {
             targets << "roborio"
+            dependsOn(gitCommit)
         }
     }
 }

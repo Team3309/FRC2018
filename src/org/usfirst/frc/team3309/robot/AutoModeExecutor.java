@@ -28,9 +28,11 @@ public class AutoModeExecutor {
 
     public static void displayAutos() {
 
-        autos.addDefault("No Action", new NoActionAuto());
-        autos.addObject("CurvyToSwitchAuto", new CurvyToSwitchAuto());
+        autos.addObject("No Action", new NoActionAuto());
+        autos.addDefault("CurvyToSwitchAuto", new CurvyToSwitchAuto());
         autos.addObject("AutoLineAuto", new AutoLineAuto());
+        autos.addObject("LeftSideSwitch", new GreedyCrossAuto(true));
+        autos.addObject("RightSideSwitch", new GreedyCrossAuto(false));
 
         if (isUsingFile) {
             for (File autoFile : autoFiles) {

@@ -3,9 +3,54 @@ package org.usfirst.frc.team3309.robot;
 import org.usfirst.frc.team3309.lib.controllers.helpers.Waypoint;
 import org.usfirst.frc.team3309.lib.math.Length;
 
+import java.net.NetworkInterface;
+
+import java.net.SocketException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Constants {
+
+    private static final byte[] PRACTICEBOT_MAC_ADDR = {0x00, (byte) 0x80, 0x2F, 0x17, (byte) 0x85, (byte) 0xD3};
+    private static final byte[] COMPBOT_MAC_ADDR = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00}; // find this at comp
+
+    public enum Robot {
+        PRACTICE,
+        COMPETITION
+    }
+
+    public static Robot currentRobot;
+
+    static {
+        try {
+            byte[] rioMac = NetworkInterface.getByName("eth0").getHardwareAddress();
+            if (Arrays.equals(rioMac, PRACTICEBOT_MAC_ADDR)) {
+                currentRobot = Robot.PRACTICE;
+            } else if (Arrays.equals(rioMac, COMPBOT_MAC_ADDR)) {
+                currentRobot = Robot.COMPETITION;
+            } else {
+                currentRobot = null;
+                System.err.println("Oh no! Unknown robot! Did somebody install a new rio?");
+            }
+        } catch (SocketException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public static double BELTBAR_BOTTOM_POS = Constants.currentRobot == Robot.PRACTICE ? -2720 : -1950;
+    public static double BELTBAR_INTAKE_POS = Constants.currentRobot == Robot.PRACTICE ? -1350 : -640;
+    public static double BELTBAR_EXCHANGE_POS = Constants.currentRobot == Robot.PRACTICE ? -1800 : -900;
+    public static double BELTBAR_EJECT_POS = Constants.currentRobot == Robot.PRACTICE ? -2400 : -1690;
+    public static double BELTBAR_SWITCH_POS = Constants.currentRobot == Robot.PRACTICE ? -2000 : -1090;
+    public static double BELTBAR_CLIMB = Constants.currentRobot == Robot.PRACTICE ? -2800 : -1950;
+
+    public static double ELEVATOR_BOTTOM_POS = 0;
+    public static double ELEVATOR_INTAKE_POS = 1100;
+    public static double ELEVATOR_EXCHANGE_POS = 700;
+    public static double ELEVATOR_SWITCH_POS = 15000;
+    public static double ELEVATOR_SCALE_DOWN_POS = 30000;
+    public static double ELEVATOR_SCALE_MIDDLE_POS = 34000;
+    public static double ELEVATOR_SCALE_TOP_POS = 42000;
 
     // drive
     public static final int DRIVE_RIGHT_0_ID = 11;
@@ -58,19 +103,19 @@ public class Constants {
 
     public static final double MAX_LIFT_POS = 47000;
 
-    public static final double DRIVE_ENCODER_COUNTS_PER_REV = 4096.0 * 5  * 2 * 10;
+    public static final double DRIVE_ENCODER_COUNTS_PER_REV = 39298;
     public static final Length WHEEL_DIAMETER_INCHES = Length.fromInches(6.0);
     public static final Length WHEELBASE_INCHES = Length.fromInches(26.0);
 
     public static final ArrayList<Waypoint> curvyToSwitchRight = new ArrayList<>();
     public static final ArrayList<Waypoint> curvyToSwitchLeft = new ArrayList<>();
 
-    static  {
+    static {
         curvyToSwitchRight.add(new Waypoint(0.796 * 82.34987618525085, 0.39093873144451713));
-        curvyToSwitchRight.add(new Waypoint(-0.796 * 29.777276396478868,     0.740486358108046));
+        curvyToSwitchRight.add(new Waypoint(-0.796 * 29.777276396478868, 0.740486358108046));
 
         curvyToSwitchLeft.add(new Waypoint(-0.796 * 82.34987618525085, -0.39093873144451713));
-     //   curvyToSwitchLeft.add(new Waypoint(0.796 * 34.777276396478868,     -0.740486358108046));
+        //   curvyToSwitchLeft.add(new Waypoint(0.796 * 34.777276396478868,     -0.740486358108046));
     }
 
 }

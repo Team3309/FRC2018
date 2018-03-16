@@ -9,6 +9,7 @@ public class IntakeCube extends CommandGroup {
         addSequential(new MoveAssembly(AssemblyLocation.BOTTOM_FOR_CUBE));
         addSequential(new CheckForCube());
         addSequential(new WaitCommand(0.6));
+        addParallel(new CheckForDrop());
         addSequential(new MoveAssembly(AssemblyLocation.BOTTOM));
     }
 
