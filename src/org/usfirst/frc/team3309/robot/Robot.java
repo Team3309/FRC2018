@@ -113,10 +113,8 @@ public class Robot extends TimedRobot {
         falconDoors.setUp();
         lift.setHolderOut();
         Scheduler.getInstance().removeAll();
-        //Scheduler.getInstance().add(new LiftCheckLimits());
-        lift.reset();
+        Scheduler.getInstance().add(new LiftCheckLimits());
     }
-
 
     @Override
     public void teleopPeriodic() {
