@@ -43,6 +43,7 @@ public class OI {
         operatorRemote.buttonY.whenPressed(new LiftElevate(AssemblyLocation.BOTTOM.getElevatorPosition()));
         operatorRemote.dPad.down.whenPressed(new LiftElevate(AssemblyLocation.SCALE_DOWN.getElevatorPosition()));
         operatorRemote.dPad.right.whenPressed(new LiftElevate(AssemblyLocation.SCALE_MIDDLE.getElevatorPosition()));
+        operatorRemote.dPad.up.whenPressed(new LiftElevate(AssemblyLocation.SCALE_UP.getElevatorPosition()));
 
     }
 
