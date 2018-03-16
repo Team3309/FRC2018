@@ -36,6 +36,7 @@ public class LiftHybridMove extends Command
         {
             goalAngle += offset;
         }
+        Robot.lift.setGoalPos(goalAngle);
         Robot.lift.set(goalAngle);
     }
 

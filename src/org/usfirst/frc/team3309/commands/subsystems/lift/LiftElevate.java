@@ -17,6 +17,7 @@ public class LiftElevate extends Command {
     @Override
     protected void initialize() {
         Robot.lift.changeToBrakeMode();
+        Robot.lift.setGoalPos(goalPos);
         Robot.lift.changeToPositionMode();
     }
 

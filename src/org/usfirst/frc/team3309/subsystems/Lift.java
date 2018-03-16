@@ -35,6 +35,8 @@ public class Lift extends Subsystem {
     private double liftPos;
     private double beltbarPos;
 
+    private double goalPos;
+
     public final int FORWARD_LIM = 47000; // 47000
 
     public Lift() {
@@ -99,7 +101,9 @@ public class Lift extends Subsystem {
         SmartDashboard.putData(this);
         NetworkTable table = NetworkTableInstance.getDefault().getTable("Lift");
         table.getEntry("lift pos: ").setNumber(getPosition());
+        table.getEntry("lift goal pos: ").setNumber(getGoalPos());
         table.getEntry("lift control mode: ").setString(lift0.getControlMode().toString());
+        table.getEntry("lift percent mode: ").setNumber(lift0.getMotorOutputPercent());
         table.getEntry("lift percent output: ").setNumber(lift0.getMotorOutputPercent());
         table.getEntry("lift banner sensor: ").setBoolean(bannerSensor.get());
         table.getEntry("banner sensor trigger: ").setBoolean(bannerSensor.isAnalogTrigger());
@@ -156,6 +160,14 @@ public class Lift extends Subsystem {
 
     public void setLiftShifter(boolean value) {
         liftShifter.set(value);
+    }
+
+    public double getGoalPos() {
+        return goalPos;
+    }
+
+    public void setGoalPos(double goalPos) {
+        this.goalPos = goalPos;
     }
 
     public boolean isAtBottom() {
