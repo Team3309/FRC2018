@@ -82,7 +82,6 @@ public class Robot extends TimedRobot {
         logger.info("autonomous init");
         drive.reset();
         lift.setLiftShifter(true);
-        lift.reset();
         autoCommand = AutoModeExecutor.getAutoSelected();
         logger.info("Running " + autoCommand.getName());
         if (autoCommand != null) {

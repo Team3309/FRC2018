@@ -24,7 +24,6 @@ public class LiftCheckLimits extends Command {
                     Robot.lift.resetToBottom();
                     hasStarted = false;
                     isZeroed = true;
-                    start = Double.POSITIVE_INFINITY;
                 }
             }
         }
@@ -32,7 +31,7 @@ public class LiftCheckLimits extends Command {
 
     @Override
     protected boolean isFinished() {
-        return false;
+        return isZeroed;
     }
 
     public static boolean isZeroed() {
