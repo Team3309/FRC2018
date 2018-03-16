@@ -20,7 +20,7 @@ public class RollersTeleop extends Command {
         double rightTrigger = OI.operatorRemote.rightTrigger.getY();
 
         if (Math.abs(leftTrigger) > MIN_POWER) {
-                Robot.rollers.setLeftRight(rescale(leftTrigger), rescale(leftTrigger));
+                Robot.rollers.setLeftRight(-rescale(leftTrigger), rescale(leftTrigger));
         } else if (Math.abs(rightTrigger) > MIN_POWER) {
                 Robot.rollers.setLeftRight(rescale(rightTrigger),-rescale(rightTrigger));
         } else {
@@ -34,7 +34,7 @@ public class RollersTeleop extends Command {
 
     private double rescale(double val)
     {
-        return ((val+ROLLER_FEED_FORWARD)/(1+ROLLER_FEED_FORWARD));
+        return Math.max(val+ROLLER_FEED_FORWARD,1);
     }
 
     @Override
