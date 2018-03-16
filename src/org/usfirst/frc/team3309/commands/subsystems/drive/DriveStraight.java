@@ -15,7 +15,7 @@ public class DriveStraight extends CommandEx {
     private double timeoutSec = Double.POSITIVE_INFINITY;
 
     private final double errorThreshold = 6;
-    private double CRUISE_VELOCITY = 25000;
+    private int CRUISE_VELOCITY = 25000;
 
     private LibTimer timer = new LibTimer(.5);
 
