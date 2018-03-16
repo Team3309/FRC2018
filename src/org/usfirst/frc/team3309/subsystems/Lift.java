@@ -91,10 +91,6 @@ public class Lift extends Subsystem {
             lift0.set(ControlMode.Position, AssemblyLocation.SCALE_UP.getElevatorPosition());
             DriverStation.reportWarning("Lift exceeded forward limit! Correcting...", false);
 
-        } else if (getPosition() < 0) {
-            lift0.configReverseSoftLimitEnable(false, 10);
-            lift0.set(ControlMode.Position, AssemblyLocation.BOTTOM.getElevatorPosition());
-            DriverStation.reportWarning("Lift exceeded forward limit! Correcting...", false);
         } else {
             lift0.configForwardSoftLimitEnable(true, 10);
             lift0.configReverseSoftLimitEnable(true, 10);
