@@ -8,7 +8,6 @@ public class RollersTeleop extends Command {
 
     private final double MIN_POWER = 0.1;
     private final double MAX_IN_POWER = 0.7;
-    private final double ROLLER_FEED_FORWARD = 1/5;
     private final double DEFAULT_POWER = 0.1;
 
     public RollersTeleop() {
@@ -21,9 +20,9 @@ public class RollersTeleop extends Command {
         double rightTrigger = OI.operatorRemote.rightTrigger.getY();
 
         if (Math.abs(leftTrigger) > MIN_POWER) {
-                Robot.rollers.setLeftRight(rescale(leftTrigger)*MAX_IN_POWER, -rescale(leftTrigger)*MAX_IN_POWER);
+                Robot.rollers.setLeftRight(rescale(leftTrigger), -rescale(leftTrigger));
         } else if (Math.abs(rightTrigger) > MIN_POWER) {
-                Robot.rollers.setLeftRight(-rescale(rightTrigger),rescale(rightTrigger));
+                Robot.rollers.setLeftRight(-rightTrigger*MAX_IN_POWER,rightTrigger*MAX_IN_POWER);
         } else {
             if (Robot.beltBar.isCubePresent() && Robot.arms.isArmsClosed()) {
                 Robot.rollers.setLeftRight(-DEFAULT_POWER, DEFAULT_POWER);
@@ -35,7 +34,7 @@ public class RollersTeleop extends Command {
 
     private double rescale(double val)
     {
-        return Math.max(val+ROLLER_FEED_FORWARD,1);
+        return Math.copySign(val*val,val);
     }
 
     @Override
