@@ -22,6 +22,7 @@ public class LiftElevate extends Command {
 
     @Override
     protected void execute() {
+
         if (goalPos > Robot.lift.getFORWARD_LIM()) {
             goalPos = 0;
         }
