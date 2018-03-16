@@ -38,15 +38,17 @@ public class BeltBar extends Subsystem {
     public void init() {
         masterBar.setInverted(false);
         masterBar.setSensorPhase(true);
+
         masterBar.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 0);
         masterBar.changeToPositionMode();
+
         masterBar.config_kP(0, 0.98, 0);
         masterBar.config_kF(0, 0.04, 0);
         masterBar.clearStickyFaults(0);
 
         if(Constants.currentRobot == Constants.Robot.PRACTICE) {
             REVERSE_SOFT_LIM = -2840;
-            FORWARD_SOFT_LIM = -1538; //Moo
+            FORWARD_SOFT_LIM = -1538;
         }
 
         if(Constants.currentRobot == Constants.Robot.COMPETITION) {
