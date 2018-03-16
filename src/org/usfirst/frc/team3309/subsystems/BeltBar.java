@@ -97,6 +97,7 @@ public class BeltBar extends Subsystem {
         masterBar.config_kD(0,SmartDashboard.getNumber("Beltbar D: ", 0),0);
         masterBar.config_kF(0,SmartDashboard.getNumber("Beltbar F: ", 0.04),0);
         masterBar.config_IntegralZone(0,(int)SmartDashboard.getNumber("Beltbar Iz: ", 0),0);
+        SmartDashboard.putNumber("Beltbar PV Output: ",masterBar.getMotorOutputPercent());
     }
 
     @Override
