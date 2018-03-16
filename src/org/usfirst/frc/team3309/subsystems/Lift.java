@@ -7,6 +7,7 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -51,6 +52,13 @@ public class Lift extends Subsystem {
         lift0.config_kD(0, 28, 10);
         lift0.config_kF(0, 0.023, 10);
 
+        SmartDashboard.putNumber("Lift P: ", 0.2);
+        SmartDashboard.putNumber("Lift I: ", 0);
+        SmartDashboard.putNumber("Lift D: ", 28);
+        SmartDashboard.putNumber("Lift F: ", 0.023);
+        SmartDashboard.putNumber("Lift Iz: ", 0);
+
+
         lift0.configClosedloopRamp(0.22, 10);
         lift0.configPeakOutputForward(1.0, 10); //1.0
         lift0.configPeakOutputReverse(-0.45, 10); // -0.45
@@ -83,16 +91,25 @@ public class Lift extends Subsystem {
 
     @Override
     public void periodic() {
-       /* if (getPosition() > FORWARD_LIM) {
+        if (getPosition() > FORWARD_LIM) {
             lift0.configForwardSoftLimitEnable(false, 10);
             lift0.set(ControlMode.Position, AssemblyLocation.SCALE_UP.getElevatorPosition());
+            DriverStation.reportWarning("Lift exceeded forward limit! Correcting...", false);
+
         } else if (getPosition() < 0) {
             lift0.configReverseSoftLimitEnable(false, 10);
             lift0.set(ControlMode.Position, AssemblyLocation.BOTTOM.getElevatorPosition());
+            DriverStation.reportWarning("Lift exceeded forward limit! Correcting...", false);
         } else {
             lift0.configForwardSoftLimitEnable(true, 10);
             lift0.configReverseSoftLimitEnable(true, 10);
-        }*/
+        }
+        lift0.config_kP(0,SmartDashboard.getNumber("Lift P: ",3),0);
+        lift0.config_kI(0,SmartDashboard.getNumber("Lift I: ", 0),0);
+        lift0.config_kD(0,SmartDashboard.getNumber("Lift D: ", 0.5),0);
+        lift0.config_kF(0,SmartDashboard.getNumber("Lift F: ", 0.04),0);
+        lift0.config_IntegralZone(0,(int)SmartDashboard.getNumber("Lift Iz: ", 0),0);
+        SmartDashboard.putNumber("Lift PV Output: ",lift0.getMotorOutputPercent());
     }
 
     public void sendToDashboard() {

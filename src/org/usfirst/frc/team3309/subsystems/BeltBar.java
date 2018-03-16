@@ -46,7 +46,8 @@ public class BeltBar extends Subsystem {
         masterBar.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 10);
         masterBar.changeToPositionMode();
 
-        masterBar.config_kP(0, 0.98, 10);
+        masterBar.config_kP(0, 3, 10);
+        masterBar.config_kD(0,0.5,0);
         masterBar.config_kF(0, 0.04, 10);
         masterBar.clearStickyFaults(10);
         SmartDashboard.putNumber("Beltbar P: ", 0.98);
@@ -92,12 +93,11 @@ public class BeltBar extends Subsystem {
             masterBar.configForwardSoftLimitEnable(true, 0);
             masterBar.configReverseSoftLimitEnable(true, 0);
         }
-        masterBar.config_kP(0,SmartDashboard.getNumber("Beltbar P: ",0.98),0);
+        masterBar.config_kP(0,SmartDashboard.getNumber("Beltbar P: ",3),0);
         masterBar.config_kI(0,SmartDashboard.getNumber("Beltbar I: ", 0),0);
-        masterBar.config_kD(0,SmartDashboard.getNumber("Beltbar D: ", 0),0);
+        masterBar.config_kD(0,SmartDashboard.getNumber("Beltbar D: ", 0.5),0);
         masterBar.config_kF(0,SmartDashboard.getNumber("Beltbar F: ", 0.04),0);
         masterBar.config_IntegralZone(0,(int)SmartDashboard.getNumber("Beltbar Iz: ", 0),0);
-        SmartDashboard.putNumber("Beltbar PV Output: ",masterBar.getMotorOutputPercent());
     }
 
     @Override
