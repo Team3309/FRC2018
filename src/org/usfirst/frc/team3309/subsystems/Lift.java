@@ -110,6 +110,7 @@ public class Lift extends Subsystem {
         lift0.config_kF(0,SmartDashboard.getNumber("Lift F: ", 0.04),0);
         lift0.config_IntegralZone(0,(int)SmartDashboard.getNumber("Lift Iz: ", 0),0);
         SmartDashboard.putNumber("Lift PV Output: ",lift0.getMotorOutputPercent());
+        SmartDashboard.putNumber("Lift Position: ", lift0.getSelectedSensorPosition(0));
     }
 
     public void sendToDashboard() {
