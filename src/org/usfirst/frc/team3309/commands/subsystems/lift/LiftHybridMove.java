@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3309.commands.subsystems.lift;
 
 import edu.wpi.first.wpilibj.command.Command;
+import org.usfirst.frc.team3309.robot.OI;
 import org.usfirst.frc.team3309.robot.Robot;
 
 public class LiftHybridMove extends Command
@@ -23,7 +24,7 @@ public class LiftHybridMove extends Command
 
     @Override
     protected void execute() {
-        double offset = 100 * Robot.DEFAULT_PERIOD;
+        double offset = 100 * Robot.DEFAULT_PERIOD * OI.operatorRemote.leftStick.getY();
         if(goalAngle + offset > Robot.lift.FORWARD_LIM)
         {
             goalAngle = Robot.lift.FORWARD_LIM;
