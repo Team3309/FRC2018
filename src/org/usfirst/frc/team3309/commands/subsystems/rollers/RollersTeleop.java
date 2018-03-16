@@ -7,6 +7,7 @@ import org.usfirst.frc.team3309.robot.Robot;
 public class RollersTeleop extends Command {
 
     private final double MIN_POWER = 0.1;
+    private final double MAX_IN_POWER = 0.7;
     private final double ROLLER_FEED_FORWARD = 1/3;
     private final double DEFAULT_POWER = 0.1;
 
@@ -20,7 +21,7 @@ public class RollersTeleop extends Command {
         double rightTrigger = OI.operatorRemote.rightTrigger.getY();
 
         if (Math.abs(leftTrigger) > MIN_POWER) {
-                Robot.rollers.setLeftRight(-rescale(leftTrigger), rescale(leftTrigger));
+                Robot.rollers.setLeftRight(rescale(leftTrigger)*MAX_IN_POWER, -rescale(leftTrigger)*MAX_IN_POWER);
         } else if (Math.abs(rightTrigger) > MIN_POWER) {
                 Robot.rollers.setLeftRight(rescale(rightTrigger),-rescale(rightTrigger));
         } else {
