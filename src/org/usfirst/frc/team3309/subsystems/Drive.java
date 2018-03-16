@@ -33,32 +33,32 @@ public class Drive extends Subsystem {
 
     public Drive() {
         left0.changeToPercentMode();
-        left0.configPeakOutputForward(1.0, 0);
-        left0.configPeakOutputReverse(-1.0, 0);
-        left0.configNominalOutputForward(0.0, 0);
-        left0.configNominalOutputReverse(-0.0, 0);
-        left0.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
+        left0.configPeakOutputForward(1.0, 10);
+        left0.configPeakOutputReverse(-1.0, 10);
+        left0.configNominalOutputForward(0.0, 10);
+        left0.configNominalOutputReverse(-0.0, 10);
+        left0.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
         left1.follow(left0);
         left2.follow(left0);
-        left0.configOpenloopRamp(0, 0);
-        left0.configMotionAcceleration(30000, 0);
-        left0.config_kP(0, 0.019, 0);
-        left0.config_kD(0, 0.0006, 0);
-        left0.config_kF(0, 0.002, 0);
+        left0.configOpenloopRamp(0, 10);
+        left0.configMotionAcceleration(30000, 10);
+        left0.config_kP(0, 0.019, 10);
+        left0.config_kD(0, 0.0006, 10);
+        left0.config_kF(0, 0.002, 10);
 
         right0.changeToPercentMode();
-        right0.configPeakOutputForward(1.0, 0);
-        right0.configPeakOutputReverse(-1.0, 0);
-        right0.configNominalOutputForward(0.0, 0);
-        right0.configNominalOutputReverse(-0.0, 0);
-        right0.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
+        right0.configPeakOutputForward(1.0, 10);
+        right0.configPeakOutputReverse(-1.0, 10);
+        right0.configNominalOutputForward(0.0, 10);
+        right0.configNominalOutputReverse(-0.0, 10);
+        right0.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
         right1.follow(right0);
         right2.follow(right0);
-        right0.configOpenloopRamp(0, 0);
-        right0.configMotionAcceleration(30000, 0);
-        right0.config_kP(0, 0.019, 0);
-        right0.config_kD(0, 0.0006, 0);
-        right0.config_kF(0, 0.002, 0);
+        right0.configOpenloopRamp(0, 10);
+        right0.configMotionAcceleration(30000, 10);
+        right0.config_kP(0, 0.019, 10);
+        right0.config_kD(0, 0.0006, 10);
+        right0.config_kF(0, 0.002, 10);
 
         setHighGear();
         changeToBrakeMode();
@@ -216,11 +216,11 @@ public class Drive extends Subsystem {
     }
 
     public void configRightCruiseVelocity(int sensorUnitsPer100ms) {
-        right0.configMotionCruiseVelocity(sensorUnitsPer100ms, 0);
+        right0.configMotionCruiseVelocity(sensorUnitsPer100ms, 10);
     }
 
     public void configLeftCruiseVelocity(int sensorUnitsPer100ms) {
-        left0.configMotionCruiseVelocity(sensorUnitsPer100ms, 0);
+        left0.configMotionCruiseVelocity(sensorUnitsPer100ms, 10);
     }
 
     public double getGoalPos() {

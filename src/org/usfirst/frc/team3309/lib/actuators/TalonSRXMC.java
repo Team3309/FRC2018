@@ -15,39 +15,39 @@ public class TalonSRXMC extends TalonSRX {
     }
 
     public void reset(){
-        configOpenloopRamp(0, 0);
-        configClosedloopRamp(0, 0);
-        configPeakOutputForward(1, 0);
-        configPeakOutputReverse(-1, 0);
-        configNominalOutputForward(0, 0);
-        configNominalOutputReverse(0, 0);
-        configNeutralDeadband(0.04, 0);
-        configVoltageCompSaturation(0, 0);
-        configVoltageMeasurementFilter(32, 0);
-        configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
-        configRemoteFeedbackFilter(getDeviceID(), RemoteSensorSource.Off, 0, 0);
-        configVelocityMeasurementPeriod(VelocityMeasPeriod.Period_100Ms, 0);
-        configVelocityMeasurementWindow(64, 0);
-        configForwardLimitSwitchSource(LimitSwitchSource.Deactivated, LimitSwitchNormal.NormallyOpen, 0);
-        configReverseLimitSwitchSource(LimitSwitchSource.Deactivated, LimitSwitchNormal.NormallyOpen, 0);
-        configForwardSoftLimitThreshold(0,0);
-        configReverseSoftLimitThreshold(0, 0);
-        configForwardSoftLimitEnable(false, 0);
-        configReverseSoftLimitEnable(false, 0);
-        config_kP(0, 0,0);
-        config_kI(0, 0,0);
-        config_kD(0, 0,0);
-        config_kF(0, 0,0);
-        config_IntegralZone(0, 0,0 );
-        configAllowableClosedloopError(0, 0, 0);
-        configMaxIntegralAccumulator(0, 0, 0);
-        configMotionCruiseVelocity(0, 0);
-        configMotionAcceleration(0,0);
-        configMotionProfileTrajectoryPeriod(0, 0);
-        configSetCustomParam(0, 0, 0);
-        configPeakCurrentLimit(0, 0);
-        configPeakCurrentDuration(0, 0);
-        configContinuousCurrentLimit(0, 0);
+        configOpenloopRamp(0, 10);
+        configClosedloopRamp(0, 10);
+        configPeakOutputForward(1, 10);
+        configPeakOutputReverse(-1, 10);
+        configNominalOutputForward(0, 10);
+        configNominalOutputReverse(0, 10);
+        configNeutralDeadband(0.04, 10);
+        configVoltageCompSaturation(0, 10);
+        configVoltageMeasurementFilter(32, 10);
+        configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 10);
+        configRemoteFeedbackFilter(getDeviceID(), RemoteSensorSource.Off, 0,10);
+        configVelocityMeasurementPeriod(VelocityMeasPeriod.Period_100Ms, 10);
+        configVelocityMeasurementWindow(64, 10);
+        configForwardLimitSwitchSource(LimitSwitchSource.Deactivated, LimitSwitchNormal.NormallyOpen, 10);
+        configReverseLimitSwitchSource(LimitSwitchSource.Deactivated, LimitSwitchNormal.NormallyOpen, 10);
+        configForwardSoftLimitThreshold(0,10);
+        configReverseSoftLimitThreshold(0, 10);
+        configForwardSoftLimitEnable(false, 10);
+        configReverseSoftLimitEnable(false, 10);
+        config_kP(0, 0,10);
+        config_kI(0, 0,10);
+        config_kD(0, 0,10);
+        config_kF(0, 0,10);
+        config_IntegralZone(0, 0,10 );
+        configAllowableClosedloopError(0, 0, 10);
+        configMaxIntegralAccumulator(0, 0, 10);
+        configMotionCruiseVelocity(0, 10);
+        configMotionAcceleration(0,10);
+        configMotionProfileTrajectoryPeriod(0, 10);
+        configSetCustomParam(0, 0, 10);
+        configPeakCurrentLimit(0, 10);
+        configPeakCurrentDuration(0, 10);
+        configContinuousCurrentLimit(0, 10);
     }
 
     public void changeToPercentMode() {

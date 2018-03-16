@@ -24,6 +24,8 @@ public class BeltBar extends Subsystem {
 
     private DigitalInput hallEffectSensor = new DigitalInput(Constants.BELTBAR_HALL_EFFECT);
 
+    private boolean inRecovery = false;
+
     private double goalAngle;
 
     // TODO determine top value
@@ -47,8 +49,10 @@ public class BeltBar extends Subsystem {
         masterBar.changeToPositionMode();
 
         masterBar.config_kP(0, 3, 10);
-        masterBar.config_kD(0,0.5,0);
+        masterBar.config_kI(0,0,10);
+        masterBar.config_kD(0,0.5,10);
         masterBar.config_kF(0, 0.04, 10);
+        masterBar.config_IntegralZone(0,0,0);
         masterBar.clearStickyFaults(10);
         SmartDashboard.putNumber("Beltbar P: ", 3);
         SmartDashboard.putNumber("Beltbar I: ", 0);
@@ -58,7 +62,7 @@ public class BeltBar extends Subsystem {
 
         if (Constants.currentRobot == Constants.Robot.PRACTICE) {
             REVERSE_SOFT_LIM = -2840;
-            FORWARD_SOFT_LIM = -1300;
+            FORWARD_SOFT_LIM = -1200;
         }
 
         if (Constants.currentRobot == Constants.Robot.COMPETITION) {
@@ -82,22 +86,28 @@ public class BeltBar extends Subsystem {
     @Override
     public void periodic() {
         if (getPosition() > FORWARD_SOFT_LIM) {
-            masterBar.configForwardSoftLimitEnable(false, 0);
+            masterBar.configForwardSoftLimitEnable(false, 10);
             masterBar.set(ControlMode.Position, AssemblyLocation.BOTTOM_FOR_CUBE.getBeltBarPosition());
             DriverStation.reportWarning("Beltbar exceeded forward limit! Correcting...", false);
+            inRecovery = true;
         } else if (getPosition() < REVERSE_SOFT_LIM) {
-            masterBar.configReverseSoftLimitEnable(false, 0);
+            masterBar.configReverseSoftLimitEnable(false, 10);
             masterBar.set(ControlMode.Position, AssemblyLocation.BOTTOM.getBeltBarPosition());
             DriverStation.reportWarning("Beltbar exceeded reverse limit! Correcting...", false);
+            inRecovery = true;
         } else {
-            masterBar.configForwardSoftLimitEnable(true, 0);
-            masterBar.configReverseSoftLimitEnable(true, 0);
+            if(inRecovery)
+            {
+                masterBar.configForwardSoftLimitEnable(true, 10);
+                masterBar.configReverseSoftLimitEnable(true, 10);
+                inRecovery = false;
+            }
         }
-        masterBar.config_kP(0,SmartDashboard.getNumber("Beltbar P: ",3),0);
-        masterBar.config_kI(0,SmartDashboard.getNumber("Beltbar I: ", 0),0);
-        masterBar.config_kD(0,SmartDashboard.getNumber("Beltbar D: ", 0.5),0);
-        masterBar.config_kF(0,SmartDashboard.getNumber("Beltbar F: ", 0.04),0);
-        masterBar.config_IntegralZone(0,(int)SmartDashboard.getNumber("Beltbar Iz: ", 0),0);
+        masterBar.config_kP(0,SmartDashboard.getNumber("Beltbar P: ",3),10);
+        masterBar.config_kI(0,SmartDashboard.getNumber("Beltbar I: ", 0),10);
+        masterBar.config_kD(0,SmartDashboard.getNumber("Beltbar D: ", 0.5),10);
+        masterBar.config_kF(0,SmartDashboard.getNumber("Beltbar F: ", 0.04),10);
+        masterBar.config_IntegralZone(0,(int)SmartDashboard.getNumber("Beltbar Iz: ", 0),10);
     }
 
     @Override
@@ -141,7 +151,7 @@ public class BeltBar extends Subsystem {
 
     public void configCruiseVelocity(int sensorUnitsPer100ms)
     {
-        masterBar.configMotionCruiseVelocity(sensorUnitsPer100ms,0);
+        masterBar.configMotionCruiseVelocity(sensorUnitsPer100ms,10);
     }
 
     public void changeToPositionMode() {
@@ -173,7 +183,7 @@ public class BeltBar extends Subsystem {
     }
 
     public void resetToTop() {
-        masterBar.setSelectedSensorPosition(TOP_VALUE, 0, 0);
+        masterBar.setSelectedSensorPosition(TOP_VALUE, 0, 10);
     }
 
     public double getCurrent() {
