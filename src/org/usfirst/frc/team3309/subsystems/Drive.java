@@ -210,17 +210,17 @@ public class Drive extends Subsystem {
         right0.changeToMotionMagic();
     }
 
-    public void configLeftRightCruiseVelocity(double leftSpeed, double rightSpeed) {
+    public void configLeftRightCruiseVelocity(int leftSpeed, int rightSpeed) {
         configLeftCruiseVelocity(leftSpeed);
         configRightCruiseVelocity(rightSpeed);
     }
 
-    public void configRightCruiseVelocity(double sensorUnitsPer100ms) {
-        right0.configMotionCruiseVelocity((int) sensorUnitsPer100ms, 0);
+    public void configRightCruiseVelocity(int sensorUnitsPer100ms) {
+        right0.configMotionCruiseVelocity(sensorUnitsPer100ms, 0);
     }
 
-    public void configLeftCruiseVelocity(double sensorUnitsPer100ms) {
-        left0.configMotionCruiseVelocity((int) sensorUnitsPer100ms, 0);
+    public void configLeftCruiseVelocity(int sensorUnitsPer100ms) {
+        left0.configMotionCruiseVelocity(sensorUnitsPer100ms, 0);
     }
 
     public double getGoalPos() {

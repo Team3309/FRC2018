@@ -135,6 +135,15 @@ public class BeltBar extends Subsystem {
         masterBar.setNeutralMode(NeutralMode.Coast);
     }
 
+    public void changeToMotionMagicMode() {
+        masterBar.changeToMotionMagic();
+    }
+
+    public void configCruiseVelocity(int sensorUnitsPer100ms)
+    {
+        masterBar.configMotionCruiseVelocity(sensorUnitsPer100ms,0);
+    }
+
     public void changeToPositionMode() {
         masterBar.changeToPositionMode();
     }

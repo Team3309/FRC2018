@@ -164,6 +164,15 @@ public class Lift extends Subsystem {
         lift0.changeToVelocityMode();
     }
 
+    public void changeToMotionMagicMode() {
+        lift0.changeToMotionMagic();
+    }
+
+    public void setCruiseVelocity(int vel)
+    {
+        lift0.configMotionCruiseVelocity(vel,0);
+    }
+
     public void setLiftShifter(boolean value) {
         liftShifter.set(value);
     }

@@ -4,12 +4,12 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team3309.robot.Robot;
 
-public class LiftElevate extends Command {
+public class LiftElevateFast extends Command {
 
     private double goalPos;
     private final double ERROR_THRESHOLD = 300;
 
-    public LiftElevate(double goalPos) {
+    public LiftElevateFast(double goalPos) {
         this.goalPos = goalPos;
         requires(Robot.lift);
     }
@@ -18,7 +18,7 @@ public class LiftElevate extends Command {
     protected void initialize() {
         Robot.lift.changeToBrakeMode();
         Robot.lift.setGoalPos(goalPos);
-        Robot.lift.changeToPositionMode();
+        Robot.lift.changeToMotionMagicMode();
     }
 
     @Override
