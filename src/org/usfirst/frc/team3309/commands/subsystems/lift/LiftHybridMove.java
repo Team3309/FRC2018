@@ -24,7 +24,7 @@ public class LiftHybridMove extends Command
 
     @Override
     protected void execute() {
-        double offset = 500 * Robot.DEFAULT_PERIOD * OI.operatorRemote.leftStick.getY();
+        double offset = 2500 * Robot.DEFAULT_PERIOD * OI.operatorRemote.leftStick.getY();
         if(goalAngle + offset > Robot.lift.FORWARD_LIM)
         {
             goalAngle = Robot.lift.FORWARD_LIM;
