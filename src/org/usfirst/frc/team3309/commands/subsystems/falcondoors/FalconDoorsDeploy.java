@@ -11,7 +11,7 @@ public class FalconDoorsDeploy extends InstantCommand {
 
     @Override
     protected void execute() {
-        Robot.falconDoors.setOut();
+        Robot.falconDoors.setDown();
     }
 
 }

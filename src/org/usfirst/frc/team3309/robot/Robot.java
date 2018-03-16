@@ -1,12 +1,11 @@
 package org.usfirst.frc.team3309.robot;
 
 import edu.wpi.cscore.UsbCamera;
-import edu.wpi.first.wpilibj.CameraServer;
-import edu.wpi.first.wpilibj.Compressor;
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.cscore.VideoSource;
+import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team3309.commands.subsystems.lift.LiftCheckLimits;
 import org.usfirst.frc.team3309.subsystems.*;
@@ -26,19 +25,30 @@ public class Robot extends TimedRobot {
     public static Arms arms;
     public static Rollers rollers;
 
-    private UsbCamera cam;
     private Compressor c;
     private OI oi;
 
     private Command autoCommand = null;
     public static Logger logger;
 
+    private static boolean isLeftSwitch;
+    private static boolean isRightSwitch;
+
+    private static boolean isLeftScale;
+    private static boolean isRightScale;
+
+    private PowerDistributionPanel pdp;
+
     @Override
     public void robotInit() {
+        setPeriod(0.01);
+        pdp = new PowerDistributionPanel(0);
+
         logger = Logger.getLogger("Robot");
         logger.info("robot init");
-        cam = CameraServer.getInstance().startAutomaticCapture();
-        cam.setFPS(30);
+     //   BlackBox.initLog("beltbar current ", "amps");
+        CameraServer.getInstance().startAutomaticCapture(0).setFPS(18);
+        CameraServer.getInstance().startAutomaticCapture(1).setFPS(18);
         drive = new Drive();
         lift = new Lift();
         beltBar = new BeltBar();
@@ -48,22 +58,33 @@ public class Robot extends TimedRobot {
         rollers = new Rollers();
         oi = new OI();
         c = new Compressor();
+        LiveWindow.disableTelemetry(pdp);
         c.start();
-        drive.sendToDashboard();
         drive.reset();
+        lift.setLiftShifter(true);
+        falconDoors.setUp();
+        sendToDashboard();
         AutoModeExecutor.displayAutos();
     }
 
     @Override
     public void autonomousInit() {
+        Scheduler.getInstance().removeAll();
+        if (DriverStation.getInstance().getGameSpecificMessage() != null) {
+            isLeftSwitch = DriverStation.getInstance().getGameSpecificMessage().charAt(0) == 'L';
+            isRightSwitch = DriverStation.getInstance().getGameSpecificMessage().charAt(0) == 'R';
+            isLeftScale = DriverStation.getInstance().getGameSpecificMessage().charAt(1) == 'L';
+            isRightScale = DriverStation.getInstance().getGameSpecificMessage().charAt(1) == 'R';
+        }
+        falconDoors.setUp();
+        c.stop();
         logger.info("autonomous init");
         drive.reset();
-        lift.setLiftShifter(false);
+        lift.setLiftShifter(true);
         lift.reset();
         autoCommand = AutoModeExecutor.getAutoSelected();
         logger.info("Running " + autoCommand.getName());
         if (autoCommand != null) {
-            System.out.println("Starting");
             autoCommand.start();
         }
         Scheduler.getInstance().run();
@@ -72,58 +93,77 @@ public class Robot extends TimedRobot {
     @Override
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
-        drive.sendToDashboard();
-        lift.sendToDashboard();
+        sendToDashboard();
     }
+
+    private double start;
 
     @Override
     public void teleopInit() {
+        start = Timer.getFPGATimestamp();
+        lift.setLiftShifter(true);
+        c.start();
         logger.info("teleop init");
         if (autoCommand != null) {
             autoCommand.cancel();
         }
         drive.reset();
         drive.setHighGear();
-        drive.changeToCoastMode();
-        lift.setLiftShifter(false);
+        drive.changeToBrakeMode();
+        falconDoors.setUp();
+        lift.setHolderOut();
         Scheduler.getInstance().removeAll();
-        Scheduler.getInstance().add(new LiftCheckLimits());
+        //Scheduler.getInstance().add(new LiftCheckLimits());
+        lift.reset();
     }
+
 
     @Override
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
-        drive.sendToDashboard();
-        lift.sendToDashboard();
-        beltBar.sendToDashboard();
+        sendToDashboard();
         SmartDashboard.putData(beltBar);
         SmartDashboard.putData(shooter);
         SmartDashboard.putData(falconDoors);
         SmartDashboard.putData(arms);
         SmartDashboard.putData(rollers);
+        if (Timer.getFPGATimestamp() - start >= 1) {
+          //  BlackBox.writeLog(String.valueOf(Timer.getFPGATimestamp()), String.valueOf(beltBar.getCurrent()));
+            start = Timer.getFPGATimestamp();
+        }
+    }
+
+    @Override
+    public void disabledInit() {
     }
 
     @Override
     public void disabledPeriodic() {
+        falconDoors.setUp();
         drive.reset();
-        lift.reset();
-        lift.setLiftShifter(false);
+    }
+
+    public void sendToDashboard() {
+        drive.sendToDashboard();
+        lift.sendToDashboard();
+        beltBar.sendToDashboard();
+        arms.sendToDashboard();
     }
 
     public static boolean isLeftSwitch() {
-        return DriverStation.getInstance().getGameSpecificMessage().charAt(0) == 'L';
+        return isLeftSwitch;
     }
 
     public static boolean isRightSwitch() {
-        return DriverStation.getInstance().getGameSpecificMessage().charAt(0) == 'R';
+        return isRightSwitch;
     }
 
     public static boolean isLeftScale() {
-        return DriverStation.getInstance().getGameSpecificMessage().charAt(1) == 'L';
+        return isLeftScale;
     }
 
     public static boolean isRightScale() {
-        return DriverStation.getInstance().getGameSpecificMessage().charAt(1) == 'R';
+        return isRightScale;
     }
 
 }

@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: openrio.mirror.third.ctre:CTRE-phoenix-java:5.3.1.0">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/openrio.mirror.third.ctre/CTRE-phoenix-java/5.3.1.0/a72e43884bdab932374599f719e0d65aa6d804bc/CTRE-phoenix-java-5.3.1.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/openrio.mirror.third.ctre/CTRE-phoenix-java/5.3.1.0/6bc591da3912ee9c34d1b82203e04eb16099225a/CTRE-phoenix-java-5.3.1.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

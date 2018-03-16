@@ -3,16 +3,18 @@ package org.usfirst.frc.team3309.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.sensors.PigeonIMU;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.usfirst.frc.team3309.commands.subsystems.AssemblyLocation;
+import org.usfirst.frc.team3309.commands.subsystems.lift.LiftManualClimb;
 import org.usfirst.frc.team3309.commands.subsystems.lift.LiftManualTest;
 import org.usfirst.frc.team3309.lib.actuators.TalonSRXMC;
 import org.usfirst.frc.team3309.lib.actuators.VictorSPXMC;
-import org.usfirst.frc.team3309.lib.sensors.LimitSwitch;
 import org.usfirst.frc.team3309.robot.Constants;
 
 public class Lift extends Subsystem {
@@ -23,38 +25,64 @@ public class Lift extends Subsystem {
     private VictorSPXMC lift3 = new VictorSPXMC(Constants.LIFT_3);
     private VictorSPXMC lift4 = new VictorSPXMC(Constants.LIFT_4);
 
-    private PigeonIMU pigeonIMU = new PigeonIMU(lift1);
+    private DoubleSolenoid secondStageHolder = new DoubleSolenoid(Constants.LIFT_HOLDER_A, Constants.LIFT_HOLDER_B);
 
-    private LimitSwitch bottomLimitSwitch = new LimitSwitch(Constants.LIFT_BOTTOM_LIMIT_SWITCH);
+    private DigitalInput bannerSensor = new DigitalInput(Constants.LIFT_BANNER_SENSOR);
 
     private Solenoid liftShifter = new Solenoid(Constants.LIFT_SHIFTER);
 
+    private double liftPos = AssemblyLocation.BOTTOM.getElevatorPosition();
+    private double beltbarPos = AssemblyLocation.BOTTOM.getBeltBarPosition();
+
     private double goalPos;
 
+    private final int FORWARD_LIM = 47000;
+
     public Lift() {
-        bottomLimitSwitch.reset();
         lift0.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0,
                 0);
-        lift0.configForwardSoftLimitThreshold(47000, 0);
+
+        lift0.configForwardSoftLimitThreshold(FORWARD_LIM, 0);
         lift0.configForwardSoftLimitEnable(true, 0);
-        lift0.config_kP(0, 0.18, 0);
-        lift0.config_kD(0, 10, 0);
+
+        /* practice bot
+        lift0.config_kP(0, 0.24, 0);
+        lift0.config_kD(0, 28, 0);
         lift0.config_kF(0, 0.023, 0);
-        lift0.configClosedloopRamp(0.22,0);
-        lift0.configPeakOutputForward(1.0, 0);
-        lift0.configPeakOutputReverse(-0.5, 0);
+        */
+
+        lift0.config_kP(0, 0.2, 0);
+        lift0.config_kD(0, 28, 0);
+        lift0.config_kF(0, 0.023, 0);
+
+        lift0.configClosedloopRamp(0.22, 0);
+        lift0.configPeakOutputForward(.20, 0); //1.0
+        lift0.configPeakOutputReverse(-0.2, 0); // -0.45
+
         lift0.changeToPositionMode();
-        lift0.setInverted(true);
+
+        if(Constants.currentRobot == Constants.Robot.PRACTICE) {
+            lift0.setSensorPhase(false);
+            lift0.setInverted(true);
+        }
+
+        if(Constants.currentRobot == Constants.Robot.COMPETITION) {
+            lift0.setInverted(false);
+            lift0.setSensorPhase(true);
+        }
+
         lift1.follow(lift0);
         lift2.follow(lift0);
         lift3.follow(lift0);
         lift4.follow(lift0);
+
+        setHolderIn();
         changeToBrakeMode();
     }
 
     @Override
     protected void initDefaultCommand() {
-        setDefaultCommand(new LiftManualTest());
+    //    setDefaultCommand(new LiftManualTest());
     }
 
     public void sendToDashboard() {
@@ -62,9 +90,11 @@ public class Lift extends Subsystem {
         NetworkTable table = NetworkTableInstance.getDefault().getTable("Lift");
         table.getEntry("lift pos: ").setNumber(getPosition());
         table.getEntry("lift goal pos: ").setNumber(getGoalPos());
-        table.getEntry("lift limit switch: ").setBoolean(isBottomLimitSwitch());
         table.getEntry("lift control mode: ").setString(lift0.getControlMode().toString());
         table.getEntry("lift percent mode: ").setNumber(lift0.getMotorOutputPercent());
+        table.getEntry("lift percent output: ").setNumber(lift0.getMotorOutputPercent());
+        table.getEntry("lift banner sensor: ").setBoolean(bannerSensor.get());
+        table.getEntry("banner sensor trigger: ").setBoolean(bannerSensor.isAnalogTrigger());
     }
 
     public void reset() {
@@ -72,11 +102,11 @@ public class Lift extends Subsystem {
     }
 
     public void resetToBottom() {
-        lift0.getSensorCollection().setQuadraturePosition(0, 0);
+        lift0.setSelectedSensorPosition(0, 0, 0);
     }
 
     public double getPosition() {
-        return lift0.getSensorCollection().getQuadraturePosition();
+        return lift0.getSelectedSensorPosition(0);
     }
 
     public void changeToBrakeMode() {
@@ -119,8 +149,39 @@ public class Lift extends Subsystem {
         this.goalPos = goalPos;
     }
 
-    public boolean isBottomLimitSwitch() {
-        return bottomLimitSwitch.isSwitchSet();
+    public boolean isAtBottom() {
+        return bannerSensor.get();
     }
 
+    public double getError() {
+        return lift0.getClosedLoopError(0);
+    }
+
+    public void setHolderIn() {
+        secondStageHolder.set(DoubleSolenoid.Value.kForward);
+    }
+
+    public void setHolderOut() {
+        secondStageHolder.set(DoubleSolenoid.Value.kReverse);
+    }
+
+    public void setLiftPos(double liftPos) {
+        this.liftPos = liftPos;
+    }
+
+    public double getLiftPos() {
+        return liftPos;
+    }
+
+    public void setBeltbarPos(double beltbarPos) {
+        this.beltbarPos = beltbarPos;
+    }
+
+    public double getBeltbarPos() {
+        return beltbarPos;
+    }
+
+    public double getFORWARD_LIM() {
+        return FORWARD_LIM;
+    }
 }

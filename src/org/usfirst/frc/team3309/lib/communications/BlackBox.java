@@ -14,7 +14,9 @@ import java.util.Date;
 public class BlackBox {
 
     // path writes to USB connected to roboRio
-    private static final String logPath = "/media/sda1/Logs/";
+
+    // /media/sda1/Logs
+    private static final String logPath = "/home/lvuser/Logs/";
     private static PrintWriter pw;
 
     public static void initLog(String title, String... headers) {

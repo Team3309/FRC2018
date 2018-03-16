@@ -1,18 +1,13 @@
 package org.usfirst.frc.team3309.robot;
 
-import org.usfirst.frc.team3309.commands.InterruptAll;
-import org.usfirst.frc.team3309.commands.subsystems.AssemblyLocation;
+import edu.wpi.first.wpilibj.Joystick;
+import org.usfirst.frc.team3309.commands.subsystems.*;
 import org.usfirst.frc.team3309.commands.subsystems.arms.ArmsClamp;
 import org.usfirst.frc.team3309.commands.subsystems.arms.ArmsOpen;
 import org.usfirst.frc.team3309.commands.subsystems.beltbar.BeltBarMoveToPos;
-import org.usfirst.frc.team3309.commands.subsystems.drive.DriveForward;
-import org.usfirst.frc.team3309.commands.subsystems.drive.DriveSetHighGear;
-import org.usfirst.frc.team3309.commands.subsystems.drive.DriveSetLowGear;
 import org.usfirst.frc.team3309.commands.subsystems.lift.LiftElevate;
-import org.usfirst.frc.team3309.commands.subsystems.lift.LiftShiftToClimbMode;
 import org.usfirst.frc.team3309.commands.subsystems.shooter.ShooterForward;
 import org.usfirst.frc.team3309.lib.input.InputXbox;
-import org.usfirst.frc.team3309.lib.math.Length;
 
 /*
  * <p>Class for defining controllers
@@ -21,31 +16,31 @@ import org.usfirst.frc.team3309.lib.math.Length;
  */
 public class OI {
 
-    public static InputXbox driverRemote = new InputXbox(0);
-    public static InputXbox operatorRemote = new InputXbox(1);
+    public static InputXbox operatorRemote = new InputXbox(2);
+
+    public static Joystick driverRemoteLeft = new Joystick(0);
+    public static Joystick driverRemoteRight = new Joystick(1);
 
     OI() {
-
-        driverRemote.leftBumper.whenPressed(new DriveSetLowGear());
-        driverRemote.leftBumper.whenReleased(new DriveSetHighGear());
-
-        driverRemote.backButton.whenPressed(new InterruptAll());
-        operatorRemote.backButton.whenPressed(new InterruptAll());
 
         operatorRemote.buttonA.whenPressed(new ArmsClamp());
         operatorRemote.buttonB.whenPressed(new ArmsOpen());
 
         operatorRemote.leftBumper.whenPressed(new ShooterForward());
-        operatorRemote.rightBumper.whenPressed(new LiftShiftToClimbMode());
 
-        operatorRemote.buttonX.whenPressed(new LiftElevate(AssemblyLocation.GROUND.getElevatorPosition()));
-        operatorRemote.buttonY.whenPressed(new LiftElevate(AssemblyLocation.SWITCH.getElevatorPosition()));
-        operatorRemote.dPad.left.whenPressed(new LiftElevate(AssemblyLocation.SCALE_DOWN.getElevatorPosition()));
-        operatorRemote.dPad.right.whenPressed(new LiftElevate(AssemblyLocation.SCALE_UP.getElevatorPosition()));
+        operatorRemote.startButton.whenPressed(new PrepareForClimb());
+        operatorRemote.rightStick.whenPressed(new SetClimbMode());
 
-        operatorRemote.dPad.down.whenPressed(new BeltBarMoveToPos(AssemblyLocation.SWITCH.getBeltBarPosition()));
+        operatorRemote.buttonX.whenPressed(new IntakeCube());
+        operatorRemote.buttonY.whenPressed(new MoveAssembly(AssemblyLocation.BOTTOM));
+        operatorRemote.dPad.down.whenPressed(new MoveAssembly(AssemblyLocation.SWITCH));
+        operatorRemote.dPad.right.whenPressed(new MoveAssembly(AssemblyLocation.SCALE_DOWN));
+        operatorRemote.dPad.up.whenPressed(new MoveAssembly(AssemblyLocation.SCALE_MIDDLE));
+        operatorRemote.dPad.left.whenPressed(new MoveAssembly(AssemblyLocation.SCALE_UP));
+        operatorRemote.rightBumper.whenPressed(new MoveAssembly(AssemblyLocation.EXCHANGE_ZONE));
+
+
+
     }
 
-
 }
-

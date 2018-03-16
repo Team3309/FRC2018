@@ -19,119 +19,120 @@ import org.usfirst.frc.team3309.lib.math.LibMath;
  */
 public class DriveCheezyController extends Controller3<DriveSignal, Double, Double, Boolean> {
 
-    private double oldWheel, quickStopAccumulator;
+    private static final double kThrottleDeadband = 0.02;
+    private static final double kWheelDeadband = 0.02;
 
-    private double throttleDeadband = 0.04;
-    private double wheelDeadband = 0.04;
+    private static final double kHighWheelNonLinearity = 0.65;
+    private static final double kLowWheelNonLinearity = 0.5;
 
-    public DriveCheezyController(double throttleDeadband, double turnDeadband) {
-        this.throttleDeadband = throttleDeadband;
-        this.wheelDeadband = turnDeadband;
-    }
+    private static final double kHighNegInertiaScalar = 4.0;
 
-    public DriveCheezyController() {
-    }
+    private static final double kHighSensitivity = 1.05;
+    private static final double kLowSensitiity = 1.3;
+
+    private static final double kLowNegInertiaThreshold = 0.65;
+    private static final double kLowNegInertiaTurnScalar = 1.5;
+    private static final double kLowNegInertiaCloseScalar = 4.0;
+    private static final double kLowNegInertiaFarScalar = 5.0;
+
+    private static final double kQuickStopDeadband = 0.2;
+    private static final double kQuickStopWeight = 0.1;
+    private static final double kQuickStopScalar = 5.0;
+
+    private double mOldWheel = 0.0;
+    private double mQuickStopAccumlator = 0.0;
+    private double mNegInertiaAccumlator = 0.0;
 
     @Override
     public DriveSignal update(Double throttle, Double turn, Boolean isQuickTurn) {
         DriveSignal driveSignal;
         boolean isHighGear = true;
+
+        turn = LibMath.handleDeadband(turn, kWheelDeadband);
+        throttle = LibMath.handleDeadband(throttle, kThrottleDeadband);
+
+        double negInertia = turn - mOldWheel;
+        mOldWheel = turn;
+
         double wheelNonLinearity;
 
-        turn = LibMath.handleDeadband(turn, wheelDeadband);
-        throttle = LibMath.handleDeadband(throttle, throttleDeadband);
-
-        double negInertia = turn - oldWheel;
-        oldWheel = turn;
-
         if (isHighGear) {
-            wheelNonLinearity = 0.6;
+            wheelNonLinearity = kHighWheelNonLinearity;
+            final double denominator = Math.sin(Math.PI / 2.0 * wheelNonLinearity);
             // Apply a sin function that's scaled to make it feel better.
-            turn = Math.sin(Math.PI / 2.0 * wheelNonLinearity * turn)
-                    / Math.sin(Math.PI / 2.0 * wheelNonLinearity);
-            turn = Math.sin(Math.PI / 2.0 * wheelNonLinearity * turn)
-                    / Math.sin(Math.PI / 2.0 * wheelNonLinearity);
+            turn = Math.sin(Math.PI / 2.0 * wheelNonLinearity * turn) / denominator;
+            turn = Math.sin(Math.PI / 2.0 * wheelNonLinearity * turn) / denominator;
         } else {
-            wheelNonLinearity = 0.5;
+            wheelNonLinearity = kLowWheelNonLinearity;
+            final double denominator = Math.sin(Math.PI / 2.0 * wheelNonLinearity);
             // Apply a sin function that's scaled to make it feel better.
-            turn = Math.sin(Math.PI / 2.0 * wheelNonLinearity * turn)
-                    / Math.sin(Math.PI / 2.0 * wheelNonLinearity);
-            turn = Math.sin(Math.PI / 2.0 * wheelNonLinearity * turn)
-                    / Math.sin(Math.PI / 2.0 * wheelNonLinearity);
-            turn = Math.sin(Math.PI / 2.0 * wheelNonLinearity * turn)
-                    / Math.sin(Math.PI / 2.0 * wheelNonLinearity);
+            turn = Math.sin(Math.PI / 2.0 * wheelNonLinearity * turn) / denominator;
+            turn = Math.sin(Math.PI / 2.0 * wheelNonLinearity * turn) / denominator;
+            turn = Math.sin(Math.PI / 2.0 * wheelNonLinearity * turn) / denominator;
         }
 
         double leftPwm, rightPwm, overPower;
-        double sensitivity = 0.3; // 0.3
+        double sensitivity;
 
         double angularPower;
         double linearPower;
 
         // Negative inertia!
-        double negInertiaAccumulator = 0.0;
-        double negInertiaScalar = 5;
+        double negInertiaScalar;
         if (isHighGear) {
-
-            negInertiaScalar = 5.0;
+            negInertiaScalar = kHighNegInertiaScalar;
+            sensitivity = kHighSensitivity;
         } else {
-            /*
-             * if (wheel * negInertia > 0) { negInertiaScalar = 1.75; } else {
-             * if (Math.abs(wheel) > 0.65) { negInertiaScalar = 4.0; } else {
-             * negInertiaScalar = 3.0; } } sensitivity = .6;
-             */
+            if (turn * negInertia > 0) {
+                // If we are moving away from 0.0, aka, trying to get more wheel.
+                negInertiaScalar = kLowNegInertiaTurnScalar;
+            } else {
+                // Otherwise, we are attempting to go back to 0.0.
+                if (Math.abs(turn) > kLowNegInertiaThreshold) {
+                    negInertiaScalar = kLowNegInertiaFarScalar;
+                } else {
+                    negInertiaScalar = kLowNegInertiaCloseScalar;
+                }
+            }
+            sensitivity = kLowSensitiity;
         }
         double negInertiaPower = negInertia * negInertiaScalar;
-        negInertiaAccumulator += negInertiaPower;
+        mNegInertiaAccumlator += negInertiaPower;
 
-        turn = turn + negInertiaAccumulator;
-        if (negInertiaAccumulator > 1) {
-            negInertiaAccumulator -= 1;
-        } else if (negInertiaAccumulator < -1) {
-            negInertiaAccumulator += 1;
+        turn = turn + mNegInertiaAccumlator;
+        if (mNegInertiaAccumlator > 1) {
+            mNegInertiaAccumlator -= 1;
+        } else if (mNegInertiaAccumlator < -1) {
+            mNegInertiaAccumlator += 1;
         } else {
-            negInertiaAccumulator = 0;
+            mNegInertiaAccumlator = 0;
         }
         linearPower = throttle;
 
-        if (throttle > .4) {
-            sensitivity = .5; // 0.15
-        } else {
-            sensitivity = .8; // 0.3
-        }
         // Quickturn!
         if (isQuickTurn) {
-            if (Math.abs(linearPower) < 0.2) {
-                double alpha = 0.05;
-                quickStopAccumulator = (1 - alpha) * quickStopAccumulator
-                        + alpha * limit(turn, 1.0) * 5;
+            if (Math.abs(linearPower) < kQuickStopDeadband) {
+                double alpha = kQuickStopWeight;
+                mQuickStopAccumlator = (1 - alpha) * mQuickStopAccumlator
+                        + alpha * limit(turn, 1.0) * kQuickStopScalar;
             }
             overPower = 1.0;
-            if (isHighGear) {
-                sensitivity = .85; // 0.455
-            } else {
-                sensitivity = .85; // 0.455
-            }
-            angularPower = turn * sensitivity;
-            if (turn == 1 || turn == -1) {
-                angularPower = turn;
-            }
+            angularPower = turn;
         } else {
             overPower = 0.0;
-            angularPower = Math.abs(throttle) * turn * sensitivity
-                    - quickStopAccumulator;
-            if (quickStopAccumulator > 1) {
-                quickStopAccumulator -= 1;
-            } else if (quickStopAccumulator < -1) {
-                quickStopAccumulator += 1;
+            angularPower = Math.abs(throttle) * turn * sensitivity - mQuickStopAccumlator;
+            if (mQuickStopAccumlator > 1) {
+                mQuickStopAccumlator -= 1;
+            } else if (mQuickStopAccumlator < -1) {
+                mQuickStopAccumlator += 1;
             } else {
-                quickStopAccumulator = 0.0;
+                mQuickStopAccumlator = 0.0;
             }
         }
 
         rightPwm = leftPwm = linearPower;
-        leftPwm -= angularPower;
-        rightPwm += angularPower;
+        leftPwm += angularPower;
+        rightPwm -= angularPower;
 
         if (leftPwm > 1.0) {
             rightPwm -= overPower * (leftPwm - 1.0);

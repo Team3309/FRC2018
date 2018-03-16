@@ -1,46 +1,39 @@
 package org.usfirst.frc.team3309.subsystems;
 
-import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import org.usfirst.frc.team3309.commands.subsystems.arms.ArmsCheckForCube;
 import org.usfirst.frc.team3309.robot.Constants;
 
 public class Arms extends Subsystem {
 
-    private DoubleSolenoid leftActuator = new DoubleSolenoid(Constants.ARMS_LEFT_ACTUATOR_A,
-            Constants.ARMS_LEFT_ACTUATOR_B);
-
-    private DoubleSolenoid rightActuator = new DoubleSolenoid(Constants.ARMS_RIGHT_ACTUATOR_A,
-            Constants.ARMS_RIGHT_ACTUATOR_B);
-
-    private AnalogInput hasCubeSensor = new AnalogInput(Constants.ARMS_SHARP_SENSOR);
+    private DoubleSolenoid actuator = new DoubleSolenoid(Constants.ARMS_ACTUATOR_A,
+            Constants.ARMS_ACTUATOR_B);
 
     @Override
     protected void initDefaultCommand() {
-        setDefaultCommand(new ArmsCheckForCube());
     }
 
-    private void setRightActuator(DoubleSolenoid.Value value) {
-        rightActuator.set(value);
+    public void sendToDashboard() {
+        NetworkTable table = NetworkTableInstance.getDefault().getTable("Arms");
+        table.getEntry("arms closed: ").setBoolean(isArmsClosed());
     }
 
-    private void setLeftActuator(DoubleSolenoid.Value value) {
-        leftActuator.set(value);
-    }
-
-    public boolean isCubeIn() {
-        return hasCubeSensor.getAverageVoltage() > 0.7;
-    }
-
-    public void clampArms() {
-        setLeftActuator(DoubleSolenoid.Value.kForward);
-        setRightActuator(DoubleSolenoid.Value.kForward);
+    private void setActuator(DoubleSolenoid.Value value) {
+        actuator.set(value);
     }
 
     public void openArms() {
-        setLeftActuator(DoubleSolenoid.Value.kReverse);
-        setRightActuator(DoubleSolenoid.Value.kReverse);
+        setActuator(DoubleSolenoid.Value.kForward);
+    }
+
+    public void clampArms() {
+        setActuator(DoubleSolenoid.Value.kReverse);
+    }
+
+    public boolean isArmsClosed() {
+        return actuator.get() == DoubleSolenoid.Value.kReverse;
     }
 
 }

@@ -3,9 +3,54 @@ package org.usfirst.frc.team3309.robot;
 import org.usfirst.frc.team3309.lib.controllers.helpers.Waypoint;
 import org.usfirst.frc.team3309.lib.math.Length;
 
+import java.net.NetworkInterface;
+
+import java.net.SocketException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Constants {
+
+    private static final byte[] PRACTICEBOT_MAC_ADDR = {0x00, (byte) 0x80, 0x2F, 0x17, (byte) 0x85, (byte) 0xD3};
+    private static final byte[] COMPBOT_MAC_ADDR = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00}; // find this at comp
+
+    public enum Robot {
+        PRACTICE,
+        COMPETITION
+    }
+
+    public static Robot currentRobot;
+
+    static {
+        try {
+            byte[] rioMac = NetworkInterface.getByName("eth0").getHardwareAddress();
+            if (Arrays.equals(rioMac, PRACTICEBOT_MAC_ADDR)) {
+                currentRobot = Robot.PRACTICE;
+            } else if (Arrays.equals(rioMac, COMPBOT_MAC_ADDR)) {
+                currentRobot = Robot.COMPETITION;
+            } else {
+                currentRobot = null;
+                System.err.println("Oh no! Unknown robot! Did somebody install a new rio?");
+            }
+        } catch (SocketException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public static double BELTBAR_BOTTOM_POS = Constants.currentRobot == Robot.PRACTICE ? -2720 : -1950;
+    public static double BELTBAR_INTAKE_POS = Constants.currentRobot == Robot.PRACTICE ? -1350 : -640;
+    public static double BELTBAR_EXCHANGE_POS = Constants.currentRobot == Robot.PRACTICE ? -1800 : -900;
+    public static double BELTBAR_EJECT_POS = Constants.currentRobot == Robot.PRACTICE ? -2400 : -1690;
+    public static double BELTBAR_SWITCH_POS = Constants.currentRobot == Robot.PRACTICE ? -2000 : -1090;
+    public static double BELTBAR_CLIMB = Constants.currentRobot == Robot.PRACTICE ? -2800 : -1950;
+
+    public static double ELEVATOR_BOTTOM_POS = 0;
+    public static double ELEVATOR_INTAKE_POS = 1100;
+    public static double ELEVATOR_EXCHANGE_POS = 700;
+    public static double ELEVATOR_SWITCH_POS = 15000;
+    public static double ELEVATOR_SCALE_DOWN_POS = 30000;
+    public static double ELEVATOR_SCALE_MIDDLE_POS = 34000;
+    public static double ELEVATOR_SCALE_TOP_POS = 42000;
 
     // drive
     public static final int DRIVE_RIGHT_0_ID = 11;
@@ -23,13 +68,8 @@ public class Constants {
     public static final int ROLLER_RIGHT = 41;
 
     // arms
-    public static final int ARMS_LEFT_ACTUATOR_A = 1;
-    public static final int ARMS_LEFT_ACTUATOR_B = 2;
-
-    public static final int ARMS_RIGHT_ACTUATOR_A = 3;
-    public static final int ARMS_RIGHT_ACTUATOR_B = 0;
-
-    public static final int ARMS_SHARP_SENSOR = 0;
+    public static final int ARMS_ACTUATOR_A = 1;
+    public static final int ARMS_ACTUATOR_B = 2;
 
     // lift
     public static final int LIFT_0 = 20;
@@ -40,10 +80,18 @@ public class Constants {
 
     public static final int LIFT_SHIFTER = 6;
 
-    public static final int LIFT_BOTTOM_LIMIT_SWITCH = 0;
+    public static final int LIFT_BANNER_SENSOR = 0;
+
+    public static final int LIFT_HOLDER_A = 3;
+    public static final int LIFT_HOLDER_B = 0;
 
     // beltbar
     public static final int BELTBAR_0 = 30;
+
+    public static final int BELTBAR_SHARP_SENSOR_LEFT = 0;
+    public static final int BELTBAR_SHARP_SENSOR_RIGHT = 1;
+
+    public static final int BELTBAR_HALL_EFFECT = 2;
 
     // shooter
     public static final int SHOOTER_SHIFTER = 5;
@@ -53,46 +101,21 @@ public class Constants {
 
     // robot constants
 
-    public static final double DRIVE_ENCODER_COUNTS_PER_REV = 4096.0 * 5  * 2 * 10; // 4096.0 * 5.0 * 2 * 10
+    public static final double MAX_LIFT_POS = 47000;
 
+    public static final double DRIVE_ENCODER_COUNTS_PER_REV = 39298;
     public static final Length WHEEL_DIAMETER_INCHES = Length.fromInches(6.0);
-    public static final Length WHEELBASE_INCHES = Length.fromInches(28.0);
+    public static final Length WHEELBASE_INCHES = Length.fromInches(26.0);
 
-    public static final Length BELTBAR_ARM_LENGTH = Length.fromInches(9);
+    public static final ArrayList<Waypoint> curvyToSwitchRight = new ArrayList<>();
+    public static final ArrayList<Waypoint> curvyToSwitchLeft = new ArrayList<>();
 
-    public static final double LIFT_MAX_ENC_POSITION = 0;
+    static {
+        curvyToSwitchRight.add(new Waypoint(0.796 * 82.34987618525085, 0.39093873144451713));
+        curvyToSwitchRight.add(new Waypoint(-0.796 * 29.777276396478868, 0.740486358108046));
 
-    public static final ArrayList<Waypoint> figureEightPath = new ArrayList<>();
-    public static final ArrayList<Waypoint> sigmoidPath = new ArrayList<>();
-    public static final ArrayList<Waypoint> circularPath = new ArrayList<>();
-    public static final ArrayList<Waypoint> semiCircular = new ArrayList<>();
-    public static final ArrayList<Waypoint> toSwitchPath = new ArrayList<>();
-
-    static  {
-        figureEightPath.add(new Waypoint(32.470, 1.1821));
-        figureEightPath.add(new Waypoint(32.470, -1.1821));
-        figureEightPath.add(new Waypoint(22.140, -1.1571));
-        figureEightPath.add(new Waypoint(22.140, -1.1571));
-        figureEightPath.add(new Waypoint(28.367, -1.3498));
-        figureEightPath.add(new Waypoint(28.367, 1.3498));
-
-        sigmoidPath.add(new Waypoint(39.497, 1.1467));
-        sigmoidPath.add(new Waypoint(37.191, -1.202));
-
-        circularPath.add(new Waypoint(27.48, 1.622));
-        circularPath.add(new Waypoint(29.5, 1.552));
-        circularPath.add(new Waypoint(29.2969, 0.8153));
-        circularPath.add(new Waypoint(28.6254, 0.8323));
-        circularPath.add(new Waypoint(27.3257, 0.79898));
-        circularPath.add(new Waypoint(30.2656, 0.72836));
-
-        semiCircular.add(new Waypoint(25.169, 1.6019));
-        semiCircular.add(new Waypoint(25.478, 1.5897));
-
-        toSwitchPath.add(new Waypoint(-87.135, 0.9282));
-        toSwitchPath.add(new Waypoint(-43.654, 1.5699));
-        toSwitchPath.add(new Waypoint(44.6938, -1.3548));
-        toSwitchPath.add(new Waypoint(55.8847, -1.1433));
+        curvyToSwitchLeft.add(new Waypoint(-0.796 * 82.34987618525085, -0.39093873144451713));
+        //   curvyToSwitchLeft.add(new Waypoint(0.796 * 34.777276396478868,     -0.740486358108046));
     }
 
 }

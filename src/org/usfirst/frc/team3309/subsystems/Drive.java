@@ -1,5 +1,6 @@
 package org.usfirst.frc.team3309.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.kauailabs.navx.frc.AHRS;
@@ -39,7 +40,7 @@ public class Drive extends Subsystem {
         left0.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
         left1.follow(left0);
         left2.follow(left0);
-        left0.configOpenloopRamp(0.25, 0);
+        left0.configOpenloopRamp(0, 0);
         left0.configMotionAcceleration(30000, 0);
         left0.config_kP(0, 0.019, 0);
         left0.config_kD(0, 0.0006, 0);
@@ -53,7 +54,7 @@ public class Drive extends Subsystem {
         right0.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
         right1.follow(right0);
         right2.follow(right0);
-        right0.configOpenloopRamp(0.25, 0);
+        right0.configOpenloopRamp(0, 0);
         right0.configMotionAcceleration(30000, 0);
         right0.config_kP(0, 0.019, 0);
         right0.config_kD(0, 0.0006, 0);
@@ -69,11 +70,11 @@ public class Drive extends Subsystem {
     }
 
     public double encoderCountsToInches(double counts) {
-        return counts * ((Math.PI * Constants.WHEEL_DIAMETER_INCHES.toInches()) / Constants.DRIVE_ENCODER_COUNTS_PER_REV);
+        return counts * (1 / Constants.DRIVE_ENCODER_COUNTS_PER_REV) * (Math.PI * Constants.WHEEL_DIAMETER_INCHES.toInches());
     }
 
     public double inchesToEncoderCounts(double inches) {
-        return inches * Constants.DRIVE_ENCODER_COUNTS_PER_REV / (Math.PI * Constants.WHEEL_DIAMETER_INCHES.toInches());
+        return inches * (Constants.DRIVE_ENCODER_COUNTS_PER_REV / (Math.PI * Constants.WHEEL_DIAMETER_INCHES.toInches()));
     }
 
     public void reset() {
@@ -81,9 +82,9 @@ public class Drive extends Subsystem {
         right0.clearMotionProfileTrajectories();
         left0.changeToDisabledMode();
         right0.changeToDisabledMode();
-        left0.getSensorCollection().setQuadraturePosition(0, 0);
-        right0.getSensorCollection().setQuadraturePosition(0, 0);
-        navX.reset();
+        left0.setSelectedSensorPosition(0, 0,0);
+        right0.setSelectedSensorPosition(0, 0,0);
+        navX.zeroYaw();
     }
 
     public double getEncoderPos() {
@@ -91,11 +92,11 @@ public class Drive extends Subsystem {
     }
 
     public double getLeftEncoder() {
-        return -left0.getSensorCollection().getQuadraturePosition();
+        return -left0.getSelectedSensorPosition(0);
     }
 
     public double getRightEncoder() {
-        return right0.getSensorCollection().getQuadraturePosition();
+        return right0.getSelectedSensorPosition(0);
     }
 
     public double getEncoderVelocity() {
@@ -103,15 +104,14 @@ public class Drive extends Subsystem {
     }
 
     public int getLeftVelocity() {
-        return left0.getSensorCollection().getQuadratureVelocity();
+        return left0.getSelectedSensorVelocity(0);
     }
 
     public double getRightVelocity() {
-        return -right0.getSensorCollection().getQuadratureVelocity();
+        return -right0.getSelectedSensorVelocity(0);
     }
 
-    public double
-    getAngPos() {
+    public double getAngPos() {
         return -navX.getAngle();
     }
 
@@ -122,10 +122,16 @@ public class Drive extends Subsystem {
     public void sendToDashboard() {
         SmartDashboard.putData(this);
         NetworkTable table = NetworkTableInstance.getDefault().getTable("Drive");
-        table.getEntry("Target velocity left: ").setNumber(left0.getClosedLoopTarget(0));
-        table.getEntry("Target velocity right: ").setNumber(right0.getClosedLoopTarget(0));
-        table.getEntry("Velocity left error: ").setNumber(left0.getClosedLoopError(0));
-        table.getEntry("Velocity right error: ").setNumber(right0.getClosedLoopError(0));
+        if (left0.getControlMode() == ControlMode.Velocity || left0.getControlMode() == ControlMode.MotionMagic
+                || left0.getControlMode() == ControlMode.Position) {
+            table.getEntry("Target velocity left: ").setNumber(left0.getClosedLoopTarget(0));
+            table.getEntry("Velocity left error: ").setNumber(left0.getClosedLoopError(0));
+        }
+        if (right0.getControlMode() == ControlMode.Velocity || right0.getControlMode() == ControlMode.MotionMagic
+                || right0.getControlMode() == ControlMode.Position) {
+            table.getEntry("Target velocity right: ").setNumber(right0.getClosedLoopTarget(0));
+            table.getEntry("Velocity right error: ").setNumber(right0.getClosedLoopError(0));
+        }
         table.getEntry("Position (Inches): ").setNumber(encoderCountsToInches(getEncoderPos()));
         table.getEntry("Velocity (Inches): ").setNumber(encoderCountsToInches(getEncoderVelocity()));
         table.getEntry("Left Position (Inches): ").setNumber(encoderCountsToInches(getLeftEncoder()));
@@ -142,6 +148,15 @@ public class Drive extends Subsystem {
         table.getEntry("Right output: ").setNumber(right0.getMotorOutputPercent());
         table.getEntry("Left control: ").setString(left0.getControlMode().toString());
         table.getEntry("Right control: ").setString(right0.getControlMode().toString());
+
+        table.getEntry("left0 current ").setNumber(left0.getOutputCurrent());
+        table.getEntry("left1 current ").setNumber(left1.getOutputCurrent());
+        table.getEntry("left2 current ").setNumber(left2.getOutputCurrent());
+
+        table.getEntry("right0 current ").setNumber(right0.getOutputCurrent());
+        table.getEntry("right1 current ").setNumber(right1.getOutputCurrent());
+        table.getEntry("right2 current ").setNumber(right2.getOutputCurrent());
+
     }
 
     public void changeToBrakeMode() {

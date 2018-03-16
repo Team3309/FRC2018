@@ -5,10 +5,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.usfirst.frc.team3309.commands.autos.AutoLineAuto;
-import org.usfirst.frc.team3309.commands.autos.NoActionAuto;
-import org.usfirst.frc.team3309.commands.autos.SwitchForwardAuto;
-import org.usfirst.frc.team3309.commands.autos.TurnToSwitchAuto;
+import org.usfirst.frc.team3309.commands.autos.*;
 import org.usfirst.frc.team3309.commands.subsystems.beltbar.BeltBarMoveToPos;
 import org.usfirst.frc.team3309.commands.subsystems.drive.*;
 import org.usfirst.frc.team3309.commands.subsystems.lift.LiftElevate;
@@ -30,18 +27,13 @@ public class AutoModeExecutor {
             .listFiles();
 
     public static void displayAutos() {
-        autos.addObject("Drivepower auto", new DrivePower());
-        autos.addDefault("No Action", new NoActionAuto());
-        autos.addObject("DriveForwardAuto", new DriveForward(Length.fromInches(50)));
-        autos.addObject("DriveBack", new DriveForward(Length.fromInches(-50)));
-        autos.addObject("TurnCWToAngleAuto", new DriveTurn(-90));
-        autos.addObject("TurnCCWToAngleAuto", new DriveTurn(90));
+
+        autos.addObject("No Action", new NoActionAuto());
+        autos.addDefault("CurvyToSwitchAuto", new CurvyToSwitchAuto());
         autos.addObject("AutoLineAuto", new AutoLineAuto());
-        autos.addObject("SwitchForwardAuto", new SwitchForwardAuto());
-        autos.addObject("TurnToSwitchAuto", new TurnToSwitchAuto());
-        autos.addObject("LiftElevate", new LiftElevate(5000));
-        autos.addObject("BeltbarMoveToPos", new BeltBarMoveToPos(0));
-        autos.addObject("DriveForwardVelocity", new DriveForwardVelocity(28000));
+        autos.addObject("LeftSideSwitch", new GreedyCrossAuto(true));
+        autos.addObject("RightSideSwitch", new GreedyCrossAuto(false));
+
         if (isUsingFile) {
             for (File autoFile : autoFiles) {
                 Command autoCommand = null;
@@ -79,7 +71,7 @@ public class AutoModeExecutor {
                     autoGroup.addSequential(new DrivePath(arcPath));
                 case "LINE":
                     double dist = Double.parseDouble(values[1]);
-                    autoGroup.addSequential(new DriveForward(Length.fromInches(dist)));
+                    autoGroup.addSequential(new DriveStraight(Length.fromInches(dist)));
                 case "WAIT":
                     double sec = Double.parseDouble(values[1]);
                     autoGroup.addSequential(new WaitCommand(sec));
