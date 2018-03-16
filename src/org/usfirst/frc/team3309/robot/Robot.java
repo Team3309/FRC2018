@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.usfirst.frc.team3309.commands.subsystems.AssemblyLocation;
 import org.usfirst.frc.team3309.commands.subsystems.lift.LiftCheckLimits;
 import org.usfirst.frc.team3309.subsystems.*;
 
@@ -43,7 +44,7 @@ public class Robot extends TimedRobot {
     public void robotInit() {
         setPeriod(0.01);
         pdp = new PowerDistributionPanel(0);
-
+        AssemblyLocation.init();
         logger = Logger.getLogger("Robot");
         logger.info("robot init");
      //   BlackBox.initLog("beltbar current ", "amps");
