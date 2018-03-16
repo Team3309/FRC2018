@@ -48,16 +48,11 @@ public class Lift extends Subsystem {
         lift0.configForwardSoftLimitThreshold(FORWARD_LIM, 10);
         lift0.configForwardSoftLimitEnable(true, 10);
 
-        lift0.config_kP(0, 0.2, 10);
-        lift0.config_kD(0, 28, 10);
-        lift0.config_kF(0, 0.023, 10);
-
-        SmartDashboard.putNumber("Lift P: ", 0.2);
-        SmartDashboard.putNumber("Lift I: ", 0);
-        SmartDashboard.putNumber("Lift D: ", 28);
-        SmartDashboard.putNumber("Lift F: ", 0.023);
-        SmartDashboard.putNumber("Lift Iz: ", 0);
-
+        lift0.config_kP(0, 0.26, 10);
+        lift0.config_kI(0,3.2*Math.pow(10,-5),10);
+        lift0.config_kD(0, 30, 10);
+        lift0.config_IntegralZone(0,200,0);
+        lift0.config_kF(0, 0.024, 10);
 
         lift0.configClosedloopRamp(0.22, 10);
         lift0.configPeakOutputForward(1.0, 10); //1.0
@@ -104,13 +99,6 @@ public class Lift extends Subsystem {
             lift0.configForwardSoftLimitEnable(true, 10);
             lift0.configReverseSoftLimitEnable(true, 10);
         }
-        lift0.config_kP(0,SmartDashboard.getNumber("Lift P: ",3),0);
-        lift0.config_kI(0,SmartDashboard.getNumber("Lift I: ", 0),0);
-        lift0.config_kD(0,SmartDashboard.getNumber("Lift D: ", 0.5),0);
-        lift0.config_kF(0,SmartDashboard.getNumber("Lift F: ", 0.04),0);
-        lift0.config_IntegralZone(0,(int)SmartDashboard.getNumber("Lift Iz: ", 0),0);
-        SmartDashboard.putNumber("Lift PV Output: ",lift0.getMotorOutputPercent());
-        SmartDashboard.putNumber("Lift Position: ", lift0.getSelectedSensorPosition(0));
     }
 
     public void sendToDashboard() {
