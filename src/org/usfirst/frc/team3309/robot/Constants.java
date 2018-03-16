@@ -42,13 +42,13 @@ public class Constants {
     public static double BELTBAR_EXCHANGE_POS = Constants.currentRobot == Robot.PRACTICE ? -1800 : -900;
     public static double BELTBAR_EJECT_POS = Constants.currentRobot == Robot.PRACTICE ? -2400 : -1690;
     public static double BELTBAR_SWITCH_POS = Constants.currentRobot == Robot.PRACTICE ? -2000 : -1090;
-    public static double BELTBAR_CLIMB = Constants.currentRobot == Robot.PRACTICE ? -2800 : -2000;
+    public static double BELTBAR_CLIMB = Constants.currentRobot == Robot.PRACTICE ? -2800 : -1950;
 
     public static double ELEVATOR_BOTTOM_POS = 0;
     public static double ELEVATOR_INTAKE_POS = 1100;
     public static double ELEVATOR_EXCHANGE_POS = 700;
     public static double ELEVATOR_SWITCH_POS = 15000;
-    public static double ELEVATOR_SCALE_DOWN_POS = 34000;
+    public static double ELEVATOR_SCALE_DOWN_POS = 32000;
     public static double ELEVATOR_SCALE_MIDDLE_POS = 38000;
     public static double ELEVATOR_SCALE_TOP_POS = 42000;
 
