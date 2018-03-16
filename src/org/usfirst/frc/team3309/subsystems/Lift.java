@@ -56,7 +56,7 @@ public class Lift extends Subsystem {
         lift0.config_kF(0, 0.023, 0);
 
         lift0.configClosedloopRamp(0.22, 0);
-        lift0.configPeakOutputForward(.20, 0); //1.0
+        lift0.configPeakOutputForward(0.2, 0); //1.0
         lift0.configPeakOutputReverse(-0.2, 0); // -0.45
 
         lift0.changeToPositionMode();
