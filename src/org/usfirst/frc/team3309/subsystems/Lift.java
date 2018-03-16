@@ -40,10 +40,10 @@ public class Lift extends Subsystem {
 
     public Lift() {
         lift0.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0,
-                0);
+                10);
 
-        lift0.configForwardSoftLimitThreshold(FORWARD_LIM, 0);
-        lift0.configForwardSoftLimitEnable(true, 0);
+        lift0.configForwardSoftLimitThreshold(FORWARD_LIM, 10);
+        lift0.configForwardSoftLimitEnable(true, 10);
 
         /* practice bot
         lift0.config_kP(0, 0.24, 0);
@@ -51,13 +51,13 @@ public class Lift extends Subsystem {
         lift0.config_kF(0, 0.023, 0);
         */
 
-        lift0.config_kP(0, 0.2, 0);
-        lift0.config_kD(0, 28, 0);
-        lift0.config_kF(0, 0.023, 0);
+        lift0.config_kP(0, 0.2, 10);
+        lift0.config_kD(0, 28, 10);
+        lift0.config_kF(0, 0.023, 10);
 
-        lift0.configClosedloopRamp(0.22, 0);
-        lift0.configPeakOutputForward(0.2, 0); //1.0
-        lift0.configPeakOutputReverse(-0.2, 0); // -0.45
+        lift0.configClosedloopRamp(0.22, 10);
+        lift0.configPeakOutputForward(0.2, 10); //1.0
+        lift0.configPeakOutputReverse(-0.2, 10); // -0.45
 
         lift0.changeToPositionMode();
 
