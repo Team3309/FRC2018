@@ -36,7 +36,7 @@ public class Lift extends Subsystem {
 
     private double goalPos;
 
-    private final int FORWARD_LIM = 47000;
+    private final int FORWARD_LIM = 47000; // 47000
 
     public Lift() {
         lift0.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0,
@@ -44,12 +44,6 @@ public class Lift extends Subsystem {
 
         lift0.configForwardSoftLimitThreshold(FORWARD_LIM, 10);
         lift0.configForwardSoftLimitEnable(true, 10);
-
-        /* practice bot
-        lift0.config_kP(0, 0.24, 0);
-        lift0.config_kD(0, 28, 0);
-        lift0.config_kF(0, 0.023, 0);
-        */
 
         lift0.config_kP(0, 0.2, 10);
         lift0.config_kD(0, 28, 10);

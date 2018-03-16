@@ -10,7 +10,7 @@ public class LiftCheckLimits extends Command {
     private final double DESIRED_TIME_ELUDED = 0.3;
     private boolean hasStarted = false;
 
-    private boolean isZeroed = false;
+    private static boolean isZeroed = false;
 
     @Override
     protected void execute() {
@@ -33,6 +33,10 @@ public class LiftCheckLimits extends Command {
     @Override
     protected boolean isFinished() {
         return false;
+    }
+
+    public static boolean isZeroed() {
+        return isZeroed;
     }
 
 }
