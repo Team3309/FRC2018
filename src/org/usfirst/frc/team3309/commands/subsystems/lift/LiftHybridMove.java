@@ -6,7 +6,6 @@ import org.usfirst.frc.team3309.robot.Robot;
 
 public class LiftHybridMove extends Command
 {
-
     private double goalAngle;
     private double error;
     public static final double ERROR_THRESHOLD = 100;
@@ -45,5 +44,4 @@ public class LiftHybridMove extends Command
     protected boolean isFinished() {
         return false;
     }
-
 }

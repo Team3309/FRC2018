@@ -11,6 +11,7 @@ public class IntakeCube extends CommandGroup {
 //        addSequential(new WaitCommand(0.6));
 //        addParallel(new CheckForDrop());
 //        addSequential(new MoveAssembly(AssemblyLocation.BOTTOM));
+//        Andrew said to 🐈 on auto-pickup.
     }
 
 }
