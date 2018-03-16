@@ -36,7 +36,7 @@ public class RollersTeleop extends Command {
 
     private double rescale(double val)
     {
-        return ((val+ROLLER_FEED_FORWARD)/(1+ROLLER_FEED_FORWARD))
+        return ((val+ROLLER_FEED_FORWARD)/(1+ROLLER_FEED_FORWARD));
     }
 
     @Override
