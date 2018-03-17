@@ -20,7 +20,7 @@ public class ArcController extends Controller1<DriveSignal, DriveState> implemen
 
     private double goalAngle;
 
-    private double angleErrorThreshold = Math.toRadians(8);
+    private double angleErrorThreshold = Math.toRadians(4);
     private double distanceErrorThreshold = Robot.drive.inchesToEncoderCounts(1.5);
 
     private double prevAngle;
