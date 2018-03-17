@@ -23,10 +23,10 @@ public class CurvyToSwitchAuto extends CommandGroup {
                 addSequential(new DriveStraightProperly(-0.4, 8000));
                 addSequential(new DriveStop());
             } else if (Robot.isRightSwitch()) {
-                addSequential(new DriveArc(Length.fromInches(20), -50, 30000, true));
-                addSequential(new DriveStraightProperly(-0.1, 26000));
-                addSequential(new DriveArc(Length.fromInches(20), 40, 28000, true));
-                addSequential(new DriveStraightProperly(-2, 18000));
+                addSequential(new DriveArc(Length.fromInches(20), -50, 31000, true));
+                addSequential(new DriveStraightProperly(-0.1, 29900));
+                addSequential(new DriveArc(Length.fromInches(20), 40, 29000, true));
+                addSequential(new DriveStraightProperly(-2, 20000));
                 addSequential(new DriveStop());
             } else {
                 DriverStation.reportError("Oh no! I don't know where to go! :karson5:",false);
