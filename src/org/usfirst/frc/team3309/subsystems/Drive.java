@@ -96,7 +96,7 @@ public class Drive extends Subsystem {
     }
 
     public double getRightEncoder() {
-        return right0.getSelectedSensorPosition(0);
+        return -right0.getSelectedSensorPosition(0);
     }
 
     public double getEncoderVelocity() {
@@ -108,7 +108,7 @@ public class Drive extends Subsystem {
     }
 
     public double getRightVelocity() {
-        return right0.getSelectedSensorVelocity(0);
+        return -right0.getSelectedSensorVelocity(0);
     }
 
     public double getAngPos() {
