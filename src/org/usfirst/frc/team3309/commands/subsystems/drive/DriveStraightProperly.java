@@ -11,6 +11,7 @@ public class DriveStraightProperly extends Command
         MOTION_MAGIC,
         POSITION,
     }
+
     private DriveStrategy strategy;
     private double distance;
     private int velocityTarget = 30000;
@@ -20,6 +21,11 @@ public class DriveStraightProperly extends Command
         this.strategy = strategy;
         this.distance = Robot.drive.inchesToEncoderCounts(distance);
         requires(Robot.drive);
+    }
+
+    public DriveStraightProperly(double distance, int velocity) {
+        this(distance, DriveStrategy.VELOCITY);
+        this.velocityTarget = velocity;
     }
 
     @Override
@@ -57,4 +63,5 @@ public class DriveStraightProperly extends Command
         super.end();
         Robot.drive.disableOutput();
     }
+
 }

@@ -4,21 +4,29 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveArc;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveStraight;
+import org.usfirst.frc.team3309.commands.subsystems.drive.DriveStraightProperly;
+import org.usfirst.frc.team3309.commands.subsystems.drive.DriveStraightVel;
 import org.usfirst.frc.team3309.lib.math.Length;
 import org.usfirst.frc.team3309.robot.Robot;
 
 public class ScaleOnlyAuto extends CommandGroup {
 
-    public ScaleOnlyAuto() {
-        if (DriverStation.getInstance().getGameSpecificMessage().length() > 0) {
-            if (Robot.isRightScale()) {
-                addSequential(new DriveStraight(Length.fromInches(204), false));
-                addSequential(new DriveArc(Length.fromInches(15), 45, 14000, false));
-            } else if (Robot.isLeftScale()) {
+    private boolean isStartLeft = false;
 
-            }
-
-        }
+    public ScaleOnlyAuto(boolean isStartLeft) {
+        this.isStartLeft = isStartLeft;
     }
 
+    @Override
+    public synchronized void start() {
+        if (Robot.isLeftScale() && isStartLeft) {
+            addSequential(new DriveStraightProperly(204, 30000));
+            addSequential(new DriveArc(Length.fromInches(30), 30, 26000, false));
+            addSequential(new DriveStraightProperly(5, 10000));
+        } else if (Robot.isRightSwitch() && !isStartLeft) {
+            addSequential(new DriveStraightProperly(115, 30000));
+          //  addSequential(new DriveArc(Length.fromInches(30), -90, ));
+        }
+        super.start();
+    }
 }
