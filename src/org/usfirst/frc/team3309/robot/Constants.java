@@ -103,7 +103,7 @@ public class Constants {
 
     public static final double MAX_LIFT_POS = 47000;
 
-    public static final double DRIVE_ENCODER_COUNTS_PER_REV = 4096*9.6;
+    public static final double DRIVE_ENCODER_COUNTS_PER_REV = 4096/9.6;
     public static final Length WHEEL_DIAMETER_INCHES = Length.fromInches(6.0);
     public static final Length WHEELBASE_INCHES = Length.fromInches(26.0);
 

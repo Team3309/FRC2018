@@ -164,7 +164,6 @@ public class Drive extends Subsystem {
     {
         super.periodic();
         SmartDashboard.putNumber("Robot Distance Traversed: ",getEncoderPos());
-
     }
 
     public void changeToBrakeMode() {
