@@ -37,7 +37,7 @@ public class Constants {
         }
     }
 
-    public static double BELTBAR_BOTTOM_POS = Constants.currentRobot == Robot.PRACTICE ? -2590 : -1950;
+    public static double BELTBAR_BOTTOM_POS = Constants.currentRobot == Robot.PRACTICE ? -2680 : -1950;
     public static double BELTBAR_INTAKE_POS = Constants.currentRobot == Robot.PRACTICE ? -1350 : -640;
     public static double BELTBAR_EXCHANGE_POS = Constants.currentRobot == Robot.PRACTICE ? -1800 : -900;
     public static double BELTBAR_EJECT_POS = Constants.currentRobot == Robot.PRACTICE ? -2400 : -1690;
