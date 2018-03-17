@@ -13,12 +13,20 @@ public class DriveArc extends CommandEx {
     private ArcController arcController;
     private boolean isInitialized = false;
     private boolean backwards;
+    private boolean allowOvershoot;
+    private double angleDegrees;
 
-    public DriveArc(Length radius, double angleDegrees, double vel, boolean backwards) {
+    public DriveArc(Length radius, double angleDegrees, double vel, boolean backwards, boolean allowOvershoot) {
         requires(Robot.drive);
+        this.angleDegrees = angleDegrees;
+        this.allowOvershoot = allowOvershoot;
         this.backwards = backwards;
         arcController = new ArcController(Robot.drive.inchesToEncoderCounts(radius.toInches()), Math.toRadians(angleDegrees),
                 Robot.drive.inchesToEncoderCounts(Constants.WHEELBASE_INCHES.toInches()), vel);
+    }
+
+    public DriveArc(Length radius, double angleDegrees, double vel, boolean backwards) {
+        this(radius, angleDegrees, vel, backwards, false);
     }
 
     @Override
@@ -49,7 +57,7 @@ public class DriveArc extends CommandEx {
 
     @Override
     protected boolean isFinished() {
-        return arcController.isFinished();
+        return arcController.isFinished() || Math.abs(Robot.drive.getAngPos()) > Math.abs(angleDegrees);
     }
 
     @Override
