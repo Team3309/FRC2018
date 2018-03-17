@@ -25,7 +25,6 @@ public class DriveStraightProperly extends Command
     @Override
     protected void execute()
     {
-        SmartDashboard.putNumber("Robot Distance Travelled: ",Robot.drive.getEncoderPos());
         switch(strategy)
         {
             case POSITION:

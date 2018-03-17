@@ -159,6 +159,14 @@ public class Drive extends Subsystem {
 
     }
 
+    @Override
+    public void periodic()
+    {
+        super.periodic();
+        SmartDashboard.putNumber("Robot Distance Traversed: ",getEncoderPos());
+
+    }
+
     public void changeToBrakeMode() {
         left0.setNeutralMode(NeutralMode.Brake);
         right0.setNeutralMode(NeutralMode.Brake);
