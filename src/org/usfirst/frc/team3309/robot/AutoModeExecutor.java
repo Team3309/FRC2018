@@ -40,6 +40,8 @@ public class AutoModeExecutor {
         autos.addObject("Drive Straight Test (Position)", new DriveStraightProperly(60, DriveStraightProperly.DriveStrategy.POSITION));
         autos.addObject("Drive Straight Test (Velocity)", new DriveStraightProperly(60, DriveStraightProperly.DriveStrategy.VELOCITY));
         autos.addObject("Drive Straight Test (Motion Magic)", new DriveStraightProperly(60, DriveStraightProperly.DriveStrategy.MOTION_MAGIC));
+        autos.addObject("Drive Straight Test (Velocity) back", new DriveStraightProperly(-60, DriveStraightProperly.DriveStrategy.VELOCITY));
+
         if (isUsingFile) {
             for (File autoFile : autoFiles) {
                 Command autoCommand = null;
