@@ -1,7 +1,6 @@
 package org.usfirst.frc.team3309.commands.subsystems;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import org.usfirst.frc.team3309.lib.WaitCommand;
 
 public class IntakeCube extends CommandGroup {
 

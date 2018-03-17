@@ -1,6 +1,5 @@
 package org.usfirst.frc.team3309.commands.subsystems.drive;
 
-import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team3309.lib.CommandEx;
 import org.usfirst.frc.team3309.lib.controllers.drive.ArcController;
 import org.usfirst.frc.team3309.lib.controllers.helpers.DriveSignal;

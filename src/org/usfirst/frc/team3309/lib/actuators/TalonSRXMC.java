@@ -2,7 +2,6 @@ package org.usfirst.frc.team3309.lib.actuators;
 
 import com.ctre.phoenix.motorcontrol.*;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import org.usfirst.frc.team3309.robot.Constants;
 
 public class TalonSRXMC extends TalonSRX {
 

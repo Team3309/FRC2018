@@ -1,7 +1,5 @@
 package org.usfirst.frc.team3309.robot;
 
-import edu.wpi.cscore.UsbCamera;
-import edu.wpi.cscore.VideoSource;
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;

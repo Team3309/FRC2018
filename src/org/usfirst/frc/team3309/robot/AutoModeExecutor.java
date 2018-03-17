@@ -5,10 +5,14 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.usfirst.frc.team3309.commands.autos.*;
-import org.usfirst.frc.team3309.commands.subsystems.beltbar.BeltBarMoveToPos;
-import org.usfirst.frc.team3309.commands.subsystems.drive.*;
-import org.usfirst.frc.team3309.commands.subsystems.lift.LiftElevate;
+import org.usfirst.frc.team3309.commands.autos.AutoLineAuto;
+import org.usfirst.frc.team3309.commands.autos.CurvyToSwitchAuto;
+import org.usfirst.frc.team3309.commands.autos.GreedyCrossAuto;
+import org.usfirst.frc.team3309.commands.autos.NoActionAuto;
+import org.usfirst.frc.team3309.commands.subsystems.drive.DrivePath;
+import org.usfirst.frc.team3309.commands.subsystems.drive.DriveStraight;
+import org.usfirst.frc.team3309.commands.subsystems.drive.DriveStraightProperly;
+import org.usfirst.frc.team3309.commands.subsystems.drive.DriveTurn;
 import org.usfirst.frc.team3309.lib.controllers.helpers.Waypoint;
 import org.usfirst.frc.team3309.lib.math.Length;
 

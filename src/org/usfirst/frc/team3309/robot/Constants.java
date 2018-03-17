@@ -4,7 +4,6 @@ import org.usfirst.frc.team3309.lib.controllers.helpers.Waypoint;
 import org.usfirst.frc.team3309.lib.math.Length;
 
 import java.net.NetworkInterface;
-
 import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.Arrays;

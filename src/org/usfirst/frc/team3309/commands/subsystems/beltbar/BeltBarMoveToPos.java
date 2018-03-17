@@ -1,7 +1,6 @@
 package org.usfirst.frc.team3309.commands.subsystems.beltbar;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team3309.lib.LibTimer;
 import org.usfirst.frc.team3309.robot.Robot;
 

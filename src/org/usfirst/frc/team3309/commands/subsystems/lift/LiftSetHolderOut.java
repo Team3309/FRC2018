@@ -1,7 +1,6 @@
 package org.usfirst.frc.team3309.commands.subsystems.lift;
 
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team3309.lib.CommandEx;
 import org.usfirst.frc.team3309.robot.Robot;
 

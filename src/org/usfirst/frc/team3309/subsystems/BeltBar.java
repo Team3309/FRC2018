@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team3309.commands.subsystems.AssemblyLocation;
-import org.usfirst.frc.team3309.commands.subsystems.beltbar.BeltBarManualTest;
 import org.usfirst.frc.team3309.lib.actuators.TalonSRXMC;
 import org.usfirst.frc.team3309.robot.Constants;
 
@@ -35,7 +34,7 @@ public class BeltBar extends Subsystem {
     private final int MAX_CURRENT_DURATION = 125;
 
     private int FORWARD_SOFT_LIM = -400;  //  -730
-    private int REVERSE_SOFT_LIM = -2050; //  -1990
+    private int REVERSE_SOFT_LIM = -2100; //  -1990
 
     public BeltBar() {
         init();

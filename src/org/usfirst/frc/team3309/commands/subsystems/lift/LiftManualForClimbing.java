@@ -1,7 +1,6 @@
 package org.usfirst.frc.team3309.commands.subsystems.lift;
 
 import edu.wpi.first.wpilibj.command.Command;
-import org.usfirst.frc.team3309.lib.math.LibMath;
 import org.usfirst.frc.team3309.robot.OI;
 import org.usfirst.frc.team3309.robot.Robot;
 

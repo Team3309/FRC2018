@@ -1,7 +1,6 @@
 package org.usfirst.frc.team3309.commands.subsystems.drive;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team3309.commands.subsystems.shooter.ShooterForward;
 import org.usfirst.frc.team3309.lib.controllers.drive.DriveCheezyController;
 import org.usfirst.frc.team3309.lib.controllers.helpers.DriveSignal;

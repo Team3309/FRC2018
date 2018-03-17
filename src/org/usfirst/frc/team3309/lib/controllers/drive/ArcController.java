@@ -4,12 +4,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team3309.lib.controllers.Controller1;
 import org.usfirst.frc.team3309.lib.controllers.helpers.DriveSignal;
 import org.usfirst.frc.team3309.lib.controllers.helpers.DriveState;
-import org.usfirst.frc.team3309.lib.controllers.helpers.Waypoint;
 import org.usfirst.frc.team3309.lib.controllers.interfaces.Finishable;
 import org.usfirst.frc.team3309.lib.math.LibMath;
 import org.usfirst.frc.team3309.robot.Robot;
-
-import java.util.ArrayList;
 
 public class ArcController extends Controller1<DriveSignal, DriveState> implements Finishable {
 

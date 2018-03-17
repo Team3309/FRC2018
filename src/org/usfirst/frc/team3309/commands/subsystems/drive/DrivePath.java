@@ -7,7 +7,6 @@ import org.usfirst.frc.team3309.lib.controllers.helpers.DriveState;
 import org.usfirst.frc.team3309.lib.controllers.helpers.Waypoint;
 import org.usfirst.frc.team3309.robot.Constants;
 import org.usfirst.frc.team3309.robot.Robot;
-import org.usfirst.frc.team3309.subsystems.Drive;
 
 import java.util.ArrayList;
 

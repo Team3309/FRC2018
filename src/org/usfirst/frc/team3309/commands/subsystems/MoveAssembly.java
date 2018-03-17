@@ -4,7 +4,6 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 import org.usfirst.frc.team3309.commands.subsystems.beltbar.BeltBarMoveToPos;
 import org.usfirst.frc.team3309.commands.subsystems.lift.LiftElevate;
 import org.usfirst.frc.team3309.commands.subsystems.lift.LiftHybridMove;
-import org.usfirst.frc.team3309.lib.WaitCommand;
 
 public class MoveAssembly extends CommandGroup {
 

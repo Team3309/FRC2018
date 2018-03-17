@@ -12,8 +12,6 @@ import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team3309.commands.subsystems.AssemblyLocation;
-import org.usfirst.frc.team3309.commands.subsystems.lift.LiftManualClimb;
-import org.usfirst.frc.team3309.commands.subsystems.lift.LiftManualTest;
 import org.usfirst.frc.team3309.lib.actuators.TalonSRXMC;
 import org.usfirst.frc.team3309.lib.actuators.VictorSPXMC;
 import org.usfirst.frc.team3309.robot.Constants;
