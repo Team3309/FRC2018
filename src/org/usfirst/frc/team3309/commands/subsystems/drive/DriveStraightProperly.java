@@ -55,7 +55,7 @@ public class DriveStraightProperly extends Command
     @Override
     protected boolean isFinished()
     {
-        return Math.abs(distance - Robot.drive.getEncoderPos()) <= Robot.drive.inchesToEncoderCounts(2.5);
+        return Math.abs(distance - Robot.drive.getEncoderPos()) <= Robot.drive.inchesToEncoderCounts(3.3309);
     }
 
     @Override
