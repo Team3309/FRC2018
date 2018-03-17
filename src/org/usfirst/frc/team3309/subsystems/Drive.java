@@ -92,7 +92,7 @@ public class Drive extends Subsystem {
     }
 
     public double getLeftEncoder() {
-        return -left0.getSelectedSensorPosition(0);
+        return left0.getSelectedSensorPosition(0);
     }
 
     public double getRightEncoder() {
@@ -108,7 +108,7 @@ public class Drive extends Subsystem {
     }
 
     public double getRightVelocity() {
-        return -right0.getSelectedSensorVelocity(0);
+        return right0.getSelectedSensorVelocity(0);
     }
 
     public double getAngPos() {
@@ -163,7 +163,9 @@ public class Drive extends Subsystem {
     public void periodic()
     {
         super.periodic();
-        SmartDashboard.putNumber("Robot Distance Traversed: ",getEncoderPos());
+        SmartDashboard.putNumber("Robot Distance Traversed (Left): ",getLeftEncoder());
+        SmartDashboard.putNumber("Robot Distance Traversed (Right): ",getRightEncoder());
+
         SmartDashboard.putNumber("Robot Distance Traversed (Humanized) : ",encoderCountsToInches(getEncoderPos()));
         SmartDashboard.putNumber("Robot revolution ", (getEncoderPos()/Constants.DRIVE_ENCODER_COUNTS_PER_REV));
         SmartDashboard.putNumber("Robot enc calc: ", inchesToEncoderCounts(encoderCountsToInches(getEncoderPos())));
