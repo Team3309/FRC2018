@@ -2,9 +2,10 @@ package org.usfirst.frc.team3309.commands.subsystems.drive;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.usfirst.frc.team3309.lib.CommandEx;
 import org.usfirst.frc.team3309.robot.Robot;
 
-public class DriveStraightProperly extends Command
+public class DriveStraightProperly extends CommandEx
 {
 
     private boolean isInit = false;
@@ -38,7 +39,7 @@ public class DriveStraightProperly extends Command
     }
 
     @Override
-    protected void initialize() {
+    public void initialize() {
         super.initialize();
         Robot.drive.reset();
         isInit = true;
@@ -81,7 +82,7 @@ public class DriveStraightProperly extends Command
     }
 
     @Override
-    protected void end()
+    public void end()
     {
         super.end();
         Robot.drive.disableOutput();
