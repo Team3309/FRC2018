@@ -33,7 +33,9 @@ public class AutoModeExecutor {
         autos.addObject("AutoLineAuto", new AutoLineAuto());
         autos.addObject("LeftSideSwitch", new GreedyCrossAuto(true));
         autos.addObject("RightSideSwitch", new GreedyCrossAuto(false));
-
+        autos.addObject("Drive Straight Test (Position)", new DriveStraightProperly(60, DriveStraightProperly.DriveStrategy.POSITION));
+        autos.addObject("Drive Straight Test (Velocity)", new DriveStraightProperly(60, DriveStraightProperly.DriveStrategy.VELOCITY));
+        autos.addObject("Drive Straight Test (Motion Magic)", new DriveStraightProperly(60, DriveStraightProperly.DriveStrategy.MOTION_MAGIC));
         if (isUsingFile) {
             for (File autoFile : autoFiles) {
                 Command autoCommand = null;

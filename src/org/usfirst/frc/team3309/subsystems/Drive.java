@@ -223,6 +223,12 @@ public class Drive extends Subsystem {
         left0.configMotionCruiseVelocity(sensorUnitsPer100ms, 10);
     }
 
+    public void disableOutput()
+    {
+        left0.set(ControlMode.Disabled,0);
+        right0.set(ControlMode.Disabled,0);
+    }
+
     public double getGoalPos() {
         return goalPos;
     }
