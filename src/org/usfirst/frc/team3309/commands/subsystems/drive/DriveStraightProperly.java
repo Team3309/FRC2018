@@ -39,7 +39,7 @@ public class DriveStraightProperly extends Command
                 break;
             case VELOCITY:
                 Robot.drive.changeToVelocityMode();
-                if(distance < Robot.drive.encoderCountsToInches(Robot.drive.getEncoderPos()))
+                if(distance > Robot.drive.encoderCountsToInches(Robot.drive.getEncoderPos()))
                     Robot.drive.setLeftRight(velocityTarget,velocityTarget);
                 else
                     Robot.drive.setLeftRight(-velocityTarget,-velocityTarget);
@@ -55,7 +55,7 @@ public class DriveStraightProperly extends Command
     protected boolean isFinished()
     {
         SmartDashboard.putNumber("error: ", Math.abs(distance-Robot.drive.encoderCountsToInches(Robot.drive.getEncoderPos())));
-        return (Math.abs(distance-Robot.drive.encoderCountsToInches(Robot.drive.getEncoderPos())) <= 1.30);
+        return Math.abs(distance - Robot.drive.encoderCountsToInches(Robot.drive.getEncoderPos())) <= 1.30;
     }
 
     @Override
