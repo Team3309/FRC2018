@@ -26,12 +26,12 @@ public class CurvyToSwitchAuto extends CommandGroup {
                 addSequential(new DriveArc(Length.fromInches(20), -50, 28000, true));
                 addSequential(new DriveStraightProperly(-0.1, 23000));
                 addSequential(new DriveArc(Length.fromInches(20), 40, 26000, true));
-                addSequential(new DriveStraightProperly(-3, 16000));
+                addSequential(new DriveStraightProperly(-2, 16000));
                 addSequential(new DriveStop());
             } else {
                 DriverStation.reportError("Oh no! I don't know where to go! :karson5:",false);
             }
-            addSequential(new WaitCommand(0.45));
+            addSequential(new WaitCommand(0.30));
             addSequential(new ShooterShoot());
         }
         super.start();
