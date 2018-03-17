@@ -31,12 +31,10 @@ public class AutoModeExecutor {
 
         autos.addObject("No Action", new NoActionAuto());
         autos.addDefault("CurvyToSwitchAuto", new CurvyToSwitchAuto());
-        autos.addObject("ScaleLeftOnlyAuto", new ScaleOnlyAuto(true));
-        autos.addObject("ScaleRightOnlyAuto", new ScaleOnlyAuto(false));
+        autos.addObject("ScaleRightOnlyAuto", new ScaleRightOnlyAuto());
 
         autos.addObject("AutoLineAuto", new AutoLineAuto());
-        autos.addObject("LeftSideSwitch", new GreedyCrossAuto(true));
-        autos.addObject("RightSideSwitch", new GreedyCrossAuto(false));
+
         autos.addObject("Drive Straight Test (Position)", new DriveStraightProperly(60, DriveStraightProperly.DriveStrategy.POSITION));
         autos.addObject("Drive Straight Test (Velocity)", new DriveStraightProperly(60, DriveStraightProperly.DriveStrategy.VELOCITY));
         autos.addObject("Drive Straight Test (Motion Magic)", new DriveStraightProperly(60, DriveStraightProperly.DriveStrategy.MOTION_MAGIC));
