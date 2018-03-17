@@ -7,6 +7,7 @@ import org.usfirst.frc.team3309.commands.subsystems.drive.DriveStop;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveStraightProperly;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveStraightVel;
 import org.usfirst.frc.team3309.commands.subsystems.shooter.ShooterShoot;
+import org.usfirst.frc.team3309.lib.WaitCommand;
 import org.usfirst.frc.team3309.lib.math.Length;
 import org.usfirst.frc.team3309.robot.Robot;
 
@@ -30,7 +31,7 @@ public class CurvyToSwitchAuto extends CommandGroup {
             } else {
                 DriverStation.reportError("Oh no! I don't know where to go! :karson5:",false);
             }
-
+            addSequential(new WaitCommand(0.5));
             addSequential(new ShooterShoot());
         }
         super.start();
