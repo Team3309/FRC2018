@@ -6,6 +6,9 @@ import org.usfirst.frc.team3309.robot.Robot;
 
 public class DriveStraightProperly extends Command
 {
+
+    private boolean isInit = false;
+
     public enum DriveStrategy {
         VELOCITY,
         MOTION_MAGIC,
@@ -29,8 +32,18 @@ public class DriveStraightProperly extends Command
     }
 
     @Override
+    protected void initialize() {
+        super.initialize();
+        Robot.drive.reset();
+        isInit = true;
+    }
+
+    @Override
     protected void execute()
     {
+        if (!isInit) {
+            initialize();
+        }
         SmartDashboard.putNumber("error: ", Math.abs(distance-Robot.drive.getEncoderPos()));
         switch(strategy)
         {
@@ -63,6 +76,7 @@ public class DriveStraightProperly extends Command
     {
         super.end();
         Robot.drive.disableOutput();
+        isInit = false;
     }
 
 }
