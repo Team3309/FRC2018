@@ -15,7 +15,7 @@ public class ScaleRightOnlyAuto extends CommandGroup {
     public synchronized void start() {
         addSequential(new MoveAssembly(AssemblyLocation.BOTTOM));
         if (Robot.isRightScale()) {
-            addSequential(new DriveStraightProperly(24, 20000, true));
+            addSequential(new DriveStraightProperly(-24, 20000, true));
             addSequential(new DriveArc(Length.fromInches(60), 45, 26000, true, true));
             addSequential(new DriveStop());
         //    addSequential(new DriveStraightProperly(20, 10000));
