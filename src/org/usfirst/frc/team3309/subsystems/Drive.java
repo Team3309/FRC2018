@@ -166,6 +166,7 @@ public class Drive extends Subsystem {
         SmartDashboard.putNumber("Robot Distance Traversed: ",getEncoderPos());
         SmartDashboard.putNumber("Robot Distance Traversed (Humanized) : ",encoderCountsToInches(getEncoderPos()));
         SmartDashboard.putNumber("Robot revolution ", (getEncoderPos()/Constants.DRIVE_ENCODER_COUNTS_PER_REV));
+        SmartDashboard.putNumber("Robot enc calc: ", inchesToEncoderCounts(encoderCountsToInches(getEncoderPos())));
     }
 
     public void changeToBrakeMode() {
