@@ -19,8 +19,8 @@ public class CurvyToSwitchAuto extends CommandGroup {
             if (Robot.isLeftSwitch()) {
                 addSequential(new DriveArc(Length.fromInches(26), 50, 28000, true));
                 addSequential(new DriveStraightProperly(-4, 23000));
-                addSequential(new DriveArc(Length.fromInches(23), -32, 24000, true));
-                addSequential(new DriveStraightProperly(-1, 10000));
+                addSequential(new DriveArc(Length.fromInches(23), -30, 24000, true));
+                addSequential(new DriveStraightProperly(-3, 10000));
                 addSequential(new DriveStop());
             } else if (Robot.isRightSwitch()) {
                 addSequential(new DriveArc(Length.fromInches(18), -40, 31000, true));
