@@ -70,11 +70,11 @@ public class Drive extends Subsystem {
     }
 
     public double encoderCountsToInches(double counts) {
-        return counts * (1 / Constants.DRIVE_ENCODER_COUNTS_PER_REV) * (Math.PI * Constants.WHEEL_DIAMETER_INCHES.toInches());
+        return counts / Constants.DRIVE_ENCODER_COUNTS_PER_REV * (Math.PI * Constants.WHEEL_DIAMETER_INCHES);
     }
 
     public double inchesToEncoderCounts(double inches) {
-        return inches * (Constants.DRIVE_ENCODER_COUNTS_PER_REV / (Math.PI * Constants.WHEEL_DIAMETER_INCHES.toInches()));
+        return inches * (Constants.DRIVE_ENCODER_COUNTS_PER_REV / (Math.PI * Constants.WHEEL_DIAMETER_INCHES));
     }
 
     public void reset() {
@@ -166,7 +166,6 @@ public class Drive extends Subsystem {
         SmartDashboard.putNumber("Robot Distance Traversed: ",getEncoderPos());
         SmartDashboard.putNumber("Robot Distance Traversed (Humanized) : ",encoderCountsToInches(getEncoderPos()));
         SmartDashboard.putNumber("Robot revolution ", (getEncoderPos()/Constants.DRIVE_ENCODER_COUNTS_PER_REV));
-
     }
 
     public void changeToBrakeMode() {
