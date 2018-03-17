@@ -13,7 +13,7 @@ public class DriveStraightProperly extends Command
 
     private DriveStrategy strategy;
     private double distance;
-    private int velocityTarget = 30000;
+    private int velocityTarget = 15000;
 
     public DriveStraightProperly(double distance, DriveStrategy strategy)
     {
@@ -53,7 +53,7 @@ public class DriveStraightProperly extends Command
     @Override
     protected boolean isFinished()
     {
-        return (Math.abs(distance-Robot.drive.encoderCountsToInches(Robot.drive.getEncoderPos())) <= .750);
+        return (Math.abs(distance-Robot.drive.encoderCountsToInches(Robot.drive.getEncoderPos())) <= 1.30);
     }
 
     @Override
