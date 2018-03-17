@@ -18,6 +18,7 @@ public class DriveStraightProperly extends Command
     private DriveStrategy strategy;
     private double distance;
     private int velocityTarget = 15000;
+    private boolean isOvershoot = false;
 
     public DriveStraightProperly(double distance, DriveStrategy strategy)
     {
@@ -29,6 +30,11 @@ public class DriveStraightProperly extends Command
     public DriveStraightProperly(double distance, int velocity) {
         this(distance, DriveStrategy.VELOCITY);
         this.velocityTarget = velocity;
+    }
+
+    public DriveStraightProperly(double distance, int velocity, boolean isOvershoot) {
+        this(distance, velocity);
+        this.isOvershoot = isOvershoot;
     }
 
     @Override
@@ -68,7 +74,8 @@ public class DriveStraightProperly extends Command
     @Override
     protected boolean isFinished()
     {
-        return Math.abs(distance - Robot.drive.getEncoderPos()) <= Robot.drive.inchesToEncoderCounts(1.5);
+        return Math.abs(distance - Robot.drive.getEncoderPos()) <= Robot.drive.inchesToEncoderCounts(1.5) ? !isOvershoot :
+                Math.abs(distance) > Math.abs(Robot.drive.getEncoderPos());
     }
 
     @Override
