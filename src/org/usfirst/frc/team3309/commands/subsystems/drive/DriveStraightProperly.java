@@ -31,6 +31,7 @@ public class DriveStraightProperly extends Command
     @Override
     protected void execute()
     {
+        SmartDashboard.putNumber("error: ", Math.abs(distance-Robot.drive.encoderCountsToInches(Robot.drive.getEncoderPos())));
         switch(strategy)
         {
             case POSITION:
@@ -54,7 +55,6 @@ public class DriveStraightProperly extends Command
     @Override
     protected boolean isFinished()
     {
-        SmartDashboard.putNumber("error: ", Math.abs(distance-Robot.drive.encoderCountsToInches(Robot.drive.getEncoderPos())));
         return Math.abs(distance - Robot.drive.encoderCountsToInches(Robot.drive.getEncoderPos())) <= 1.30;
     }
 
