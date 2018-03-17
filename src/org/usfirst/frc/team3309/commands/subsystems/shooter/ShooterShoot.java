@@ -7,7 +7,7 @@ public class ShooterShoot extends CommandGroup {
 
     public ShooterShoot() {
         addSequential(new ShooterForward());
-        addSequential(new WaitCommand(0.5));
+        addSequential(new WaitCommand(1.0));
         addSequential(new ShooterBack());
     }
 
