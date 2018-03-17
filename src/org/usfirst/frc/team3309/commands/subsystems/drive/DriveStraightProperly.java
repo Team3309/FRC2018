@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3309.commands.subsystems.drive;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team3309.robot.Robot;
 
 public class DriveStraightProperly extends Command
@@ -53,6 +54,7 @@ public class DriveStraightProperly extends Command
     @Override
     protected boolean isFinished()
     {
+        SmartDashboard.putNumber("error: ", Math.abs(distance-Robot.drive.encoderCountsToInches(Robot.drive.getEncoderPos())));
         return (Math.abs(distance-Robot.drive.encoderCountsToInches(Robot.drive.getEncoderPos())) <= 1.30);
     }
 
