@@ -17,16 +17,29 @@ public class ScaleOnlyAuto extends CommandGroup {
     @Override
     public synchronized void start() {
         if (Robot.isLeftScale() && isStartLeft) {
-            addSequential(new DriveStraightProperly(204, 30000));
-            addSequential(new DriveArc(Length.fromInches(30), 30, 26000, false));
-            addSequential(new DriveStraightProperly(5, 10000));
-        } else if (Robot.isRightSwitch() && !isStartLeft) {
-            addSequential(new DriveStraightProperly(115, 30000));
-            addSequential(new DriveArc(Length.fromInches(30), -90, 26000, false));
-            addSequential(new DriveStraightProperly(144, 30000));
-            addSequential(new DriveArc(Length.fromInches(30), 90, 26000, false));
-            addSequential(new DriveStraightProperly(33, 30000));
-
+            if (isStartLeft) {
+                addSequential(new DriveStraightProperly(204, 30000));
+                addSequential(new DriveArc(Length.fromInches(30), 30, 26000, false));
+                addSequential(new DriveStraightProperly(5, 10000));
+            } else if (!isStartLeft) {
+                addSequential(new DriveStraightProperly(115, 30000));
+                addSequential(new DriveArc(Length.fromInches(30), -90, 26000, false));
+                addSequential(new DriveStraightProperly(144, 30000));
+                addSequential(new DriveArc(Length.fromInches(30), 90, 26000, false));
+                addSequential(new DriveStraightProperly(33, 30000));
+            }
+        } else if (Robot.isRightSwitch()) {
+            if (!isStartLeft) {
+                addSequential(new DriveStraightProperly(204, 30000));
+                addSequential(new DriveArc(Length.fromInches(30), -30, 26000, false));
+                addSequential(new DriveStraightProperly(5, 10000));
+            } else if (isStartLeft) {
+                addSequential(new DriveStraightProperly(115, 30000));
+                addSequential(new DriveArc(Length.fromInches(30), 90, 26000, false));
+                addSequential(new DriveStraightProperly(144, 30000));
+                addSequential(new DriveArc(Length.fromInches(30), -90, 26000, false));
+                addSequential(new DriveStraightProperly(33, 30000));
+            }
         }
         super.start();
     }
