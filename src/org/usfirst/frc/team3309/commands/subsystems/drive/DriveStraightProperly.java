@@ -39,9 +39,9 @@ public class DriveStraightProperly extends Command
             case VELOCITY:
                 Robot.drive.changeToVelocityMode();
                 if(distance < Robot.drive.encoderCountsToInches(Robot.drive.getEncoderPos()))
-                    Robot.drive.setLeftRight(-velocityTarget,-velocityTarget);
-                else
                     Robot.drive.setLeftRight(velocityTarget,velocityTarget);
+                else
+                    Robot.drive.setLeftRight(-velocityTarget,-velocityTarget);
                 break;
             case MOTION_MAGIC:
                 Robot.drive.changeToMotionMagicMode();
