@@ -76,7 +76,6 @@ public class Robot extends TimedRobot {
             isLeftScale = DriverStation.getInstance().getGameSpecificMessage().charAt(1) == 'L';
             isRightScale = DriverStation.getInstance().getGameSpecificMessage().charAt(1) == 'R';
         }
-        drive.zeroNavx();
         falconDoors.setUp();
         c.stop();
         logger.info("autonomous init");
@@ -100,7 +99,6 @@ public class Robot extends TimedRobot {
 
     @Override
     public void teleopInit() {
-        drive.zeroNavx();
         start = Timer.getFPGATimestamp();
         lift.setLiftShifter(true);
         c.start();
