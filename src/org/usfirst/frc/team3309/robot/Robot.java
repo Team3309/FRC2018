@@ -65,6 +65,7 @@ public class Robot extends TimedRobot {
         falconDoors.setUp();
         sendToDashboard();
         drive.zeroNavx();
+        Scheduler.getInstance().add(new LiftCheckLimits());
         AutoModeExecutor.displayAutos();
     }
 
