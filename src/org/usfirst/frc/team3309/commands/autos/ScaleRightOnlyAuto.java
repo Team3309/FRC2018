@@ -8,6 +8,7 @@ import org.usfirst.frc.team3309.commands.subsystems.arms.ArmsOpen;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveArc;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveStop;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveStraightProperly;
+import org.usfirst.frc.team3309.commands.subsystems.drive.DriveTurn;
 import org.usfirst.frc.team3309.commands.subsystems.rollers.RollersActuate;
 import org.usfirst.frc.team3309.lib.WaitCommand;
 import org.usfirst.frc.team3309.lib.math.Length;
@@ -32,8 +33,9 @@ public class ScaleRightOnlyAuto extends CommandGroup {
         } else if (Robot.isLeftScale()) {
             addSequential(new DriveStraightProperly(133, 28000, true, 2.0));
             addSequential(new DriveArc(Length.fromInches(28), -80, 23000,false, true));
-            addSequential(new DriveStraightProperly(85, 28000,  2.5));
-            addSequential(new DriveArc(Length.fromInches(8), 110, 18000, false, true));
+            addSequential(new DriveStraightProperly(105, 28000,  2.5));
+            addSequential(new DriveTurn(135));
+        //    addSequential(new DriveArc(Length.fromInches(8), 110, 18000, false, true));
             addSequential(new DriveStop());
         }
         super.start();
