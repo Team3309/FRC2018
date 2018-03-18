@@ -28,7 +28,7 @@ public class RollersActuate extends Command {
         if (!isInit) {
             initialize();
         }
-        Robot.rollers.setLeftRight(intakeRollerPower, intakeRollerPower);
+        Robot.rollers.setLeftRight(-intakeRollerPower, intakeRollerPower);
     }
 
     @Override
