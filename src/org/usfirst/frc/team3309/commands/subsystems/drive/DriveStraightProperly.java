@@ -64,7 +64,7 @@ public class DriveStraightProperly extends CommandEx
                 break;
             case VELOCITY:
                 Robot.drive.changeToVelocityMode();
-                double angularUpdate = angleController.update(Robot.drive.getAngVel(), startAngleVel);
+                double angularUpdate = 10000 * angleController.update(Robot.drive.getAngVel(), startAngleVel);
                 if(distance > Robot.drive.encoderCountsToInches(Robot.drive.getEncoderPos()))
                     Robot.drive.setLeftRight(velocityTarget + angularUpdate,velocityTarget + angularUpdate);
                 else
