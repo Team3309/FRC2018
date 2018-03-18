@@ -31,7 +31,7 @@ public class LiftHybridMove extends Command {
             last = Timer.getFPGATimestamp();
             started = true;
         }
-        double offset = 100 * (Timer.getFPGATimestamp() - last) * OI.operatorRemote.leftStick.getY();
+        double offset = 500 * (Timer.getFPGATimestamp() - last) * OI.operatorRemote.leftStick.getY();
         if (goalAngle + offset > Robot.lift.FORWARD_LIM) {
             goalAngle = Robot.lift.FORWARD_LIM;
         } else if (goalAngle + offset < 0) {
