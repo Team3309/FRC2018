@@ -28,7 +28,7 @@ public class LiftElevate extends Command {
             goalPos = 0;
         }
 
-        if (LiftFindZero.isZeroed()) {
+        if (true) {
             Robot.lift.set(goalPos);
         } else {
             Robot.lift.set(ControlMode.Disabled,0);
