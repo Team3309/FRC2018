@@ -17,10 +17,10 @@ public class ScaleRightOnlyAuto extends CommandGroup {
         addSequential(new MoveAssembly(AssemblyLocation.BOTTOM));
         if (Robot.isRightScale()) {
             addSequential(new DriveStraightProperly(185, 20000, true));
-    /*        addParallel(new MoveAssembly(AssemblyLocation.SCALE_MIDDLE));
+         //   addParallel(new MoveAssembly(AssemblyLocation.SCALE_MIDDLE));
             addSequential(new DriveArc(Length.fromInches(40), -34, 26000, false, true));
             addSequential(new DriveStop());
-            addSequential(new RollersActuate(0.5, 2.0));*/
+         //   addSequential(new RollersActuate(0.5, 2.0));
         } else if (Robot.isLeftScale()) {
  /*           addSequential(new DriveStraightProperly(115, 30000));
             addSequential(new DriveArc(Length.fromInches(30), 90, 26000, false));
