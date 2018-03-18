@@ -112,6 +112,7 @@ public class Robot extends TimedRobot {
         drive.changeToBrakeMode();
         falconDoors.setUp();
         lift.setHolderOut();
+        Scheduler.getInstance().add(new LiftFindZero());
     }
 
     @Override
