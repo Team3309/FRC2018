@@ -39,5 +39,6 @@ public class RollersActuate extends Command {
     @Override
     public void end() {
         isInit = false;
+        start = Double.POSITIVE_INFINITY;
     }
 }
