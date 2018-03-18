@@ -21,7 +21,7 @@ public class ScaleRightOnlyAuto extends CommandGroup {
             addParallel(new CommandGroup() {
                 @Override
                 public void start() {
-                    addSequential(new WaitCommand(1));
+                    addSequential(new WaitCommand(0.5));
                     addSequential(new MoveAssembly(AssemblyLocation.SCALE_UP));
                     super.start();
                 }
