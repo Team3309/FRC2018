@@ -21,11 +21,12 @@ public class ScaleRightOnlyAuto extends CommandGroup {
                 @Override
                 public void start() {
                     addSequential(new WaitCommand(0.5));
-                    addSequential(new MoveAssembly(AssemblyLocation.SCALE_UP));
+
                     super.start();
                 }
             });
             addSequential(new DriveStraightProperly(185, 20000, true));
+            addSequential(new MoveAssembly(AssemblyLocation.SCALE_UP));
             addSequential(new DriveArc(Length.fromInches(40), -20, 26000, false, true));
             addSequential(new DriveStop());
             addSequential(new RollersActuate(0.5, 2.0));
