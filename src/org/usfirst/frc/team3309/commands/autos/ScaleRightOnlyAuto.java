@@ -31,6 +31,7 @@ public class ScaleRightOnlyAuto extends CommandGroup {
             addSequential(new DriveStraightProperly(-20, 15000, 2.0));
             addSequential(new DriveStop());
             addSequential(new MoveAssembly(AssemblyLocation.BOTTOM));
+            // TODO same as left side with tweaking
         } else if (Robot.isLeftScale()) {
             addSequential(new DriveStraightProperly(133, 28000, true, 2.0));
             addSequential(new DriveArc(Length.fromInches(28), -80, 23000,false, true));
@@ -45,6 +46,8 @@ public class ScaleRightOnlyAuto extends CommandGroup {
             addSequential(new DriveStraightProperly(-20, 15000, 2.0));
             addSequential(new DriveStop());
             addSequential(new MoveAssembly(AssemblyLocation.BOTTOM));
+            // TODO intake position, rotate 90, go forward same distance with rollers spinning, close, go back a bit,
+            // assembly switch level, forward a tad and rollers actuate and arms open, back and to home
         }
         super.start();
     }
