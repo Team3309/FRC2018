@@ -7,6 +7,7 @@ import org.usfirst.frc.team3309.commands.subsystems.drive.DriveArc;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveStop;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveStraightProperly;
 import org.usfirst.frc.team3309.commands.subsystems.rollers.RollersActuate;
+import org.usfirst.frc.team3309.lib.WaitCommand;
 import org.usfirst.frc.team3309.lib.math.Length;
 import org.usfirst.frc.team3309.robot.Robot;
 
@@ -17,7 +18,14 @@ public class ScaleRightOnlyAuto extends CommandGroup {
         addSequential(new MoveAssembly(AssemblyLocation.BOTTOM));
         if (Robot.isRightScale()) {
             addSequential(new DriveStraightProperly(185, 20000, true));
-            addParallel(new MoveAssembly(AssemblyLocation.SCALE_UP));
+            addParallel(new CommandGroup() {
+                @Override
+                public void start() {
+                    addSequential(new WaitCommand(2));
+                    addSequential(new MoveAssembly(AssemblyLocation.SCALE_UP));
+                    super.start();
+                }
+            });
             addSequential(new DriveArc(Length.fromInches(40), -20, 26000, false, true));
             addSequential(new DriveStop());
             addSequential(new RollersActuate(0.5, 2.0));
