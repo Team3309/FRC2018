@@ -1,85 +1,114 @@
 package org.usfirst.frc.team3309.commands.subsystems.drive;
 
+import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team3309.lib.CommandEx;
-import org.usfirst.frc.team3309.lib.LibTimer;
-import org.usfirst.frc.team3309.lib.math.Length;
+import org.usfirst.frc.team3309.lib.controllers.pid.PIDConstants;
+import org.usfirst.frc.team3309.lib.controllers.pid.PIDController;
 import org.usfirst.frc.team3309.robot.Robot;
 
-public class DriveStraight extends CommandEx {
+public class DriveStraight extends CommandEx
+{
 
-    // inches
-    private final double goalPos;
-    private double error;
-    private boolean isMotionProfile = false;
+    private boolean isInit = false;
+    private double startAngleVel;
+    private double start;
+    private double timeout = Double.POSITIVE_INFINITY;
+    private PIDController angleController = new PIDController(new PIDConstants(0.6, 0, 0));
 
-    private double timeoutSec = Double.POSITIVE_INFINITY;
+    public enum DriveStrategy {
+        VELOCITY,
+        MOTION_MAGIC,
+        POSITION,
+    }
 
-    private final double errorThreshold = 6;
-    private int CRUISE_VELOCITY = 25000;
+    private DriveStrategy strategy;
+    private double distance;
+    private int velocityTarget = 15000;
+    private boolean allowOvershoot = false;
 
-    private LibTimer timer = new LibTimer(.5);
-
-    private boolean isInitialized = false;
-
-    public DriveStraight(Length goalPos) {
-        this.goalPos = goalPos.toInches();
+    public DriveStraight(double distance, DriveStrategy strategy)
+    {
+        this.strategy = strategy;
+        this.distance = Robot.drive.inchesToEncoderCounts(distance);
         requires(Robot.drive);
     }
 
-    public DriveStraight(Length goalPos, boolean isMotionProfile) {
-        this(goalPos);
-        this.isMotionProfile = isMotionProfile;
+    public DriveStraight(double distance, int velocity) {
+        this(distance, DriveStrategy.VELOCITY);
+        this.velocityTarget = velocity;
     }
 
-    public DriveStraight(Length goalPos, double timeoutSec) {
-        this(goalPos);
-        this.timeoutSec = timeoutSec;
+    public DriveStraight(double distance, int velocity, boolean allowOvershoot) {
+        this(distance, velocity);
+        this.allowOvershoot = allowOvershoot;
     }
 
-    public DriveStraight(Length goalPos, boolean isMotionProfile, double timeoutSec) {
-        this(goalPos, timeoutSec);
-        this.isMotionProfile = isMotionProfile;
+    public DriveStraight(double distance, int velocity, boolean allowOvershoot, double timeout) {
+        this(distance, velocity, allowOvershoot);
+        this.timeout = timeout;
+    }
+
+    public DriveStraight(double distance, int velocity, double timeout) {
+        this(distance, velocity, false, timeout);
     }
 
     @Override
     public void initialize() {
+        super.initialize();
         Robot.drive.reset();
-        Robot.drive.setHighGear();
-        Robot.drive.changeToBrakeMode();
-        Robot.drive.setGoalPos(goalPos);
-        if (isMotionProfile) {
-            Robot.drive.changeToMotionMagicMode();
-        } else {
-            Robot.drive.changeToPositionMode();
-        }
-        timer.reset();
-        isInitialized = true;
+        isInit = true;
+        start = Timer.getFPGATimestamp();
+        startAngleVel = Robot.drive.getAngVel();
     }
 
     @Override
-    protected void execute() {
-        if (!isInitialized) {
+    protected void execute()
+    {
+        if (!isInit) {
             initialize();
         }
-        error = Robot.drive.getGoalPos() - Robot.drive.encoderCountsToInches(Robot.drive.getEncoderPos());
-        Robot.drive.setLeftRight(-Robot.drive.inchesToEncoderCounts(Robot.drive.getGoalPos()),
-                -Robot.drive.inchesToEncoderCounts(Robot.drive.getGoalPos()));
-        if (isMotionProfile) {
-            Robot.drive.configLeftRightCruiseVelocity(CRUISE_VELOCITY, CRUISE_VELOCITY);
+        SmartDashboard.putNumber("error: ", Math.abs(distance-Robot.drive.getEncoderPos()));
+        switch(strategy)
+        {
+            case POSITION:
+                Robot.drive.changeToPositionMode();
+                Robot.drive.setLeftRight(distance,distance);
+                break;
+            case VELOCITY:
+                Robot.drive.changeToVelocityMode();
+                double angularUpdate = -30000 * angleController.update(Robot.drive.getAngVel(), startAngleVel);
+                if(distance > Robot.drive.encoderCountsToInches(Robot.drive.getEncoderPos()))
+                    Robot.drive.setLeftRight(velocityTarget + angularUpdate,velocityTarget - angularUpdate);
+                else
+                    Robot.drive.setLeftRight(-velocityTarget + angularUpdate,-velocityTarget - angularUpdate);
+                break;
+            case MOTION_MAGIC:
+                Robot.drive.changeToMotionMagicMode();
+                Robot.drive.configLeftRightCruiseVelocity(velocityTarget,velocityTarget);
+                Robot.drive.setLeftRight(distance,distance);
+                break;
         }
     }
 
     @Override
-    protected boolean isFinished() {
-        return timer.isConditionMaintained(Math.abs(error) < errorThreshold)
-                || timer.get() > timeoutSec;
+    protected boolean isFinished()
+    {
+            if (Timer.getFPGATimestamp() - start >= timeout) {
+                return true;
+            } else if (allowOvershoot) {
+                return Math.abs(Robot.drive.getEncoderPos()) >  Math.abs(distance);
+            }
+            return Math.abs(distance - Robot.drive.getEncoderPos()) <= Robot.drive.inchesToEncoderCounts(1.5);
     }
 
     @Override
-    public void end() {
-        isInitialized = false;
-        timeoutSec = Double.POSITIVE_INFINITY;
-        isMotionProfile = false;
+    public void end()
+    {
+        super.end();
+        Robot.drive.disableOutput();
+        isInit = false;
+        timeout = Double.POSITIVE_INFINITY;
     }
 
 }

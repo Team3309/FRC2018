@@ -1,12 +1,9 @@
 package org.usfirst.frc.team3309.robot;
 
-import org.usfirst.frc.team3309.lib.controllers.helpers.Waypoint;
 import org.usfirst.frc.team3309.lib.math.Length;
 
 import java.net.NetworkInterface;
-
 import java.net.SocketException;
-import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Constants {
@@ -36,6 +33,9 @@ public class Constants {
             ex.printStackTrace();
         }
     }
+
+    public static int JOYSTICK_TRIGGER_BUTTON = 1;
+    public static int JOYSTICK_SHOOT_BUTTON = 3;
 
     public static double BELTBAR_BOTTOM_POS = Constants.currentRobot == Robot.PRACTICE ? -2680 : -1950;
     public static double BELTBAR_INTAKE_POS = Constants.currentRobot == Robot.PRACTICE ? -1350 : -640;
@@ -85,6 +85,8 @@ public class Constants {
     public static final int LIFT_HOLDER_A = 3;
     public static final int LIFT_HOLDER_B = 0;
 
+    public static final double LIFT_NUDGE_SPEED = 100;
+
     // beltbar
     public static final int BELTBAR_0 = 30;
 
@@ -100,22 +102,11 @@ public class Constants {
     public static final int FALCONDOORS_SOLENOID = 4;
 
     // robot constants
-
     public static final double MAX_LIFT_POS = 47000;
+    public static final double AUTO_ROLLER_INTAKE_POWER = -1;
 
     public static final double DRIVE_ENCODER_COUNTS_PER_REV = 4096*9.6;
     public static final double WHEEL_DIAMETER_INCHES = 6.0;
     public static final Length WHEELBASE_INCHES = Length.fromInches(26.0);
-
-    public static final ArrayList<Waypoint> curvyToSwitchRight = new ArrayList<>();
-    public static final ArrayList<Waypoint> curvyToSwitchLeft = new ArrayList<>();
-
-    static {
-        curvyToSwitchRight.add(new Waypoint(0.796 * 82.34987618525085, 0.39093873144451713));
-        curvyToSwitchRight.add(new Waypoint(-0.796 * 29.777276396478868, 0.740486358108046));
-
-        curvyToSwitchLeft.add(new Waypoint(-0.796 * 82.34987618525085, -0.39093873144451713));
-        //   curvyToSwitchLeft.add(new Waypoint(0.796 * 34.777276396478868,     -0.740486358108046));
-    }
 
 }

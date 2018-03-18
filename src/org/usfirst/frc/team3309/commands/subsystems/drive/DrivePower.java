@@ -6,7 +6,7 @@ import org.usfirst.frc.team3309.robot.Robot;
 
 public class DrivePower extends Command {
 
-    public void DrivePower() {
+    public DrivePower() {
         requires(Robot.drive);
         Robot.drive.changeToPercentMode();
         SmartDashboard.putNumber("Drive power:", 0);

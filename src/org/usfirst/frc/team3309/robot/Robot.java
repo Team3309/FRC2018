@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team3309.commands.subsystems.AssemblyLocation;
-import org.usfirst.frc.team3309.commands.subsystems.lift.LiftCheckLimits;
+import org.usfirst.frc.team3309.commands.subsystems.lift.LiftFindZero;
 import org.usfirst.frc.team3309.subsystems.*;
 
 import java.util.logging.Logger;
@@ -65,7 +65,7 @@ public class Robot extends TimedRobot {
         falconDoors.setUp();
         sendToDashboard();
         drive.zeroNavx();
-        Scheduler.getInstance().add(new LiftCheckLimits());
+        Scheduler.getInstance().add(new LiftFindZero());
         AutoModeExecutor.displayAutos();
     }
 
@@ -112,8 +112,6 @@ public class Robot extends TimedRobot {
         drive.changeToBrakeMode();
         falconDoors.setUp();
         lift.setHolderOut();
-        Scheduler.getInstance().removeAll();
-        Scheduler.getInstance().add(new LiftCheckLimits());
     }
 
     @Override

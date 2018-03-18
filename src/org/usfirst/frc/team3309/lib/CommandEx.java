@@ -20,5 +20,4 @@ public class CommandEx extends Command {
         System.out.println(Timer.getFPGATimestamp() + " ---- " + getName() + " - end");
     }
 
-
 }

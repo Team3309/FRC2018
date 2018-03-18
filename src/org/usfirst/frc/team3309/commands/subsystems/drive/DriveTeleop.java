@@ -1,7 +1,6 @@
 package org.usfirst.frc.team3309.commands.subsystems.drive;
 
 import edu.wpi.first.wpilibj.command.Command;
-import org.usfirst.frc.team3309.commands.subsystems.shooter.ShooterForward;
 import org.usfirst.frc.team3309.lib.controllers.drive.DriveCheezyController;
 import org.usfirst.frc.team3309.lib.controllers.helpers.DriveSignal;
 import org.usfirst.frc.team3309.lib.math.LibMath;
@@ -35,21 +34,7 @@ public class DriveTeleop extends Command {
         double throttle = -LibMath.handleDeadband(OI.driverRemoteLeft.getY(), 0.04);
         double turn = -LibMath.handleDeadband(OI.driverRemoteRight.getX(), 0.02);
 
-        if (OI.driverRemoteLeft.getTrigger()) {
-            Robot.drive.setLowGear();
-        } else {
-            Robot.drive.setHighGear();
-        }
-
-        if (OI.driverRemoteRight.getTrigger()) {
-            isQuickTurn = true;
-        } else {
-            isQuickTurn = false;
-        }
-
-        if (OI.driverRemoteRight.getRawButton(3) || OI.driverRemoteLeft.getRawButton(3)) {
-            new ShooterForward().start();
-        }
+        isQuickTurn = OI.driverRemoteRight.getTrigger();
 
         driveSignal = cheezyDriveEquation.update(throttle, turn, isQuickTurn);
         Robot.drive.setLeftRight(driveSignal.getLeftMotor(), driveSignal.getRightMotor());

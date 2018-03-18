@@ -1,13 +1,14 @@
 package org.usfirst.frc.team3309.commands.subsystems.drive;
 
-import edu.wpi.first.wpilibj.command.Command;
+import org.usfirst.frc.team3309.lib.CommandEx;
 import org.usfirst.frc.team3309.lib.LibTimer;
 import org.usfirst.frc.team3309.lib.controllers.pid.PIDConstants;
 import org.usfirst.frc.team3309.lib.controllers.pid.PIDController;
 import org.usfirst.frc.team3309.lib.math.LibMath;
 import org.usfirst.frc.team3309.robot.Robot;
 
-public class DriveTurn extends Command {
+public class DriveTurn extends CommandEx
+{
 
     private double goalAngle;
     private PIDController angleController;
@@ -31,6 +32,7 @@ public class DriveTurn extends Command {
 
     @Override
     public void initialize() {
+        super.initialize();
         isInitialized = true;
         Robot.drive.reset();
         Robot.drive.setHighGear();
@@ -58,6 +60,7 @@ public class DriveTurn extends Command {
 
     @Override
     public void end() {
+        super.end();
         isInitialized = false;
         timeoutSec = Double.POSITIVE_INFINITY;
     }
