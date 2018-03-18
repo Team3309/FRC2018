@@ -1,7 +1,9 @@
 .classpath
 .settings
 .gradle
-.idea/workspace.xml
+.gradle/*
+.idea/*
+.idea
 out
 bin
 build
