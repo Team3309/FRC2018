@@ -14,14 +14,13 @@ public class ScaleRightOnlyAuto extends CommandGroup {
 
     @Override
     public synchronized void start() {
-    //    addSequential(new MoveAssembly(AssemblyLocation.BOTTOM));
+        addSequential(new MoveAssembly(AssemblyLocation.BOTTOM));
         if (Robot.isRightScale()) {
             addSequential(new DriveStraightProperly(185, 20000, true));
-            addParallel(new MoveAssembly(AssemblyLocation.SCALE_MIDDLE));
+    /*        addParallel(new MoveAssembly(AssemblyLocation.SCALE_MIDDLE));
             addSequential(new DriveArc(Length.fromInches(40), -34, 26000, false, true));
             addSequential(new DriveStop());
-            addSequential(new RollersActuate(1.0, 3.0));
-        //    addSequential(new DriveStraightProperly(20, 10000));
+            addSequential(new RollersActuate(0.5, 2.0));*/
         } else if (Robot.isLeftScale()) {
  /*           addSequential(new DriveStraightProperly(115, 30000));
             addSequential(new DriveArc(Length.fromInches(30), 90, 26000, false));
