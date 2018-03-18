@@ -85,7 +85,7 @@ public class Constants {
     public static final int LIFT_HOLDER_A = 3;
     public static final int LIFT_HOLDER_B = 0;
 
-    public static final double LIFT_NUDGE_SPEED = 1000;
+    public static final double LIFT_NUDGE_SPEED = 1400;
 
     // beltbar
     public static final int BELTBAR_0 = 30;
