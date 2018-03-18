@@ -1,6 +1,5 @@
 package org.usfirst.frc.team3309.commands.subsystems.drive;
 
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team3309.lib.CommandEx;
 import org.usfirst.frc.team3309.lib.controllers.pid.PIDConstants;
@@ -11,8 +10,8 @@ public class DriveStraightProperly extends CommandEx
 {
 
     private boolean isInit = false;
-    private double startAngle;
-    private PIDController angleController = new PIDController(new PIDConstants(0.1, 0, 0));
+    private double startAngleVel;
+    private PIDController angleController = new PIDController(new PIDConstants(1.0, 0, 0));
 
     public enum DriveStrategy {
         VELOCITY,
@@ -47,7 +46,7 @@ public class DriveStraightProperly extends CommandEx
         super.initialize();
         Robot.drive.reset();
         isInit = true;
-        startAngle = Robot.drive.getAngPos();
+        startAngleVel = Robot.drive.getAngVel();
     }
 
     @Override
@@ -65,7 +64,7 @@ public class DriveStraightProperly extends CommandEx
                 break;
             case VELOCITY:
                 Robot.drive.changeToVelocityMode();
-                double angularUpdate = angleController.update(Robot.drive.getAngPos(), startAngle);
+                double angularUpdate = angleController.update(Robot.drive.getAngVel(), startAngleVel);
                 if(distance > Robot.drive.encoderCountsToInches(Robot.drive.getEncoderPos()))
                     Robot.drive.setLeftRight(velocityTarget + angularUpdate,velocityTarget + angularUpdate);
                 else
