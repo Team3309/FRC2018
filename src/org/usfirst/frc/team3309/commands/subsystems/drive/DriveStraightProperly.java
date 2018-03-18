@@ -66,9 +66,9 @@ public class DriveStraightProperly extends CommandEx
                 Robot.drive.changeToVelocityMode();
                 double angularUpdate = 60000 * angleController.update(Robot.drive.getAngVel(), startAngleVel);
                 if(distance > Robot.drive.encoderCountsToInches(Robot.drive.getEncoderPos()))
-                    Robot.drive.setLeftRight(velocityTarget + angularUpdate,velocityTarget + angularUpdate);
+                    Robot.drive.setLeftRight(velocityTarget + angularUpdate,velocityTarget - angularUpdate);
                 else
-                    Robot.drive.setLeftRight(-velocityTarget + angularUpdate,-velocityTarget + angularUpdate);
+                    Robot.drive.setLeftRight(-velocityTarget + angularUpdate,-velocityTarget - angularUpdate);
                 break;
             case MOTION_MAGIC:
                 Robot.drive.changeToMotionMagicMode();
