@@ -25,6 +25,8 @@ public class BeltBar extends Subsystem {
 
     private boolean inRecovery = false;
 
+    private boolean isClimbing = false;
+
     private double goalAngle;
 
     // TODO determine top value
@@ -84,22 +86,24 @@ public class BeltBar extends Subsystem {
 
     @Override
     public void periodic() {
-        if (getPosition() > FORWARD_SOFT_LIM) {
-            masterBar.configForwardSoftLimitEnable(false, 10);
-            masterBar.set(ControlMode.Position, AssemblyLocation.BOTTOM_FOR_CUBE.getBeltBarPosition());
-            DriverStation.reportWarning("Beltbar exceeded forward limit! Correcting...", false);
-            inRecovery = true;
-        } else if (getPosition() < REVERSE_SOFT_LIM) {
-            masterBar.configReverseSoftLimitEnable(false, 10);
-            masterBar.set(ControlMode.Position, AssemblyLocation.BOTTOM.getBeltBarPosition());
-            DriverStation.reportWarning("Beltbar exceeded reverse limit! Correcting...", false);
-            inRecovery = true;
-        } else {
-            if(inRecovery)
-            {
-                masterBar.configForwardSoftLimitEnable(true, 10);
-                masterBar.configReverseSoftLimitEnable(true, 10);
-                inRecovery = false;
+        if (!isClimbing) {
+            if (getPosition() > FORWARD_SOFT_LIM) {
+                masterBar.configForwardSoftLimitEnable(false, 10);
+                masterBar.set(ControlMode.Position, AssemblyLocation.BOTTOM_FOR_CUBE.getBeltBarPosition());
+                DriverStation.reportWarning("Beltbar exceeded forward limit! Correcting...", false);
+                inRecovery = true;
+            } else if (getPosition() < REVERSE_SOFT_LIM) {
+                masterBar.configReverseSoftLimitEnable(false, 10);
+                masterBar.set(ControlMode.Position, AssemblyLocation.BOTTOM.getBeltBarPosition());
+                DriverStation.reportWarning("Beltbar exceeded reverse limit! Correcting...", false);
+                inRecovery = true;
+            } else {
+                if(inRecovery)
+                {
+                    masterBar.configForwardSoftLimitEnable(true, 10);
+                    masterBar.configReverseSoftLimitEnable(true, 10);
+                    inRecovery = false;
+                }
             }
         }
         masterBar.config_kP(0,SmartDashboard.getNumber("Beltbar P: ",3),10);
@@ -187,6 +191,10 @@ public class BeltBar extends Subsystem {
 
     public double getCurrent() {
         return masterBar.getOutputCurrent();
+    }
+
+    public void setClimbing(boolean climbing) {
+        isClimbing = climbing;
     }
 
 }
