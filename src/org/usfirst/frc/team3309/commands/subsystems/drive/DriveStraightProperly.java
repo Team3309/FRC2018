@@ -12,7 +12,8 @@ public class DriveStraightProperly extends CommandEx
 
     private boolean isInit = false;
     private double startAngleVel;
-    private double start = Double.POSITIVE_INFINITY;
+    private double start;
+    private double timeout = Double.POSITIVE_INFINITY;
     private PIDController angleController = new PIDController(new PIDConstants(0.6, 0, 0));
 
     public enum DriveStrategy {
@@ -43,7 +44,17 @@ public class DriveStraightProperly extends CommandEx
         this.allowOvershoot = allowOvershoot;
     }
 
-    @Override
+    public DriveStraightProperly(double distance, int velocity, boolean allowOvershoot, double timeout) {
+        this(distance, velocity, allowOvershoot);
+        this.timeout = timeout;
+    }
+
+    public DriveStraightProperly(double distance, int velocity, double timeout) {
+        this(distance, velocity, false, timeout);
+    }
+
+
+        @Override
     public void initialize() {
         super.initialize();
         Robot.drive.reset();
@@ -83,14 +94,12 @@ public class DriveStraightProperly extends CommandEx
     @Override
     protected boolean isFinished()
     {
-        if (Timer.getFPGATimestamp() - start >= 0.15) {
-            return false;
-        } else {
-            if (allowOvershoot) {
+            if (Timer.getFPGATimestamp() - start >= timeout) {
+                return true;
+            } else if (allowOvershoot) {
                 return Math.abs(Robot.drive.getEncoderPos()) >  Math.abs(distance);
             }
             return Math.abs(distance - Robot.drive.getEncoderPos()) <= Robot.drive.inchesToEncoderCounts(1.5);
-        }
     }
 
     @Override
@@ -99,7 +108,7 @@ public class DriveStraightProperly extends CommandEx
         super.end();
         Robot.drive.disableOutput();
         isInit = false;
-        start = Double.POSITIVE_INFINITY;
+        timeout = Double.POSITIVE_INFINITY;
     }
 
 }
