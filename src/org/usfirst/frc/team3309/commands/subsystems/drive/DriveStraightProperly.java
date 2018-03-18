@@ -12,7 +12,7 @@ public class DriveStraightProperly extends CommandEx
 
     private boolean isInit = false;
     private double startAngleVel;
-    private double start;
+    private double start = Double.POSITIVE_INFINITY;
     private PIDController angleController = new PIDController(new PIDConstants(0.6, 0, 0));
 
     public enum DriveStrategy {
@@ -99,6 +99,7 @@ public class DriveStraightProperly extends CommandEx
         super.end();
         Robot.drive.disableOutput();
         isInit = false;
+        start = Double.POSITIVE_INFINITY;
     }
 
 }
