@@ -3,12 +3,15 @@ package org.usfirst.frc.team3309.commands.subsystems.drive;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team3309.lib.CommandEx;
+import org.usfirst.frc.team3309.lib.controllers.pid.PIDConstants;
+import org.usfirst.frc.team3309.lib.controllers.pid.PIDController;
 import org.usfirst.frc.team3309.robot.Robot;
 
 public class DriveStraightProperly extends CommandEx
 {
 
     private boolean isInit = false;
+    private PIDController angleController = new PIDController(new PIDConstants(0.001, 0, 0));
 
     public enum DriveStrategy {
         VELOCITY,
