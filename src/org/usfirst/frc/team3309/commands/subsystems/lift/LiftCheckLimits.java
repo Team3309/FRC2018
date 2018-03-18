@@ -12,6 +12,10 @@ public class LiftCheckLimits extends Command {
 
     private static boolean isZeroed = false;
 
+    public LiftCheckLimits() {
+        setRunWhenDisabled(true);
+    }
+
     @Override
     protected void execute() {
         if (Robot.lift.isAtBottom() && !isZeroed) {
