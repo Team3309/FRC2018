@@ -35,7 +35,7 @@ public class ScaleRightOnlyAuto extends CommandGroup {
             addSequential(new DriveArc(Length.fromInches(28), -80, 23000,false, true));
             addSequential(new DriveStraightProperly(183, 24000, true,  2.0));
             addSequential(new DriveTurn(-125, 0.6));
-            addSequential(new DriveStraightProperly(50, 15000, 0.7));
+            addSequential(new DriveStraightProperly(35, 15000, 0.7));
         //    addSequential(new DriveArc(Length.fromInches(8), 110, 18000, false, true));
             addSequential(new DriveStop());
         }
