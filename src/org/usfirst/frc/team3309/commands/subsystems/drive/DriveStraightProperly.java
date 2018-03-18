@@ -11,7 +11,7 @@ public class DriveStraightProperly extends CommandEx
 
     private boolean isInit = false;
     private double startAngleVel;
-    private PIDController angleController = new PIDController(new PIDConstants(0.11, 0, 0));
+    private PIDController angleController = new PIDController(new PIDConstants(0.6, 0, 0));
 
     public enum DriveStrategy {
         VELOCITY,
@@ -64,7 +64,7 @@ public class DriveStraightProperly extends CommandEx
                 break;
             case VELOCITY:
                 Robot.drive.changeToVelocityMode();
-                double angularUpdate = 30000 * angleController.update(Robot.drive.getAngVel(), startAngleVel);
+                double angularUpdate = -30000 * angleController.update(Robot.drive.getAngVel(), startAngleVel);
                 if(distance > Robot.drive.encoderCountsToInches(Robot.drive.getEncoderPos()))
                     Robot.drive.setLeftRight(velocityTarget + angularUpdate,velocityTarget - angularUpdate);
                 else
