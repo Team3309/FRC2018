@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3309.commands.autos;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import org.usfirst.frc.team3309.commands.WaitAndMoveAssembly;
 import org.usfirst.frc.team3309.commands.subsystems.AssemblyLocation;
 import org.usfirst.frc.team3309.commands.subsystems.MoveAssembly;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveArc;
@@ -17,16 +18,8 @@ public class ScaleRightOnlyAuto extends CommandGroup {
     public synchronized void start() {
         addSequential(new MoveAssembly(AssemblyLocation.BOTTOM));
         if (Robot.isRightScale()) {
-            addParallel(new CommandGroup() {
-                @Override
-                public void start() {
-                    addSequential(new WaitCommand(0.5));
-
-                    super.start();
-                }
-            });
+            addParallel(new WaitAndMoveAssembly(1.5, AssemblyLocation.SCALE_UP));
             addSequential(new DriveStraightProperly(185, 20000, true));
-            addSequential(new MoveAssembly(AssemblyLocation.SCALE_UP));
             addSequential(new DriveArc(Length.fromInches(40), -20, 26000, false, true));
             addSequential(new DriveStop());
             addSequential(new RollersActuate(0.5, 2.0));
