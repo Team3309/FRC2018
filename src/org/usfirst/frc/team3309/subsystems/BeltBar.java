@@ -106,7 +106,7 @@ public class BeltBar extends Subsystem {
                 }
             }
         }
-        
+
         masterBar.config_kP(0,SmartDashboard.getNumber("Beltbar P: ",3),10);
         masterBar.config_kI(0,SmartDashboard.getNumber("Beltbar I: ", 0),10);
         masterBar.config_kD(0,SmartDashboard.getNumber("Beltbar D: ", 0.5),10);

@@ -22,7 +22,7 @@ public class PrepareForClimb extends CommandGroup {
 
             @Override
             protected boolean isFinished() {
-                return false;
+                return true;
             }
         });
         addSequential(new LiftManualForClimbing());
