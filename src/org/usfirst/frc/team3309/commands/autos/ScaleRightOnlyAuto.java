@@ -42,7 +42,6 @@ public class ScaleRightOnlyAuto extends CommandGroup {
             addSequential(new DriveStop());
             addParallel(new ArmsOpen());
             addSequential(new RollersActuate(0.5, 1));
-            System.out.println("Time--------- " + Timer.getFPGATimestamp());
             addSequential(new DriveStraightProperly(-20, 15000, 2.0));
             addSequential(new DriveStop());
             addSequential(new MoveAssembly(AssemblyLocation.BOTTOM));
