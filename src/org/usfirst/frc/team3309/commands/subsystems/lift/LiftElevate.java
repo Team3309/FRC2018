@@ -10,6 +10,7 @@ public class LiftElevate extends CommandEx {
     private double goalPos;
     private final double ERROR_THRESHOLD = 300;
 
+
     public LiftElevate(double goalPos) {
         this.goalPos = goalPos;
         requires(Robot.lift);
