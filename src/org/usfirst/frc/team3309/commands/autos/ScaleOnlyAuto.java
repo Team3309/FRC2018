@@ -57,7 +57,7 @@ public class ScaleOnlyAuto extends CommandGroup {
                 // assembly switch level, forward a tad and rollers actuate and arms open, back and to home
             }
         } else if (!isRight) {
-            if (Robot.isRightScale()) {
+            if (Robot.isLeftScale()) {
               //  addParallel(new WaitAndMoveAssembly(1.5, AssemblyLocation.SCALE_UP));
                 addSequential(new DriveStraight(185, 20000, true));
                 addSequential(new DriveArc(Length.fromInches(40), 24, 26000, false, true));
@@ -69,7 +69,7 @@ public class ScaleOnlyAuto extends CommandGroup {
                 addSequential(new DriveStraight(-20, 15000, 2.0));
                 addSequential(new DriveEnd());
                 addSequential(new MoveAssembly(AssemblyLocation.BOTTOM));*/
-            } else if (Robot.isLeftScale()) {
+            } else if (Robot.isRightScale()) {
 
             }
         }
