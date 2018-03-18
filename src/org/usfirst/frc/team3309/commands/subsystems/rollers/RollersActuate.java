@@ -40,5 +40,6 @@ public class RollersActuate extends Command {
     public void end() {
         isInit = false;
         start = Double.POSITIVE_INFINITY;
+        Robot.rollers.setLeftRight(0, 0);
     }
 }
