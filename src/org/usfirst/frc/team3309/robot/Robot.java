@@ -82,7 +82,7 @@ public class Robot extends TimedRobot {
         c.stop();
         logger.info("autonomous init");
         drive.reset();
-        lift.setLiftShifter(true);
+        lift.setHolderOut();
         autoCommand = AutoModeExecutor.getAutoSelected();
         logger.info("Running " + autoCommand.getName());
         if (autoCommand != null) {
@@ -102,7 +102,6 @@ public class Robot extends TimedRobot {
     @Override
     public void teleopInit() {
         start = Timer.getFPGATimestamp();
-        lift.setLiftShifter(true);
         c.start();
         logger.info("teleop init");
         if (autoCommand != null) {
