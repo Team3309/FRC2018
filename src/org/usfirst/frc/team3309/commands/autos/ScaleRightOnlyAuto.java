@@ -30,7 +30,7 @@ public class ScaleRightOnlyAuto extends CommandGroup {
             addSequential(new DriveStop());
             addSequential(new MoveAssembly(AssemblyLocation.BOTTOM));
         } else if (Robot.isLeftScale()) {
-            addSequential(new DriveStraightProperly(170, 25000));
+            addSequential(new DriveStraightProperly(150, 25000));
             addSequential(new DriveArc(Length.fromInches(28), -90, 26000,false));
             addSequential(new DriveStraightProperly(150, 25000));
             addSequential(new DriveArc(Length.fromInches(28), 90, 26000, false));
