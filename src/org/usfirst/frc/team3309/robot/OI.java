@@ -24,10 +24,10 @@ public class OI {
 
     public static Joystick driverRemoteLeft = new Joystick(1);
     public static Joystick driverRemoteRight = new Joystick(2);
+
     public static JoystickButton driverShiftButton = new JoystickButton(driverRemoteLeft,Constants.JOYSTICK_TRIGGER_BUTTON);
     public static JoystickButton leftShootButton = new JoystickButton(driverRemoteLeft,Constants.JOYSTICK_SHOOT_BUTTON);
     public static JoystickButton rightShootButton = new JoystickButton(driverRemoteRight,Constants.JOYSTICK_SHOOT_BUTTON);
-
 
     OI() {
         /* =====DRIVER===== */
@@ -45,9 +45,9 @@ public class OI {
         operatorRemote.startButton.whenPressed(new PrepareForClimb());
         operatorRemote.rightStick.whenPressed(new SetClimbMode());
 
-        operatorRemote.buttonX.whenPressed(new MoveAssembly(AssemblyLocation.BOTTOM_FOR_CUBE,true));
-        operatorRemote.buttonY.whenPressed(new MoveAssembly(AssemblyLocation.BOTTOM,true));
-        operatorRemote.dPad.down.whenPressed(new MoveAssembly(AssemblyLocation.SWITCH,true));
+        operatorRemote.buttonX.whenPressed(new MoveAssembly(AssemblyLocation.BOTTOM_FOR_CUBE,false));
+        operatorRemote.buttonY.whenPressed(new MoveAssembly(AssemblyLocation.BOTTOM,false));
+        operatorRemote.dPad.down.whenPressed(new MoveAssembly(AssemblyLocation.SWITCH,false));
         operatorRemote.dPad.right.whenPressed(new MoveAssembly(AssemblyLocation.SCALE_DOWN,true));
         operatorRemote.dPad.up.whenPressed(new MoveAssembly(AssemblyLocation.SCALE_MIDDLE,true));
         operatorRemote.dPad.left.whenPressed(new MoveAssembly(AssemblyLocation.SCALE_UP,true));
