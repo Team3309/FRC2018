@@ -1,5 +1,6 @@
 package org.usfirst.frc.team3309.commands.subsystems.lift;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team3309.robot.OI;
 import org.usfirst.frc.team3309.robot.Robot;
@@ -8,6 +9,8 @@ public class LiftHybridMove extends Command
 {
     private double goalAngle;
     private double error;
+    private double last = 0;
+    private boolean started = false;
     public static final double ERROR_THRESHOLD = 100;
 
     public LiftHybridMove(double goalAngle) {
@@ -23,7 +26,12 @@ public class LiftHybridMove extends Command
 
     @Override
     protected void execute() {
-        double offset = 10000 * Robot.DEFAULT_PERIOD * OI.operatorRemote.leftStick.getY();
+        if(!started)
+        {
+            last=Timer.getFPGATimestamp();
+            started = true;
+        }
+        double offset = 10000 * (last-Timer.getFPGATimestamp()) * OI.operatorRemote.leftStick.getY();
         if(goalAngle + offset > Robot.lift.FORWARD_LIM)
         {
             goalAngle = Robot.lift.FORWARD_LIM;
@@ -43,5 +51,11 @@ public class LiftHybridMove extends Command
     @Override
     protected boolean isFinished() {
         return false;
+    }
+
+    @Override
+    protected void end() {
+        super.end();
+        started = false;
     }
 }

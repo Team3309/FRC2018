@@ -36,11 +36,12 @@ public class Robot extends TimedRobot {
     private static boolean isLeftScale;
     private static boolean isRightScale;
 
+
     private PowerDistributionPanel pdp;
 
     @Override
     public void robotInit() {
-        setPeriod(0.01);
+        setPeriod(0.005);
         pdp = new PowerDistributionPanel(0);
         AssemblyLocation.init();
         logger = Logger.getLogger("Robot");
