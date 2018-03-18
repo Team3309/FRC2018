@@ -9,7 +9,10 @@ import org.usfirst.frc.team3309.robot.Robot;
 public class LiftHybridMove extends Command
 {
     private double goalAngle;
-    private double last = Double.NaN;
+    private double error;
+    private double last = 0;
+    private boolean started = false;
+    public static final double ERROR_THRESHOLD = 100;
 
     public LiftHybridMove(double goalAngle)
     {
@@ -25,12 +28,12 @@ public class LiftHybridMove extends Command
     }
 
     @Override
-    protected void execute()
-    {
+    protected void execute() {
         double now = Timer.getFPGATimestamp();
-        if(last == Double.NaN)
+        if(!started)
         {
-            last = now;
+            last=Timer.getFPGATimestamp();
+            started = true;
         }
         double offset = Constants.LIFT_NUDGE_SPEED * (now - last) * OI.operatorRemote.leftStick.getY();
         if(goalAngle + offset > Robot.lift.FORWARD_LIM)
