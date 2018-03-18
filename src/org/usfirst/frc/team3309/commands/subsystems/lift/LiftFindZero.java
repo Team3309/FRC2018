@@ -26,11 +26,10 @@ public class LiftFindZero extends Command {
                 double timeElapsed = Timer.getFPGATimestamp() - start;
                 if (timeElapsed > DESIRED_TIME_ELAPSED) {
                     Robot.lift.resetToBottom();
+                    hasStarted = false;
                     isZeroed = true;
                 }
             }
-        } else {
-            hasStarted = false;
         }
     }
 
