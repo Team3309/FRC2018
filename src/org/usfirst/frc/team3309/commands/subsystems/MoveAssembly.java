@@ -19,6 +19,7 @@ public class MoveAssembly extends CommandGroup {
     public MoveAssembly(AssemblyLocation assemblyLocation) {
         this(assemblyLocation,false);
     }
+
     public MoveAssembly(AssemblyLocation assemblyLocation,boolean useHybrid)
     {
         addParallel(new BeltBarMoveToPos(assemblyLocation.getBeltBarPosition()));

@@ -3,6 +3,7 @@ package org.usfirst.frc.team3309.commands.autos;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import org.usfirst.frc.team3309.commands.subsystems.AssemblyLocation;
 import org.usfirst.frc.team3309.commands.subsystems.MoveAssembly;
+import org.usfirst.frc.team3309.commands.subsystems.beltbar.BeltBarMoveToPos;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveArc;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveStop;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveStraightProperly;
@@ -17,7 +18,8 @@ public class ScaleRightOnlyAuto extends CommandGroup {
         addSequential(new MoveAssembly(AssemblyLocation.BOTTOM));
         if (Robot.isRightScale()) {
             addSequential(new DriveStraightProperly(185, 20000, true));
-            addParallel(new MoveAssembly(AssemblyLocation.SWITCH));
+            addParallel(new LiftElevate(AssemblyLocation.SWITCH.getElevatorPosition()));
+            addParallel(new BeltBarMoveToPos(AssemblyLocation.SWITCH.getBeltBarPosition()));
             addSequential(new DriveArc(Length.fromInches(40), -25, 26000, false, true));
             addSequential(new DriveStop());
         //    addSequential(new DriveStraightProperly(20, 10000));
