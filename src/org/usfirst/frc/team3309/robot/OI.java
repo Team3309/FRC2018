@@ -45,7 +45,7 @@ public class OI {
         operatorRemote.startButton.whenPressed(new PrepareForClimb());
         operatorRemote.rightStick.whenPressed(new SetClimbMode());
 
-        operatorRemote.buttonX.whenPressed(new MoveAssembly(AssemblyLocation.BOTTOM_FOR_CUBE,false));
+        operatorRemote.buttonX.whenPressed(new MoveAssembly(AssemblyLocation.BOTTOM_FOR_CUBE,true));
         operatorRemote.buttonY.whenPressed(new MoveAssembly(AssemblyLocation.BOTTOM,false));
         operatorRemote.dPad.down.whenPressed(new MoveAssembly(AssemblyLocation.SWITCH,false));
         operatorRemote.dPad.right.whenPressed(new MoveAssembly(AssemblyLocation.SCALE_DOWN,true));
