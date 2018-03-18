@@ -33,7 +33,7 @@ public class RollersActuate extends Command {
 
     @Override
     protected boolean isFinished() {
-        return Math.abs(Timer.getFPGATimestamp() - start) >= time;
+        return Timer.getFPGATimestamp() - start >= time;
     }
 
     @Override
