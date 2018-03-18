@@ -10,9 +10,11 @@ public class LiftHybridMove extends Command {
     private double goalAngle;
     private double last = 0;
     private boolean started = false;
+    private double origAngle;
 
     public LiftHybridMove(double goalAngle) {
         this.goalAngle = goalAngle;
+        origAngle = goalAngle;
         requires(Robot.lift);
     }
 
@@ -25,11 +27,14 @@ public class LiftHybridMove extends Command {
     @Override
     protected void execute() {
         double now = Timer.getFPGATimestamp();
+
         if (!started) {
             last = Timer.getFPGATimestamp();
             started = true;
         }
+
         double offset = Constants.LIFT_NUDGE_SPEED * (Timer.getFPGATimestamp() - last) * OI.operatorRemote.leftStick.getY();
+
         if (goalAngle + offset > Robot.lift.FORWARD_LIM) {
             goalAngle = Robot.lift.FORWARD_LIM;
         } else if (goalAngle + offset < 0) {
@@ -37,6 +42,7 @@ public class LiftHybridMove extends Command {
         } else {
             goalAngle += offset;
         }
+
         Robot.lift.setGoalPos(goalAngle);
         Robot.lift.set(goalAngle);
         last = now;
@@ -51,5 +57,7 @@ public class LiftHybridMove extends Command {
     protected void end() {
         super.end();
         started = false;
+        goalAngle = origAngle;
+
     }
 }

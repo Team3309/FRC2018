@@ -23,7 +23,8 @@ public class MoveAssembly extends CommandGroup {
     public MoveAssembly(AssemblyLocation assemblyLocation,boolean useHybrid)
     {
         addParallel(new BeltBarMoveToPos(assemblyLocation.getBeltBarPosition()));
-        addSequential(useHybrid ? new LiftHybridMove(assemblyLocation.getElevatorPosition()) : new LiftElevate(assemblyLocation.getElevatorPosition()));
+        addSequential(useHybrid ? new LiftHybridMove(assemblyLocation.getElevatorPosition()) :
+                new LiftElevate(assemblyLocation.getElevatorPosition()));
     }
 
 }
