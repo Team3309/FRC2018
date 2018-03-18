@@ -26,7 +26,7 @@ public class ScaleRightOnlyAuto extends CommandGroup {
             addParallel(new ArmsOpen());
             addSequential(new RollersActuate(0.5, 1.0));
             addSequential(new WaitCommand(0.5));
-            addSequential(new DriveStraightProperly(-20, 15000, true, 2.0));
+            addSequential(new DriveStraightProperly(-20, 15000, 2.0));
             addSequential(new DriveStop());
         //    addSequential(new MoveAssembly(AssemblyLocation.BOTTOM));
         } else if (Robot.isLeftScale()) {

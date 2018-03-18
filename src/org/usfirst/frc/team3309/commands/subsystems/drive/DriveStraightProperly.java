@@ -53,8 +53,7 @@ public class DriveStraightProperly extends CommandEx
         this(distance, velocity, false, timeout);
     }
 
-
-        @Override
+    @Override
     public void initialize() {
         super.initialize();
         Robot.drive.reset();
