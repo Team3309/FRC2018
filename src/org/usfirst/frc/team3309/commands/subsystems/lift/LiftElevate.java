@@ -2,9 +2,10 @@ package org.usfirst.frc.team3309.commands.subsystems.lift;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj.command.Command;
+import org.usfirst.frc.team3309.lib.CommandEx;
 import org.usfirst.frc.team3309.robot.Robot;
 
-public class LiftElevate extends Command {
+public class LiftElevate extends CommandEx {
 
     private double goalPos;
     private final double ERROR_THRESHOLD = 300;
@@ -15,7 +16,8 @@ public class LiftElevate extends Command {
     }
 
     @Override
-    protected void initialize() {
+    public void initialize() {
+        super.initialize();
         Robot.lift.changeToBrakeMode();
         Robot.lift.setGoalPos(goalPos);
         Robot.lift.changeToPositionMode();
@@ -28,7 +30,7 @@ public class LiftElevate extends Command {
             goalPos = 0;
         }
 
-        if (true) {
+        if (LiftFindZero.isZeroed()) {
             Robot.lift.set(goalPos);
         } else {
             Robot.lift.set(ControlMode.Disabled,0);
@@ -39,6 +41,11 @@ public class LiftElevate extends Command {
     @Override
     protected boolean isFinished() {
         return Math.abs(Robot.lift.getError()) < ERROR_THRESHOLD;
+    }
+
+    @Override
+    public void end() {
+        super.end();
     }
 
 }
