@@ -1,5 +1,6 @@
 package org.usfirst.frc.team3309.commands.subsystems.drive;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team3309.lib.CommandEx;
 import org.usfirst.frc.team3309.lib.controllers.pid.PIDConstants;
@@ -47,6 +48,7 @@ public class DriveStraightProperly extends CommandEx
         super.initialize();
         Robot.drive.reset();
         isInit = true;
+        start = Timer.getFPGATimestamp();
         startAngleVel = Robot.drive.getAngVel();
     }
 
@@ -81,10 +83,14 @@ public class DriveStraightProperly extends CommandEx
     @Override
     protected boolean isFinished()
     {
-        if (allowOvershoot) {
-            return Math.abs(Robot.drive.getEncoderPos()) >  Math.abs(distance);
+        if (Timer.getFPGATimestamp() - start >= 0.15) {
+            return false;
+        } else {
+            if (allowOvershoot) {
+                return Math.abs(Robot.drive.getEncoderPos()) >  Math.abs(distance);
+            }
+            return Math.abs(distance - Robot.drive.getEncoderPos()) <= Robot.drive.inchesToEncoderCounts(1.5);
         }
-        return Math.abs(distance - Robot.drive.getEncoderPos()) <= Robot.drive.inchesToEncoderCounts(1.5);
     }
 
     @Override
