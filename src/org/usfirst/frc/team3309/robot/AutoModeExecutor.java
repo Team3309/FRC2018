@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team3309.commands.autos.AutoLineAuto;
 import org.usfirst.frc.team3309.commands.autos.CurvyToSwitchAuto;
 import org.usfirst.frc.team3309.commands.autos.NoActionAuto;
-import org.usfirst.frc.team3309.commands.autos.ScaleRightOnlyAuto;
+import org.usfirst.frc.team3309.commands.autos.ScaleOnlyAuto;
 
 public class AutoModeExecutor {
 
@@ -16,7 +16,7 @@ public class AutoModeExecutor {
 
         autos.addObject("No Action", new NoActionAuto());
         autos.addDefault("CurvyToSwitchAuto", new CurvyToSwitchAuto());
-        autos.addObject("ScaleRightOnlyAuto", new ScaleRightOnlyAuto());
+        autos.addObject("ScaleOnlyAuto", new ScaleOnlyAuto());
         autos.addObject("AutoLineAuto", new AutoLineAuto());
 
         SmartDashboard.putData("Autos: ", autos);
