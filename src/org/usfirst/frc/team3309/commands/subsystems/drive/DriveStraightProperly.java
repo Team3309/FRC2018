@@ -11,6 +11,7 @@ public class DriveStraightProperly extends CommandEx
 
     private boolean isInit = false;
     private double startAngleVel;
+    private double start;
     private PIDController angleController = new PIDController(new PIDConstants(0.6, 0, 0));
 
     public enum DriveStrategy {
