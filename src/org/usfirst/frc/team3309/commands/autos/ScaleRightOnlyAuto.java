@@ -35,8 +35,10 @@ public class ScaleRightOnlyAuto extends CommandGroup {
             addSequential(new DriveArc(Length.fromInches(28), -80, 23000,false, true));
             addSequential(new DriveStraightProperly(183, 24000, true,  2.0));
             addSequential(new DriveTurn(-125, 0.6));
+            addSequential(new MoveAssembly(AssemblyLocation.SCALE_UP));
             addSequential(new DriveStraightProperly(20, 15000,  1.2));
             addSequential(new DriveStop());
+            addSequential(new RollersActuate(0.5, 1));
         }
         super.start();
     }
