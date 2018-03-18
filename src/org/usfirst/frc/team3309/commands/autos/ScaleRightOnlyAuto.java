@@ -1,5 +1,6 @@
 package org.usfirst.frc.team3309.commands.autos;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import org.usfirst.frc.team3309.commands.WaitAndMoveAssembly;
 import org.usfirst.frc.team3309.commands.subsystems.AssemblyLocation;
@@ -40,6 +41,7 @@ public class ScaleRightOnlyAuto extends CommandGroup {
             addSequential(new DriveStraightProperly(20, 15000,  1.2));
             addSequential(new DriveStop());
             addSequential(new RollersActuate(0.5, 1));
+            System.out.println("Time--------- " + Timer.getFPGATimestamp());
             addSequential(new DriveStraightProperly(-20, 15000, 2.0));
             addSequential(new DriveStop());
             addSequential(new MoveAssembly(AssemblyLocation.BOTTOM));
