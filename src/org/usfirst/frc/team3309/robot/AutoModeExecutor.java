@@ -15,9 +15,9 @@ public class AutoModeExecutor {
     public static void displayAutos() {
 
         autos.addObject("No Action", new NoActionAuto());
-        autos.addDefault("CurvyToSwitchAuto", new CurvyToSwitchAuto());
+        autos.addObject("CurvyToSwitchAuto", new CurvyToSwitchAuto());
         autos.addObject("ScaleFromRightOnlyAuto", new ScaleOnlyAuto(true));
-        autos.addObject("ScaleFromLeftOnlyAuto", new ScaleOnlyAuto(false));
+        autos.addDefault("ScaleFromLeftOnlyAuto", new ScaleOnlyAuto(false));
         autos.addObject("AutoLineAuto", new AutoLineAuto());
 
         SmartDashboard.putData("Autos: ", autos);
