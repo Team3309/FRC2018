@@ -5,7 +5,7 @@ import org.usfirst.frc.team3309.robot.Constants;
 public class AssemblyLocation {
 
     public static AssemblyLocation BOTTOM;
-    public static AssemblyLocation BOTTOM_FOR_CUBE;
+    public static AssemblyLocation INTAKE;
     public static AssemblyLocation EXCHANGE_ZONE;
     public static AssemblyLocation SCALE_DOWN;
     public static AssemblyLocation SCALE_MIDDLE;
@@ -19,7 +19,7 @@ public class AssemblyLocation {
     public static void init()
     {
         BOTTOM = new AssemblyLocation(Constants.BELTBAR_BOTTOM_POS, Constants.ELEVATOR_BOTTOM_POS);
-        BOTTOM_FOR_CUBE = new AssemblyLocation(Constants.BELTBAR_INTAKE_POS, Constants.ELEVATOR_INTAKE_POS);
+        INTAKE = new AssemblyLocation(Constants.BELTBAR_INTAKE_POS, Constants.ELEVATOR_INTAKE_POS);
         EXCHANGE_ZONE = new AssemblyLocation(Constants.BELTBAR_EXCHANGE_POS, Constants.ELEVATOR_EXCHANGE_POS);
         SCALE_DOWN = new AssemblyLocation(Constants.BELTBAR_EJECT_POS, Constants.ELEVATOR_SCALE_DOWN_POS);
         SCALE_MIDDLE = new AssemblyLocation(Constants.BELTBAR_EJECT_POS, Constants.ELEVATOR_SCALE_MIDDLE_POS);

@@ -3,7 +3,6 @@ package org.usfirst.frc.team3309.commands.autos;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import org.usfirst.frc.team3309.commands.WaitAndMoveAssembly;
 import org.usfirst.frc.team3309.commands.subsystems.AssemblyLocation;
-import org.usfirst.frc.team3309.commands.subsystems.FindAndGetCube;
 import org.usfirst.frc.team3309.commands.subsystems.MoveAssembly;
 import org.usfirst.frc.team3309.commands.subsystems.WaitForCube;
 import org.usfirst.frc.team3309.commands.subsystems.arms.ArmsClamp;
@@ -45,8 +44,9 @@ public class ScaleOnlyAuto extends CommandGroup {
                 addSequential(new DriveEnd());
                 addSequential(new MoveAssembly(AssemblyLocation.BOTTOM));
                 if (switchCube && Robot.isRightSwitch()) {
+
+                    addParallel(new MoveAssembly(AssemblyLocation.INTAKE));
                     addSequential(new DriveTurn(85, 1.0));
-                    addSequential(new MoveAssembly(AssemblyLocation.BOTTOM_FOR_CUBE));
 
                     addParallel(new DriveStraight(20, 15000, 1.2));
                     addParallel(new RollersActuate(Constants.AUTO_ROLLER_INTAKE_POWER,3));
