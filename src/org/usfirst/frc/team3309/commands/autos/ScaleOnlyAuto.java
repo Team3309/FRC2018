@@ -46,13 +46,13 @@ public class ScaleOnlyAuto extends CommandGroup {
                 if (switchCube && Robot.isRightSwitch()) {
 
                     addParallel(new MoveAssembly(AssemblyLocation.INTAKE));
-                    addSequential(new DriveTurn(80, 1.0));
+                    addSequential(new DriveTurn(83, 1.0));
 
                     addParallel(new RollersSetIn(true));
                     addSequential(new DriveStraight(26, 15000, 1.2));
 
                     addSequential(new ArmsClamp());
-                    addSequential(new DriveStraight(-3, 10000, true, 0.3));
+                    addSequential(new DriveStraight(-6, 15000, 0.5));
                     addSequential(new RollersSetIn(false));
 
                     addSequential(new MoveAssembly(AssemblyLocation.SWITCH));
