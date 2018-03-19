@@ -5,6 +5,8 @@ import org.usfirst.frc.team3309.commands.WaitAndMoveAssembly;
 import org.usfirst.frc.team3309.commands.subsystems.AssemblyLocation;
 import org.usfirst.frc.team3309.commands.subsystems.FindAndGetCube;
 import org.usfirst.frc.team3309.commands.subsystems.MoveAssembly;
+import org.usfirst.frc.team3309.commands.subsystems.WaitForCube;
+import org.usfirst.frc.team3309.commands.subsystems.arms.ArmsClamp;
 import org.usfirst.frc.team3309.commands.subsystems.arms.ArmsOpen;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveArc;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveEnd;
@@ -13,6 +15,7 @@ import org.usfirst.frc.team3309.commands.subsystems.drive.DriveTurn;
 import org.usfirst.frc.team3309.commands.subsystems.rollers.RollersActuate;
 import org.usfirst.frc.team3309.lib.WaitCommand;
 import org.usfirst.frc.team3309.lib.math.Length;
+import org.usfirst.frc.team3309.robot.Constants;
 import org.usfirst.frc.team3309.robot.Robot;
 
 public class ScaleOnlyAuto extends CommandGroup {
@@ -43,8 +46,13 @@ public class ScaleOnlyAuto extends CommandGroup {
                 addSequential(new MoveAssembly(AssemblyLocation.BOTTOM));
                 if (switchCube && Robot.isRightSwitch()) {
                     addSequential(new DriveTurn(85, 1.0));
-                    addSequential(new DriveStraight(15, 15000, 1.2));
-                    addParallel(new FindAndGetCube());
+                    addSequential(new MoveAssembly(AssemblyLocation.BOTTOM_FOR_CUBE));
+
+                    addParallel(new DriveStraight(20, 15000, 1.2));
+                    addParallel(new RollersActuate(Constants.AUTO_ROLLER_INTAKE_POWER,3));
+                    addSequential(new WaitForCube());
+                    addSequential(new ArmsClamp());
+
                     addSequential(new DriveStraight(-3, 10000, true, 0.3));
                     addSequential(new MoveAssembly(AssemblyLocation.SWITCH));
                     addSequential(new DriveStraight(3, 10000, true, 0.3));
