@@ -58,6 +58,5 @@ public class LiftHybridMove extends Command {
         super.end();
         started = false;
         goalAngle = origAngle;
-
     }
 }
