@@ -10,7 +10,7 @@ public class CheckForDrop extends Command {
     protected void execute() {
         if (!Robot.beltBar.isCubePresent()) {
             getGroup().cancel();
-            new LocateAndAcquireCube().start();
+            new FindAndGetCube().start();
         }
 
     }

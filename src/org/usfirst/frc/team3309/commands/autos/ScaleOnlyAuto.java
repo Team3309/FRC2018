@@ -3,6 +3,7 @@ package org.usfirst.frc.team3309.commands.autos;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import org.usfirst.frc.team3309.commands.WaitAndMoveAssembly;
 import org.usfirst.frc.team3309.commands.subsystems.AssemblyLocation;
+import org.usfirst.frc.team3309.commands.subsystems.FindAndGetCube;
 import org.usfirst.frc.team3309.commands.subsystems.MoveAssembly;
 import org.usfirst.frc.team3309.commands.subsystems.arms.ArmsOpen;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveArc;
@@ -17,9 +18,11 @@ import org.usfirst.frc.team3309.robot.Robot;
 public class ScaleOnlyAuto extends CommandGroup {
 
     private boolean isRight;
+    private boolean switchCube;
 
-    public ScaleOnlyAuto(boolean isRight) {
+    public ScaleOnlyAuto(boolean isRight, boolean switchCube) {
         this.isRight = isRight;
+        this.switchCube = switchCube;
     }
 
     @Override
@@ -38,6 +41,17 @@ public class ScaleOnlyAuto extends CommandGroup {
                 addSequential(new DriveStraight(-20, 15000, 1.2));
                 addSequential(new DriveEnd());
                 addSequential(new MoveAssembly(AssemblyLocation.BOTTOM));
+                if (switchCube && Robot.isRightSwitch()) {
+                    addSequential(new DriveTurn(90));
+                    addParallel(new FindAndGetCube());
+                    addSequential(new DriveStraight(20, 15000, 1.2));
+                    addSequential(new DriveStraight(-3, 10000, true, 0.3));
+                    addSequential(new MoveAssembly(AssemblyLocation.SWITCH));
+                    addSequential(new DriveStraight(3, 10000, true, 0.3));
+                    addSequential(new ArmsOpen());
+                    addSequential(new DriveStraight(-20, 15000, 1.2));
+                    addSequential(new MoveAssembly(AssemblyLocation.BOTTOM));
+                }
                 // TODO same as left side with tweaking
             } else if (Robot.isLeftScale()) {
                 addSequential(new DriveStraight(133, 28000, true, 2.0));

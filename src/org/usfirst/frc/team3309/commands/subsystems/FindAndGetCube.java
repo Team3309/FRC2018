@@ -7,9 +7,9 @@ import org.usfirst.frc.team3309.commands.subsystems.rollers.RollersActuate;
 import org.usfirst.frc.team3309.lib.WaitCommand;
 import org.usfirst.frc.team3309.robot.Constants;
 
-public class LocateAndAcquireCube extends CommandGroup {
+public class FindAndGetCube extends CommandGroup {
 
-    public LocateAndAcquireCube() {
+    public FindAndGetCube() {
         addParallel(new ArmsOpen());
         addParallel(new RollersActuate(Constants.AUTO_ROLLER_INTAKE_POWER,3));
         addSequential(new MoveAssembly(AssemblyLocation.BOTTOM_FOR_CUBE));

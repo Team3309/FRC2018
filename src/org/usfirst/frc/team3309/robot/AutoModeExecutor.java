@@ -14,11 +14,15 @@ public class AutoModeExecutor {
 
     public static void displayAutos() {
 
-        autos.addObject("No Action", new NoActionAuto());
-        autos.addObject("CurvyToSwitchAuto", new CurvyToSwitchAuto());
-        autos.addObject("ScaleFromRightOnlyAuto", new ScaleOnlyAuto(true));
-        autos.addDefault("ScaleFromLeftOnlyAuto", new ScaleOnlyAuto(false));
+        autos.addDefault("No Action", new NoActionAuto());
         autos.addObject("AutoLineAuto", new AutoLineAuto());
+        autos.addObject("MiddleSwitchAuto", new CurvyToSwitchAuto());
+
+        autos.addObject("RightScaleAuto", new ScaleOnlyAuto(true, false));
+        autos.addObject("LeftScaleAuto", new ScaleOnlyAuto(false, false));
+
+        autos.addObject("RightScaleAnd(Switch)Auto", new ScaleOnlyAuto(true, true));
+        autos.addObject("LeftScaleAnd(Switch)Auto", new ScaleOnlyAuto(false, true));
 
         SmartDashboard.putData("Autos: ", autos);
     }
