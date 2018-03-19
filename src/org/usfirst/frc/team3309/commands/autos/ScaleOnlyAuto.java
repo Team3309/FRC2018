@@ -50,7 +50,6 @@ public class ScaleOnlyAuto extends CommandGroup {
 
                     addParallel(new DriveStraight(23, 15000, 1.2));
                     addParallel(new RollersActuate(Constants.AUTO_ROLLER_INTAKE_POWER,3));
-                    addSequential(new WaitForCube());
                     addSequential(new ArmsClamp());
 
                     addSequential(new DriveStraight(-3, 10000, true, 0.3));
