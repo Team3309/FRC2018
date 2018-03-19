@@ -53,11 +53,11 @@ public class ScaleOnlyAuto extends CommandGroup {
                     addSequential(new WaitCommand(0.5));
                     addSequential(new ArmsClamp());
                     addSequential(new WaitCommand(0.25));
-                    addSequential(new DriveStraight(-10, 20000, 1.5));
+                    addSequential(new DriveStraight(-4, 20000, 1.5));
                     addSequential(new RollersSetIn(false));
 
                     addSequential(new MoveAssembly(AssemblyLocation.SWITCH));
-                    addSequential(new DriveStraight(3, 10000, true, 0.3));
+                    addSequential(new DriveStraight(8, 10000, true, 0.3));
                     addSequential(new ArmsOpen());
                     addSequential(new DriveStraight(-20, 15000, 1.2));
                     addSequential(new MoveAssembly(AssemblyLocation.BOTTOM));
