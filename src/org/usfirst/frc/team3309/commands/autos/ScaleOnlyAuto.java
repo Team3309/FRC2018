@@ -12,6 +12,7 @@ import org.usfirst.frc.team3309.commands.subsystems.drive.DriveEnd;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveStraight;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveTurn;
 import org.usfirst.frc.team3309.commands.subsystems.rollers.RollersActuate;
+import org.usfirst.frc.team3309.commands.subsystems.rollers.RollersSetIn;
 import org.usfirst.frc.team3309.lib.WaitCommand;
 import org.usfirst.frc.team3309.lib.math.Length;
 import org.usfirst.frc.team3309.robot.Constants;
@@ -48,12 +49,12 @@ public class ScaleOnlyAuto extends CommandGroup {
                     addSequential(new DriveTurn(85, 1.0));
 
                     addParallel(new DriveStraight(26, 15000, 1.2));
-                    addSequential(new RollersActuate(Constants.AUTO_ROLLER_INTAKE_POWER,1.2));
+                    addSequential(new RollersSetIn(true));
                     addSequential(new ArmsClamp());
 
-                    addSequential(new RollersActuate(Constants.AUTO_ROLLER_INTAKE_POWER, 0.3));
-
                     addSequential(new DriveStraight(-3, 10000, true, 0.3));
+                    addSequential(new RollersSetIn(false));
+                    
                     addSequential(new MoveAssembly(AssemblyLocation.SWITCH));
                     addSequential(new DriveStraight(3, 10000, true, 0.3));
                     addSequential(new ArmsOpen());
