@@ -12,6 +12,7 @@ public class BeltBarMoveToPos extends Command {
     private final double goalAngle;
     private double error;
     public static final double ERROR_THRESHOLD = 100;
+    private boolean hasStarted = false;
 
     private final double MIN_LIFT_POS_TO_ADJUST_HOME = 5000;
     private final double BELTBAR_GOAL_ADJUSTMENT = 800;
@@ -34,8 +35,12 @@ public class BeltBarMoveToPos extends Command {
 
     @Override
     protected void execute() {
-        if (Robot.lift.getLiftPos() > MIN_LIFT_POS_TO_ADJUST_HOME && Math.abs(goalAngle - Constants.BELTBAR_BOTTOM_POS) < 10.0) {
+        if (Robot.lift.getLiftPos() > MIN_LIFT_POS_TO_ADJUST_HOME &&
+                Math.abs(goalAngle - Constants.BELTBAR_BOTTOM_POS) < 10.0
+                && !hasStarted) {
             Robot.beltBar.set(goalAngle + BELTBAR_GOAL_ADJUSTMENT);
+            hasStarted = true;
+            System.out.println("i have changed");
         } else {
             Robot.beltBar.set(goalAngle);
         }
