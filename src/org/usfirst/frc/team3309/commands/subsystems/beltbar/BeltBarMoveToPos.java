@@ -48,6 +48,7 @@ public class BeltBarMoveToPos extends Command {
             System.out.println("i have changed");
         } else {
             Robot.beltBar.set(goalAngle);
+            hasStarted = false;
         }
         SmartDashboard.putNumber("Beltbar goal" , goalAngle);
         error = goalAngle - Robot.beltBar.getPosition();
