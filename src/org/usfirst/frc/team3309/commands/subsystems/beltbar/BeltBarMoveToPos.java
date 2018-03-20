@@ -2,6 +2,7 @@ package org.usfirst.frc.team3309.commands.subsystems.beltbar;
 
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team3309.lib.LibTimer;
+import org.usfirst.frc.team3309.robot.Constants;
 import org.usfirst.frc.team3309.robot.Robot;
 
 public class BeltBarMoveToPos extends Command {
@@ -9,6 +10,9 @@ public class BeltBarMoveToPos extends Command {
     private final double goalAngle;
     private double error;
     public static final double ERROR_THRESHOLD = 100;
+
+    private final double MIN_LIFT_POS_TO_ADJUST_HOME = 5000;
+    private final double BELTBAR_GOAL_ADJUSTMENT = 200;
 
     private LibTimer timer = new LibTimer();
 
@@ -27,7 +31,11 @@ public class BeltBarMoveToPos extends Command {
 
     @Override
     protected void execute() {
-        Robot.beltBar.set(goalAngle);
+        if (Robot.lift.getLiftPos() > MIN_LIFT_POS_TO_ADJUST_HOME && goalAngle == Constants.BELTBAR_BOTTOM_POS) {
+            Robot.beltBar.set(goalAngle + BELTBAR_GOAL_ADJUSTMENT);
+        } else {
+            Robot.beltBar.set(goalAngle);
+        }
         error = goalAngle - Robot.beltBar.getPosition();
     }
 
