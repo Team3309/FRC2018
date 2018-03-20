@@ -12,7 +12,7 @@ public class BeltBarMoveToPos extends Command {
     public static final double ERROR_THRESHOLD = 100;
 
     private final double MIN_LIFT_POS_TO_ADJUST_HOME = 5000;
-    private final double BELTBAR_GOAL_ADJUSTMENT = 200;
+    private final double BELTBAR_GOAL_ADJUSTMENT = 400;
 
     private LibTimer timer = new LibTimer();
 
