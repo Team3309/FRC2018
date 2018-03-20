@@ -38,12 +38,10 @@ public class BeltBarMoveToPos extends Command {
                 Math.abs(goalAngle - Constants.BELTBAR_BOTTOM_POS) < 10.0 && !hasStarted) {
             Robot.beltBar.set(goalAngle + BELTBAR_GOAL_ADJUSTMENT);
             hasStarted = true;
-            System.out.println("i have changed");
         } else {
             Robot.beltBar.set(goalAngle);
             hasStarted = false;
         }
-        SmartDashboard.putNumber("Beltbar goal" , goalAngle);
         error = goalAngle - Robot.beltBar.getPosition();
     }
 
