@@ -18,11 +18,11 @@ public class Arms extends Subsystem {
     }
 
     public void periodic() {
-/*        if (OI.operatorRemote.buttonA.get()) {
+        if (OI.operatorRemote.buttonA.get()) {
             Robot.arms.clampArms();
         } else if (OI.operatorRemote.buttonB.get()) {
             Robot.arms.openArms();
-        }*/
+        }
     }
 
     public void sendToDashboard() {
