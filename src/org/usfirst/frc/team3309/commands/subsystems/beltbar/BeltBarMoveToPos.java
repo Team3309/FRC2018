@@ -14,7 +14,7 @@ public class BeltBarMoveToPos extends Command {
     public static final double ERROR_THRESHOLD = 100;
     private boolean hasStarted = false;
 
-    private final double MIN_LIFT_POS_TO_ADJUST_HOME = 5000;
+    private final double MIN_LIFT_POS_TO_ADJUST_HOME = 10000;
     private final double BELTBAR_GOAL_ADJUSTMENT = 400;
 
     private LibTimer timer = new LibTimer();
@@ -22,7 +22,6 @@ public class BeltBarMoveToPos extends Command {
     public BeltBarMoveToPos(double goalAngle) {
         this.goalAngle = goalAngle;
         requires(Robot.beltBar);
-        SmartDashboard.putNumber("Beltbar goal" , goalAngle);
     }
 
     @Override
@@ -35,12 +34,6 @@ public class BeltBarMoveToPos extends Command {
 
     @Override
     protected void execute() {
-        System.out.println("Lift pos: " + Robot.lift.getPosition());
-        System.out.println("Greater: " + (Robot.lift.getPosition() > MIN_LIFT_POS_TO_ADJUST_HOME));
-        System.out.println("Goal angle: " + goalAngle);
-        System.out.println("Beltbar bottom: " + Constants.BELTBAR_BOTTOM_POS);
-        System.out.println("Diff: " + Math.abs(goalAngle - Constants.BELTBAR_BOTTOM_POS));
-        System.out.println("Diff bool: " + (Math.abs(goalAngle - Constants.BELTBAR_BOTTOM_POS) < 10.0));
         if (Robot.lift.getPosition() > MIN_LIFT_POS_TO_ADJUST_HOME &&
                 Math.abs(goalAngle - Constants.BELTBAR_BOTTOM_POS) < 10.0 && !hasStarted) {
             Robot.beltBar.set(goalAngle + BELTBAR_GOAL_ADJUSTMENT);
