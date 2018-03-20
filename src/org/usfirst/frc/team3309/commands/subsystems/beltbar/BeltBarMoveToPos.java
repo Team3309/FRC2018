@@ -40,6 +40,7 @@ public class BeltBarMoveToPos extends Command {
         System.out.println("Goal angle: " + goalAngle);
         System.out.println("Beltbar bottom: " + Constants.BELTBAR_BOTTOM_POS);
         System.out.println("Diff: " + Math.abs(goalAngle - Constants.BELTBAR_BOTTOM_POS));
+        System.out.println("Diff bool: " + (Math.abs(goalAngle - Constants.BELTBAR_BOTTOM_POS) < 10.0);
         if (Robot.lift.getLiftPos() > MIN_LIFT_POS_TO_ADJUST_HOME &&
                 Math.abs(goalAngle - Constants.BELTBAR_BOTTOM_POS) < 10.0
                 && !hasStarted) {
