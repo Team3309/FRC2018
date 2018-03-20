@@ -34,7 +34,7 @@ public class BeltBarMoveToPos extends Command {
 
     @Override
     protected void execute() {
-        if (Robot.lift.getLiftPos() > MIN_LIFT_POS_TO_ADJUST_HOME && goalAngle == Constants.BELTBAR_BOTTOM_POS) {
+        if (Robot.lift.getLiftPos() > MIN_LIFT_POS_TO_ADJUST_HOME && (goalAngle - Constants.BELTBAR_BOTTOM_POS) < 10.0) {
             Robot.beltBar.set(goalAngle + BELTBAR_GOAL_ADJUSTMENT);
         } else {
             Robot.beltBar.set(goalAngle);
