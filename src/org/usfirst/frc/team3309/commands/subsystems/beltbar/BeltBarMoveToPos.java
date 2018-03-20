@@ -1,6 +1,8 @@
 package org.usfirst.frc.team3309.commands.subsystems.beltbar;
 
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team3309.lib.LibTimer;
 import org.usfirst.frc.team3309.robot.Constants;
 import org.usfirst.frc.team3309.robot.Robot;
@@ -19,6 +21,7 @@ public class BeltBarMoveToPos extends Command {
     public BeltBarMoveToPos(double goalAngle) {
         this.goalAngle = goalAngle;
         requires(Robot.beltBar);
+        SmartDashboard.putNumber("Beltbar goal" , goalAngle);
     }
 
     @Override
@@ -36,6 +39,7 @@ public class BeltBarMoveToPos extends Command {
         } else {
             Robot.beltBar.set(goalAngle);
         }
+        SmartDashboard.putNumber("Beltbar goal" , goalAngle);
         error = goalAngle - Robot.beltBar.getPosition();
     }
 
