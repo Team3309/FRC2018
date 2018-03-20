@@ -29,6 +29,8 @@ public class RollersTeleop extends Command {
             } else {
                 Robot.rollers.setLeftRight(0, 0);
             }
+        } else {
+            Robot.rollers.setLeftRight(0, 0);
         }
     }
 
