@@ -21,8 +21,8 @@ public class AutoModeExecutor {
         autos.addObject("RightScaleAnd(Switch)Auto", new ScaleOnlyAuto(true, true));
         autos.addObject("LeftScaleAnd(Switch)Auto", new ScaleOnlyAuto(false, true));
 
-        autos.addObject("LeftSwitchAuto", new SideSwitch(false));
-        autos.addObject("RightSwitchAuto", new SideSwitch(true));
+        autos.addObject("LeftSwitchAuto", new SideSwitchAuto(false));
+        autos.addObject("RightSwitchAuto", new SideSwitchAuto(true));
 
         SmartDashboard.putData("Autos: ", autos);
     }

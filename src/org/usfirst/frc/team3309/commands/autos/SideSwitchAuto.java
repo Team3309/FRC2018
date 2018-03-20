@@ -8,14 +8,11 @@ import org.usfirst.frc.team3309.commands.subsystems.shooter.ShooterShoot;
 import org.usfirst.frc.team3309.lib.math.Length;
 import org.usfirst.frc.team3309.robot.Robot;
 
-/*
-*  TODO test this
-* */
-public class SideSwitch extends CommandGroup {
+public class SideSwitchAuto extends CommandGroup {
 
     private boolean onRight;
 
-    public SideSwitch(boolean onRight) {
+    public SideSwitchAuto(boolean onRight) {
         this.onRight = onRight;
     }
 
