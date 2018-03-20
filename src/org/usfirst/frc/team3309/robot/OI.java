@@ -20,10 +20,10 @@ import org.usfirst.frc.team3309.lib.input.InputXbox;
  */
 public class OI {
 
-    public static InputXbox operatorRemote = new InputXbox(0);
+    public static InputXbox operatorRemote = new InputXbox(2);
 
-    public static Joystick driverRemoteLeft = new Joystick(1);
-    public static Joystick driverRemoteRight = new Joystick(2);
+    public static Joystick driverRemoteLeft = new Joystick(0);
+    public static Joystick driverRemoteRight = new Joystick(1);
 
     public static JoystickButton driverShiftButton = new JoystickButton(driverRemoteLeft,Constants.JOYSTICK_TRIGGER_BUTTON);
     public static JoystickButton leftShootButton = new JoystickButton(driverRemoteLeft,Constants.JOYSTICK_SHOOT_BUTTON);
