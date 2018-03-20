@@ -23,7 +23,7 @@ public class AssemblyLocation {
         EXCHANGE_ZONE = new AssemblyLocation(Constants.BELTBAR_EXCHANGE_POS, Constants.ELEVATOR_EXCHANGE_POS);
         SCALE_DOWN = new AssemblyLocation(Constants.BELTBAR_EJECT_POS, Constants.ELEVATOR_SCALE_DOWN_POS);
         SCALE_MIDDLE = new AssemblyLocation(Constants.BELTBAR_EJECT_POS, Constants.ELEVATOR_SCALE_MIDDLE_POS);
-        SCALE_UP = new AssemblyLocation(Constants.BELTBAR_EJECT_POS, Constants.ELEVATOR_SCALE_TOP_POS);
+        SCALE_UP = new AssemblyLocation(Constants.BELTBAR_SCALE_UP_POS, Constants.ELEVATOR_SCALE_TOP_POS);
         SWITCH = new AssemblyLocation(Constants.BELTBAR_SWITCH_POS, Constants.ELEVATOR_SWITCH_POS);
         CLIMB = new AssemblyLocation(Constants.BELTBAR_CLIMB, Constants.ELEVATOR_BOTTOM_POS);
     }
