@@ -8,6 +8,8 @@ import org.usfirst.frc.team3309.lib.actuators.VictorSPXMC;
 import org.usfirst.frc.team3309.robot.Constants;
 import org.usfirst.frc.team3309.robot.Robot;
 
+import java.sql.Driver;
+
 public class Rollers extends Subsystem {
 
     private VictorSPXMC leftMotor = new VictorSPXMC(Constants.ROLLER_LEFT);
@@ -30,7 +32,7 @@ public class Rollers extends Subsystem {
     public void periodic() {
         if (DriverStation.getInstance().isAutonomous() && enableRollerPower) {
             Robot.rollers.setLeftRight(defaultAutoPower, -defaultAutoPower);
-        } else {
+        } else if (DriverStation.getInstance().isAutonomous()) {
             Robot.rollers.setLeftRight(0, 0);
         }
     }
