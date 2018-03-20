@@ -3,10 +3,7 @@ package org.usfirst.frc.team3309.robot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.usfirst.frc.team3309.commands.autos.AutoLineAuto;
-import org.usfirst.frc.team3309.commands.autos.CurvyToSwitchAuto;
-import org.usfirst.frc.team3309.commands.autos.NoActionAuto;
-import org.usfirst.frc.team3309.commands.autos.ScaleOnlyAuto;
+import org.usfirst.frc.team3309.commands.autos.*;
 
 public class AutoModeExecutor {
 
@@ -23,6 +20,9 @@ public class AutoModeExecutor {
 
         autos.addObject("RightScaleAnd(Switch)Auto", new ScaleOnlyAuto(true, true));
         autos.addObject("LeftScaleAnd(Switch)Auto", new ScaleOnlyAuto(false, true));
+
+        autos.addObject("LeftSwitchAuto", new SideSwitch(false));
+        autos.addObject("RightSwitchAuto", new SideSwitch(true));
 
         SmartDashboard.putData("Autos: ", autos);
     }
