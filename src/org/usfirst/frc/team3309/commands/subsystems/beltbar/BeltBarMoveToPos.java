@@ -35,6 +35,8 @@ public class BeltBarMoveToPos extends Command {
 
     @Override
     protected void execute() {
+        System.out.println("Greater: " + (Robot.lift.getLiftPos() > MIN_LIFT_POS_TO_ADJUST_HOME));
+        System.out.println("Diff: " + Math.abs(goalAngle - Constants.BELTBAR_BOTTOM_POS));
         if (Robot.lift.getLiftPos() > MIN_LIFT_POS_TO_ADJUST_HOME &&
                 Math.abs(goalAngle - Constants.BELTBAR_BOTTOM_POS) < 10.0
                 && !hasStarted) {

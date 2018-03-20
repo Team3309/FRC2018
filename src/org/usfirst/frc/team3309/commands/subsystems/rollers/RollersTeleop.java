@@ -24,9 +24,6 @@ public class RollersTeleop extends Command {
         double leftTrigger = OI.operatorRemote.leftTrigger.getY();
         double rightTrigger = OI.operatorRemote.rightTrigger.getY();
 
-        System.out.println("leftTrigger " + leftTrigger);
-        System.out.println("rightTrigger " + rightTrigger);
-
         if (Math.abs(leftTrigger) > MIN_POWER) {
                 Robot.rollers.setLeftRight(rescale(leftTrigger)* MAX_OUT_POWER, -rescale(leftTrigger)*MAX_OUT_POWER);
         } else if (Math.abs(rightTrigger) > MIN_POWER) {
