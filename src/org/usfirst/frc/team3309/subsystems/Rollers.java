@@ -25,16 +25,16 @@ public class Rollers extends Subsystem {
 
     @Override
     protected void initDefaultCommand() {
-      //  setDefaultCommand(new RollersTeleop());
+        setDefaultCommand(new RollersTeleop());
     }
 
     @Override
     public void periodic() {
-     /*   if (DriverStation.getInstance().isAutonomous() && enableRollerPower) {
+        if (DriverStation.getInstance().isAutonomous() && enableRollerPower) {
             Robot.rollers.setLeftRight(defaultAutoPower, -defaultAutoPower);
         } else if (DriverStation.getInstance().isAutonomous()) {
             Robot.rollers.setLeftRight(0, 0);
-        }*/
+        }
     }
 
     public void setLeftRight(double left, double right) {

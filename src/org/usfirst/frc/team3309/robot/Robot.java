@@ -104,6 +104,7 @@ public class Robot extends TimedRobot {
     public void teleopInit() {
         Scheduler.getInstance().removeAll();
         new RollersSetIn(false).start();
+        rollers.setLeftRight(0, 0 );
         start = Timer.getFPGATimestamp();
         c.start();
         logger.info("teleop init");

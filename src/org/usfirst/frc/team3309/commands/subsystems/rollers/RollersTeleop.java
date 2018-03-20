@@ -15,6 +15,11 @@ public class RollersTeleop extends Command {
     }
 
     @Override
+    public void initialize() {
+        Robot.rollers.setLeftRight(0, 0);
+    }
+
+    @Override
     protected void execute() {
         double leftTrigger = OI.operatorRemote.leftTrigger.getY();
         double rightTrigger = OI.operatorRemote.rightTrigger.getY();
