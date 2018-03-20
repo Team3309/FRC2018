@@ -101,6 +101,7 @@ public class Robot extends TimedRobot {
 
     @Override
     public void teleopInit() {
+        Scheduler.getInstance().removeAll();
         start = Timer.getFPGATimestamp();
         c.start();
         logger.info("teleop init");

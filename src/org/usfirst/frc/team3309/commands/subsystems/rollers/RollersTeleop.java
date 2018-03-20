@@ -26,6 +26,7 @@ public class RollersTeleop extends Command {
         } else {
             Robot.rollers.setLeftRight(0, 0);
         }
+
     }
 
     private double rescale(double val) {

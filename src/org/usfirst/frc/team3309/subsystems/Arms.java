@@ -5,6 +5,8 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.usfirst.frc.team3309.robot.Constants;
+import org.usfirst.frc.team3309.robot.OI;
+import org.usfirst.frc.team3309.robot.Robot;
 
 public class Arms extends Subsystem {
 
@@ -13,6 +15,14 @@ public class Arms extends Subsystem {
 
     @Override
     protected void initDefaultCommand() {
+    }
+
+    public void periodic() {
+/*        if (OI.operatorRemote.buttonA.get()) {
+            Robot.arms.clampArms();
+        } else if (OI.operatorRemote.buttonB.get()) {
+            Robot.arms.openArms();
+        }*/
     }
 
     public void sendToDashboard() {
