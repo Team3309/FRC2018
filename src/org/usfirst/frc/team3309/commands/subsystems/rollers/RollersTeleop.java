@@ -8,7 +8,7 @@ public class RollersTeleop extends Command {
 
     private final double MIN_POWER = 0.1;
     private final double MAX_OUT_POWER = 0.7;
-    private final double DEFAULT_POWER = 0.1;
+    private final double DEFAULT_POWER = 0;
 
     public RollersTeleop() {
         requires(Robot.rollers);
