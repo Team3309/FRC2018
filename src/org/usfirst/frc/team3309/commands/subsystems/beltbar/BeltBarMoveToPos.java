@@ -59,4 +59,9 @@ public class BeltBarMoveToPos extends Command {
         return Math.abs(error) < ERROR_THRESHOLD;
     }
 
+    @Override
+    public void end() {
+        hasStarted = false;
+    }
+
 }
