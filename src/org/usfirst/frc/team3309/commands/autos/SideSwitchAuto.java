@@ -22,7 +22,7 @@ public class SideSwitchAuto extends CommandGroup {
         if (onRight) {
             if (Robot.isRightSwitch()) {
                 addSequential(new DriveStraight(-65, 28000, true));
-                addSequential(new DriveArc(Length.fromInches(10), 70, 23000,true, true));
+                addSequential(new DriveArc(Length.fromInches(10), 60, 23000,true, true));
           /*      addSequential(new DriveTurn(90, 0.8));
                 addSequential(new DriveStraight(-10, 23000, true ));*/
                 addSequential(new WaitCommand(0.3));
