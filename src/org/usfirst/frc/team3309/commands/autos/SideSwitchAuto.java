@@ -20,12 +20,12 @@ public class SideSwitchAuto extends CommandGroup {
     public void start() {
         if (onRight) {
             if (Robot.isRightSwitch()) {
-                addSequential(new DriveStraight(-70, 25000, true));
+                addSequential(new DriveStraight(-60, 25000, true));
                 addSequential(new DriveArc(Length.fromInches(20), 80, 23000,true, true));
                 addSequential(new WaitCommand(0.3));
                 addSequential(new ShooterShoot());
             } else if (Robot.isLeftSwitch()) {
-                addSequential(new DriveStraight(139.56, DriveStraight.DriveStrategy.POSITION));
+                addSequential(new DriveStraight(-100, DriveStraight.DriveStrategy.POSITION));
             }
         } else if (!onRight) {
             if (Robot.isRightSwitch()) {
