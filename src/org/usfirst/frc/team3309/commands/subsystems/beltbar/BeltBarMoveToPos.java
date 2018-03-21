@@ -9,7 +9,7 @@ import org.usfirst.frc.team3309.robot.Robot;
 
 public class BeltBarMoveToPos extends Command {
 
-    private final double goalAngle;
+    private double goalAngle;
     private double error;
     public static final double ERROR_THRESHOLD = 100;
     private boolean hasStarted = false;
@@ -36,9 +36,16 @@ public class BeltBarMoveToPos extends Command {
     protected void execute() {
         if (Robot.lift.getPosition() > MIN_LIFT_POS_TO_ADJUST_HOME &&
                 Math.abs(goalAngle - Constants.BELTBAR_BOTTOM_POS) < 10.0 && !hasStarted) {
-            Robot.beltBar.set(goalAngle + BELTBAR_GOAL_ADJUSTMENT);
+            double newAngle = goalAngle + BELTBAR_GOAL_ADJUSTMENT;
+
+            Robot.beltBar.set(newAngle);
             hasStarted = true;
         } else {
+            if (goalAngle > Robot.beltBar.FORWARD_SOFT_LIM) {
+                goalAngle = goalAngle - BELTBAR_GOAL_ADJUSTMENT;
+            } else if (goalAngle > Robot.beltBar.REVERSE_SOFT_LIM) {
+                goalAngle = goalAngle + BELTBAR_GOAL_ADJUSTMENT;
+            }
             Robot.beltBar.set(goalAngle);
             hasStarted = false;
         }

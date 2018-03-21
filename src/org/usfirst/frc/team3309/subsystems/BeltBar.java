@@ -35,8 +35,8 @@ public class BeltBar extends Subsystem {
     private final int MAX_CURRENT = 18;
     private final int MAX_CURRENT_DURATION = 125;
 
-    private int FORWARD_SOFT_LIM = -400;  //  -730
-    private int REVERSE_SOFT_LIM = -2050; //  -1990
+    public int FORWARD_SOFT_LIM = -400;  //  -730
+    public int REVERSE_SOFT_LIM = -2050; //  -1990
 
     public BeltBar() {
         init();
