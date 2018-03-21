@@ -41,11 +41,11 @@ public class BeltBarMoveToPos extends Command {
             Robot.beltBar.set(newAngle);
             hasStarted = true;
         } else {
-            if (goalAngle > Robot.beltBar.FORWARD_SOFT_LIM) {
+/*            if (goalAngle > Robot.beltBar.FORWARD_SOFT_LIM) {
                 goalAngle = goalAngle - BELTBAR_GOAL_ADJUSTMENT;
             } else if (goalAngle > Robot.beltBar.REVERSE_SOFT_LIM) {
                 goalAngle = goalAngle + BELTBAR_GOAL_ADJUSTMENT;
-            }
+            }*/
             Robot.beltBar.set(goalAngle);
             hasStarted = false;
         }
