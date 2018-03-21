@@ -167,12 +167,12 @@ public class Drive extends Subsystem {
     public void periodic()
     {
         super.periodic();
-        SmartDashboard.putNumber("Robot Distance Traversed (Left): ",getLeftEncoder());
+   /*     SmartDashboard.putNumber("Robot Distance Traversed (Left): ",getLeftEncoder());
         SmartDashboard.putNumber("Robot Distance Traversed (Right): ",getRightEncoder());
 
         SmartDashboard.putNumber("Robot Distance Traversed (Humanized) : ",encoderCountsToInches(getEncoderPos()));
         SmartDashboard.putNumber("Robot revolution ", (getEncoderPos()/Constants.DRIVE_ENCODER_COUNTS_PER_REV));
-        SmartDashboard.putNumber("Robot enc calc: ", inchesToEncoderCounts(encoderCountsToInches(getEncoderPos())));
+        SmartDashboard.putNumber("Robot enc calc: ", inchesToEncoderCounts(encoderCountsToInches(getEncoderPos())));*/
     }
 
     public void changeToBrakeMode() {

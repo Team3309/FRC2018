@@ -55,11 +55,11 @@ public class BeltBar extends Subsystem {
         masterBar.config_kF(0, 0.04, 10);
         masterBar.config_IntegralZone(0,0,0);
         masterBar.clearStickyFaults(10);
-        SmartDashboard.putNumber("Beltbar P: ", 3);
+/*        SmartDashboard.putNumber("Beltbar P: ", 3);
         SmartDashboard.putNumber("Beltbar I: ", 0);
         SmartDashboard.putNumber("Beltbar D: ", 0.5);
         SmartDashboard.putNumber("Beltbar F: ", 0.04);
-        SmartDashboard.putNumber("Beltbar Iz: ", 0);
+        SmartDashboard.putNumber("Beltbar Iz: ", 0);*/
 
         if (Constants.currentRobot == Constants.Robot.PRACTICE) {
             REVERSE_SOFT_LIM = -2840;
@@ -105,13 +105,14 @@ public class BeltBar extends Subsystem {
                     inRecovery = false;
                 }
             }
+            SmartDashboard.putNumber("Beltbar pos: ", getPosition());
         }
 
-        masterBar.config_kP(0,SmartDashboard.getNumber("Beltbar P: ",3),10);
+  /*      masterBar.config_kP(0,SmartDashboard.getNumber("Beltbar P: ",3),10);
         masterBar.config_kI(0,SmartDashboard.getNumber("Beltbar I: ", 0),10);
         masterBar.config_kD(0,SmartDashboard.getNumber("Beltbar D: ", 0.5),10);
         masterBar.config_kF(0,SmartDashboard.getNumber("Beltbar F: ", 0.04),10);
-        masterBar.config_IntegralZone(0,(int)SmartDashboard.getNumber("Beltbar Iz: ", 0),10);
+        masterBar.config_IntegralZone(0,(int)SmartDashboard.getNumber("Beltbar Iz: ", 0),10);*/
     }
 
     @Override
