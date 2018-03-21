@@ -27,11 +27,11 @@ public class SideSwitchAuto extends CommandGroup {
         addParallel(new MoveAssembly(AssemblyLocation.BOTTOM));
         if (onRight) {
             if (Robot.isRightSwitch()) {
-                addSequential(new DriveStraight(-73, 28000, true));
+                addSequential(new DriveStraight(73, 28000, true));
 
                 addSequential(new MoveAssembly(AssemblyLocation.SWITCH));
 
-                addSequential(new DriveArc(Length.fromInches(10), 58, 23000,true, true));
+                addSequential(new DriveArc(Length.fromInches(10), -58, 23000,false, true));
 
                 addSequential(new WaitCommand(0.2));
                 addParallel(new ArmsOpen());
