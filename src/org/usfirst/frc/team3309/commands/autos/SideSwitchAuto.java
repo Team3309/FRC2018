@@ -64,7 +64,7 @@ public class SideSwitchAuto extends CommandGroup {
                 addSequential(new WaitCommand(0.3));
                 addSequential(new ShooterShoot());
             } else if (Robot.isLeftSwitch()) {
-                addSequential(new DriveStraight(73, 28000, true));
+                addSequential(new DriveStraight(63, 28000, true));
                 addSequential(new MoveAssembly(AssemblyLocation.SWITCH));
                 addSequential(new DriveArc(Length.fromInches(10), 58, 23000,false, true));
 
