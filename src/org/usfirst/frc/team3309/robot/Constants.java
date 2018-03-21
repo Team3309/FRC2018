@@ -35,7 +35,7 @@ public class Constants {
     }
 
     public static int JOYSTICK_TRIGGER_BUTTON = 1;
-    public static int JOYSTICK_SHOOT_BUTTON = 3;
+    public static int JOYSTICK_SHOOT_BUTTON = 2;
 
     public static double BELTBAR_BOTTOM_POS = Constants.currentRobot == Robot.PRACTICE ? -2680 : -1950;
     public static double BELTBAR_INTAKE_POS = Constants.currentRobot == Robot.PRACTICE ? -1350 : -640;
