@@ -105,8 +105,12 @@ public class BeltBar extends Subsystem {
                     inRecovery = false;
                 }
             }
-            SmartDashboard.putNumber("Beltbar pos: ", getPosition());
+        } else if (isClimbing) {
+            DriverStation.reportWarning("I am climbing!", false);
+            masterBar.configForwardSoftLimitEnable(false, 10);
+            masterBar.configReverseSoftLimitEnable(false, 10);
         }
+        SmartDashboard.putNumber("Beltbar pos: ", getPosition());
 
   /*      masterBar.config_kP(0,SmartDashboard.getNumber("Beltbar P: ",3),10);
         masterBar.config_kI(0,SmartDashboard.getNumber("Beltbar I: ", 0),10);
