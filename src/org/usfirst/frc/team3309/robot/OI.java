@@ -34,8 +34,7 @@ public class OI {
         driverShiftButton.whenPressed(new DriveSetLowGear());
         driverShiftButton.whenReleased(new DriveSetHighGear());
 
-        leftShootButton.whileHeld(new ShooterForward());
-        rightShootButton.whileHeld(new ShooterForward());
+        leftShootButton.whenPressed(new ShooterForward());
 
         /* =====OPERATOR===== */
         operatorRemote.buttonA.whenPressed(new ArmsClamp());
