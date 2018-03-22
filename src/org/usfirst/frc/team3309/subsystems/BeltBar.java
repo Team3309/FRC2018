@@ -110,6 +110,7 @@ public class BeltBar extends Subsystem {
             DriverStation.reportWarning("I am climbing!", false);
             masterBar.configForwardSoftLimitEnable(false, 10);
             masterBar.configReverseSoftLimitEnable(false, 10);
+            masterBar.changeToDisabledMode();
         }
         SmartDashboard.putNumber("Beltbar pos: ", getPosition());
 

@@ -24,9 +24,9 @@ public class LiftManualClimb extends Command {
         if (Math.abs(power) > MAX_POWER) {
             power = MAX_POWER * Math.signum(power);
         }
-        if (Robot.lift.isAtBottom() && power > 0.1) {
+        /*if (Robot.lift.isAtBottom() && power > 0.1) {
             power = 0;
-        }
+        }*/
         Robot.lift.set(power);
         SmartDashboard.putNumber("Lift power: ", power);
     }
