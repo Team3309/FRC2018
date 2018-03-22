@@ -82,8 +82,8 @@ public class Drive extends Subsystem {
         right0.clearMotionProfileTrajectories();
         left0.changeToDisabledMode();
         right0.changeToDisabledMode();
-        left0.setSelectedSensorPosition(0, 0,10);
-        right0.setSelectedSensorPosition(0, 0,10);
+        left0.setSelectedSensorPosition(0, 0,0);
+        right0.setSelectedSensorPosition(0, 0,0);
         navX.zeroYaw();
     }
 
