@@ -9,7 +9,7 @@ import java.util.Arrays;
 public class Constants {
 
     private static final byte[] PRACTICEBOT_MAC_ADDR = {0x00, (byte) 0x80, 0x2F, 0x17, (byte) 0x85, (byte) 0xD3};
-    private static final byte[] COMPBOT_MAC_ADDR = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00}; // find this at comp
+    private static final byte[] COMPBOT_MAC_ADDR = {0x00, (byte)0x80, 0x2F, 0x17, (byte) 0xE4, 0x5E}; // find this at comp
 
     public enum Robot {
         PRACTICE,
