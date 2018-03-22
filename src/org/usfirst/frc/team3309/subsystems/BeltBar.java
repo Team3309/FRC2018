@@ -69,7 +69,7 @@ public class BeltBar extends Subsystem {
 
         if (Constants.currentRobot == Constants.Robot.COMPETITION) {
             REVERSE_SOFT_LIM = -2050;
-            FORWARD_SOFT_LIM = -400;
+            FORWARD_SOFT_LIM = -500;
         }
 
         masterBar.configForwardSoftLimitThreshold(FORWARD_SOFT_LIM, 10);
@@ -87,7 +87,7 @@ public class BeltBar extends Subsystem {
 
     @Override
     public void periodic() {
-    /*    if (!isClimbing) {
+        if (!isClimbing) {
             if (getPosition() > FORWARD_SOFT_LIM) {
                 masterBar.configForwardSoftLimitEnable(false, 10);
                 masterBar.set(ControlMode.Position, AssemblyLocation.INTAKE.getBeltBarPosition());
@@ -110,7 +110,7 @@ public class BeltBar extends Subsystem {
             DriverStation.reportWarning("I am climbing!", false);
             masterBar.configForwardSoftLimitEnable(false, 10);
             masterBar.configReverseSoftLimitEnable(false, 10);
-        }*/
+        }
         SmartDashboard.putNumber("Beltbar pos: ", getPosition());
 
   /*      masterBar.config_kP(0,SmartDashboard.getNumber("Beltbar P: ",3),10);
@@ -122,7 +122,7 @@ public class BeltBar extends Subsystem {
 
     @Override
     protected void initDefaultCommand() {
-           setDefaultCommand(new BeltBarManualTest());
+      //     setDefaultCommand(new BeltBarManualTest());
     }
 
     public void sendToDashboard() {

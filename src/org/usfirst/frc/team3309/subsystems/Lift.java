@@ -80,12 +80,12 @@ public class Lift extends Subsystem {
 
     @Override
     protected void initDefaultCommand() {
-        setDefaultCommand(new LiftManualTest());
+     //   setDefaultCommand(new LiftManualTest());
     }
 
     @Override
     public void periodic() {
-      /*  if (getPosition() > FORWARD_LIM) {
+        if (getPosition() > FORWARD_LIM) {
             lift0.configForwardSoftLimitEnable(false, 10);
             lift0.set(ControlMode.Position, AssemblyLocation.SCALE_UP.getElevatorPosition());
             DriverStation.reportWarning("Lift exceeded forward limit! Correcting...", false);
@@ -93,7 +93,7 @@ public class Lift extends Subsystem {
         } else {
             lift0.configForwardSoftLimitEnable(true, 10);
             lift0.configReverseSoftLimitEnable(true, 10);
-        }*/
+        }
     }
 
     public void sendToDashboard() {
