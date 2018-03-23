@@ -129,6 +129,7 @@ public class Robot extends TimedRobot {
 
         if (Timer.getFPGATimestamp() - start >= (135 - 130)) {
             OI.operatorRemote.setRumble(1.0);
+            DriverStation.reportWarning("rumple", false);
         }
 
 
