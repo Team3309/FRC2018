@@ -127,9 +127,8 @@ public class Robot extends TimedRobot {
         SmartDashboard.putData(arms);
         SmartDashboard.putData(rollers);
 
-        if (Timer.getFPGATimestamp() - start >= (135 - 130)) {
+        if (Timer.getFPGATimestamp() - start >= (135 - 50)) {
             OI.operatorRemote.setRumble(1.0);
-            DriverStation.reportWarning("rumple", false);
         }
 
 
