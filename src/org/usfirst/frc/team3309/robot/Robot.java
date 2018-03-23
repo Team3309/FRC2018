@@ -136,6 +136,7 @@ public class Robot extends TimedRobot {
 
     @Override
     public void disabledInit() {
+        OI.operatorRemote.setRumble(0);
     }
 
     @Override
