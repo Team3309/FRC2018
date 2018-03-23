@@ -126,10 +126,12 @@ public class Robot extends TimedRobot {
         SmartDashboard.putData(falconDoors);
         SmartDashboard.putData(arms);
         SmartDashboard.putData(rollers);
-        if (Timer.getFPGATimestamp() - start >= 1) {
-          //  BlackBox.writeLog(String.valueOf(Timer.getFPGATimestamp()), String.valueOf(beltBar.getCurrent()));
-            start = Timer.getFPGATimestamp();
+
+        if (Timer.getFPGATimestamp() - start >= (135 - 130)) {
+            OI.operatorRemote.setRumble(1.0);
         }
+
+
     }
 
     @Override
