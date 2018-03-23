@@ -66,7 +66,9 @@ public class ScaleOnlyAuto extends CommandGroup {
                     addSequential(new MoveAssembly(AssemblyLocation.BOTTOM));
                 }
 
-            } /*else if (Robot.isLeftScale()) {
+            } else {
+                addSequential(new DriveStraight(185, 20000, true));
+                /*else if (Robot.isLeftScale()) {
                 addSequential(new DriveStraight(133, 28000, true, 2.0));
                 addSequential(new DriveArc(Length.fromInches(28), -80, 23000,false, true));
                 addSequential(new DriveStraight(183, 24000, true,  2.0));
@@ -84,7 +86,8 @@ public class ScaleOnlyAuto extends CommandGroup {
                 addSequential(new MoveAssembly(AssemblyLocation.BOTTOM));
             }
 
-        } *//*else if (!onRight) {
+        } */
+            }/*else if (!onRight) {
             if (Robot.isLeftScale()) {
                 addParallel(new WaitAndMoveAssembly(1.5, AssemblyLocation.SCALE_UP));
                 addSequential(new DriveStraight(185, 20000, true));
