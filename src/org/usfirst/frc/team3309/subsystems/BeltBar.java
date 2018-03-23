@@ -40,6 +40,8 @@ public class BeltBar extends Subsystem {
     public int FORWARD_SOFT_LIM = -400;
     public int REVERSE_SOFT_LIM = -2050;
 
+    private final double LIM_TOLERANCE = 2048;
+
     public BeltBar() {
         init();
     }
@@ -96,8 +98,8 @@ public class BeltBar extends Subsystem {
 
 
     private void adjustBackInLimits() {
-        if (Robot.beltBar.getPosition() > Robot.beltBar.FORWARD_SOFT_LIM + 2048 &&
-                Robot.beltBar.getPosition() < Robot.beltBar.REVERSE_SOFT_LIM - 2048) {
+        if (Robot.beltBar.getPosition() > Robot.beltBar.FORWARD_SOFT_LIM + LIM_TOLERANCE &&
+                Robot.beltBar.getPosition() < Robot.beltBar.REVERSE_SOFT_LIM - LIM_TOLERANCE) {
                 masterBar.set(ControlMode.Disabled, 0);
         } else {
             if (!isClimbing) {
