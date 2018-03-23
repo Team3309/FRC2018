@@ -51,9 +51,9 @@ public class ScaleOnlyAuto extends CommandGroup {
 
                     addParallel(new RollersSetIn(true));
                     addSequential(new DriveStraight(29, 15000, 1.5));
-                    addSequential(new WaitCommand(0.5));
+                    addSequential(new WaitCommand(0.75));
                     addSequential(new ArmsClamp());
-                    addSequential(new WaitCommand(0.25));
+                    addSequential(new WaitCommand(0.5));
                     addSequential(new DriveStraight(-4, 20000, 1.5));
                     addSequential(new RollersSetIn(false));
 
