@@ -32,11 +32,11 @@ public class ArcController extends Controller1<DriveSignal, DriveState> implemen
     public ArcController(double radius, double ang, double WHEELBASE, double goalVelocity) {
         this.WHEELBASE = WHEELBASE;
         curRadius = radius;
-        SmartDashboard.putNumber("curRadius---------", curRadius);
+//        SmartDashboard.putNumber("curRadius---------", curRadius);
         goalAngle = ang;
-        SmartDashboard.putNumber("goalAngle", goalAngle);
+//        SmartDashboard.putNumber("goalAngle", goalAngle);
         goalDistance = Math.abs(goalAngle) * Math.abs(curRadius);
-        SmartDashboard.putNumber("goalDistance ---------- ", goalDistance);
+//        SmartDashboard.putNumber("goalDistance ---------- ", goalDistance);
         this.goalVelocity = goalVelocity;
     }
 
@@ -56,13 +56,13 @@ public class ArcController extends Controller1<DriveSignal, DriveState> implemen
         boolean isDistInThreshold = LibMath.isInThreshold(curPosDiff, distanceErrorThreshold);
         boolean isAngleInThreshold = LibMath.isInThreshold(curAngleDiff, angleErrorThreshold);
 
-        SmartDashboard.putNumber("goalAngle", goalAngle);
+  /*      SmartDashboard.putNumber("goalAngle", goalAngle);
         SmartDashboard.putNumber("curAngle", curAngle);
         SmartDashboard.putBoolean("isInAngleThresh", isAngleInThreshold);
         SmartDashboard.putBoolean("isInDistThresh", isDistInThreshold);
         SmartDashboard.putNumber("curPosDiff ", curPosDiff);
         SmartDashboard.putNumber("curAngleDiff ", curAngleDiff);
-
+*/
         if (isAngleInThreshold) {
             prevAngle = curAngle;
             System.out.println("goalDistance" + goalDistance);
@@ -82,13 +82,13 @@ public class ArcController extends Controller1<DriveSignal, DriveState> implemen
             rightVelocity = goalVelocity;
         }
 
-        SmartDashboard.putNumber("turing value", getTurningValue());
+  /*      SmartDashboard.putNumber("turing value", getTurningValue());
         SmartDashboard.putNumber("desLeftVel", leftVelocity);
         SmartDashboard.putNumber("desRightVel", rightVelocity);
         SmartDashboard.putNumber("curDistance", curPos);
         SmartDashboard.putNumber("goalDistance", goalDistance);
         SmartDashboard.putNumber("curRadius", curRadius);
-
+*/
         driveSignal = new DriveSignal(leftVelocity, rightVelocity);
         return driveSignal;
     }
