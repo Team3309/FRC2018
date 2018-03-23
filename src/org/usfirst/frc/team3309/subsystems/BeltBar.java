@@ -14,6 +14,7 @@ import org.usfirst.frc.team3309.commands.subsystems.AssemblyLocation;
 import org.usfirst.frc.team3309.commands.subsystems.beltbar.BeltBarManualTest;
 import org.usfirst.frc.team3309.lib.actuators.TalonSRXMC;
 import org.usfirst.frc.team3309.robot.Constants;
+import org.usfirst.frc.team3309.robot.Robot;
 
 public class BeltBar extends Subsystem {
 
@@ -82,7 +83,7 @@ public class BeltBar extends Subsystem {
 
     @Override
     public void periodic() {
-        //  adjustBackInLimits();
+        adjustBackInLimits();
         if (isClimbing) {
             DriverStation.reportWarning("I am climbing!", false);
             masterBar.configForwardSoftLimitEnable(false, 10);
@@ -93,26 +94,33 @@ public class BeltBar extends Subsystem {
 
     }
 
+
     private void adjustBackInLimits() {
-        if (!isClimbing) {
-            if (getPosition() > FORWARD_SOFT_LIM) {
-                masterBar.configForwardSoftLimitEnable(false, 10);
-                masterBar.set(ControlMode.Position, AssemblyLocation.INTAKE.getBeltBarPosition());
-                DriverStation.reportWarning("Beltbar exceeded forward limit! Correcting...", false);
-                inRecovery = true;
-            } else if (getPosition() < REVERSE_SOFT_LIM) {
-                masterBar.configReverseSoftLimitEnable(false, 10);
-                masterBar.set(ControlMode.Position, AssemblyLocation.BOTTOM.getBeltBarPosition());
-                DriverStation.reportWarning("Beltbar exceeded reverse limit! Correcting...", false);
-                inRecovery = true;
-            } else {
-                if (inRecovery) {
-                    masterBar.configForwardSoftLimitEnable(true, 10);
-                    masterBar.configReverseSoftLimitEnable(true, 10);
-                    inRecovery = false;
+        if (Robot.beltBar.getPosition() > Robot.beltBar.FORWARD_SOFT_LIM + 2048 &&
+                Robot.beltBar.getPosition() < Robot.beltBar.REVERSE_SOFT_LIM - 2048) {
+                masterBar.set(ControlMode.Disabled, 0);
+        } else {
+            if (!isClimbing) {
+                if (getPosition() > FORWARD_SOFT_LIM) {
+                    masterBar.configForwardSoftLimitEnable(false, 10);
+                    masterBar.set(ControlMode.Position, AssemblyLocation.INTAKE.getBeltBarPosition());
+                    DriverStation.reportWarning("Beltbar exceeded forward limit! Correcting...", false);
+                    inRecovery = true;
+                } else if (getPosition() < REVERSE_SOFT_LIM) {
+                    masterBar.configReverseSoftLimitEnable(false, 10);
+                    masterBar.set(ControlMode.Position, AssemblyLocation.BOTTOM.getBeltBarPosition());
+                    DriverStation.reportWarning("Beltbar exceeded reverse limit! Correcting...", false);
+                    inRecovery = true;
+                } else {
+                    if (inRecovery) {
+                        masterBar.configForwardSoftLimitEnable(true, 10);
+                        masterBar.configReverseSoftLimitEnable(true, 10);
+                        inRecovery = false;
+                    }
                 }
             }
         }
+
     }
 
     @Override
