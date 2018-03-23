@@ -36,8 +36,8 @@ public class BeltBar extends Subsystem {
     private final int MAX_CURRENT = 18;
     private final int MAX_CURRENT_DURATION = 125;
 
-    public int FORWARD_SOFT_LIM = -400;  //  -730
-    public int REVERSE_SOFT_LIM = -2050; //  -1990
+    public int FORWARD_SOFT_LIM = -400;
+    public int REVERSE_SOFT_LIM = -2050;
 
     public BeltBar() {
         init();
@@ -51,16 +51,11 @@ public class BeltBar extends Subsystem {
         masterBar.changeToPositionMode();
 
         masterBar.config_kP(0, 3, 10);
-        masterBar.config_kI(0,0,10);
-        masterBar.config_kD(0,0.5,10);
+        masterBar.config_kI(0, 0, 10);
+        masterBar.config_kD(0, 0.5, 10);
         masterBar.config_kF(0, 0.04, 10);
-        masterBar.config_IntegralZone(0,0,0);
+        masterBar.config_IntegralZone(0, 0, 0);
         masterBar.clearStickyFaults(10);
-/*        SmartDashboard.putNumber("Beltbar P: ", 3);
-        SmartDashboard.putNumber("Beltbar I: ", 0);
-        SmartDashboard.putNumber("Beltbar D: ", 0.5);
-        SmartDashboard.putNumber("Beltbar F: ", 0.04);
-        SmartDashboard.putNumber("Beltbar Iz: ", 0);*/
 
         if (Constants.currentRobot == Constants.Robot.PRACTICE) {
             REVERSE_SOFT_LIM = -2840;
@@ -68,7 +63,7 @@ public class BeltBar extends Subsystem {
         }
 
         if (Constants.currentRobot == Constants.Robot.COMPETITION) {
-            REVERSE_SOFT_LIM = -2050;
+            REVERSE_SOFT_LIM = -2100;
             FORWARD_SOFT_LIM = -500;
         }
 
@@ -87,6 +82,18 @@ public class BeltBar extends Subsystem {
 
     @Override
     public void periodic() {
+        //  adjustBackInLimits();
+        if (isClimbing) {
+            DriverStation.reportWarning("I am climbing!", false);
+            masterBar.configForwardSoftLimitEnable(false, 10);
+            masterBar.configReverseSoftLimitEnable(false, 10);
+            masterBar.changeToDisabledMode();
+        }
+        SmartDashboard.putNumber("Beltbar pos: ", getPosition());
+
+    }
+
+    private void adjustBackInLimits() {
         if (!isClimbing) {
             if (getPosition() > FORWARD_SOFT_LIM) {
                 masterBar.configForwardSoftLimitEnable(false, 10);
@@ -99,31 +106,18 @@ public class BeltBar extends Subsystem {
                 DriverStation.reportWarning("Beltbar exceeded reverse limit! Correcting...", false);
                 inRecovery = true;
             } else {
-                if(inRecovery)
-                {
+                if (inRecovery) {
                     masterBar.configForwardSoftLimitEnable(true, 10);
                     masterBar.configReverseSoftLimitEnable(true, 10);
                     inRecovery = false;
                 }
             }
-        } else if (isClimbing) {
-            DriverStation.reportWarning("I am climbing!", false);
-            masterBar.configForwardSoftLimitEnable(false, 10);
-            masterBar.configReverseSoftLimitEnable(false, 10);
-            masterBar.changeToDisabledMode();
         }
-        SmartDashboard.putNumber("Beltbar pos: ", getPosition());
-
-  /*      masterBar.config_kP(0,SmartDashboard.getNumber("Beltbar P: ",3),10);
-        masterBar.config_kI(0,SmartDashboard.getNumber("Beltbar I: ", 0),10);
-        masterBar.config_kD(0,SmartDashboard.getNumber("Beltbar D: ", 0.5),10);
-        masterBar.config_kF(0,SmartDashboard.getNumber("Beltbar F: ", 0.04),10);
-        masterBar.config_IntegralZone(0,(int)SmartDashboard.getNumber("Beltbar Iz: ", 0),10);*/
     }
 
     @Override
     protected void initDefaultCommand() {
-      //     setDefaultCommand(new BeltBarManualTest());
+        //     setDefaultCommand(new BeltBarManualTest());
     }
 
     public void sendToDashboard() {
@@ -160,9 +154,8 @@ public class BeltBar extends Subsystem {
         masterBar.changeToMotionMagic();
     }
 
-    public void configCruiseVelocity(int sensorUnitsPer100ms)
-    {
-        masterBar.configMotionCruiseVelocity(sensorUnitsPer100ms,10);
+    public void configCruiseVelocity(int sensorUnitsPer100ms) {
+        masterBar.configMotionCruiseVelocity(sensorUnitsPer100ms, 10);
     }
 
     public void changeToPositionMode() {
