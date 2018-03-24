@@ -120,12 +120,12 @@ public class Robot extends TimedRobot {
     @Override
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
-        sendToDashboard();
-        SmartDashboard.putData(beltBar);
-        SmartDashboard.putData(shooter);
-        SmartDashboard.putData(falconDoors);
-        SmartDashboard.putData(arms);
-        SmartDashboard.putData(rollers);
+//        sendToDashboard();
+//        SmartDashboard.putData(beltBar);
+//        SmartDashboard.putData(shooter);
+//        SmartDashboard.putData(falconDoors);
+//        SmartDashboard.putData(arms);
+//        SmartDashboard.putData(rollers);
 
         if (Timer.getFPGATimestamp() - start >= (135 - 50)) {
             OI.operatorRemote.setRumble(1.0);

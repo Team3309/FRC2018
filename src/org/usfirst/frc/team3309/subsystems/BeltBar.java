@@ -92,7 +92,7 @@ public class BeltBar extends Subsystem {
             masterBar.configReverseSoftLimitEnable(false, 10);
             masterBar.changeToDisabledMode();
         }
-        SmartDashboard.putNumber("Beltbar pos: ", getPosition());
+//        SmartDashboard.putNumber("Beltbar pos: ", getPosition());
 
     }
 
