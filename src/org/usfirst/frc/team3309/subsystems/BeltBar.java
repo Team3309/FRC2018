@@ -87,7 +87,7 @@ public class BeltBar extends Subsystem {
     public void periodic() {
         adjustBackInLimits();
         if (isClimbing) {
-            DriverStation.reportWarning("I am climbing!", false);
+            DriverStation.reportWarning("This better work!!!", false);
             masterBar.configForwardSoftLimitEnable(false, 10);
             masterBar.configReverseSoftLimitEnable(false, 10);
             masterBar.changeToDisabledMode();
