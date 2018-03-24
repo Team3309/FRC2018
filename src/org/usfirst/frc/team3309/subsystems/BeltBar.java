@@ -101,8 +101,8 @@ public class BeltBar extends Subsystem {
         if (Robot.beltBar.getPosition() > Robot.beltBar.FORWARD_SOFT_LIM + LIM_TOLERANCE &&
                 Robot.beltBar.getPosition() < Robot.beltBar.REVERSE_SOFT_LIM - LIM_TOLERANCE) {
             masterBar.set(ControlMode.Disabled, 0);
-            masterBar.reset();
-            init();
+//            masterBar.reset();
+//            init();
             DriverStation.reportError("Catting on beltbar!!!", false);
         } else {
             if (!isClimbing) {
