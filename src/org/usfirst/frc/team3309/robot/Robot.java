@@ -48,8 +48,8 @@ public class Robot extends TimedRobot {
         logger = Logger.getLogger("Robot");
         logger.info("robot init");
      //   BlackBox.initLog("beltbar current ", "amps");
-        CameraServer.getInstance().startAutomaticCapture(0).setFPS(18);
-        CameraServer.getInstance().startAutomaticCapture(1).setFPS(18);
+        CameraServer.getInstance().startAutomaticCapture(0).setFPS(15);
+        CameraServer.getInstance().startAutomaticCapture(1).setFPS(15);
         drive = new Drive();
         lift = new Lift();
         beltBar = new BeltBar();
