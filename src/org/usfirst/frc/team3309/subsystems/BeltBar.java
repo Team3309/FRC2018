@@ -100,10 +100,10 @@ public class BeltBar extends Subsystem {
     private void adjustBackInLimits() {
         if (Robot.beltBar.getPosition() > Robot.beltBar.FORWARD_SOFT_LIM + LIM_TOLERANCE &&
                 Robot.beltBar.getPosition() < Robot.beltBar.REVERSE_SOFT_LIM - LIM_TOLERANCE) {
-                masterBar.reset();
-                init();
-                masterBar.set(ControlMode.Disabled, 0);
-                DriverStation.reportError("Catting on beltbar!!!", false);
+            masterBar.set(ControlMode.Disabled, 0);
+            masterBar.reset();
+            init();
+            DriverStation.reportError("Catting on beltbar!!!", false);
         } else {
             if (!isClimbing) {
                 if (getPosition() > FORWARD_SOFT_LIM) {
