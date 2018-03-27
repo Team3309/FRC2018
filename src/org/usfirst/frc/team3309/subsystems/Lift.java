@@ -36,7 +36,7 @@ public class Lift extends Subsystem {
 
     private double goalPos;
 
-    public final int FORWARD_LIM = 47000; // 47000
+    public final int FORWARD_LIM = 47000;
 
     public Lift() {
         liftPos = AssemblyLocation.BOTTOM.getElevatorPosition();
@@ -80,7 +80,7 @@ public class Lift extends Subsystem {
 
     @Override
     protected void initDefaultCommand() {
-        setDefaultCommand(new LiftManualTest());
+      //  setDefaultCommand(new LiftManualTest());
     }
 
     @Override
