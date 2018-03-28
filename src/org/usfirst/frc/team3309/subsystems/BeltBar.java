@@ -101,17 +101,21 @@ public class BeltBar extends Subsystem {
         if (Robot.beltBar.getPosition() > Robot.beltBar.FORWARD_SOFT_LIM + LIM_TOLERANCE &&
                 Robot.beltBar.getPosition() < Robot.beltBar.REVERSE_SOFT_LIM - LIM_TOLERANCE) {
             masterBar.set(ControlMode.Disabled, 0);
-//            masterBar.reset();
-//            init();
+            masterBar.reset();
+            init();
             DriverStation.reportError("Catting on beltbar!!!", false);
         } else {
             if (!isClimbing) {
                 if (getPosition() > FORWARD_SOFT_LIM) {
+                    masterBar.reset();
+                    init();
                     masterBar.configForwardSoftLimitEnable(false, 10);
                     masterBar.set(ControlMode.Position, AssemblyLocation.INTAKE.getBeltBarPosition());
                     DriverStation.reportWarning("Beltbar exceeded forward limit! Correcting...", false);
                     inRecovery = true;
                 } else if (getPosition() < REVERSE_SOFT_LIM) {
+                    masterBar.reset();
+                    init();
                     masterBar.configReverseSoftLimitEnable(false, 10);
                     masterBar.set(ControlMode.Position, AssemblyLocation.BOTTOM.getBeltBarPosition());
                     DriverStation.reportWarning("Beltbar exceeded reverse limit! Correcting...", false);
