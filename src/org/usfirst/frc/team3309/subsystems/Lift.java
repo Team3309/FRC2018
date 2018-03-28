@@ -59,8 +59,8 @@ public class Lift extends Subsystem {
         lift0.configPeakOutputReverse(-0.45, 10); // -0.45
 */
 
-        lift0.configPeakOutputForward(1.0, 10); //1.0
-        lift0.configPeakOutputReverse(-1.0, 10); // -0.45
+        lift0.configPeakOutputForward(-1.0, 10); //1.0
+        lift0.configPeakOutputReverse(1.0, 10); // -0.45
 
 
         lift0.changeToPositionMode();
