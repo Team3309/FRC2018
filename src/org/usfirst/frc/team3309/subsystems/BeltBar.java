@@ -144,6 +144,7 @@ public class BeltBar extends Subsystem {
         table.getEntry("sharp sensor right").setNumber(hasCubeSensorRight.getAverageVoltage());
         table.getEntry("sharp sensor average").setNumber(getSharpSensorValue());
         table.getEntry("current: ").setNumber(masterBar.getOutputCurrent());
+        SmartDashboard.putNumber("beltbar pos: ", getPosition());
 
     }
 
