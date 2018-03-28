@@ -63,7 +63,7 @@ public class Lift extends Subsystem {
 
         if(Constants.currentRobot == Constants.Robot.PRACTICE) {
             lift0.setSensorPhase(false);
-            lift0.setInverted(true);
+            lift0.setInverted(false);
         }
 
         if(Constants.currentRobot == Constants.Robot.COMPETITION) {
