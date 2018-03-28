@@ -45,7 +45,7 @@ public class Lift extends Subsystem {
                 10);
 
         lift0.configForwardSoftLimitThreshold(FORWARD_LIM, 10);
-        lift0.configForwardSoftLimitEnable(true, 10);
+        lift0.configForwardSoftLimitEnable(false, 10);
 
         lift0.config_kP(0, 0.26, 10);
         lift0.config_kI(0,3.2*Math.pow(10,-5),10);
@@ -90,7 +90,6 @@ public class Lift extends Subsystem {
             lift0.configForwardSoftLimitEnable(false, 10);
             lift0.set(ControlMode.Position, AssemblyLocation.SCALE_UP.getElevatorPosition());
             DriverStation.reportWarning("Lift exceeded forward limit! Correcting...", false);
-
         } else {
             lift0.configForwardSoftLimitEnable(true, 10);
             lift0.configReverseSoftLimitEnable(true, 10);
