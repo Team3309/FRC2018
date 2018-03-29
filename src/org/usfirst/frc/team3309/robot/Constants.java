@@ -46,7 +46,7 @@ public class Constants {
     public static double BELTBAR_CLIMB = Constants.currentRobot == Robot.PRACTICE ? -2800 : -1950;
 
     public static double ELEVATOR_BOTTOM_POS = 0;
-    public static double ELEVATOR_INTAKE_POS = 1300;
+    public static double ELEVATOR_INTAKE_POS = 1100;
     public static double ELEVATOR_EXCHANGE_POS = 700;
     public static double ELEVATOR_SWITCH_POS = 15000;
     public static double ELEVATOR_SCALE_DOWN_POS = 28000;
