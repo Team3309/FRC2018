@@ -10,7 +10,6 @@ import org.usfirst.frc.team3309.commands.subsystems.drive.DriveEnd;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveStraight;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveTurn;
 import org.usfirst.frc.team3309.commands.subsystems.rollers.RollersActuate;
-import org.usfirst.frc.team3309.commands.subsystems.rollers.RollersSetIn;
 import org.usfirst.frc.team3309.lib.WaitCommand;
 import org.usfirst.frc.team3309.lib.math.Length;
 import org.usfirst.frc.team3309.robot.Robot;
@@ -25,7 +24,7 @@ public class CurvyToSwitchAuto extends CommandGroup {
                 addSequential(new DriveArc(Length.fromInches(18), -37, 31000, false, true));
                 addSequential(new DriveStraight(10.0, 23000, true));
                 addParallel(new MoveAssembly(AssemblyLocation.SWITCH));
-                addSequential(new DriveArc(Length.fromInches(20), 20, 28000, false));
+                addSequential(new DriveArc(Length.fromInches(20), 20, 28000, false, true));
                 addSequential(new DriveStraight(2, 28000, true));
                 addSequential(new WaitCommand(0.2));
                 addParallel(new ArmsOpen());
@@ -34,8 +33,7 @@ public class CurvyToSwitchAuto extends CommandGroup {
                 addSequential(new WaitCommand(0.05));
                 addParallel(new DriveTurn(-50, 0.3));
                 addSequential(new MoveAssembly(AssemblyLocation.INTAKE));
-                addSequential(new RollersSetIn(true));
-                addSequential(new DriveStraight(33.09, 22000, true));
+                addSequential(new DriveStraight(33.09, 25000, true));
             } else if (Robot.isRightSwitch()) {
                 addSequential(new DriveArc(Length.fromInches(18), 37, 31000, false, true));
                 addSequential(new DriveStraight(3.0, 23000, true));
