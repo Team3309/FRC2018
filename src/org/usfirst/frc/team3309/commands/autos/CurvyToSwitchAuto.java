@@ -33,27 +33,27 @@ public class CurvyToSwitchAuto extends CommandGroup {
                 addSequential(new RollersActuate(0.5, 0.2));
                 addSequential(new WaitCommand(0.3));
 
-                addSequential(new DriveStraight(-40, 25000, true));
+                addSequential(new DriveStraight(-50, 25000, true));
                 addParallel(new DriveTurn(-90, 0.3));
                 addSequential(new MoveAssembly(AssemblyLocation.INTAKE));
                 addParallel(new RollersSetIn(true));
                 addSequential(new DriveStraight(10, 17000, true));
           //      addSequential(new DriveStraight(9, 14000, true));
                 addSequential(new DriveArc(Length.fromInches(10), -3, 20000, false));
-                addSequential(new ArmsClamp());
-                addSequential(new WaitCommand(1.3));
-                addSequential(new RollersSetIn(false));
-                addParallel(new MoveAssembly(AssemblyLocation.EXCHANGE_ZONE));
-                addSequential(new DriveStraight(-30, 22000, true));
-                addSequential(new MoveAssembly(AssemblyLocation.SWITCH));
-                addSequential(new DriveTurn(63, 0.4));
-                addSequential(new WaitCommand(0.1));
-                addSequential(new DriveStraight(47, 20000, true));
-                addSequential(new DriveStraight(26, 14000, true));
-                addSequential(new ArmsOpen());
-                addSequential(new WaitCommand(0.3));
-
-                addSequential(new DriveStraight(-25, 22000, true));
+//                addSequential(new ArmsClamp());
+//                addSequential(new WaitCommand(1.3));
+//                addSequential(new RollersSetIn(false));
+//                addParallel(new MoveAssembly(AssemblyLocation.EXCHANGE_ZONE));
+//                addSequential(new DriveStraight(-30, 22000, true));
+//                addSequential(new MoveAssembly(AssemblyLocation.SWITCH));
+//                addSequential(new DriveTurn(63, 0.4));
+//                addSequential(new WaitCommand(0.1));
+//                addSequential(new DriveStraight(47, 20000, true));
+//                addSequential(new DriveStraight(26, 14000, true));
+//                addSequential(new ArmsOpen());
+//                addSequential(new WaitCommand(0.3));
+//
+//                addSequential(new DriveStraight(-25, 22000, true));
 //                addParallel(new DriveTurn(-40, 0.3))
 //                addSequential(new MoveAssembly(AssemblyLocation.INTAKE));
 //                addParallel(new RollersSetIn(true));
