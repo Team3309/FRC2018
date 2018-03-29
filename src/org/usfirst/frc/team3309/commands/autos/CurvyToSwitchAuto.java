@@ -36,10 +36,10 @@ public class CurvyToSwitchAuto extends CommandGroup {
                 addSequential(new DriveStraight(-50, 25000, true));
                 addParallel(new DriveTurn(-90, 0.3));
                 addSequential(new MoveAssembly(AssemblyLocation.INTAKE));
-                addParallel(new RollersSetIn(true));
+         //       addParallel(new RollersSetIn(true));
                 addSequential(new DriveStraight(10, 17000, true));
           //      addSequential(new DriveStraight(9, 14000, true));
-                addSequential(new DriveArc(Length.fromInches(20), -27, 20000, false, true));
+                addSequential(new DriveArc(Length.fromInches(17), -32, 20000, false, true));
 //                addSequential(new ArmsClamp());
 //                addSequential(new WaitCommand(1.3));
 //                addSequential(new RollersSetIn(false));
