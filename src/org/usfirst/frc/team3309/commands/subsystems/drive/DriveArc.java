@@ -60,7 +60,7 @@ public class DriveArc extends CommandEx {
 
     @Override
     protected boolean isFinished() {
-        return timer.get() > 0.2 && allowOvershoot ? Math.abs(Robot.drive.getAngPos()) > Math.abs(angleDegrees) : arcController.isFinished();
+        return timer.get() > 0.6 && allowOvershoot ? Math.abs(Robot.drive.getAngPos()) > Math.abs(angleDegrees) : arcController.isFinished();
     }
 
     @Override
