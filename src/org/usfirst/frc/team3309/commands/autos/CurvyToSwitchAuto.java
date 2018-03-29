@@ -8,6 +8,7 @@ import org.usfirst.frc.team3309.commands.subsystems.arms.ArmsOpen;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveArc;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveEnd;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveStraight;
+import org.usfirst.frc.team3309.commands.subsystems.drive.DriveTurn;
 import org.usfirst.frc.team3309.commands.subsystems.rollers.RollersActuate;
 import org.usfirst.frc.team3309.commands.subsystems.shooter.ShooterShoot;
 import org.usfirst.frc.team3309.lib.WaitCommand;
@@ -28,8 +29,9 @@ public class CurvyToSwitchAuto extends CommandGroup {
                 addSequential(new DriveStraight(2, 28000));
                 addParallel(new ArmsOpen());
                 addSequential(new RollersActuate(0.5, 1));
-                addSequential(new DriveStraight(-15, 13000));
-                addSequential(new MoveAssembly(5300, AssemblyLocation.SWITCH.getBeltBarPosition()));
+                addSequential(new DriveStraight(-20, 13000));
+                addParallel(new MoveAssembly(5300, AssemblyLocation.SWITCH.getBeltBarPosition()));
+                addSequential(new DriveTurn(-90, 1.0));
                 addSequential(new DriveEnd());
             } else if (Robot.isRightSwitch()) {
                 addSequential(new DriveArc(Length.fromInches(18), 37, 31000, false, true));
