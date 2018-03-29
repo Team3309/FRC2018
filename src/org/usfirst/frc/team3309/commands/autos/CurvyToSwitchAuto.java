@@ -8,6 +8,7 @@ import org.usfirst.frc.team3309.commands.subsystems.arms.ArmsOpen;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveArc;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveEnd;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveStraight;
+import org.usfirst.frc.team3309.commands.subsystems.drive.DriveTurn;
 import org.usfirst.frc.team3309.commands.subsystems.rollers.RollersActuate;
 import org.usfirst.frc.team3309.lib.WaitCommand;
 import org.usfirst.frc.team3309.lib.math.Length;
@@ -39,7 +40,8 @@ public class CurvyToSwitchAuto extends CommandGroup {
                 addParallel(new ArmsOpen());
                 addSequential(new RollersActuate(0.5, 1));
                 addSequential(new DriveStraight(-15, 13000));
-                addSequential(new MoveAssembly(AssemblyLocation.BOTTOM));
+                addParallel(new MoveAssembly(AssemblyLocation.BOTTOM));
+                addSequential(new DriveTurn(90, 0.5));
             /*    addParallel(new ArmsOpen());
                 addSequential(new RollersSetIn(true));
 
