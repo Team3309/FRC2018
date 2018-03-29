@@ -1,5 +1,6 @@
 package org.usfirst.frc.team3309.commands.subsystems.drive;
 
+import edu.wpi.first.wpilibj.Timer;
 import org.usfirst.frc.team3309.lib.CommandEx;
 import org.usfirst.frc.team3309.lib.controllers.drive.ArcController;
 import org.usfirst.frc.team3309.lib.controllers.helpers.DriveSignal;
@@ -11,6 +12,7 @@ import org.usfirst.frc.team3309.robot.Robot;
 public class DriveArc extends CommandEx {
 
     private ArcController arcController;
+    private Timer timer = new Timer();
     private boolean isInitialized = false;
     private boolean backwards;
     private boolean allowOvershoot;
@@ -32,6 +34,7 @@ public class DriveArc extends CommandEx {
     @Override
     public void initialize() {
         super.initialize();
+        timer.start();
         Robot.drive.reset();
         Robot.drive.setHighGear();
         Robot.drive.changeToBrakeMode();
@@ -57,13 +60,14 @@ public class DriveArc extends CommandEx {
 
     @Override
     protected boolean isFinished() {
-        return allowOvershoot ? Math.abs(Robot.drive.getAngPos()) > Math.abs(angleDegrees) : arcController.isFinished();
+        return timer.get() > 0.2 && allowOvershoot ? Math.abs(Robot.drive.getAngPos()) > Math.abs(angleDegrees) : arcController.isFinished();
     }
 
     @Override
     public void end() {
         super.end();
         isInitialized = false;
+        timer.reset();
     }
 
 }
