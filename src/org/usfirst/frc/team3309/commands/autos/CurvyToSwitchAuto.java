@@ -49,12 +49,13 @@ public class CurvyToSwitchAuto extends CommandGroup {
                 addSequential(new ArmsOpen());
             } else if (Robot.isRightSwitch()) {
                 addSequential(new DriveArc(Length.fromInches(18), 37, 31000, false, true));
-                addSequential(new DriveStraight(3.0, 23000, true));
+                addSequential(new DriveStraight(16.0, 23000, true));
                 addParallel(new MoveAssembly(AssemblyLocation.SWITCH));
-                addSequential(new DriveArc(Length.fromInches(20), -16, 28000, false));
+                addSequential(new DriveArc(Length.fromInches(20), -20, 28000, false, true));
                 addSequential(new DriveStraight(2, 28000, true));
+                addSequential(new WaitCommand(0.13));
                 addParallel(new ArmsOpen());
-                addSequential(new RollersActuate(0.5, 1));
+                addSequential(new RollersActuate(0.5, 0.2));
                 addSequential(new WaitCommand(0.3));
 
                 addParallel(new WaitAndMoveAssembly(0.5, AssemblyLocation.INTAKE));
