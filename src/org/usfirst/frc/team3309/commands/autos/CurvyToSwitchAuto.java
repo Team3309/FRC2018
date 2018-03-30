@@ -39,18 +39,23 @@ public class CurvyToSwitchAuto extends CommandGroup {
                 addSequential(new WaitCommand(0.3));
 
                 addParallel(new WaitAndMoveAssembly(0.5, AssemblyLocation.INTAKE));
-                addSequential(new DriveArc(Length.fromInches(30), 72, 26000, true, true));
-                addSequential(new DriveTurn(-70, 0.3));
+                addSequential(new DriveArc(Length.fromInches(30), 74, 26000, true, true));
+                addSequential(new DriveTurn(-70, 0.23));
                 addParallel(new RollersSetIn(true));
-                addSequential(new DriveStraight(15, 17000));
+                addSequential(new DriveStraight(20, 17000));
+                addSequential(new ArmsClamp());
                 addSequential(new WaitCommand(0.7));
                 addParallel(new RollersSetIn(false));
-                addSequential(new ArmsClamp());
-                addSequential(new DriveStraight(-18, 17000, true));
+                addParallel(new MoveAssembly(AssemblyLocation.EXCHANGE_ZONE));
+                addSequential(new DriveStraight(-13, 17000));
                 addParallel(new MoveAssembly(AssemblyLocation.SWITCH));
-                addSequential(new DriveTurn(90, 0.3));
-                addSequential(new DriveArc(Length.fromInches(19), 90, 20000, false, true));
+                addSequential(new DriveTurn(89, 0.5));
+                addSequential(new DriveArc(Length.fromInches(38), 79, 27000, false, true));
+                addSequential(new DriveStraight(16, 14000));
                 addSequential(new ArmsOpen());
+                addSequential(new WaitCommand(0.3));
+                addSequential(new DriveStraight(-17, 18000));
+                addSequential(new MoveAssembly(AssemblyLocation.BOTTOM));
             } else if (Robot.isRightSwitch()) {
                 addSequential(new DriveArc(Length.fromInches(12), 37, 31000, false, true));
                 addParallel(new MoveAssembly(AssemblyLocation.SWITCH));
