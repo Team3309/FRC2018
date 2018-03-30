@@ -51,7 +51,7 @@ public class CurvyToSwitchAuto extends CommandGroup {
                 addParallel(new MoveAssembly(AssemblyLocation.SWITCH));
                 addSequential(new DriveTurn(78, 0.5));
                 addSequential(new WaitCommand(0.1));
-                addSequential(new DriveArc(Length.fromInches(69), 71, 26000, false, true));
+                addSequential(new DriveArc(Length.fromInches(60), 71, 26000, false, true));
                 addSequential(new DriveStraight(16, 14000));
                 addSequential(new ArmsOpen());
                 addSequential(new WaitCommand(0.3));
