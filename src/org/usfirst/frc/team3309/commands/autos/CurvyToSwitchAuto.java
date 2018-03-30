@@ -20,8 +20,11 @@ import org.usfirst.frc.team3309.robot.Robot;
 
 public class CurvyToSwitchAuto extends CommandGroup {
 
+    double start;
+
     @Override
     public void start() {
+        start = Timer.getFPGATimestamp();
         addParallel(new MoveAssembly(AssemblyLocation.BOTTOM));
         if (DriverStation.getInstance().getGameSpecificMessage().length() > 0) {
             if (Robot.isLeftSwitch()) {
@@ -69,7 +72,7 @@ public class CurvyToSwitchAuto extends CommandGroup {
                 addParallel(new MoveAssembly(AssemblyLocation.EXCHANGE_ZONE));
                 addSequential(new DriveStraight(-13, 17000));
                 addParallel(new MoveAssembly(AssemblyLocation.SWITCH));
-                addSequential(new DriveTurn(-80, 0.5));
+                addSequential(new DriveTurn(-89, 0.5));
                 addSequential(new DriveArc(Length.fromInches(38), -79, 27000, false, true));
                 addSequential(new DriveStraight(16, 14000));
                 addSequential(new ArmsOpen());
@@ -86,7 +89,7 @@ public class CurvyToSwitchAuto extends CommandGroup {
     @Override
     public void end() {
         super.end();
-        System.out.println("I ended at " + Timer.getFPGATimestamp() + "!");
+        System.out.println("I ended at " + (Timer.getFPGATimestamp() - start) + "!");
     }
 
 }
