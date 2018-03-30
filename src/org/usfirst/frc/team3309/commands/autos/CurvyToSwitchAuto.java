@@ -55,22 +55,22 @@ public class CurvyToSwitchAuto extends CommandGroup {
                 addSequential(new DriveStraight(2, 28000, true));
                 addParallel(new ArmsOpen());
                 addSequential(new RollersActuate(0.5, 1));
-                addSequential(new DriveStraight(-15, 13000));
-                addParallel(new MoveAssembly(AssemblyLocation.BOTTOM));
-                addSequential(new DriveTurn(90, 0.5));
-            /*    addParallel(new ArmsOpen());
-                addSequential(new RollersSetIn(true));
+                addSequential(new WaitCommand(0.3));
 
-
-                addSequential(new DriveStraight(-15, 13000));
-                addParallel(new MoveAssembly(AssemblyLocation.INTAKE));
-                addSequential(new DriveTurn(90, 1.0));
-                addParallel(new ArmsOpen());
-                addSequential(new DriveStraight(30, 20000, true));
+                addParallel(new WaitAndMoveAssembly(0.5, AssemblyLocation.INTAKE));
+                addSequential(new DriveArc(Length.fromInches(30), -72, 26000, true, true));
+                addSequential(new DriveTurn(70, 0.3));
+                addParallel(new RollersSetIn(true));
+                addSequential(new DriveStraight(15, 17000));
+                addSequential(new WaitCommand(0.7));
+                addParallel(new RollersSetIn(false));
                 addSequential(new ArmsClamp());
-                addSequential(new RollersSetIn(false));
-                addSequential(new MoveAssembly(AssemblyLocation.BOTTOM));
-                addSequential(new DriveEnd());*/
+                addSequential(new DriveStraight(-18, 17000, true));
+                addParallel(new MoveAssembly(AssemblyLocation.SWITCH));
+                addSequential(new DriveTurn(-90, 0.3));
+                addSequential(new DriveArc(Length.fromInches(19), -90, 20000, false, true));
+                addSequential(new ArmsOpen());
+
             } else {
                 DriverStation.reportError("Oh no! I don't know where to go! :karson5:", false);
             }
