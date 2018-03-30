@@ -2,6 +2,7 @@ package org.usfirst.frc.team3309.commands.autos;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import org.usfirst.frc.team3309.commands.WaitAndMoveAssembly;
 import org.usfirst.frc.team3309.commands.subsystems.AssemblyLocation;
 import org.usfirst.frc.team3309.commands.subsystems.MoveAssembly;
 import org.usfirst.frc.team3309.commands.subsystems.arms.ArmsClamp;
@@ -33,9 +34,9 @@ public class CurvyToSwitchAuto extends CommandGroup {
                 addSequential(new RollersActuate(0.5, 0.2));
                 addSequential(new WaitCommand(0.3));
 
+                addParallel(new WaitAndMoveAssembly(0.5, AssemblyLocation.INTAKE));
                 addSequential(new DriveArc(Length.fromInches(30), 70, 26000, true, true));
                 addSequential(new DriveTurn(-70, 0.5));
-                addSequential(new MoveAssembly(AssemblyLocation.INTAKE));
                 addParallel(new RollersSetIn(true));
                 addSequential(new DriveStraight(20, 25000));
                 addParallel(new MoveAssembly(AssemblyLocation.EXCHANGE_ZONE));
