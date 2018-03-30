@@ -73,7 +73,7 @@ public class CurvyToSwitchAuto extends CommandGroup {
                 addSequential(new ArmsOpen());
                 addSequential(new WaitCommand(0.3));
                 addSequential(new DriveStraight(-17, 18000));
-
+                addSequential(new MoveAssembly(AssemblyLocation.BOTTOM));
             } else {
                 DriverStation.reportError("Oh no! I don't know where to go! :karson5:", false);
             }
