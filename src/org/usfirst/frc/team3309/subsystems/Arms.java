@@ -14,6 +14,8 @@ public class Arms extends Subsystem {
     private DoubleSolenoid actuator = new DoubleSolenoid(Constants.ARMS_ACTUATOR_A,
             Constants.ARMS_ACTUATOR_B);
 
+    private Solenoid otherActuator = new Solenoid(Constants.ARMS_ACTUATOR_OTHER);
+
     @Override
     protected void initDefaultCommand() {
     }
@@ -31,16 +33,19 @@ public class Arms extends Subsystem {
         table.getEntry("arms closed: ").setBoolean(isArmsClosed());
     }
 
-    private void setActuator(DoubleSolenoid.Value value) {
-        actuator.set(value);
-    }
-
     public void openArms() {
-        setActuator(DoubleSolenoid.Value.kForward);
+        actuator.set(DoubleSolenoid.Value.kReverse);
+        otherActuator.set(true);
     }
 
     public void clampArms() {
-        setActuator(DoubleSolenoid.Value.kReverse);
+        actuator.set(DoubleSolenoid.Value.kForward);
+        otherActuator.set(false);
+    }
+
+    public void middleArms() {
+        actuator.set(DoubleSolenoid.Value.kForward);
+        otherActuator.set(true);
     }
 
     public boolean isArmsClosed() {

@@ -72,6 +72,8 @@ public class Constants {
     public static final int ARMS_ACTUATOR_A = 1;
     public static final int ARMS_ACTUATOR_B = 2;
 
+    public static final int ARMS_ACTUATOR_OTHER = 5;
+
     // lift
     public static final int LIFT_0 = 20;
     public static final int LIFT_1 = 21;
@@ -95,9 +97,6 @@ public class Constants {
     public static final int BELTBAR_SHARP_SENSOR_RIGHT = 1;
 
     public static final int BELTBAR_HALL_EFFECT = 2;
-
-    // shooter
-    public static final int SHOOTER_SHIFTER = 5;
 
     // falcon doors
     public static final int FALCONDOORS_SOLENOID = 4;

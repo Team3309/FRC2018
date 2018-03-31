@@ -7,6 +7,7 @@ import org.usfirst.frc.team3309.commands.subsystems.MoveAssembly;
 import org.usfirst.frc.team3309.commands.subsystems.PrepareForClimb;
 import org.usfirst.frc.team3309.commands.subsystems.SetClimbMode;
 import org.usfirst.frc.team3309.commands.subsystems.arms.ArmsClamp;
+import org.usfirst.frc.team3309.commands.subsystems.arms.ArmsMiddle;
 import org.usfirst.frc.team3309.commands.subsystems.arms.ArmsOpen;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveSetHighGear;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveSetLowGear;
@@ -32,11 +33,13 @@ public class OI {
         driverShiftButton.whenReleased(new DriveSetHighGear());
 
         /* =====OPERATOR===== */
+        operatorRemote.leftBumper.whenPressed(new ArmsOpen());
         operatorRemote.buttonA.whenPressed(new ArmsClamp());
-        operatorRemote.buttonB.whenPressed(new ArmsOpen());
+        operatorRemote.buttonB.whenPressed(new ArmsMiddle());
 
         operatorRemote.startButton.whenPressed(new PrepareForClimb());
         operatorRemote.rightStick.whenPressed(new SetClimbMode());
+
 
         operatorRemote.buttonX.whenPressed(new MoveAssembly(AssemblyLocation.INTAKE, true));
         operatorRemote.buttonY.whenPressed(new MoveAssembly(AssemblyLocation.BOTTOM, true));
