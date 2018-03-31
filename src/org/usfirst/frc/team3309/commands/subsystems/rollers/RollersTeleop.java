@@ -27,7 +27,7 @@ public class RollersTeleop extends Command {
         if (Math.abs(leftTrigger) > MIN_POWER) {
                 Robot.rollers.setLeftRight(rescale(leftTrigger)* MAX_OUT_POWER, -rescale(leftTrigger)*MAX_OUT_POWER);
         } else if (Math.abs(rightTrigger) > MIN_POWER) {
-                Robot.rollers.setLeftRight(-rightTrigger,rightTrigger);
+                Robot.rollers.setLeftRight(-rescale(rightTrigger*0.6),rescale(rightTrigger*0.6));
         } else {
             if (Robot.beltBar.isCubePresent() && Robot.arms.isArmsClosed()) {
                 Robot.rollers.setLeftRight(-DEFAULT_POWER, DEFAULT_POWER);
