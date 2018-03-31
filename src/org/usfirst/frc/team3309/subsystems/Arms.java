@@ -45,7 +45,7 @@ public class Arms extends Subsystem {
 
     public void middleArms() {
         actuator.set(DoubleSolenoid.Value.kForward);
-        otherActuator.set(false);
+        otherActuator.set(true);
     }
 
     public boolean isArmsClosed() {
