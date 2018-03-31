@@ -35,7 +35,7 @@ public class Arms extends Subsystem {
 
     public void openArms() {
         actuator.set(DoubleSolenoid.Value.kReverse);
-        otherActuator.set(false);
+        otherActuator.set(true);
     }
 
     public void clampArms() {
