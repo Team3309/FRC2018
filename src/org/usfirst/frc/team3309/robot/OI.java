@@ -24,9 +24,7 @@ public class OI {
     public static Joystick driverRemoteLeft = new Joystick(0);
     public static Joystick driverRemoteRight = new Joystick(1);
 
-    public static JoystickButton driverShiftButton = new JoystickButton(driverRemoteLeft, Constants.JOYSTICK_TRIGGER_BUTTON);
-    public static JoystickButton leftShootButton = new JoystickButton(driverRemoteLeft, Constants.JOYSTICK_SHOOT_BUTTON);
-    public static JoystickButton rightShootButton = new JoystickButton(driverRemoteRight, Constants.JOYSTICK_SHOOT_BUTTON);
+    public static JoystickButton driverShiftButton = new JoystickButton(driverRemoteLeft, Constants.JOYSTICK_TRIGGER_BUTTON);s
 
     OI() {
         /* =====DRIVER===== */
