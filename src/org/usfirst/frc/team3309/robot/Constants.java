@@ -69,8 +69,8 @@ public class Constants {
     public static final int ROLLER_RIGHT = 41;
 
     // arms
-    public static final int ARMS_ACTUATOR_A = 1;
-    public static final int ARMS_ACTUATOR_B = 2;
+    public static final int ARMS_ACTUATOR_A = 2;
+    public static final int ARMS_ACTUATOR_B = 1;
 
     public static final int ARMS_ACTUATOR_OTHER = 5;
 
