@@ -25,7 +25,7 @@ public class Drive extends Subsystem {
     private VictorSPXMC right1 = new VictorSPXMC(Constants.DRIVE_RIGHT_1_ID);
     private VictorSPXMC right2 = new VictorSPXMC(Constants.DRIVE_RIGHT_2_ID);
 
-    private Solenoid shifter = new Solenoid(Constants.SHIFTER);
+    private Solenoid shifter = new Solenoid(Constants.DRIVE_SHIFTER);
 
     private AHRS navX = new AHRS(SPI.Port.kMXP);
 

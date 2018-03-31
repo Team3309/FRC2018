@@ -10,8 +10,6 @@ import org.usfirst.frc.team3309.commands.subsystems.arms.ArmsClamp;
 import org.usfirst.frc.team3309.commands.subsystems.arms.ArmsOpen;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveSetHighGear;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveSetLowGear;
-import org.usfirst.frc.team3309.commands.subsystems.shooter.ShooterForward;
-import org.usfirst.frc.team3309.commands.subsystems.shooter.ShooterShoot;
 import org.usfirst.frc.team3309.lib.input.InputXbox;
 
 /*
@@ -35,16 +33,10 @@ public class OI {
         driverShiftButton.whenPressed(new DriveSetLowGear());
         driverShiftButton.whenReleased(new DriveSetHighGear());
 
-/*
-        leftShootButton.whenPressed(new ShooterForward());
-        rightShootButton.whenPressed(new ShooterForward());
-*/
-
         /* =====OPERATOR===== */
         operatorRemote.buttonA.whenPressed(new ArmsClamp());
         operatorRemote.buttonB.whenPressed(new ArmsOpen());
 
-        //   operatorRemote.leftBumper.whenPressed(new ShooterForward());
         operatorRemote.startButton.whenPressed(new PrepareForClimb());
         operatorRemote.rightStick.whenPressed(new SetClimbMode());
 

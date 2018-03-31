@@ -62,7 +62,7 @@ public class Constants {
     public static final int DRIVE_LEFT_1_ID = 12;
     public static final int DRIVE_LEFT_2_ID = 14;
 
-    public static final int SHIFTER = 7;
+    public static final int DRIVE_SHIFTER = 7;
 
     // roller
     public static final int ROLLER_LEFT = 40;
@@ -103,7 +103,6 @@ public class Constants {
     public static final int FALCONDOORS_SOLENOID = 4;
 
     // robot constants
-    public static final double MAX_LIFT_POS = 47000;
     public static final double AUTO_ROLLER_INTAKE_POWER = -1;
 
     public static final double DRIVE_ENCODER_COUNTS_PER_REV = 4096*9.6;

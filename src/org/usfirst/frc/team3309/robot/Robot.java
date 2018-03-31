@@ -20,7 +20,6 @@ public class Robot extends TimedRobot {
     public static Drive drive;
     public static Lift lift;
     public static BeltBar beltBar;
-    public static Shooter shooter;
     public static FalconDoors falconDoors;
     public static Arms arms;
     public static Rollers rollers;
@@ -53,7 +52,6 @@ public class Robot extends TimedRobot {
         drive = new Drive();
         lift = new Lift();
         beltBar = new BeltBar();
-        shooter = new Shooter();
         falconDoors = new FalconDoors();
         arms = new Arms();
         rollers = new Rollers();
