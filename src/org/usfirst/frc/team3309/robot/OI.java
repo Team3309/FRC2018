@@ -35,14 +35,16 @@ public class OI {
         driverShiftButton.whenPressed(new DriveSetLowGear());
         driverShiftButton.whenReleased(new DriveSetHighGear());
 
+/*
         leftShootButton.whenPressed(new ShooterForward());
         rightShootButton.whenPressed(new ShooterForward());
+*/
 
         /* =====OPERATOR===== */
         operatorRemote.buttonA.whenPressed(new ArmsClamp());
         operatorRemote.buttonB.whenPressed(new ArmsOpen());
 
-        operatorRemote.leftBumper.whenPressed(new ShooterForward());
+     //   operatorRemote.leftBumper.whenPressed(new ShooterForward());
         operatorRemote.startButton.whenPressed(new PrepareForClimb());
         operatorRemote.rightStick.whenPressed(new SetClimbMode());
 
