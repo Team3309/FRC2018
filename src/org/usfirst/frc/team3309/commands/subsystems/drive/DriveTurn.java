@@ -7,8 +7,7 @@ import org.usfirst.frc.team3309.lib.controllers.pid.PIDController;
 import org.usfirst.frc.team3309.lib.math.LibMath;
 import org.usfirst.frc.team3309.robot.Robot;
 
-public class DriveTurn extends CommandEx
-{
+public class DriveTurn extends CommandEx {
 
     private double goalAngle;
     private PIDController angleController;
@@ -16,6 +15,7 @@ public class DriveTurn extends CommandEx
     private boolean isInitialized = false;
     private LibTimer timer = new LibTimer(0.35);
     private double timeoutSec = Double.POSITIVE_INFINITY;
+    private boolean isPigeon = false;
 
     public DriveTurn(double goalAngle) {
         this.goalAngle = goalAngle;
@@ -26,6 +26,11 @@ public class DriveTurn extends CommandEx
     public DriveTurn(double goalAngle, double timeoutSec) {
         this(goalAngle);
         this.timeoutSec = timeoutSec;
+    }
+
+    public DriveTurn(double goalAngle, boolean isPigeon) {
+        this(goalAngle);
+        this.isPigeon = isPigeon;
     }
 
     @Override
@@ -44,7 +49,7 @@ public class DriveTurn extends CommandEx
         if (!isInitialized) {
             initialize();
         }
-        double power = angleController.update(Robot.drive.getPigeonPos(), goalAngle);
+        double power = angleController.update(isPigeon ? Robot.drive.getPigeonPos() : Robot.drive.getAngPos(), goalAngle);
         Robot.drive.setLeftRight(power, -power);
     }
 

@@ -10,11 +10,11 @@ import org.usfirst.frc.team3309.robot.Robot;
 public class DriveStraight extends CommandEx {
 
     private boolean isInit = false;
-    private boolean isAbs = false;
     private double startAngle = Double.NaN;
     private double start;
     private double timeout = Double.POSITIVE_INFINITY;
     private PIDController angleController = new PIDController(new PIDConstants(0.6, 0, 0));
+    private boolean isPigeon = false;
 
     public enum DriveStrategy {
         VELOCITY,
@@ -38,9 +38,9 @@ public class DriveStraight extends CommandEx {
         this.velocityTarget = velocity;
     }
 
-    public DriveStraight(double distance, int velocity, boolean allowOvershoot, boolean isAbs) {
+    public DriveStraight(double distance, int velocity, boolean allowOvershoot, boolean isPigeon) {
         this(distance, velocity, allowOvershoot);
-        this.isAbs = isAbs;
+        this.isPigeon = isPigeon;
     }
 
     public DriveStraight(double distance, int velocity, boolean allowOvershoot) {
@@ -49,7 +49,7 @@ public class DriveStraight extends CommandEx {
     }
 
     public DriveStraight(double distance, int velocity, double angle) {
-        this(distance, velocity, true);
+        this(distance, velocity, true, true);
         this.startAngle = angle;
     }
 
@@ -61,11 +61,7 @@ public class DriveStraight extends CommandEx {
     @Override
     public void initialize() {
         super.initialize();
-        if (!isAbs) {
-            Robot.drive.reset();
-        } else {
-            distance += Robot.drive.getEncoderPos();
-        }
+        Robot.drive.reset();
         isInit = true;
         start = Timer.getFPGATimestamp();
         if (startAngle == Double.NaN) {
