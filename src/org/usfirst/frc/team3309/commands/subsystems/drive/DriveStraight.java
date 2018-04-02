@@ -10,7 +10,7 @@ import org.usfirst.frc.team3309.robot.Robot;
 public class DriveStraight extends CommandEx {
 
     private boolean isInit = false;
-    private double startAngle;
+    private double startAngle = Double.NaN;
     private double start;
     private double timeout = Double.POSITIVE_INFINITY;
     private PIDController angleController;
@@ -69,7 +69,9 @@ public class DriveStraight extends CommandEx {
             startAngle = Robot.drive.getPigeonPos();
         } else {
             angleController = new PIDController(new PIDConstants(0.6, 0, 0));
-            startAngle = Robot.drive.getAngPos();
+            if (startAngle == Double.NaN) {
+                startAngle = Robot.drive.getAngPos();
+            }
         }
 
     }
