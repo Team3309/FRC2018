@@ -29,10 +29,10 @@ public class ScaleThreeCubeAuto extends CommandGroup{
          //       addParallel(new WaitAndMoveAssembly(1.5, AssemblyLocation.SCALE_UP));
                 addSequential(new DriveStraight(20, 25000, true));
                 addSequential(new DriveArc(Length.fromInches(10), 10, 26000, false, true));
-                addSequential(new DriveArc(Length.fromInches(10), -9, 26000, false, true));
+                addSequential(new DriveArc(Length.fromInches(10), -8.2, 26000, false, true));
                 addSequential(new DriveStraight(80, 25000, true));
                 addSequential(new DriveEnd());
-                addSequential(new DriveArc(Length.fromInches(35), -50, 26000, false, true));
+                addSequential(new DriveArc(Length.fromInches(20), -20, 26000, false, true));
                 addSequential(new DriveEnd());
 
 //                addSequential(new WaitCommand(0.2));
