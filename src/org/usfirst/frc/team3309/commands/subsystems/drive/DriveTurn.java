@@ -28,8 +28,8 @@ public class DriveTurn extends CommandEx {
         this.timeoutSec = timeoutSec;
     }
 
-    public DriveTurn(double goalAngle, boolean isPigeon) {
-        this(goalAngle);
+    public DriveTurn(double goalAngle, double timeoutSec, boolean isPigeon) {
+        this(goalAngle, timeoutSec);
         this.isPigeon = isPigeon;
     }
 

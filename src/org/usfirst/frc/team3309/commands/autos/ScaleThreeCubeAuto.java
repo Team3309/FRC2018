@@ -6,6 +6,7 @@ import org.usfirst.frc.team3309.commands.subsystems.MoveAssembly;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveArc;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveEnd;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveStraight;
+import org.usfirst.frc.team3309.commands.subsystems.drive.DriveTurn;
 import org.usfirst.frc.team3309.lib.math.Length;
 import org.usfirst.frc.team3309.robot.Robot;
 
@@ -31,6 +32,7 @@ public class ScaleThreeCubeAuto extends CommandGroup{
      //           addSequential(new DriveStraight(80, 25000, false, true));
         //        addSequential(new DriveArc(Length.fromInches(20), -20, 26000, false, true, true));
                 addSequential(new DriveEnd());
+                addSequential(new DriveTurn(0, 2, true));
               //  addSequential(new DriveStraight(100, 25000, 0));
 
 //                addSequential(new WaitCommand(0.2));
