@@ -119,6 +119,7 @@ public class DriveStraight extends CommandEx
     {
         super.end();
         Robot.drive.disableOutput();
+        System.out.println("Drive dist " + Robot.drive.encoderCountsToInches(Robot.drive.getEncoderPos()));
         isInit = false;
         timeout = Double.POSITIVE_INFINITY;
     }
