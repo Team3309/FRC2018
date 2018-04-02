@@ -44,7 +44,7 @@ public class DriveTurn extends CommandEx
         if (!isInitialized) {
             initialize();
         }
-        double power = angleController.update(Robot.drive.getAngPos(), goalAngle);
+        double power = angleController.update(Robot.drive.getPigeonPos(), goalAngle);
         Robot.drive.setLeftRight(power, -power);
     }
 

@@ -3,6 +3,7 @@ package org.usfirst.frc.team3309.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.sensors.PigeonIMU;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -14,6 +15,7 @@ import org.usfirst.frc.team3309.commands.subsystems.drive.DriveTeleop;
 import org.usfirst.frc.team3309.lib.actuators.TalonSRXMC;
 import org.usfirst.frc.team3309.lib.actuators.VictorSPXMC;
 import org.usfirst.frc.team3309.robot.Constants;
+import org.usfirst.frc.team3309.robot.Robot;
 
 public class Drive extends Subsystem {
 
@@ -24,6 +26,8 @@ public class Drive extends Subsystem {
     private TalonSRXMC right0 = new TalonSRXMC(Constants.DRIVE_RIGHT_0_ID);
     private VictorSPXMC right1 = new VictorSPXMC(Constants.DRIVE_RIGHT_1_ID);
     private VictorSPXMC right2 = new VictorSPXMC(Constants.DRIVE_RIGHT_2_ID);
+
+    private PigeonIMU pigeonIMU = new PigeonIMU(Robot.lift.getLeft1());
 
     private Solenoid shifter = new Solenoid(Constants.SHIFTER);
 
@@ -121,6 +125,10 @@ public class Drive extends Subsystem {
 
     public double getAngVel() {
         return navX.getRate();
+    }
+
+    public double getPigeonPos() {
+        return pigeonIMU.getAbsoluteCompassHeading();
     }
 
     public void sendToDashboard() {
