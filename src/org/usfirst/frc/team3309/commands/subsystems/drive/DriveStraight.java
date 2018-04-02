@@ -92,7 +92,7 @@ public class DriveStraight extends CommandEx {
                 break;
             case VELOCITY:
                 Robot.drive.changeToVelocityMode();
-                double vel = isPigeon ? 10000 : -30000;
+                double vel = isPigeon ? 30000 : -30000;
                 System.out.println("startAngle" + startAngle);
                 System.out.println("pigeon" + Robot.drive.getPigeonPos());
                 double angularUpdate = vel * angleController.update(isPigeon ? Robot.drive.getPigeonPos() : Robot.drive.getAngPos(), startAngle);
