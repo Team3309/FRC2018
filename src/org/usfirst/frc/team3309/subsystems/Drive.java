@@ -138,7 +138,14 @@ public class Drive extends Subsystem {
     public double getPigeonPos() {
         double[] ypr = new double[3];
         pigeonIMU.getYawPitchRoll(ypr);
-        return ypr[0];
+        double yaw = ypr[0];
+        while (yaw > 360) {
+            yaw -= 360;
+        }
+        while (yaw < 0) {
+            yaw += 360;
+        }
+        return yaw;
     }
 
     public void sendToDashboard() {
