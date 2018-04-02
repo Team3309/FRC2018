@@ -130,7 +130,9 @@ public class Drive extends Subsystem {
     }
 
     public double getPigeonPos() {
-        return pigeonIMU.getAbsoluteCompassHeading();
+        double[] ypr = new double[3];
+        pigeonIMU.getYawPitchRoll(ypr);
+        return ypr[0];
     }
 
     public void sendToDashboard() {
