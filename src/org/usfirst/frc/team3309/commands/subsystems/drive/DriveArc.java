@@ -12,12 +12,12 @@ import org.usfirst.frc.team3309.robot.Robot;
 public class DriveArc extends CommandEx {
 
     private ArcController arcController;
+    private Timer timer = new Timer();
     private boolean isInitialized = false;
     private boolean backwards;
     private boolean allowOvershoot;
     private double angleDegrees;
     private boolean isAbs = false;
-    private Timer timer  = new Timer();
 
     public DriveArc(Length radius, double angleDegrees, double vel, boolean backwards, boolean allowOvershoot) {
         requires(Robot.drive);
@@ -40,10 +40,8 @@ public class DriveArc extends CommandEx {
     @Override
     public void initialize() {
         super.initialize();
-        if (!isAbs) {
-            Robot.drive.reset();
-        }
         timer.start();
+        Robot.drive.reset();
         Robot.drive.setHighGear();
         Robot.drive.changeToBrakeMode();
         Robot.drive.changeToVelocityMode();
@@ -79,6 +77,7 @@ public class DriveArc extends CommandEx {
         timer.reset();
         super.end();
         isInitialized = false;
+        timer.reset();
     }
 
 }

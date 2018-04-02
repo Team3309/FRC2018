@@ -7,11 +7,10 @@ import org.usfirst.frc.team3309.commands.subsystems.MoveAssembly;
 import org.usfirst.frc.team3309.commands.subsystems.PrepareForClimb;
 import org.usfirst.frc.team3309.commands.subsystems.SetClimbMode;
 import org.usfirst.frc.team3309.commands.subsystems.arms.ArmsClamp;
+import org.usfirst.frc.team3309.commands.subsystems.arms.ArmsMiddle;
 import org.usfirst.frc.team3309.commands.subsystems.arms.ArmsOpen;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveSetHighGear;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveSetLowGear;
-import org.usfirst.frc.team3309.commands.subsystems.shooter.ShooterForward;
-import org.usfirst.frc.team3309.commands.subsystems.shooter.ShooterShoot;
 import org.usfirst.frc.team3309.lib.input.InputXbox;
 
 /*
@@ -26,33 +25,29 @@ public class OI {
     public static Joystick driverRemoteLeft = new Joystick(0);
     public static Joystick driverRemoteRight = new Joystick(1);
 
-    public static JoystickButton driverShiftButton = new JoystickButton(driverRemoteLeft,Constants.JOYSTICK_TRIGGER_BUTTON);
-    public static JoystickButton leftShootButton = new JoystickButton(driverRemoteLeft,Constants.JOYSTICK_SHOOT_BUTTON);
-    public static JoystickButton rightShootButton = new JoystickButton(driverRemoteRight,Constants.JOYSTICK_SHOOT_BUTTON);
+    public static JoystickButton driverShiftButton = new JoystickButton(driverRemoteLeft, Constants.JOYSTICK_TRIGGER_BUTTON);
 
     OI() {
         /* =====DRIVER===== */
         driverShiftButton.whenPressed(new DriveSetLowGear());
         driverShiftButton.whenReleased(new DriveSetHighGear());
 
-        leftShootButton.whenPressed(new ShooterForward());
-        rightShootButton.whenPressed(new ShooterForward());
-
         /* =====OPERATOR===== */
+        operatorRemote.leftBumper.whenPressed(new ArmsOpen());
         operatorRemote.buttonA.whenPressed(new ArmsClamp());
-        operatorRemote.buttonB.whenPressed(new ArmsOpen());
+        operatorRemote.buttonB.whenPressed(new ArmsMiddle());
 
-        operatorRemote.leftBumper.whenPressed(new ShooterForward());
         operatorRemote.startButton.whenPressed(new PrepareForClimb());
         operatorRemote.rightStick.whenPressed(new SetClimbMode());
 
-        operatorRemote.buttonX.whenPressed(new MoveAssembly(AssemblyLocation.INTAKE,true));
-        operatorRemote.buttonY.whenPressed(new MoveAssembly(AssemblyLocation.BOTTOM,true));
-        operatorRemote.dPad.down.whenPressed(new MoveAssembly(AssemblyLocation.SWITCH,true));
-        operatorRemote.dPad.right.whenPressed(new MoveAssembly(AssemblyLocation.SCALE_DOWN,true));
-        operatorRemote.dPad.up.whenPressed(new MoveAssembly(AssemblyLocation.SCALE_MIDDLE,true));
-        operatorRemote.dPad.left.whenPressed(new MoveAssembly(AssemblyLocation.SCALE_UP,true));
-        operatorRemote.rightBumper.whenPressed(new MoveAssembly(AssemblyLocation.EXCHANGE_ZONE,true));
+
+        operatorRemote.buttonX.whenPressed(new MoveAssembly(AssemblyLocation.INTAKE, true));
+        operatorRemote.buttonY.whenPressed(new MoveAssembly(AssemblyLocation.BOTTOM, true));
+        operatorRemote.dPad.down.whenPressed(new MoveAssembly(AssemblyLocation.SWITCH, true));
+        operatorRemote.dPad.right.whenPressed(new MoveAssembly(AssemblyLocation.SCALE_DOWN, true));
+        operatorRemote.dPad.up.whenPressed(new MoveAssembly(AssemblyLocation.SCALE_MIDDLE, true));
+        operatorRemote.dPad.left.whenPressed(new MoveAssembly(AssemblyLocation.SCALE_UP, true));
+        operatorRemote.rightBumper.whenPressed(new MoveAssembly(AssemblyLocation.EXCHANGE_ZONE, true));
 
     }
 

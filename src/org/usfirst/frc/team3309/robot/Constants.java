@@ -38,7 +38,7 @@ public class Constants {
     public static int JOYSTICK_SHOOT_BUTTON = 2;
 
     public static double BELTBAR_BOTTOM_POS = Constants.currentRobot == Robot.PRACTICE ? -2680 : -1950;
-    public static double BELTBAR_INTAKE_POS = Constants.currentRobot == Robot.PRACTICE ? -1350 : -640;
+    public static double BELTBAR_INTAKE_POS = Constants.currentRobot == Robot.PRACTICE ? -1550 : -640;
     public static double BELTBAR_EXCHANGE_POS = Constants.currentRobot == Robot.PRACTICE ? -1800 : -900;
     public static double BELTBAR_EJECT_POS = Constants.currentRobot == Robot.PRACTICE ? -2400 : -1690;
     public static double BELTBAR_SCALE_UP_POS = Constants.currentRobot == Robot.PRACTICE ? -2550 : -1690;
@@ -46,7 +46,7 @@ public class Constants {
     public static double BELTBAR_CLIMB = Constants.currentRobot == Robot.PRACTICE ? -2800 : -1950;
 
     public static double ELEVATOR_BOTTOM_POS = 0;
-    public static double ELEVATOR_INTAKE_POS = 1300;
+    public static double ELEVATOR_INTAKE_POS = 1100;
     public static double ELEVATOR_EXCHANGE_POS = 700;
     public static double ELEVATOR_SWITCH_POS = 15000;
     public static double ELEVATOR_SCALE_DOWN_POS = 28000;
@@ -62,15 +62,17 @@ public class Constants {
     public static final int DRIVE_LEFT_1_ID = 12;
     public static final int DRIVE_LEFT_2_ID = 14;
 
-    public static final int SHIFTER = 7;
+    public static final int DRIVE_SHIFTER = 7;
 
     // roller
     public static final int ROLLER_LEFT = 40;
     public static final int ROLLER_RIGHT = 41;
 
     // arms
-    public static final int ARMS_ACTUATOR_A = 1;
-    public static final int ARMS_ACTUATOR_B = 2;
+    public static final int ARMS_ACTUATOR_A = 2;
+    public static final int ARMS_ACTUATOR_B = 1;
+
+    public static final int ARMS_ACTUATOR_OTHER = 5;
 
     // lift
     public static final int LIFT_0 = 20;
@@ -96,14 +98,10 @@ public class Constants {
 
     public static final int BELTBAR_HALL_EFFECT = 2;
 
-    // shooter
-    public static final int SHOOTER_SHIFTER = 5;
-
     // falcon doors
     public static final int FALCONDOORS_SOLENOID = 4;
 
     // robot constants
-    public static final double MAX_LIFT_POS = 47000;
     public static final double AUTO_ROLLER_INTAKE_POWER = -1;
 
     public static final double DRIVE_ENCODER_COUNTS_PER_REV = 4096*9.6;

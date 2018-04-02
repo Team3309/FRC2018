@@ -12,7 +12,6 @@ public class InterruptAll extends InstantCommand {
         requires(Robot.falconDoors);
         requires(Robot.lift);
         requires(Robot.rollers);
-        requires(Robot.shooter);
     }
 
 }

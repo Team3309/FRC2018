@@ -3,6 +3,7 @@ package org.usfirst.frc.team3309.subsystems;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.usfirst.frc.team3309.robot.Constants;
 import org.usfirst.frc.team3309.robot.OI;
@@ -13,16 +14,13 @@ public class Arms extends Subsystem {
     private DoubleSolenoid actuator = new DoubleSolenoid(Constants.ARMS_ACTUATOR_A,
             Constants.ARMS_ACTUATOR_B);
 
+    private Solenoid otherActuator = new Solenoid(Constants.ARMS_ACTUATOR_OTHER);
+
     @Override
     protected void initDefaultCommand() {
     }
 
     public void periodic() {
-        if (OI.operatorRemote.buttonA.get()) {
-            Robot.arms.clampArms();
-        } else if (OI.operatorRemote.buttonB.get()) {
-            Robot.arms.openArms();
-        }
     }
 
     public void sendToDashboard() {
@@ -30,16 +28,19 @@ public class Arms extends Subsystem {
         table.getEntry("arms closed: ").setBoolean(isArmsClosed());
     }
 
-    private void setActuator(DoubleSolenoid.Value value) {
-        actuator.set(value);
-    }
-
     public void openArms() {
-        setActuator(DoubleSolenoid.Value.kForward);
+        actuator.set(DoubleSolenoid.Value.kReverse);
+        otherActuator.set(false);
     }
 
     public void clampArms() {
-        setActuator(DoubleSolenoid.Value.kReverse);
+        actuator.set(DoubleSolenoid.Value.kForward);
+        otherActuator.set(true);
+    }
+
+    public void middleArms() {
+        actuator.set(DoubleSolenoid.Value.kForward);
+        otherActuator.set(false);
     }
 
     public boolean isArmsClosed() {

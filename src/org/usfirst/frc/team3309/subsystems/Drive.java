@@ -29,7 +29,7 @@ public class Drive extends Subsystem {
 
     private PigeonIMU pigeonIMU = new PigeonIMU(Robot.lift.getLeft1());
 
-    private Solenoid shifter = new Solenoid(Constants.SHIFTER);
+    private Solenoid shifter = new Solenoid(Constants.DRIVE_SHIFTER);
 
     private AHRS navX = new AHRS(SPI.Port.kMXP);
 
