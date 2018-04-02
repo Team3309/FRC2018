@@ -27,6 +27,7 @@ public class CurvyToSwitchAuto extends CommandGroup {
                 addSequential(new DriveArc(Length.fromInches(20), 30, 28000, true));
                 addSequential(new DriveStraight(-7, 28000));
                 addSequential(new DriveEnd());
+
             } else {
                 DriverStation.reportError("Oh no! I don't know where to go! :karson5:",false);
             }
