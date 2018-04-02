@@ -11,7 +11,7 @@ public class DriveStraight extends CommandEx {
 
     private boolean isInit = false;
     private boolean isAbs = false;
-    private double startAngle;
+    private double startAngle = Double.NaN;
     private double start;
     private double timeout = Double.POSITIVE_INFINITY;
     private PIDController angleController = new PIDController(new PIDConstants(0.6, 0, 0));
@@ -48,13 +48,14 @@ public class DriveStraight extends CommandEx {
         this.allowOvershoot = allowOvershoot;
     }
 
+    public DriveStraight(double distance, int velocity, double angle) {
+        this(distance, velocity, true);
+        this.startAngle = angle;
+    }
+
     public DriveStraight(double distance, int velocity, boolean allowOvershoot, double timeout) {
         this(distance, velocity, allowOvershoot);
         this.timeout = timeout;
-    }
-
-    public DriveStraight(double distance, int velocity, double timeout) {
-        this(distance, velocity, false, timeout);
     }
 
     @Override
@@ -67,7 +68,9 @@ public class DriveStraight extends CommandEx {
         }
         isInit = true;
         start = Timer.getFPGATimestamp();
-        startAngle = Robot.drive.getPigeonPos();
+        if (startAngle == Double.NaN) {
+            startAngle = Robot.drive.getPigeonPos();
+        }
     }
 
     @Override
