@@ -19,7 +19,7 @@ public class DriveTurn extends CommandEx {
 
     public DriveTurn(double goalAngle) {
         this.goalAngle = goalAngle;
-        angleController = new PIDController(new PIDConstants(0.0092, 0.0000, 0.005));
+        angleController = new PIDController(new PIDConstants(0.0088, 0.0000, 0.005));
         requires(Robot.drive);
     }
 
