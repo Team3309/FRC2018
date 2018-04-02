@@ -31,7 +31,7 @@ public class ScaleThreeCubeAuto extends CommandGroup{
                 addSequential(new DriveArc(Length.fromInches(10), 10, 26000, false, true, true));
                 addSequential(new DriveStraight(5, 26000, false, true));
                 addSequential(new DriveArc(Length.fromInches(10), -8.4, 26000, false, true, true));
-                addSequential(new DriveStraight(80, 25000, false, true));
+     //           addSequential(new DriveStraight(80, 25000, false, true));
                 addSequential(new DriveEnd());
         //        addSequential(new DriveArc(Length.fromInches(20), -20, 26000, false, true, true));
                 addSequential(new DriveEnd());
