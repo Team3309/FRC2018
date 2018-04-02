@@ -64,13 +64,17 @@ public class Drive extends Subsystem {
         right0.config_kD(0, 0.0006, 10);
         right0.config_kF(0, 0.002, 10);
 
-        pigeonIMU.setYaw(0, 10);
-        pigeonIMU.setFusedHeading(0, 10);
+
 
         setHighGear();
         changeToBrakeMode();
     }
 
+
+    public void clearPigeon() {
+        pigeonIMU.setYaw(0, 10);
+        pigeonIMU.setFusedHeading(0, 10);
+    }
 
     @Override
     protected void initDefaultCommand() {

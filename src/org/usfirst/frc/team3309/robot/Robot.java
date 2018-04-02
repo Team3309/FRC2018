@@ -68,10 +68,12 @@ public class Robot extends TimedRobot {
         drive.zeroNavx();
         Scheduler.getInstance().add(new LiftFindZero());
         AutoModeExecutor.displayAutos();
+        drive.clearPigeon();
     }
 
     @Override
     public void autonomousInit() {
+        drive.clearPigeon();
         Scheduler.getInstance().removeAll();
         if (DriverStation.getInstance().getGameSpecificMessage() != null) {
             isLeftSwitch = DriverStation.getInstance().getGameSpecificMessage().charAt(0) == 'L';
@@ -102,6 +104,7 @@ public class Robot extends TimedRobot {
 
     @Override
     public void teleopInit() {
+        drive.clearPigeon();
         Scheduler.getInstance().removeAll();
         start = Timer.getFPGATimestamp();
         c.start();
