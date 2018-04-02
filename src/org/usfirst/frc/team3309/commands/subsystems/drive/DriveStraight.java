@@ -83,6 +83,7 @@ public class DriveStraight extends CommandEx {
             case VELOCITY:
                 Robot.drive.changeToVelocityMode();
                 double angularUpdate = -30000 * angleController.update(Robot.drive.getPigeonPos(), startAngle);
+                System.out.println("Going");
                 if (distance > Robot.drive.encoderCountsToInches(Robot.drive.getEncoderPos()))
                     Robot.drive.setLeftRight(velocityTarget + angularUpdate, velocityTarget - angularUpdate);
                 else
