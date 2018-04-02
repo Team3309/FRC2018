@@ -1,5 +1,6 @@
 package org.usfirst.frc.team3309.commands.subsystems.drive;
 
+import edu.wpi.first.wpilibj.Timer;
 import org.usfirst.frc.team3309.lib.CommandEx;
 import org.usfirst.frc.team3309.lib.controllers.drive.ArcController;
 import org.usfirst.frc.team3309.lib.controllers.helpers.DriveSignal;
@@ -16,6 +17,7 @@ public class DriveArc extends CommandEx {
     private boolean allowOvershoot;
     private double angleDegrees;
     private boolean isAbs = false;
+    private Timer timer  = new Timer();
 
     public DriveArc(Length radius, double angleDegrees, double vel, boolean backwards, boolean allowOvershoot) {
         requires(Robot.drive);
@@ -41,6 +43,7 @@ public class DriveArc extends CommandEx {
         if (!isAbs) {
             Robot.drive.reset();
         }
+        timer.start();
         Robot.drive.setHighGear();
         Robot.drive.changeToBrakeMode();
         Robot.drive.changeToVelocityMode();
@@ -66,13 +69,14 @@ public class DriveArc extends CommandEx {
     @Override
     protected boolean isFinished() {
         if (isAbs) {
-            return Math.abs(Robot.drive.getAngPos()) > Math.abs(Robot.drive.getAngPos() + angleDegrees);
+            return timer.get() > 0.6 && Math.abs(Robot.drive.getAngPos()) > Math.abs(Robot.drive.getAngPos() + angleDegrees);
         }
-        return allowOvershoot ? Math.abs(Robot.drive.getAngPos()) > Math.abs(angleDegrees) : arcController.isFinished();
+        return timer.get() > 0.6 && allowOvershoot ? Math.abs(Robot.drive.getAngPos()) > Math.abs(angleDegrees) : arcController.isFinished();
     }
 
     @Override
     public void end() {
+        timer.reset();
         super.end();
         isInitialized = false;
     }
