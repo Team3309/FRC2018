@@ -140,7 +140,7 @@ public class Drive extends Subsystem {
         while (yaw > 360) {
             yaw -= 360;
         }
-        while (yaw < 0) {
+        while (yaw < -360) {
             yaw += 360;
         }
         return yaw;
