@@ -138,13 +138,7 @@ public class Drive extends Subsystem {
         pigeonIMU.getYawPitchRoll(ypr);
         pigeonIMU.getAbsoluteCompassHeading();
         double yaw = ypr[0];
-        while (yaw > 360) {
-            yaw -= 360;
-        }
-        while (yaw < -360) {
-            yaw += 360;
-        }
-        return pigeonIMU.getAbsoluteCompassHeading();
+        return yaw;
     }
 
     public void sendToDashboard() {
