@@ -12,7 +12,7 @@ public class DriveTurn extends CommandEx {
 
     private double goalAngle;
     private PIDController angleController;
-    private final double ANGLE_LENIENCY = 8;
+    private final double ANGLE_LENIENCY = 5;
     private boolean isInitialized = false;
     private LibTimer timer = new LibTimer(0.15);
     private double timeoutSec = Double.POSITIVE_INFINITY;
@@ -56,18 +56,18 @@ public class DriveTurn extends CommandEx {
         double kP = SmartDashboard.getNumber("kP", 0);
         double kI = SmartDashboard.getNumber("kI", 0);
         double kD = SmartDashboard.getNumber("kD", 0);
-        angleController = new PIDController(new PIDConstants(kP, kI, kD));
+        angleController = new PIDController(new PIDConstants(0.0737, 0, 0.06));
         double power = angleController.update(isPigeon ? Robot.drive.getPigeonPos() : Robot.drive.getAngPos(), goalAngle);
         Robot.drive.setLeftRight(power, -power);
     }
 
     @Override
     protected boolean isFinished() {
-        return false;
-        /*timer.isConditionMaintained(
-                LibMath.isWithin(isPigeon ? Robot.drive.getPigeonPos() : Robot.drive.getAngPos(),
-                        goalAngle - ANGLE_LENIENCY, goalAngle + ANGLE_LENIENCY))
-                || timer.get() > timeoutSec;*/
+        return
+                timer.isConditionMaintained(
+                        LibMath.isWithin(isPigeon ? Robot.drive.getPigeonPos() : Robot.drive.getAngPos(),
+                                goalAngle - ANGLE_LENIENCY, goalAngle + ANGLE_LENIENCY))
+                        || timer.get() > timeoutSec;
     }
 
     @Override
