@@ -15,6 +15,7 @@ public class DriveArc extends CommandEx {
     private boolean backwards;
     private boolean allowOvershoot;
     private double angleDegrees;
+    private boolean isAbs = false;
 
     public DriveArc(Length radius, double angleDegrees, double vel, boolean backwards, boolean allowOvershoot) {
         requires(Robot.drive);
@@ -25,15 +26,21 @@ public class DriveArc extends CommandEx {
                 Robot.drive.inchesToEncoderCounts(Constants.WHEELBASE_INCHES.toInches()), vel);
     }
 
-    // TODO remove allow overshoot
     public DriveArc(Length radius, double angleDegrees, double vel, boolean backwards) {
         this(radius, angleDegrees, vel, backwards, false);
+    }
+
+    public DriveArc(Length radius, double angleDegrees, double vel, boolean backwards, boolean allowOvershoot, boolean isAbs) {
+        this(radius, angleDegrees, vel, backwards, allowOvershoot);
+        this.isAbs = isAbs;
     }
 
     @Override
     public void initialize() {
         super.initialize();
-        Robot.drive.reset();
+        if (!isAbs) {
+            Robot.drive.reset();
+        }
         Robot.drive.setHighGear();
         Robot.drive.changeToBrakeMode();
         Robot.drive.changeToVelocityMode();

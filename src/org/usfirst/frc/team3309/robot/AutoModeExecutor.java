@@ -21,6 +21,8 @@ public class AutoModeExecutor {
         autos.addObject("RightScaleAnd(Switch)Auto", new ScaleOnlyAuto(true, true));
         autos.addObject("LeftScaleAnd(Switch)Auto", new ScaleOnlyAuto(false, true));
 
+        autos.addObject("RightScaleThreeCubeAuto", new ScaleThreeCubeAuto(true));
+
         autos.addObject("LeftSwitchAuto", new SideSwitchAuto(false));
         autos.addObject("RightSwitchAuto", new SideSwitchAuto(true));
 

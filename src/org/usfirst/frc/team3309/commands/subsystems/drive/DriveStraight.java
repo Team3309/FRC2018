@@ -11,6 +11,7 @@ public class DriveStraight extends CommandEx
 {
 
     private boolean isInit = false;
+    private boolean isAbs = false;
     private double startAngleVel;
     private double start;
     private double timeout = Double.POSITIVE_INFINITY;
@@ -39,6 +40,11 @@ public class DriveStraight extends CommandEx
         this.velocityTarget = velocity;
     }
 
+    public DriveStraight(double distance, int velocity, boolean allowOvershoot, boolean isAbs) {
+        this(distance, velocity, allowOvershoot);
+        this.isAbs = isAbs;
+    }
+
     public DriveStraight(double distance, int velocity, boolean allowOvershoot) {
         this(distance, velocity);
         this.allowOvershoot = allowOvershoot;
@@ -56,7 +62,9 @@ public class DriveStraight extends CommandEx
     @Override
     public void initialize() {
         super.initialize();
-        Robot.drive.reset();
+        if (!isAbs) {
+            Robot.drive.reset();
+        }
         isInit = true;
         start = Timer.getFPGATimestamp();
         startAngleVel = Robot.drive.getAngVel();
@@ -73,7 +81,11 @@ public class DriveStraight extends CommandEx
         {
             case POSITION:
                 Robot.drive.changeToPositionMode();
-                Robot.drive.setLeftRight(distance,distance);
+                if (isAbs) {
+                    Robot.drive.setLeftRight(Robot.drive.getLeftEncoder() + distance,Robot.drive.getRightEncoder() + distance);
+                } else {
+                    Robot.drive.setLeftRight(distance, distance);
+                }
                 break;
             case VELOCITY:
                 Robot.drive.changeToVelocityMode();
