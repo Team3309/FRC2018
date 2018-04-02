@@ -11,7 +11,7 @@ public class DriveTurn extends CommandEx {
 
     private double goalAngle;
     private PIDController angleController;
-    private final double ANGLE_LENIENCY = 18; // 1.5
+    private final double ANGLE_LENIENCY = 3; // 1.5
     private boolean isInitialized = false;
     private LibTimer timer = new LibTimer(0.35);
     private double timeoutSec = Double.POSITIVE_INFINITY;
