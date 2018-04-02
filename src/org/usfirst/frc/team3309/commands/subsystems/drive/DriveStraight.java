@@ -64,13 +64,12 @@ public class DriveStraight extends CommandEx {
         Robot.drive.reset();
         isInit = true;
         start = Timer.getFPGATimestamp();
-        if (startAngle == Double.NaN) {
-            if (isPigeon) {
-                startAngle = Robot.drive.getPigeonPos();
-            } else  {
-                startAngle = Robot.drive.getAngPos();
-            }
+        if (isPigeon) {
+            startAngle = Robot.drive.getPigeonPos();
+        } else {
+            startAngle = Robot.drive.getAngPos();
         }
+        
     }
 
 
