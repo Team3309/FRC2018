@@ -50,8 +50,8 @@ public class Robot extends TimedRobot {
      //   BlackBox.initLog("beltbar current ", "amps");
         CameraServer.getInstance().startAutomaticCapture(0).setFPS(15);
         CameraServer.getInstance().startAutomaticCapture(1).setFPS(15);
-        drive = new Drive();
         lift = new Lift();
+        drive = new Drive();
         beltBar = new BeltBar();
         shooter = new Shooter();
         falconDoors = new FalconDoors();
