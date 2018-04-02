@@ -10,7 +10,7 @@ import org.usfirst.frc.team3309.robot.Robot;
 public class DriveStraight extends CommandEx {
 
     private boolean isInit = false;
-    private double startAngle = Double.NaN;
+    private double startAngle;
     private double start;
     private double timeout = Double.POSITIVE_INFINITY;
     private PIDController angleController = new PIDController(new PIDConstants(0.6, 0, 0));
@@ -69,7 +69,6 @@ public class DriveStraight extends CommandEx {
         } else {
             startAngle = Robot.drive.getAngPos();
         }
-        
     }
 
 
@@ -86,7 +85,7 @@ public class DriveStraight extends CommandEx {
                 break;
             case VELOCITY:
                 Robot.drive.changeToVelocityMode();
-                double angularUpdate = -30000 * angleController.update(Robot.drive.getPigeonPos(), startAngle);
+                double angularUpdate = 30000 * angleController.update(Robot.drive.getPigeonPos(), startAngle);
                 System.out.println("Going");
                 System.out.println(velocityTarget + angularUpdate);
                 if (distance > Robot.drive.encoderCountsToInches(Robot.drive.getEncoderPos()))
