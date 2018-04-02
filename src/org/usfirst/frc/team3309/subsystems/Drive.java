@@ -171,6 +171,8 @@ public class Drive extends Subsystem {
         table.getEntry("right1 current ").setNumber(right1.getOutputCurrent());
         table.getEntry("right2 current ").setNumber(right2.getOutputCurrent());
 
+        table.getEntry("pigeon compass angle").setNumber(getPigeonPos());
+
     }
 
     @Override
