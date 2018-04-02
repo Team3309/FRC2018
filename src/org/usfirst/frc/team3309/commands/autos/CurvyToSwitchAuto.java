@@ -22,7 +22,7 @@ public class CurvyToSwitchAuto extends CommandGroup {
 
     double start;
 
-    @Override
+    /*@Override
     public void start() {
         start = Timer.getFPGATimestamp();
         addParallel(new MoveAssembly(AssemblyLocation.BOTTOM));
@@ -91,6 +91,10 @@ public class CurvyToSwitchAuto extends CommandGroup {
             }
         }
         super.start();
+    }*/
+
+    public CurvyToSwitchAuto() {
+        addSequential(new DriveTurn(90, Double.POSITIVE_INFINITY, true));
     }
 
     @Override
