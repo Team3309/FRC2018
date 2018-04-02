@@ -64,8 +64,6 @@ public class Drive extends Subsystem {
         right0.config_kD(0, 0.0006, 10);
         right0.config_kF(0, 0.002, 10);
 
-
-
         setHighGear();
         changeToBrakeMode();
     }
@@ -139,12 +137,12 @@ public class Drive extends Subsystem {
         double[] ypr = new double[3];
         pigeonIMU.getYawPitchRoll(ypr);
         double yaw = ypr[0];
-        while (yaw > 360) {
+/*        while (yaw > 360) {
             yaw -= 360;
         }
         while (yaw < 0) {
             yaw += 360;
-        }
+        }*/
         return yaw;
     }
 
