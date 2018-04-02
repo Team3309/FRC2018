@@ -7,8 +7,7 @@ import org.usfirst.frc.team3309.lib.controllers.pid.PIDConstants;
 import org.usfirst.frc.team3309.lib.controllers.pid.PIDController;
 import org.usfirst.frc.team3309.robot.Robot;
 
-public class DriveStraight extends CommandEx
-{
+public class DriveStraight extends CommandEx {
 
     private boolean isInit = false;
     private boolean isAbs = false;
@@ -28,8 +27,7 @@ public class DriveStraight extends CommandEx
     private int velocityTarget = 15000;
     private boolean allowOvershoot = false;
 
-    public DriveStraight(double distance, DriveStrategy strategy)
-    {
+    public DriveStraight(double distance, DriveStrategy strategy) {
         this.strategy = strategy;
         this.distance = Robot.drive.inchesToEncoderCounts(distance);
         requires(Robot.drive);
@@ -73,14 +71,12 @@ public class DriveStraight extends CommandEx
     }
 
     @Override
-    protected void execute()
-    {
+    protected void execute() {
         if (!isInit) {
             initialize();
         }
-        SmartDashboard.putNumber("error: ", Math.abs(distance-Robot.drive.getEncoderPos()));
-        switch(strategy)
-        {
+        SmartDashboard.putNumber("error: ", Math.abs(distance - Robot.drive.getEncoderPos()));
+        switch (strategy) {
             case POSITION:
                 Robot.drive.changeToPositionMode();
                 Robot.drive.setLeftRight(distance, distance);
@@ -88,33 +84,31 @@ public class DriveStraight extends CommandEx
             case VELOCITY:
                 Robot.drive.changeToVelocityMode();
                 double angularUpdate = -30000 * angleController.update(Robot.drive.getAngVel(), startAngleVel);
-                if(distance > Robot.drive.encoderCountsToInches(Robot.drive.getEncoderPos()))
-                    Robot.drive.setLeftRight(velocityTarget + angularUpdate,velocityTarget - angularUpdate);
+                if (distance > Robot.drive.encoderCountsToInches(Robot.drive.getEncoderPos()))
+                    Robot.drive.setLeftRight(velocityTarget + angularUpdate, velocityTarget - angularUpdate);
                 else
-                    Robot.drive.setLeftRight(-velocityTarget + angularUpdate,-velocityTarget - angularUpdate);
+                    Robot.drive.setLeftRight(-velocityTarget + angularUpdate, -velocityTarget - angularUpdate);
                 break;
             case MOTION_MAGIC:
                 Robot.drive.changeToMotionMagicMode();
-                Robot.drive.configLeftRightCruiseVelocity(velocityTarget,velocityTarget);
-                Robot.drive.setLeftRight(distance,distance);
+                Robot.drive.configLeftRightCruiseVelocity(velocityTarget, velocityTarget);
+                Robot.drive.setLeftRight(distance, distance);
                 break;
         }
     }
 
     @Override
-    protected boolean isFinished()
-    {
-            if (Timer.getFPGATimestamp() - start >= timeout) {
-                return true;
-            } else if (allowOvershoot) {
-                return Math.abs(Robot.drive.getEncoderPos()) >  Math.abs(distance);
-            }
-            return Math.abs(distance - Robot.drive.getEncoderPos()) <= Robot.drive.inchesToEncoderCounts(1.5);
+    protected boolean isFinished() {
+        if (Timer.getFPGATimestamp() - start >= timeout) {
+            return true;
+        } else if (allowOvershoot) {
+            return Math.abs(Robot.drive.getEncoderPos()) > Math.abs(distance);
+        }
+        return Math.abs(distance - Robot.drive.getEncoderPos()) <= Robot.drive.inchesToEncoderCounts(1.5);
     }
 
     @Override
-    public void end()
-    {
+    public void end() {
         super.end();
         Robot.drive.disableOutput();
         System.out.println("Drive dist " + Robot.drive.encoderCountsToInches(Robot.drive.getEncoderPos()));
