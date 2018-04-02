@@ -25,13 +25,13 @@ public class ScaleThreeCubeAuto extends CommandGroup{
             if (Robot.isRightScale()) {
          //       addParallel(new WaitAndMoveAssembly(1.5, AssemblyLocation.SCALE_UP));
                 addSequential(new DriveStraight(20, 25000, true, true));
-                addSequential(new DriveArc(Length.fromInches(15), 20, 26000, false, true));
+  /*              addSequential(new DriveArc(Length.fromInches(15), 20, 26000, false, true));
            //     addSequential(new DriveStraight(5, 26000, false, true));
                 addSequential(new DriveEnd());
                 addSequential(new DriveArc(Length.fromInches(15), -10, 26000, false, true));
      //           addSequential(new DriveStraight(80, 25000, false, true));
         //        addSequential(new DriveArc(Length.fromInches(20), -20, 26000, false, true, true));
-                addSequential(new DriveEnd());
+                addSequential(new DriveEnd());*/
                 addSequential(new DriveStraight(30, 25000, 0));
 
 //                addSequential(new WaitCommand(0.2));
