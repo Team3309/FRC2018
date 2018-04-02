@@ -181,6 +181,7 @@ public class Drive extends Subsystem {
 
         table.getEntry("pigeon angle").setNumber(getPigeonPos());
 
+        SmartDashboard.putNumber("pigeon angle", getPigeonPos());
     }
 
     @Override
