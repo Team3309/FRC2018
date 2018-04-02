@@ -63,9 +63,7 @@ public class Drive extends Subsystem {
         right0.config_kP(0, 0.019, 10);
         right0.config_kD(0, 0.0006, 10);
         right0.config_kF(0, 0.002, 10);
-
-        pigeonIMU.setCompassAngle(0, 10);
-
+        
         setHighGear();
         changeToBrakeMode();
     }
