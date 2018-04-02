@@ -1,5 +1,6 @@
 package org.usfirst.frc.team3309.commands.subsystems.drive;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team3309.lib.CommandEx;
 import org.usfirst.frc.team3309.lib.LibTimer;
 import org.usfirst.frc.team3309.lib.controllers.pid.PIDConstants;
@@ -11,7 +12,7 @@ public class DriveTurn extends CommandEx {
 
     private double goalAngle;
     private PIDController angleController;
-    private final double ANGLE_LENIENCY = 8; // 1.5
+    private final double ANGLE_LENIENCY = 8;
     private boolean isInitialized = false;
     private LibTimer timer = new LibTimer(0.15);
     private double timeoutSec = Double.POSITIVE_INFINITY;
@@ -19,13 +20,15 @@ public class DriveTurn extends CommandEx {
 
     public DriveTurn(double goalAngle) {
         this.goalAngle = goalAngle;
-        angleController = new PIDController(new PIDConstants(0.0088, 0.0000, 0.005));
         requires(Robot.drive);
     }
 
     public DriveTurn(double goalAngle, double timeoutSec) {
         this(goalAngle);
         this.timeoutSec = timeoutSec;
+        SmartDashboard.putNumber("kP", 0);
+        SmartDashboard.putNumber("kI", 0);
+        SmartDashboard.putNumber("kD", 0);
     }
 
     public DriveTurn(double goalAngle, double timeoutSec, boolean isPigeon) {
@@ -49,16 +52,22 @@ public class DriveTurn extends CommandEx {
         if (!isInitialized) {
             initialize();
         }
+        //0.0088, 0.0000, 0.005
+        double kP = SmartDashboard.getNumber("kP", 0);
+        double kI = SmartDashboard.getNumber("kI", 0);
+        double kD = SmartDashboard.getNumber("kD", 0);
+        angleController = new PIDController(new PIDConstants(kP, kI, kD));
         double power = angleController.update(isPigeon ? Robot.drive.getPigeonPos() : Robot.drive.getAngPos(), goalAngle);
         Robot.drive.setLeftRight(power, -power);
     }
 
     @Override
     protected boolean isFinished() {
-        return timer.isConditionMaintained(
+        return false;
+        /*timer.isConditionMaintained(
                 LibMath.isWithin(isPigeon ? Robot.drive.getPigeonPos() : Robot.drive.getAngPos(),
                         goalAngle - ANGLE_LENIENCY, goalAngle + ANGLE_LENIENCY))
-                || timer.get() > timeoutSec;
+                || timer.get() > timeoutSec;*/
     }
 
     @Override
