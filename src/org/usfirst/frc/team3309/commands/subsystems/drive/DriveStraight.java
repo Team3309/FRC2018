@@ -65,7 +65,7 @@ public class DriveStraight extends CommandEx {
         isInit = true;
         start = Timer.getFPGATimestamp();
         if (isPigeon) {
-            angleController = new PIDController(new PIDConstants(0.2, 0, 0));
+            angleController = new PIDController(new PIDConstants(0.09, 0, 0));
             startAngle = Robot.drive.getPigeonPos();
         } else {
             angleController = new PIDController(new PIDConstants(0.6, 0, 0));
