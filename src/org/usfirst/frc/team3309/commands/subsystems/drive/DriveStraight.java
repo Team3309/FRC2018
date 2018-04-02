@@ -64,6 +64,8 @@ public class DriveStraight extends CommandEx
         super.initialize();
         if (!isAbs) {
             Robot.drive.reset();
+        } else {
+            distance += Robot.drive.getEncoderPos();
         }
         isInit = true;
         start = Timer.getFPGATimestamp();
@@ -81,11 +83,7 @@ public class DriveStraight extends CommandEx
         {
             case POSITION:
                 Robot.drive.changeToPositionMode();
-                if (isAbs) {
-                    Robot.drive.setLeftRight(Robot.drive.getLeftEncoder() + distance,Robot.drive.getRightEncoder() + distance);
-                } else {
-                    Robot.drive.setLeftRight(distance, distance);
-                }
+                Robot.drive.setLeftRight(distance, distance);
                 break;
             case VELOCITY:
                 Robot.drive.changeToVelocityMode();
