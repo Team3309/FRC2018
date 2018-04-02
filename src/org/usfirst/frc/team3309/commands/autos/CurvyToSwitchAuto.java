@@ -61,7 +61,7 @@ public class CurvyToSwitchAuto extends CommandGroup {
                 addSequential(new DriveArc(Length.fromInches(12), 37, 31000, false, true));
                 addParallel(new MoveAssembly(AssemblyLocation.SWITCH));
                 addSequential(new DriveArc(Length.fromInches(12), -22, 28000, false, true));
-                addSequential(new DriveStraight(2, 28000, true, true));
+                addSequential(new DriveStraight(2, 28000, 0));
                 addSequential(new WaitCommand(0.13));
                 addParallel(new ArmsOpen());
                 addSequential(new RollersActuate(0.5, 0.2));
@@ -71,20 +71,20 @@ public class CurvyToSwitchAuto extends CommandGroup {
                 addSequential(new DriveArc(Length.fromInches(30), -74, 26000, true, true));
                 addSequential(new DriveTurn(0, 0.23, true));
                 addParallel(new RollersSetIn(true));
-                addSequential(new DriveStraight(20, 17000, true, true));
+                addSequential(new DriveStraight(20, 17000, 0));
                 addSequential(new ArmsClamp());
 
                 addSequential(new WaitCommand(0.7));
                 addParallel(new RollersSetIn(false));
                 addParallel(new MoveAssembly(AssemblyLocation.EXCHANGE_ZONE));
-                addSequential(new DriveStraight(-13, 17000, true, true));
+                addSequential(new DriveStraight(-13, 17000, 0));
                 addParallel(new MoveAssembly(AssemblyLocation.SWITCH));
                 addSequential(new DriveTurn(-89, 0.5, true));
                 addSequential(new DriveArc(Length.fromInches(42), -79, 27000, false, true));
-                addSequential(new DriveStraight(16, 14000, true));
+                addSequential(new DriveStraight(16, 14000, 0));
                 addSequential(new ArmsOpen());
                 addSequential(new WaitCommand(0.3));
-                addSequential(new DriveStraight(-17, 18000, true));
+                addSequential(new DriveStraight(-17, 18000, 0));
                 addSequential(new MoveAssembly(AssemblyLocation.BOTTOM));
             } else {
                 DriverStation.reportError("Oh no! I don't know where to go! :karson5:", false);
