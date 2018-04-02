@@ -27,7 +27,7 @@ public class Drive extends Subsystem {
     private VictorSPXMC right1 = new VictorSPXMC(Constants.DRIVE_RIGHT_1_ID);
     private VictorSPXMC right2 = new VictorSPXMC(Constants.DRIVE_RIGHT_2_ID);
 
-    private PigeonIMU pigeonIMU = new PigeonIMU(Robot.lift.getLeft1());
+    private PigeonIMU pigeonIMU = new PigeonIMU(21);
 
     private Solenoid shifter = new Solenoid(Constants.SHIFTER);
 
