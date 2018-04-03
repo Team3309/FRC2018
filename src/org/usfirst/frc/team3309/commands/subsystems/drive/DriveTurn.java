@@ -1,5 +1,6 @@
 package org.usfirst.frc.team3309.commands.subsystems.drive;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team3309.lib.CommandEx;
 import org.usfirst.frc.team3309.lib.LibTimer;
@@ -17,6 +18,7 @@ public class DriveTurn extends CommandEx {
     private LibTimer timer = new LibTimer(0.15);
     private double timeoutSec = Double.POSITIVE_INFINITY;
     private boolean isPigeon = false;
+    private double start = Double.POSITIVE_INFINITY;
 
     public DriveTurn(double goalAngle) {
         this.goalAngle = goalAngle;
@@ -45,6 +47,7 @@ public class DriveTurn extends CommandEx {
         Robot.drive.changeToBrakeMode();
         Robot.drive.changeToVelocityMode();
         timer.start();
+        start = Timer.getFPGATimestamp();
     }
 
     @Override
@@ -72,13 +75,14 @@ public class DriveTurn extends CommandEx {
                 timer.isConditionMaintained(
                         LibMath.isWithin(isPigeon ? Robot.drive.getPigeonPos() : Robot.drive.getAngPos(),
                                 goalAngle - ANGLE_LENIENCY, goalAngle + ANGLE_LENIENCY))
-                        || timer.get() > timeoutSec;
+                        || timer.get() > timeoutSec || (Timer.getFPGATimestamp() - start) > timeoutSec;
     }
 
     @Override
     public void end() {
         super.end();
         timer.reset();
+        start = Double.POSITIVE_INFINITY;
         isInitialized = false;
         timeoutSec = Double.POSITIVE_INFINITY;
     }
