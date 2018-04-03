@@ -3,6 +3,7 @@ package org.usfirst.frc.team3309.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.sensors.PigeonIMU;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -14,6 +15,7 @@ import org.usfirst.frc.team3309.commands.subsystems.drive.DriveTeleop;
 import org.usfirst.frc.team3309.lib.actuators.TalonSRXMC;
 import org.usfirst.frc.team3309.lib.actuators.VictorSPXMC;
 import org.usfirst.frc.team3309.robot.Constants;
+import org.usfirst.frc.team3309.robot.Robot;
 
 public class Drive extends Subsystem {
 
@@ -24,6 +26,8 @@ public class Drive extends Subsystem {
     private TalonSRXMC right0 = new TalonSRXMC(Constants.DRIVE_RIGHT_0_ID);
     private VictorSPXMC right1 = new VictorSPXMC(Constants.DRIVE_RIGHT_1_ID);
     private VictorSPXMC right2 = new VictorSPXMC(Constants.DRIVE_RIGHT_2_ID);
+
+    private PigeonIMU pigeonIMU = new PigeonIMU(Robot.lift.getLeft1());
 
     private Solenoid shifter = new Solenoid(Constants.DRIVE_SHIFTER);
 
@@ -62,6 +66,12 @@ public class Drive extends Subsystem {
 
         setHighGear();
         changeToBrakeMode();
+    }
+
+
+    public void clearPigeon() {
+        pigeonIMU.setYaw(0, 10);
+        pigeonIMU.setFusedHeading(0, 10);
     }
 
     @Override
@@ -123,6 +133,14 @@ public class Drive extends Subsystem {
         return navX.getRate();
     }
 
+    public double getPigeonPos() {
+        double[] ypr = new double[3];
+        pigeonIMU.getYawPitchRoll(ypr);
+        pigeonIMU.getAbsoluteCompassHeading();
+        double yaw = ypr[0];
+        return yaw;
+    }
+
     public void sendToDashboard() {
         SmartDashboard.putData(this);
         NetworkTable table = NetworkTableInstance.getDefault().getTable("Drive");
@@ -160,6 +178,10 @@ public class Drive extends Subsystem {
         table.getEntry("right0 current ").setNumber(right0.getOutputCurrent());
         table.getEntry("right1 current ").setNumber(right1.getOutputCurrent());
         table.getEntry("right2 current ").setNumber(right2.getOutputCurrent());
+
+        table.getEntry("pigeon angle").setNumber(getPigeonPos());
+
+        SmartDashboard.putNumber("pigeon angle", getPigeonPos());
 
     }
 

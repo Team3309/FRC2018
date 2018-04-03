@@ -41,16 +41,18 @@ public class Robot extends TimedRobot {
 
     @Override
     public void robotInit() {
-        setPeriod(0.005);
+        setPeriod(0.0042);
         pdp = new PowerDistributionPanel(0);
         AssemblyLocation.init();
         logger = Logger.getLogger("Robot");
         logger.info("robot init");
      //   BlackBox.initLog("beltbar current ", "amps");
         CameraServer.getInstance().startAutomaticCapture(0).setFPS(15);
-        CameraServer.getInstance().startAutomaticCapture(1).setFPS(15);
-        drive = new Drive();
+        if (Constants.currentRobot == Constants.Robot.COMPETITION) {
+            CameraServer.getInstance().startAutomaticCapture(1).setFPS(15);
+        }
         lift = new Lift();
+        drive = new Drive();
         beltBar = new BeltBar();
         falconDoors = new FalconDoors();
         arms = new Arms();
@@ -66,10 +68,12 @@ public class Robot extends TimedRobot {
         drive.zeroNavx();
         Scheduler.getInstance().add(new LiftFindZero());
         AutoModeExecutor.displayAutos();
+        drive.clearPigeon();
     }
 
     @Override
     public void autonomousInit() {
+        drive.clearPigeon();
         Scheduler.getInstance().removeAll();
         if (DriverStation.getInstance().getGameSpecificMessage() != null) {
             isLeftSwitch = DriverStation.getInstance().getGameSpecificMessage().charAt(0) == 'L';
@@ -100,6 +104,7 @@ public class Robot extends TimedRobot {
 
     @Override
     public void teleopInit() {
+        drive.clearPigeon();
         Scheduler.getInstance().removeAll();
         start = Timer.getFPGATimestamp();
         c.start();

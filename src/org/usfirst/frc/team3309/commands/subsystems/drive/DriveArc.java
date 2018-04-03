@@ -17,6 +17,7 @@ public class DriveArc extends CommandEx {
     private boolean backwards;
     private boolean allowOvershoot;
     private double angleDegrees;
+    private boolean isAbs = false;
 
     public DriveArc(Length radius, double angleDegrees, double vel, boolean backwards, boolean allowOvershoot) {
         requires(Robot.drive);
@@ -29,6 +30,11 @@ public class DriveArc extends CommandEx {
 
     public DriveArc(Length radius, double angleDegrees, double vel, boolean backwards) {
         this(radius, angleDegrees, vel, backwards, false);
+    }
+
+    public DriveArc(Length radius, double angleDegrees, double vel, boolean backwards, boolean allowOvershoot, boolean isAbs) {
+        this(radius, angleDegrees, vel, backwards, allowOvershoot);
+        this.isAbs = isAbs;
     }
 
     @Override
@@ -60,11 +66,15 @@ public class DriveArc extends CommandEx {
 
     @Override
     protected boolean isFinished() {
+        if (isAbs) {
+            return timer.get() > 0.6 && Math.abs(Robot.drive.getAngPos()) > Math.abs(Robot.drive.getAngPos() + angleDegrees);
+        }
         return timer.get() > 0.6 && allowOvershoot ? Math.abs(Robot.drive.getAngPos()) > Math.abs(angleDegrees) : arcController.isFinished();
     }
 
     @Override
     public void end() {
+        timer.reset();
         super.end();
         isInitialized = false;
         timer.reset();

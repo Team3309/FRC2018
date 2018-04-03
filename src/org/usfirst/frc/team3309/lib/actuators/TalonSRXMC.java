@@ -75,6 +75,10 @@ public class TalonSRXMC extends TalonSRX {
         set(controlMode, value);
     }
 
+    public TalonSRX getTalonSRX() {
+        return this;
+    }
+
 
 
 }
