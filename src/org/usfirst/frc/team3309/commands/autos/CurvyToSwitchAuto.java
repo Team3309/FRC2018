@@ -37,6 +37,7 @@ public class CurvyToSwitchAuto extends CommandGroup {
                 addSequential(new RollersActuate(0.5, 0.2));
                 addSequential(new WaitCommand(0.3));
 
+                /* second cube */
                 addParallel(new WaitAndMoveAssembly(0.5, AssemblyLocation.INTAKE));
                 addSequential(new DriveArc(Length.fromInches(30), 71, 26000, true, true));
                 addSequential(new DriveTurn(-65, 0.23));
@@ -44,6 +45,7 @@ public class CurvyToSwitchAuto extends CommandGroup {
                 addSequential(new DriveStraight(18, 17000));
                 addSequential(new ArmsClamp());
                 addSequential(new WaitCommand(0.7));
+
                 addParallel(new RollersSetIn(false));
                 addParallel(new MoveAssembly(AssemblyLocation.EXCHANGE_ZONE));
                 addSequential(new DriveStraight(-13, 17000));
@@ -54,6 +56,9 @@ public class CurvyToSwitchAuto extends CommandGroup {
                 addSequential(new DriveStraight(16, 14000));
                 addSequential(new ArmsOpen());
                 addSequential(new WaitCommand(0.3));
+
+                /* third cube */
+
                 addSequential(new DriveStraight(-17, 18000));
                 addSequential(new MoveAssembly(AssemblyLocation.BOTTOM));
             } else if (Robot.isRightSwitch()) {
@@ -85,7 +90,7 @@ public class CurvyToSwitchAuto extends CommandGroup {
 
                 /* third cube */
                 addParallel(new WaitAndMoveAssembly(0.5, 5300, AssemblyLocation.SWITCH.getBeltBarPosition()));
-                addSequential(new DriveArc(Length.fromInches(22), -65, 24000, true, true));
+                addSequential(new DriveArc(Length.fromInches(24), -67, 24000, true, true));
                 addSequential(new DriveTurn(0, 1.0, true));
                 addParallel(new RollersSetIn(true));
                 addSequential(new DriveStraight(23, 12000, 0));
