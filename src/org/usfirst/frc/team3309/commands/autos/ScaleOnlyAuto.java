@@ -38,7 +38,7 @@ public class ScaleOnlyAuto extends CommandGroup {
          //       addParallel(new WaitAndMoveAssembly(1, AssemblyLocation.SCALE_UP));
                 addSequential(new DriveStraight(120, 31000, 0));
                 addSequential(new DriveArc(Length.fromInches(45), -20, 23000, false, true));
-                addSequential(new DriveArc(Length.fromInches(25), 15, 23000, false, false));
+                addSequential(new DriveArc(Length.fromInches(25), 5, 23000, false, false));
 
                 addParallel(new ArmsOpen());
                 addSequential(new RollersActuate(0.4, 1.0));
