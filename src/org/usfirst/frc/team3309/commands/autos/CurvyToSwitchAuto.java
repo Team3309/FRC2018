@@ -85,8 +85,8 @@ public class CurvyToSwitchAuto extends CommandGroup {
                 addSequential(new DriveTurn(-90, 1.0, true));
                 addSequential(new DriveArc(Length.fromInches(70), -80, 27000, false, true));
                 addSequential(new DriveStraight(14, 12000, 0));
+                addParallel(new RollersActuate(-1, 0.3));
                 addSequential(new ArmsOpen());
-                addSequential(new WaitCommand(0.2));
 
                 /* third cube */
                 addParallel(new WaitAndMoveAssembly(0.5, 5300, AssemblyLocation.SWITCH.getBeltBarPosition()));
