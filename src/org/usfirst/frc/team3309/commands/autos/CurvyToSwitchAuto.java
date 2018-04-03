@@ -92,20 +92,20 @@ public class CurvyToSwitchAuto extends CommandGroup {
                 addParallel(new WaitAndMoveAssembly(0.5, 5300, AssemblyLocation.SWITCH.getBeltBarPosition()));
                 addSequential(new DriveArc(Length.fromInches(12), -37, 24000, true, true));
             //    addSequential(new DriveStraight(5, 17000, true, true));
-                addSequential(new DriveArc(Length.fromInches(15), 34, 24000, true, true));
+                addSequential(new DriveArc(Length.fromInches(20), 34, 24000, true, true));
            //     addSequential(new DriveTurn(0, 1.0, true));
                 addParallel(new RollersSetIn(true));
-                addSequential(new DriveStraight(28, 12000, 0));
+                addSequential(new DriveStraight(35, 15000, 0));
                 addSequential(new ArmsClamp());
 
                 addSequential(new WaitCommand(0.7));
                 addParallel(new RollersSetIn(false));
                 addSequential(new DriveStraight(-10, 17000, true, true));
                 addParallel(new MoveAssembly(AssemblyLocation.SWITCH));
-                addSequential(new DriveStraight(-10, 17000, 0));
-                addSequential(new DriveTurn(-60, 1.0, true));
-             //   addSequential(new DriveArc(Length.fromInches(65), -60, 27000, false, true));
-                addSequential(new DriveStraight(50, 19000, true, true));
+//                addSequential(new DriveStraight(-10, 17000, 0));
+//                addSequential(new DriveTurn(-60, 1.0, true));
+                addSequential(new DriveArc(Length.fromInches(65), -60, 27000, false, true));
+                addSequential(new DriveStraight(10, 14000, true, true));
                 addParallel(new ArmsOpen() {
                     @Override
                     public void end() {
