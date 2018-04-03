@@ -107,7 +107,7 @@ public class CurvyToSwitchAuto extends CommandGroup {
                         super.end();
                         System.out.println("I REALLY ended at " + (Timer.getFPGATimestamp()-start));
                     }
-                })
+                });
                 addSequential(new WaitCommand(0.2));
 
                 addSequential(new DriveStraight(-17, 18000, 0));
