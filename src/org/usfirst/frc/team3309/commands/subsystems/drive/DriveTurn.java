@@ -52,6 +52,7 @@ public class DriveTurn extends CommandEx {
         if (!isInitialized) {
             initialize();
         }
+        System.out.println("goalAngle");
         double kP = SmartDashboard.getNumber("kP", 0.0735);
         double kI = SmartDashboard.getNumber("kI", 0.0014);
         double kD = SmartDashboard.getNumber("kD", 0.068); // 0.068
