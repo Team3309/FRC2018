@@ -12,7 +12,7 @@ public class DriveTurn extends CommandEx {
 
     private double goalAngle;
     private PIDController angleController;
-    private final double ANGLE_LENIENCY = 6;
+    private final double ANGLE_LENIENCY = 10;
     private boolean isInitialized = false;
     private LibTimer timer = new LibTimer(0.15);
     private double timeoutSec = Double.POSITIVE_INFINITY;
@@ -58,7 +58,7 @@ public class DriveTurn extends CommandEx {
         double kI = SmartDashboard.getNumber("kI", 0.0); // 0.0014
         double kD = SmartDashboard.getNumber("kD", 0.0); // 0.068
         kP = 0.0735;
-        kI = 0.0014;
+        kI = 0.0018;
         kD = 0.068;
         angleController = new PIDController(new PIDConstants(kP, kI, kD));
         double power = 30000 * angleController.update(isPigeon ? Robot.drive.getPigeonPos() : Robot.drive.getAngPos(), goalAngle);
