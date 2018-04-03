@@ -43,10 +43,10 @@ public class ScaleOnlyAuto extends CommandGroup {
                 addSequential(new DriveStraight(6, 12000, true, true));
                 addSequential(new DriveTurn(9, 1.0, true));
                 addParallel(new ArmsOpen());
-                addSequential(new RollersActuate(0.4, 1.0));
+                addSequential(new RollersActuate(0.8, 1.0));
 
-                addParallel(new WaitAndMoveAssembly(0.5, AssemblyLocation.BOTTOM));
-                addSequential(new DriveStraight(-12, 17000, 0));
+                addParallel(new WaitAndMoveAssembly(0.2, AssemblyLocation.BOTTOM));
+                addSequential(new DriveStraight(-12, 12000, 0));
 
                 addSequential(new DriveTurn(165, 1.0, true));
 
