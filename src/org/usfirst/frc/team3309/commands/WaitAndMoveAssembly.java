@@ -12,4 +12,9 @@ public class WaitAndMoveAssembly extends CommandGroup {
         addSequential(new MoveAssembly(assemblyLocation));
     }
 
+    public WaitAndMoveAssembly(double wait, double elevatorPos, double beltbarPos) {
+        addSequential(new WaitCommand(wait));
+        addSequential(new MoveAssembly(elevatorPos, beltbarPos));
+    }
+
 }
