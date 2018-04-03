@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3309.commands.autos;
 
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import org.usfirst.frc.team3309.commands.WaitAndMoveAssembly;
 import org.usfirst.frc.team3309.commands.subsystems.AssemblyLocation;
@@ -47,7 +48,12 @@ public class ScaleOnlyAuto extends CommandGroup {
 
                 addParallel(new WaitAndMoveAssembly(0.2, AssemblyLocation.BOTTOM));
                 addSequential(new DriveStraight(-12, 12000, 0));
-
+                addSequential(new Command() {
+                    @Override
+                    protected boolean isFinished() {
+                        return Math.abs(Robot.lift.getPosition()) < 500;
+                    }
+                });
                 addSequential(new DriveTurn(165, 1.0, true));
 
                 if (shouldSwitchCube && Robot.isRightSwitch()) {
