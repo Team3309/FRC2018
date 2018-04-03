@@ -37,7 +37,7 @@ public class ScaleOnlyAuto extends CommandGroup {
             if (Robot.isRightScale()) {
                 addParallel(new WaitAndMoveAssembly(1, AssemblyLocation.SCALE_UP));
                 addSequential(new DriveStraight(185, 31000, 0));
-                addSequential(new DriveArc(Length.fromInches(40), -4, 23000, false, true));
+                addSequential(new DriveArc(Length.fromInches(40), -5, 23000, false, true));
                 addSequential(new DriveEnd());
 
                 addParallel(new ArmsOpen());
