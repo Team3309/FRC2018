@@ -53,6 +53,7 @@ public class DriveTurn extends CommandEx {
             initialize();
         }
         System.out.println("goalAngle"+goalAngle);
+        System.out.println("pigeion" + Robot.drive.getPigeonPos());
         double kP = SmartDashboard.getNumber("kP", 0.0735);
         double kI = SmartDashboard.getNumber("kI", 0.0014);
         double kD = SmartDashboard.getNumber("kD", 0.068); // 0.068
