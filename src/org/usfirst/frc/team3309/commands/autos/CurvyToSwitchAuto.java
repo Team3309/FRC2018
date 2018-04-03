@@ -77,8 +77,6 @@ public class CurvyToSwitchAuto extends CommandGroup {
 
                 addSequential(new WaitCommand(0.7));
                 addParallel(new RollersSetIn(false));
-//                addParallel(new MoveAssembly(AssemblyLocation.EXCHANGE_ZONE));
-//                addSequential(new DriveStraight(-13, 17000, 0));
                 addParallel(new MoveAssembly(AssemblyLocation.SWITCH));
                 addSequential(new DriveTurn(-90, 0.4, true));
                 addSequential(new DriveArc(Length.fromInches(55), -80, 27000, false, true));
@@ -87,7 +85,7 @@ public class CurvyToSwitchAuto extends CommandGroup {
                 addSequential(new WaitCommand(0.3));
 
                 /* third cube */
-            /*    addParallel(new WaitAndMoveAssembly(0.5, 5300, AssemblyLocation.SWITCH.getBeltBarPosition()));
+                addParallel(new WaitAndMoveAssembly(0.5, 5300, AssemblyLocation.SWITCH.getBeltBarPosition()));
                 addSequential(new DriveArc(Length.fromInches(30), -81, 26000, true, true));
                 addSequential(new DriveTurn(0, 1.0, true));
                 addParallel(new RollersSetIn(true));
@@ -97,13 +95,13 @@ public class CurvyToSwitchAuto extends CommandGroup {
                 addSequential(new WaitCommand(0.7));
                 addParallel(new RollersSetIn(false));
                 addParallel(new MoveAssembly(AssemblyLocation.EXCHANGE_ZONE));
-                addSequential(new DriveStraight(-25, 17000, 0));
+//                addSequential(new DriveStraight(-25, 17000, 0));
                 addParallel(new MoveAssembly(AssemblyLocation.SWITCH));
                 addSequential(new DriveTurn(-90, 0.4, true));
                 addSequential(new DriveArc(Length.fromInches(52), -77, 27000, false, true));
                 addSequential(new DriveStraight(16, 14000, 0));
                 addSequential(new ArmsOpen());
-                addSequential(new WaitCommand(0.3));*/
+                addSequential(new WaitCommand(0.3));
 
                 addSequential(new DriveStraight(-17, 18000, 0));
                 addSequential(new MoveAssembly(AssemblyLocation.BOTTOM));
