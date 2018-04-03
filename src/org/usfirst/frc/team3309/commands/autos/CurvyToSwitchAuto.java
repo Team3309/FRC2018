@@ -104,14 +104,14 @@ public class CurvyToSwitchAuto extends CommandGroup {
                 addSequential(new DriveTurn(-60, 1.0, true));
              //   addSequential(new DriveArc(Length.fromInches(65), -60, 27000, false, true));
                 addSequential(new DriveStraight(50, 19000, true, true));
-                addSequential(new DriveTurn(0, 1.0, true));
-                addSequential(new ArmsOpen() {
+                addParallel(new ArmsOpen() {
                     @Override
                     public void end() {
                         super.end();
                         System.out.println("I REALLY ended at " + (Timer.getFPGATimestamp()-start));
                     }
                 });
+                addSequential(new DriveTurn(0, 1.0, true));
                 addSequential(new WaitCommand(0.2));
                 addSequential(new MoveAssembly(AssemblyLocation.BOTTOM));
 //                addSequential(new DriveStraight(-17, 18000, 0));
