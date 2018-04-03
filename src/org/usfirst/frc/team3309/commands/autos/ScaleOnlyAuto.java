@@ -1,5 +1,6 @@
 package org.usfirst.frc.team3309.commands.autos;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import org.usfirst.frc.team3309.commands.WaitAndMoveAssembly;
 import org.usfirst.frc.team3309.commands.subsystems.AssemblyLocation;
@@ -21,6 +22,8 @@ public class ScaleOnlyAuto extends CommandGroup {
     private boolean onRight;
     private boolean shouldSwitchCube;
 
+    private double start;
+
     public ScaleOnlyAuto(boolean onRight, boolean shouldSwitchCube) {
         this.onRight = onRight;
         this.shouldSwitchCube = shouldSwitchCube;
@@ -28,6 +31,7 @@ public class ScaleOnlyAuto extends CommandGroup {
 
     @Override
     public synchronized void start() {
+        start = Timer.getFPGATimestamp();
         addParallel(new MoveAssembly(AssemblyLocation.BOTTOM));
         if (onRight) {
             if (Robot.isRightScale()) {
@@ -47,7 +51,7 @@ public class ScaleOnlyAuto extends CommandGroup {
                 if (shouldSwitchCube && Robot.isRightSwitch()) {
 
                     addParallel(new MoveAssembly(AssemblyLocation.INTAKE));
-                    addSequential(new DriveTurn(135, 1.1, true));
+                    addSequential(new DriveTurn(125, 1.1, true));
 
                     addParallel(new RollersSetIn(true));
                     addSequential(new DriveStraight(29, 15000, true, true));
@@ -60,7 +64,13 @@ public class ScaleOnlyAuto extends CommandGroup {
                     addSequential(new MoveAssembly(AssemblyLocation.SWITCH));
                     addSequential(new DriveArc(Length.fromInches(20), -13, 15000, false, true));
                     addParallel(new RollersActuate(0.4, 1.0));
-                    addSequential(new ArmsOpen());
+                    addSequential(new ArmsOpen() {
+                        @Override
+                        public void end() {
+                            super.end();
+                            System.out.println("I ended at " + (Timer.getFPGATimestamp() - start));
+                        }
+                    });
                     addSequential(new WaitCommand(0.2));
                     addSequential(new DriveStraight(-20, 15000, true, true));
                     addSequential(new MoveAssembly(AssemblyLocation.BOTTOM));
