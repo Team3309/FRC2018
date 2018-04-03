@@ -84,14 +84,14 @@ public class CurvyToSwitchAuto extends CommandGroup {
                 addSequential(new DriveStraight(-10, 17000, true, true));
                 addSequential(new DriveTurn(-90, 1.0, true));
                 addSequential(new DriveArc(Length.fromInches(70), -80, 27000, false, true));
-                addSequential(new DriveStraight(11, 12000, 0));
+                addSequential(new DriveStraight(14, 12000, 0));
                 addSequential(new ArmsOpen());
                 addSequential(new WaitCommand(0.2));
 
                 /* third cube */
                 addParallel(new WaitAndMoveAssembly(0.5, 5300, AssemblyLocation.SWITCH.getBeltBarPosition()));
-                addSequential(new DriveArc(Length.fromInches(12), -50, 24000, true, true));
-                addSequential(new DriveArc(Length.fromInches(15), 30, 24000, true, true));
+                addSequential(new DriveArc(Length.fromInches(12), -60, 24000, true, true));
+                addSequential(new DriveArc(Length.fromInches(20), 20, 24000, true, true));
                 addParallel(new RollersSetIn(true));
                 addSequential(new DriveStraight(35, 15000, true, true));
                 addSequential(new ArmsClamp());
@@ -100,6 +100,7 @@ public class CurvyToSwitchAuto extends CommandGroup {
                 addParallel(new RollersSetIn(false));
                 addSequential(new DriveStraight(-10, 17000, true, true));
                 addParallel(new MoveAssembly(AssemblyLocation.SWITCH));
+                addSequential(new DriveTurn(-90, 1.0, true);
                 addSequential(new DriveArc(Length.fromInches(65), -60, 27000, false, true));
                 addSequential(new DriveStraight(10, 14000, true, true));
                 addParallel(new ArmsOpen() {
