@@ -32,7 +32,7 @@ public class ScaleOnlyAuto extends CommandGroup {
         if (onRight) {
             if (Robot.isRightScale()) {
                 addParallel(new WaitAndMoveAssembly(1.5, AssemblyLocation.SCALE_UP));
-                addSequential(new DriveStraight(185, 20000, true));
+                addSequential(new DriveStraight(185, 20000, 0));
                 addSequential(new DriveArc(Length.fromInches(40), -24, 26000, false, true));
                 addSequential(new DriveEnd());
 
@@ -40,7 +40,7 @@ public class ScaleOnlyAuto extends CommandGroup {
                 addParallel(new ArmsOpen());
                 addSequential(new RollersActuate(0.4, 1.0));
 
-                addSequential(new DriveStraight(-20, 15000, 1.2));
+                addSequential(new DriveStraight(-20, 15000, true, true));
                 addSequential(new DriveEnd());
                 addSequential(new MoveAssembly(AssemblyLocation.BOTTOM));
 
@@ -50,11 +50,11 @@ public class ScaleOnlyAuto extends CommandGroup {
                     addSequential(new DriveTurn(135, 1.1));
 
                     addParallel(new RollersSetIn(true));
-                    addSequential(new DriveStraight(29, 15000, 1.5));
+                    addSequential(new DriveStraight(29, 15000, true, true));
                     addSequential(new WaitCommand(0.75));
                     addSequential(new ArmsClamp());
                     addSequential(new WaitCommand(0.5));
-                    addSequential(new DriveStraight(-4, 20000, 1.5));
+                    addSequential(new DriveStraight(-4, 20000, true, true));
                     addSequential(new RollersSetIn(false));
 
                     addSequential(new MoveAssembly(AssemblyLocation.SWITCH));
@@ -62,7 +62,7 @@ public class ScaleOnlyAuto extends CommandGroup {
                     addParallel(new RollersActuate(0.4, 1.0));
                     addSequential(new ArmsOpen());
                     addSequential(new WaitCommand(0.2));
-                    addSequential(new DriveStraight(-20, 15000, 1.2));
+                    addSequential(new DriveStraight(-20, 15000, true, true));
                     addSequential(new MoveAssembly(AssemblyLocation.BOTTOM));
                 }
 
