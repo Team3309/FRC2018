@@ -44,7 +44,7 @@ public class DriveTurn extends CommandEx {
         Robot.drive.setHighGear();
         Robot.drive.changeToBrakeMode();
         Robot.drive.changeToVelocityMode();
-        timer.reset();
+        timer.start();
     }
 
     @Override
@@ -73,6 +73,7 @@ public class DriveTurn extends CommandEx {
     @Override
     public void end() {
         super.end();
+        timer.reset();
         isInitialized = false;
         timeoutSec = Double.POSITIVE_INFINITY;
     }
