@@ -112,10 +112,7 @@ public class DriveStraight extends CommandEx {
 
     @Override
     protected boolean isFinished() {
-        if (timer.get() > 0.5) {
-            return false;
-        }
-        else if (Timer.getFPGATimestamp() - start >= timeout) {
+        if (Timer.getFPGATimestamp() - start >= timeout) {
             return true;
         } else if (allowOvershoot) {
             return Math.abs(Robot.drive.getEncoderPos()) > Math.abs(distance);
