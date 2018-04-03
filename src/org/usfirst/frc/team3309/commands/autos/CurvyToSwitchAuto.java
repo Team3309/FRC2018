@@ -28,10 +28,10 @@ public class CurvyToSwitchAuto extends CommandGroup {
         if (DriverStation.getInstance().getGameSpecificMessage().length() > 0) {
             if (Robot.isLeftSwitch()) {
                 addSequential(new DriveArc(Length.fromInches(18), -37, 31000, false, true));
-                addSequential(new DriveStraight(16.0, 23000, true));
+                addSequential(new DriveStraight(16.0, 23000, true, true));
                 addParallel(new MoveAssembly(AssemblyLocation.SWITCH));
                 addSequential(new DriveArc(Length.fromInches(20), 20, 28000, false, true));
-                addSequential(new DriveStraight(2, 28000, true));
+                addSequential(new DriveStraight(2, 28000, 0));
                 addSequential(new WaitCommand(0.13));
                 addParallel(new ArmsOpen());
                 addSequential(new RollersActuate(0.5, 0.2));
@@ -40,20 +40,20 @@ public class CurvyToSwitchAuto extends CommandGroup {
                 /* second cube */
                 addParallel(new WaitAndMoveAssembly(0.5, AssemblyLocation.INTAKE));
                 addSequential(new DriveArc(Length.fromInches(30), 71, 26000, true, true));
-                addSequential(new DriveTurn(-65, 0.23));
+                addSequential(new DriveTurn(0, 0.23));
                 addParallel(new RollersSetIn(true));
-                addSequential(new DriveStraight(18, 17000));
+                addSequential(new DriveStraight(18, 17000, 0));
                 addSequential(new ArmsClamp());
                 addSequential(new WaitCommand(0.7));
 
                 addParallel(new RollersSetIn(false));
                 addParallel(new MoveAssembly(AssemblyLocation.EXCHANGE_ZONE));
-                addSequential(new DriveStraight(-13, 17000));
+                addSequential(new DriveStraight(-13, 17000, 0));
                 addParallel(new MoveAssembly(AssemblyLocation.SWITCH));
-                addSequential(new DriveTurn(78, 0.5));
+                addSequential(new DriveTurn(90, 0.5));
                 addSequential(new WaitCommand(0.1));
                 addSequential(new DriveArc(Length.fromInches(60), 71, 26000, false, true));
-                addSequential(new DriveStraight(16, 14000));
+                addSequential(new DriveStraight(16, 14000, 0));
                 addSequential(new ArmsOpen());
                 addSequential(new WaitCommand(0.3));
 
