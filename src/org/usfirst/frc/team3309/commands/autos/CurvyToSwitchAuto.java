@@ -109,7 +109,6 @@ public class CurvyToSwitchAuto extends CommandGroup {
                     }
                 });
                 addSequential(new WaitCommand(0.2));
-
                 addSequential(new DriveStraight(-17, 18000, 0));
                 addSequential(new MoveAssembly(AssemblyLocation.BOTTOM));
             } else {
