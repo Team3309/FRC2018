@@ -15,6 +15,7 @@ public class DriveStraight extends CommandEx {
     private double timeout = Double.POSITIVE_INFINITY;
     private PIDController angleController;
     private boolean isPigeon = false;
+    private Timer timer = new Timer();
 
     public enum DriveStrategy {
         VELOCITY,
@@ -111,7 +112,10 @@ public class DriveStraight extends CommandEx {
 
     @Override
     protected boolean isFinished() {
-        if (Timer.getFPGATimestamp() - start >= timeout) {
+        if (timer.get() > 0.5) {
+            return false;
+        }
+        else if (Timer.getFPGATimestamp() - start >= timeout) {
             return true;
         } else if (allowOvershoot) {
             return Math.abs(Robot.drive.getEncoderPos()) > Math.abs(distance);
