@@ -64,7 +64,7 @@ public class DriveTurn extends CommandEx {
         kI = 0.0018;
         kD = 0.068;
         angleController = new PIDController(new PIDConstants(kP, kI, kD));
-        double power = 30000 * angleController.update(isPigeon ? Robot.drive.getPigeonPos() : Robot.drive.getAngPos(), goalAngle);
+        double power = 30000 * angleController.update(isPigeon ? Robot.drive.getPigeonPos() : Robot.drive.getAngVel(), goalAngle);
         Robot.drive.setLeftRight(power, -power);
         System.out.println(power);
     }
