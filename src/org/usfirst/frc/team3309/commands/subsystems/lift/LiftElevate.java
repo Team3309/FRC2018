@@ -47,6 +47,7 @@ public class LiftElevate extends CommandEx {
     @Override
     public void end() {
         super.end();
+        System.out.println("The lift finished!");
     }
 
 }
