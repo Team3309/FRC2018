@@ -91,7 +91,7 @@ public class ScaleOnlyAuto extends CommandGroup {
                 addSequential(new DriveStraight(132, 40000, 90));
                 addSequential(new DriveTurn(-5, 1.0, true));
 
-                addSequential(new MoveAssembly(AssemblyLocation.SWITCH));
+                addSequential(new MoveAssembly(AssemblyLocation.SCALE_UP));
                 addSequential(new WaitCommand(0.3));
                 addSequential(new DriveStraight(25, 15000,  true, true));
                 addSequential(new DriveEnd());
