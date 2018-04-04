@@ -212,7 +212,7 @@ public class ScaleOnlyAuto extends CommandGroup {
                             System.out.println("I ended at " + (Timer.getFPGATimestamp() - start));
                         }
                     });
-                    addSequential(new DriveStraight(-17, 12000, true, true));
+                    addParallel(new DriveStraight(-10, 12000, true, true));
                     addSequential(new MoveAssembly(AssemblyLocation.BOTTOM));
                 }
 
