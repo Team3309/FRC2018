@@ -65,8 +65,15 @@ public class ScaleOnlyAuto extends CommandGroup {
                     addSequential(new WaitCommand(0.3));
                     addParallel(new MoveAssembly(AssemblyLocation.BOTTOM));
                     addSequential(new DriveStraight(-5, 17000, true, true));
-                    addParallel(new RollersSetIn(false));
+                    addSequential(new RollersSetIn(false));
                     addSequential(new MoveAssembly(AssemblyLocation.SWITCH));
+                    addSequential(new Command() {
+                        @Override
+                        protected boolean isFinished() {
+                            System.out.println("The lift ended!");
+                            return true;
+                        }
+                    });
                     addSequential(new DriveStraight(18, 17000, true, true));
                     addParallel(new RollersActuate(0.8, 1.0));
                     addSequential(new ArmsOpen() {
