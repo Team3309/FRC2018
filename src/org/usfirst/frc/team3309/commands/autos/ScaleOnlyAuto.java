@@ -67,6 +67,12 @@ public class ScaleOnlyAuto extends CommandGroup {
                 addSequential(new DriveTurn(0, 1.0, true));
                 addSequential(new MoveAssembly(AssemblyLocation.SCALE_UP));
                 addSequential(new DriveStraight(8, 12000, 0));
+                addSequential(new Command() {
+                    @Override
+                    protected boolean isFinished() {
+                        return Math.abs(AssemblyLocation.SCALE_UP.getElevatorPosition() - Robot.lift.getPosition()) < 500;
+                    }
+                });
                 addParallel(new RollersActuate(0.7, 1.0));
                 addSequential(new ArmsOpen());
 
