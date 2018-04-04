@@ -67,10 +67,16 @@ public class ScaleOnlyAuto extends CommandGroup {
                 addSequential(new DriveTurn(0, 1.0, true));
                 addSequential(new MoveAssembly(AssemblyLocation.SCALE_UP));
                 addSequential(new DriveTurn(15, 0.8, true));
-                addSequential(new DriveStraight(8, 12000, true, true));
+                addSequential(new DriveStraight(10, 12000, true, true));
                 addSequential(new WaitCommand(0.5));
                 addParallel(new RollersActuate(1.0, 1.0));
-                addSequential(new ArmsOpen());
+                addSequential(new ArmsOpen() {
+                    @Override
+                    public void end() {
+                        super.end();
+                        System.out.println("I ended at " + (Timer.getFPGATimestamp() - start));
+                    }
+                });
                 addSequential(new DriveStraight(-17, 12000, true, true));
                 addSequential(new MoveAssembly(AssemblyLocation.BOTTOM));
 
