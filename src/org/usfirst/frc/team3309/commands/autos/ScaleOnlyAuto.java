@@ -77,7 +77,7 @@ public class ScaleOnlyAuto extends CommandGroup {
                             return true;
                         }
                     });
-                    addSequential(new DriveStraight(22, 17000, true, true));
+                    addSequential(new DriveStraight(25, 17000, true, true));
                     addParallel(new RollersActuate(0.8, 1.0));
                     addSequential(new ArmsOpen() {
                         @Override
