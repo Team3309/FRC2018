@@ -160,7 +160,7 @@ public class ScaleOnlyAuto extends CommandGroup {
                     addSequential(new DriveStraight(-5, 17000, true, true));
                     addParallel(new RollersSetIn(false));
                     addParallel(new BeltBarMoveToPos(AssemblyLocation.SWITCH.getBeltBarPosition()));
-                    addSequential(new LiftElevate(AssemblyLocation.SWITCH.getElevatorPosition(), 1.2));
+                    addSequential(new LiftElevate(AssemblyLocation.SWITCH.getElevatorPosition(), 0.9));
                     addSequential(new Command() {
                         @Override
                         protected boolean isFinished() {
@@ -168,7 +168,7 @@ public class ScaleOnlyAuto extends CommandGroup {
                             return true;
                         }
                     });
-                    addSequential(new DriveStraight(25, 17000, true, true));
+                    addSequential(new DriveStraight(28, 17000, true, true));
                     addParallel(new RollersActuate(0.8, 1.0));
                     addSequential(new ArmsOpen() {
                         @Override
@@ -203,7 +203,6 @@ public class ScaleOnlyAuto extends CommandGroup {
                     addSequential(new MoveAssembly(AssemblyLocation.SCALE_UP));
                     addSequential(new DriveStraight(20, 12000, true, true));
                     addSequential(new DriveTurn(-21, 0.8, true));
-//                    addSequential(new WaitCommand(0.5));
                     addParallel(new RollersActuate(0.6, 1.0));
                     addSequential(new ArmsOpen() {
                         @Override
