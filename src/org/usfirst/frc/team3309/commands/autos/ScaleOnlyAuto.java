@@ -82,43 +82,23 @@ public class ScaleOnlyAuto extends CommandGroup {
 
                 if (shouldSwitchCube && Robot.isRightSwitch()) {
 
-        /*            addParallel(new MoveAssembly(AssemblyLocation.INTAKE));
-                    addSequential(new DriveTurn(90, 0.5, true));
-                                        addSequential(new DriveStraight(10, 25000, true, true));
-                    addSequential(new DriveArc(Length.fromInches(10), -1.0, 23000, false, true));
-                    addParallel(new RollersSetIn(true));
-                    addSequential(new ArmsClamp());
-                    addSequential(new WaitCommand(0.5));
-                //    addParallel(new MoveAssembly(AssemblyLocation.SWITCH));
-                    addSequential(new RollersSetIn(false));
-                    addSequential(new DriveStraight(5, 22000, true, true));
-                    addParallel(new RollersActuate(0.4, 1.0));
-                    addSequential(new ArmsOpen() {
-                        @Override
-                        public void end() {
-                            super.end();
-                            System.out.println("I ended at " + (Timer.getFPGATimestamp() - start));
-                        }
-                    });
-                    addSequential(new WaitCommand(0.2));
-                    addSequential(new DriveStraight(-14, 15000, true, true));
-                    addSequential(new MoveAssembly(AssemblyLocation.BOTTOM));*/
+
                 }
 
             } else if (Robot.isLeftScale()) {
-                addSequential(new DriveStraight(133, 28000, true, 2.0));
-                addSequential(new DriveArc(Length.fromInches(28), -80, 23000,false, true));
-                addSequential(new DriveStraight(183, 24000, true,  2.0));
-                addSequential(new DriveTurn(-120, 0.6));
+                addSequential(new DriveStraight(133, 40000, 0));
+                addSequential(new DriveArc(Length.fromInches(28), -80, 27000,false, true));
+                addSequential(new DriveStraight(183, 40000, -90));
+                addSequential(new DriveTurn(-120, 0.6, true));
 
                 addSequential(new MoveAssembly(AssemblyLocation.SCALE_UP));
                 addSequential(new WaitCommand(0.3));
-                addSequential(new DriveStraight(25, 15000,  1.2));
+                addSequential(new DriveStraight(25, 15000,  true, true));
                 addSequential(new DriveEnd());
                 addParallel(new ArmsOpen());
                 addSequential(new RollersActuate(0.5, 1));
 
-                addSequential(new DriveStraight(-25, 15000, 2.0));
+                addSequential(new DriveStraight(-25, 15000, true, true));
                 addSequential(new DriveEnd());
                 addSequential(new MoveAssembly(AssemblyLocation.BOTTOM));
             }
@@ -126,7 +106,7 @@ public class ScaleOnlyAuto extends CommandGroup {
         } else if (!onRight) {
             if (Robot.isLeftScale()) {
                 addParallel(new WaitAndMoveAssembly(1.5, AssemblyLocation.SCALE_UP));
-                addSequential(new DriveStraight(185, 20000, true));
+                addSequential(new DriveStraight(185, 20000, 0));
                 addSequential(new DriveArc(Length.fromInches(40), 24, 26000, false, true));
                 addSequential(new DriveEnd());
 
