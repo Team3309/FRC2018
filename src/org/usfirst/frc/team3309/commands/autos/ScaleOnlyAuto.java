@@ -162,7 +162,7 @@ public class ScaleOnlyAuto extends CommandGroup {
                     addParallel(new BeltBarMoveToPos(AssemblyLocation.SWITCH.getBeltBarPosition()));
                     addSequential(new LiftElevate(AssemblyLocation.SWITCH.getElevatorPosition(), 0.9));
                     addSequential(new Command() {
-                        @Override
+                        @Override//
                         protected boolean isFinished() {
                             System.out.println("The lift ended!");
                             return true;
