@@ -54,6 +54,7 @@ public class BeltBarMoveToPos extends Command {
 
     @Override
     public void end() {
+        System.out.println("The beltbar Finished!");
         hasStarted = false;
     }
 

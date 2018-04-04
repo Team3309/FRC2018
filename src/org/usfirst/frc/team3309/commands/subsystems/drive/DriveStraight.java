@@ -66,12 +66,12 @@ public class DriveStraight extends CommandEx {
         isInit = true;
         start = Timer.getFPGATimestamp();
         if (isPigeon) {
-            angleController = new PIDController(new PIDConstants(0.041, 0.0, 0.01));
+            angleController = new PIDController(new PIDConstants(0.038, 0.0, 0.01));
             if (Double.isNaN(startAngle)) {
                 startAngle = Robot.drive.getPigeonPos();
             }
         } else {
-            angleController = new PIDController(new PIDConstants(0.6, 0, 0));
+            angleController = new PIDController(new PIDConstants(0, 0, 0));
             if (Double.isNaN(startAngle)){
                 startAngle = Robot.drive.getAngPos();
             }
@@ -93,7 +93,7 @@ public class DriveStraight extends CommandEx {
             case VELOCITY:
                 Robot.drive.changeToVelocityMode();
                 double vel = isPigeon ? 30000 : -30000;
-                double angularUpdate = vel * angleController.update(isPigeon ? Robot.drive.getPigeonPos() : Robot.drive.getAngPos(), startAngle);
+                double angularUpdate = vel * angleController.update(isPigeon ? Robot.drive.getPigeonPos() : Robot.drive.getAngVel(), startAngle);
                 if (distance > Robot.drive.encoderCountsToInches(Robot.drive.getEncoderPos()))
                     Robot.drive.setLeftRight(velocityTarget + angularUpdate, velocityTarget - angularUpdate);
                 else
