@@ -141,7 +141,44 @@ public class ScaleOnlyAuto extends CommandGroup {
 
                 if (shouldSwitchCube && Robot.isLeftSwitch()) {
                     /* cube on switch */
-
+                    addParallel(new WaitAndMoveAssembly(0.2, AssemblyLocation.BOTTOM));
+                    addSequential(new DriveStraight(-16, 12000, 0));
+                    addSequential(new Command() {
+                        @Override
+                        protected boolean isFinished() {
+                            return Math.abs(Robot.lift.getPosition()) < 500;
+                        }
+                    });
+                    addParallel(new MoveAssembly(AssemblyLocation.INTAKE));
+                    addSequential(new DriveTurn(-165, 1.0, true));
+                    addParallel(new RollersSetIn(true));
+                    addSequential(new DriveStraight(13, 17000, true, true));
+                    addSequential(new WaitCommand(0.5));
+                    addSequential(new ArmsClamp());
+                    addSequential(new WaitCommand(0.3));
+                    addParallel(new MoveAssembly(AssemblyLocation.BOTTOM));
+                    addSequential(new DriveStraight(-5, 17000, true, true));
+                    addParallel(new RollersSetIn(false));
+                    addParallel(new BeltBarMoveToPos(AssemblyLocation.SWITCH.getBeltBarPosition()));
+                    addSequential(new LiftElevate(AssemblyLocation.SWITCH.getElevatorPosition(), 1.2));
+                    addSequential(new Command() {
+                        @Override
+                        protected boolean isFinished() {
+                            System.out.println("The lift ended!");
+                            return true;
+                        }
+                    });
+                    addSequential(new DriveStraight(25, 17000, true, true));
+                    addParallel(new RollersActuate(0.8, 1.0));
+                    addSequential(new ArmsOpen() {
+                        @Override
+                        public void end() {
+                            super.end();
+                            System.out.println("I ended at " + (Timer.getFPGATimestamp() - start));
+                        }
+                    });
+                    addSequential(new DriveStraight(-17, 12000, true, true));
+                    addSequential(new MoveAssembly(AssemblyLocation.BOTTOM));
                 }  else {
                     /* second cube on scale */
                     addParallel(new WaitAndMoveAssembly(0.2, AssemblyLocation.BOTTOM));
