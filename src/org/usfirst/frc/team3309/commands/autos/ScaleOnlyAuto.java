@@ -8,10 +8,12 @@ import org.usfirst.frc.team3309.commands.subsystems.AssemblyLocation;
 import org.usfirst.frc.team3309.commands.subsystems.MoveAssembly;
 import org.usfirst.frc.team3309.commands.subsystems.arms.ArmsClamp;
 import org.usfirst.frc.team3309.commands.subsystems.arms.ArmsOpen;
+import org.usfirst.frc.team3309.commands.subsystems.beltbar.BeltBarMoveToPos;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveArc;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveEnd;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveStraight;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveTurn;
+import org.usfirst.frc.team3309.commands.subsystems.lift.LiftElevate;
 import org.usfirst.frc.team3309.commands.subsystems.rollers.RollersActuate;
 import org.usfirst.frc.team3309.commands.subsystems.rollers.RollersSetIn;
 import org.usfirst.frc.team3309.lib.WaitCommand;
@@ -66,7 +68,8 @@ public class ScaleOnlyAuto extends CommandGroup {
                     addParallel(new MoveAssembly(AssemblyLocation.BOTTOM));
                     addSequential(new DriveStraight(-5, 17000, true, true));
                     addSequential(new RollersSetIn(false));
-                    addSequential(new MoveAssembly(AssemblyLocation.SWITCH));
+                    addParallel(new BeltBarMoveToPos(AssemblyLocation.SWITCH.getBeltBarPosition()));
+                    addSequential(new LiftElevate(AssemblyLocation.SWITCH.getElevatorPosition()));
                     addSequential(new Command() {
                         @Override
                         protected boolean isFinished() {
