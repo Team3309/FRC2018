@@ -69,7 +69,7 @@ public class ScaleOnlyAuto extends CommandGroup {
                     addSequential(new DriveStraight(-5, 17000, true, true));
                     addSequential(new RollersSetIn(false));
                     addParallel(new BeltBarMoveToPos(AssemblyLocation.SWITCH.getBeltBarPosition()));
-                    addSequential(new LiftElevate(AssemblyLocation.SWITCH.getElevatorPosition()));
+                    addSequential(new LiftElevate(AssemblyLocation.SWITCH.getElevatorPosition(), 1.2));
                     addSequential(new Command() {
                         @Override
                         protected boolean isFinished() {
