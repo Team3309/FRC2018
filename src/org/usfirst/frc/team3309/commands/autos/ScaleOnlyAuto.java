@@ -80,11 +80,6 @@ public class ScaleOnlyAuto extends CommandGroup {
                 addSequential(new DriveStraight(-17, 12000, true, true));
                 addSequential(new MoveAssembly(AssemblyLocation.BOTTOM));
 
-                if (shouldSwitchCube && Robot.isRightSwitch()) {
-
-
-                }
-
             } else if (Robot.isLeftScale()) {
                 addSequential(new DriveStraight(120, 40000, 0));
                 addSequential(new DriveArc(Length.fromInches(28), -62, 23000,false, true));
@@ -98,8 +93,38 @@ public class ScaleOnlyAuto extends CommandGroup {
                 addParallel(new ArmsOpen());
                 addSequential(new RollersActuate(0.5, 1));
 
-                addSequential(new DriveStraight(-25, 15000, true, true));
-                addSequential(new DriveEnd());
+                addParallel(new WaitAndMoveAssembly(0.2, AssemblyLocation.BOTTOM));
+                addSequential(new DriveStraight(-19, 12000, 0));
+                addSequential(new Command() {
+                    @Override
+                    protected boolean isFinished() {
+                        return Math.abs(Robot.lift.getPosition()) < 500;
+                    }
+                });
+                addParallel(new MoveAssembly(AssemblyLocation.INTAKE));
+                addSequential(new DriveTurn(152, 1.0, true));
+                addParallel(new RollersSetIn(true));
+                addSequential(new DriveStraight(13, 17000, true, true));
+                addSequential(new WaitCommand(0.5));
+                addSequential(new ArmsClamp());
+                addSequential(new WaitCommand(0.3));
+                addParallel(new MoveAssembly(AssemblyLocation.BOTTOM));
+                addSequential(new DriveStraight(-5, 17000, true, true));
+                addParallel(new RollersSetIn(false));
+                addSequential(new DriveTurn(0, 1.0, true));
+                addSequential(new MoveAssembly(AssemblyLocation.SCALE_UP));
+                addSequential(new DriveTurn(21, 0.8, true));
+                addSequential(new DriveStraight(20, 12000, true, true));
+                addSequential(new WaitCommand(0.5));
+                addParallel(new RollersActuate(0.8, 1.0));
+                addSequential(new ArmsOpen() {
+                    @Override
+                    public void end() {
+                        super.end();
+                        System.out.println("I ended at " + (Timer.getFPGATimestamp() - start));
+                    }
+                });
+                addSequential(new DriveStraight(-17, 12000, true, true));
                 addSequential(new MoveAssembly(AssemblyLocation.BOTTOM));
             }
 
