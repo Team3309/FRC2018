@@ -153,9 +153,9 @@ public class ScaleOnlyAuto extends CommandGroup {
                     addSequential(new DriveTurn(-159, 1.0, true));
                     addParallel(new RollersSetIn(true));
                     addSequential(new DriveStraight(13, 17000, true, true));
-                    addSequential(new WaitCommand(0.5));
+                    addSequential(new WaitCommand(0.35));
                     addSequential(new ArmsClamp());
-                    addSequential(new WaitCommand(0.3));
+                    addSequential(new WaitCommand(0.15));
                     addParallel(new MoveAssembly(AssemblyLocation.BOTTOM));
                     addSequential(new DriveStraight(-5, 17000, true, true));
                     addParallel(new RollersSetIn(false));
@@ -177,7 +177,7 @@ public class ScaleOnlyAuto extends CommandGroup {
                             System.out.println("I ended at " + (Timer.getFPGATimestamp() - start));
                         }
                     });
-                    addSequential(new DriveStraight(-17, 12000, true, true));
+                    addSequential(new DriveStraight(-10, 12000, true, true));
                     addSequential(new MoveAssembly(AssemblyLocation.BOTTOM));
                 }  else {
                     /* second cube on scale */
