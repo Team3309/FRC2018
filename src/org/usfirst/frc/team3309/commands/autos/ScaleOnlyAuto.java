@@ -47,7 +47,7 @@ public class ScaleOnlyAuto extends CommandGroup {
                 addSequential(new RollersActuate(1.0, 1.0));
 
                 addParallel(new WaitAndMoveAssembly(0.2, AssemblyLocation.BOTTOM));
-                addSequential(new DriveStraight(-12, 12000, 0));
+                addSequential(new DriveStraight(-17, 12000, 0));
                 addSequential(new Command() {
                     @Override
                     protected boolean isFinished() {
@@ -67,12 +67,7 @@ public class ScaleOnlyAuto extends CommandGroup {
                 addSequential(new MoveAssembly(AssemblyLocation.SCALE_UP));
                 addSequential(new DriveTurn(15, 0.8, true));
                 addSequential(new DriveStraight(8, 12000, true, true));
-                addSequential(new Command() {
-                    @Override
-                    protected boolean isFinished() {
-                        return Math.abs(AssemblyLocation.SCALE_UP.getElevatorPosition() - Robot.lift.getPosition()) < 2000;
-                    }
-                });
+                addSequential(new WaitCommand(0.5));
                 addParallel(new RollersActuate(1.0, 1.0));
                 addSequential(new ArmsOpen());
 
