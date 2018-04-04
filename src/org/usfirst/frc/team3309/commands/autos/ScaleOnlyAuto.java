@@ -70,7 +70,7 @@ public class ScaleOnlyAuto extends CommandGroup {
                 addSequential(new Command() {
                     @Override
                     protected boolean isFinished() {
-                        return Math.abs(AssemblyLocation.SCALE_UP.getElevatorPosition() - Robot.lift.getPosition()) < 500;
+                        return Math.abs(AssemblyLocation.SCALE_UP.getElevatorPosition() - Robot.lift.getPosition()) < 2000;
                     }
                 });
                 addParallel(new RollersActuate(1.0, 1.0));
