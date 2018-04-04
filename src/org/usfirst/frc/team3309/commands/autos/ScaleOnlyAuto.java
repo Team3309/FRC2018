@@ -41,7 +41,7 @@ public class ScaleOnlyAuto extends CommandGroup {
                 /* first cube on scale */
                 addSequential(new DriveStraight(122, 40000, 0));
                 addParallel(new WaitAndMoveAssembly(0.2, AssemblyLocation.SCALE_UP));
-                addSequential(new DriveArc(Length.fromInches(5), -32, 25000, false, true));
+                addSequential(new DriveArc(Length.fromInches(7), -32, 25000, false, true));
                 addSequential(new DriveArc(Length.fromInches(6), 24, 20000, false, true));
                 addSequential(new DriveStraight(6, 12000, true, true));
                 addSequential(new DriveTurn(25, 1.0, true));
