@@ -54,7 +54,13 @@ public class ScaleOnlyAuto extends CommandGroup {
                         return Math.abs(Robot.lift.getPosition()) < 500;
                     }
                 });
-                addSequential(new DriveTurn(165, 1.0, true));
+                addParallel(new MoveAssembly(AssemblyLocation.INTAKE));
+                addSequential(new DriveTurn(160, 1.0, true));
+                addSequential(new DriveStraight(6, 17000, true, true));
+                addParallel(new RollersSetIn(true));
+                addSequential(new WaitCommand(0.5));
+                addSequential(new ArmsClamp());
+                addSequential(new MoveAssembly(AssemblyLocation.BOTTOM));
 
                 if (shouldSwitchCube && Robot.isRightSwitch()) {
 
