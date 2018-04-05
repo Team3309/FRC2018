@@ -11,6 +11,7 @@ import org.usfirst.frc.team3309.commands.subsystems.arms.ArmsClamp;
 import org.usfirst.frc.team3309.commands.subsystems.arms.ArmsOpen;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveSetHighGear;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveSetLowGear;
+import org.usfirst.frc.team3309.commands.subsystems.falcondoors.FalconDoorsDeploy;
 import org.usfirst.frc.team3309.lib.input.InputXbox;
 
 /*
@@ -39,6 +40,7 @@ public class OI {
 
         operatorRemote.startButton.whenPressed(new PrepareForClimb());
         operatorRemote.rightStick.whenPressed(new SetClimbMode());
+        operatorRemote.backButton.whenPressed(new FalconDoorsDeploy());
 
         operatorRemote.buttonX.whenPressed(new MoveAssembly(AssemblyLocation.INTAKE, true));
         operatorRemote.buttonY.whenPressed(new MoveAssembly(AssemblyLocation.BOTTOM, true));
@@ -48,17 +50,6 @@ public class OI {
         operatorRemote.dPad.left.whenPressed(new MoveAssembly(AssemblyLocation.SCALE_UP, true));
         operatorRemote.rightBumper.whenPressed(new MoveAssembly(AssemblyLocation.EXCHANGE_ZONE, true));
 
-        operatorRemote.backButton.whenPressed(new Command() {
-            @Override
-            public void execute() {
-                System.out.println("I am being rfjbvdfijbc");
-            }
-
-            @Override
-            protected boolean isFinished() {
-                return false;
-            }
-        });
 
     }
 
