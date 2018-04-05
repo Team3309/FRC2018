@@ -33,10 +33,10 @@ public class MiddleSwitchAuto extends CommandGroup {
             isRightSwitch = false;
 
             if (isLeftSwitch) {
-                addSequential(new DriveArc(Length.fromInches(16), -37, 31000, false, true));
+                addSequential(new DriveArc(Length.fromInches(13), -37, 31000, false, true)); // 16
                 addParallel(new MoveAssembly(AssemblyLocation.SWITCH));
                 addSequential(new DriveStraight(5, 25000, true, true)); // 18
-                addSequential(new DriveArc(Length.fromInches(16), 22, 28000, false, true));
+                addSequential(new DriveArc(Length.fromInches(13), 22, 28000, false, true)); // 16
                 addSequential(new DriveStraight(8, 17000, 0)); // 4
                 addSequential(new WaitCommand(0.1));
                 addParallel(new ArmsOpen());

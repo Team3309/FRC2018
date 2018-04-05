@@ -2,6 +2,7 @@ package org.usfirst.frc.team3309.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team3309.commands.subsystems.AssemblyLocation;
 import org.usfirst.frc.team3309.commands.subsystems.MoveAssembly;
 import org.usfirst.frc.team3309.commands.subsystems.PrepareForClimb;
@@ -46,6 +47,18 @@ public class OI {
         operatorRemote.dPad.up.whenPressed(new MoveAssembly(AssemblyLocation.SCALE_MIDDLE, true));
         operatorRemote.dPad.left.whenPressed(new MoveAssembly(AssemblyLocation.SCALE_UP, true));
         operatorRemote.rightBumper.whenPressed(new MoveAssembly(AssemblyLocation.EXCHANGE_ZONE, true));
+
+        operatorRemote.backButton.whenPressed(new Command() {
+            @Override
+            public void execute() {
+                System.out.println("I am being rfjbvdfijbc");
+            }
+
+            @Override
+            protected boolean isFinished() {
+                return false;
+            }
+        });
 
     }
 
