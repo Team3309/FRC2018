@@ -71,9 +71,9 @@ public class BeltBar extends Subsystem {
         }
 
         masterBar.configForwardSoftLimitThreshold(FORWARD_SOFT_LIM, 10);
-        masterBar.configForwardSoftLimitEnable(true, 10);
+        masterBar.configForwardSoftLimitEnable(false, 10);
         masterBar.configReverseSoftLimitThreshold(REVERSE_SOFT_LIM, 10);
-        masterBar.configReverseSoftLimitEnable(true, 10);
+        masterBar.configReverseSoftLimitEnable(false, 10);
 
         masterBar.configPeakCurrentLimit(MAX_CURRENT, 10);
         masterBar.configPeakCurrentDuration(MAX_CURRENT_DURATION, 10);
@@ -86,12 +86,13 @@ public class BeltBar extends Subsystem {
     @Override
     public void periodic() {
      //   adjustBackInLimits();
-        if (isClimbing) {
+
+     /*   if (isClimbing) {
             DriverStation.reportWarning("I am climbing!", false);
             masterBar.configForwardSoftLimitEnable(false, 10);
             masterBar.configReverseSoftLimitEnable(false, 10);
             masterBar.changeToDisabledMode();
-        }
+        }*/
 //        SmartDashboard.putNumber("Beltbar pos: ", getPosition());
 
     }
