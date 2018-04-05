@@ -25,7 +25,7 @@ public class SideSwitchAuto extends CommandGroup {
         addParallel(new MoveAssembly(AssemblyLocation.BOTTOM));
         if (onRight) {
             if (Robot.isRightSwitch()) {
-                addSequential(new DriveStraight(67, 28000, true));
+                addSequential(new DriveStraight(67, 28000, 0));
 
                 addSequential(new MoveAssembly(AssemblyLocation.SWITCH));
 
@@ -35,45 +35,24 @@ public class SideSwitchAuto extends CommandGroup {
                 addParallel(new ArmsOpen());
                 addSequential(new RollersActuate(0.4, 1.0));
                 addSequential(new org.usfirst.frc.team3309.lib.WaitCommand(0.5));
-                addSequential(new DriveStraight(-20, 15000, 1.2));
+                addSequential(new DriveStraight(-20, 15000, 90));
                 addSequential(new DriveEnd());
                 addSequential(new MoveAssembly(AssemblyLocation.BOTTOM));
-            } else if (Robot.isLeftSwitch()) {
-          /*      addSequential(new DriveStraight(-133, 28000, true, 2.0));
-                addSequential(new DriveArc(Length.fromInches(28), 80, 23000,true, true));
-                addSequential(new DriveStraight(-133, 24000, true,  2.0));
-                addSequential(new DriveArc(Length.fromInches(26), 80, 25000,true, true));
-                addSequential(new DriveArc(Length.fromInches(26), 75, 23000,true, true));
-
-                addSequential(new org.usfirst.frc.team3309.lib.WaitCommand(0.2));
-                addParallel(new ArmsOpen());
-                addSequential(new RollersActuate(0.4, 1.0));
-                addSequential(new org.usfirst.frc.team3309.lib.WaitCommand(0.5));
-                addSequential(new DriveStraight(-20, 15000, 1.2));
-                addSequential(new DriveEnd());*/
             }
         } else if (!onRight) {
-            if (Robot.isRightSwitch()) {
-             /*   addSequential(new DriveStraight(-133, 28000, true, 2.0));
-                addSequential(new DriveArc(Length.fromInches(28), -80, 23000,true, true));
-                addSequential(new DriveStraight(-133, 24000, true,  2.0));
-                addSequential(new DriveArc(Length.fromInches(26), -80, 25000,true, true));
-                addSequential(new DriveArc(Length.fromInches(26), -80, 23000,true, true));
-                addSequential(new WaitCommand(0.3));
-                addSequential(new ShooterShoot());*/
-            } else if (Robot.isLeftSwitch()) {
-                addSequential(new DriveStraight(63, 28000, true));
-                addSequential(new MoveAssembly(AssemblyLocation.SWITCH));
-                addSequential(new DriveArc(Length.fromInches(10), 58, 23000,false, true));
+                 if (Robot.isLeftSwitch()) {
+                    addSequential(new DriveStraight(63, 28000, 0));
+                    addSequential(new MoveAssembly(AssemblyLocation.SWITCH));
+                    addSequential(new DriveArc(Length.fromInches(10), 58, 23000,false, true));
 
-                addSequential(new WaitCommand(0.2));
-                addParallel(new ArmsOpen());
-                addSequential(new RollersActuate(0.4, 1.0));
-                addSequential(new org.usfirst.frc.team3309.lib.WaitCommand(0.5));
-                addSequential(new DriveStraight(-20, 15000, 1.2));
-                addSequential(new DriveEnd());
-                addSequential(new MoveAssembly(AssemblyLocation.BOTTOM));
-            }
+                    addSequential(new WaitCommand(0.2));
+                    addParallel(new ArmsOpen());
+                    addSequential(new RollersActuate(0.4, 1.0));
+                    addSequential(new org.usfirst.frc.team3309.lib.WaitCommand(0.5));
+                    addSequential(new DriveStraight(-20, 15000, -90));
+                    addSequential(new DriveEnd());
+                    addSequential(new MoveAssembly(AssemblyLocation.BOTTOM));
+                }
         }
         super.start();
     }
