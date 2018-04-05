@@ -46,6 +46,7 @@ public class ScaleOnlyAuto extends CommandGroup {
         isRightSwitch = false;
         isLeftScale = false;
         isLeftSwitch = false;
+        shouldSwitchCube = true;
 
         if (onRight) {
             if (isRightScale) {
