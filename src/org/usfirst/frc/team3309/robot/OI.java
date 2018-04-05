@@ -24,9 +24,10 @@ public class OI {
     public static Joystick driverRemoteLeft = new Joystick(0);
     public static Joystick driverRemoteRight = new Joystick(1);
 
-    public static JoystickButton driverShiftButton = new JoystickButton(driverRemoteLeft, Constants.JOYSTICK_TRIGGER_BUTTON);
+    private static JoystickButton driverShiftButton = new JoystickButton(driverRemoteLeft, Constants.JOYSTICK_TRIGGER_BUTTON);
 
     OI() {
+
         /* =====DRIVER===== */
         driverShiftButton.whenPressed(new DriveSetLowGear());
         driverShiftButton.whenReleased(new DriveSetHighGear());
@@ -38,13 +39,13 @@ public class OI {
         operatorRemote.startButton.whenPressed(new PrepareForClimb());
         operatorRemote.rightStick.whenPressed(new SetClimbMode());
 
-        operatorRemote.buttonX.whenPressed(new MoveAssembly(AssemblyLocation.INTAKE, true));
+/*        operatorRemote.buttonX.whenPressed(new MoveAssembly(AssemblyLocation.INTAKE, true));
         operatorRemote.buttonY.whenPressed(new MoveAssembly(AssemblyLocation.BOTTOM, true));
         operatorRemote.dPad.down.whenPressed(new MoveAssembly(AssemblyLocation.SWITCH, true));
         operatorRemote.dPad.right.whenPressed(new MoveAssembly(AssemblyLocation.SCALE_DOWN, true));
         operatorRemote.dPad.up.whenPressed(new MoveAssembly(AssemblyLocation.SCALE_MIDDLE, true));
         operatorRemote.dPad.left.whenPressed(new MoveAssembly(AssemblyLocation.SCALE_UP, true));
-        operatorRemote.rightBumper.whenPressed(new MoveAssembly(AssemblyLocation.EXCHANGE_ZONE, true));
+        operatorRemote.rightBumper.whenPressed(new MoveAssembly(AssemblyLocation.EXCHANGE_ZONE, true));*/
 
     }
 
