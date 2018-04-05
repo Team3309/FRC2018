@@ -39,6 +39,7 @@ public class OI {
         operatorRemote.startButton.whenPressed(new PrepareForClimb());
         operatorRemote.rightStick.whenPressed(new SetClimbMode());
 
+/*
         operatorRemote.buttonX.whenPressed(new MoveAssembly(AssemblyLocation.INTAKE, true));
         operatorRemote.buttonY.whenPressed(new MoveAssembly(AssemblyLocation.BOTTOM, true));
         operatorRemote.dPad.down.whenPressed(new MoveAssembly(AssemblyLocation.SWITCH, true));
@@ -46,6 +47,7 @@ public class OI {
         operatorRemote.dPad.up.whenPressed(new MoveAssembly(AssemblyLocation.SCALE_MIDDLE, true));
         operatorRemote.dPad.left.whenPressed(new MoveAssembly(AssemblyLocation.SCALE_UP, true));
         operatorRemote.rightBumper.whenPressed(new MoveAssembly(AssemblyLocation.EXCHANGE_ZONE, true));
+*/
 
     }
 
