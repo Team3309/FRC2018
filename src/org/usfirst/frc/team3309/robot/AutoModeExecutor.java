@@ -14,7 +14,7 @@ public class AutoModeExecutor {
 
         autos.addDefault("No Action", new NoActionAuto());
         autos.addObject("AutoLineAuto", new AutoLineAuto());
-        autos.addObject("MiddleSwitchAuto", new CurvyToSwitchAuto());
+        autos.addObject("MiddleSwitchAuto", new MiddleSwitchAuto());
 
         autos.addObject("RightScaleAuto", new ScaleOnlyAuto(true, false));
         autos.addObject("LeftScaleAuto", new ScaleOnlyAuto(false, false));

@@ -17,7 +17,7 @@ import org.usfirst.frc.team3309.lib.WaitCommand;
 import org.usfirst.frc.team3309.lib.math.Length;
 import org.usfirst.frc.team3309.robot.Robot;
 
-public class CurvyToSwitchAuto extends CommandGroup {
+public class MiddleSwitchAuto extends CommandGroup {
 
     double start;
 
@@ -26,7 +26,13 @@ public class CurvyToSwitchAuto extends CommandGroup {
         start = Timer.getFPGATimestamp();
         addParallel(new MoveAssembly(AssemblyLocation.BOTTOM));
         if (DriverStation.getInstance().getGameSpecificMessage().length() > 0) {
-            if (Robot.isLeftSwitch()) {
+
+            boolean isLeftSwitch = Robot.isLeftSwitch();
+            boolean isRightSwitch = Robot.isRightSwitch();
+            isLeftSwitch = true;
+            isRightSwitch = false;
+
+            if (isLeftSwitch) {
                 addSequential(new DriveArc(Length.fromInches(16), -37, 31000, false, true));
                 addParallel(new MoveAssembly(AssemblyLocation.SWITCH));
                 addSequential(new DriveStraight(18, 25000, true, true));
@@ -57,7 +63,7 @@ public class CurvyToSwitchAuto extends CommandGroup {
 
                 addSequential(new DriveStraight(-17, 18000, true, true));
                 addSequential(new MoveAssembly(AssemblyLocation.BOTTOM));
-            } else if (Robot.isRightSwitch()) {
+            } else if (isRightSwitch) {
                 addSequential(new DriveArc(Length.fromInches(12), 37, 31000, false, true));
                 addParallel(new MoveAssembly(AssemblyLocation.SWITCH));
                 addSequential(new DriveArc(Length.fromInches(12), -22, 28000, false, true));
@@ -85,26 +91,6 @@ public class CurvyToSwitchAuto extends CommandGroup {
                 addParallel(new RollersActuate(-1, 0.3));
                 addSequential(new ArmsOpen());
                 addSequential(new WaitCommand(0.2));
-
-                /* third cube */
-   /*             addParallel(new WaitAndMoveAssembly(0.5, 5300, AssemblyLocation.SWITCH.getBeltBarPosition()));
-                addSequential(new DriveArc(Length.fromInches(6), -20, 24000, true, true));
-                addSequential(new DriveStraight(-13, 15000, true));
-                addSequential(new DriveArc(Length.fromInches(10), 23, 24000, true, true));
-                addParallel(new RollersSetIn(true));
-                addSequential(new DriveStraight(25, 15000, 0));
-                addSequential(new ArmsClamp());
-
-                addSequential(new WaitCommand(0.7));
-                addParallel(new RollersSetIn(false));
-                addSequential(new DriveStraight(-10, 17000, true, true));
-                addParallel(new MoveAssembly(AssemblyLocation.SWITCH));
-                addSequential(new DriveTurn(-90, 1.0, true));
-                addSequential(new DriveArc(Length.fromInches(45), -69, 27000, false, true));
-                addSequential(new DriveStraight(10, 14000, true, true));
-                addParallel(new ArmsOpen());
-                addSequential(new DriveTurn(0, 1.0, true));
-                addSequential(new WaitCommand(0.2));*/
 
                 addParallel(new MoveAssembly(AssemblyLocation.BOTTOM));
                 addSequential(new DriveStraight(-17, 18000, 0));
