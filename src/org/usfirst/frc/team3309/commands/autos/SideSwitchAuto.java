@@ -38,6 +38,9 @@ public class SideSwitchAuto extends CommandGroup {
                 addSequential(new DriveStraight(-20, 15000, 90));
                 addSequential(new DriveEnd());
                 addSequential(new MoveAssembly(AssemblyLocation.BOTTOM));
+            } else if (Robot.isLeftSwitch()){
+                addSequential(new DriveStraight(105, 25000, 0));
+
             }
         } else if (!onRight) {
                  if (Robot.isLeftSwitch()) {
@@ -52,7 +55,9 @@ public class SideSwitchAuto extends CommandGroup {
                     addSequential(new DriveStraight(-20, 15000, -90));
                     addSequential(new DriveEnd());
                     addSequential(new MoveAssembly(AssemblyLocation.BOTTOM));
-                }
+                } else if (Robot.isRightSwitch()){
+                     addSequential(new DriveStraight(105, 25000, 0));
+                 }
         }
         super.start();
     }
