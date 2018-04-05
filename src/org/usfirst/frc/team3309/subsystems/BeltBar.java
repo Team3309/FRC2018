@@ -137,7 +137,7 @@ public class BeltBar extends Subsystem {
 
     @Override
     protected void initDefaultCommand() {
-        setDefaultCommand(new BeltBarManualTest());
+      //  setDefaultCommand(new BeltBarManualTest());
     }
 
     public void sendToDashboard() {
