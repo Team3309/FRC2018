@@ -10,8 +10,6 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.usfirst.frc.team3309.commands.subsystems.AssemblyLocation;
-import org.usfirst.frc.team3309.commands.subsystems.beltbar.BeltBarManualTest;
 import org.usfirst.frc.team3309.lib.actuators.TalonSRXMC;
 import org.usfirst.frc.team3309.robot.Constants;
 import org.usfirst.frc.team3309.robot.Robot;
@@ -66,7 +64,7 @@ public class BeltBar extends Subsystem {
         }
 
         if (Constants.currentRobot == Constants.Robot.COMPETITION) {
-            REVERSE_SOFT_LIM = -2100;
+            REVERSE_SOFT_LIM = -2300;
             FORWARD_SOFT_LIM = -300;
         }
 
