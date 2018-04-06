@@ -155,6 +155,10 @@ public class BeltBar extends Subsystem {
 
     }
 
+    public void set(ControlMode controlMode, double value) {
+        masterBar.set(controlMode, value);
+    }
+
     public double getPosition() {
         return masterBar.getSelectedSensorPosition(0);
     }

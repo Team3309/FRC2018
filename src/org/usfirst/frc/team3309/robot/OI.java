@@ -9,6 +9,7 @@ import org.usfirst.frc.team3309.commands.subsystems.PrepareForClimb;
 import org.usfirst.frc.team3309.commands.subsystems.SetClimbMode;
 import org.usfirst.frc.team3309.commands.subsystems.arms.ArmsClamp;
 import org.usfirst.frc.team3309.commands.subsystems.arms.ArmsOpen;
+import org.usfirst.frc.team3309.commands.subsystems.beltbar.BeltbarStop;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveSetHighGear;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveSetLowGear;
 import org.usfirst.frc.team3309.commands.subsystems.falcondoors.FalconDoorsDeploy;
@@ -41,6 +42,8 @@ public class OI {
         operatorRemote.startButton.whenPressed(new PrepareForClimb());
         operatorRemote.rightStick.whenPressed(new SetClimbMode());
         operatorRemote.backButton.whenPressed(new FalconDoorsDeploy());
+
+        operatorRemote.leftStick.whenPressed(new BeltbarStop());
 
         operatorRemote.buttonX.whenPressed(new MoveAssembly(AssemblyLocation.INTAKE, true));
         operatorRemote.buttonY.whenPressed(new MoveAssembly(AssemblyLocation.BOTTOM, true));
