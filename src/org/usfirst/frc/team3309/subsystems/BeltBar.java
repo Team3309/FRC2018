@@ -107,7 +107,7 @@ public class BeltBar extends Subsystem {
             DriverStation.reportError("Catting on beltbar!!!", false);
         } else {
             if (!isClimbing) {
-                if (getPosition() > FORWARD_SOFT_LIM) {
+                if (getPosition() > FORWARD_SOFT_LIM + 500) {
                     masterBar.set(ControlMode.Disabled, 0);
                     masterBar.reset();
                     init();
@@ -115,7 +115,7 @@ public class BeltBar extends Subsystem {
                  //   masterBar.set(ControlMode.Position, AssemblyLocation.INTAKE.getBeltBarPosition());
                     DriverStation.reportWarning("Catting on beltbar!! Outside front!", false);
                     inRecovery = true;
-                } else if (getPosition() < REVERSE_SOFT_LIM) {
+                } else if (getPosition() < REVERSE_SOFT_LIM - 500) {
                     masterBar.set(ControlMode.Disabled, 0);
                     masterBar.reset();
                     init();
