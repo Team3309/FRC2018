@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team3309.commands.subsystems.AssemblyLocation;
+import org.usfirst.frc.team3309.commands.subsystems.beltbar.BeltBarManualTest;
 import org.usfirst.frc.team3309.lib.actuators.TalonSRXMC;
 import org.usfirst.frc.team3309.robot.Constants;
 import org.usfirst.frc.team3309.robot.Robot;
@@ -106,26 +107,22 @@ public class BeltBar extends Subsystem {
             DriverStation.reportError("Catting on beltbar!!!", false);
         } else {
             if (!isClimbing) {
-                if (getPosition() > FORWARD_SOFT_LIM && getPosition() < FORWARD_SOFT_LIM + 500) {
+                if (getPosition() > FORWARD_SOFT_LIM) {
                     masterBar.set(ControlMode.Disabled, 0);
                     masterBar.reset();
                     init();
                     masterBar.configForwardSoftLimitEnable(false, 10);
-                    masterBar.set(ControlMode.Position, AssemblyLocation.INTAKE.getBeltBarPosition());
-                    DriverStation.reportWarning("Beltbar exceeded forward limit! Correcting...", false);
+                 //   masterBar.set(ControlMode.Position, AssemblyLocation.INTAKE.getBeltBarPosition());
+                    DriverStation.reportWarning("Catting on beltbar!! Outside front!", false);
                     inRecovery = true;
-                } else if (getPosition() < REVERSE_SOFT_LIM && getPosition() > REVERSE_SOFT_LIM - 500) {
+                } else if (getPosition() < REVERSE_SOFT_LIM) {
                     masterBar.set(ControlMode.Disabled, 0);
                     masterBar.reset();
                     init();
                     masterBar.configReverseSoftLimitEnable(false, 10);
-                    masterBar.set(ControlMode.Position, AssemblyLocation.BOTTOM.getBeltBarPosition());
-                    DriverStation.reportWarning("Beltbar exceeded reverse limit! Correcting...", false);
+                   // masterBar.set(ControlMode.Position, AssemblyLocation.BOTTOM.getBeltBarPosition());
+                    DriverStation.reportWarning("Catting on beltbar!! Outside back!", false);
                     inRecovery = true;
-                } else if (getPosition() > FORWARD_SOFT_LIM + 500) {
-                    masterBar.set(ControlMode.Disabled, 0);
-                } else if (getPosition() < REVERSE_SOFT_LIM - 500) {
-                    masterBar.set(ControlMode.Disabled, 0);
                 } else {
                     if (inRecovery) {
                         masterBar.configForwardSoftLimitEnable(true, 10);
