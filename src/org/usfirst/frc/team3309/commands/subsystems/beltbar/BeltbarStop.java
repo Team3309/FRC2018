@@ -14,6 +14,7 @@ public class BeltbarStop extends Command {
     protected void execute() {
         Robot.beltBar.set(ControlMode.Disabled, 0);
         Robot.beltBar.setIsManual(true);
+        Robot.beltBar.setDefaultCommand(new BeltBarManualTest());
     }
 
     @Override

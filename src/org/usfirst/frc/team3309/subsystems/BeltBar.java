@@ -218,4 +218,8 @@ public class BeltBar extends Subsystem {
         this.isManual = isManual;
     }
 
+    public boolean getIsManual() {
+        return isManual;
+    }
+
 }

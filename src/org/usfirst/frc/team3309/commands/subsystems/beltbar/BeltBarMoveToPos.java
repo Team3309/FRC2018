@@ -26,30 +26,34 @@ public class BeltBarMoveToPos extends Command {
 
     @Override
     protected void initialize() {
-        Robot.beltBar.setGoalAngle(goalAngle);
-        Robot.beltBar.changeToPositionMode();
-        Robot.beltBar.changeToBrakeMode();
-        timer.start();
+        if (!Robot.beltBar.getIsManual()) {
+            Robot.beltBar.setGoalAngle(goalAngle);
+            Robot.beltBar.changeToPositionMode();
+            Robot.beltBar.changeToBrakeMode();
+            timer.start();
+        }
     }
 
     @Override
     protected void execute() {
-        if (Robot.lift.getPosition() > MIN_LIFT_POS_TO_ADJUST_HOME &&
-                Math.abs(goalAngle - Constants.BELTBAR_BOTTOM_POS) < 10.0 && !hasStarted) {
-            double newAngle = goalAngle + BELTBAR_GOAL_ADJUSTMENT;
+        if (!Robot.beltBar.getIsManual()) {
+            if (Robot.lift.getPosition() > MIN_LIFT_POS_TO_ADJUST_HOME &&
+                    Math.abs(goalAngle - Constants.BELTBAR_BOTTOM_POS) < 10.0 && !hasStarted) {
+                double newAngle = goalAngle + BELTBAR_GOAL_ADJUSTMENT;
 
-            Robot.beltBar.set(newAngle);
-            hasStarted = true;
-        } else {
-            Robot.beltBar.set(goalAngle);
-            hasStarted = false;
+                Robot.beltBar.set(newAngle);
+                hasStarted = true;
+            } else {
+                Robot.beltBar.set(goalAngle);
+                hasStarted = false;
+            }
+            error = goalAngle - Robot.beltBar.getPosition();
         }
-        error = goalAngle - Robot.beltBar.getPosition();
     }
 
     @Override
     protected boolean isFinished() {
-        return Math.abs(error) < ERROR_THRESHOLD;
+        return Math.abs(error) < ERROR_THRESHOLD || Robot.beltBar.getIsManual();
     }
 
     @Override
