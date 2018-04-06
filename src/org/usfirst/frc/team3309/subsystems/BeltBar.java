@@ -66,7 +66,7 @@ public class BeltBar extends Subsystem {
 
         if (Constants.currentRobot == Constants.Robot.COMPETITION) {
             REVERSE_SOFT_LIM = -2300;
-            FORWARD_SOFT_LIM = -300;
+            FORWARD_SOFT_LIM = 0;
         }
 
         masterBar.configForwardSoftLimitThreshold(FORWARD_SOFT_LIM, 10);

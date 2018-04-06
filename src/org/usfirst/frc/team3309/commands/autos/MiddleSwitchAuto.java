@@ -42,7 +42,7 @@ public class MiddleSwitchAuto extends CommandGroup {
 
                 /* second cube */
                 addParallel(new WaitAndMoveAssembly(0.5, AssemblyLocation.INTAKE));
-                addSequential(new DriveArc(Length.fromInches(20), 60, 26000, true, true)); // 27, 76
+                addSequential(new DriveArc(Length.fromInches(24), 60, 26000, true, true)); // 20, 76
                 addSequential(new DriveTurn(0, 1.0, true));
                 addParallel(new RollersSetIn(true));
                 addSequential(new DriveStraight(17, 17000, 0)); // 11
@@ -54,19 +54,12 @@ public class MiddleSwitchAuto extends CommandGroup {
                 addSequential(new DriveStraight(-10, 17000, true, true));
                 addSequential(new DriveTurn(90, 1.0, true));
                 addSequential(new DriveStraight(7, 26000, true, true));
-                addSequential(new DriveArc(Length.fromInches(70), 78, 27000, false, true));
+                addSequential(new DriveArc(Length.fromInches(65), 78, 27000, false, true)); // 65
                 addSequential(new DriveStraight(16, 12000, 0)); // 16
 
                 addSequential(new DriveStraight(-17, 18000, true, true));
                 addSequential(new MoveAssembly(AssemblyLocation.BOTTOM));
 
-//                addSequential(new DriveStraight(50, 25000, true));
-//                addSequential(new DriveTurn(45, 1.0, true));
-//                addSequential(new DriveStraight(2, 25000, true, true));
-//                addSequential(new DriveTurn(0, 1.0, true));
-//                addSequential(new DriveStraight(2, 17000, 0));
-//                addParallel(new RollersActuate(-1, 0.3));
-//                addSequential(new ArmsOpen());
 
             } else if (isRightSwitch) {
                 addSequential(new DriveArc(Length.fromInches(12), 37, 31000, false, true));
