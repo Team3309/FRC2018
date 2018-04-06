@@ -160,8 +160,6 @@ public class ScaleOnlyAuto extends CommandGroup {
                 addParallel(new RollersSetIn(true));
                 addSequential(new DriveStraight(13, 17000, true, true));
 
-                shouldScale = false;
-
                 if (shouldSwitchCube && isLeftSwitch) {
                     /* cube on switch */
                     addSequential(new WaitCommand(0.35));
