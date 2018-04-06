@@ -13,6 +13,7 @@ public class BeltbarStop extends Command {
     @Override
     protected void execute() {
         Robot.beltBar.set(ControlMode.Disabled, 0);
+        Robot.beltBar.disableLimits();
         Robot.beltBar.setIsManual(true);
         Robot.beltBar.setDefaultCommand(new BeltBarManualTest());
     }

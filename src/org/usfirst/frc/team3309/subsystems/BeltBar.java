@@ -222,4 +222,9 @@ public class BeltBar extends Subsystem {
         return isManual;
     }
 
+    public void disableLimits() {
+        masterBar.configForwardSoftLimitEnable(false, 10);
+        masterBar.configReverseSoftLimitEnable(false, 10);
+    }
+
 }

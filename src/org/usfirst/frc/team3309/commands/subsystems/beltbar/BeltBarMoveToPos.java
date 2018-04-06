@@ -45,9 +45,7 @@ public class BeltBarMoveToPos extends Command {
                 hasStarted = false;
             }
             error = goalAngle - Robot.beltBar.getPosition();
-        }
-        else
-        {
+        } else {
             new BeltBarManualTest().start();
         }
     }
