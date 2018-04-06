@@ -67,7 +67,7 @@ public class BeltBar extends Subsystem {
 
         if (Constants.currentRobot == Constants.Robot.COMPETITION) {
             REVERSE_SOFT_LIM = -2100;
-            FORWARD_SOFT_LIM = -500;
+            FORWARD_SOFT_LIM = -300;
         }
 
         masterBar.configForwardSoftLimitThreshold(FORWARD_SOFT_LIM, 10);
@@ -86,15 +86,13 @@ public class BeltBar extends Subsystem {
     @Override
     public void periodic() {
         adjustBackInLimits();
-
         if (isClimbing) {
             DriverStation.reportWarning("I am climbing!", false);
             masterBar.configForwardSoftLimitEnable(false, 10);
             masterBar.configReverseSoftLimitEnable(false, 10);
             masterBar.changeToDisabledMode();
         }
-//        SmartDashboard.putNumber("Beltbar pos: ", getPosition());
-
+        SmartDashboard.putNumber("Beltbar pos: ", getPosition());
     }
 
 
