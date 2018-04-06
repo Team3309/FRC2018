@@ -13,10 +13,11 @@ public class BeltbarStop extends Command {
     @Override
     protected void execute() {
         Robot.beltBar.set(ControlMode.Disabled, 0);
+        Robot.beltBar.setIsManual(true);
     }
 
     @Override
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 }

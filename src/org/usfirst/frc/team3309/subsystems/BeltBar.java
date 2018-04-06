@@ -26,6 +26,7 @@ public class BeltBar extends Subsystem {
     private boolean inRecovery = false;
 
     private boolean isClimbing = false;
+    private boolean isManual = false;
 
     private double goalAngle;
 
@@ -102,21 +103,15 @@ public class BeltBar extends Subsystem {
             init();
             DriverStation.reportError("Catting on beltbar!!!", false);
         } else {
-            if (!isClimbing) {
+            if (!isClimbing && !isManual) {
                 if (getPosition() > FORWARD_SOFT_LIM + 500) {
-                    masterBar.set(ControlMode.Disabled, 0);
-                    masterBar.reset();
-                    init();
                     masterBar.configForwardSoftLimitEnable(false, 10);
-                 //   masterBar.set(ControlMode.Position, AssemblyLocation.INTAKE.getBeltBarPosition());
+                    masterBar.set(ControlMode.Disabled, 0);
                     DriverStation.reportWarning("Catting on beltbar!! Outside front!", false);
                     inRecovery = true;
                 } else if (getPosition() < REVERSE_SOFT_LIM - 500) {
-                    masterBar.set(ControlMode.Disabled, 0);
-                    masterBar.reset();
-                    init();
                     masterBar.configReverseSoftLimitEnable(false, 10);
-                   // masterBar.set(ControlMode.Position, AssemblyLocation.BOTTOM.getBeltBarPosition());
+                    masterBar.set(ControlMode.Disabled, 0);
                     DriverStation.reportWarning("Catting on beltbar!! Outside back!", false);
                     inRecovery = true;
                 } else {
@@ -124,6 +119,7 @@ public class BeltBar extends Subsystem {
                         masterBar.configForwardSoftLimitEnable(true, 10);
                         masterBar.configReverseSoftLimitEnable(true, 10);
                         inRecovery = false;
+                        DriverStation.reportWarning("Reenabling beltbar limits!!", false);
                     }
                 }
             }
@@ -216,6 +212,10 @@ public class BeltBar extends Subsystem {
 
     public void setClimbing(boolean climbing) {
         isClimbing = climbing;
+    }
+
+    public void setIsManual(boolean isManual) {
+        this.isManual = isManual;
     }
 
 }
