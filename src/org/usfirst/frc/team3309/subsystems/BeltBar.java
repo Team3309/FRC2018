@@ -3,6 +3,7 @@ package org.usfirst.frc.team3309.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.sun.org.apache.regexp.internal.RE;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.AnalogInput;
@@ -107,7 +108,7 @@ public class BeltBar extends Subsystem {
             DriverStation.reportError("Catting on beltbar!!!", false);
         } else {
             if (!isClimbing) {
-                if (getPosition() > FORWARD_SOFT_LIM) {
+                if (getPosition() > FORWARD_SOFT_LIM && getPosition() < FORWARD_SOFT_LIM + 500) {
                     masterBar.set(ControlMode.Disabled, 0);
                     masterBar.reset();
                     init();
@@ -115,7 +116,7 @@ public class BeltBar extends Subsystem {
                     masterBar.set(ControlMode.Position, AssemblyLocation.INTAKE.getBeltBarPosition());
                     DriverStation.reportWarning("Beltbar exceeded forward limit! Correcting...", false);
                     inRecovery = true;
-                } else if (getPosition() < REVERSE_SOFT_LIM) {
+                } else if (getPosition() < REVERSE_SOFT_LIM && getPosition() > REVERSE_SOFT_LIM - 500) {
                     masterBar.set(ControlMode.Disabled, 0);
                     masterBar.reset();
                     init();
@@ -123,6 +124,10 @@ public class BeltBar extends Subsystem {
                     masterBar.set(ControlMode.Position, AssemblyLocation.BOTTOM.getBeltBarPosition());
                     DriverStation.reportWarning("Beltbar exceeded reverse limit! Correcting...", false);
                     inRecovery = true;
+                } else if (getPosition() > FORWARD_SOFT_LIM + 500) {
+                    masterBar.set(ControlMode.Disabled, 0);
+                } else if (getPosition() < REVERSE_SOFT_LIM - 500) {
+                    masterBar.set(ControlMode.Disabled, 0);
                 } else {
                     if (inRecovery) {
                         masterBar.configForwardSoftLimitEnable(true, 10);
@@ -132,7 +137,6 @@ public class BeltBar extends Subsystem {
                 }
             }
         }
-
     }
 
     @Override
