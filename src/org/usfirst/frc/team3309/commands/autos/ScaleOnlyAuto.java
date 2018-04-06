@@ -42,11 +42,6 @@ public class ScaleOnlyAuto extends CommandGroup {
         boolean isLeftScale = Robot.isLeftScale();
         boolean isLeftSwitch = Robot.isRightScale();
 
-        isRightScale = false;
-        isRightSwitch = false;
-        isLeftScale = true;
-        isLeftSwitch = true;
-        shouldSwitchCube = true;
 
         if (onRight) {
             if (isRightScale) {
@@ -138,8 +133,8 @@ public class ScaleOnlyAuto extends CommandGroup {
                 }
             } else if (isLeftScale) {
                 addSequential(new DriveStraight(125, 40000, 0));
-                addSequential(new DriveArc(Length.fromInches(28), -62, 23000, false, true));
-                addSequential(new DriveStraight(126, 40000, 90));
+                addSequential(new DriveArc(Length.fromInches(28), -53, 23000, false, true)); // -62
+                addSequential(new DriveStraight(109, 40000, 90)); // 126
                 addSequential(new DriveTurn(-5, 1.0, true));
 
                 addSequential(new MoveAssembly(AssemblyLocation.SCALE_UP));

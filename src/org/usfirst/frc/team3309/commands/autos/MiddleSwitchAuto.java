@@ -29,22 +29,20 @@ public class MiddleSwitchAuto extends CommandGroup {
 
             boolean isLeftSwitch = Robot.isLeftSwitch();
             boolean isRightSwitch = Robot.isRightSwitch();
-            isLeftSwitch = true;
-            isRightSwitch = false;
 
             if (isLeftSwitch) {
                 addSequential(new DriveArc(Length.fromInches(13), -37, 31000, false, true)); // 16
                 addParallel(new MoveAssembly(AssemblyLocation.SWITCH));
                 addSequential(new DriveStraight(5, 25000, true, true)); // 18
-                addSequential(new DriveArc(Length.fromInches(13), 20, 28000, false, true)); // 16, 22
-                addSequential(new DriveStraight(14, 17000, 0)); // 8
+                addSequential(new DriveArc(Length.fromInches(13), 18, 28000, false, true)); // 16, 20
+                addSequential(new DriveStraight(17, 17000, 0)); // 14
                 addSequential(new WaitCommand(0.1));
                 addParallel(new ArmsOpen());
                 addSequential(new RollersActuate(0.5, 0.1));
 
                 /* second cube */
                 addParallel(new WaitAndMoveAssembly(0.5, AssemblyLocation.INTAKE));
-                addSequential(new DriveArc(Length.fromInches(27), 76, 26000, true, true));
+                addSequential(new DriveArc(Length.fromInches(20), 76, 26000, true, true)); // 27
                 addSequential(new DriveTurn(0, 1.0, true));
                 addParallel(new RollersSetIn(true));
                 addSequential(new DriveStraight(17, 17000, 0)); // 11

@@ -15,15 +15,13 @@ public class AutoModeExecutor {
         autos.addDefault("No Action", new NoActionAuto());
         autos.addObject("AutoLineAuto", new AutoLineAuto());
         autos.addObject("MiddleSwitchAuto", new MiddleSwitchAuto());
-
+        
         autos.addObject("RightScaleAuto", new ScaleOnlyAuto(true, false));
 
         autos.addObject("RightScaleAnd(Switch)Auto", new ScaleOnlyAuto(true, true));
 
         autos.addObject("LeftSwitchAuto", new SideSwitchAuto(false));
         autos.addObject("RightSwitchAuto", new SideSwitchAuto(true));
-
-      //  autos.addObject("StayRightPrioritizeScale", );
 
         SmartDashboard.putData("Autos: ", autos);
     }
