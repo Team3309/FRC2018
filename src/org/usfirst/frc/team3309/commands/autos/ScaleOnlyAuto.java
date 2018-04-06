@@ -42,6 +42,8 @@ public class ScaleOnlyAuto extends CommandGroup {
         boolean isLeftScale = Robot.isLeftScale();
         boolean isLeftSwitch = Robot.isRightScale();
 
+        boolean shouldScale = true;
+
 
         if (onRight) {
             if (isRightScale) {
@@ -95,7 +97,7 @@ public class ScaleOnlyAuto extends CommandGroup {
                     });
                     addSequential(new DriveStraight(-17, 12000, true, true));
                     addSequential(new MoveAssembly(AssemblyLocation.BOTTOM));
-                } else {
+                } else if (shouldScale) {
                     /* second cube on scale */
                     addParallel(new WaitAndMoveAssembly(0.2, AssemblyLocation.BOTTOM));
                     addSequential(new DriveStraight(-19, 12000, 0));
@@ -158,6 +160,8 @@ public class ScaleOnlyAuto extends CommandGroup {
                 addParallel(new RollersSetIn(true));
                 addSequential(new DriveStraight(13, 17000, true, true));
 
+                shouldScale = false;
+
                 if (shouldSwitchCube && isLeftSwitch) {
                     /* cube on switch */
                     addSequential(new WaitCommand(0.35));
@@ -186,7 +190,7 @@ public class ScaleOnlyAuto extends CommandGroup {
                     });
                     addSequential(new DriveStraight(-10, 12000, true, true));
                     addSequential(new MoveAssembly(AssemblyLocation.BOTTOM));
-                } else {
+                } else if (shouldScale) {
                     /* second cube on scale */
                     addSequential(new WaitCommand(0.5));
                     addSequential(new ArmsClamp());

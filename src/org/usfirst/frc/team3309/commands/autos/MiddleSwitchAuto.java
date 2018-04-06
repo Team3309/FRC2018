@@ -34,33 +34,40 @@ public class MiddleSwitchAuto extends CommandGroup {
                 addSequential(new DriveArc(Length.fromInches(13), -37, 31000, false, true)); // 16
                 addParallel(new MoveAssembly(AssemblyLocation.SWITCH));
                 addSequential(new DriveStraight(5, 25000, true, true)); // 18
-                addSequential(new DriveArc(Length.fromInches(13), 18, 28000, false, true)); // 16, 20
-                addSequential(new DriveStraight(17, 17000, 0)); // 14
+                addSequential(new DriveArc(Length.fromInches(9), 18, 28000, false, true)); // 13, 20
+                addSequential(new DriveStraight(25, 17000, 0)); // 17
                 addSequential(new WaitCommand(0.1));
                 addParallel(new ArmsOpen());
                 addSequential(new RollersActuate(0.5, 0.1));
 
                 /* second cube */
-                addParallel(new WaitAndMoveAssembly(0.5, AssemblyLocation.INTAKE));
-                addSequential(new DriveArc(Length.fromInches(20), 76, 26000, true, true)); // 27
-                addSequential(new DriveTurn(0, 1.0, true));
-                addParallel(new RollersSetIn(true));
-                addSequential(new DriveStraight(17, 17000, 0)); // 11
-                addSequential(new ArmsClamp());
-
-                addSequential(new WaitCommand(0.8));
-                addParallel(new RollersSetIn(false));
-                addParallel(new MoveAssembly(AssemblyLocation.SWITCH));
-                addSequential(new DriveStraight(-10, 17000, true, true));
-                addSequential(new DriveTurn(90, 1.0, true));
-                addSequential(new DriveStraight(7, 26000, true, true));
-                addSequential(new DriveArc(Length.fromInches(70), 78, 27000, false, true));
-                addSequential(new DriveStraight(16, 12000, 0)); // 16
-                addParallel(new RollersActuate(-1, 0.3));
-                addSequential(new ArmsOpen());
+//                addParallel(new WaitAndMoveAssembly(0.5, AssemblyLocation.INTAKE));
+//                addSequential(new DriveArc(Length.fromInches(20), 76, 26000, true, true)); // 27
+//                addSequential(new DriveTurn(0, 1.0, true));
+//                addParallel(new RollersSetIn(true));
+//                addSequential(new DriveStraight(17, 17000, 0)); // 11
+//                addSequential(new ArmsClamp());
+//
+//                addSequential(new WaitCommand(0.8));
+//                addParallel(new RollersSetIn(false));
+//                addParallel(new MoveAssembly(AssemblyLocation.SWITCH));
+//                addSequential(new DriveStraight(-10, 17000, true, true));
+//                addSequential(new DriveTurn(90, 1.0, true));
+//                addSequential(new DriveStraight(7, 26000, true, true));
+//                addSequential(new DriveArc(Length.fromInches(70), 78, 27000, false, true));
+//                addSequential(new DriveStraight(16, 12000, 0)); // 16
 
                 addSequential(new DriveStraight(-17, 18000, true, true));
                 addSequential(new MoveAssembly(AssemblyLocation.BOTTOM));
+
+//                addSequential(new DriveStraight(50, 25000, true));
+//                addSequential(new DriveTurn(45, 1.0, true));
+//                addSequential(new DriveStraight(2, 25000, true, true));
+//                addSequential(new DriveTurn(0, 1.0, true));
+//                addSequential(new DriveStraight(2, 17000, 0));
+//                addParallel(new RollersActuate(-1, 0.3));
+//                addSequential(new ArmsOpen());
+
             } else if (isRightSwitch) {
                 addSequential(new DriveArc(Length.fromInches(12), 37, 31000, false, true));
                 addParallel(new MoveAssembly(AssemblyLocation.SWITCH));
