@@ -85,7 +85,7 @@ public class BeltBar extends Subsystem {
 
     @Override
     public void periodic() {
-        adjustBackInLimits();
+    //    adjustBackInLimits();
         if (isClimbing) {
             DriverStation.reportWarning("I am climbing!", false);
             disableLimits();
