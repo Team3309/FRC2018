@@ -13,7 +13,7 @@ public class StayRightAuto extends CommandGroup {
         } else if (Robot.isRightSwitch()) {
             new SideSwitchAuto(true).start();
         } else {
-            new DriveStraight(95, 25000, 0).start();
+            new AutoLineAuto().start();
         }
     }
 
