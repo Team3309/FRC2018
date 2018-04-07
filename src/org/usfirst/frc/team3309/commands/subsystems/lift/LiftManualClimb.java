@@ -27,4 +27,5 @@ public class LiftManualClimb extends Command {
     protected boolean isFinished() {
         return false;
     }
+
 }
