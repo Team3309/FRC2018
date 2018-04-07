@@ -124,20 +124,10 @@ public class Robot extends TimedRobot {
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
         sendToDashboard();
-//        SmartDashboard.putData(beltBar);
-//        SmartDashboard.putData(shooter);
-//        SmartDashboard.putData(falconDoors);
-//        SmartDashboard.putData(arms);
-//        SmartDashboard.putData(rollers);
-
 
         if (Timer.getFPGATimestamp() - start >= (135 - 50)) {
             OI.operatorRemote.setRumble(1.0);
         }
-
-        System.out.println("Operator power " + OI.operatorRemote.leftStick.getY());
-
-
 
     }
 
