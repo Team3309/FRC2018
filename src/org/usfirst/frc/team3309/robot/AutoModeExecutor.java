@@ -23,6 +23,8 @@ public class AutoModeExecutor {
         autos.addObject("LeftSwitchAuto", new SideSwitchAuto(false));
         autos.addObject("RightSwitchAuto", new SideSwitchAuto(true));
 
+        autos.addObject("StayRightAuto", new StayRightAuto());
+
         SmartDashboard.putData("Autos: ", autos);
     }
 
