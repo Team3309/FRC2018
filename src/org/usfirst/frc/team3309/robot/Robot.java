@@ -135,6 +135,9 @@ public class Robot extends TimedRobot {
             OI.operatorRemote.setRumble(1.0);
         }
 
+        System.out.println("Operator power " + OI.operatorRemote.leftStick.getY());
+
+
 
     }
 
