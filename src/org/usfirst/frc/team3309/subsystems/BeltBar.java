@@ -13,7 +13,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team3309.commands.subsystems.beltbar.BeltBarManualTest;
 import org.usfirst.frc.team3309.lib.actuators.TalonSRXMC;
 import org.usfirst.frc.team3309.robot.Constants;
-import org.usfirst.frc.team3309.robot.Robot;
 
 public class BeltBar extends Subsystem {
 
@@ -85,7 +84,7 @@ public class BeltBar extends Subsystem {
 
     @Override
     public void periodic() {
-        adjustBackInLimits();
+        stopIfOut();
         if (isClimbing) {
             DriverStation.reportWarning("I am climbing!", false);
             disableLimits();
@@ -94,7 +93,7 @@ public class BeltBar extends Subsystem {
         SmartDashboard.putNumber("Beltbar pos: ", getPosition());
     }
 
-    private void adjustBackInLimits() {
+    private void stopIfOut() {
         if (!isClimbing && !isManual) {
             if (getPosition() > FORWARD_SOFT_LIM + LIM_TOLERANCE) {
                 disableLimits();
