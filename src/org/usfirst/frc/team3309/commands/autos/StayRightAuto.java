@@ -9,13 +9,12 @@ public class StayRightAuto extends CommandGroup {
     @Override
     public synchronized void start() {
         if (Robot.isRightScale()) {
-            addSequential(new ScaleOnlyAuto(true, false));
+            new ScaleOnlyAuto(true, false).start();
         } else if (Robot.isRightSwitch()) {
-            addSequential(new SideSwitchAuto(true));
+            new SideSwitchAuto(true).start();
         } else {
-            addSequential(new DriveStraight(95, 25000, 0));
+            new DriveStraight(95, 25000, 0).start();
         }
-        super.start();
     }
 
 }
