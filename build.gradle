@@ -43,6 +43,11 @@ sourceSets {
 }
 repositories {
     mavenCentral()
+    allprojects {
+        repositories {
+            maven { url 'https://jitpack.io' }
+        }
+    }
 }
 
 dependencies {
@@ -50,7 +55,8 @@ dependencies {
     compile ctre()
     compile navx()
     compile openrio.powerup.matchData()
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"x
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    compile 'com.github.Nico1999:4322Utils:2.0'
 }
 
 
