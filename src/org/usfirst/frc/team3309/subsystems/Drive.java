@@ -9,13 +9,20 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.tenkiv.physikal.complete.UcumKt;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveTeleop;
 import org.usfirst.frc.team3309.lib.actuators.TalonSRXMC;
 import org.usfirst.frc.team3309.lib.actuators.VictorSPXMC;
 import org.usfirst.frc.team3309.robot.Constants;
 import org.usfirst.frc.team3309.robot.Robot;
+import org.usfirst.frc.team4322.math.Rotation;
+import org.usfirst.frc.team4322.motion.RobotPositionIntegrator;
+import tec.uom.se.ComparableQuantity;
+
+import javax.measure.Quantity;
 
 public class Drive extends Subsystem {
 
@@ -32,6 +39,8 @@ public class Drive extends Subsystem {
     private Solenoid shifter = new Solenoid(Constants.DRIVE_SHIFTER);
 
     private AHRS navX = new AHRS(SPI.Port.kMXP);
+
+    private double lastLeft, lastRight;
 
     private double goalPos;
 
@@ -189,12 +198,12 @@ public class Drive extends Subsystem {
     public void periodic()
     {
         super.periodic();
-   /*     SmartDashboard.putNumber("Robot Distance Traversed (Left): ",getLeftEncoder());
-        SmartDashboard.putNumber("Robot Distance Traversed (Right): ",getRightEncoder());
-
-        SmartDashboard.putNumber("Robot Distance Traversed (Humanized) : ",encoderCountsToInches(getEncoderPos()));
-        SmartDashboard.putNumber("Robot revolution ", (getEncoderPos()/Constants.DRIVE_ENCODER_COUNTS_PER_REV));
-        SmartDashboard.putNumber("Robot enc calc: ", inchesToEncoderCounts(encoderCountsToInches(getEncoderPos())));*/
+        double leftDistance = encoderCountsToInches(getLeftEncoder());
+        double rightDistance = encoderCountsToInches(getRightEncoder());
+        RobotPositionIntegrator.INSTANCE.update(Timer.getFPGATimestamp(),UcumKt.getInchInternational((leftDistance-lastLeft)),
+                UcumKt.getInchInternational((rightDistance-lastRight)), Rotation.Companion.fromRadians(getPigeonPos()));
+        lastLeft = leftDistance;
+        lastRight = rightDistance;
     }
 
     public void changeToBrakeMode() {
