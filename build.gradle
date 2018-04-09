@@ -1,7 +1,7 @@
 plugins {
     id "java"
     id "eclipse"
-    id "org.jetbrains.kotlin.jvm" version "1.2.21"
+    id "org.jetbrains.kotlin.jvm" version "1.2.31"
     id "idea"
     id "jaci.openrio.gradle.GradleRIO" version "2018.03.06"
     id "org.ajoberstar.grgit" version '2.1.1'
