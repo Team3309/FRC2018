@@ -18,6 +18,7 @@ class FollowPathCommand(private val path : Path, private val reverse : Boolean =
     }
 
     override fun initialize() {
+        pathFollower.execute(Timer.getFPGATimestamp())
         RobotPositionIntegrator.reset()
     }
 
