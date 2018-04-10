@@ -206,7 +206,7 @@ public class Drive extends Subsystem {
         SmartDashboard.putNumber("Last Rotation: ",Math.toRadians(lastGyro));
         SmartDashboard.putNumber("New Rotation: ",Math.toRadians(gyroHeading));
         RobotPositionIntegrator.INSTANCE.update(Timer.getFPGATimestamp(),UcumKt.getInchInternational((leftDistance-lastLeft)),
-                UcumKt.getInchInternational((rightDistance-lastRight)), Rotation.Companion.fromRadians(deltaRotation));
+                UcumKt.getInchInternational((rightDistance-lastRight)), Rotation.Companion.fromRadians(gyroHeading));
         lastLeft = leftDistance;
         lastRight = rightDistance;
         lastGyro = gyroHeading;
