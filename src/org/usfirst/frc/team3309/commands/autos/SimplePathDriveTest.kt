@@ -1,6 +1,6 @@
 package org.usfirst.frc.team3309.commands.autos
 
-import edu.wpi.first.wpilibj.command.CommandGroup
+import edu.wpi.first.wpilibj.command.InstantCommand
 import org.usfirst.frc.team3309.commands.subsystems.drive.FollowPathCommand
 import org.usfirst.frc.team4322.math.PathBuilder
 import edu.wpi.first.wpilibj.command.Command
@@ -13,7 +13,7 @@ import java.util.ArrayList
 
 
 
-class SimplePathDriveTest : CommandGroup() {
+class SimplePathDriveTest : InstantCommand() {
     override fun start() {
         val waypoints = mutableListOf<PathBuilder.Waypoint>()
         waypoints.add(PathBuilder.Waypoint(0.0,0.0,0.0,0.0))
