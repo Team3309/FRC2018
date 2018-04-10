@@ -202,7 +202,7 @@ public class Drive extends Subsystem {
         double rightDistance = encoderCountsToInches(getRightEncoder());
         double gyroHeading = getPigeonPos();
         RobotPositionIntegrator.INSTANCE.update(Timer.getFPGATimestamp(),UcumKt.getInchInternational((leftDistance-lastLeft)),
-                UcumKt.getInchInternational((rightDistance-lastRight)), Rotation.Companion.fromDegrees(gyroHeading-lastGyro));
+                UcumKt.getInchInternational((rightDistance-lastRight)), Rotation.Companion.fromRadians(Math.toRadians(gyroHeading-lastGyro)));
         lastLeft = leftDistance;
         lastRight = rightDistance;
         lastGyro = gyroHeading;
