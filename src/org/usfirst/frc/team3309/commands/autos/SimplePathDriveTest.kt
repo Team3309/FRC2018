@@ -20,7 +20,6 @@ class SimplePathDriveTest : InstantCommand() {
         waypoints.add(PathBuilder.Waypoint(12.0,0.0,0.0,2000.0))
         val path = PathBuilder.buildPathFromWaypoints(waypoints)
         FollowPathCommand(path,false).start()
-
     }
 class SimplePathDriveTest : CommandGroup() {
 init {
