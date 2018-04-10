@@ -15,11 +15,7 @@ import java.util.ArrayList
 
 class SimplePathDriveTest : InstantCommand() {
     override fun start() {
-        val waypoints = mutableListOf<PathBuilder.Waypoint>()
-        waypoints.add(PathBuilder.Waypoint(0.0,0.0,0.0,0.0))
-        waypoints.add(PathBuilder.Waypoint(12.0,0.0,0.0,2000.0))
-        val path = PathBuilder.buildPathFromWaypoints(waypoints)
-        FollowPathCommand(path,false).start()
+
     }
 class SimplePathDriveTest : CommandGroup() {
 init {
