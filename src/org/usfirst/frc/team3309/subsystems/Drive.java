@@ -201,7 +201,7 @@ public class Drive extends Subsystem {
         double leftDistance = encoderCountsToInches(getLeftEncoder());
         double rightDistance = encoderCountsToInches(getRightEncoder());
         RobotPositionIntegrator.INSTANCE.update(Timer.getFPGATimestamp(),UcumKt.getInchInternational((leftDistance-lastLeft)),
-                UcumKt.getInchInternational((rightDistance-lastRight)), Rotation.Companion.fromRadians(getPigeonPos()));
+                UcumKt.getInchInternational((rightDistance-lastRight)), Rotation.Companion.fromDegrees(getPigeonPos()));
         lastLeft = leftDistance;
         lastRight = rightDistance;
         SmartDashboard.putNumber("Robot X Position: ",RobotPositionIntegrator.INSTANCE.getCurrentPose().getTranslation().getX());
