@@ -15,10 +15,10 @@ class FollowPathCommand(private val path : Path, private val reverse : Boolean =
 
     override fun initialize() {
         RobotPositionIntegrator.reset()
-        Robot.drive.changeToVelocityMode()
     }
 
     override fun execute() {
+        Robot.drive.changeToVelocityMode()
         val out = pathFollower.execute(Timer.getFPGATimestamp())
         SmartDashboard.putNumber("Left Target: ",Robot.drive.inchesToEncoderCounts(out.first))
         SmartDashboard.putNumber("Right Target: ",Robot.drive.inchesToEncoderCounts(out.second))
