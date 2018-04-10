@@ -203,8 +203,8 @@ public class Drive extends Subsystem {
         double gyroHeading = pigeonIMU.getFusedHeading();
         double delta_v = ((rightDistance-lastRight) - (leftDistance-lastLeft)) / 2.0;
         double deltaRotation = delta_v * 2 / Constants.WHEELBASE_INCHES.toInches();
-        SmartDashboard.putNumber("Last Rotation: ",Rotation.Companion.fromRadians(Math.toRadians(lastGyro)).radians());
-        SmartDashboard.putNumber("New Rotation: ",Rotation.Companion.fromRadians(Math.toRadians(gyroHeading)).radians());
+        SmartDashboard.putNumber("Last Rotation: ",Math.toRadians(lastGyro));
+        SmartDashboard.putNumber("New Rotation: ",Math.toRadians(gyroHeading));
         RobotPositionIntegrator.INSTANCE.update(Timer.getFPGATimestamp(),UcumKt.getInchInternational((leftDistance-lastLeft)),
                 UcumKt.getInchInternational((rightDistance-lastRight)), Rotation.Companion.fromRadians(deltaRotation));
         lastLeft = leftDistance;
