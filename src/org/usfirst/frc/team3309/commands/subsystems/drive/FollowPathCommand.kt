@@ -22,7 +22,7 @@ class FollowPathCommand(private val path : Path, private val reverse : Boolean =
         val out = pathFollower.execute(Timer.getFPGATimestamp())
         SmartDashboard.putNumber("Left Target: ",Robot.drive.inchesToEncoderCounts(out.first))
         SmartDashboard.putNumber("Right Target: ",Robot.drive.inchesToEncoderCounts(out.second))
-        Robot.drive.setLeftRight(out.first,out.second)
+        Robot.drive.setLeftRight(Robot.drive.inchesToEncoderCounts(out.first),Robot.drive.inchesToEncoderCounts(out.second))
     }
 
     override fun isFinished(): Boolean {
