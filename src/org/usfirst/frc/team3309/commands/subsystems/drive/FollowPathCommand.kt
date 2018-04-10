@@ -18,7 +18,6 @@ class FollowPathCommand(private val path : Path, private val reverse : Boolean =
     }
 
     override fun initialize() {
-        pathFollower.execute(Timer.getFPGATimestamp())
         RobotPositionIntegrator.reset()
     }
 
@@ -30,6 +29,7 @@ class FollowPathCommand(private val path : Path, private val reverse : Boolean =
         SmartDashboard.putNumber("Left Target: ",outLeft)
         SmartDashboard.putNumber("Right Target: ",outRight)
         Robot.drive.setLeftRight(outLeft,outRight)
+        pathFollower.execute(Timer.getFPGATimestamp())
     }
 
     override fun isFinished(): Boolean {
