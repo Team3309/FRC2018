@@ -204,6 +204,9 @@ public class Drive extends Subsystem {
                 UcumKt.getInchInternational((rightDistance-lastRight)), Rotation.Companion.fromRadians(getPigeonPos()));
         lastLeft = leftDistance;
         lastRight = rightDistance;
+        SmartDashboard.putNumber("Robot X Position: ",RobotPositionIntegrator.INSTANCE.getCurrentPose().getTranslation().getX());
+        SmartDashboard.putNumber("Robot Y Position: ",RobotPositionIntegrator.INSTANCE.getCurrentPose().getTranslation().getY());
+        SmartDashboard.putNumber("Robot Heading: ",RobotPositionIntegrator.INSTANCE.getCurrentPose().getRotation().degrees());
     }
 
     public void changeToBrakeMode() {
