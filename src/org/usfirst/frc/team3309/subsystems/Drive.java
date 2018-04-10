@@ -40,7 +40,7 @@ public class Drive extends Subsystem {
 
     private AHRS navX = new AHRS(SPI.Port.kMXP);
 
-    private double lastLeft, lastRight;
+    private double lastLeft, lastRight, lastGyro;
 
     private double goalPos;
 
@@ -200,10 +200,12 @@ public class Drive extends Subsystem {
         super.periodic();
         double leftDistance = encoderCountsToInches(getLeftEncoder());
         double rightDistance = encoderCountsToInches(getRightEncoder());
+        double gyroHeading = getPigeonPos();
         RobotPositionIntegrator.INSTANCE.update(Timer.getFPGATimestamp(),UcumKt.getInchInternational((leftDistance-lastLeft)),
-                UcumKt.getInchInternational((rightDistance-lastRight)), Rotation.Companion.fromDegrees(getPigeonPos()));
+                UcumKt.getInchInternational((rightDistance-lastRight)), Rotation.Companion.fromDegrees(gyroHeading-lastGyro));
         lastLeft = leftDistance;
         lastRight = rightDistance;
+        lastGyro = gyroHeading;
         SmartDashboard.putNumber("Robot X Position: ",RobotPositionIntegrator.INSTANCE.getCurrentPose().getTranslation().getX());
         SmartDashboard.putNumber("Robot Y Position: ",RobotPositionIntegrator.INSTANCE.getCurrentPose().getTranslation().getY());
         SmartDashboard.putNumber("Robot Heading: ",RobotPositionIntegrator.INSTANCE.getCurrentPose().getRotation().degrees());
