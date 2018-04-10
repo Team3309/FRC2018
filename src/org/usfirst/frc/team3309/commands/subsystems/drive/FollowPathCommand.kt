@@ -11,6 +11,9 @@ class FollowPathCommand(private val path : Path, private val reverse : Boolean =
     val pathFollower = PathFollower(path,reverse, PathFollower.Parameters(Lookahead(12.0,24.0,70.0,120.0),
             0.0,5.0,0.03,0.02,1.0,0.05,120.0,120.0,0.75,12.0,9.0))
 
+    init {
+        requires(Robot.drive)
+    }
     override fun initialize() {
         RobotPositionIntegrator.reset()
     }
