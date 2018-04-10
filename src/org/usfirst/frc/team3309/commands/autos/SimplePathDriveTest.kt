@@ -6,11 +6,12 @@ import org.usfirst.frc.team4322.math.PathBuilder
 
 
 class SimplePathDriveTest : CommandGroup() {
-    init {
+    override fun start() {
         val waypoints = mutableListOf<PathBuilder.Waypoint>()
         waypoints.add(PathBuilder.Waypoint(0.0,0.0,0.0,0.0))
         waypoints.add(PathBuilder.Waypoint(0.0,12.0*6,0.0,0.0))
         val path = PathBuilder.buildPathFromWaypoints(waypoints)
-        addSequential(FollowPathCommand(path,false))
+        FollowPathCommand(path,false)
+
     }
 }

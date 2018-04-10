@@ -24,7 +24,7 @@ public class AutoModeExecutor {
         autos.addObject("RightSwitchAuto", new SideSwitchAuto(true));
 
         autos.addObject("TurnTest", new DriveTurn(90, Double.POSITIVE_INFINITY, true));
-        autos.addObject("Drive Forward Test",new SimplePathDriveTest());
+        autos.addObject("Drive Forward Path Test",new SimplePathDriveTest());
         SmartDashboard.putData("Autos: ", autos);
     }
 
