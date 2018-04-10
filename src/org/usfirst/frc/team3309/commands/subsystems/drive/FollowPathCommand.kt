@@ -2,6 +2,7 @@ package org.usfirst.frc.team3309.commands.subsystems.drive
 
 import edu.wpi.first.wpilibj.Timer
 import edu.wpi.first.wpilibj.command.Command
+import org.usfirst.frc.team3309.robot.Robot
 import org.usfirst.frc.team4322.math.Path
 import org.usfirst.frc.team4322.motion.Lookahead
 import org.usfirst.frc.team4322.motion.PathFollower
@@ -13,10 +14,12 @@ class FollowPathCommand(private val path : Path, private val reverse : Boolean =
 
     override fun initialize() {
         RobotPositionIntegrator.reset()
+        Robot.drive.changeToVelocityMode()
     }
 
     override fun execute() {
-        pathFollower.execute(Timer.getFPGATimestamp())
+        val out = pathFollower.execute(Timer.getFPGATimestamp())
+        Robot.drive.setLeftRight(out.first,out.second)
     }
 
     override fun isFinished(): Boolean {
