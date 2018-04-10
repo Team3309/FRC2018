@@ -5,6 +5,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team3309.commands.autos.*;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveTurn;
+import org.usfirst.frc.team3309.commands.subsystems.drive.FollowPathCommand;
+import org.usfirst.frc.team4322.math.Path;
+import org.usfirst.frc.team4322.math.PathBuilder;
+
+import java.util.ArrayList;
 
 public class AutoModeExecutor {
 
@@ -23,8 +28,12 @@ public class AutoModeExecutor {
         autos.addObject("LeftSwitchAuto", new SideSwitchAuto(false));
         autos.addObject("RightSwitchAuto", new SideSwitchAuto(true));
 
+        ArrayList<PathBuilder.Waypoint> waypoints = new ArrayList<>();
+        waypoints.add(new PathBuilder.Waypoint(0.0,0.0,0.0,0.0));
+        waypoints.add(new PathBuilder.Waypoint(12.0,0.0,0.0,2000.0));
+        Path path = PathBuilder.INSTANCE.buildPathFromWaypoints(waypoints);
         autos.addObject("TurnTest", new DriveTurn(90, Double.POSITIVE_INFINITY, true));
-        autos.addObject("Drive Forward Path Test",new SimplePathDriveTest());
+        autos.addObject("Drive Forward Path Test",new FollowPathCommand(path,false));
         SmartDashboard.putData("Autos: ", autos);
     }
 
