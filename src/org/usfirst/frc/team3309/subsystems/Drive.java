@@ -200,7 +200,7 @@ public class Drive extends Subsystem {
         super.periodic();
         double leftDistance = encoderCountsToInches(getLeftEncoder());
         double rightDistance = encoderCountsToInches(getRightEncoder());
-        double gyroHeading = pigeonIMU.getFusedHeading();
+        double gyroHeading = navX.getFusedHeading();
         double delta_v = ((rightDistance-lastRight) - (leftDistance-lastLeft)) / 2.0;
         double deltaRotation = delta_v * 2 / Constants.WHEELBASE_INCHES.toInches();
         SmartDashboard.putNumber("Last Rotation: ",Math.toRadians(lastGyro));
