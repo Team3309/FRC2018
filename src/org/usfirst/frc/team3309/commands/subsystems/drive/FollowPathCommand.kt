@@ -11,7 +11,7 @@ import org.usfirst.frc.team4322.motion.RobotPositionIntegrator
 
 class FollowPathCommand(private val path : Path, private val reverse : Boolean = false) : Command() {
     val pathFollower = PathFollower(path,reverse, PathFollower.Parameters(Lookahead(12.0,24.0,9.0,60.0),
-            0.0,1.5,0.012,0.02,1.0,0.05,60.0,90.0,0.75,12.0,10.0))
+            0.0,1.5,0.008,0.02,1.0,0.05,60.0,90.0,0.75,12.0,10.0))
 
     init {
         requires(Robot.drive)
