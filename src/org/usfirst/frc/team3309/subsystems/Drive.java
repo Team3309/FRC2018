@@ -202,7 +202,9 @@ public class Drive extends Subsystem {
         double rightDistance = encoderCountsToInches(getRightEncoder());
         double gyroHeading = getPigeonPos();
         Rotation rc = Rotation.Companion.fromRadians(Math.toRadians(lastGyro)).inverse().rotateBy(Rotation.Companion.fromRadians(Math.toRadians(gyroHeading)));
-        SmartDashboard.putNumber("Computed Rotation: ",rc.radians());
+        SmartDashboard.putNumber("Last Rotation: ",Rotation.Companion.fromRadians(Math.toRadians(lastGyro)).radians());
+        SmartDashboard.putNumber("Computed Delta Rotation: ",rc.radians());
+        SmartDashboard.putNumber("New Rotation: ",Rotation.Companion.fromRadians(Math.toRadians(gyroHeading)).radians());
         RobotPositionIntegrator.INSTANCE.update(Timer.getFPGATimestamp(),UcumKt.getInchInternational((leftDistance-lastLeft)),
                 UcumKt.getInchInternational((rightDistance-lastRight)), rc);
         lastLeft = leftDistance;
