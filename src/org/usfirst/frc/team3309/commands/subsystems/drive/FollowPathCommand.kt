@@ -30,6 +30,6 @@ class FollowPathCommand(private val path : Path, private val reverse : Boolean =
     }
 
     override fun isFinished(): Boolean {
-        return false
+        return pathFollower.isFinished
     }
 }
