@@ -32,8 +32,8 @@ public class AutoModeExecutor {
         waypoints.add(new PathBuilder.Waypoint(0.0,0.0,0.0,0.0));
 //        waypoints.add(new PathBuilder.Waypoint(72.0,0.0,0.0,200.0));
 //        waypoints.add(new PathBuilder.Waypoint(196,0.0,0.0,100.0));
-        waypoints.add(new PathBuilder.Waypoint(72,-16,0,50.0));
-        waypoints.add(new PathBuilder.Waypoint(100,-20,0,75.0));
+        waypoints.add(new PathBuilder.Waypoint(72,-16,0,65.0));
+        waypoints.add(new PathBuilder.Waypoint(130,-30,0,100.0));
         waypoints.add(new PathBuilder.Waypoint(260,-60,0,200.0));
 
         Path path = PathBuilder.INSTANCE.buildPathFromWaypoints(waypoints);
