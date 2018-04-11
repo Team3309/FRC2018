@@ -26,16 +26,12 @@ public class MiddleSwitchAuto extends CommandGroup {
         start = Timer.getFPGATimestamp();
         addParallel(new MoveAssembly(AssemblyLocation.BOTTOM));
         if (DriverStation.getInstance().getGameSpecificMessage().length() > 0) {
-
-            boolean isLeftSwitch = Robot.isLeftSwitch();
-            boolean isRightSwitch = Robot.isRightSwitch();
-
-            if (isLeftSwitch) {
-                addSequential(new DriveArc(Length.fromInches(13), -37, 31000, false, true)); // 16
+            if (Robot.isLeftSwitch()) {
+                addSequential(new DriveArc(Length.fromInches(15), -37, 31000, false, true));
                 addParallel(new MoveAssembly(AssemblyLocation.SWITCH));
-                addSequential(new DriveStraight(7.6, 25000, true, true)); // 18
-                addSequential(new DriveArc(Length.fromInches(9), 16, 28000, false, true)); // 13, 20
-                addSequential(new DriveStraight(25, 17000, 0)); // 17
+                addSequential(new DriveStraight(18, 25000, true, true));
+                addSequential(new DriveArc(Length.fromInches(15), 22, 28000, false, true));
+                addSequential(new DriveStraight(4, 17000, 0));
                 addSequential(new WaitCommand(0.1));
                 addParallel(new ArmsOpen());
                 addSequential(new RollersActuate(0.5, 0.1));
