@@ -56,6 +56,8 @@ dependencies {
     compile navx()
     compile openrio.powerup.matchData()
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.2.31"
+    compile 'com.github.Nico1999:4322Utils:4589482d198383d2d1e10b82648a3eb2ccabcb5e'
+
 }
 
 
