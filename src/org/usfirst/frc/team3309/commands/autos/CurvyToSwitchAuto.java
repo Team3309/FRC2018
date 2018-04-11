@@ -27,10 +27,10 @@ public class CurvyToSwitchAuto extends CommandGroup {
         addParallel(new MoveAssembly(AssemblyLocation.BOTTOM));
         if (DriverStation.getInstance().getGameSpecificMessage().length() > 0) {
             if (Robot.isLeftSwitch()) {
-                addSequential(new DriveArc(Length.fromInches(16), -37, 31000, false, true));
+                addSequential(new DriveArc(Length.fromInches(15), -37, 31000, false, true));
                 addParallel(new MoveAssembly(AssemblyLocation.SWITCH));
                 addSequential(new DriveStraight(18, 25000, true, true));
-                addSequential(new DriveArc(Length.fromInches(16), 22, 28000, false, true));
+                addSequential(new DriveArc(Length.fromInches(15), 22, 28000, false, true));
                 addSequential(new DriveStraight(4, 17000, 0));
                 addSequential(new WaitCommand(0.1));
                 addParallel(new ArmsOpen());
