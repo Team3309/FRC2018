@@ -28,7 +28,18 @@ public class AutoModeExecutor {
         autos.addObject("LeftSwitchAuto", new SideSwitchAuto(false));
         autos.addObject("RightSwitchAuto", new SideSwitchAuto(true));
 
+<<<<<<< HEAD
 
+=======
+        ArrayList<PathBuilder.Waypoint> waypoints = new ArrayList<>();
+        waypoints.add(new PathBuilder.Waypoint(0.0,0.0,0.0,0.0));
+//        waypoints.add(new PathBuilder.Waypoint(72.0,0.0,0.0,200.0));
+//        waypoints.add(new PathBuilder.Waypoint(196,0.0,0.0,100.0));
+        waypoints.add(new PathBuilder.Waypoint(60,-9,0,100.0));
+        waypoints.add(new PathBuilder.Waypoint(72,-18,0,100.0));
+
+        Path path = PathBuilder.INSTANCE.buildPathFromWaypoints(waypoints);
+>>>>>>> Auto-Commit
         autos.addObject("TurnTest", new DriveTurn(90, Double.POSITIVE_INFINITY, true));
         autos.addObject("Drive Forward Path Test",new SimplePathDriveTest());
         SmartDashboard.putData("Autos: ", autos);
