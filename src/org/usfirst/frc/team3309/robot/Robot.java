@@ -42,7 +42,7 @@ public class Robot extends TimedRobot {
 
     @Override
     public void robotInit() {
-        setPeriod(0.0042);
+        setPeriod(0.0026);
         pdp = new PowerDistributionPanel(0);
         AssemblyLocation.init();
         logger = Logger.getLogger("Robot");
