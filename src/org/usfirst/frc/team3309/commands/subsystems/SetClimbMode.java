@@ -9,7 +9,6 @@ public class SetClimbMode extends CommandGroup{
 
     public SetClimbMode() {
         addSequential(new LiftShiftToClimbMode());
-        addSequential(new FalconDoorsDeploy());
         addSequential(new LiftManualClimb());
     }
 

@@ -2,14 +2,17 @@ package org.usfirst.frc.team3309.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team3309.commands.subsystems.AssemblyLocation;
 import org.usfirst.frc.team3309.commands.subsystems.MoveAssembly;
 import org.usfirst.frc.team3309.commands.subsystems.PrepareForClimb;
 import org.usfirst.frc.team3309.commands.subsystems.SetClimbMode;
 import org.usfirst.frc.team3309.commands.subsystems.arms.ArmsClamp;
 import org.usfirst.frc.team3309.commands.subsystems.arms.ArmsOpen;
+import org.usfirst.frc.team3309.commands.subsystems.beltbar.BeltbarStop;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveSetHighGear;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveSetLowGear;
+import org.usfirst.frc.team3309.commands.subsystems.falcondoors.FalconDoorsDeploy;
 import org.usfirst.frc.team3309.lib.input.InputXbox;
 
 /*
@@ -24,9 +27,10 @@ public class OI {
     public static Joystick driverRemoteLeft = new Joystick(0);
     public static Joystick driverRemoteRight = new Joystick(1);
 
-    public static JoystickButton driverShiftButton = new JoystickButton(driverRemoteLeft, Constants.JOYSTICK_TRIGGER_BUTTON);
+    private static JoystickButton driverShiftButton = new JoystickButton(driverRemoteLeft, Constants.JOYSTICK_TRIGGER_BUTTON);
 
     OI() {
+
         /* =====DRIVER===== */
         driverShiftButton.whenPressed(new DriveSetLowGear());
         driverShiftButton.whenReleased(new DriveSetHighGear());
@@ -37,6 +41,9 @@ public class OI {
 
         operatorRemote.startButton.whenPressed(new PrepareForClimb());
         operatorRemote.rightStick.whenPressed(new SetClimbMode());
+        operatorRemote.backButton.whenPressed(new FalconDoorsDeploy());
+
+        operatorRemote.leftStick.whenPressed(new BeltbarStop());
 
         operatorRemote.buttonX.whenPressed(new MoveAssembly(AssemblyLocation.INTAKE, true));
         operatorRemote.buttonY.whenPressed(new MoveAssembly(AssemblyLocation.BOTTOM, true));

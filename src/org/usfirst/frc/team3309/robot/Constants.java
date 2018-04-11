@@ -35,22 +35,21 @@ public class Constants {
     }
 
     public static int JOYSTICK_TRIGGER_BUTTON = 1;
-    public static int JOYSTICK_SHOOT_BUTTON = 2;
 
-    public static double BELTBAR_BOTTOM_POS = Constants.currentRobot == Robot.PRACTICE ? -2680 : -1950;
-    public static double BELTBAR_INTAKE_POS = Constants.currentRobot == Robot.PRACTICE ? -1550 : -640;
-    public static double BELTBAR_EXCHANGE_POS = Constants.currentRobot == Robot.PRACTICE ? -1800 : -900;
-    public static double BELTBAR_EJECT_POS = Constants.currentRobot == Robot.PRACTICE ? -2400 : -1690;
-    public static double BELTBAR_SCALE_UP_POS = Constants.currentRobot == Robot.PRACTICE ? -2550 : -1690;
-    public static double BELTBAR_SWITCH_POS = Constants.currentRobot == Robot.PRACTICE ? -2000 : -1090;
-    public static double BELTBAR_CLIMB = Constants.currentRobot == Robot.PRACTICE ? -2800 : -1950;
+    public static double BELTBAR_BOTTOM_POS = Constants.currentRobot == Robot.PRACTICE ? -2680 : -2700;
+    public static double BELTBAR_INTAKE_POS = Constants.currentRobot == Robot.PRACTICE ? -1550 : -1500;
+    public static double BELTBAR_EXCHANGE_POS = Constants.currentRobot == Robot.PRACTICE ? -1800 : -1700;
+    public static double BELTBAR_EJECT_POS = Constants.currentRobot == Robot.PRACTICE ? -2400 : -2300;
+    public static double BELTBAR_SCALE_UP_POS = Constants.currentRobot == Robot.PRACTICE ? -2550 : -2500;
+    public static double BELTBAR_SWITCH_POS = Constants.currentRobot == Robot.PRACTICE ? -2000 : -1900;
+    public static double BELTBAR_CLIMB = Constants.currentRobot == Robot.PRACTICE ? -2800 : -2700;
 
     public static double ELEVATOR_BOTTOM_POS = 0;
     public static double ELEVATOR_INTAKE_POS = 1100;
     public static double ELEVATOR_EXCHANGE_POS = 700;
     public static double ELEVATOR_SWITCH_POS = 15000;
-    public static double ELEVATOR_SCALE_DOWN_POS = 28000;
-    public static double ELEVATOR_SCALE_MIDDLE_POS = 35000;
+    public static double ELEVATOR_SCALE_DOWN_POS = 31000;
+    public static double ELEVATOR_SCALE_MIDDLE_POS = 36000;
     public static double ELEVATOR_SCALE_TOP_POS = 40000;
 
     // drive
@@ -86,7 +85,7 @@ public class Constants {
     public static final int LIFT_HOLDER_A = 3;
     public static final int LIFT_HOLDER_B = 0;
 
-    public static final double LIFT_NUDGE_SPEED = 1800;
+    public static final double LIFT_NUDGE_SPEED = 6955; // viva chile!
 
     // beltbar
     public static final int BELTBAR_0 = 30;

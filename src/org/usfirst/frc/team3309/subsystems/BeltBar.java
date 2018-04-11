@@ -10,11 +10,9 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.usfirst.frc.team3309.commands.subsystems.AssemblyLocation;
 import org.usfirst.frc.team3309.commands.subsystems.beltbar.BeltBarManualTest;
 import org.usfirst.frc.team3309.lib.actuators.TalonSRXMC;
 import org.usfirst.frc.team3309.robot.Constants;
-import org.usfirst.frc.team3309.robot.Robot;
 
 public class BeltBar extends Subsystem {
 
@@ -28,6 +26,7 @@ public class BeltBar extends Subsystem {
     private boolean inRecovery = false;
 
     private boolean isClimbing = false;
+    private boolean isManual = false;
 
     private double goalAngle;
 
@@ -37,10 +36,10 @@ public class BeltBar extends Subsystem {
     private final int MAX_CURRENT = 18;
     private final int MAX_CURRENT_DURATION = 125;
 
-    public int FORWARD_SOFT_LIM = -400;
-    public int REVERSE_SOFT_LIM = -2050;
+    public int FORWARD_SOFT_LIM = 0;
+    public int REVERSE_SOFT_LIM = 0;
 
-    private final double LIM_TOLERANCE = 300;
+    private final double LIM_TOLERANCE = 500;
 
     public BeltBar() {
         init();
@@ -66,14 +65,14 @@ public class BeltBar extends Subsystem {
         }
 
         if (Constants.currentRobot == Constants.Robot.COMPETITION) {
-            REVERSE_SOFT_LIM = -2100;
+            REVERSE_SOFT_LIM = -3200;
             FORWARD_SOFT_LIM = -500;
         }
 
         masterBar.configForwardSoftLimitThreshold(FORWARD_SOFT_LIM, 10);
-        masterBar.configForwardSoftLimitEnable(true, 10);
+        masterBar.configForwardSoftLimitEnable(false, 10);
         masterBar.configReverseSoftLimitThreshold(REVERSE_SOFT_LIM, 10);
-        masterBar.configReverseSoftLimitEnable(true, 10);
+        masterBar.configReverseSoftLimitEnable(false, 10);
 
         masterBar.configPeakCurrentLimit(MAX_CURRENT, 10);
         masterBar.configPeakCurrentDuration(MAX_CURRENT_DURATION, 10);
@@ -85,58 +84,32 @@ public class BeltBar extends Subsystem {
 
     @Override
     public void periodic() {
-        adjustBackInLimits();
+        stopIfOut();
         if (isClimbing) {
             DriverStation.reportWarning("I am climbing!", false);
-            masterBar.configForwardSoftLimitEnable(false, 10);
-            masterBar.configReverseSoftLimitEnable(false, 10);
-            masterBar.changeToDisabledMode();
+            disableLimits();
+            masterBar.set(ControlMode.Disabled, 0);
         }
-//        SmartDashboard.putNumber("Beltbar pos: ", getPosition());
-
+        SmartDashboard.putNumber("Beltbar pos: ", getPosition());
     }
 
-
-    private void adjustBackInLimits() {
-        if (Robot.beltBar.getPosition() > Robot.beltBar.FORWARD_SOFT_LIM + LIM_TOLERANCE &&
-                Robot.beltBar.getPosition() < Robot.beltBar.REVERSE_SOFT_LIM - LIM_TOLERANCE) {
-            masterBar.set(ControlMode.Disabled, 0);
-            masterBar.reset();
-            init();
-            DriverStation.reportError("Catting on beltbar!!!", false);
-        } else {
-            if (!isClimbing) {
-                if (getPosition() > FORWARD_SOFT_LIM) {
-                    masterBar.set(ControlMode.Disabled, 0);
-                    masterBar.reset();
-                    init();
-                    masterBar.configForwardSoftLimitEnable(false, 10);
-                    masterBar.set(ControlMode.Position, AssemblyLocation.INTAKE.getBeltBarPosition());
-                    DriverStation.reportWarning("Beltbar exceeded forward limit! Correcting...", false);
-                    inRecovery = true;
-                } else if (getPosition() < REVERSE_SOFT_LIM) {
-                    masterBar.set(ControlMode.Disabled, 0);
-                    masterBar.reset();
-                    init();
-                    masterBar.configReverseSoftLimitEnable(false, 10);
-                    masterBar.set(ControlMode.Position, AssemblyLocation.BOTTOM.getBeltBarPosition());
-                    DriverStation.reportWarning("Beltbar exceeded reverse limit! Correcting...", false);
-                    inRecovery = true;
-                } else {
-                    if (inRecovery) {
-                        masterBar.configForwardSoftLimitEnable(true, 10);
-                        masterBar.configReverseSoftLimitEnable(true, 10);
-                        inRecovery = false;
-                    }
-                }
+    private void stopIfOut() {
+        if (!isClimbing && !isManual) {
+            if (getPosition() > FORWARD_SOFT_LIM + LIM_TOLERANCE) {
+                disableLimits();
+                masterBar.set(ControlMode.Disabled, 0);
+                DriverStation.reportWarning("Catting on beltbar!! Outside front!", false);
+            } else if (getPosition() < REVERSE_SOFT_LIM - LIM_TOLERANCE) {
+                disableLimits();
+                masterBar.set(ControlMode.Disabled, 0);
+                DriverStation.reportWarning("Catting on beltbar!! Outside back!", false);
             }
         }
-
     }
 
     @Override
     protected void initDefaultCommand() {
-        //     setDefaultCommand(new BeltBarManualTest());
+        setDefaultCommand(new BeltBarManualTest());
     }
 
     public void sendToDashboard() {
@@ -152,6 +125,10 @@ public class BeltBar extends Subsystem {
         table.getEntry("current: ").setNumber(masterBar.getOutputCurrent());
         SmartDashboard.putNumber("beltbar pos: ", getPosition());
 
+    }
+
+    public void set(ControlMode controlMode, double value) {
+        masterBar.set(controlMode, value);
     }
 
     public double getPosition() {
@@ -216,6 +193,19 @@ public class BeltBar extends Subsystem {
 
     public void setClimbing(boolean climbing) {
         isClimbing = climbing;
+    }
+
+    public void setIsManual(boolean isManual) {
+        this.isManual = isManual;
+    }
+
+    public boolean getIsManual() {
+        return isManual;
+    }
+
+    public void disableLimits() {
+        masterBar.configForwardSoftLimitEnable(false, 10);
+        masterBar.configReverseSoftLimitEnable(false, 10);
     }
 
 }

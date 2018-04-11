@@ -1,8 +1,6 @@
 package org.usfirst.frc.team3309.commands.subsystems.beltbar;
 
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team3309.lib.LibTimer;
 import org.usfirst.frc.team3309.robot.Constants;
 import org.usfirst.frc.team3309.robot.Robot;
@@ -26,30 +24,35 @@ public class BeltBarMoveToPos extends Command {
 
     @Override
     protected void initialize() {
-        Robot.beltBar.setGoalAngle(goalAngle);
-        Robot.beltBar.changeToPositionMode();
-        Robot.beltBar.changeToBrakeMode();
-        timer.start();
+        if (!Robot.beltBar.getIsManual()) {
+            Robot.beltBar.setGoalAngle(goalAngle);
+            Robot.beltBar.changeToPositionMode();
+            Robot.beltBar.changeToBrakeMode();
+            timer.start();
+        }
     }
 
     @Override
     protected void execute() {
-        if (Robot.lift.getPosition() > MIN_LIFT_POS_TO_ADJUST_HOME &&
-                Math.abs(goalAngle - Constants.BELTBAR_BOTTOM_POS) < 10.0 && !hasStarted) {
-            double newAngle = goalAngle + BELTBAR_GOAL_ADJUSTMENT;
-
-            Robot.beltBar.set(newAngle);
-            hasStarted = true;
+        if (!Robot.beltBar.getIsManual()) {
+            if (Robot.lift.getPosition() > MIN_LIFT_POS_TO_ADJUST_HOME &&
+                    Math.abs(goalAngle - Constants.BELTBAR_BOTTOM_POS) < 10.0 && !hasStarted) {
+                double newAngle = goalAngle + BELTBAR_GOAL_ADJUSTMENT;
+                Robot.beltBar.set(newAngle);
+                hasStarted = true;
+            } else {
+                Robot.beltBar.set(goalAngle);
+                hasStarted = false;
+            }
+            error = goalAngle - Robot.beltBar.getPosition();
         } else {
-            Robot.beltBar.set(goalAngle);
-            hasStarted = false;
+            new BeltBarManualTest().start();
         }
-        error = goalAngle - Robot.beltBar.getPosition();
     }
 
     @Override
     protected boolean isFinished() {
-        return Math.abs(error) < ERROR_THRESHOLD;
+        return Math.abs(error) < ERROR_THRESHOLD || Robot.beltBar.getIsManual();
     }
 
     @Override
