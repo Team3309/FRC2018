@@ -48,7 +48,6 @@ public class ScaleOnlyAuto extends CommandGroup {
         if (onRight) {
             if (isRightScale) {
                 /* first cube on scale */
-                addSequential(new ArmsClamp());
                 addSequential(new DriveStraight(122, 40000, 0));
                 addParallel(new WaitAndMoveAssembly(0.2, AssemblyLocation.SCALE_UP));
                 addSequential(new DriveArc(Length.fromInches(5), -24, 25000, false, true)); // 8, -32
