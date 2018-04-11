@@ -10,6 +10,7 @@ import org.usfirst.frc.team3309.commands.subsystems.lift.LiftFindZero;
 import org.usfirst.frc.team3309.commands.subsystems.rollers.RollersSetIn;
 import org.usfirst.frc.team3309.subsystems.*;
 import org.usfirst.frc.team4322.logging.RobotLogger;
+import org.usfirst.frc.team4322.math.Transform;
 import org.usfirst.frc.team4322.motion.RobotPositionIntegrator;
 
 import java.util.logging.Logger;
@@ -101,6 +102,8 @@ public class Robot extends TimedRobot {
 
     @Override
     public void autonomousPeriodic() {
+        Transform tr = RobotPositionIntegrator.INSTANCE.getCurrentPose()
+        RobotLogger.INSTANCE.info("%f,%f,%f",tr.getTranslation().getX(),tr.getTranslation().getY(),tr.getRotation().degrees());
         Scheduler.getInstance().run();
         sendToDashboard();
     }
@@ -109,7 +112,6 @@ public class Robot extends TimedRobot {
 
     @Override
     public void teleopInit() {
-        RobotPositionIntegrator.INSTANCE.
         drive.setClosedRampRate(0);
         drive.clearPigeon();
         Scheduler.getInstance().removeAll();
