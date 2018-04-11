@@ -15,10 +15,10 @@ init {
     waypoints.add(PathBuilder.Waypoint(0.0, 0.0, 0.0, 0.0))
 //        waypoints.add(new PathBuilder.Waypoint(72.0,0.0,0.0,200.0));
 //        waypoints.add(new PathBuilder.Waypoint(196,0.0,0.0,100.0));
-    waypoints.add(PathBuilder.Waypoint(36.0, -8.0, 0.0, 37.0))
-    waypoints.add(PathBuilder.Waypoint(82.0, -16.0, 0.0, 65.0))
-    waypoints.add(PathBuilder.Waypoint(130.0, -30.0, 0.0, 100.0,"midpoint"))
-    waypoints.add(PathBuilder.Waypoint(250.0, -50.0, 0.0, 100.0))
+    waypoints.add(PathBuilder.Waypoint(36.0, -12.0, 0.0, 37.0))
+    waypoints.add(PathBuilder.Waypoint(82.0, -18.0, 0.0, 65.0))
+    waypoints.add(PathBuilder.Waypoint(130.0, -30.0, 0.0, 80.0,"midpoint"))
+    waypoints.add(PathBuilder.Waypoint(250.0, -50.0, 0.0, 80.0))
 
     val path = PathBuilder.buildPathFromWaypoints(waypoints)
     addParallel(object : CommandGroup(){
