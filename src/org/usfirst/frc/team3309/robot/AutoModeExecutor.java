@@ -38,7 +38,7 @@ public class AutoModeExecutor {
 //        waypoints.add(new PathBuilder.Waypoint(196,0.0,0.0,100.0));
         waypoints.add(new PathBuilder.Waypoint(72,-16,0,50.0));
         waypoints.add(new PathBuilder.Waypoint(100,-20,0,75.0));
-        waypoints.add(new PathBuilder.Waypoint(260,-40,0,200.0));
+        waypoints.add(new PathBuilder.Waypoint(260,-60,0,200.0));
 
         Path path = PathBuilder.INSTANCE.buildPathFromWaypoints(waypoints);
         autos.addObject("TurnTest", new DriveTurn(90, Double.POSITIVE_INFINITY, true));
