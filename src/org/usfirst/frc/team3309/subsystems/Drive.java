@@ -253,6 +253,10 @@ public class Drive extends Subsystem {
         right0.changeToPercentMode();
     }
 
+    public void setClosedRampRate(double rr) {
+        left0.configClosedloopRamp(rr,10);
+        right0.configClosedloopRamp(rr,10);
+    }
     public void changeToPositionMode() {
         left0.changeToPositionMode();
         right0.changeToPositionMode();

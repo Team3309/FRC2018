@@ -75,6 +75,7 @@ public class Robot extends TimedRobot {
     @Override
     public void autonomousInit() {
         drive.clearPigeon();
+        drive.setClosedRampRate(.25);
         RobotPositionIntegrator.INSTANCE.reset();
         Scheduler.getInstance().removeAll();
         if (DriverStation.getInstance().getGameSpecificMessage() != null) {
@@ -106,6 +107,7 @@ public class Robot extends TimedRobot {
 
     @Override
     public void teleopInit() {
+        drive.setClosedRampRate(0);
         drive.clearPigeon();
         Scheduler.getInstance().removeAll();
         start = Timer.getFPGATimestamp();
