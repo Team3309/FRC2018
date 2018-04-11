@@ -75,6 +75,7 @@ public class Robot extends TimedRobot {
     @Override
     public void autonomousInit() {
         drive.clearPigeon();
+        RobotPositionIntegrator.INSTANCE.reset();
         Scheduler.getInstance().removeAll();
         if (DriverStation.getInstance().getGameSpecificMessage() != null) {
             isLeftSwitch = DriverStation.getInstance().getGameSpecificMessage().charAt(0) == 'L';
