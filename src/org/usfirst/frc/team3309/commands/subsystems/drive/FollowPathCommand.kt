@@ -24,8 +24,8 @@ class FollowPathCommand(private val path : Path, private val reverse : Boolean =
     override fun execute() {
         Robot.drive.changeToVelocityMode()
         val out = pathFollower.execute(Timer.getFPGATimestamp())
-        val outLeft = Robot.drive.inchesToEncoderCounts(out.second)/2
-        val outRight = Robot.drive.inchesToEncoderCounts(out.first)/2
+        val outLeft = Robot.drive.inchesToEncoderCounts(out.first)
+        val outRight = Robot.drive.inchesToEncoderCounts(out.second)
         SmartDashboard.putNumber("Left Target: ",outLeft)
         SmartDashboard.putNumber("Right Target: ",outRight)
         Robot.drive.setLeftRight(outLeft,outRight)
