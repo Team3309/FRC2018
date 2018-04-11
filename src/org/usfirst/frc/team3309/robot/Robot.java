@@ -102,9 +102,9 @@ public class Robot extends TimedRobot {
 
     @Override
     public void autonomousPeriodic() {
-        Transform tr = RobotPositionIntegrator.INSTANCE.getCurrentPose()
-        RobotLogger.INSTANCE.info("%f,%f,%f",tr.getTranslation().getX(),tr.getTranslation().getY(),tr.getRotation().degrees());
         Scheduler.getInstance().run();
+        Transform tr = RobotPositionIntegrator.INSTANCE.getCurrentPose();
+        RobotLogger.INSTANCE.info("%f,%f,%f",tr.getTranslation().getX(),tr.getTranslation().getY(),tr.getRotation().degrees());
         sendToDashboard();
     }
 
@@ -112,6 +112,7 @@ public class Robot extends TimedRobot {
 
     @Override
     public void teleopInit() {
+        RobotLogger.INSTANCE.update();
         drive.setClosedRampRate(0);
         drive.clearPigeon();
         Scheduler.getInstance().removeAll();
