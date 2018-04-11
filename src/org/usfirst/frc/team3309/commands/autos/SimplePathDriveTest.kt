@@ -15,7 +15,8 @@ init {
     waypoints.add(PathBuilder.Waypoint(0.0, 0.0, 0.0, 0.0))
 //        waypoints.add(new PathBuilder.Waypoint(72.0,0.0,0.0,200.0));
 //        waypoints.add(new PathBuilder.Waypoint(196,0.0,0.0,100.0));
-    waypoints.add(PathBuilder.Waypoint(72.0, -16.0, 0.0, 65.0))
+    waypoints.add(PathBuilder.Waypoint(36.0, -8.0, 0.0, 35.0))
+    waypoints.add(PathBuilder.Waypoint(72.0, -16.0, 0.0, 35.0))
     waypoints.add(PathBuilder.Waypoint(130.0, -30.0, 0.0, 65.0,"midpoint"))
     waypoints.add(PathBuilder.Waypoint(250.0, -50.0, 0.0, 65.0))
 
