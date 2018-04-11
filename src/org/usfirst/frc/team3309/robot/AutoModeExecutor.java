@@ -34,7 +34,7 @@ public class AutoModeExecutor {
 
 
         autos.addObject("TurnTest", new DriveTurn(90, Double.POSITIVE_INFINITY, true));
-        autos.addObject("Drive Forward Path Test",);
+        autos.addObject("Drive Forward Path Test",new SimplePathDriveTest());
         SmartDashboard.putData("Autos: ", autos);
     }
 
