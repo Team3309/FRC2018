@@ -18,7 +18,7 @@ init {
     waypoints.add(PathBuilder.Waypoint(15.0, -5.0, 0.0, 27.0))
     waypoints.add(PathBuilder.Waypoint(29.0, -7.0, 0.0, 37.0))
     waypoints.add(PathBuilder.Waypoint(36.0, -10.0, 0.0, 40.0))
-    waypoints.add(PathBuilder.Waypoint(100.0, -25.0, 0.0, 37.0))
+    waypoints.add(PathBuilder.Waypoint(100.0, -25.0, 0.0, 40.0))
     waypoints.add(PathBuilder.Waypoint(110.0, -25.0, 0.0, 60.0))
     waypoints.add(PathBuilder.Waypoint(130.0, -35.0, 0.0, 75.0,"midpoint"))
     waypoints.add(PathBuilder.Waypoint(240.0, -30.0, 0.0, 75.0))
