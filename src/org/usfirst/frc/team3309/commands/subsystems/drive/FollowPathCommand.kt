@@ -11,7 +11,7 @@ import org.usfirst.frc.team4322.motion.RobotPositionIntegrator
 
 class FollowPathCommand(private val path : Path, private val reverse : Boolean = false) : Command() {
     val pathFollower = PathFollower(path,reverse, PathFollower.Parameters(Lookahead(6.0,18.0,6.0,60.0),
-            0.000013309,1.8,0.015,0.02,1.0,0.055,60.0,58.05,0.75,8.0,3.0))
+            0.000013309,1.8,0.015,0.02,1.0,0.06,60.0,90.0,0.75,8.0,3.0))
 
     init {
         requires(Robot.drive)
@@ -24,9 +24,11 @@ class FollowPathCommand(private val path : Path, private val reverse : Boolean =
     override fun execute() {
         Robot.drive.changeToVelocityMode()
         val out = pathFollower.execute(Timer.getFPGATimestamp())
-        SmartDashboard.putNumber("Left Target: ",Robot.drive.inchesToEncoderCounts(out.first))
-        SmartDashboard.putNumber("Right Target: ",Robot.drive.inchesToEncoderCounts(out.second))
-        Robot.drive.setLeftRight(Robot.drive.inchesToEncoderCounts(out.first),Robot.drive.inchesToEncoderCounts(out.second))
+        val outLeft = Robot.drive.inchesToEncoderCounts(out.second)/10
+        val outRight = Robot.drive.inchesToEncoderCounts(out.first)/10
+        SmartDashboard.putNumber("Left Target: ",outLeft)
+        SmartDashboard.putNumber("Right Target: ",outRight)
+        Robot.drive.setLeftRight(outLeft,outRight)
     }
 
     override fun isFinished(): Boolean {
