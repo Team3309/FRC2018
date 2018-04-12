@@ -11,6 +11,7 @@ public class SCurveTestAuto extends CommandGroup {
     public void start() {
         addSequential(new DriveArc(Length.fromInches(13), -37, 27000, false, true)); // 16
         addSequential(new DriveArc(Length.fromInches(13), 37, 27000, false, true)); // 16
+        addSequential(new DriveArc(Length.fromInches(13), 37, 27000, false, true)); // 16
         addSequential(new DriveArc(Length.fromInches(13), -37, 27000, false, true)); // 16
         addSequential(new DriveStraight(10, 17000, true, true));
         super.start();
