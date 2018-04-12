@@ -29,6 +29,9 @@ public class ArcController extends Controller1<DriveSignal, DriveState> implemen
     private final double goalVelocity;
     private final double WHEELBASE;
 
+    private double leftErr;
+    private double rightErr;
+
     public ArcController(double radius, double ang, double WHEELBASE, double goalVelocity) {
         this.WHEELBASE = WHEELBASE;
         curRadius = radius;
@@ -82,6 +85,9 @@ public class ArcController extends Controller1<DriveSignal, DriveState> implemen
             rightVelocity = goalVelocity;
         }
 
+        leftErr = leftVelocity - Robot.drive.getLeftVelocity();
+        rightErr = rightVelocity - Robot.drive.getRightVelocity();
+
   /*      SmartDashboard.putNumber("turing value", getTurningValue());
         SmartDashboard.putNumber("desLeftVel", leftVelocity);
         SmartDashboard.putNumber("desRightVel", rightVelocity);
@@ -108,6 +114,14 @@ public class ArcController extends Controller1<DriveSignal, DriveState> implemen
 
     public void setAngleErrorThreshold(double angleErrorThreshold) {
         this.angleErrorThreshold = angleErrorThreshold;
+    }
+
+    public double getLeftError() {
+        return leftErr;
+    }
+
+    public double getRightError() {
+        return rightErr;
     }
 
 }

@@ -1,6 +1,8 @@
 package org.usfirst.frc.team3309.commands.subsystems.drive;
 
+import com.sun.org.apache.xalan.internal.xsltc.trax.SmartTransformerFactoryImpl;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team3309.lib.CommandEx;
 import org.usfirst.frc.team3309.lib.controllers.drive.ArcController;
 import org.usfirst.frc.team3309.lib.controllers.helpers.DriveSignal;
@@ -26,6 +28,8 @@ public class DriveArc extends CommandEx {
         this.backwards = backwards;
         arcController = new ArcController(Robot.drive.inchesToEncoderCounts(radius.toInches()), Math.toRadians(angleDegrees),
                 Robot.drive.inchesToEncoderCounts(Constants.WHEELBASE_INCHES.toInches()), vel);
+        SmartDashboard.putNumber("left arc error", 0);
+        SmartDashboard.putNumber("right arc error", 0);
     }
 
     public DriveArc(Length radius, double angleDegrees, double vel, boolean backwards) {
@@ -56,7 +60,8 @@ public class DriveArc extends CommandEx {
         }
         DriveState driveState = new DriveState(Robot.drive.getEncoderPos(), Math.toRadians(Robot.drive.getAngPos()));
         DriveSignal driveSignal = arcController.update(driveState);
-        System.out.println("Drive angle " + Robot.drive.getAngPos());
+        SmartDashboard.putNumber("left arc error", arcController.getLeftError());
+        SmartDashboard.putNumber("right arc error", arcController.getRightError());
         if (backwards) {
             Robot.drive.setLeftRight(-driveSignal.getLeftMotor(), -driveSignal.getRightMotor());
         } else {
