@@ -25,6 +25,8 @@ public class AutoModeExecutor {
 
         autos.addObject("StayRightAuto", new StayRightAuto());
 
+        autos.addObject("SCurveTest", new SCurveTestAuto());
+
         SmartDashboard.putData("Autos: ", autos);
     }
 
