@@ -36,6 +36,7 @@ public class DriveTurn extends CommandEx {
     public DriveTurn(double goalAngle, double timeoutSec, boolean isPigeon) {
         this(goalAngle, timeoutSec);
         this.isPigeon = isPigeon;
+
     }
 
     @Override
@@ -61,7 +62,7 @@ public class DriveTurn extends CommandEx {
         double kI = SmartDashboard.getNumber("kI", 0.0); // 0.0014
         double kD = SmartDashboard.getNumber("kD", 0.0); // 0.068
         kP = 0.0775;
-        kI = 0.0018;
+        kI = 0.0013;
         kD = 0.068;
         angleController = new PIDController(new PIDConstants(kP, kI, kD));
         double power = 30000 * angleController.update(isPigeon ? Robot.drive.getPigeonPos() : Robot.drive.getAngVel(), goalAngle);
