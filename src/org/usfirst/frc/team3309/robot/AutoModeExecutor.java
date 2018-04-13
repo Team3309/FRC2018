@@ -27,6 +27,8 @@ public class AutoModeExecutor {
 
         autos.addObject("SCurveTest", new SCurveTestAuto());
 
+        autos.addObject("DriveTurnTest", new DriveTurn(90, 1.0, true));
+
         SmartDashboard.putData("Autos: ", autos);
     }
 
