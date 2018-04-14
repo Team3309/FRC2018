@@ -3,6 +3,7 @@ package org.usfirst.frc.team3309.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.command.Command;
+import org.usfirst.frc.team3309.commands.FlashLED;
 import org.usfirst.frc.team3309.commands.subsystems.*;
 import org.usfirst.frc.team3309.commands.subsystems.arms.ArmsClamp;
 import org.usfirst.frc.team3309.commands.subsystems.arms.ArmsOpen;
@@ -25,12 +26,18 @@ public class OI {
     public static Joystick driverRemoteRight = new Joystick(1);
 
     private static JoystickButton driverShiftButton = new JoystickButton(driverRemoteLeft, Constants.JOYSTICK_TRIGGER_BUTTON);
+    private static JoystickButton driverFlashButtonLeft = new JoystickButton(driverRemoteLeft, 2);
+    private static JoystickButton driverFlashButtonRight = new JoystickButton(driverRemoteRight, 2);
+
 
     OI() {
 
         /* =====DRIVER===== */
         driverShiftButton.whenPressed(new DriveSetLowGear());
         driverShiftButton.whenReleased(new DriveSetHighGear());
+
+        driverFlashButtonLeft.whenPressed(new FlashLED());
+        driverFlashButtonRight.whenPressed(new FlashLED());
 
         /* =====OPERATOR===== */
         operatorRemote.buttonA.whenPressed(new ArmsClamp());
@@ -41,6 +48,8 @@ public class OI {
         operatorRemote.backButton.whenPressed(new FalconDoorsDeploy());
 
         operatorRemote.leftStick.whenPressed(new BeltbarStop());
+
+        operatorRemote.leftBumper.whenPressed(new FlashLED());
 
         operatorRemote.buttonX.whenPressed(new FindAndGetCube());
         operatorRemote.buttonY.whenPressed(new MoveAssembly(AssemblyLocation.BOTTOM, true));

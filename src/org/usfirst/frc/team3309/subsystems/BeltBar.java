@@ -8,9 +8,11 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team3309.commands.subsystems.beltbar.BeltBarManualTest;
+import org.usfirst.frc.team3309.lib.LibTimer;
 import org.usfirst.frc.team3309.lib.actuators.TalonSRXMC;
 import org.usfirst.frc.team3309.robot.Constants;
 
@@ -22,6 +24,8 @@ public class BeltBar extends Subsystem {
     private AnalogInput hasCubeSensorRight = new AnalogInput(Constants.BELTBAR_SHARP_SENSOR_RIGHT);
 
     private DigitalInput hallEffectSensor = new DigitalInput(Constants.BELTBAR_HALL_EFFECT);
+
+    private LibTimer timer  = new LibTimer(0.2);
 
     private boolean inRecovery = false;
 
@@ -171,7 +175,7 @@ public class BeltBar extends Subsystem {
     }
 
     public boolean isCubePresent() {
-        return hasCubeSensorLeft.getAverageValue() > 1200 && hasCubeSensorRight.getAverageValue() > 90;
+        return timer.isConditionMaintained(hasCubeSensorLeft.getAverageValue() > 1200 && hasCubeSensorRight.getAverageValue() > 90);
     }
 
     public double getSharpSensorValue() {
@@ -201,6 +205,10 @@ public class BeltBar extends Subsystem {
     public void disableLimits() {
         masterBar.configForwardSoftLimitEnable(false, 10);
         masterBar.configReverseSoftLimitEnable(false, 10);
+    }
+
+    public void resetTimer() {
+        timer.reset();
     }
 
 }

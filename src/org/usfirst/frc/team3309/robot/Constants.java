@@ -100,8 +100,12 @@ public class Constants {
     // falcon doors
     public static final int FALCONDOORS_SOLENOID = 4;
 
+    // led
+    public static final int LED_CHANNEL = 9;
+
     // robot constants
     public static final double AUTO_ROLLER_INTAKE_POWER = -1;
+
 
     public static final double DRIVE_ENCODER_COUNTS_PER_REV = 4096*9.6;
     public static final double WHEEL_DIAMETER_INCHES = 6.0;

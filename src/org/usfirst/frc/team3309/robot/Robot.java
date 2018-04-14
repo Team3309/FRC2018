@@ -4,10 +4,8 @@ import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team3309.commands.subsystems.AssemblyLocation;
 import org.usfirst.frc.team3309.commands.subsystems.lift.LiftFindZero;
-import org.usfirst.frc.team3309.commands.subsystems.rollers.RollersSetIn;
 import org.usfirst.frc.team3309.subsystems.*;
 
 import java.util.logging.Logger;
@@ -23,6 +21,7 @@ public class Robot extends TimedRobot {
     public static FalconDoors falconDoors;
     public static Arms arms;
     public static Rollers rollers;
+    public static LED led;
 
     private Compressor c;
     private OI oi;
@@ -59,6 +58,7 @@ public class Robot extends TimedRobot {
         rollers = new Rollers();
         oi = new OI();
         c = new Compressor();
+        led = new LED();
         LiveWindow.disableTelemetry(pdp);
         c.start();
         drive.reset();
