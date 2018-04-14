@@ -35,8 +35,8 @@ public class OI {
         driverShiftButton.whenPressed(new DriveSetLowGear());
         driverShiftButton.whenReleased(new DriveSetHighGear());
 
-        driverFlashButtonLeft.whileHeld(new FlashLED());
-        driverFlashButtonRight.whileHeld(new FlashLED());
+        driverFlashButtonLeft.whenPressed(new FlashLED());
+        driverFlashButtonRight.whenPressed(new FlashLED());
 
         /* =====OPERATOR===== */
         operatorRemote.buttonA.whenPressed(new ArmsClamp());
@@ -48,7 +48,7 @@ public class OI {
 
         operatorRemote.leftStick.whenPressed(new BeltbarStop());
 
-        operatorRemote.leftBumper.whileHeld(new FlashLED());
+        operatorRemote.leftBumper.whenPressed(new FlashLED());
 
         operatorRemote.buttonX.whenPressed(new FindAndGetCube());
         operatorRemote.buttonY.whenPressed(new MoveAssembly(AssemblyLocation.BOTTOM, true));
