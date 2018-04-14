@@ -25,7 +25,7 @@ public class FlashLED extends Command {
         double timeElapsed = now - start;
         if (timeElapsed < 0.065) {
             Robot.led.set(5.0);
-        } else if (timeElapsed < 0.4) {
+        } else if (timeElapsed < 0.3) {
             Robot.led.set(0);
         } else {
             start = now;
