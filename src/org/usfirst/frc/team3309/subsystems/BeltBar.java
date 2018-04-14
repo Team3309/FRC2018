@@ -119,12 +119,11 @@ public class BeltBar extends Subsystem {
         table.getEntry("Beltbar control mode: ").setString(masterBar.getControlMode().toString());
         table.getEntry("Beltbar goal: ").setNumber(goalAngle);
         table.getEntry("sees cube").setBoolean(isCubePresent());
-        table.getEntry("sharp sensor left").setNumber(hasCubeSensorLeft.getAverageVoltage());
-        table.getEntry("sharp sensor right").setNumber(hasCubeSensorRight.getAverageVoltage());
+        table.getEntry("sharp sensor left").setNumber(hasCubeSensorLeft.getAverageValue());
+        table.getEntry("sharp sensor right").setNumber(hasCubeSensorRight.getAverageValue());
         table.getEntry("sharp sensor average").setNumber(getSharpSensorValue());
         table.getEntry("current: ").setNumber(masterBar.getOutputCurrent());
         SmartDashboard.putNumber("beltbar pos: ", getPosition());
-
     }
 
     public void set(ControlMode controlMode, double value) {
