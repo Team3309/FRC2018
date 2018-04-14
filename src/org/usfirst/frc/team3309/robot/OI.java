@@ -44,7 +44,8 @@ public class OI {
 
         operatorRemote.leftStick.whenPressed(new BeltbarStop());
 
-        operatorRemote.buttonX.whenPressed(new FindAndGetCube());
+    //    operatorRemote.buttonX.whenPressed(new FindAndGetCube());
+        operatorRemote.buttonX.whenPressed(new MoveAssembly(AssemblyLocation.INTAKE, true));
         operatorRemote.buttonY.whenPressed(new MoveAssembly(AssemblyLocation.BOTTOM, true));
         operatorRemote.dPad.down.whenPressed(new MoveAssembly(AssemblyLocation.SWITCH, true));
         operatorRemote.dPad.right.whenPressed(new MoveAssembly(AssemblyLocation.SCALE_DOWN, true));
