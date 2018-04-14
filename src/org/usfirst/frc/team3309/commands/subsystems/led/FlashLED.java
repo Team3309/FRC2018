@@ -11,7 +11,9 @@ public class FlashLED extends Command {
     }
 
     public void execute() {
-        blink();
+        for (int i = 0; i < 3; i++) {
+            blink();
+        }
     }
 
     private void blink() {
