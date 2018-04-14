@@ -2,8 +2,7 @@ package org.usfirst.frc.team3309.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import edu.wpi.first.wpilibj.command.Command;
-import org.usfirst.frc.team3309.commands.FlashLED;
+import org.usfirst.frc.team3309.commands.subsystems.led.FlashLED;
 import org.usfirst.frc.team3309.commands.subsystems.*;
 import org.usfirst.frc.team3309.commands.subsystems.arms.ArmsClamp;
 import org.usfirst.frc.team3309.commands.subsystems.arms.ArmsOpen;
