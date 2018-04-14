@@ -12,7 +12,6 @@ public class CheckForDrop extends Command {
             getGroup().cancel();
             new FindAndGetCube().start();
         }
-
     }
 
     @Override

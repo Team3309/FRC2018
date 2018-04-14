@@ -11,12 +11,9 @@ public class FindAndGetCube extends CommandGroup {
 
     public FindAndGetCube() {
         addParallel(new ArmsOpen());
-        addParallel(new RollersActuate(Constants.AUTO_ROLLER_INTAKE_POWER,3));
         addSequential(new MoveAssembly(AssemblyLocation.INTAKE));
         addSequential(new WaitForCube());
         addSequential(new ArmsClamp());
-        addSequential(new WaitCommand(0.6));
-        addParallel(new CheckForDrop());
-        addSequential(new MoveAssembly(AssemblyLocation.BOTTOM));
     }
+
 }

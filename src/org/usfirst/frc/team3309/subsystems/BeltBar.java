@@ -178,6 +178,7 @@ public class BeltBar extends Subsystem {
     public double getSharpSensorValue() {
         return (hasCubeSensorLeft.getAverageValue() + hasCubeSensorRight.getAverageValue()) / 2.0;
     }
+    
 
     public boolean isAtTop() {
         return hallEffectSensor.get();
@@ -185,10 +186,6 @@ public class BeltBar extends Subsystem {
 
     public void resetToTop() {
         masterBar.setSelectedSensorPosition(TOP_VALUE, 0, 10);
-    }
-
-    public double getCurrent() {
-        return masterBar.getOutputCurrent();
     }
 
     public void setClimbing(boolean climbing) {

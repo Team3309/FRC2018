@@ -71,6 +71,8 @@ public class Constants {
     public static final int ARMS_ACTUATOR_A = 2;
     public static final int ARMS_ACTUATOR_B = 1;
 
+    public static final int ARMS_OTHER_ACTUATOR = 5;
+
     // lift
     public static final int LIFT_0 = 20;
     public static final int LIFT_1 = 21;
