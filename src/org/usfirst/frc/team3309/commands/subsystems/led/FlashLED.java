@@ -16,6 +16,7 @@ public class FlashLED extends Command {
     @Override
     protected void initialize() {
         super.initialize();
+        numBlinks = 0;
         start = Timer.getFPGATimestamp();
     }
 
@@ -35,6 +36,6 @@ public class FlashLED extends Command {
 
     @Override
     protected boolean isFinished() {
-        return numBlinks>=3;
+        return numBlinks >= 3;
     }
 }
