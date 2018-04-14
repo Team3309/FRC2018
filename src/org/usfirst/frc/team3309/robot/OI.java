@@ -35,8 +35,8 @@ public class OI {
 
         /* =====OPERATOR===== */
         operatorRemote.leftBumper.whenPressed(new ArmsClamp());
-        operatorRemote.buttonA.whenPressed(new ArmsMiddle());
-        operatorRemote.buttonB.whenPressed(new ArmsOpen());
+        operatorRemote.buttonB.whenPressed(new ArmsMiddle());
+        operatorRemote.buttonA.whenPressed(new ArmsOpen());
 
         operatorRemote.startButton.whenPressed(new PrepareForClimb());
         operatorRemote.rightStick.whenPressed(new SetClimbMode());
