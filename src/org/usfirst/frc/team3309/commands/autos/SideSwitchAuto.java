@@ -8,6 +8,7 @@ import org.usfirst.frc.team3309.commands.subsystems.arms.ArmsOpen;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveArc;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveEnd;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveStraight;
+import org.usfirst.frc.team3309.commands.subsystems.drive.DriveTurn;
 import org.usfirst.frc.team3309.commands.subsystems.rollers.RollersActuate;
 import org.usfirst.frc.team3309.lib.math.Length;
 import org.usfirst.frc.team3309.robot.Robot;
@@ -27,7 +28,9 @@ public class SideSwitchAuto extends CommandGroup {
             if (Robot.isRightSwitch()) {
                 addSequential(new DriveStraight(67, 28000, 0));
                // addSequential(new MoveAssembly(AssemblyLocation.SWITCH));
-                addSequential(new DriveArc(Length.fromInches(10), -58, 23000, false, true));
+          //      addSequential(new DriveArc(Length.fromInches(10), -58, 23000, false, true));
+                addSequential(new DriveTurn(90, 1.0, true));
+                addSequential(new DriveStraight(12, 20000, 90));
 
                 addSequential(new WaitCommand(0.2));
                 addParallel(new ArmsOpen());
