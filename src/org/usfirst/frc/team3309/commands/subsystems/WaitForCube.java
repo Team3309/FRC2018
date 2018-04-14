@@ -7,8 +7,7 @@ public class WaitForCube extends Command {
 
     @Override
     protected boolean isFinished() {
-        return Robot.beltBar.isCubePresent() &&
-                Robot.arms.isArmsClosed();
+        return Robot.beltBar.isCubePresent();
     }
 
 }
