@@ -6,36 +6,35 @@ import org.usfirst.frc.team3309.robot.Robot;
 
 public class FlashLED extends Command {
 
-    private boolean isThreadActive = true;
+    private double start;
+    private int numBlinks = 0;
 
     public FlashLED() {
         requires(Robot.led);
     }
 
+    @Override
+    protected void initialize() {
+        super.initialize();
+        start = Timer.getFPGATimestamp();
+    }
+
     public void execute() {
-
-        new Thread() {
-            @Override
-            public void run() {
-                for (int i = 0; i < 3; i++) {
-                    try {
-                        Robot.led.set(5.0);
-                        sleep((long)0.065);
-                        Robot.led.set(0);
-                        sleep((long)0.3);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-
-                }
-                isThreadActive = false;
-            }
-        }.start();
+        double now = Timer.getFPGATimestamp();
+        double timeElapsed = now - start;
+        if (timeElapsed < 0.065) {
+            Robot.led.set(5.0);
+        } else if (timeElapsed < 0.4) {
+            Robot.led.set(0);
+        } else {
+            start = now;
+            numBlinks++;
+        }
     }
 
 
     @Override
     protected boolean isFinished() {
-        return !isThreadActive;
+        return numBlinks>=3;
     }
 }
