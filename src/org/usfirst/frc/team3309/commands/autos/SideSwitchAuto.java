@@ -53,7 +53,7 @@ public class SideSwitchAuto extends CommandGroup {
                 addParallel(new ArmsOpen());
                 addSequential(new RollersActuate(0.4, 1.0));
                 addSequential(new org.usfirst.frc.team3309.lib.WaitCommand(0.5));
-                addSequential(new DriveStraight(-20, 15000, -90));
+                addSequential(new DriveStraight(-12, 15000, -90));
                 addSequential(new DriveEnd());
              //   addSequential(new MoveAssembly(AssemblyLocation.BOTTOM));
             } else if (Robot.isRightSwitch()) {
