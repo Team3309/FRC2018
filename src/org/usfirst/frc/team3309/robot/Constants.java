@@ -101,7 +101,7 @@ public class Constants {
     public static final int FALCONDOORS_SOLENOID = 4;
 
     // led
-    public static final int LED_CHANNEL = 1;
+    public static final int LED_CHANNEL = 0;
 
     // robot constants
     public static final double AUTO_ROLLER_INTAKE_POWER = -1;
