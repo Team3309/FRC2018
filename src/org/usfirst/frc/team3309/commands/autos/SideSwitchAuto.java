@@ -22,11 +22,11 @@ public class SideSwitchAuto extends CommandGroup {
 
     @Override
     public void start() {
-        addParallel(new MoveAssembly(AssemblyLocation.BOTTOM));
+      //  addParallel(new MoveAssembly(AssemblyLocation.BOTTOM));
         if (onRight) {
             if (Robot.isRightSwitch()) {
                 addSequential(new DriveStraight(67, 28000, 0));
-                addSequential(new MoveAssembly(AssemblyLocation.SWITCH));
+               // addSequential(new MoveAssembly(AssemblyLocation.SWITCH));
                 addSequential(new DriveArc(Length.fromInches(10), -58, 23000, false, true));
 
                 addSequential(new WaitCommand(0.2));
@@ -35,14 +35,14 @@ public class SideSwitchAuto extends CommandGroup {
                 addSequential(new org.usfirst.frc.team3309.lib.WaitCommand(0.5));
                 addSequential(new DriveStraight(-20, 15000, 90));
                 addSequential(new DriveEnd());
-                addSequential(new MoveAssembly(AssemblyLocation.BOTTOM));
+             //   addSequential(new MoveAssembly(AssemblyLocation.BOTTOM));
             } else if (Robot.isLeftSwitch()) {
-                addSequential(new DriveStraight(100, 25000, 0));
+                new AutoLineAuto().start();
             }
         } else if (!onRight) {
              if (Robot.isLeftSwitch()) {
                 addSequential(new DriveStraight(63, 28000, 0));
-                addSequential(new MoveAssembly(AssemblyLocation.SWITCH));
+           //     addSequential(new MoveAssembly(AssemblyLocation.SWITCH));
                 addSequential(new DriveArc(Length.fromInches(10), 58, 23000,false, true));
 
                 addSequential(new WaitCommand(0.2));
@@ -51,9 +51,9 @@ public class SideSwitchAuto extends CommandGroup {
                 addSequential(new org.usfirst.frc.team3309.lib.WaitCommand(0.5));
                 addSequential(new DriveStraight(-20, 15000, -90));
                 addSequential(new DriveEnd());
-                addSequential(new MoveAssembly(AssemblyLocation.BOTTOM));
+             //   addSequential(new MoveAssembly(AssemblyLocation.BOTTOM));
             } else if (Robot.isRightSwitch()) {
-                addSequential(new DriveStraight(100, 25000, 0));
+                 new AutoLineAuto().start();
             }
         }
         super.start();
