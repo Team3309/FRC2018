@@ -16,9 +16,9 @@ public class FlashLED extends Command {
 
     private void blink() {
         Robot.led.set(5.0);
-        Timer.delay(0.25);
+        Timer.delay(0.1);
         Robot.led.set(0);
-        Timer.delay(0.5);
+        Timer.delay(0.25);
     }
 
     @Override
