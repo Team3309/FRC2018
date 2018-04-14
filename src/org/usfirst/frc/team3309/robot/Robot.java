@@ -56,9 +56,9 @@ public class Robot extends TimedRobot {
         falconDoors = new FalconDoors();
         arms = new Arms();
         rollers = new Rollers();
+        led = new LED();
         oi = new OI();
         c = new Compressor();
-        led = new LED();
         LiveWindow.disableTelemetry(pdp);
         c.start();
         drive.reset();
