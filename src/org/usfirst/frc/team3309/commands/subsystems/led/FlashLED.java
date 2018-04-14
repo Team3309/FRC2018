@@ -36,6 +36,7 @@ public class FlashLED extends Command {
 
     @Override
     protected boolean isFinished() {
+        System.out.println("bliks " + numBlinks);
         return numBlinks >= 3;
     }
 }
