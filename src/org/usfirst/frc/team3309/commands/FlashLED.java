@@ -11,7 +11,7 @@ public class FlashLED extends Command {
     }
 
     public void execute() {
-        Robot.led.set(255);
+        Robot.led.set(1);
         Timer.delay(1.0);
         Robot.led.set(0);
     }
