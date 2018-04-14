@@ -7,8 +7,8 @@ public class LED extends Subsystem {
 
     private PWM indicatorLight = new PWM(Constants.LED_CHANNEL);
 
-    public void set(double speed) {
-        indicatorLight.setSpeed(speed);
+    public void set(int val) {
+        indicatorLight.setRaw(val);
     }
 
     @Override
