@@ -5,7 +5,6 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team3309.commands.subsystems.*;
 import org.usfirst.frc.team3309.commands.subsystems.arms.ArmsClamp;
-import org.usfirst.frc.team3309.commands.subsystems.arms.ArmsMiddle;
 import org.usfirst.frc.team3309.commands.subsystems.arms.ArmsOpen;
 import org.usfirst.frc.team3309.commands.subsystems.beltbar.BeltbarStop;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveSetHighGear;
@@ -34,9 +33,8 @@ public class OI {
         driverShiftButton.whenReleased(new DriveSetHighGear());
 
         /* =====OPERATOR===== */
-        operatorRemote.leftBumper.whenPressed(new ArmsClamp());
-        operatorRemote.buttonB.whenPressed(new ArmsMiddle());
-        operatorRemote.buttonA.whenPressed(new ArmsOpen());
+        operatorRemote.buttonA.whenPressed(new ArmsClamp());
+        operatorRemote.buttonB.whenPressed(new ArmsOpen());
 
         operatorRemote.startButton.whenPressed(new PrepareForClimb());
         operatorRemote.rightStick.whenPressed(new SetClimbMode());
@@ -44,8 +42,7 @@ public class OI {
 
         operatorRemote.leftStick.whenPressed(new BeltbarStop());
 
-    //    operatorRemote.buttonX.whenPressed(new FindAndGetCube());
-        operatorRemote.buttonX.whenPressed(new MoveAssembly(AssemblyLocation.INTAKE, true));
+        operatorRemote.buttonX.whenPressed(new FindAndGetCube());
         operatorRemote.buttonY.whenPressed(new MoveAssembly(AssemblyLocation.BOTTOM, true));
         operatorRemote.dPad.down.whenPressed(new MoveAssembly(AssemblyLocation.SWITCH, true));
         operatorRemote.dPad.right.whenPressed(new MoveAssembly(AssemblyLocation.SCALE_DOWN, true));

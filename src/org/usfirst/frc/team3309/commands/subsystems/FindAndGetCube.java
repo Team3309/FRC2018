@@ -10,7 +10,6 @@ import org.usfirst.frc.team3309.robot.Constants;
 public class FindAndGetCube extends CommandGroup {
 
     public FindAndGetCube() {
-        addParallel(new ArmsOpen());
         addSequential(new MoveAssembly(AssemblyLocation.INTAKE));
         addSequential(new WaitForCube());
         addSequential(new ArmsClamp());

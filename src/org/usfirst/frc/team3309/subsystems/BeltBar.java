@@ -172,13 +172,12 @@ public class BeltBar extends Subsystem {
     }
 
     public boolean isCubePresent() {
-        return getSharpSensorValue() > 1250;
+        return hasCubeSensorLeft.getAverageValue() > 1250 && hasCubeSensorRight.getAverageValue() > 1250;
     }
 
     public double getSharpSensorValue() {
         return (hasCubeSensorLeft.getAverageValue() + hasCubeSensorRight.getAverageValue()) / 2.0;
     }
-
 
     public boolean isAtTop() {
         return hallEffectSensor.get();
