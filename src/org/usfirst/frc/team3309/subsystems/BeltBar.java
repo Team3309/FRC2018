@@ -171,7 +171,7 @@ public class BeltBar extends Subsystem {
     }
 
     public boolean isCubePresent() {
-        return hasCubeSensorLeft.getAverageValue() > 1250 && hasCubeSensorRight.getAverageValue() > 1250;
+        return hasCubeSensorLeft.getAverageValue() > 2250 && hasCubeSensorRight.getAverageValue() > 2250;
     }
 
     public double getSharpSensorValue() {
