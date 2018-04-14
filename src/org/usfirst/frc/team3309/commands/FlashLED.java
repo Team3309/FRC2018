@@ -1,6 +1,5 @@
 package org.usfirst.frc.team3309.commands;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team3309.robot.Robot;
 
@@ -11,9 +10,7 @@ public class FlashLED extends Command {
     }
 
     public void execute() {
-        Robot.led.set(1);
-        Timer.delay(1.0);
-        Robot.led.set(0);
+        Robot.led.set(255);
     }
 
     @Override
