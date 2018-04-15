@@ -100,12 +100,12 @@ public class BeltBar extends Subsystem {
     private void stopIfOut() {
         if (!isClimbing && !isManual) {
             if (getPosition() > FORWARD_SOFT_LIM + LIM_TOLERANCE) {
-                disableLimits();
                 masterBar.set(ControlMode.Disabled, 0);
+                disableLimits();
                 DriverStation.reportWarning("Catting on beltbar!! Outside front!", false);
             } else if (getPosition() < REVERSE_SOFT_LIM - LIM_TOLERANCE) {
-                disableLimits();
                 masterBar.set(ControlMode.Disabled, 0);
+                disableLimits();
                 DriverStation.reportWarning("Catting on beltbar!! Outside back!", false);
             }
         }
