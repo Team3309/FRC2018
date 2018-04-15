@@ -21,7 +21,8 @@ public class FlashLED extends Command {
     }
 
     public void execute() {
-        double now = Timer.getFPGATimestamp();
+        Robot.led.set(5);
+       /* double now = Timer.getFPGATimestamp();
         double timeElapsed = now - start;
         if (timeElapsed < 0.065) {
             Robot.led.set(5.0);
@@ -30,13 +31,14 @@ public class FlashLED extends Command {
         } else {
             start = now;
             numBlinks++;
-        }
+        }*/
     }
 
 
     @Override
     protected boolean isFinished() {
-        System.out.println("bliks " + numBlinks);
-        return numBlinks >= 3;
+   //     System.out.println("bliks " + numBlinks);
+    //    return numBlinks >= 3;
+        return true;
     }
 }
