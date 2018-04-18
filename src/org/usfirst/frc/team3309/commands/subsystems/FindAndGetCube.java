@@ -14,7 +14,7 @@ public class FindAndGetCube extends CommandGroup {
 
     public FindAndGetCube() {
         addSequential(new MoveAssembly(AssemblyLocation.INTAKE));
-        addSequential(new WaitForCube());
+ /*       addSequential(new WaitForCube());
         addParallel(new Command() {
             @Override
             public void execute() {
@@ -27,7 +27,7 @@ public class FindAndGetCube extends CommandGroup {
             }
         });
         addSequential(new ArmsClamp());
-        Robot.beltBar.resetTimer();
+        Robot.beltBar.resetTimer();*/
     }
 
 }
