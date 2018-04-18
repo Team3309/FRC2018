@@ -43,7 +43,7 @@ public class BeltBar extends Subsystem {
     public int FORWARD_SOFT_LIM = 0;
     public int REVERSE_SOFT_LIM = 0;
 
-    private final double LIM_TOLERANCE = 500;
+    private final double LIM_TOLERANCE = 300;
 
     public BeltBar() {
         init();
