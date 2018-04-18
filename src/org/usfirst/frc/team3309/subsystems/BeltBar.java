@@ -18,7 +18,7 @@ import org.usfirst.frc.team3309.robot.Constants;
 
 public class BeltBar extends Subsystem {
 
-    private TalonSRXMC masterBar = new TalonSRXMC(Constants.BELTBAR_0);
+    private TalonSRXMC masterBar = new TalonSRXMC(Constants.BELTBAR_1);
 
     private AnalogInput hasCubeSensorLeft = new AnalogInput(Constants.BELTBAR_SHARP_SENSOR_LEFT);
     private AnalogInput hasCubeSensorRight = new AnalogInput(Constants.BELTBAR_SHARP_SENSOR_RIGHT);
@@ -26,9 +26,7 @@ public class BeltBar extends Subsystem {
     private DigitalInput hallEffectSensor = new DigitalInput(Constants.BELTBAR_HALL_EFFECT);
 
     private LibTimer timer  = new LibTimer(0.2);
-
-    private boolean inRecovery = false;
-
+    
     private boolean isClimbing = false;
     private boolean isManual = false;
 

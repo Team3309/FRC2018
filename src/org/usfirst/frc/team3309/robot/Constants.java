@@ -91,6 +91,7 @@ public class Constants {
 
     // beltbar
     public static final int BELTBAR_0 = 30;
+    public static final int BELTBAR_1 = 31;
 
     public static final int BELTBAR_SHARP_SENSOR_LEFT = 0;
     public static final int BELTBAR_SHARP_SENSOR_RIGHT = 1;
