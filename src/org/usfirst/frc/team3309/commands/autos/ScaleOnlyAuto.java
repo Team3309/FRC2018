@@ -48,10 +48,10 @@ public class ScaleOnlyAuto extends CommandGroup {
         if (onRight) {
             if (isRightScale) {
                 /* first cube on scale */
-                addSequential(new DriveStraight(127, 40000, 0)); // 122
+                addSequential(new DriveStraight(122, 40000, 0)); // 122
                 addParallel(new WaitAndMoveAssembly(0.2, AssemblyLocation.SCALE_UP));
-                addSequential(new DriveArc(Length.fromInches(5), -20, 25000, false, true)); // 8, -32
-                addSequential(new DriveArc(Length.fromInches(4), 20, 20000, false, true)); // 7
+                addSequential(new DriveArc(Length.fromInches(5), -24, 25000, false, true)); // 8, -32
+                addSequential(new DriveArc(Length.fromInches(4), 24, 20000, false, true)); // 7
                 addSequential(new DriveStraight(6, 12000, true, true));
                 addSequential(new DriveTurn(25, 1.0, true));
                 addParallel(new ArmsOpen());
