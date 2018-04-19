@@ -61,9 +61,9 @@ public class DriveTurn extends CommandEx {
         double kP = SmartDashboard.getNumber("kP", 0.0735);
         double kI = SmartDashboard.getNumber("kI", 0.0); // 0.0014
         double kD = SmartDashboard.getNumber("kD", 0.0); // 0.068
-        kP = 0.04; // 0.0782
+        kP = 0.03; // 0.0782
         kI = 0.000; // 0.00039
-        kD = 0.0; // 0.071
+        kD = 1; // 0.071
         angleController = new PIDController(new PIDConstants(kP, kI, kD));
         double power = 30000 * angleController.update(isPigeon ? Robot.drive.getPigeonPos() : Robot.drive.getAngVel(), goalAngle);
         Robot.drive.setLeftRight(power, -power);
