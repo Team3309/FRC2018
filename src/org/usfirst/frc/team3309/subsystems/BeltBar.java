@@ -26,7 +26,7 @@ public class BeltBar extends Subsystem {
     private DigitalInput hallEffectSensor = new DigitalInput(Constants.BELTBAR_HALL_EFFECT);
 
     private LibTimer timer  = new LibTimer(0.2);
-    
+
     private boolean isClimbing = false;
     private boolean isManual = false;
 
