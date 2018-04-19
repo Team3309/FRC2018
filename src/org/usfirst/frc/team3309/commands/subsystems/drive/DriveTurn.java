@@ -58,7 +58,7 @@ public class DriveTurn extends CommandEx {
         }
         System.out.println("goalAngle" + goalAngle);
         System.out.println("pigeion" + Robot.drive.getPigeonPos());
-        double kP = 0.0782; //   0.0245
+        double kP = 0.0784; //   0.0245
         double kI = 0.000378; //  0.000002
         double kD = 0.0723; // 0.0184
         angleController = new PIDController(new PIDConstants(kP, kI, kD));
