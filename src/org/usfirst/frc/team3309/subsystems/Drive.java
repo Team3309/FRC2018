@@ -7,6 +7,7 @@ import com.ctre.phoenix.sensors.PigeonIMU;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -70,6 +71,7 @@ public class Drive extends Subsystem {
 
 
     public void clearPigeon() {
+        DriverStation.reportWarning("The pigeon has been reset~!!!!!!~~~", false);
         pigeonIMU.setYaw(0, 10);
         pigeonIMU.setFusedHeading(0, 10);
     }
