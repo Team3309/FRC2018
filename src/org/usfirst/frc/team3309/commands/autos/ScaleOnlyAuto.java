@@ -60,7 +60,7 @@ public class ScaleOnlyAuto extends CommandGroup {
                 if (shouldSwitchCube && isRightSwitch) {
                     /* cube on switch */
                     addParallel(new WaitAndMoveAssembly(0.2, AssemblyLocation.BOTTOM));
-                    addSequential(new DriveStraight(-19, 12000, 0));
+                    addSequential(new DriveStraight(-16, 12000, 0));
                     addSequential(new Command() {
                         @Override
                         protected boolean isFinished() {
@@ -68,7 +68,7 @@ public class ScaleOnlyAuto extends CommandGroup {
                         }
                     });
                     addParallel(new MoveAssembly(AssemblyLocation.INTAKE));
-                    addSequential(new DriveTurn(163, 1.3, true)); // 152
+                    addSequential(new DriveTurn(180, 1.3, true)); // 152
                     addParallel(new RollersSetIn(true));
                     addSequential(new DriveStraight(13, 17000, true, true));
                     addSequential(new WaitCommand(0.5));
