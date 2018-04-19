@@ -10,9 +10,9 @@ public class SketchTestAuto extends CommandGroup {
 
     @Override
     public synchronized void start() {
+        addSequential(new DriveTurn(90, 5.0, true));
         addSequential(new DriveArc(Length.fromInches(20), 15, 12000, true));
         addSequential(new WaitCommand(1.0));
-        addSequential(new DriveTurn(90, 5.0, true));
         super.start();
     }
 }
