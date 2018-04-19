@@ -76,7 +76,7 @@ public class DriveTurn extends CommandEx {
                 timer.isConditionMaintained(
                         LibMath.isWithin(isPigeon ? Robot.drive.getPigeonPos() : Robot.drive.getAngPos(),
                                 goalAngle - ANGLE_LENIENCY, goalAngle + ANGLE_LENIENCY))
-                        || timer.get() > timeoutSec || (Timer.getFPGATimestamp() - start) > timeoutSec;
+                        || (Timer.getFPGATimestamp() - start) > timeoutSec;
     }
 
     @Override

@@ -138,7 +138,7 @@ public class ScaleOnlyAuto extends CommandGroup {
                     addSequential(new MoveAssembly(AssemblyLocation.BOTTOM));
                 }
             } else if (isLeftScale) {
-                addSequential(new DriveStraight(125, 40000, 0));
+                addSequential(new DriveStraight(128, 40000, 0));
                 addSequential(new DriveArc(Length.fromInches(28), -53, 23000, false, true)); // -62
                 addSequential(new DriveStraight(109, 40000, 90)); // 126
                 addSequential(new DriveTurn(-5, 1.0, true));
