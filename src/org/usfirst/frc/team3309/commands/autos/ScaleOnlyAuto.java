@@ -42,11 +42,6 @@ public class ScaleOnlyAuto extends CommandGroup {
         boolean isLeftScale = Robot.isLeftScale();
         boolean isLeftSwitch = Robot.isRightScale();
 
-        isRightScale = false;
-        isRightSwitch = false;
-        isLeftScale = true;
-        isLeftSwitch = false;
-
         boolean shouldScale = true;
 
         if (onRight) {
