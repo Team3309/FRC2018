@@ -61,7 +61,7 @@ public class DriveTurn extends CommandEx {
         double kP = SmartDashboard.getNumber("kP", 0.0735);
         double kI = SmartDashboard.getNumber("kI", 0.0); // 0.0014
         double kD = SmartDashboard.getNumber("kD", 0.0); // 0.068
-        kP = 0.03; // 0.0782
+        kP = 0.023; // 0.0782
         kI = 0.000; // 0.00039
         kD = 0.013; // 0.071
         angleController = new PIDController(new PIDConstants(kP, kI, kD));
