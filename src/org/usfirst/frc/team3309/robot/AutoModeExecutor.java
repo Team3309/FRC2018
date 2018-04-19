@@ -29,6 +29,8 @@ public class AutoModeExecutor {
 
         autos.addObject("DriveTurnTest", new DriveTurn(90, 10.0, true));
 
+        autos.addObject("SketchTest", new SketchTestAuto());
+
         SmartDashboard.putData("Autos: ", autos);
     }
 
