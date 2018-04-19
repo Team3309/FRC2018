@@ -81,7 +81,6 @@ public class DriveArc extends CommandEx {
         timer.reset();
         super.end();
         isInitialized = false;
-        timer.reset();
     }
 
 }
