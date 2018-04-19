@@ -56,7 +56,7 @@ public class DriveTurn extends CommandEx {
         if (!isInitialized) {
             initialize();
         }
-        System.out.println("goalAngle"+goalAngle);
+        System.out.println("goalAngle" + goalAngle);
         System.out.println("pigeion" + Robot.drive.getPigeonPos());
         double kP = SmartDashboard.getNumber("kP", 0.0735);
         double kI = SmartDashboard.getNumber("kI", 0.0); // 0.0014
@@ -72,7 +72,7 @@ public class DriveTurn extends CommandEx {
 
     @Override
     protected boolean isFinished() {
-        boolean inRange =  timer.isConditionMaintained(
+        boolean inRange = timer.isConditionMaintained(
                 LibMath.isWithin(isPigeon ? Robot.drive.getPigeonPos() : Robot.drive.getAngPos(),
                         goalAngle - ANGLE_LENIENCY, goalAngle + ANGLE_LENIENCY));
         boolean isTimeout = (Timer.getFPGATimestamp() - start) > timeoutSec;
