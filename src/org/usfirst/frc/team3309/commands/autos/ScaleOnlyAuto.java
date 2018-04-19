@@ -141,11 +141,11 @@ public class ScaleOnlyAuto extends CommandGroup {
                 addSequential(new DriveStraight(128, 40000, 0));
                 addSequential(new DriveArc(Length.fromInches(28), -53, 23000, false, true)); // -62
                 addSequential(new DriveStraight(109, 40000, 90)); // 126
-                addSequential(new DriveTurn(-5, 1.0, true));
+                addSequential(new DriveTurn(-15, 2.0, true));
 
                 addSequential(new MoveAssembly(AssemblyLocation.SCALE_UP));
                 addSequential(new WaitCommand(0.2));
-                addSequential(new DriveStraight(17, 15000, true, true));
+                addSequential(new DriveStraight(19, 15000, true, true));
                 addSequential(new DriveEnd());
                 addParallel(new ArmsOpen());
                 addSequential(new RollersActuate(0.5, 1));
@@ -162,7 +162,7 @@ public class ScaleOnlyAuto extends CommandGroup {
                 addParallel(new MoveAssembly(AssemblyLocation.INTAKE));
                 addSequential(new DriveTurn(-159, 1.0, true));
                 addParallel(new RollersSetIn(true));
-                addSequential(new DriveStraight(13, 17000, true, true));
+                addSequential(new DriveStraight(18, 17000, true, true));
 
                 if (shouldSwitchCube && isLeftSwitch) {
                     /* cube on switch */
