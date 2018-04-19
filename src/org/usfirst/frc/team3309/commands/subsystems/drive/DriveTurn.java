@@ -41,7 +41,7 @@ public class DriveTurn extends CommandEx {
 
     @Override
     public void initialize() {
-     //   super.initialize();
+        super.initialize();
         isInitialized = true;
         Robot.drive.reset();
         Robot.drive.setHighGear();
@@ -86,7 +86,7 @@ public class DriveTurn extends CommandEx {
 
     @Override
     public void end() {
-    //    super.end();
+        super.end();
         timer.reset();
         start = Double.POSITIVE_INFINITY;
         isInitialized = false;
