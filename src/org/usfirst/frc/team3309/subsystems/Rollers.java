@@ -31,7 +31,7 @@ public class Rollers extends Subsystem {
     @Override
     public void periodic() {
         if (DriverStation.getInstance().isAutonomous() && enableRollerPower) {
-            Robot.rollers.setLeftRight(defaultAutoPower, -defaultAutoPower);
+            Robot.rollers.setLeftRight(-defaultAutoPower, defaultAutoPower);
         } else if (DriverStation.getInstance().isAutonomous()) {
             Robot.rollers.setLeftRight(0, 0);
         }
