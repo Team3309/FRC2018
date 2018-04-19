@@ -48,10 +48,10 @@ public class ScaleOnlyAuto extends CommandGroup {
         if (onRight) {
             if (isRightScale) {
                 /* first cube on scale */
-                addSequential(new DriveStraight(122, 40000, 0)); // 122
+                addSequential(new DriveStraight(124, 40000, 0)); // 122
                 addParallel(new WaitAndMoveAssembly(0.2, AssemblyLocation.SCALE_UP));
-                addSequential(new DriveArc(Length.fromInches(5), -24, 25000, false, true)); // 8, -32
-                addSequential(new DriveArc(Length.fromInches(4), 24, 20000, false, true)); // 7
+                addSequential(new DriveArc(Length.fromInches(5), -23, 25000, false, true)); // 8, -32
+                addSequential(new DriveArc(Length.fromInches(4), 23, 20000, false, true)); // 7
                 addSequential(new DriveStraight(6, 12000, true, true));
                 addSequential(new DriveTurn(25, 1.0, true));
                 addParallel(new ArmsOpen());
@@ -68,7 +68,7 @@ public class ScaleOnlyAuto extends CommandGroup {
                         }
                     });
                     addParallel(new MoveAssembly(AssemblyLocation.INTAKE));
-                    addSequential(new DriveTurn(180, 1.3, true)); // 152
+                    addSequential(new DriveTurn(180, 2.0, true)); // 152
                     addParallel(new RollersSetIn(true));
                     addSequential(new DriveStraight(13, 17000, true, true));
                     addSequential(new WaitCommand(0.5));
