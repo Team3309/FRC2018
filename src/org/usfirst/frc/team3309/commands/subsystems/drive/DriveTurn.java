@@ -72,11 +72,19 @@ public class DriveTurn extends CommandEx {
 
     @Override
     protected boolean isFinished() {
-        return
-                timer.isConditionMaintained(
-                        LibMath.isWithin(isPigeon ? Robot.drive.getPigeonPos() : Robot.drive.getAngPos(),
-                                goalAngle - ANGLE_LENIENCY, goalAngle + ANGLE_LENIENCY))
-                        || (Timer.getFPGATimestamp() - start) > timeoutSec;
+        boolean inRange =  timer.isConditionMaintained(
+                LibMath.isWithin(isPigeon ? Robot.drive.getPigeonPos() : Robot.drive.getAngPos(),
+                        goalAngle - ANGLE_LENIENCY, goalAngle + ANGLE_LENIENCY));
+        boolean isTimeout = (Timer.getFPGATimestamp() - start) > timeoutSec;
+        if (inRange) {
+            System.out.println("Drive Turn in range. Ending!!");
+            return true;
+        } else if (isTimeout) {
+            System.out.println("Drive turn ended from timeout.");
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
