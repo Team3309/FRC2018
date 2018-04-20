@@ -8,10 +8,12 @@ import org.usfirst.frc.team3309.commands.subsystems.AssemblyLocation;
 import org.usfirst.frc.team3309.commands.subsystems.MoveAssembly;
 import org.usfirst.frc.team3309.commands.subsystems.arms.ArmsClamp;
 import org.usfirst.frc.team3309.commands.subsystems.arms.ArmsOpen;
+import org.usfirst.frc.team3309.commands.subsystems.beltbar.BeltBarMoveToPos;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveArc;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveEnd;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveStraight;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveTurn;
+import org.usfirst.frc.team3309.commands.subsystems.lift.LiftElevate;
 import org.usfirst.frc.team3309.commands.subsystems.rollers.RollersActuate;
 import org.usfirst.frc.team3309.commands.subsystems.rollers.RollersSetIn;
 import org.usfirst.frc.team3309.lib.WaitCommand;
@@ -32,7 +34,7 @@ public class MiddleSwitchAuto extends CommandGroup {
             boolean isRightSwitch = Robot.isRightSwitch();
 
             if (isLeftSwitch) {
-                addSequential(new MoveAssembly(AssemblyLocation.SWITCH));
+addParallel(new BeltBarMoveToPos(AssemblyLocation.SWITCH.getBeltBarPosition()));                addSequential(new LiftElevate(AssemblyLocation.SWITCH, 0.6));
                 addSequential(new DriveArc(Length.fromInches(13), -37, 31000, false, true)); // 16
                 addSequential(new DriveEnd());
                 addSequential(new DriveStraight(8.5, 25000, true, true)); // 18

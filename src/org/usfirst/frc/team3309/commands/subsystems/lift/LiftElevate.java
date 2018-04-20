@@ -3,13 +3,14 @@ package org.usfirst.frc.team3309.commands.subsystems.lift;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
+import org.usfirst.frc.team3309.commands.subsystems.AssemblyLocation;
 import org.usfirst.frc.team3309.lib.CommandEx;
 import org.usfirst.frc.team3309.robot.Robot;
 
 public class LiftElevate extends CommandEx {
 
     private double goalPos;
-    private final double ERROR_THRESHOLD = 500;
+    private final double ERROR_THRESHOLD = 300;
     private double timeout = Double.POSITIVE_INFINITY;
     private double start = Double.POSITIVE_INFINITY;
 
@@ -20,6 +21,11 @@ public class LiftElevate extends CommandEx {
 
     public LiftElevate(double goalPos, double timeout) {
         this(goalPos);
+        this.timeout = timeout;
+    }
+
+    public LiftElevate(AssemblyLocation assemblyLocation, double timeout) {
+        this(assemblyLocation.getElevatorPosition());
         this.timeout = timeout;
     }
 
