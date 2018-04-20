@@ -75,7 +75,7 @@ public class MiddleSwitchAuto extends CommandGroup {
 
                 /* second cube */
                 addParallel(new WaitAndMoveAssembly(0.5, AssemblyLocation.INTAKE));
-                addSequential(new DriveArc(Length.fromInches(30), -81, 26000, true, true)); // -81
+                addSequential(new DriveArc(Length.fromInches(34), -81, 26000, true, true)); // -81
                 addSequential(new DriveTurn(0, 1.0, true));
                 addParallel(new RollersSetIn(true));
                 addSequential(new DriveStraight(18, 17000, 0));
