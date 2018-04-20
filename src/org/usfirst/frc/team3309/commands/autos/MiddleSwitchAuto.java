@@ -27,7 +27,7 @@ public class MiddleSwitchAuto extends CommandGroup {
     @Override
     public void start() {
         start = Timer.getFPGATimestamp();
-        addSequential(new WaitCommand(0.5));
+        addSequential(new WaitCommand(1.0));
      //   addSequential(new MoveAssembly(AssemblyLocation.BOTTOM));  caused the beltbar to miss its goal when it started with velcro
         if (DriverStation.getInstance().getGameSpecificMessage().length() > 0) {
 
