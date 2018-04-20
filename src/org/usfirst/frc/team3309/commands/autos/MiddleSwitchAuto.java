@@ -27,6 +27,7 @@ public class MiddleSwitchAuto extends CommandGroup {
     @Override
     public void start() {
         start = Timer.getFPGATimestamp();
+        addSequential(new MoveAssembly(AssemblyLocation.BOTTOM));
         if (DriverStation.getInstance().getGameSpecificMessage().length() > 0) {
 
             boolean isLeftSwitch = Robot.isLeftSwitch();
