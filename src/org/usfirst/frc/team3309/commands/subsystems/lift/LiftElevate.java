@@ -9,7 +9,7 @@ import org.usfirst.frc.team3309.robot.Robot;
 public class LiftElevate extends CommandEx {
 
     private double goalPos;
-    private final double ERROR_THRESHOLD = 300;
+    private final double ERROR_THRESHOLD = 500;
     private double timeout = Double.POSITIVE_INFINITY;
     private double start = Double.POSITIVE_INFINITY;
 
