@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.command.WaitForChildren;
 import org.usfirst.frc.team3309.commands.WaitAndMoveAssembly;
 import org.usfirst.frc.team3309.commands.subsystems.AssemblyLocation;
 import org.usfirst.frc.team3309.commands.subsystems.MoveAssembly;
@@ -38,19 +39,20 @@ public class MiddleSwitchAuto extends CommandGroup {
             if (isLeftSwitch) {
                 addParallel(new BeltBarMoveToPos(AssemblyLocation.SWITCH.getBeltBarPosition()));
                 addSequential(new LiftElevate(AssemblyLocation.SWITCH, 1.0));
-                addSequential(new Command() {
+            /*    addSequential(new Command() {
                     @Override
                     protected boolean isFinished() {
                         return Math.abs(Robot.lift.getPosition() - AssemblyLocation.SWITCH.getElevatorPosition()) < 500;
                     }
-                });
+                });*/
+                addSequential(new WaitForChildren());
 
                 addSequential(new DriveArc(Length.fromInches(13), -37, 31000, false, true)); // 16
-                addSequential(new DriveEnd());
+                //addSequential(new DriveEnd());
                 addSequential(new DriveStraight(11, 25000, true, true)); // 18
-                addSequential(new DriveEnd());
+                //addSequential(new DriveEnd());
                 addSequential(new DriveArc(Length.fromInches(9), 16, 28000, false, true)); // 13, 20
-                addSequential(new DriveEnd());
+                //addSequential(new DriveEnd());
                 addSequential(new DriveStraight(27, 12000, 0));
                 addSequential(new WaitCommand(0.1));
                 addParallel(new ArmsOpen());
