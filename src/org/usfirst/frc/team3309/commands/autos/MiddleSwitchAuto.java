@@ -9,6 +9,7 @@ import org.usfirst.frc.team3309.commands.subsystems.MoveAssembly;
 import org.usfirst.frc.team3309.commands.subsystems.arms.ArmsClamp;
 import org.usfirst.frc.team3309.commands.subsystems.arms.ArmsOpen;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveArc;
+import org.usfirst.frc.team3309.commands.subsystems.drive.DriveEnd;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveStraight;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveTurn;
 import org.usfirst.frc.team3309.commands.subsystems.rollers.RollersActuate;
@@ -52,6 +53,7 @@ public class MiddleSwitchAuto extends CommandGroup {
                 addParallel(new RollersSetIn(false));
                 addParallel(new MoveAssembly(AssemblyLocation.SWITCH));
                 addSequential(new DriveStraight(-10, 17000, true, true));
+                addSequential(new DriveEnd());
                 addSequential(new DriveTurn(90, 1.3, true));
                 addSequential(new DriveStraight(7, 26000, true, true));
                 addSequential(new DriveArc(Length.fromInches(54), 78, 27000, false, true)); // 57
@@ -85,7 +87,8 @@ public class MiddleSwitchAuto extends CommandGroup {
                 addParallel(new RollersSetIn(false));
                 addParallel(new MoveAssembly(AssemblyLocation.SWITCH));
                 addSequential(new DriveStraight(-10, 17000, true, true));
-                addSequential(new DriveTurn(-90, 4.0, true));
+                addSequential(new DriveEnd());
+                addSequential(new DriveTurn(-90, 1.3, true));
                 addSequential(new DriveStraight(4, 26000, true, true));
                 addSequential(new DriveArc(Length.fromInches(70), -80, 27000, false, true));
                 addSequential(new DriveStraight(13, 12000, 0));
