@@ -12,7 +12,7 @@ public class LiftElevate extends CommandEx {
     private double goalPos;
     private final double ERROR_THRESHOLD = 300;
     private double timeout = Double.POSITIVE_INFINITY;
-    private double start = Double.POSITIVE_INFINITY;
+    private double start = 0;
 
     public LiftElevate(double goalPos) {
         this.goalPos = goalPos;
