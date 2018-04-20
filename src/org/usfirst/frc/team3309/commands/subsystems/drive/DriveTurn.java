@@ -91,6 +91,9 @@ public class DriveTurn extends CommandEx {
         start = Double.POSITIVE_INFINITY;
         isInitialized = false;
         timeoutSec = Double.POSITIVE_INFINITY;
+
+        Robot.drive.disableOutput();
+
     }
 
 }
