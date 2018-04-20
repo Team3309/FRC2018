@@ -139,6 +139,13 @@ public class ScaleOnlyAuto extends CommandGroup {
          //       addSequential(new DriveEnd());
 
                 addSequential(new DriveArc(Length.fromInches(28), -10, 23000, false, true));
+                addSequential(new Command() {
+                    @Override
+                    protected boolean isFinished() {
+                        System.out.println("ARC DONE!!!!!!!!!!!!!!!!!!!");
+                        return true;
+                    }
+                });
             //    addSequential(new DriveEnd());
 
                 addSequential(new DriveStraight(115, 40000, 90)); // 126
