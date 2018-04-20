@@ -30,7 +30,7 @@ public class MiddleSwitchAuto extends CommandGroup {
     public void start() {
         start = Timer.getFPGATimestamp();
         addSequential(new WaitCommand(1.0));
-     //   addSequential(new MoveAssembly(AssemblyLocation.BOTTOM));  caused the beltbar to miss its goal when it started with velcro
+        //   addSequential(new MoveAssembly(AssemblyLocation.BOTTOM));  caused the beltbar to miss its goal when it started with velcro
         if (DriverStation.getInstance().getGameSpecificMessage().length() > 0) {
 
             boolean isLeftSwitch = Robot.isLeftSwitch();
@@ -39,12 +39,6 @@ public class MiddleSwitchAuto extends CommandGroup {
             if (isLeftSwitch) {
                 addParallel(new BeltBarMoveToPos(AssemblyLocation.SWITCH.getBeltBarPosition()));
                 addSequential(new LiftElevate(AssemblyLocation.SWITCH, 1.0));
-            /*    addSequential(new Command() {
-                    @Override
-                    protected boolean isFinished() {
-                        return Math.abs(Robot.lift.getPosition() - AssemblyLocation.SWITCH.getElevatorPosition()) < 500;
-                    }
-                });*/
                 addSequential(new WaitForChildren());
 
                 addSequential(new DriveArc(Length.fromInches(13), -37, 31000, false, true)); // 16
@@ -53,7 +47,7 @@ public class MiddleSwitchAuto extends CommandGroup {
                 //addSequential(new DriveEnd());
                 addSequential(new DriveArc(Length.fromInches(9), 16, 28000, false, true)); // 13, 20
                 //addSequential(new DriveEnd());
-                addSequential(new DriveStraight(27, 12000, 0));
+                addSequential(new DriveStraight(27, 12000, true, true));
                 addSequential(new WaitCommand(0.1));
                 addParallel(new ArmsOpen());
                 addSequential(new RollersActuate(0.5, 0.1));
@@ -87,12 +81,7 @@ public class MiddleSwitchAuto extends CommandGroup {
             } else if (isRightSwitch) {
                 addParallel(new BeltBarMoveToPos(AssemblyLocation.SWITCH.getBeltBarPosition()));
                 addSequential(new LiftElevate(AssemblyLocation.SWITCH, 1.0));
-                addSequential(new Command() {
-                    @Override
-                    protected boolean isFinished() {
-                        return Math.abs(Robot.lift.getPosition() - AssemblyLocation.SWITCH.getElevatorPosition()) < 500;
-                    }
-                });
+                addSequential(new WaitForChildren());
 
                 addSequential(new DriveArc(Length.fromInches(12), 37, 31000, false, true));
                 addSequential(new DriveArc(Length.fromInches(12), -22, 28000, false, true));
