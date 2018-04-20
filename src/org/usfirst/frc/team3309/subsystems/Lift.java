@@ -183,22 +183,6 @@ public class Lift extends Subsystem {
         secondStageHolder.set(DoubleSolenoid.Value.kReverse);
     }
 
-    public void setLiftPos(double liftPos) {
-        this.liftPos = liftPos;
-    }
-
-    public double getLiftPos() {
-        return liftPos;
-    }
-
-    public void setBeltbarPos(double beltbarPos) {
-        this.beltbarPos = beltbarPos;
-    }
-
-    public double getBeltbarPos() {
-        return beltbarPos;
-    }
-
     public double getFORWARD_LIM() {
         return FORWARD_LIM;
     }

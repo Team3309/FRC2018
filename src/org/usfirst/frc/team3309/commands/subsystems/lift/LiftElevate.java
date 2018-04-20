@@ -51,16 +51,18 @@ public class LiftElevate extends CommandEx {
         } else {
             Robot.lift.set(ControlMode.Disabled,0);
         }
-
     }
 
     @Override
     protected boolean isFinished() {
+
+
+
         if ((Timer.getFPGATimestamp() - start) > timeout) {
             System.out.println("Timeout hit!!");
             return true;
         }
-        if (Math.abs(Robot.lift.getError()) < ERROR_THRESHOLD) {
+        if (Math.abs(Robot.lift.getPosition() - goalPos) < ERROR_THRESHOLD) {
             System.out.println("Lift in range!!");
             return true;
         }
