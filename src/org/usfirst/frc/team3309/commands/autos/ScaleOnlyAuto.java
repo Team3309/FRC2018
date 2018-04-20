@@ -140,10 +140,16 @@ public class ScaleOnlyAuto extends CommandGroup {
                 }
             } else if (isLeftScale) {
                 addSequential(new DriveStraight(128, 40000, 0));
-                addSequential(new DriveArc(Length.fromInches(28), -53, 23000, false, true)); // -62
-                addSequential(new DriveStraight(109, 40000, 90)); // 126
-                addSequential(new DriveTurn(-15, 2.0, true));
+                addSequential(new DriveEnd());
 
+                addSequential(new DriveArc(Length.fromInches(28), -53, 23000, false, true)); // -62
+                addSequential(new DriveEnd());
+
+                addSequential(new DriveStraight(109, 40000, 90)); // 126
+                addSequential(new DriveEnd());
+
+                addSequential(new DriveTurn(-15, 2.0, true));
+                addSequential(new DriveEnd());
                 addSequential(new MoveAssembly(AssemblyLocation.SCALE_UP));
                 addSequential(new WaitCommand(0.2));
                 addSequential(new DriveStraight(19, 15000, true, true));
