@@ -60,8 +60,12 @@ public class LiftElevate extends CommandEx {
             System.out.println("Timeout hit!!");
             return true;
         }
-        System.out.println("Lift in range!!");
-        return Math.abs(Robot.lift.getError()) < ERROR_THRESHOLD;
+        if (Math.abs(Robot.lift.getError()) < ERROR_THRESHOLD) {
+            System.out.println("Lift in range!!");
+
+            return true;
+        }
+        return false;
     }
 
     @Override
