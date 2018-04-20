@@ -38,7 +38,7 @@ public class MiddleSwitchAuto extends CommandGroup {
 
             if (isLeftSwitch) {
                 addParallel(new BeltBarMoveToPos(AssemblyLocation.SWITCH.getBeltBarPosition()));
-                addSequential(new LiftElevate(AssemblyLocation.SWITCH, 1.0));
+                addSequential(new LiftElevate(AssemblyLocation.SWITCH, 4.0));
                 addSequential(new WaitForChildren());
 
                 /*
@@ -91,7 +91,7 @@ public class MiddleSwitchAuto extends CommandGroup {
 
             } else if (isRightSwitch) {
                 addParallel(new BeltBarMoveToPos(AssemblyLocation.SWITCH.getBeltBarPosition()));
-                addSequential(new LiftElevate(AssemblyLocation.SWITCH, 1.0));
+                addSequential(new LiftElevate(AssemblyLocation.SWITCH, 4.0));
                 addSequential(new WaitForChildren());
 
                 addSequential(new DriveArc(Length.fromInches(12), 37, 31000, false, true));
