@@ -38,7 +38,12 @@ public class MiddleSwitchAuto extends CommandGroup {
             if (isLeftSwitch) {
                 addParallel(new BeltBarMoveToPos(AssemblyLocation.SWITCH.getBeltBarPosition()));
                 addSequential(new LiftElevate(AssemblyLocation.SWITCH, 1.0));
-                addSequential(new WaitCommand(0.1));
+                addSequential(new Command() {
+                    @Override
+                    protected boolean isFinished() {
+                        return Math.abs(Robot.lift.getPosition() - AssemblyLocation.SWITCH.getElevatorPosition()) < 500;
+                    }
+                });
 
                 addSequential(new DriveArc(Length.fromInches(13), -37, 31000, false, true)); // 16
                 addSequential(new DriveEnd());
