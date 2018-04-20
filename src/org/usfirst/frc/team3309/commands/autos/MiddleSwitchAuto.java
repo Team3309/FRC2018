@@ -34,9 +34,9 @@ public class MiddleSwitchAuto extends CommandGroup {
             boolean isRightSwitch = Robot.isRightSwitch();
 
             if (isLeftSwitch) {
-//                addParallel(new BeltBarMoveToPos(AssemblyLocation.SWITCH.getBeltBarPosition()));
-//                addSequential(new LiftElevate(AssemblyLocation.SWITCH, 1.0));
-                addSequential(new MoveAssembly(AssemblyLocation.SWITCH));
+                addParallel(new BeltBarMoveToPos(AssemblyLocation.SWITCH.getBeltBarPosition()));
+                addSequential(new LiftElevate(AssemblyLocation.SWITCH, 1.0));
+         //       addSequential(new MoveAssembly(AssemblyLocation.SWITCH));
 
                 addSequential(new DriveArc(Length.fromInches(13), -37, 31000, false, true)); // 16
                 addSequential(new DriveEnd());
