@@ -19,6 +19,8 @@ public class DriveArc extends CommandEx {
     private boolean allowOvershoot;
     private double angleDegrees;
     private boolean isAbs = false;
+    private double timeout;
+    private double start;
 
     public DriveArc(Length radius, double angleDegrees, double vel, boolean backwards, boolean allowOvershoot) {
         requires(Robot.drive);
@@ -40,9 +42,15 @@ public class DriveArc extends CommandEx {
         this.isAbs = isAbs;
     }
 
+    public DriveArc(Length radius, double angleDegrees, double vel, boolean backwards, double timeout) {
+        this(radius, angleDegrees, vel, backwards, true);
+        this.timeout = timeout;
+    }
+
     @Override
     public void initialize() {
         super.initialize();
+        start = Timer.getFPGATimestamp();
         timer.start();
         Robot.drive.reset();
         Robot.drive.setHighGear();
@@ -70,9 +78,20 @@ public class DriveArc extends CommandEx {
 
     @Override
     protected boolean isFinished() {
+
+        // timeout check
+        double now = Timer.getFPGATimestamp();
+        if (now - start > timeout) {
+            System.out.println("Arc timed out!!!!");
+            return true;
+        }
+
+        // absolute mode
         if (isAbs) {
             return timer.get() > 0.6 && Math.abs(Robot.drive.getAngPos()) > Math.abs(Robot.drive.getAngPos() + angleDegrees);
         }
+
+        // relative mode
         return timer.get() > 0.6 && allowOvershoot ? Math.abs(Robot.drive.getAngPos()) > Math.abs(angleDegrees) : arcController.isFinished();
     }
 

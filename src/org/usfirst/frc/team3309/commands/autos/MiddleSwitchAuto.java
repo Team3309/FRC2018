@@ -27,7 +27,7 @@ public class MiddleSwitchAuto extends CommandGroup {
     @Override
     public void start() {
         start = Timer.getFPGATimestamp();
-     //   addSequential(new MoveAssembly(AssemblyLocation.BOTTOM));
+     //   addSequential(new MoveAssembly(AssemblyLocation.BOTTOM));  caused the beltbar to miss its goal when it started with velcro
         if (DriverStation.getInstance().getGameSpecificMessage().length() > 0) {
 
             boolean isLeftSwitch = Robot.isLeftSwitch();
