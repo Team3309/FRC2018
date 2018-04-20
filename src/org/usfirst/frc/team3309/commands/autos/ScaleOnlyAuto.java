@@ -138,7 +138,7 @@ public class ScaleOnlyAuto extends CommandGroup {
                 addSequential(new DriveStraight(134, 40000, 0));
                 addSequential(new DriveArc(Length.fromInches(28), -70, 23000, false, true));
 
-                addSequential(new DriveStraight(105, 40000, 90)); // 126
+                addSequential(new DriveStraight(96, 40000, 90)); // 126
                 addSequential(new DriveEnd());
                 addSequential(new DriveTurn(-15, 2.0, true));
                 addSequential(new DriveEnd());
