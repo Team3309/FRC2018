@@ -19,7 +19,7 @@ public class DriveArc extends CommandEx {
     private boolean allowOvershoot;
     private double angleDegrees;
     private boolean isAbs = false;
-    private double timeout;
+    private double timeout = Double.NaN;
     private double start;
 
     public DriveArc(Length radius, double angleDegrees, double vel, boolean backwards, boolean allowOvershoot) {
@@ -80,11 +80,11 @@ public class DriveArc extends CommandEx {
     protected boolean isFinished() {
 
         // timeout check
-        double now = Timer.getFPGATimestamp();
-        if (now - start > timeout) {
+   /*     double now = Timer.getFPGATimestamp();
+        if (timeout != Double.NaN && now - start > timeout) {
             System.out.println("Arc timed out!!!!");
             return true;
-        }
+        }*/
 
         // absolute mode
         if (isAbs) {
@@ -100,7 +100,6 @@ public class DriveArc extends CommandEx {
         timer.reset();
         super.end();
         isInitialized = false;
-
         Robot.drive.disableOutput();
 
     }
