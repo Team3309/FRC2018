@@ -32,6 +32,7 @@ public class LiftElevate extends CommandEx {
     @Override
     public void initialize() {
         super.initialize();
+        System.out.println("Lift at " + Robot.lift.getPosition());
         Robot.lift.changeToBrakeMode();
         Robot.lift.setGoalPos(goalPos);
         Robot.lift.changeToPositionMode();
@@ -62,7 +63,7 @@ public class LiftElevate extends CommandEx {
     @Override
     public void end() {
         super.end();
-        System.out.println("The lift finished!");
+        System.out.println("The lift finished! " + Robot.lift.getPosition());
         start = Double.POSITIVE_INFINITY;
     }
 
