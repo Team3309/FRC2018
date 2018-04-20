@@ -62,7 +62,6 @@ public class LiftElevate extends CommandEx {
         }
         if (Math.abs(Robot.lift.getError()) < ERROR_THRESHOLD) {
             System.out.println("Lift in range!!");
-
             return true;
         }
         return false;
