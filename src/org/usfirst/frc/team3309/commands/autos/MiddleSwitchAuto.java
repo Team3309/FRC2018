@@ -45,9 +45,18 @@ public class MiddleSwitchAuto extends CommandGroup {
                 //addSequential(new DriveEnd());
                 addSequential(new DriveStraight(11, 25000, true, true)); // 18
                 //addSequential(new DriveEnd());
-                addSequential(new DriveArc(Length.fromInches(9), 16, 28000, false, true)); // 13, 20
+                addSequential(new DriveArc(Length.fromInches(9), 20, 28000, false, true)); // 13, 20
                 //addSequential(new DriveEnd());
                 addSequential(new DriveStraight(27, 12000, true, true));
+
+       /*         addSequential(new DriveArc(Length.fromInches(13), -37, 31000, false, true)); // 16
+                //addSequential(new DriveEnd());
+                addSequential(new DriveStraight(11, 25000, true, true)); // 18
+                //addSequential(new DriveEnd());
+                addSequential(new DriveArc(Length.fromInches(9), 16, 28000, false, true)); // 13, 20
+                //addSequential(new DriveEnd());
+                addSequential(new DriveStraight(27, 12000, 0));*/
+
                 addSequential(new WaitCommand(0.1));
                 addParallel(new ArmsOpen());
                 addSequential(new RollersActuate(0.5, 0.1));
