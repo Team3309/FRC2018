@@ -106,6 +106,7 @@ public class ScaleOnlyAuto extends CommandGroup {
                             return Math.abs(Robot.lift.getPosition()) < 500;
                         }
                     });
+                    addSequential(new DriveEnd());
                     addParallel(new MoveAssembly(AssemblyLocation.INTAKE));
                     addSequential(new DriveTurn(163, 1.0, true)); // 152
                     addParallel(new RollersSetIn(true));
@@ -115,10 +116,11 @@ public class ScaleOnlyAuto extends CommandGroup {
                     addSequential(new WaitCommand(0.3));
                     addParallel(new MoveAssembly(AssemblyLocation.BOTTOM));
                     addSequential(new DriveStraight(-5, 17000, true, true));
+                    addSequential(new DriveEnd());
                     addParallel(new RollersSetIn(false));
                     addSequential(new DriveTurn(0, 1.0, true));
                     addSequential(new MoveAssembly(AssemblyLocation.SCALE_UP));
-                    addSequential(new DriveTurn(25, 0.8, true));
+                    addSequential(new DriveTurn(15, 0.8, true));
                     addSequential(new DriveStraight(20, 12000, true, true));
                     addSequential(new WaitCommand(0.5));
                     addParallel(new RollersActuate(0.6, 1.0));
@@ -146,6 +148,7 @@ public class ScaleOnlyAuto extends CommandGroup {
                 addSequential(new RollersActuate(0.5, 1));
 
                 /* get second cube */
+                addSequential(new DriveEnd());
                 addParallel(new WaitAndMoveAssembly(0.2, AssemblyLocation.BOTTOM));
                 addSequential(new DriveStraight(-16, 12000, 0));
                 addSequential(new Command() {
@@ -154,10 +157,12 @@ public class ScaleOnlyAuto extends CommandGroup {
                         return Math.abs(Robot.lift.getPosition()) < 500;
                     }
                 });
+                addSequential(new DriveEnd());
                 addParallel(new MoveAssembly(AssemblyLocation.INTAKE));
                 addSequential(new DriveTurn(-159, 1.0, true));
                 addParallel(new RollersSetIn(true));
                 addSequential(new DriveStraight(18, 17000, true, true));
+                addSequential(new DriveEnd());
 
                 if (shouldSwitchCube && isLeftSwitch) {
                     /* cube on switch */
@@ -194,10 +199,12 @@ public class ScaleOnlyAuto extends CommandGroup {
                     addSequential(new WaitCommand(0.3));
                     addParallel(new MoveAssembly(AssemblyLocation.BOTTOM));
                     addSequential(new DriveStraight(-5, 17000, true, true));
+                    addSequential(new DriveEnd());
                     addParallel(new RollersSetIn(false));
                     addSequential(new DriveTurn(0, 1.0, true));
                     addSequential(new MoveAssembly(AssemblyLocation.SCALE_UP));
                     addSequential(new DriveStraight(20, 12000, true, true));
+                    addSequential(new DriveEnd());
                     addSequential(new DriveTurn(-21, 0.8, true));
                     addParallel(new RollersActuate(0.6, 1.0));
                     addSequential(new ArmsOpen() {
@@ -207,6 +214,7 @@ public class ScaleOnlyAuto extends CommandGroup {
                             System.out.println("I ended at " + (Timer.getFPGATimestamp() - start));
                         }
                     });
+                    addSequential(new DriveEnd());
                     addParallel(new DriveStraight(-10, 12000, true, true));
                     addSequential(new MoveAssembly(AssemblyLocation.BOTTOM));
                 }
