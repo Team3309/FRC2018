@@ -80,6 +80,7 @@ public class MiddleSwitchAuto extends CommandGroup {
             } else if (isRightSwitch) {
                 addParallel(new BeltBarMoveToPos(AssemblyLocation.SWITCH.getBeltBarPosition()));
                 addSequential(new LiftElevate(AssemblyLocation.SWITCH, 1.0));
+                addSequential(new WaitCommand(0.1));
 
                 addSequential(new DriveArc(Length.fromInches(12), 37, 31000, false, true));
                 addSequential(new DriveArc(Length.fromInches(12), -22, 28000, false, true));
