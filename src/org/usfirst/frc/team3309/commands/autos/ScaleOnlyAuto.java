@@ -3,6 +3,7 @@ package org.usfirst.frc.team3309.commands.autos;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.command.WaitForChildren;
 import org.usfirst.frc.team3309.commands.WaitAndMoveAssembly;
 import org.usfirst.frc.team3309.commands.subsystems.AssemblyLocation;
 import org.usfirst.frc.team3309.commands.subsystems.MoveAssembly;
@@ -104,12 +105,8 @@ public class ScaleOnlyAuto extends CommandGroup {
                     /* second cube on scale */
                     addParallel(new WaitAndMoveAssembly(0.2, AssemblyLocation.BOTTOM));
                     addSequential(new DriveStraight(-16, 12000, 0));
-                    addSequential(new Command() {
-                        @Override
-                        protected boolean isFinished() {
-                            return Math.abs(Robot.lift.getPosition()) < 500;
-                        }
-                    });
+                    addSequential(new WaitForChildren());
+
                     addSequential(new DriveEnd());
                     addParallel(new MoveAssembly(AssemblyLocation.INTAKE));
                     addSequential(new DriveTurn(163, 1.0, true)); // 152
@@ -122,9 +119,8 @@ public class ScaleOnlyAuto extends CommandGroup {
                     addSequential(new DriveStraight(-5, 17000, true, true));
                     addSequential(new DriveEnd());
                     addParallel(new RollersSetIn(false));
-                    addSequential(new DriveTurn(0, 1.0, true));
+                    addSequential(new DriveTurn(-6, 1.0, true));
                     addSequential(new MoveAssembly(AssemblyLocation.SCALE_UP));
-                    addSequential(new DriveTurn(15, 0.8, true));
                     addSequential(new DriveStraight(20, 12000, true, true));
                     addSequential(new WaitCommand(0.5));
                     addParallel(new RollersActuate(0.6, 1.0));
