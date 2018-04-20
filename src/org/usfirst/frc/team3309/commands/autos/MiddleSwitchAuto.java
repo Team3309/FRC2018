@@ -27,7 +27,7 @@ public class MiddleSwitchAuto extends CommandGroup {
     @Override
     public void start() {
         start = Timer.getFPGATimestamp();
-        addParallel(new MoveAssembly(AssemblyLocation.BOTTOM));
+//        addParallel(new MoveAssembly(AssemblyLocation.BOTTOM));
         if (DriverStation.getInstance().getGameSpecificMessage().length() > 0) {
 
             boolean isLeftSwitch = Robot.isLeftSwitch();
@@ -76,7 +76,7 @@ public class MiddleSwitchAuto extends CommandGroup {
             } else if (isRightSwitch) {
 //                addParallel(new BeltBarMoveToPos(AssemblyLocation.SWITCH.getBeltBarPosition()));
 //                addSequential(new LiftElevate(AssemblyLocation.SWITCH, 1.0));
-//                
+//
                 addSequential(new MoveAssembly(AssemblyLocation.SWITCH));
 
                 addSequential(new MoveAssembly(AssemblyLocation.SWITCH));
