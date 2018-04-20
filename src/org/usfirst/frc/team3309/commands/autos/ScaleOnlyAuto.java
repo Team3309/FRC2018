@@ -103,7 +103,7 @@ public class ScaleOnlyAuto extends CommandGroup {
                 } else if (shouldScale) {
                     /* second cube on scale */
                     addParallel(new WaitAndMoveAssembly(0.2, AssemblyLocation.BOTTOM));
-                    addSequential(new DriveStraight(-19, 12000, 0));
+                    addSequential(new DriveStraight(-16, 12000, 0));
                     addSequential(new Command() {
                         @Override
                         protected boolean isFinished() {
