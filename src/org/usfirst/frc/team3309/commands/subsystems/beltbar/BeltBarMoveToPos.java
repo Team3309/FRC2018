@@ -20,6 +20,7 @@ public class BeltBarMoveToPos extends Command {
     public BeltBarMoveToPos(double goalAngle) {
         this.goalAngle = goalAngle;
         requires(Robot.beltBar);
+        setInterruptible(true);
     }
 
     @Override
