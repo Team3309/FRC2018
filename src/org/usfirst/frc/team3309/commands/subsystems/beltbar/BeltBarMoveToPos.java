@@ -9,7 +9,7 @@ public class BeltBarMoveToPos extends Command {
 
     private double goalAngle;
     private double error;
-    public static final double ERROR_THRESHOLD = 100;
+    public static final double ERROR_THRESHOLD = 250;
     private boolean hasStarted = false;
 
     private final double MIN_LIFT_POS_TO_ADJUST_HOME = 10000;
