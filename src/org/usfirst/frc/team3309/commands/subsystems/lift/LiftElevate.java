@@ -56,8 +56,12 @@ public class LiftElevate extends CommandEx {
 
     @Override
     protected boolean isFinished() {
-        return Math.abs(Robot.lift.getError()) < ERROR_THRESHOLD
-                || (Timer.getFPGATimestamp() - start) > timeout;
+        if ((Timer.getFPGATimestamp() - start) > timeout) {
+            System.out.println("Timeout hit!!");
+            return true;
+        }
+        System.out.println("Lift in range!!");
+        return Math.abs(Robot.lift.getError()) < ERROR_THRESHOLD;
     }
 
     @Override
