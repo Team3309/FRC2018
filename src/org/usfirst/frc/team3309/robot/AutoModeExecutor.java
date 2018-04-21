@@ -23,13 +23,13 @@ public class AutoModeExecutor {
         autos.addObject("LeftSwitchAuto", new SideSwitchAuto(false));
         autos.addObject("RightSwitchAuto", new SideSwitchAuto(true));
 
-        autos.addObject("StayRightAuto", new StayRightAuto());
+    //    autos.addObject("StayRightAuto", new StayRightAuto());
 
-        autos.addObject("SCurveTest", new SCurveTestAuto());
+    //    autos.addObject("SCurveTest", new SCurveTestAuto());
 
-        autos.addObject("DriveTurnTest", new DriveTurn(90, 10.0, true));
+    //    autos.addObject("DriveTurnTest", new DriveTurn(90, 10.0, true));
 
-        autos.addObject("SketchTest", new SketchTestAuto());
+    //    autos.addObject("SketchTest", new SketchTestAuto());
 
         SmartDashboard.putData("Autos: ", autos);
     }
