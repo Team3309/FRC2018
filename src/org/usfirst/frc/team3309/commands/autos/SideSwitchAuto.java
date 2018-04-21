@@ -33,7 +33,7 @@ public class SideSwitchAuto extends CommandGroup {
 
                 addSequential(new DriveStraight(97, 28000, 0));
                 addSequential(new DriveEnd());
-                addSequential(new DriveTurn(90, 1.0, true));
+                addSequential(new DriveTurn(90, 2.3, true));
                 addSequential(new DriveStraight(6, 17000, 90));
 
                 addSequential(new WaitCommand(0.2));
